@@ -50,18 +50,18 @@
 // #else
   // For the breakout board, you can use any 2 or 3 pins.
   // These pins will also work for the 1.8" TFT shield.
-  #define TFT_CS        7
-  #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
-  #define TFT_DC         10
+  #define TFT_CS        18
+  #define TFT_RST        17 // Or set to -1 and connect to Arduino RESET pin
+  #define TFT_DC         16
 // #endif
 
 // OPTION 1 (recommended) is to use the HARDWARE SPI pins, which are unique
 // to each board and not reassignable. For Arduino Uno: MOSI = pin 11 and
 // SCLK = pin 13. This is the fastest mode of operation and is required if
 // using the breakout board's microSD card.
-
+ 
 // For 1.44" and 1.8" TFT with ST7735 use:
-// Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 // For 1.14", 1.3", 1.54", 1.69", and 2.0" TFT with ST7789:
 //Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
@@ -69,11 +69,11 @@
 
 // OPTION 2 lets you interface the display using ANY TWO or THREE PINS,
 // tradeoff being that performance is not as fast as hardware SPI above.
-#define TFT_MOSI 5  // Data out
-#define TFT_SCLK 4  // Clock out
+// #define TFT_MOSI 5  // Data out
+// #define TFT_SCLK 4  // Clock out
 
 // For ST7735-based displays, we will use this call
-Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+// Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
 // OR for the ST7789-based displays, we will use this call
 //Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
@@ -86,10 +86,10 @@ void setup(void) {
   Serial.print(F("Hello! ST77xx TFT Test"));
 
   // Use this initializer if using a 1.8" TFT screen:
-  //tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
+  tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
 
   // OR use this initializer if using a 1.8" TFT screen with offset such as WaveShare:
-  tft.initR(INITR_GREENTAB);      // Init ST7735S chip, green tab
+  // tft.initR(INITR_GREENTAB);      // Init ST7735S chip, green tab
 
   // OR use this initializer (uncomment) if using a 1.44" TFT:
   //tft.initR(INITR_144GREENTAB); // Init ST7735R chip, green tab
