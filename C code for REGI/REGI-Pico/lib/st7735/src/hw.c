@@ -12,15 +12,15 @@
 #include "hw.h"
 
 void tft_spi_init() {
-  gpio_init(SPI_TFT_CS);
-  gpio_set_dir(SPI_TFT_CS, GPIO_OUT);
-  gpio_put(SPI_TFT_CS, 1);  // Chip select is active-low
+    gpio_init(LCD_CS);
+    gpio_set_dir(LCD_CS, GPIO_OUT);
+    gpio_put(LCD_CS, 1);  // Chip select is active-low
 
-  gpio_init(SPI_TFT_DC);
-  gpio_set_dir(SPI_TFT_DC, GPIO_OUT);
-  gpio_put(SPI_TFT_DC, 0);  // Chip select is active-low
+    gpio_init(LCD_DC);
+    gpio_set_dir(LCD_DC, GPIO_OUT);
+    gpio_put(LCD_DC, 0);  // Chip select is active-low
 
-  gpio_init(SPI_TFT_RST);
-  gpio_set_dir(SPI_TFT_RST, GPIO_OUT);
-  gpio_put(SPI_TFT_RST, 0);
+    gpio_init(LCD_RST);
+    gpio_set_dir(LCD_RST, GPIO_OUT);
+    gpio_put(LCD_RST, 0);
 }

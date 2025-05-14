@@ -2,6 +2,9 @@
 #include "tinyengine_renderer_st7735r.h"
 #include <pico/time.h>
 
+#include "ST7735_TFT.h"
+
+
 tinyengine_status_t tinyengine_init(tinyengine_handle_t* engine_handle)
 {
 
@@ -49,22 +52,31 @@ tinyengine_status_t tinyengine_init_renderer(
 
 }
 
-tinyengine_status_t tinyengine_loop(tinyengine_handle_t* engine_handle)
+void tinyengine_render(tinyengine_handle_t* engine_handle, double frametime) {
+    // telog("Rendering");
+    engine_handle->render_clbk(frametime);
+}
+
+void tinyengine_update(tinyengine_handle_t* engine_handle, double frametime) {
+
+}
+
+tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
 {
 
-    double lastTime = get_absolute_time();
+    double lastTime = ((double)to_ms_since_boot(get_absolute_time())) / ((double)1000);
     double unproccessedTime = 0;
     double passedTime = 0;
     double startTime = 0;
     double frameCounter = 0;
     int render = 1;
     int frames = 0;
-    float framerate = 0;
-    float frametime = 0;
+    float framerate = 30;
+    double frametime = (double)1 / (double)framerate;
 
     while (1) { //isRunning
-        telog("Rnning");
-        startTime = get_absolute_time();
+
+        startTime = ((double)to_ms_since_boot(get_absolute_time())) / ((double)1000);
         passedTime = startTime - lastTime;
 
         lastTime = startTime;
@@ -73,16 +85,17 @@ tinyengine_status_t tinyengine_loop(tinyengine_handle_t* engine_handle)
 
         frameCounter += passedTime;
 
-        render = 1;
+        render = 0; // run uncapped
 
-        while (1 // isRunning
-            && (unproccessedTime > frametime)) {
+        while ((unproccessedTime > frametime)) {
             render = 1;
 
-
+            // telog("Running");
             unproccessedTime -= frametime;
 
-            engine_handle->update_clbk(frametime);
+            // engine_handle->update_clbk(frametime);
+
+            tinyengine_update(engine_handle, frametime);
 
             if (frameCounter >= 1.0) {
                 telog("FPS: %d", frames);
@@ -92,7 +105,8 @@ tinyengine_status_t tinyengine_loop(tinyengine_handle_t* engine_handle)
 
         }
         if (render) {
-            engine_handle->render_clbk(frametime);
+            // engine_handle->render_clbk(frametime);
+            tinyengine_render(engine_handle, frametime);
             frames += 1;
         }
         else {

@@ -18,22 +18,22 @@
 // ----------------------------------------------------------------
 // pin and ports (usually defined in the makefile)
 
-#ifndef SPI_TFT_PORT
+#ifndef LCD_SPI_PORT
 #error "SPI port not defined; define SPI_TFT_PORT before including hw.h"
 #endif
 
 // chip-select output pin
-#ifndef SPI_TFT_CS
+#ifndef LCD_CS
 #error "SPI CS not defined; define SPI_TFT_CS before including hw.h"
 #endif
 
 // TFT_DC output pin
-#ifndef SPI_TFT_DC
+#ifndef LCD_DC
 #error "SPI DC not defined; define SPI_TFT_DC before including hw.h"
 #endif
 
 // TFT_RST output pin
-#ifndef SPI_TFT_RST
+#ifndef LCD_RST
 #error "SPI port not defined; define SPI_TFT_PORT before including hw.h"
 #endif
 // ----------------------------------------------------------------
@@ -50,6 +50,7 @@ void tft_spi_init();
 
 #include "hardware/spi.h"
 
+
 // ----------------------------------------------------------------
 // function-map
 #ifdef __delay_ms
@@ -57,33 +58,62 @@ void tft_spi_init();
 #endif
 #define __delay_ms(x) sleep_ms(x)
 
-#define spiwrite(data) spi_write_blocking(SPI_TFT_PORT, &data, 1)
+// #define spiwrite(data) spi_write_blocking(SPI_TFT_PORT, &data, 1)
+
+// #define tft_cs_low()                 \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_CS, 0);           \
+//   asm volatile("nop \n nop \n nop")
+// #define tft_cs_high()                \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_CS, 1);           \
+//   asm volatile("nop \n nop \n nop")
+
+// #define tft_dc_low()                 \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_DC, 0);           \
+//   asm volatile("nop \n nop \n nop")
+// #define tft_dc_high()                \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_DC, 1);           \
+//   asm volatile("nop \n nop \n nop")
+
+// #define tft_rst_low()                \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_RST, 0);          \
+//   asm volatile("nop \n nop \n nop")
+// #define tft_rst_high()               \
+//   asm volatile("nop \n nop \n nop"); \
+//   gpio_put(SPI_TFT_RST, 1);          \
+//   asm volatile("nop \n nop \n nop")
+
+#define spiwrite(data) spi_write_blocking(LCD_SPI_PORT, &data, 1)
 
 #define tft_cs_low()                 \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_CS, 0);           \
+  gpio_put(LCD_CS, 0);           \
   asm volatile("nop \n nop \n nop")
 #define tft_cs_high()                \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_CS, 1);           \
+  gpio_put(LCD_CS, 1);           \
   asm volatile("nop \n nop \n nop")
 
 #define tft_dc_low()                 \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_DC, 0);           \
+  gpio_put(LCD_DC, 0);           \
   asm volatile("nop \n nop \n nop")
 #define tft_dc_high()                \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_DC, 1);           \
+  gpio_put(LCD_DC, 1);           \
   asm volatile("nop \n nop \n nop")
 
 #define tft_rst_low()                \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_RST, 0);          \
+  gpio_put(LCD_RST, 0);          \
   asm volatile("nop \n nop \n nop")
 #define tft_rst_high()               \
   asm volatile("nop \n nop \n nop"); \
-  gpio_put(SPI_TFT_RST, 1);          \
+  gpio_put(LCD_RST, 1);          \
   asm volatile("nop \n nop \n nop")
 // ----------------------------------------------------------------
 

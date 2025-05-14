@@ -51,10 +51,17 @@ pico_sdk_init()
 file(GLOB SOURCES "src/*.c")
 
 # library configuration (override if necessary)
-set(SPI_TFT_PORT "spi1" CACHE STRING "TFT spi port-name")
-set(SPI_TFT_CS "13" CACHE STRING "TFT CS  pin number")
-set(SPI_TFT_DC "8" CACHE STRING "TFT DC  pin number")
-set(SPI_TFT_RST "9" CACHE STRING "TFT RST pin number")
+set(LCD_SPI_PORT "spi1" CACHE STRING "TFT spi port-name")
+set(LCD_CS "13" CACHE STRING "TFT CS  pin number")
+set(LCD_DC "8" CACHE STRING "TFT DC  pin number")
+set(LCD_RST "9" CACHE STRING "TFT RST pin number")
+
+set(LCD_SPI_SPEED "1000000" CACHE STRING "TFT speed ")
+set(LCD_SPI_MISO "12" CACHE STRING "TFT DC miso ")
+set(LCD_SPI_MOSI "11" CACHE STRING "TFT mosi")
+set(LCD_SPI_CLK "10" CACHE STRING "TFT clk")
+set(LCD_BKLT "6" CACHE STRING "TFT bk ")
+
 set(TFT_OPTIONS TFT_ENABLE_GREEN TFT_ENABLE_RESET TFT_ENABLE_TEXT TFT_ENABLE_SHAPES
     TFT_ENABLE_ROTATE TFT_ENABLE_SCROLL
     CACHE STRING "TFT options/functions")
@@ -72,10 +79,18 @@ set(TFT_OPTIONS TFT_ENABLE_GREEN TFT_ENABLE_RESET TFT_ENABLE_TEXT TFT_ENABLE_SHA
 # - TFT_ENABLE_SHAPES
 # - TFT_ENABLE_ROTATE
 # - TFT_ENABLE_BMP  (not implemented yet)
-add_compile_definitions(SPI_TFT_PORT=${SPI_TFT_PORT})
-add_compile_definitions(SPI_TFT_CS=${SPI_TFT_CS})
-add_compile_definitions(SPI_TFT_DC=${SPI_TFT_DC})
-add_compile_definitions(SPI_TFT_RST=${SPI_TFT_RST})
+add_compile_definitions(LCD_SPI_PORT=${LCD_SPI_PORT})
+add_compile_definitions(LCD_CS=${LCD_CS})
+add_compile_definitions(LCD_DC=${LCD_DC})
+add_compile_definitions(LCD_RST=${LCD_RST})
+
+add_compile_definitions(LCD_SPI_SPEED=${LCD_SPI_SPEED})
+add_compile_definitions(LCD_SPI_MISO=${LCD_SPI_MISO})
+add_compile_definitions(LCD_SPI_MOSI=${LCD_SPI_MOSI})
+add_compile_definitions(LCD_SPI_CLK=${LCD_SPI_CLK})
+add_compile_definitions(LCD_BKLT=${LCD_BKLT})
+
+add_compile_definitions(SYS_CLK_MHZ=200)
 
 foreach(opt IN LISTS TFT_OPTIONS)
     message(">>> using: ${opt}")
@@ -105,7 +120,7 @@ pico_set_program_version(REGI-Pico "0.1")
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(REGI-Pico 1)
 
-pico_enable_stdio_usb(REGI-Pico 1)
+pico_enable_stdio_usb(REGI-Pico 0)
 
 # Add the standard library to the build
 target_link_libraries(REGI-Pico
@@ -122,6 +137,7 @@ target_include_directories(REGI-Pico PRIVATE
 target_link_libraries(REGI-Pico
     pico_stdlib
     hardware_spi
+
     st7735
 
     # config

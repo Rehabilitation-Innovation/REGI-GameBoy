@@ -7,10 +7,10 @@
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 #define telog(M, ...) \
-  printf("[Tiny Engine Log] (%s:%d)" M "\r\n", __FILE__, __LINE__, ##__VA_ARGS__)
+  printf("[Tiny Engine Log] (%s:%d)" M "\r\n", __BASE_FILE__, __LINE__, ##__VA_ARGS__)
 
 #define teerr(M, ...) \
-  printf("[Tiny Engine ERROR] (%s:%d)" M "\r\n", __FILE__, __LINE__, ##__VA_ARGS__)
+  printf("[Tiny Engine ERROR] (%s:%d)" M "\r\n", __BASE_FILE__, __LINE__, ##__VA_ARGS__)
 
 typedef enum {
     TINYENGINE_OK,
@@ -32,7 +32,7 @@ typedef struct {
 
 // The reason this is a uint8_t* in the paramenter is that its defined before the engine handle
 // but it needs access to it. So to give it access i give it a uint8_t* instead of struct*
-typedef tinyengine_status_t(*tinyengine_clbk_t)(float delta);
+typedef tinyengine_status_t(*tinyengine_clbk_t)(double delta);
 
 typedef struct {
     spi_inst_t* lcd_spi_instance;
@@ -63,6 +63,6 @@ tinyengine_status_t tinyengine_start(tinyengine_handle_t* engine_handle);
 tinyengine_status_t tinyengine_init_renderer(
     tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use);
 
-tinyengine_status_t tinyengine_loop(tinyengine_handle_t* engine_handle);
+tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle);
 
 #endif
