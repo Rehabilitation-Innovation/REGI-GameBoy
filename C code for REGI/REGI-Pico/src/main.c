@@ -6,6 +6,7 @@
 
 #include "pico/stdlib.h"
 
+#include "pico/rand.h"
 #include "tinyengine.h"
 
 #include "ST7735_TFT.h"
@@ -17,52 +18,143 @@
 #include "hardware/structs/clocks.h"
 
 
+#define BALL_CNT 1
+
 tinyengine_status_t post_init() {
 }
 
-tinyengine_status_t pre_init() {
-}
 
-tinyengine_status_t update(double frameTime) {
-}
+
 
 const char* txt = " hello world";
 
+double counter = 0;
+double x1 = 10, y1 = 20, x2 = 0, y2 = 50;
+
+struct ball {
+
+    double x, y;
+    double dirx, diry;
+    double spd;
+
+} ball1, ball2, ball3;
+
+struct ball balls[BALL_CNT];
+
+tinyengine_status_t pre_init() {
+    // ball1.x = 2;
+    // ball1.y = 10;
+    // ball1.dirx = 0.1;
+    // ball1.diry = 0.5;
+    // ball1.spd = 500;
+
+
+
+    // ball2.x = 2;
+    // ball2.y = 10;
+    // ball2.dirx = 0.1;
+    // ball2.diry = 0.5;
+    // ball2.spd = 500;
+
+    for (uint8_t i = 0; i < BALL_CNT; i++) {
+        balls[i].x = 2;
+        balls[i].y = 10;
+        balls[i].dirx = 0.1;
+        balls[i].diry = 0.5;
+        balls[i].spd = 500;
+    }
+
+}
+
+
+char fps[32] = { 0 };
+
 tinyengine_status_t render(double frameTime) {
-
-
-
-    // static int a = 1;
-    // a = !a;
-    // if (a)
-    //     fillScreen(ST7735_BLACK);
-    // else
-    //     // static double time = 0;
-    //     // static double time2 = 0;
-    //     // if ((time2 - time) >= 10)
-    //     // time = frameTime;
-    //     fillScreen(ST7735_BLUE);
-
-
-    drawText(0, 5, txt, ST7735_WHITE, ST7735_BLACK, 1);
-    drawText(0, 15, txt, ST7735_BLUE, ST7735_BLACK, 1);
-    drawText(0, 25, txt, ST7735_RED, ST7735_BLACK, 1);
-    drawText(0, 35, txt, ST7735_GREEN, ST7735_BLACK, 1);
-    drawText(0, 45, txt, ST7735_CYAN, ST7735_BLACK, 1);
-    drawText(0, 55, txt, ST7735_MAGENTA, ST7735_BLACK, 1);
-    drawText(0, 65, txt, ST7735_YELLOW, ST7735_BLACK, 1);
-    drawText(0, 75, txt, ST7735_WHITE, ST7735_BLACK, 1);
-
     fillScreen(ST7735_BLACK);
+    // fillCircle(x1, y1, 10, ST7735_BLUE);
+    // fillCircle(x2, y1, 10, ST7735_RED);
 
-    // drawText(0, 5, " !#$%&'()*+,-.", ST7735_WHITE, ST7735_BLACK, 1);
-    // drawText(0, 15, "0123456789", ST7735_BLUE, ST7735_BLACK, 1);
-    // drawText(0, 25, "abcdefghijklmn", ST7735_RED, ST7735_BLACK, 1);
-    // drawText(0, 35, "ABCDEGHIJKLMN", ST7735_GREEN, ST7735_BLACK, 1);
-    // drawText(0, 45, "opqrstuvwxyz", ST7735_CYAN, ST7735_BLACK, 1);
-    // drawText(0, 55, "OPQRSTUVWYXZ", ST7735_MAGENTA, ST7735_BLACK, 1);
-    // drawText(0, 65, ";:=,.?@", ST7735_YELLOW, ST7735_BLACK, 1);
-    // drawText(0, 75, "[]/", ST7735_BLACK, ST7735_WHITE, 1);
+
+    // fillCircle(ball1.x, ball1.y, 10, ST7735_GREEN);
+    // fillCircle(ball2.x, ball2.y, 10, ST7735_RED);
+    for (uint8_t i = 0; i < BALL_CNT; i++) {
+
+        switch (i % 2)
+        {
+        case 1:
+            fillCircle(balls[i].x, balls[i].y, 10, ST7735_GREEN);
+            break;
+        case 0:
+            fillCircle(balls[i].x, balls[i].y, 10, ST7735_RED);
+            break;
+        default:
+            break;
+        }
+
+
+    }
+    // sprintf(fps, "fps: %d", frameTime);
+    // drawText(0, 10, fps, ST7735_RED, ST7735_BLACK, 1);
+}
+
+tinyengine_status_t update(double frameTime) {
+    // x1 = x1 + 50 * (frameTime * ((x1 >= 128) ? -1 : 1) * ((x1 <= 0) ? -1 : 1));
+    // y1 = y1 + 50 * (frameTime * ((y1 >= 128) ? -1 : 1) * ((y1 <= 0) ? -1 : 1));
+    // x2 = x2 + 50 * (frameTime * ((x2 >= 128) ? -1 : 1) * ((x2 <= 0) ? -1 : 1));
+    // y2 = y2 + 50 * (frameTime * ((y2 >= 128) ? -1 : 1) * ((y2 <= 0) ? -1 : 1));
+    // if (ball1.x >= 128) {
+    //     ball1.dirx = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball1.y >= 128) {
+    //     ball1.diry = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball1.x <= 0) {
+    //     ball1.dirx = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball1.y <= 0) {
+    //     ball1.diry = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+
+    // ball1.x += ball1.spd * frameTime * ball1.dirx;
+
+    // ball1.y += ball1.spd * frameTime * ball1.diry;
+
+    // if (ball2.x >= 128) {
+    //     ball2.dirx = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball2.y >= 128) {
+    //     ball2.diry = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball2.x <= 0) {
+    //     ball2.dirx = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+    // if (ball2.y <= 0) {
+    //     ball2.diry = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+    // }
+
+    // ball2.x += ball2.spd * frameTime * ball2.dirx;
+
+    // ball2.y += ball2.spd * frameTime * ball2.diry;
+
+
+    for (uint8_t i = 0; i < BALL_CNT; i++) {
+        if (balls[i].x >= 128) {
+            balls[i].dirx = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+        }
+        if (balls[i].y >= 128) {
+            balls[i].diry = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
+        }
+        if (balls[i].x <= 0) {
+            balls[i].dirx = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+        }
+        if (balls[i].y <= 0) {
+            balls[i].diry = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
+        }
+
+        balls[i].x += balls[i].spd * frameTime * balls[i].dirx;
+
+        balls[i].y += balls[i].spd * frameTime * balls[i].diry;
+    }
 
 }
 
@@ -73,6 +165,7 @@ void measure_freqs(void) {
     uint f_pll_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
     uint f_pll_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_USB_CLKSRC_PRIMARY);
     uint f_rosc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_ROSC_CLKSRC);
+
     uint f_clk_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
     uint f_clk_peri = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_PERI);
     uint f_clk_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_USB);
@@ -96,7 +189,7 @@ void measure_freqs(void) {
 }
 
 int main() {
-
+    set_sys_clock_khz(260000, true);
     stdio_init_all();
 
     measure_freqs();

@@ -56,6 +56,8 @@ typedef struct {
     tinyengine_clbk_t render_clbk;
     tinyengine_clbk_t update_clbk;
 
+    uint16_t fps;
+
 } tinyengine_handle_t;
 
 tinyengine_status_t tinyengine_init(tinyengine_handle_t* engine_handle);

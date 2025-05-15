@@ -9,7 +9,7 @@ tinyengine_status_t tinyengine_init(tinyengine_handle_t* engine_handle)
 {
 
     tinyengine_status_t line_status = TINYENGINE_OK;
-
+    engine_handle->fps = 0;
     line_status = engine_handle->pre_init_clbk();
     if (line_status != TINYENGINE_OK) {
         return line_status;
@@ -58,7 +58,7 @@ void tinyengine_render(tinyengine_handle_t* engine_handle, double frametime) {
 }
 
 void tinyengine_update(tinyengine_handle_t* engine_handle, double frametime) {
-
+    engine_handle->update_clbk(frametime);
 }
 
 tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
@@ -68,11 +68,13 @@ tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
     double unproccessedTime = 0;
     double passedTime = 0;
     double startTime = 0;
-    double frameCounter = 0;
     int render = 1;
     int frames = 0;
-    float framerate = 30;
+    int framerate = 60;
     double frametime = (double)1 / (double)framerate;
+
+    uint32_t startus = to_us_since_boot(get_absolute_time());
+    double frameCounter = 0;
 
     while (1) { //isRunning
 
@@ -97,7 +99,7 @@ tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
 
             tinyengine_update(engine_handle, frametime);
 
-            if (frameCounter >= 1.0) {
+            if (frameCounter >= 1) {
                 telog("FPS: %d", frames);
                 frameCounter = 0;
                 frames = 0;

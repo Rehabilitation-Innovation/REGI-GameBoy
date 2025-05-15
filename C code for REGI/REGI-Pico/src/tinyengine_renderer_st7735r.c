@@ -6,7 +6,7 @@
 
 tinyengine_status_t tinyengine_init_renderer_st7735r(
     tinyengine_handle_t* engine_handle) {
-    spi_init(engine_handle->lcd_spi_instance, engine_handle->lcd_spi_speed);
+    spi_init(engine_handle->lcd_spi_instance, 50000000);
     gpio_set_function(engine_handle->lcd_spi_miso, GPIO_FUNC_SPI);
     gpio_set_function(engine_handle->lcd_spi_clk, GPIO_FUNC_SPI);
     gpio_set_function(engine_handle->lcd_spi_mosi, GPIO_FUNC_SPI);
@@ -26,6 +26,8 @@ tinyengine_status_t tinyengine_init_renderer_st7735r(
     gpio_put(engine_handle->lcd_spi_rst, 0);
 
     TFT_GreenTab_Initialize();
+
+    setRotation(0);
 
     // setTextWrap(true);
     // setAddrWindow()

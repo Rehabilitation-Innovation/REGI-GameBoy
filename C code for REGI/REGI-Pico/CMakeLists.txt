@@ -79,6 +79,7 @@ set(TFT_OPTIONS TFT_ENABLE_GREEN TFT_ENABLE_RESET TFT_ENABLE_TEXT TFT_ENABLE_SHA
 # - TFT_ENABLE_SHAPES
 # - TFT_ENABLE_ROTATE
 # - TFT_ENABLE_BMP  (not implemented yet)
+add_compile_definitions(TFT_ENABLE_ALL)
 add_compile_definitions(LCD_SPI_PORT=${LCD_SPI_PORT})
 add_compile_definitions(LCD_CS=${LCD_CS})
 add_compile_definitions(LCD_DC=${LCD_DC})
@@ -90,8 +91,7 @@ add_compile_definitions(LCD_SPI_MOSI=${LCD_SPI_MOSI})
 add_compile_definitions(LCD_SPI_CLK=${LCD_SPI_CLK})
 add_compile_definitions(LCD_BKLT=${LCD_BKLT})
 
-add_compile_definitions(SYS_CLK_MHZ=200)
-
+# add_compile_definitions(SYS_CLK_MHZ=200)
 foreach(opt IN LISTS TFT_OPTIONS)
     message(">>> using: ${opt}")
     add_compile_definitions(${opt})
@@ -106,6 +106,9 @@ endif()
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(REGI-Pico ${SOURCES})
+
+pico_set_float_implementation(REGI-Pico pico)
+pico_set_double_implementation(REGI-Pico pico)
 
 target_include_directories(REGI-Pico PRIVATE
     "inc/"
@@ -136,6 +139,7 @@ target_include_directories(REGI-Pico PRIVATE
 # Add any user requested libraries
 target_link_libraries(REGI-Pico
     pico_stdlib
+    pico_rand
     hardware_spi
 
     st7735
