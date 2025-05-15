@@ -17,31 +17,31 @@
 #include <string.h>
 
 #if defined _PTC
-  #include "picconfig.h"
+#include "picconfig.h"
 #endif
 
 #if defined TFT_ENABLE_FONTS
-  #if !defined TFT_ENABLE_TEXT
-    #define TFT_ENABLE_TEXT
-  #endif
-  #if !defined PROGMEM
-    #define PROGMEM
-  #endif
+#if !defined TFT_ENABLE_TEXT
+#define TFT_ENABLE_TEXT
+#endif
+#if !defined PROGMEM
+#define PROGMEM
+#endif
 #endif
 
 #if defined TFT_ENABLE_ALL
-  #if !defined TFT_ENABLE_SHAPES
-    #define TFT_ENABLE_SHAPES
-  #endif
-  #if !defined TFT_ENABLE_SCROLL
-    #define TFT_ENABLE_SCROLL
-  #endif
-  #if !defined TFT_ENABLE_TEXT
-    #define TFT_ENABLE_TEXT
-  #endif
-  #if !defined TFT_ENABLE_ROTATE
-    #define TFT_ENABLE_ROTATE
-  #endif
+#if !defined TFT_ENABLE_SHAPES
+#define TFT_ENABLE_SHAPES
+#endif
+#if !defined TFT_ENABLE_SCROLL
+#define TFT_ENABLE_SCROLL
+#endif
+#if !defined TFT_ENABLE_TEXT
+#define TFT_ENABLE_TEXT
+#endif
+#if !defined TFT_ENABLE_ROTATE
+#define TFT_ENABLE_ROTATE
+#endif
 #endif
 
 extern uint8_t tft_width, tft_height;
@@ -72,6 +72,7 @@ extern uint8_t tft_width, tft_height;
 #define ST7735_MADCTL_MV 0x20
 #define ST7735_MADCTL_ML 0x10
 #define ST7735_MADCTL_RGB 0x00
+#define ST7735_MADCTL_BGR 0x08
 #define ST7735_VSCRSADD 0x37
 #define ST7735_FRMCTR1 0xB1
 #define ST7735_FRMCTR2 0xB2
@@ -108,8 +109,8 @@ extern uint8_t tft_width, tft_height;
 // ******** FUNCTION  PROTOTYPES ************
 
 // SPI
-void write_command(uint8_t );
-void write_data(uint8_t );
+void write_command(uint8_t);
+void write_data(uint8_t);
 
 // Init
 #if defined TFT_ENABLE_GREEN
@@ -142,12 +143,12 @@ void Rcmd1();
 void Rcmd3();
 
 // Misc + Screen related
-void setAddrWindow(uint8_t , uint8_t , uint8_t , uint8_t );
+void setAddrWindow(uint8_t, uint8_t, uint8_t, uint8_t);
 void fillScreen(uint16_t color);
 void drawFastVLine(uint8_t x, uint8_t y, uint8_t h, uint16_t color);
 void drawFastHLine(uint8_t x, uint8_t y, uint8_t w, uint16_t color);
-void drawPixel(uint8_t , uint8_t , uint16_t );
-void fillRectangle(uint8_t , uint8_t , uint8_t , uint8_t , uint16_t );
+void drawPixel(uint8_t, uint8_t, uint16_t);
+void fillRectangle(uint8_t, uint8_t, uint8_t, uint8_t, uint16_t);
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color);
 
 void invertDisplay(bool i);
@@ -176,9 +177,9 @@ void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, in
 
 // Text
 #if defined(TFT_ENABLE_TEXT)
-void drawChar(uint8_t x, uint8_t y, uint8_t c, uint16_t color, uint16_t bg,  uint8_t size);
+void drawChar(uint8_t x, uint8_t y, uint8_t c, uint16_t color, uint16_t bg, uint8_t size);
 void setTextWrap(bool w);
-void drawText(uint8_t x, uint8_t y, const char *_text, uint16_t color, uint16_t bg, uint8_t size);
+void drawText(uint8_t x, uint8_t y, const char* _text, uint16_t color, uint16_t bg, uint8_t size);
 #endif
 
 #if defined TFT_ENABLE_ROTATE
@@ -188,26 +189,26 @@ void setRotation(uint8_t m);
 #if defined TFT_ENABLE_FONTS
 /// Font data stored PER GLYPH
 typedef struct {
-  uint16_t bitmapOffset; ///< Pointer into GFXfont->bitmap
-  uint8_t width;         ///< Bitmap dimensions in pixels
-  uint8_t height;        ///< Bitmap dimensions in pixels
-  uint8_t xAdvance;      ///< Distance to advance cursor (x axis)
-  int8_t xOffset;        ///< X dist from cursor pos to UL corner
-  int8_t yOffset;        ///< Y dist from cursor pos to UL corner
+    uint16_t bitmapOffset; ///< Pointer into GFXfont->bitmap
+    uint8_t width;         ///< Bitmap dimensions in pixels
+    uint8_t height;        ///< Bitmap dimensions in pixels
+    uint8_t xAdvance;      ///< Distance to advance cursor (x axis)
+    int8_t xOffset;        ///< X dist from cursor pos to UL corner
+    int8_t yOffset;        ///< Y dist from cursor pos to UL corner
 } GFXglyph;
 
 /// Data stored for FONT AS A WHOLE
 typedef struct {
-  uint8_t *bitmap;     ///< Glyph bitmaps, concatenated
-  GFXglyph *glyph;     ///< Glyph array
-  uint16_t first;      ///< ASCII extents (first char)
-  uint16_t last;       ///< ASCII extents (last char)
-  uint8_t yAdvance;    ///< Newline distance (y axis)
-  const char *subset;  ///< subset of chars in the font
+    uint8_t* bitmap;     ///< Glyph bitmaps, concatenated
+    GFXglyph* glyph;     ///< Glyph array
+    uint16_t first;      ///< ASCII extents (first char)
+    uint16_t last;       ///< ASCII extents (last char)
+    uint8_t yAdvance;    ///< Newline distance (y axis)
+    const char* subset;  ///< subset of chars in the font
 } GFXfont;
 
-extern GFXfont *_gfxFont;
-void setFont(const GFXfont *f);
+extern GFXfont* _gfxFont;
+void setFont(const GFXfont* f);
 #endif
 
 // ------ not functional yet ----------------------------------------------
@@ -215,7 +216,7 @@ void setFont(const GFXfont *f);
 
 // BMP processing from SD-card
 #if defined TFT_ENABLE_BMP
-bool bmpDraw(int8_t x, int8_t y, int8_t *bmpname);
+bool bmpDraw(int8_t x, int8_t y, int8_t* bmpname);
 #endif
 
 #endif
