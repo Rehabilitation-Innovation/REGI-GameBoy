@@ -31,7 +31,7 @@ tinyengine_status_t tinyengine_start(tinyengine_handle_t* engine_handle)
 }
 
 tinyengine_status_t tinyengine_init_renderer(
-    tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use, uint8_t* framebuf, uint32_t size) {
+    tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use, te_fb_handle_t* framebuf) {
     tinyengine_status_t line_status = TINYENGINE_OK;
 
     engine_handle->render_engine_handle->current_output_renderer = renderer_to_use;
@@ -52,12 +52,12 @@ tinyengine_status_t tinyengine_init_renderer(
     case TINYENGINE_RENDERER_DVI:
         telog("Using DVI Renderer");
         // tinyengine_renderer_dvi_set_buffer(framebuf, size);
-        line_status = tinyengine_renderer_dvi_init(engine_handle, framebuf, size);
+        line_status = tinyengine_renderer_dvi_init(engine_handle, framebuf);
         if (line_status != TINYENGINE_OK) {
             teerr("Error Initializing DVI renderer");
             return line_status;
         }
-
+        framebuf->te_fb_swap_blocking_func_ptr = tinyengine_renderer_dvi_flip_blocking;
         break;
 
     case TINYENGINE_RENDERER_LCD_ILI9488:
@@ -98,7 +98,7 @@ tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
     double startTime = 0;
     int render = 1;
     int frames = 0;
-    int framerate = 25;
+    int framerate = 60;
     double frametime = (double)1 / (double)framerate;
 
     uint32_t startus = to_us_since_boot(get_absolute_time());

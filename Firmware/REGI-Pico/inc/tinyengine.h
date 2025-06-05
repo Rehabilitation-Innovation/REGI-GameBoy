@@ -71,8 +71,7 @@ typedef struct {
 
 tinyengine_status_t tinyengine_init(tinyengine_handle_t* engine_handle);
 tinyengine_status_t tinyengine_start(tinyengine_handle_t* engine_handle);
-tinyengine_status_t tinyengine_init_renderer(
-    tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use, uint8_t* framebuf, uint32_t size);
+
 
 tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle);
 

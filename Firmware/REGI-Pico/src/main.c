@@ -113,7 +113,7 @@ int main() {
     measure_freqs();
 
     run();
- 
+
     // maybe shut down and reboot after?
 
     while (1) {
