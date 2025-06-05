@@ -19,6 +19,8 @@
 
 #include "DEV_Config.h"
 
+// #include "DEV_Config.h"
+
 #define LCD_2_8				0x52
 #define LCD_3_5				0x00
 
@@ -28,7 +30,7 @@
 
 /********************************************************************************
 function:
-		Define the full screen height length of the display
+        Define the full screen height length of the display
 ********************************************************************************/
 #define LCD_X_MAXPIXEL  480  //LCD width maximum memory 
 #define LCD_Y_MAXPIXEL  320 //LCD height maximum memory
@@ -43,20 +45,20 @@ function:
 
 /********************************************************************************
 function:
-			scanning method
+            scanning method
 ********************************************************************************/
 typedef enum {
-    L2R_U2D  = 0,	//0°
-    D2U_L2R  ,      //90°
-    R2L_D2U  ,      //180°
-    U2D_R2L  ,      //270°  
+    L2R_U2D = 0,	//0°
+    D2U_L2R,      //90°
+    R2L_D2U,      //180°
+    U2D_R2L,      //270°  
 } LCD_SCAN_DIR;
 #define SCAN_DIR_DFT  L2R_U2D  //Default scan direction = L2R_U2D
 
 
 /********************************************************************************
 function:
-	Defines the total number of rows in the display area
+    Defines the total number of rows in the display area
 ********************************************************************************/
 typedef struct {
     LENGTH LCD_Dis_Column;	//COLUMN
@@ -68,7 +70,7 @@ typedef struct {
 
 /********************************************************************************
 function:
-			Macro definition variable name
+            Macro definition variable name
 ********************************************************************************/
 void LCD_Init(LCD_SCAN_DIR LCD_ScanDir, uint16_t LCD_BLval);
 void LCD_SetGramScanWay(LCD_SCAN_DIR Scan_dir);
@@ -79,9 +81,9 @@ void LCD_WriteData(uint16_t Data);
 
 void LCD_SetWindow(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend);
 void LCD_SetCursor(POINT Xpoint, POINT Ypoint);
-void LCD_SetColor(COLOR Color ,POINT Xpoint, POINT Ypoint);
+void LCD_SetColor(COLOR Color, POINT Xpoint, POINT Ypoint);
 void LCD_SetPointlColor(POINT Xpoint, POINT Ypoint, COLOR Color);
-void LCD_SetArealColor(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend,COLOR  Color);
+void LCD_SetArealColor(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend, COLOR  Color);
 void LCD_Clear(COLOR  Color);
 uint8_t LCD_Read_Id(void);
 #endif

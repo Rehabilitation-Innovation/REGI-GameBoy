@@ -1,8 +1,9 @@
 #include "tinyengine.h"
 #include "tinyengine_renderer_st7735r.h"
+#include "tinyengine_renderer_dvi.h"
+#include "tinyengine_renderer_ili9488.h"
 #include <pico/time.h>
-
-#include "ST7735_TFT.h"
+#include "tinyengine_framebuffer.h"
 
 
 tinyengine_status_t tinyengine_init(tinyengine_handle_t* engine_handle)
@@ -30,15 +31,40 @@ tinyengine_status_t tinyengine_start(tinyengine_handle_t* engine_handle)
 }
 
 tinyengine_status_t tinyengine_init_renderer(
-    tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use) {
+    tinyengine_handle_t* engine_handle, tinyengine_renderer_t renderer_to_use, uint8_t* framebuf, uint32_t size) {
     tinyengine_status_t line_status = TINYENGINE_OK;
+
+    engine_handle->render_engine_handle->current_output_renderer = renderer_to_use;
 
     switch (renderer_to_use) {
     case TINYENGINE_RENDERER_LCD_ST7735R:
         telog("Using 1.8 in lcd renderer");
-        line_status = tinyengine_init_renderer_st7735r(engine_handle);
+        line_status = tinyengine_renderer_st7735r_init(engine_handle);
         if (line_status != TINYENGINE_OK) {
-            teerr("Error Initializing renderer");
+            teerr("Error Initializing ST7735R renderer");
+            return line_status;
+        }
+        // engine_handle->render_engine_handle->set_buffer = tiny
+
+
+        break;
+
+    case TINYENGINE_RENDERER_DVI:
+        telog("Using DVI Renderer");
+        // tinyengine_renderer_dvi_set_buffer(framebuf, size);
+        line_status = tinyengine_renderer_dvi_init(engine_handle, framebuf, size);
+        if (line_status != TINYENGINE_OK) {
+            teerr("Error Initializing DVI renderer");
+            return line_status;
+        }
+
+        break;
+
+    case TINYENGINE_RENDERER_LCD_ILI9488:
+        telog("Using ILI9488 Renderer");
+        line_status = tinyengine_renderer_ili9488_init(engine_handle);
+        if (line_status != TINYENGINE_OK) {
+            teerr("Error Initializing ILI9488 renderer");
             return line_status;
         }
         break;
@@ -54,7 +80,9 @@ tinyengine_status_t tinyengine_init_renderer(
 
 void tinyengine_render(tinyengine_handle_t* engine_handle, double frametime) {
     // telog("Rendering");
+    // wait_for_vsync();
     engine_handle->render_clbk(frametime);
+
 }
 
 void tinyengine_update(tinyengine_handle_t* engine_handle, double frametime) {
@@ -70,7 +98,7 @@ tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
     double startTime = 0;
     int render = 1;
     int frames = 0;
-    int framerate = 60;
+    int framerate = 25;
     double frametime = (double)1 / (double)framerate;
 
     uint32_t startus = to_us_since_boot(get_absolute_time());

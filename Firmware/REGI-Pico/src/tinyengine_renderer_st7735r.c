@@ -4,14 +4,14 @@
 #include "hw.h"
 #include "ST7735_TFT.h"
 
-tinyengine_status_t tinyengine_init_renderer_st7735r(
+tinyengine_status_t tinyengine_renderer_st7735r_init(
     tinyengine_handle_t* engine_handle) {
-    spi_init(engine_handle->lcd_spi_instance, 50000000);
+    spi_init(engine_handle->lcd_spi_instance, 35000000);
     gpio_set_function(engine_handle->lcd_spi_miso, GPIO_FUNC_SPI);
     gpio_set_function(engine_handle->lcd_spi_clk, GPIO_FUNC_SPI);
     gpio_set_function(engine_handle->lcd_spi_mosi, GPIO_FUNC_SPI);
 
-
+    printf("spi1_baud %d \r\n", spi_get_baudrate(spi1));
 
     gpio_init(engine_handle->lcd_spi_cs);
     gpio_set_dir(engine_handle->lcd_spi_cs, GPIO_OUT);

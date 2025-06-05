@@ -26,7 +26,7 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-set(PICO_BOARD pico CACHE STRING "Board type")
+set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -35,8 +35,6 @@ project(REGI-Pico C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
-
-add_compile_options(-Wall -Wextra)
 
 # add_subdirectory(lib/config)
 # add_subdirectory(lib/lcd)
@@ -50,11 +48,16 @@ add_compile_options(-Wall -Wextra)
 
 # include_directories(./lib/fatfs)
 # include_directories(./lib/sdcard)
-file(GLOB SOURCES "src/*.c")
+file(GLOB SOURCES
+
+    "src/*.c"
+
+    # "src/*.cpp"
+)
 
 # library configuration (override if necessary)
 set(LCD_SPI_PORT "spi1" CACHE STRING "TFT spi port-name")
-set(LCD_CS "13" CACHE STRING "TFT CS  pin number")
+set(LCD_CS "22" CACHE STRING "TFT CS  pin number")
 set(LCD_DC "8" CACHE STRING "TFT DC  pin number")
 set(LCD_RST "9" CACHE STRING "TFT RST pin number")
 
@@ -106,14 +109,23 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
 endif()
 
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
+
+add_compile_options(-Wall -Wextra)
+
 # Add executable. Default name is the project name, version 0.1
 add_executable(REGI-Pico ${SOURCES})
+
+# Create map/bin/hex/uf2 files
+pico_add_extra_outputs(${PROJECT_NAME})
 
 pico_set_float_implementation(REGI-Pico pico)
 pico_set_double_implementation(REGI-Pico pico)
 
 target_include_directories(REGI-Pico PRIVATE
     "inc/"
+
+    "lib/lcd/"
 )
 
 pico_set_program_name(REGI-Pico "REGI-Pico")
@@ -132,6 +144,11 @@ target_link_libraries(REGI-Pico
     pico_stdlib)
 
 add_subdirectory(lib/st7735)
+add_subdirectory(lib/lcd)
+add_subdirectory(lib/config)
+add_subdirectory(lib/font)
+
+# add_subdirectory(lib/dvhstx/drivers/dvhstx)
 
 # Add the standard include files to the build
 target_include_directories(REGI-Pico PRIVATE
@@ -143,15 +160,17 @@ target_link_libraries(REGI-Pico
     pico_stdlib
     pico_rand
     hardware_spi
-
+    hardware_dma
+    pico_multicore
+    pico_sync
     st7735
+    config
+    font
+    lcd
 
-    # config
-
-    # font
-    # lcd
+    # dvhstx
 
     # fatfs
 )
 
-pico_add_extra_outputs(REGI-Pico)
+# pico_add_extra_outputs(REGI-Pico)

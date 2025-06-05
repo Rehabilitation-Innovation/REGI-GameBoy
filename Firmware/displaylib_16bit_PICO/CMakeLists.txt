@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Initialise pico_sdk from installed location
@@ -26,7 +26,7 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-set(PICO_BOARD pico CACHE STRING "Board type")
+set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Include build functions from Pico SDK
 include(pico_sdk_import.cmake)
@@ -45,14 +45,15 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
 
 # Tell CMake where to find the executable source file
 add_executable(${PROJECT_NAME}
-    examples/st7735/hello/main.cpp
+
+    # examples/st7735/hello/main.cpp
 
     # examples/st7735/graphics/main.cpp
     # examples/st7735/functions_fps/main.cpp
     # examples/st7735/text/main.cpp
     # examples/st7735/bmp_data/main.cpp
     # examples/st7735/demos/main.cpp
-    # examples/st7735/frame_buffer/main.cpp
+    examples/st7735/frame_buffer/main.cpp
 
     # examples/st7789/hello/main.cpp
     # examples/st7789/graphics/main.cpp
@@ -99,8 +100,8 @@ target_sources(pico_displaylib_16 INTERFACE
 target_include_directories(pico_displaylib_16 INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
 
 # Pull in pico libraries that we need
-target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_spi pico_displaylib_16)
+target_link_libraries(${PROJECT_NAME} pico_stdlib pico_rand hardware_spi pico_displaylib_16)
 
 # Enable usb output, disable uart output
-pico_enable_stdio_usb(${PROJECT_NAME} 1)
-pico_enable_stdio_uart(${PROJECT_NAME} 0)
+pico_enable_stdio_usb(${PROJECT_NAME} 0)
+pico_enable_stdio_uart(${PROJECT_NAME} 1)
