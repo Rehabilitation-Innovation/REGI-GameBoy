@@ -168,3 +168,19 @@ tinyengine_status_t te_fb_draw_sprite(te_fb_handle_t* fb_handle, te_sprite_t* sp
 
     return TINYENGINE_OK;
 }
+
+tinyengine_status_t te_fb_draw_sprite_batch(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint16_t x[], uint16_t y[], uint16_t count) {
+
+    uint16_t _x, _y;
+    for (uint16_t i = 0; i < sprite->height * sprite->width; i++) {
+        _x = i / sprite->height;
+        _y = i % sprite->width;
+        if (sprite->sprite_buffer[i] != 0x00)
+            for (uint8_t j = 0; j < count; j++) {
+                te_fb_draw_pixel(fb_handle, x[j] - _y, y[j] + _x, sprite->sprite_buffer[i]);
+            }
+    }
+
+
+    return TINYENGINE_OK;
+}

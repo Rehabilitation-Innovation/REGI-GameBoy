@@ -16,7 +16,7 @@
 
 #include "tinyengine_sprite.h"
 
-#define BALL_CNT 10
+#define BALL_CNT 50
 
 tinyengine_handle_t engine = { 0 };
 te_fb_handle_t frame_buf = { 0 };
@@ -40,6 +40,9 @@ struct ball {
 
 struct ball balls[BALL_CNT];
 
+uint16_t xs[BALL_CNT] = { 0 };
+uint16_t ys[BALL_CNT] = { 0 };
+
 te_sprite_t sprite_jockey;
 
 tinyengine_status_t pre_init() {
@@ -48,10 +51,12 @@ tinyengine_status_t pre_init() {
     sprite_jockey.width = DOCS_WIDTH;
 
     for (uint8_t i = 0; i < BALL_CNT; i++) {
-        balls[i].x = 2;
-        balls[i].y = 10;
-        balls[i].dirx = 1;
-        balls[i].diry = 0.5;
+        balls[i].x = 200;
+        xs[i] = balls[i].x;
+        balls[i].y = 100;
+        ys[i] = balls[i].y;
+        balls[i].dirx = 2;
+        balls[i].diry = 1.5;
         balls[i].spd = 100;
         balls[i].col = i;
     }
@@ -62,11 +67,14 @@ tinyengine_status_t render(double frameTime) {
     frame_buf.te_fb_wait_vsync_blocking_func_ptr();
     te_fb_clear(&frame_buf, 0x00);
 
-    for (uint8_t i = 0; i < BALL_CNT; i++) {
-        // frame_buf.te_fb_wait_vsync_blocking_func_ptr();
-        // te_fb_draw_filled_circle(&frame_buf, balls[i].x, balls[i].y, 10 + balls[i].y - balls[i].x, balls[i].col);
-        te_fb_draw_sprite(&frame_buf, &sprite_jockey, balls[i].x, balls[i].y);
-    }
+    // for (uint8_t i = 0; i < BALL_CNT; i++) {
+    //     // frame_buf.te_fb_wait_vsync_blocking_func_ptr();
+    //     // te_fb_draw_filled_circle(&frame_buf, balls[i].x, balls[i].y, 10 + balls[i].y - balls[i].x, balls[i].col);
+    // te_fb_draw_sprite(&frame_buf, &sprite_jockey, balls[0].x, balls[0].y);
+    // }
+
+    te_fb_draw_sprite_batch(&frame_buf, &sprite_jockey, xs, ys, BALL_CNT);
+
     // int x, y;
     // for (int i = 0; i < DOCS_HEIGHT * DOCS_WIDTH; i++) {
     //     x = i / DOCS_WIDTH;
@@ -89,6 +97,8 @@ tinyengine_status_t render(double frameTime) {
 
 }
 
+#define GRAVITY 5 // ~9.81
+
 tinyengine_status_t update(double frameTime) {
     for (uint8_t i = 0; i < BALL_CNT; i++) {
         if (balls[i].x >= 320) {
@@ -105,7 +115,25 @@ tinyengine_status_t update(double frameTime) {
         }
         balls[i].x += balls[i].spd * frameTime * balls[i].dirx;
         balls[i].y += balls[i].spd * frameTime * balls[i].diry;
+        xs[i] = balls[i].x;
+        ys[i] = balls[i].y;
     }
+    // if (balls[0].x >= 320) {
+    //     balls[0].dirx = -1 * balls[0].spd;
+    // }
+    // if (balls[0].y >= 240) {
+    //     balls[0].diry = -1 * balls[0].spd;
+    // }
+
+    // if (balls[0].x <= 0) {
+    //     balls[0].dirx = 0;
+    // }
+    // if (balls[0].y <= 0) {
+    //     balls[0].diry = 1 * GRAVITY;
+    // }
+    // balls[0].x += frameTime * balls[0].dirx;
+    // balls[0].y += balls[0].spd * frameTime * balls[0].diry * -1 / GRAVITY;
+
 }
 
 tinyengine_status_t loop_clbk(double frameTime) {

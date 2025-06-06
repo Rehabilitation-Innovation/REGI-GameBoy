@@ -48,4 +48,7 @@ tinyengine_status_t te_fb_swap_blocking(te_fb_handle_t* fb_handle);
 
 tinyengine_status_t te_fb_draw_sprite(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint32_t x, uint32_t y);
 
+tinyengine_status_t te_fb_draw_sprite_batch(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint16_t x[], uint16_t y[], uint16_t count);
+
+
 #endif

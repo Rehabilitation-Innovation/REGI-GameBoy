@@ -115,7 +115,7 @@ tinyengine_status_t tinyengine_start_loop(tinyengine_handle_t* engine_handle)
 
         frameCounter += passedTime;
 
-        render = 0; // run uncapped
+        render = 1; // run uncapped
 
         while ((unproccessedTime > frametime)) {
             render = 1;
