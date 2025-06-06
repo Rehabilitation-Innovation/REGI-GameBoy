@@ -57,7 +57,7 @@ tinyengine_status_t tinyengine_init_renderer(
             teerr("Error Initializing DVI renderer");
             return line_status;
         }
-        framebuf->te_fb_swap_blocking_func_ptr = tinyengine_renderer_dvi_flip_blocking;
+        framebuf->te_fb_wait_vsync_blocking_func_ptr = tinyengine_renderer_dvi_flip_blocking;
         break;
 
     case TINYENGINE_RENDERER_LCD_ILI9488:

@@ -12,6 +12,9 @@
 #include "memory.h"
 #include <malloc.h>
 
+#include "jock.h"
+
+#include "tinyengine_sprite.h"
 
 #define BALL_CNT 10
 
@@ -37,7 +40,13 @@ struct ball {
 
 struct ball balls[BALL_CNT];
 
+te_sprite_t sprite_jockey;
+
 tinyengine_status_t pre_init() {
+    sprite_jockey.sprite_buffer = Docs;
+    sprite_jockey.height = DOCS_HEIGHT;
+    sprite_jockey.width = DOCS_WIDTH;
+
     for (uint8_t i = 0; i < BALL_CNT; i++) {
         balls[i].x = 2;
         balls[i].y = 10;
@@ -48,13 +57,33 @@ tinyengine_status_t pre_init() {
     }
 }
 
-tinyengine_status_t render(double frameTime) {
 
+tinyengine_status_t render(double frameTime) {
+    frame_buf.te_fb_wait_vsync_blocking_func_ptr();
     te_fb_clear(&frame_buf, 0x00);
 
     for (uint8_t i = 0; i < BALL_CNT; i++) {
-        te_fb_draw_filled_circle(&frame_buf, balls[i].x, balls[i].y, 10 + balls[i].y - balls[i].x, balls[i].col);
+        // frame_buf.te_fb_wait_vsync_blocking_func_ptr();
+        // te_fb_draw_filled_circle(&frame_buf, balls[i].x, balls[i].y, 10 + balls[i].y - balls[i].x, balls[i].col);
+        te_fb_draw_sprite(&frame_buf, &sprite_jockey, balls[i].x, balls[i].y);
     }
+    // int x, y;
+    // for (int i = 0; i < DOCS_HEIGHT * DOCS_WIDTH; i++) {
+    //     x = i / DOCS_WIDTH;
+    //     y = i % DOCS_WIDTH;
+    //     te_fb_draw_pixel(&frame_buf, 50 - y, 50 + x, Docs[i]);
+
+    // }
+
+    // for (int i = 0; i < DOCS_HEIGHT * DOCS_WIDTH; i++) {
+    //     x = i / DOCS_WIDTH;
+    //     y = i % DOCS_WIDTH;
+    //     te_fb_draw_pixel(&frame_buf, 100 - y, 100 + x, Docs[i]);
+
+    // }
+
+    // te_fb_draw_sprite(&frame_buf, &sprite_jockey, 100, 100);
+
 
     te_fb_swap_blocking(&frame_buf);
 

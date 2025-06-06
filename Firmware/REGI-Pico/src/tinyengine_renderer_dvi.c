@@ -237,7 +237,7 @@ void __not_in_flash_func(te_renderer_dvi_wait_for_vsync()) {
 }
 
 
-void __not_in_flash_func(te_renderer_dvi_swap_buffers_blocking()) {
+void __not_in_flash_func(te_renderer_dvi_wait_vsync_blocking()) {
     while (v_scanline >= MODE_V_FRONT_PORCH) __wfe();
     // flip_next = true;
     // while (flip_next) __wfe();
@@ -245,7 +245,7 @@ void __not_in_flash_func(te_renderer_dvi_swap_buffers_blocking()) {
 
 // just a wrapper; idk maybe in the future some race handling can be done here?
 void tinyengine_renderer_dvi_flip_blocking() {
-    te_renderer_dvi_swap_buffers_blocking();
+    te_renderer_dvi_wait_vsync_blocking();
 }
 
 static __force_inline uint16_t colour_rgb565(uint8_t r, uint8_t g, uint8_t b) {
@@ -260,7 +260,7 @@ void scroll_framebuffer(void);
 
 tinyengine_status_t tinyengine_renderer_dvi_init(tinyengine_handle_t* engine_handle, te_fb_handle_t* framebuffer) {
 
-    //framebuffer->flip_blocking = te_renderer_dvi_swap_buffers_blocking;// set this in the main initiator in tinyengine.c
+    //framebuffer->flip_blocking = te_renderer_dvi_wait_vsync_blocking;// set this in the main initiator in tinyengine.c
 
     dma_claim_mask((1 << NUM_CHANS) - 1);
     ch_num = 0;
@@ -344,6 +344,8 @@ tinyengine_status_t tinyengine_renderer_dvi_init(tinyengine_handle_t* engine_han
         uint8_t b = (i & 3) * 255 / 3;
         display_palette[i] = (r << 16) | (g << 8) | b;
     }
+
+    display_palette[255] = 0xFFFFFF; // just need to set 0xff to white this pallette method is clever. i wonder if i can switch pallettes based on sprites.
 
     // const bool is_text_mode = (mode == MODE_TEXT_MONO || mode == MODE_TEXT_RGB111);
     const int frame_pixel_words = (frame_width * h_repeat * line_bytes_per_pixel + 3) >> 2;

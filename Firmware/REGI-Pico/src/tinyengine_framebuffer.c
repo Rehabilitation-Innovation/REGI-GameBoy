@@ -5,21 +5,7 @@
 #include "hw.h"
 #include "main.h"
 #include "memory.h"
-// uint32_t getTotalHeap(void) {
-//     extern char __StackLimit, __bss_end__;
 
-//     return &__StackLimit - &__bss_end__;
-// }
-
-// uint32_t getFreeHeap(void) {
-//     struct mallinfo m = mallinfo();
-
-//     return getTotalHeap() - m.uordblks;
-// }
-
-// volatile static  uint8_t display_buffer[640 * 480 * 1] = { 0 };
-
-volatile static int which_buffer = 0; // when 0 pixel_buffer = displaybufer, when 1 pixel buffer = framebuffer
 
 tinyengine_status_t te_fb_init(te_fb_handle_t* fb_handle, uint32_t frame_width, uint32_t frame_height, int is_dual) {
 
@@ -27,7 +13,6 @@ tinyengine_status_t te_fb_init(te_fb_handle_t* fb_handle, uint32_t frame_width, 
     fb_handle->display_w = frame_width;
     fb_handle->is_dual = is_dual;
     fb_handle->pixel_buffer_size = fb_handle->display_h * fb_handle->display_w * 1; // dont support color depth yet.
-
     fb_handle->pixel_buffer_back = (uint8_t*)calloc(fb_handle->pixel_buffer_size, 1);
 
     // all buffers must be dual in this current version, will implement single in the future if memory starts to run out at higher resolutions
@@ -37,10 +22,12 @@ tinyengine_status_t te_fb_init(te_fb_handle_t* fb_handle, uint32_t frame_width, 
     else {
         fb_handle->pixel_buffer_display = fb_handle->pixel_buffer_back;
     }
+
     return TINYENGINE_OK;
 }
 
 tinyengine_status_t te_fb_destroy(te_fb_handle_t* fb_handle) {
+
     free(fb_handle->pixel_buffer_back);
     if (fb_handle->is_dual) {
         free(fb_handle->pixel_buffer_display);
@@ -51,6 +38,8 @@ tinyengine_status_t te_fb_destroy(te_fb_handle_t* fb_handle) {
 
 
 tinyengine_status_t te_fb_write(te_fb_handle_t* fb_handle) {
+
+    // unused for now. will implement in future when new screen gets configured.
 
     // dw about buffer initialization here, trust the use calls after init; be smart dude
 
@@ -160,9 +149,22 @@ tinyengine_status_t te_fb_draw_filled_circle(te_fb_handle_t* fb_handle, uint32_t
 }
 
 tinyengine_status_t te_fb_swap_blocking(te_fb_handle_t* fb_handle) {
-    fb_handle->te_fb_swap_blocking_func_ptr();
+    fb_handle->te_fb_wait_vsync_blocking_func_ptr();
     uint8_t* frame_buffer_temp = fb_handle->pixel_buffer_back;
     // display->flip_now();
     fb_handle->pixel_buffer_back = fb_handle->pixel_buffer_display;
     fb_handle->pixel_buffer_display = frame_buffer_temp;
+    return TINYENGINE_OK;
+}
+
+tinyengine_status_t te_fb_draw_sprite(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint32_t x, uint32_t y) {
+    uint16_t _x, _y;
+    for (uint16_t i = 0; i < sprite->height * sprite->width; i++) {
+        _x = i / sprite->height;
+        _y = i % sprite->width;
+        if (sprite->sprite_buffer[i] != 0x00)
+            te_fb_draw_pixel(fb_handle, x - _y, y + _x, sprite->sprite_buffer[i]);
+    }
+
+    return TINYENGINE_OK;
 }
