@@ -4,11 +4,13 @@
 #include "game.h"
 #include "pico/stdlib.h"
 #include "pico/rand.h"
+#include "hardware/pwm.h"
 
 #include "tinyengine.h"
 #include "tinyengine_renderer.h"
 #include "tinyengine_framebuffer.h"
 #include "tinyengine_renderer_st7735r.h"
+#include "tinyengine_audio.h"
 #include "memory.h"
 #include <malloc.h>
 
@@ -16,7 +18,7 @@
 
 #include "tinyengine_sprite.h"
 
-#define BALL_CNT 50
+#define BALL_CNT 30
 
 tinyengine_handle_t engine = { 0 };
 te_fb_handle_t frame_buf = { 0 };
@@ -38,12 +40,12 @@ struct ball {
 
 } ball1, ball2, ball3;
 
-struct ball balls[BALL_CNT];
+static struct ball balls[BALL_CNT];
 
-uint16_t xs[BALL_CNT] = { 0 };
-uint16_t ys[BALL_CNT] = { 0 };
+static uint16_t xs[BALL_CNT] = { 0 };
+static uint16_t ys[BALL_CNT] = { 0 };
 
-te_sprite_t sprite_jockey;
+static te_sprite_t sprite_jockey;
 
 tinyengine_status_t pre_init() {
     sprite_jockey.sprite_buffer = Docs;
@@ -152,8 +154,16 @@ uint32_t getFreeHeap(void) {
 }
 
 extern char __StackLimit, __bss_end__;
+
+
 void run() {
 
+    te_audio_handle_t audio;
+    audio.audio_out_1 = 20;
+
+    te_audio_init(&audio);
+
+    
 
     engine.lcd_spi_bklt = LCD_BKLT;
     engine.lcd_spi_clk = LCD_SPI_CLK;

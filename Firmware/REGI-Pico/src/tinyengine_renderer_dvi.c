@@ -238,13 +238,17 @@ void __not_in_flash_func(te_renderer_dvi_wait_for_vsync()) {
 
 
 void __not_in_flash_func(te_renderer_dvi_wait_vsync_blocking()) {
-    while (v_scanline >= MODE_V_FRONT_PORCH) __wfe();
+    while (v_scanline >= MODE_V_FRONT_PORCH) {
+
+        __wfe();
+    }
+
     // flip_next = true;
     // while (flip_next) __wfe();
 }
 
 // just a wrapper; idk maybe in the future some race handling can be done here?
-void tinyengine_renderer_dvi_flip_blocking() {
+void __not_in_flash_func(tinyengine_renderer_dvi_flip_blocking()) {
     te_renderer_dvi_wait_vsync_blocking();
 }
 
