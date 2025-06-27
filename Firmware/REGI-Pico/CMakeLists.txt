@@ -168,6 +168,7 @@ target_link_libraries(REGI-Pico
     font
     lcd
     hardware_pwm
+    hardware_interp
 
     # dvhstx
 

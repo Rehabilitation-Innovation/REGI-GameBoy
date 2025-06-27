@@ -5,7 +5,8 @@
 #include "hw.h"
 #include "main.h"
 #include "memory.h"
-
+#include "hardware/interp.h"
+#include "math.h"
 
 tinyengine_status_t te_fb_init(te_fb_handle_t* fb_handle, uint32_t frame_width, uint32_t frame_height, int is_dual) {
 
@@ -159,11 +160,15 @@ tinyengine_status_t te_fb_swap_blocking(te_fb_handle_t* fb_handle) {
 
 tinyengine_status_t te_fb_draw_sprite(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint32_t x, uint32_t y) {
     uint16_t _x, _y;
-    for (uint16_t i = 0; i < sprite->height * sprite->width; i++) {
+    for (uint32_t i = 0; i < sprite->height * sprite->width; i++) {
         _x = i / sprite->height;
         _y = i % sprite->width;
+        if (_x == 0 && _y == 0) {
+            te_fb_draw_pixel(fb_handle, x, y, 0xC0);
+            continue;
+        }
         if (sprite->sprite_buffer[i] != 0x00)
-            te_fb_draw_pixel(fb_handle, x - _y, y + _x, sprite->sprite_buffer[i]);
+            te_fb_draw_pixel(fb_handle, _y + x, _x + y, sprite->sprite_buffer[i]);
     }
 
     return TINYENGINE_OK;

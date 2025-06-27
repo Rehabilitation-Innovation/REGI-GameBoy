@@ -150,6 +150,8 @@ static int line_bytes_per_pixel;
 static uint8_t* frame_buffer_display;
 static uint8_t* frame_buffer_back;
 
+static te_fb_handle_t* s_frame_buf;
+
 #define NUM_FRAME_LINES 2
 #define NUM_CHANS 3
 static int PALETTE_SIZE = 256;
@@ -201,7 +203,7 @@ void __not_in_flash_func(dma_irq_handler()) {
             uint32_t* dst_ptr = &line_buffers[line_num * line_buf_total_len + count_of(vactive_line_header)];
 
             // uint8_t* src_ptr = &frame_buffer_display[y * (timing_mode->h_active_pixels >> h_repeat_shift)];
-            uint8_t* src_ptr = &frame_buffer_display[y * (640 >> h_repeat_shift)];
+            uint8_t* src_ptr = &s_frame_buf->pixel_buffer_display[y * (640 >> h_repeat_shift)];
             // printf("%d\r\n", y * (640 >> h_repeat_shift));
             // for (int i = 0; i < timing_mode->h_active_pixels; i += 2) {
             for (int i = 0; i < 640; i += 2) {
@@ -250,6 +252,7 @@ void __not_in_flash_func(te_renderer_dvi_wait_vsync_blocking()) {
 // just a wrapper; idk maybe in the future some race handling can be done here?
 void __not_in_flash_func(tinyengine_renderer_dvi_flip_blocking()) {
     te_renderer_dvi_wait_vsync_blocking();
+
 }
 
 static __force_inline uint16_t colour_rgb565(uint8_t r, uint8_t g, uint8_t b) {
@@ -330,9 +333,9 @@ tinyengine_status_t tinyengine_renderer_dvi_init(tinyengine_handle_t* engine_han
     }
 
     // I just assign the pointers here because this makes the updating simpler.
-
-    frame_buffer_back = framebuffer->pixel_buffer_back;
-    frame_buffer_display = framebuffer->pixel_buffer_display;
+    s_frame_buf = framebuffer;
+    // frame_buffer_back = framebuffer->pixel_buffer_back;
+    // frame_buffer_display = framebuffer->pixel_buffer_display;
     // memset(frame_buffer_display, (uint8_t)(0xF0), frame_width * frame_height * frame_bytes_per_pixel);
     // memset(frame_buffer_back, (uint8_t)0xF0, frame_width * frame_height * frame_bytes_per_pixel);
 

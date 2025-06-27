@@ -6,6 +6,9 @@
 #include "pico/rand.h"
 #include "hardware/pwm.h"
 
+#include "pwm-tone.h"   // Include the library
+#include "melodies.h"   // Optional, but ideal location to store custom melodies
+
 #include "tinyengine.h"
 #include "tinyengine_renderer.h"
 #include "tinyengine_framebuffer.h"
@@ -15,10 +18,15 @@
 #include <malloc.h>
 
 #include "jock.h"
-
+#include "dino.h"
+#include "cloud.h"
+#include <math.h>
 #include "tinyengine_sprite.h"
 
 #define BALL_CNT 30
+#define PIEZO_PIN 20
+
+#define GRAVITY 0.98f
 
 tinyengine_handle_t engine = { 0 };
 te_fb_handle_t frame_buf = { 0 };
@@ -28,14 +36,11 @@ tinyengine_status_t post_init() {
 
 const char* txt = " hello world";
 
-double counter = 0;
-double x1 = 10, y1_ = 20, x2 = 0, y2 = 50;
-
 struct ball {
 
-    double x, y;
-    double dirx, diry;
-    double spd;
+    float x, y;
+    float dirx, diry;
+    float spd;
     uint8_t col;
 
 } ball1, ball2, ball3;
@@ -45,96 +50,80 @@ static struct ball balls[BALL_CNT];
 static uint16_t xs[BALL_CNT] = { 0 };
 static uint16_t ys[BALL_CNT] = { 0 };
 
+static uint32_t charecterCurrentx = 0;
+static uint32_t charecterCurrenty = 0;
+
 static te_sprite_t sprite_jockey;
 
-tinyengine_status_t pre_init() {
-    sprite_jockey.sprite_buffer = Docs;
-    sprite_jockey.height = DOCS_HEIGHT;
-    sprite_jockey.width = DOCS_WIDTH;
+static te_sprite_t sprite_cloud = {
+    .height = CLOUD_HEIGHT,
+    .width = CLOUD_WIDTH,
+    .sprite_buffer = cloud
+};
 
-    for (uint8_t i = 0; i < BALL_CNT; i++) {
-        balls[i].x = 200;
-        xs[i] = balls[i].x;
-        balls[i].y = 100;
-        ys[i] = balls[i].y;
-        balls[i].dirx = 2;
-        balls[i].diry = 1.5;
-        balls[i].spd = 100;
-        balls[i].col = i;
+const unsigned char* epd_bitmap_allArray[2] = {
+    tile000,
+
+    tile006,
+
+};
+
+te_sprite_t dinos[10] = { 0 };
+
+tinyengine_status_t pre_init() {
+    sprite_jockey.sprite_buffer = tile000;
+    sprite_jockey.height = 48;
+    sprite_jockey.width = 48;
+
+
+
+    for (uint8_t i = 0; i < 2; i++)
+    {
+        dinos[i].sprite_buffer = epd_bitmap_allArray[i];
+        dinos[i].height = 48;
+        dinos[i].width = 48;
     }
 }
 
-
+float clx = 0, cly = 0;
+te_sprite_t* dino = &dinos[0];
 tinyengine_status_t render(double frameTime) {
     frame_buf.te_fb_wait_vsync_blocking_func_ptr();
     te_fb_clear(&frame_buf, 0x00);
 
-    // for (uint8_t i = 0; i < BALL_CNT; i++) {
-    //     // frame_buf.te_fb_wait_vsync_blocking_func_ptr();
-    //     // te_fb_draw_filled_circle(&frame_buf, balls[i].x, balls[i].y, 10 + balls[i].y - balls[i].x, balls[i].col);
-    // te_fb_draw_sprite(&frame_buf, &sprite_jockey, balls[0].x, balls[0].y);
-    // }
-
-    te_fb_draw_sprite_batch(&frame_buf, &sprite_jockey, xs, ys, BALL_CNT);
-
-    // int x, y;
-    // for (int i = 0; i < DOCS_HEIGHT * DOCS_WIDTH; i++) {
-    //     x = i / DOCS_WIDTH;
-    //     y = i % DOCS_WIDTH;
-    //     te_fb_draw_pixel(&frame_buf, 50 - y, 50 + x, Docs[i]);
-
-    // }
-
-    // for (int i = 0; i < DOCS_HEIGHT * DOCS_WIDTH; i++) {
-    //     x = i / DOCS_WIDTH;
-    //     y = i % DOCS_WIDTH;
-    //     te_fb_draw_pixel(&frame_buf, 100 - y, 100 + x, Docs[i]);
-
-    // }
-
+    // te_fb_draw_sprite(&frame_buf, &sprite_cloud, clx + CLOUD_WIDTH / 2, cly);
+    te_fb_draw_sprite(&frame_buf, dino, 100, 100);
     // te_fb_draw_sprite(&frame_buf, &sprite_jockey, 100, 100);
-
-
     te_fb_swap_blocking(&frame_buf);
-
 }
 
-#define GRAVITY 5 // ~9.81
 
 tinyengine_status_t update(double frameTime) {
-    for (uint8_t i = 0; i < BALL_CNT; i++) {
-        if (balls[i].x >= 320) {
-            balls[i].dirx = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
-        }
-        if (balls[i].y >= 240) {
-            balls[i].diry = -1 * ((double)get_rand_32() / (double)__RAND_MAX);
-        }
-        if (balls[i].x <= 0) {
-            balls[i].dirx = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
-        }
-        if (balls[i].y <= 0) {
-            balls[i].diry = 1 * ((double)get_rand_32() / (double)__RAND_MAX);
-        }
-        balls[i].x += balls[i].spd * frameTime * balls[i].dirx;
-        balls[i].y += balls[i].spd * frameTime * balls[i].diry;
-        xs[i] = balls[i].x;
-        ys[i] = balls[i].y;
-    }
-    // if (balls[0].x >= 320) {
-    //     balls[0].dirx = -1 * balls[0].spd;
-    // }
-    // if (balls[0].y >= 240) {
-    //     balls[0].diry = -1 * balls[0].spd;
-    // }
+    // 320 x 240    int charecter_Sprite_center_x = DOCS_WIDTH / 2 + charecterCurrentx;
+    // int charecter_Sprite_center_y = DOCS_HEIGHT / 2 + char;
+    // static uint32_t
+    //     charharecterCucharecterCurrenty;DOCS_HEIGHT / 2 + charecterCurrenty;
 
-    // if (balls[0].x <= 0) {
-    //     balls[0].dirx = 0;
-    // }
-    // if (balls[0].y <= 0) {
-    //     balls[0].diry = 1 * GRAVITY;
-    // }
-    // balls[0].x += frameTime * balls[0].dirx;
-    // balls[0].y += balls[0].spd * frameTime * balls[0].diry * -1 / GRAVITY;
+
+    clx -= 100 * frameTime;
+
+    if ((clx + CLOUD_WIDTH) <= 0) clx = frame_buf.display_w;
+
+    static int i = 0;
+    static float count = 0;
+
+    count += frameTime * 10;
+
+    if (count >= 5) {
+        i += 1;
+        count = 0;
+    }
+
+    if (i > 1) {
+        i = 0;
+    }
+
+    dino = &dinos[i];
 
 }
 
@@ -155,15 +144,85 @@ uint32_t getFreeHeap(void) {
 
 extern char __StackLimit, __bss_end__;
 
-
+tonegenerator_t generator;
 void run() {
 
     te_audio_handle_t audio;
     audio.audio_out_1 = 20;
+    audio.period = 10000;
 
-    te_audio_init(&audio);
+    // te_audio_init(&audio);
 
-    
+    // tone_init(&generator, PIEZO_PIN);
+    // tone(&generator, NOTE_A4, 200);
+    // while (generator.playing) { sleep_ms(2); }
+    // tone(&generator, NOTE_A5, 200);
+    // sleep_ms(500);
+    // melody(&generator, RINGTONE_1, 3);
+    // while (generator.playing) { sleep_ms(2); }
+    // sleep_ms(500);
+
+    // melody(&generator, HAPPY_BIRTHDAY, 0);
+    // while (generator.playing) { sleep_ms(2); }
+
+    // sleep_ms(500);
+
+    // set_rest_duration(0);
+
+    /**
+     * @brief Use this function to speed up or down your melodies.
+     * Default tempo is 120bpm. Tempo does not affect tone().
+     */
+     // set_tempo(160);
+
+     /**
+      * @brief This is an example sound effect. Each note defines a pitch (float, in Hz)
+      * and a duration (expressed in subdivisions of a whole note). This means that
+      * a duration of 16 is half a duration of 8. Negative values represent dotted notation,
+      * so that -8 = 8 + (8/2) = 12. This data structure is inspired by the work at
+      * https://github.com/robsoncouto/arduino-songs/
+      */
+    note_t sfx[] = {
+        {NOTE_C4, 16},
+        {NOTE_C5, 32},
+        {NOTE_C6, 64},
+        {REST, 8}, // Pause at the end to space out repeats of the melody
+        {MELODY_END, 0}, // Melody end code. Necessary to trigger repeats
+    };
+
+    note_t vader[] = {
+
+        // Dart Vader theme (Imperial March) - Star wars 
+        // Score available at https://musescore.com/user/202909/scores/1141521
+        // The tenor saxophone part was used
+
+        NOTE_A4,-4, NOTE_A4,-4, NOTE_A4,16, NOTE_A4,16, NOTE_A4,16, NOTE_A4,16, NOTE_F4,8, REST,8,
+        NOTE_A4,-4, NOTE_A4,-4, NOTE_A4,16, NOTE_A4,16, NOTE_A4,16, NOTE_A4,16, NOTE_F4,8, REST,8,
+        NOTE_A4,4, NOTE_A4,4, NOTE_A4,4, NOTE_F4,-8, NOTE_C5,16,
+
+        NOTE_A4,4, NOTE_F4,-8, NOTE_C5,16, NOTE_A4,2,//4
+        NOTE_E5,4, NOTE_E5,4, NOTE_E5,4, NOTE_F5,-8, NOTE_C5,16,
+        NOTE_A4,4, NOTE_F4,-8, NOTE_C5,16, NOTE_A4,2,
+
+        NOTE_A5,4, NOTE_A4,-8, NOTE_A4,16, NOTE_A5,4, NOTE_GS5,-8, NOTE_G5,16, //7 
+        NOTE_DS5,16, NOTE_D5,16, NOTE_DS5,8, REST,8, NOTE_A4,8, NOTE_DS5,4, NOTE_D5,-8, NOTE_CS5,16,
+
+        NOTE_C5,16, NOTE_B4,16, NOTE_C5,16, REST,8, NOTE_F4,8, NOTE_GS4,4, NOTE_F4,-8, NOTE_A4,-16,//9
+        NOTE_C5,4, NOTE_A4,-8, NOTE_C5,16, NOTE_E5,2,
+
+        NOTE_A5,4, NOTE_A4,-8, NOTE_A4,16, NOTE_A5,4, NOTE_GS5,-8, NOTE_G5,16, //7 
+        NOTE_DS5,16, NOTE_D5,16, NOTE_DS5,8, REST,8, NOTE_A4,8, NOTE_DS5,4, NOTE_D5,-8, NOTE_CS5,16,
+
+        NOTE_C5,16, NOTE_B4,16, NOTE_C5,16, REST,8, NOTE_F4,8, NOTE_GS4,4, NOTE_F4,-8, NOTE_A4,-16,//9
+        NOTE_A4,4, NOTE_F4,-8, NOTE_C5,16, NOTE_A4,2,
+
+    };
+
+
+    /**
+     * @brief Let's play the sfx we just defined, repeating it twice
+     */
+     // melody(&generator, vader, 2);
 
     engine.lcd_spi_bklt = LCD_BKLT;
     engine.lcd_spi_clk = LCD_SPI_CLK;
