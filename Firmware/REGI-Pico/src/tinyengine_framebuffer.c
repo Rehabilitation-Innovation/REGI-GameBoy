@@ -174,6 +174,21 @@ tinyengine_status_t te_fb_draw_sprite(te_fb_handle_t* fb_handle, te_sprite_t* sp
     return TINYENGINE_OK;
 }
 
+tinyengine_status_t te_fb_draw_sprite_raw(te_fb_handle_t* fb_handle, uint8_t* sprite, uint32_t w, uint32_t h, uint32_t x, uint32_t y) {
+    uint16_t _x, _y;
+    for (uint32_t i = 0; i < h * w; i++) {
+        _x = i / h;
+        _y = i % w;
+        if (_x == 0 && _y == 0) {
+            te_fb_draw_pixel(fb_handle, x, y, 0xC0);
+            continue;
+        }
+        if (sprite[i] != 0x00)
+            te_fb_draw_pixel(fb_handle, _y + x, _x + y, sprite[i]);
+    }
+    return TINYENGINE_OK;
+}
+
 tinyengine_status_t te_fb_draw_sprite_batch(te_fb_handle_t* fb_handle, te_sprite_t* sprite, uint16_t x[], uint16_t y[], uint16_t count) {
 
     uint16_t _x, _y;

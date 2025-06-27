@@ -22,6 +22,7 @@
 #include "cloud.h"
 #include <math.h>
 #include "tinyengine_sprite.h"
+#include "tinyengine_sprite_animation.h"
 
 #define BALL_CNT 30
 #define PIEZO_PIN 20
@@ -68,31 +69,43 @@ const unsigned char* epd_bitmap_allArray[2] = {
 
 };
 
-te_sprite_t dinos[10] = { 0 };
+uint8_t dinos[2] = { 0 };
+
+te_sprite_animation_t dino_ani = {
+    .animation_delay = 5,
+    .current_frame = 0,
+    .current_frame_time = 0,
+    .height = 48,
+    .width = 48,
+    .sprite_animation_frames = dinos,
+    .total_frames = 2
+};
 
 tinyengine_status_t pre_init() {
     sprite_jockey.sprite_buffer = tile000;
     sprite_jockey.height = 48;
     sprite_jockey.width = 48;
 
+    dinos[0] = tile000;
+    dinos[1] = tile006;
 
-
-    for (uint8_t i = 0; i < 2; i++)
-    {
-        dinos[i].sprite_buffer = epd_bitmap_allArray[i];
-        dinos[i].height = 48;
-        dinos[i].width = 48;
-    }
+    // for (uint8_t i = 0; i < 2; i++)
+    // {
+    //     dinos[i].sprite_buffer = epd_bitmap_allArray[i];
+    //     dinos[i].height = 48;
+    //     dinos[i].width = 48;
+    // }
 }
 
 float clx = 0, cly = 0;
-te_sprite_t* dino = &dinos[0];
+// te_sprite_t* dino = &dinos[0];
 tinyengine_status_t render(double frameTime) {
     frame_buf.te_fb_wait_vsync_blocking_func_ptr();
     te_fb_clear(&frame_buf, 0x00);
 
     // te_fb_draw_sprite(&frame_buf, &sprite_cloud, clx + CLOUD_WIDTH / 2, cly);
-    te_fb_draw_sprite(&frame_buf, dino, 100, 100);
+    // te_fb_draw_sprite(&frame_buf, dino, 100, 100);
+    te_sprite_render_animation(&frame_buf, &dino_ani, 100, 100, frameTime);
     // te_fb_draw_sprite(&frame_buf, &sprite_jockey, 100, 100);
     te_fb_swap_blocking(&frame_buf);
 }
@@ -109,21 +122,21 @@ tinyengine_status_t update(double frameTime) {
 
     if ((clx + CLOUD_WIDTH) <= 0) clx = frame_buf.display_w;
 
-    static int i = 0;
-    static float count = 0;
+    // static int i = 0;
+    // static float count = 0;
 
-    count += frameTime * 10;
+    // count += frameTime * 10;
 
-    if (count >= 5) {
-        i += 1;
-        count = 0;
-    }
+    // if (count >= 5) {
+    //     i += 1;
+    //     count = 0;
+    // }
 
-    if (i > 1) {
-        i = 0;
-    }
+    // if (i > 1) {
+    //     i = 0;
+    // }
 
-    dino = &dinos[i];
+    // dino = &dinos[i];
 
 }
 
