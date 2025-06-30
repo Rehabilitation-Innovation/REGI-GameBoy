@@ -1645,6 +1645,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 114.3) (xy 127 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32540ab0-5890-4636-a49b-03482c901881")
+	)
+	(wire
+		(pts
 			(xy 46.99 58.42) (xy 54.61 58.42)
 		)
 		(stroke
@@ -1652,6 +1662,16 @@
 			(type default)
 		)
 		(uuid "36471b21-948e-482f-977b-ab62561dde9d")
+	)
+	(wire
+		(pts
+			(xy 109.22 114.3) (xy 127 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36aba71f-66e4-4dd6-908c-488f29d8146a")
 	)
 	(wire
 		(pts
@@ -1772,6 +1792,16 @@
 			(type default)
 		)
 		(uuid "66aa9f5b-b4bb-40be-935e-6dfc1073406f")
+	)
+	(wire
+		(pts
+			(xy 127 125.73) (xy 127 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66e53778-f8d6-47b0-9351-4e0a9977cded")
 	)
 	(wire
 		(pts
@@ -2012,6 +2042,16 @@
 			(type default)
 		)
 		(uuid "d592b416-7087-43f1-9910-8152c556bd33")
+	)
+	(wire
+		(pts
+			(xy 127 135.89) (xy 127 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d62883cf-17e9-455b-9f6a-e3c6eb19118a")
 	)
 	(wire
 		(pts
@@ -3178,6 +3218,107 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 127 121.92 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "82209df1-f6bf-40f8-a523-0f9807641efe")
+		(property "Reference" "R49"
+			(at 134.874 122.174 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1k"
+			(at 134.874 119.634 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 128.778 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DK#" "P680ACT-ND"
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C17513"
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Adjusted Value for stock" ""
+			(at 127 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "55f26799-dbda-493e-9d17-7d95f3a3dde2")
+		)
+		(pin "2"
+			(uuid "cd01344e-b5c3-47b4-9d9a-25b0a5323324")
+		)
+		(instances
+			(project "GameConsoleRev1"
+				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/39975a12-71eb-4feb-9a68-3d6642b5e328/18d4354f-95e9-4d87-8c53-891e1ee25fdd"
+					(reference "R49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "SparkFun-LED:LED")
 		(at 157.48 68.58 90)
 		(unit 1)
@@ -3248,7 +3389,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C965804"
 			(at 157.48 68.58 0)
 			(effects
 				(font
@@ -3282,6 +3423,182 @@
 			(project "GameConsoleRev1"
 				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/39975a12-71eb-4feb-9a68-3d6642b5e328/18d4354f-95e9-4d87-8c53-891e1ee25fdd"
 					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 127 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8a6be7be-a9b7-4696-9529-3c856e657db0")
+		(property "Reference" "#PWR076"
+			(at 127 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 127 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 127 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 127 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b10a58b5-33d2-429e-8198-a45039c9dc28")
+		)
+		(instances
+			(project "GameConsoleRev1"
+				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/39975a12-71eb-4feb-9a68-3d6642b5e328/18d4354f-95e9-4d87-8c53-891e1ee25fdd"
+					(reference "#PWR076")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "SparkFun-LED:LED")
+		(at 127 132.08 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a106ea58-c9c0-4dae-81e4-7c5a5cac7ae6")
+		(property "Reference" "D11"
+			(at 134.874 133.9215 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BLUE"
+			(at 134.874 131.3815 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 132.08 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 139.7 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PROD_ID" "LED-"
+			(at 137.16 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DK#" "C566D-BFE-CU0W0351-ND"
+			(at 127 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C965804"
+			(at 127 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 127 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Adjusted Value for stock" ""
+			(at 127 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8266f3b5-56c6-4d73-92d6-35982c54b0b4")
+		)
+		(pin "2"
+			(uuid "1b1256c6-aeb8-4d40-8aba-a9404a62c193")
+		)
+		(instances
+			(project "GameConsoleRev1"
+				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/39975a12-71eb-4feb-9a68-3d6642b5e328/18d4354f-95e9-4d87-8c53-891e1ee25fdd"
+					(reference "D11")
 					(unit 1)
 				)
 			)

@@ -86,8 +86,8 @@ tinyengine_status_t pre_init() {
     sprite_jockey.height = 48;
     sprite_jockey.width = 48;
 
-    dinos[0] = tile000;
-    dinos[1] = tile006;
+    // dinos[0] = tile000;
+    // dinos[1] = tile006;
 
     // for (uint8_t i = 0; i < 2; i++)
     // {
