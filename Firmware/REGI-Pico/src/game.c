@@ -18,7 +18,7 @@
 #include <malloc.h>
 
 #include "jock.h"
-#include "dino.h"
+#include "dino_running.h"
 #include "cloud.h"
 #include <math.h>
 #include "tinyengine_sprite.h"
@@ -62,23 +62,30 @@ static te_sprite_t sprite_cloud = {
     .sprite_buffer = cloud
 };
 
-const unsigned char* epd_bitmap_allArray[2] = {
+static uint8_t* epd_bitmap_allArray[11] = {
     tile000,
-
+    tile001,
+    tile002,
+    tile003,
+    tile004,
+    tile005,
     tile006,
-
+    tile007,
+    tile008,
+    tile009,
+    tile010
 };
 
-uint8_t dinos[2] = { 0 };
+uint8_t* dinos[2] = { 0 };
 
 te_sprite_animation_t dino_ani = {
-    .animation_delay = 5,
+    .animation_delay = 2,
     .current_frame = 0,
     .current_frame_time = 0,
-    .height = 48,
-    .width = 48,
-    .sprite_animation_frames = dinos,
-    .total_frames = 2
+    .height = 24,
+    .width = 24,
+    .sprite_animation_frames = epd_bitmap_allArray,
+    .total_frames = 11
 };
 
 tinyengine_status_t pre_init() {
@@ -86,8 +93,8 @@ tinyengine_status_t pre_init() {
     sprite_jockey.height = 48;
     sprite_jockey.width = 48;
 
-    // dinos[0] = tile000;
-    // dinos[1] = tile006;
+    dinos[0] = tile000;
+    dinos[1] = tile006;
 
     // for (uint8_t i = 0; i < 2; i++)
     // {

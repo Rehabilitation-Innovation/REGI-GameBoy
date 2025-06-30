@@ -16,7 +16,7 @@ tinyengine_status_t te_sprite_render_animation(
     sprite->current_frame_time += frameTime * 100;
 
     te_fb_draw_sprite_raw(
-        frame_buf, &sprite->sprite_animation_frames[sprite->current_frame],
+        frame_buf, sprite->sprite_animation_frames[sprite->current_frame],
         sprite->width, sprite->height, x, y);
 
     return TINYENGINE_OK;

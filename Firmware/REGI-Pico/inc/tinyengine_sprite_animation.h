@@ -6,7 +6,7 @@
 // all frames must be the same dimentions.
 typedef struct {
 
-    uint8_t* sprite_animation_frames;
+    uint8_t** sprite_animation_frames;
     uint16_t width, height;
     uint8_t animation_delay;
     uint8_t total_frames;

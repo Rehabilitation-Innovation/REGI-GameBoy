@@ -52,7 +52,7 @@ file(GLOB SOURCES
 
     "src/*.c"
 
-    # "src/*.cpp"
+    "src/*.cpp"
 )
 
 # library configuration (override if necessary)
