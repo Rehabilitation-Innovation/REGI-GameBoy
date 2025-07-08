@@ -2207,6 +2207,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 68.58 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2d75d823-4d57-4075-aee1-f9fc388d28f0")
 		)
@@ -2414,6 +2422,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 181.61 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "089ee5c5-9d00-4a06-b0c6-0ec6a7fc5c6d")
 		)
@@ -2482,6 +2498,14 @@
 			)
 		)
 		(property "LCSC" "C52923"
+			(at 125.73 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 125.73 50.8 0)
 			(effects
 				(font
@@ -2558,6 +2582,14 @@
 			)
 		)
 		(property "LCSC" "C1017"
+			(at 181.61 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 181.61 96.52 0)
 			(effects
 				(font
@@ -2964,6 +2996,22 @@
 				(hide yes)
 			)
 		)
+		(property "DK" ""
+			(at 95.25 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C25744"
+			(at 95.25 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "df78867e-a51d-4acc-aca0-04bb983edbcf")
 		)
@@ -3032,6 +3080,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "DK" ""
+			(at 243.84 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -3176,6 +3232,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 125.73 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "96213474-d1f8-4286-9731-6a360e9735c7")
 		)
@@ -3244,6 +3308,14 @@
 			)
 		)
 		(property "LCSC" "C1017"
+			(at 181.61 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 181.61 101.6 0)
 			(effects
 				(font
@@ -3387,6 +3459,22 @@
 				(hide yes)
 			)
 		)
+		(property "DK" ""
+			(at 100.33 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C25744"
+			(at 100.33 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "fd1668b5-6e59-4899-9ba1-c9f8e52d46ab")
 		)
@@ -3470,78 +3558,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_SPDT")
-		(at 97.79 134.62 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "67b20d58-ed88-4282-a30b-2d9921efea02")
-		(property "Reference" "SW5"
-			(at 84.582 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SW_SPDT"
-			(at 84.582 135.89 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPDT_PCM12"
-			(at 97.79 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 90.17 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Switch, single pole double throw"
-			(at 97.79 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "e8683077-1990-45ca-bb83-e0a283050293")
-		)
-		(pin "2"
-			(uuid "f08542f3-1aba-49e7-bfad-c25d362f00ce")
-		)
-		(pin "1"
-			(uuid "106dece1-5419-40f1-a0fe-20d4c5209b41")
-		)
-		(instances
-			(project "GameConsoleRev1"
-				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/6750c78d-269b-4e76-ab02-4a41b12c2dc9/400c72f9-aff2-47e6-b974-5cf5fcbcdf3d/e33a9916-7adf-4163-8d68-4e2764193783"
-					(reference "SW5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 80.01 107.95 0)
 		(unit 1)
@@ -3604,6 +3620,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 80.01 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "9006e4cf-e7d4-4488-b103-a7ff86401d4c")
 		)
@@ -3614,6 +3638,95 @@
 			(project "GameConsoleRev1"
 				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/6750c78d-269b-4e76-ab02-4a41b12c2dc9/400c72f9-aff2-47e6-b974-5cf5fcbcdf3d/e33a9916-7adf-4163-8d68-4e2764193783"
 					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPDT")
+		(at 97.79 134.62 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6f237a33-aeb1-4801-8036-1ebef5b659a8")
+		(property "Reference" "SW8"
+			(at 91.186 131.318 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SW_SPDT"
+			(at 89.154 131.318 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Angled_CK_OS102011MA1Q"
+			(at 97.79 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 97.79 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DK" ""
+			(at 97.79 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK#" "CKN9559-ND"
+			(at 97.79 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "cfcfda3f-cfa8-4e2e-b878-1f36e25d6c49")
+		)
+		(pin "2"
+			(uuid "6975b113-4cb4-41bb-9dcf-a1194dd1f4fa")
+		)
+		(pin "1"
+			(uuid "49e0dca0-501c-4958-8451-69dc7c6bfb8f")
+		)
+		(instances
+			(project "GameConsoleRev1"
+				(path "/3a486aa3-6991-4754-8b37-c2b58fe15900/6750c78d-269b-4e76-ab02-4a41b12c2dc9/400c72f9-aff2-47e6-b974-5cf5fcbcdf3d/e33a9916-7adf-4163-8d68-4e2764193783"
+					(reference "SW8")
 					(unit 1)
 				)
 			)
@@ -3814,6 +3927,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 80.01 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8ba9c034-303b-442a-91a9-6e21e7a32e1c")
 		)
@@ -3882,6 +4003,30 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC" "C113367"
+			(at 156.21 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
+			(at 156.21 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK#" "PAM8302AASCRDICT-ND"
+			(at 156.21 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "6"
@@ -3971,6 +4116,14 @@
 			)
 		)
 		(property "LCSC" "C1017"
+			(at 181.61 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 181.61 45.72 0)
 			(effects
 				(font
@@ -4178,6 +4331,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "DK" ""
+			(at 243.84 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -4449,6 +4610,14 @@
 				(hide yes)
 			)
 		)
+		(property "DK" ""
+			(at 40.64 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c5c18bee-c353-4656-ade5-d551772ac310")
 		)
@@ -4520,6 +4689,30 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC" "C113367"
+			(at 156.21 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
+			(at 156.21 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK#" "PAM8302AASCRDICT-ND"
+			(at 156.21 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "6"
@@ -4618,6 +4811,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 57.15 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "75c2ace7-e3dc-4cea-8aae-6c803748ade2")
 		)
@@ -4687,6 +4888,14 @@
 			)
 		)
 		(property "LCSC" "C52923"
+			(at 125.73 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 125.73 45.72 0)
 			(effects
 				(font
@@ -4772,6 +4981,14 @@
 				)
 			)
 		)
+		(property "DK" ""
+			(at 68.58 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a56f0fea-c9d8-4f14-9694-9cd9d00cc86d")
 		)
@@ -4840,6 +5057,14 @@
 			)
 		)
 		(property "LCSC" "C52923"
+			(at 125.73 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 125.73 101.6 0)
 			(effects
 				(font
@@ -4918,6 +5143,14 @@
 			)
 		)
 		(property "LCSC" "C15525"
+			(at 57.15 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DK" ""
 			(at 57.15 107.95 0)
 			(effects
 				(font
