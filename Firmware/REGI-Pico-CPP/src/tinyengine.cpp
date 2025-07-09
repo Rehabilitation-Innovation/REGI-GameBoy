@@ -1,6 +1,6 @@
 #include "tinyengine.h"
 // #include "tinyengine_renderer_st7735r.h"
-#include "tinyengine_renderer_dvi.h"
+// #include "tinyengine_renderer_dvi.h"
 // #include "tinyengine_renderer_ili9488.h"
 #include <pico/time.h>
 #include "tinyengine_framebuffer.h"

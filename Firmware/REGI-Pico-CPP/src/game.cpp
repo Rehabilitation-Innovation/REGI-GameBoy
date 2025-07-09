@@ -8,7 +8,7 @@
 #include "tinyengine_sprite_animation.h"
 #include "tinyengine_audio.h"
 
-#include "tinyengine_renderer_dvi.h"
+#include "tinyengine_renderer_dvi_c_adapter.h"
 
 #include "pico/stdlib.h"
 #include "pico/rand.h"
@@ -36,7 +36,7 @@ void Game::run() {
         });
     engine.set_update_clbk([&](double frameTime) {
         scene.update(frameTime);
-        
+
         return TINYENGINE_OK;
         });
     engine.init();
