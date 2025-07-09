@@ -31,7 +31,7 @@ tinyengine_status_t TinyEngine::start_loop()
     double startTime = 0;
     int render = 1;
     int frames = 0;
-    int framerate = 60;
+    int framerate = 100;
     double frametime = (double)1 / (double)framerate;
     uint32_t startus = to_us_since_boot(get_absolute_time());
     double frameCounter = 0;

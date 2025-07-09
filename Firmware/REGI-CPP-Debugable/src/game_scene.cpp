@@ -49,7 +49,6 @@ void GameScene::render() {
     m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 
-
 };
 
 void GameScene::update(double frameTime) {
