@@ -1,6 +1,9 @@
 #pragma once
 #include "tinyengine.h"
 #include "tinyengine_framebuffer.h"
+
+class TinyEngineFrameBuffer;
+
 /**
  * A 8bit color space sprite object. must be a 1-D array of 1 byte pixels.
  */
@@ -33,15 +36,14 @@ typedef struct {
 } te_sprite_animation_t;
 
 
-
 class Sprite {
 private:
     bool m_externaly_created = false;
     te_sprite_t* m_sprite_data = 0;
     bool m_animated = false;
     te_sprite_animation_t* m_animation_data = 0;
-    TinyEngineFrameBuffer& m_framebuffer;
     double m_frametime;
+    TinyEngineFrameBuffer& m_framebuffer;
     uint16_t x, y = { 0 };
 public:
     Sprite(te_sprite_t* _sprite_data, TinyEngineFrameBuffer& _framebuffer);

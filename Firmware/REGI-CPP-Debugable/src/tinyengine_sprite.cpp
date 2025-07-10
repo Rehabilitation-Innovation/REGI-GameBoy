@@ -40,7 +40,7 @@ void Sprite::render() {
         m_animation_data->current_frame = 0;
     }
 
-    m_animation_data->current_frame_time += m_animation_data->m_frametime * 100;
+    m_animation_data->current_frame_time += m_frametime * 100;
 
     m_framebuffer.draw_sprite_raw(
         m_animation_data->sprite_animation_frames[m_animation_data->current_frame],
