@@ -1,6 +1,5 @@
 #pragma once
 #include "tinyengine.h"
-#include "tinyengine_sprite.h"
 #ifndef PIXEL_COLOR_DEPTH_BITS
 #define PIXEL_COLOR_DEPTH_BITS 16
 #endif
@@ -50,10 +49,8 @@ public:
 
     tinyengine_status_t swap_blocking();
 
-    tinyengine_status_t draw_sprite(te_sprite_t* sprite, uint32_t x, uint32_t y);
-
     tinyengine_status_t draw_sprite_raw(uint8_t* sprite, uint32_t w, uint32_t h, uint32_t x, uint32_t y);
 
-    tinyengine_status_t draw_sprite_batch(te_sprite_t* sprite, uint16_t x[], uint16_t y[], uint16_t count);
+    tinyengine_status_t draw_sprite_raw_batch(uint8_t* sprite, uint32_t w, uint32_t h, uint16_t x[], uint16_t y[], uint16_t count);
 
 };

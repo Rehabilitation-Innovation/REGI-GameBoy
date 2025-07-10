@@ -17,5 +17,5 @@
 // } te_sprite_animation_t;
 
 // loops animation until it is not called and uses frame time to determine frame.
-tinyengine_status_t te_sprite_render_animation(
-    TinyEngineFrameBuffer* frame_buf, te_sprite_animation_t* sprite, uint16_t x, uint16_t y, float frameTime);
+// tinyengine_status_t te_sprite_render_animation(
+//     TinyEngineFrameBuffer* frame_buf, te_sprite_animation_t* sprite, uint16_t x, uint16_t y, float frameTime);

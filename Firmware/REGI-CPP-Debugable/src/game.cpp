@@ -26,6 +26,8 @@ void Game::run() {
     TinyEngine engine(dvi);
 
     GameScene scene(frame_buf, dvi);
+    scene.create();
+
     engine.set_pre_inti_clbk([&]() {
         telog("Hello From Callback");
         return TINYENGINE_OK;

@@ -1,17 +1,15 @@
 #include "tinyengine.h"
 #include "tinyengine_sprite.h"
 
-Sprite::Sprite(te_sprite_t* _sprite_data, TinyEngineFrameBuffer& _framebuffer) :
-    m_sprite_data(_sprite_data),
-    m_framebuffer(_framebuffer)
+Sprite::Sprite(te_sprite_t* _sprite_data) :
+    m_sprite_data(_sprite_data)
 {
 };
 
 
-Sprite::Sprite(te_sprite_t* _sprite_data, te_sprite_animation_t* _sprite_animation_data, TinyEngineFrameBuffer& _framebuffer) :
+Sprite::Sprite(te_sprite_t* _sprite_data, te_sprite_animation_t* _sprite_animation_data) :
     m_sprite_data(_sprite_data),
-    m_animation_data(_sprite_animation_data),
-    m_framebuffer(_framebuffer)
+    m_animation_data(_sprite_animation_data)
 {
     m_animated = true;
     m_externaly_created = true;
@@ -22,12 +20,14 @@ Sprite::~Sprite() {
     // only destroy if we own the data.
 };
 
-void Sprite::render() {
+void Sprite::render(TinyEngineFrameBuffer& _fb) {
     if (!m_animated) {
-        m_framebuffer.draw_sprite(
-            m_sprite_data,
-            m_sprite_data->scale_x,
-            m_sprite_data->scale_y);
+        _fb.draw_sprite_raw(
+            m_sprite_data->sprite_buffer,
+            m_sprite_data->width,
+            m_sprite_data->height,
+            m_x,
+            m_y);
         return;
     }
 
@@ -36,15 +36,16 @@ void Sprite::render() {
         m_animation_data->current_frame_time = 0;
     }
 
-    if (m_animation_data->current_frame > m_animation_data->total_frames - 1) {
-        m_animation_data->current_frame = 0;
+    if (m_animation_data->current_frame > m_animation_data->total_frames - 1
+        || m_animation_data->current_frame >= m_animation_data->end_frame) {
+        m_animation_data->current_frame = m_animation_data->start_frame;
     }
 
     m_animation_data->current_frame_time += m_frametime * 100;
 
-    m_framebuffer.draw_sprite_raw(
+    _fb.draw_sprite_raw(
         m_animation_data->sprite_animation_frames[m_animation_data->current_frame],
-        m_animation_data->width, m_animation_data->height, x, y);
+        m_animation_data->width, m_animation_data->height, m_x, m_y);
 
 };
 
