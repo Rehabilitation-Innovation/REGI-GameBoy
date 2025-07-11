@@ -55,8 +55,8 @@ void GameScene::create() {
 
     cactus_data = {
     .sprite_buffer = cactus,
-    .width = 24,
-    .height = 24,
+    .width = 64,
+    .height = 64,
     .scale_x = 1,
     .scale_y = 1,
     .rotation = 0,
