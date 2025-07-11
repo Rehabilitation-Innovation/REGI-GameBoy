@@ -8,6 +8,7 @@
 #include "hardware/gpio.h"
 #include "pico/rand.h"
 #include  "cactus.h"
+#include "dino.h"
 
 Sprite* dino, * cactus_sprite;
 te_sprite_t dino_data;
@@ -54,9 +55,9 @@ void GameScene::create() {
     dino->set_x(90);
 
     cactus_data = {
-    .sprite_buffer = cactus,
-    .width = 64,
-    .height = 64,
+    .sprite_buffer = dino_test,// cactus,
+    .width = 24,
+    .height = 24,
     .scale_x = 1,
     .scale_y = 1,
     .rotation = 0,
@@ -81,9 +82,12 @@ void GameScene::render() {
 
     for (int i = 0; i < 255; ++i) {
         m_framebuffer.draw_pixel(i, 0, i);
+        m_framebuffer.draw_filled_rectangle(i + 20, i % 16 + 20, 5, 5, i);
     }
 
-    m_renderer.wait_for_vsync();
+    m_renderer.wait_for_vsync(); // If this is enabled debugging will not work, since this uses a blocking loop
+                                // with hardware event listeners it will just stay here forever. Comment out the line when debugging
+
     m_framebuffer.swap_blocking();
 };
 
