@@ -1,29 +1,40 @@
 #include "tinyengine.h"
 #include "pico/stdlib.h"
-// #include "tinyengine_renderer_st7735r.h"
-// #include "tinyengine_renderer_dvi.h"
-// #include "tinyengine_renderer_ili9488.h"
 #include <pico/time.h>
-#include "tinyengine_framebuffer.h"
+#include "hardware/gpio.h"
 
 #define UART_ID uart0
 
 volatile static int chars_rxed = 0;
-std::vector<uint8_t>* input_queue;
+std::vector<uint8_t>* serial_input_queue;
 // RX interrupt handler
 void on_uart_rx()
 {
     while (uart_is_readable(UART_ID))
     {
         uint8_t ch = uart_getc(UART_ID);
-        input_queue->emplace_back(ch);
+        serial_input_queue->emplace_back(ch);
         chars_rxed++;
     }
 }
 
+std::vector<uint8_t>* gpio_input_queue;
+static uint32_t gpio_debounce = 0;
+
+void gpio_callback(uint gpio, uint32_t events) {
+    if (!gpio_debounce) {
+        gpio_debounce = time_us_32();
+        return;
+    }
+    if (500 <=  (time_us_32() - gpio_debounce)) {
+        gpio_input_queue->emplace_back(gpio);
+    }
+
+}
+
 tinyengine_status_t TinyEngine::init()
 {
-    input_queue = &m_serial_input_buffer;
+    serial_input_queue = &m_serial_input_buffer;
     // Set up a RX interrupt
     // We need to set up the handler first
     // Select correct interrupt for the UART we are using
@@ -34,6 +45,9 @@ tinyengine_status_t TinyEngine::init()
 
     // Now enable the UART to send interrupts - RX only
     uart_set_irq_enables(UART_ID, true, false);
+
+    gpio_input_queue = &m_gpio_input_buffer;
+
     pre_init_clbk();
     return TINYENGINE_OK;
 }
@@ -81,6 +95,15 @@ void TinyEngine::update_inputs()
 
 void TinyEngine::bind_gpio_input_event(uint8_t _gpio, std::function<void()> _event_callback)
 {
+    gpio_init(_gpio);
+    gpio_set_dir(_gpio, GPIO_IN);
+    gpio_pull_up(_gpio);
+
+    gpio_set_irq_enabled_with_callback(_gpio,
+        //GPIO_IRQ_EDGE_RISE |
+        GPIO_IRQ_EDGE_FALL,
+        true, &gpio_callback);
+
     m_gpio_input_events.emplace(_gpio, _event_callback);
 }
 
