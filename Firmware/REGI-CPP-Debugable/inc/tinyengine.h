@@ -1,15 +1,17 @@
 #pragma once
-
+#include "pico/stdlib.h"
+#include "stdio.h"
 #include "hardware/spi.h"
 #include <stdint.h>
-#include <stdio.h>
-#include "pico/stdlib.h"
-#include "hardware/uart.h"
-#include <vector>
 #include "tinyengine_scene.h"
-#include "tinyengine_scene_default.h"
+#include <unordered_map>
 
 #include <functional>
+
+class TinyEngineFrameBuffer;
+class TinyEngineRendererI;
+class TinyEngineScene;
+class Sprite;
 
 #define telog(M, ...) \
   printf("[Tiny Engine Log] (%s:%d)" M "\r\n", __BASE_FILE__, __LINE__, ##__VA_ARGS__)
@@ -76,7 +78,13 @@ private:
     std::function<tinyengine_status_t(void)> loop_clbk;
     std::function<tinyengine_status_t(void)> render_clbk;
     std::function<tinyengine_status_t(double)> update_clbk;
+    // std::function<tinyengine_status_t(void)> input_clbk;
+    void update_inputs();
 
+    std::unordered_map<uint8_t, std::function<void()>> m_gpio_input_events;
+    std::unordered_map<uint8_t, std::function<void()>> m_serial_input_events;
+    std::vector<uint8_t> m_gpio_input_buffer;
+    std::vector<uint8_t> m_serial_input_buffer;
 public:
     TinyEngineRendererI& renderer;
 
@@ -95,10 +103,10 @@ public:
 
     void render(double frametime);
     void update(double frametime);
-
-
-
     void set_scene(SceneI& scene) {};
+
+    void bind_gpio_input_event(uint8_t _gpio, std::function<void()> _event_callback);
+    void bind_serial_input_event(uint8_t _char, std::function<void()> _event_callback);
 
 };
 

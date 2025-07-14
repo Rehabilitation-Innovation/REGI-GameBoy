@@ -49,6 +49,8 @@ public:
 
     tinyengine_status_t swap_blocking();
 
+    tinyengine_status_t draw_sprite(Sprite& sprite);
+
     tinyengine_status_t draw_sprite_raw(uint8_t* sprite, uint32_t w, uint32_t h, uint32_t x, uint32_t y);
 
     tinyengine_status_t draw_sprite_raw_batch(uint8_t* sprite, uint32_t w, uint32_t h, uint16_t x[], uint16_t y[], uint16_t count);

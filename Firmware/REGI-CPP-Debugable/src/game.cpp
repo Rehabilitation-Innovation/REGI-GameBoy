@@ -5,7 +5,7 @@
 #include "tinyengine_renderer.h"
 #include "tinyengine_framebuffer.h"
 #include "tinyengine_sprite.h"
-#include "tinyengine_sprite_animation.h"
+
 #include "tinyengine_audio.h"
 
 #include "tinyengine_renderer_dvi.h"
@@ -25,7 +25,7 @@ void Game::run() {
     TinyEngineRendererDVI dvi(frame_buf);
     TinyEngine engine(dvi);
 
-    GameScene scene(frame_buf, dvi);
+    GameScene scene(frame_buf, dvi, engine);
     scene.create();
 
     engine.set_pre_inti_clbk([&]() {
@@ -41,6 +41,7 @@ void Game::run() {
 
         return TINYENGINE_OK;
         });
+
     engine.init();
 
     engine.start();

@@ -1,12 +1,39 @@
 #include "tinyengine.h"
+#include "pico/stdlib.h"
 // #include "tinyengine_renderer_st7735r.h"
 // #include "tinyengine_renderer_dvi.h"
 // #include "tinyengine_renderer_ili9488.h"
 #include <pico/time.h>
 #include "tinyengine_framebuffer.h"
 
+#define UART_ID uart0
+
+volatile static int chars_rxed = 0;
+std::vector<uint8_t>* input_queue;
+// RX interrupt handler
+void on_uart_rx()
+{
+    while (uart_is_readable(UART_ID))
+    {
+        uint8_t ch = uart_getc(UART_ID);
+        input_queue->emplace_back(ch);
+        chars_rxed++;
+    }
+}
+
 tinyengine_status_t TinyEngine::init()
 {
+    input_queue = &m_serial_input_buffer;
+    // Set up a RX interrupt
+    // We need to set up the handler first
+    // Select correct interrupt for the UART we are using
+    int UART_IRQ = UART_ID == uart0 ? UART0_IRQ : UART1_IRQ;
+    // And set up and enable the interrupt handlers
+    irq_set_exclusive_handler(UART_IRQ, on_uart_rx);
+    irq_set_enabled(UART_IRQ, true);
+
+    // Now enable the UART to send interrupts - RX only
+    uart_set_irq_enables(UART_ID, true, false);
     pre_init_clbk();
     return TINYENGINE_OK;
 }
@@ -16,11 +43,50 @@ tinyengine_status_t TinyEngine::start()
     return TINYENGINE_OK;
 }
 
-void TinyEngine::render(double frametime) {
+void TinyEngine::render(double frametime)
+{
 }
 
-void TinyEngine::update(double frametime) {
+void TinyEngine::update(double frametime)
+{
     // engine_handle->update_clbk(frametime);
+}
+
+void TinyEngine::update_inputs()
+{
+    if (!m_gpio_input_buffer.empty())
+    {
+        for (uint8_t gpio : m_gpio_input_buffer)
+        {
+            if (m_gpio_input_events.contains(gpio))
+            {
+                m_gpio_input_events[gpio]();
+            }
+        }
+        m_gpio_input_buffer.clear();
+    }
+
+    if (!m_serial_input_buffer.empty())
+    {
+        for (uint8_t chr : m_serial_input_buffer)
+        {
+            if (m_serial_input_events.contains(chr))
+            {
+                m_serial_input_events[chr]();
+            }
+        }
+        m_serial_input_buffer.clear();
+    }
+}
+
+void TinyEngine::bind_gpio_input_event(uint8_t _gpio, std::function<void()> _event_callback)
+{
+    m_gpio_input_events.emplace(_gpio, _event_callback);
+}
+
+void TinyEngine::bind_serial_input_event(uint8_t _char, std::function<void()> _event_callback)
+{
+    m_serial_input_events.emplace(_char, _event_callback);
 }
 
 tinyengine_status_t TinyEngine::start_loop()
@@ -36,33 +102,40 @@ tinyengine_status_t TinyEngine::start_loop()
     uint32_t startus = to_us_since_boot(get_absolute_time());
     double frameCounter = 0;
 
-    while (1) { //isRunning
+    while (1)
+    {
+        //isRunning
         startTime = ((double)to_ms_since_boot(get_absolute_time())) / ((double)1000);
         passedTime = startTime - lastTime;
         lastTime = startTime;
         unproccessedTime += passedTime;
         frameCounter += passedTime;
         render = 0; // run uncapped
-        while ((unproccessedTime > frametime)) {
+        while ((unproccessedTime > frametime))
+        {
             render = 1;
             // telog("Running");
             unproccessedTime -= frametime;
             // engine_handle->update_clbk(frametime);
             // tinyengine_update(engine_handle, frametime);
             update_clbk(frametime);
-            if (frameCounter >= 1) {
+            update_inputs();
+            if (frameCounter >= 1)
+            {
                 telog("FPS: %d", frames);
                 frameCounter = 0;
                 frames = 0;
             }
         }
-        if (render) {
+        if (render)
+        {
             // engine_handle->render_clbk(frametime);
             // tinyengine_render(engine_handle, frametime);
             render_clbk();
             frames += 1;
         }
-        else {
+        else
+        {
             // sleep here for rtos;
             // sleep_ms(1);
         }
