@@ -76,8 +76,8 @@ public:
 
     ~TinyEngineRendererDVI() {};
     // void dma_irq_handler();
-    tinyengine_status_t swap_blocking() {};
-    tinyengine_status_t swap_non_blocking() {};
+    tinyengine_status_t swap_blocking() { return TINYENGINE_OK; };
+    tinyengine_status_t swap_non_blocking() { return TINYENGINE_OK; };
     tinyengine_status_t wait_for_vsync();
     tinyengine_status_t tinyengine_renderer_init();
     void gfx_dma_handler();

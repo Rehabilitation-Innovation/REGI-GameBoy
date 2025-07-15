@@ -26,26 +26,27 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
+set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
 project(REGI-CPP-Debugable C CXX ASM)
 
-set(PICO_CXX_ENABLE_EXCEPTIONS 0)
+set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 
 set(PICO_CXX_ENABLE_RTTI 0)
 
 file(GLOB SOURCES
     "src/**.c"
     "src/**.cpp"
-    "scenes/**.c"
+    "src/scenes/**.cpp"
 )
 
 file(GLOB INCLUDES
     "src/**.h"
     "src/**.hpp"
+    "src/scenes/**.h"
 )
 
 string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
@@ -56,7 +57,8 @@ add_compile_options(-Wall -Wextra)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(REGI-CPP-Debugable ${SOURCES} ${INCLUDES})
+add_executable(REGI-CPP-Debugable ${SOURCES} ${INCLUDES}
+)
 
 pico_set_program_name(REGI-CPP-Debugable "REGI-CPP-Debugable")
 pico_set_program_version(REGI-CPP-Debugable "0.1")
@@ -70,6 +72,7 @@ pico_set_double_implementation(REGI-CPP-Debugable pico)
 
 target_include_directories(REGI-CPP-Debugable PRIVATE
     "inc/"
+    "src/scenes/"
 )
 
 # Add the standard library to the build

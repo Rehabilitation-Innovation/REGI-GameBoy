@@ -18,18 +18,18 @@
 #include <math.h>
 
 #include "game.h"
-#include "game_scene.h"
+#include "GameScene.h"
+#include "scenes/SnakeGame.h"
 
 void Game::run() {
     TinyEngineFrameBuffer frame_buf(320, 240, true);
     TinyEngineRendererDVI dvi(frame_buf);
     TinyEngine engine(dvi);
 
-    GameScene scene(frame_buf, dvi, engine);
+    SnakeGame scene(frame_buf, dvi, engine);
     scene.create();
 
     engine.set_pre_inti_clbk([&]() {
-        telog("Hello From Callback");
         return TINYENGINE_OK;
         });
     engine.set_render_clbk([&]() {
@@ -43,7 +43,6 @@ void Game::run() {
         });
 
     engine.init();
-
     engine.start();
     engine.start_loop();
 
