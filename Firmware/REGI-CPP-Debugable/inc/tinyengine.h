@@ -91,6 +91,11 @@ public:
     TinyEngine(TinyEngineRendererI& rn) : renderer(rn) {
     };
 
+    uint16_t get_fps() const
+    {
+        return fps;
+    }
+
     void set_pre_inti_clbk(std::function<tinyengine_status_t(void)> _pre_init_clbk) { pre_init_clbk = _pre_init_clbk; };
     void set_post_init_clbk(std::function<tinyengine_status_t(void)> _post_init_clbk) { post_init_clbk = _post_init_clbk; };
     void set_loop_clbk(std::function<tinyengine_status_t(void)> _loop_clbk) { loop_clbk = _loop_clbk; };

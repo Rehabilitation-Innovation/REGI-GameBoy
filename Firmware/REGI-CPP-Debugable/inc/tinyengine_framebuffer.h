@@ -55,4 +55,8 @@ public:
 
     tinyengine_status_t draw_sprite_raw_batch(uint8_t* sprite, uint32_t w, uint32_t h, uint16_t x[], uint16_t y[], uint16_t count);
 
+    tinyengine_status_t draw_char(char _char, uint32_t x, uint32_t y);
+
+    tinyengine_status_t draw_string(char* _string, uint32_t count, uint32_t x, uint32_t y);
+
 };

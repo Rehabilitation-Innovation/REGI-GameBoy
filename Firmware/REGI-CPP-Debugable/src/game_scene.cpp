@@ -164,20 +164,22 @@ public:
 
 Snake snake = Snake(10, 2, 160, 120);
 
+char fps_string[30] = "";
+
 void GameScene::render()
 {
     m_framebuffer.clear(0); // colors are based on pallette
 
-    for (int i = 0; i < snake.width * snake.height; i++) {
-
-        m_framebuffer.draw_pixel(snake.x_body[i], snake.y_body[i], 70);
-
-    }
-
-    m_framebuffer.draw_pixel(apple_x, apple_y, 140);
-
-
-
+    // for (int i = 0; i < snake.width * snake.height; i++) {
+    //
+    //     m_framebuffer.draw_pixel(snake.x_body[i], snake.y_body[i], 70);
+    //
+    // }
+    // printf("Hello World!\n\r");
+    // m_framebuffer.draw_pixel(apple_x, apple_y, 140);
+    // m_framebuffer.draw_char('a', 0, 0);
+    sprintf(fps_string, "FPS: %d", m_engine.get_fps());
+    m_framebuffer.draw_string(fps_string, 5, 100, 100);
 
 
 

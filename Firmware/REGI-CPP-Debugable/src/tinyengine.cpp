@@ -145,6 +145,7 @@ tinyengine_status_t TinyEngine::start_loop()
             update_inputs();
             if (frameCounter >= 1)
             {
+                fps = frames;
                 telog("FPS: %d", frames);
                 frameCounter = 0;
                 frames = 0;

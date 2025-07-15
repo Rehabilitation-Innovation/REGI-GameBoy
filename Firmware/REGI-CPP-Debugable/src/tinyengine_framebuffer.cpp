@@ -6,6 +6,10 @@
 #include "hardware/interp.h"
 #include "math.h"
 #include "tinyengine_sprite.h"
+#include "font.h"
+
+#define CHAR_WIDTH 5
+#define CHAR_HEIGHT 8
 
 tinyengine_status_t TinyEngineFrameBuffer::init()
 {
@@ -245,5 +249,43 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_sprite_raw_batch(uint8_t* sprite
     }
 
 
+    return TINYENGINE_OK;
+}
+
+tinyengine_status_t TinyEngineFrameBuffer::draw_char(char _char, uint32_t x, uint32_t y)
+{
+    // Convert the character to an index
+    _char = _char & 0x7F;
+    if (_char < ' ')
+    {
+        _char = 0;
+    }
+    else
+    {
+        _char -= ' ';
+    }
+    // 'font' is a multidimensional array of [96][char_width]
+    // which is really just a 1D array of size 96*char_width.
+    const uint8_t* chr = font[_char];
+    // Draw pixels
+    for (uint32_t j = 0; j < CHAR_WIDTH; j++)
+    {
+        for (uint32_t i = 0; i < CHAR_HEIGHT; i++)
+        {
+            if (chr[j] & (1 << i))
+            {
+                draw_pixel(x + j, y + i, 10);
+            }
+        }
+    }
+    return TINYENGINE_OK;
+}
+
+tinyengine_status_t TinyEngineFrameBuffer::draw_string(char* _string, uint32_t count, uint32_t x, uint32_t y)
+{
+    while (*_string) {
+        draw_char(*_string++, x, y);
+        x += CHAR_WIDTH;
+    }
     return TINYENGINE_OK;
 }
