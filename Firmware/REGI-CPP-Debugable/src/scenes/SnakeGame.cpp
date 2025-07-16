@@ -170,6 +170,14 @@ void SnakeGame::render() {
     sprintf(fps_string, "Total Heap: %d bytes |  Free: %d \n", getTotalHeap(), getFreeHeap());
     m_framebuffer.draw_string(fps_string, 5, 0, 100);
 
+    sprintf(fps_string, "Total Render Time %dms / %dms\n", m_engine.get_profile_render_loop_time(),
+            m_engine.get_profile_main_loop_time());
+    m_framebuffer.draw_string(fps_string, 5, 0, 110);
+
+    sprintf(fps_string, "Total Update: %dms / %dms\n",
+            m_engine.get_profile_update_loop_time(), m_engine.get_profile_main_loop_time());
+    m_framebuffer.draw_string(fps_string, 5, 0, 120);
+
     sprintf(fps_string, "Total allocated: %d bytes\n", info.uordblks);
     m_framebuffer.draw_string(fps_string, 5, 0, 60);
     sprintf(fps_string, "Total free: %d bytes\n", info.fordblks);

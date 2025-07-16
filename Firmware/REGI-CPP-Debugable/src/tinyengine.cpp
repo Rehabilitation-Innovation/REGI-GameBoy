@@ -125,8 +125,18 @@ tinyengine_status_t TinyEngine::start_loop()
     uint32_t startus = to_us_since_boot(get_absolute_time());
     double frameCounter = 0;
 
+    uint32_t profile_main_loop_start = 0, profile_main_loop_end = 0;
+
+    uint32_t profile_render_loop_start = 0, profile_render_loop_end = 0;
+
+    uint32_t profile_update_loop_start = 0, profile_update_loop_end = 0;
+
     while (1)
     {
+
+        profile_main_loop_time = profile_main_loop_end - profile_main_loop_start;
+
+        profile_main_loop_start = to_us_since_boot(get_absolute_time()) / 1000;
         //isRunning
         startTime = ((double)to_ms_since_boot(get_absolute_time())) / ((double)1000);
         passedTime = startTime - lastTime;
@@ -141,8 +151,13 @@ tinyengine_status_t TinyEngine::start_loop()
             unproccessedTime -= frametime;
             // engine_handle->update_clbk(frametime);
             // tinyengine_update(engine_handle, frametime);
+            profile_update_loop_time = profile_update_loop_end - profile_update_loop_start;
+
+            profile_update_loop_start = to_us_since_boot(get_absolute_time()) / 1000;
             update_clbk(frametime);
             update_inputs();
+            profile_update_loop_end = to_us_since_boot(get_absolute_time()) / 1000;
+
             if (frameCounter >= 1)
             {
                 fps = frames;
@@ -153,16 +168,25 @@ tinyengine_status_t TinyEngine::start_loop()
         }
         if (render)
         {
+            profile_render_loop_time = profile_render_loop_end - profile_render_loop_start;
+
+            profile_render_loop_start = to_us_since_boot(get_absolute_time()) / 1000;
             // engine_handle->render_clbk(frametime);
             // tinyengine_render(engine_handle, frametime);
             render_clbk();
             frames += 1;
+
+            profile_render_loop_end = to_us_since_boot(get_absolute_time()) / 1000;
+
         }
         else
         {
             // sleep here for rtos;
             // sleep_ms(1);
         }
+
+        profile_main_loop_end = to_us_since_boot(get_absolute_time()) / 1000;
+
     }
     return TINYENGINE_OK;
 }

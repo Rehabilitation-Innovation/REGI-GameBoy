@@ -85,6 +85,11 @@ private:
     std::unordered_map<uint8_t, std::function<void()>> m_serial_input_events;
     std::vector<uint8_t> m_gpio_input_buffer;
     std::vector<uint8_t> m_serial_input_buffer;
+
+    uint32_t profile_main_loop_time = 0;
+    uint32_t profile_render_loop_time = 0;
+    uint32_t profile_update_loop_time = 0;
+
 public:
     TinyEngineRendererI& renderer;
 
@@ -113,6 +118,17 @@ public:
     void bind_gpio_input_event(uint8_t _gpio, std::function<void()> _event_callback);
     void bind_serial_input_event(uint8_t _char, std::function<void()> _event_callback);
 
+    uint32_t get_profile_main_loop_time() const {
+        return profile_main_loop_time;
+    }
+
+    uint32_t get_profile_render_loop_time() const {
+        return profile_render_loop_time;
+    }
+
+    uint32_t get_profile_update_loop_time() const {
+        return profile_update_loop_time;
+    }
 };
 
 #define TE_COLOR_BLUE  0x001F  /**< Blue */
