@@ -162,7 +162,7 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_sprite(Sprite &sprite) {
     }
 
     // ani->current_frame_time += sprite.get_m_frametime() * 100;
-    sprite.set_m_frametime(sprite.get_m_frametime() * sprite.get_m_animation_speed());
+    // sprite.set_m_frametime(sprite.get_m_frametime() * sprite.get_m_animation_speed());
     return draw_sprite_raw(ani->sprite_animation_frames[ani->current_frame],
                            data->width,
                            data->height,
@@ -176,10 +176,10 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_sprite_raw(
     for (uint32_t i = 0; i < h * w; i++) {
         _x = i / h;
         _y = i % w;
-        if (_x == 0 && _y == 0) {
-            draw_pixel(x, y, 0xC0);
-            continue;
-        }
+        // if (_x == 0 && _y == 0) {
+        //     draw_pixel(x, y, 0xC0);
+        //     continue;
+        // }
         if (sprite[i] != 0x00)
             draw_pixel(_y + x, _x + y, sprite[i]);
     }

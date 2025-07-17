@@ -18,6 +18,8 @@
 #include <math.h>
 
 #include "game.h"
+
+#include "DinoGame.h"
 #include "GameScene.h"
 #include "scenes/SnakeGame.h"
 
@@ -26,7 +28,7 @@ void Game::run() {
     TinyEngineRendererDVI dvi(frame_buf);
     TinyEngine engine(dvi);
 
-    SnakeGame scene(frame_buf, dvi, engine);
+    DinoGame scene(frame_buf, dvi, engine);
     scene.create();
 
     engine.set_pre_inti_clbk([&]() {

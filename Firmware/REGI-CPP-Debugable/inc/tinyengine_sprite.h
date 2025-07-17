@@ -34,7 +34,7 @@ private:
     bool m_animated = false;
     te_sprite_animation_t* m_animation_data = 0;
     double m_frametime = 0.0;
-    uint8_t m_animation_speed = 10;
+    uint8_t m_animation_speed = 100;
     // its debateble that this should be a data structure since all the frame times are updated at the same time. but we can also say that some sprites may be frozen.
     uint16_t m_x = 0, m_y = 0;
     uint8_t m_scale_x = 0, m_scale_y = 0;

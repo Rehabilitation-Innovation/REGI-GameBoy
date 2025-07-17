@@ -191,6 +191,7 @@ void __scratch_x("display") TinyEngineRendererDVI::gfx_dma_handler() {
             // for (int i = 0; i < timing_mode->h_active_pixels; i += 2) {
             for (int i = 0; i < 640; i += 2) {
                 // uint32_t val = display_palette[*src_ptr++];
+                // uint32_t val = aurora_1x[*src_ptr++];
                 uint32_t val = aurora_1x[*src_ptr++];
                 // src_ptr += 1;
                 *dst_ptr++ = val; //0xEB0000;
