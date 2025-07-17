@@ -33,7 +33,7 @@ include(pico_sdk_import.cmake)
 
 project(REGI-CPP-Debugable C CXX ASM)
 
-set(PICO_CXX_ENABLE_EXCEPTIONS 1)
+set(PICO_CXX_ENABLE_EXCEPTIONS 0)
 
 set(PICO_CXX_ENABLE_RTTI 0)
 

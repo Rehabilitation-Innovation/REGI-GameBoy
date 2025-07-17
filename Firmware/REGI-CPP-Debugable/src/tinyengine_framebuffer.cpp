@@ -7,9 +7,10 @@
 #include "math.h"
 #include "tinyengine_sprite.h"
 #include "font.h"
+#include "renew_font.h"
 
-#define CHAR_WIDTH 5
-#define CHAR_HEIGHT 8
+#define CHAR_WIDTH 6
+#define CHAR_HEIGHT 7
 
 tinyengine_status_t TinyEngineFrameBuffer::init() {
     // this->m_display_h = frame_height;
@@ -211,7 +212,7 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_char(char _char, uint32_t x, uin
     }
     // 'font' is a multidimensional array of [96][char_width]
     // which is really just a 1D array of size 96*char_width.
-    const uint8_t *chr = font[_char];
+    const uint8_t *chr = renew_font[_char];
     // Draw pixels
     for (uint32_t j = 0; j < CHAR_WIDTH; j++) {
         for (uint32_t i = 0; i < CHAR_HEIGHT; i++) {

@@ -115,13 +115,6 @@ void SnakeGame::create() {
             y = fruity;
         }
     );
-
-    // m_engine.bind_gpio_input_event(
-    //     7,
-    //     [&] {
-    //         jump = 1;
-    //     }
-    // );
 }
 
 void SnakeGame::render() {
@@ -137,8 +130,10 @@ void SnakeGame::render() {
     // printf("\n");
 
     m_framebuffer.draw_outline_rectangle(0, 0, 320 - 1, 240 - 1, 45);
-    m_framebuffer.draw_pixel(x, y, 66);
-    m_framebuffer.draw_pixel(fruitx, fruity, 66);
+    // m_framebuffer.draw_pixel(x, y, 66);
+    m_framebuffer.draw_filled_rectangle(x, y, 10, 10, 45);
+    // m_framebuffer.draw_pixel(fruitx, fruity, 66);
+    m_framebuffer.draw_filled_rectangle(fruitx, fruity, 5, 5, 31);
 
 
     for (int k = 0; k < snakeTailLen; k++) {
@@ -165,41 +160,41 @@ void SnakeGame::render() {
     // printf("score = %d\r\n", score);
     // printf("Press W, A, S, D for movement.\r\n");
     // printf("Press X to quit the game.\r\n");
-    struct mallinfo info = mallinfo();
-
-    sprintf(fps_string, "Total Heap: %d bytes |  Free: %d \n", getTotalHeap(), getFreeHeap());
-    m_framebuffer.draw_string(fps_string, 5, 0, 100);
-
-    sprintf(fps_string, "Total Render Time %dms / %dms\n", m_engine.get_profile_render_loop_time(),
-            m_engine.get_profile_main_loop_time());
-    m_framebuffer.draw_string(fps_string, 5, 0, 110);
-
-    sprintf(fps_string, "Total Update: %dms / %dms\n",
-            m_engine.get_profile_update_loop_time(), m_engine.get_profile_main_loop_time());
-    m_framebuffer.draw_string(fps_string, 5, 0, 120);
-
-    sprintf(fps_string, "Total allocated: %d bytes\n", info.uordblks);
-    m_framebuffer.draw_string(fps_string, 5, 0, 60);
-    sprintf(fps_string, "Total free: %d bytes\n", info.fordblks);
-    m_framebuffer.draw_string(fps_string, 5, 0, 70);
-    sprintf(fps_string, "Total heap size: %d bytes\n", info.arena);
-    m_framebuffer.draw_string(fps_string, 5, 0, 80);
-    sprintf(fps_string, "Largest free block: %d bytes\n", info.ordblks);
-    m_framebuffer.draw_string(fps_string, 5, 0, 90);
-    sprintf(fps_string, "FPS: %d\r\n", m_engine.get_fps());
+    // struct mallinfo info = mallinfo();
+    //
+    // sprintf(fps_string, "Total Heap: %d bytes |  Free: %d \n", getTotalHeap(), getFreeHeap());
+    // m_framebuffer.draw_string(fps_string, 5, 0, 100);
+    //
+    // sprintf(fps_string, "Total Render Time %dms / %dms\n", m_engine.get_profile_render_loop_time(),
+    //         m_engine.get_profile_main_loop_time());
+    // m_framebuffer.draw_string(fps_string, 5, 0, 110);
+    //
+    // sprintf(fps_string, "Total Update: %dms / %dms\n",
+    //         m_engine.get_profile_update_loop_time(), m_engine.get_profile_main_loop_time());
+    // m_framebuffer.draw_string(fps_string, 5, 0, 120);
+    //
+    // sprintf(fps_string, "Total allocated: %d bytes\n", info.uordblks);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 60);
+    // sprintf(fps_string, "Total free: %d bytes\n", info.fordblks);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 70);
+    // sprintf(fps_string, "Total heap size: %d bytes\n", info.arena);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 80);
+    // sprintf(fps_string, "Largest free block: %d bytes\n", info.ordblks);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 90);
+    // sprintf(fps_string, "FPS: %d\r\n", m_engine.get_fps());
     m_framebuffer.draw_string(fps_string, 5, 0, 0);
-    sprintf(fps_string, "score = %d\r\n", score);
-    m_framebuffer.draw_string(fps_string, 5, 0, 10);
-    sprintf(fps_string, "Press W, A, S, D for movement.\r\n");
-    m_framebuffer.draw_string(fps_string, 5, 0, 20);
-    sprintf(fps_string, "Press X to quit the game.\r\n");
-    m_framebuffer.draw_string(fps_string, 5, 0, 30);
-    sprintf(fps_string, "Snake Coords: %d, %d\r\n", x, y);
-    m_framebuffer.draw_string(fps_string, 5, 0, 40);
-    sprintf(fps_string, "Food Coords: %d, %d\r\n", fruitx, fruity);
-    m_framebuffer.draw_string(fps_string, 5, 0, 50);
+    // sprintf(fps_string, "score = %d\r\n", score);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 10);
+    // sprintf(fps_string, "Press W, A, S, D for movement.\r\n");
+    // m_framebuffer.draw_string(fps_string, 5, 0, 20);
+    // sprintf(fps_string, "Press X to quit the game.\r\n");
+    // m_framebuffer.draw_string(fps_string, 5, 0, 30);
+    // sprintf(fps_string, "Snake Coords: %d, %d\r\n", x, y);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 40);
+    // sprintf(fps_string, "Food Coords: %d, %d\r\n", fruitx, fruity);
+    // m_framebuffer.draw_string(fps_string, 5, 0, 50);
 
-    m_renderer.wait_for_vsync(); // If this is enabled debugging will not work, since this uses a blocking loop
+    // m_renderer.wait_for_vsync(); // If this is enabled debugging will not work, since this uses a blocking loop
     // with hardware event listeners it will just stay here forever. Comment out the line when debugging
 
     m_framebuffer.swap_blocking();
@@ -207,7 +202,7 @@ void SnakeGame::render() {
 
 void SnakeGame::update(double frameTime) {
     GameScene::update(frameTime);
-
+    sprintf(fps_string, "FPS: %d\r\n", m_engine.get_fps());
     // Updating the coordinates for continous
     // movement of snake
     int prevX = snakeTailX[0];
@@ -254,7 +249,10 @@ void SnakeGame::update(double frameTime) {
 
     // If snake reaches the fruit
     // then update the score
-    if (x == fruitx && y == fruity) {
+
+    if (x)
+
+    if ((x <= fruitx && x + 10 >= fruitx) && (y <= fruity && y + 10 >= fruity)) {
         fruitx = rand() % WIDTH;
         fruity = rand() % HEIGHT;
         while (fruitx == 0)
