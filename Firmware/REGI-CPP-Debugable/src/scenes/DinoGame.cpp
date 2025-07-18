@@ -24,7 +24,9 @@
 int jumpHeight = 50, gameSpeed = 40;
 int jump = 1;
 uint32_t x = 0, y = 150;
-float dy = 10;
+float vely = 0.0f, gravity = 0.5f;
+
+bool onGround = true;
 
 DinoGame::~DinoGame() {
 }
@@ -64,8 +66,10 @@ void DinoGame::create() {
     m_engine.bind_serial_input_event(
         'w',
         [&] {
-            jump = 1;
-            dy = 10;
+            if (true == onGround) {
+                vely = -10;
+                onGround = false;
+            }
         }
     );
 }
@@ -80,38 +84,28 @@ void DinoGame::render() {
     m_framebuffer.draw_sprite(dinoSprite);
     m_framebuffer.draw_sprite(cactusSprite);
 
-    sprintf(detail, "dy: %f", dy);
+    sprintf(detail, "vely: %f", vely);
     m_framebuffer.draw_string(detail, 10, 0, 130);
 
     sprintf(detail, "Jump Input: %d", jump);
     m_framebuffer.draw_string(detail, 10, 0, 140);
 
-    m_renderer.wait_for_vsync();
+    // m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 
 void DinoGame::update(double frameTime) {
     GameScene::update(frameTime);
     dinoSprite.set_m_frametime(dinoSprite.get_m_frametime() + frameTime * 100);
-    // dinoSprite.set_m_y(y);
-
-    if (jump) {
-        jump = 0;
-        dy = 10;
-    }
-
-    dinoSprite.set_m_y(dinoSprite.get_m_y() - frameTime * 10);
+    vely += gravity;
+    dinoSprite.set_m_y(dinoSprite.get_m_y() + vely);
 
     if (dinoSprite.get_m_y() > 150) {
+        onGround = true;
         dinoSprite.set_m_y(150);
-        dy = 0;
+        vely = 0.0f;
     }
 
-    //
-    if (150 - dinoSprite.get_m_y() >= 50) {
-        // jump = 0;
-        // dy = -10;
-    }
 }
 
 void DinoGame::destroy() {
