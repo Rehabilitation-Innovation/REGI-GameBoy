@@ -142,7 +142,7 @@ void DinoGame::render()
     scoreboard.render(m_framebuffer);
     if (!gameStarted)
         banner.render(m_framebuffer);
-    // m_renderer.wait_for_vsync();
+    m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 

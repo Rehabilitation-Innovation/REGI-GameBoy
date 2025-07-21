@@ -78,7 +78,7 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_pixel(uint32_t x, uint32_t y, ui
     if ((x >= this->m_display_w) || (y >= this->m_display_h))
         return TINYENGINE_OUTOFBOUNDS_ERROR;
     // Write the color to the buffer
-    this->pixel_buffer_back[(y * this->m_display_w + x) * 1] = (uint8_t)(color);
+    this->pixel_buffer_back[( y * this->m_display_w+ x) * 1] = (uint8_t)(color);
     // * 1 is because we store 1 byte per pixel if it was RGB888 then it would be 3
 
 
