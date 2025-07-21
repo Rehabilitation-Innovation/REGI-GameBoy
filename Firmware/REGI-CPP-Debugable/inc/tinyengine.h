@@ -19,6 +19,11 @@ class Sprite;
 #define teerr(M, ...) \
   printf("[Tiny Engine ERROR] (%s:%d)" M "\r\n", __BASE_FILE__, __LINE__, ##__VA_ARGS__)
 
+typedef struct
+{
+    uint16_t x, y;
+} vec2;
+
 typedef enum {
     TINYENGINE_OK,
     TINYENGINE_ERROR,
