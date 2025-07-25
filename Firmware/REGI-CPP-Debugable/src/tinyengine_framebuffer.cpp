@@ -9,8 +9,23 @@
 #include "font.h"
 #include "renew_font.h"
 
+
+/**
+ * Improvement notes:
+ *  - per pixel bounds checks have small impact in Release optimizations, but they are unneccesary if the full shape is
+ *  insode the buffer. Add checks before drawing or just tell the user to be carefull; will save critical renderer time.
+ *  Honestly, i dont think any one will make a game that completly saturates the renderer's capabilities. Even with
+ *  full screen writes it maintains ~800 FPS.
+ *  - Char rendering is a utter waste of renderer time. Do this on the second core, or dont do it all the time.
+ *  Espeacially for static sentances. Most of the renderer time is wasted drawing the same thing from a look up table -
+ *  instead just write the text to a smaller buffer in static flash or psram and then just render pixel to pixel instead
+ *  of doing the character look up every time.
+ */
 #define CHAR_WIDTH 7
 #define CHAR_HEIGHT 8
+
+// This is the fractional part of a number when expressing a float as a fixed point integer.
+#define UNIT_LSB 16
 
 tinyengine_status_t TinyEngineFrameBuffer::init()
 {
@@ -78,7 +93,7 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_pixel(uint32_t x, uint32_t y, ui
     if ((x >= this->m_display_w) || (y >= this->m_display_h))
         return TINYENGINE_OUTOFBOUNDS_ERROR;
     // Write the color to the buffer
-    this->pixel_buffer_back[( y * this->m_display_w+ x) * 1] = (uint8_t)(color);
+    this->pixel_buffer_back[(y * this->m_display_w + x) * 1] = (uint8_t)(color);
     // * 1 is because we store 1 byte per pixel if it was RGB888 then it would be 3
 
 
@@ -95,7 +110,6 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_grid(uint32_t spacing, uint8_t c
             if (y % spacing == 0 && x % spacing == 0)
                 this->pixel_buffer_back[(y * this->m_display_w + x) * 1] = (uint8_t)(color);
         }
-
     }
     return TINYENGINE_OK;
 }
@@ -103,15 +117,30 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_grid(uint32_t spacing, uint8_t c
 tinyengine_status_t TinyEngineFrameBuffer::draw_outline_rectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,
                                                                   uint8_t color)
 {
-    for (uint32_t i = 0; i < h; i++)
-        draw_pixel(x, y + i, color);
-    for (uint32_t i = 0; i < h; i++)
-        draw_pixel(x + w, y + i, color);
+    if (!(x <= this->m_display_w && y <= this->m_display_h && x > 0 && y > 0))
+    {
+        for (uint32_t i = 0; i < h; i++)
+            draw_pixel(x, y + i, color);
+        for (uint32_t i = 0; i < h; i++)
+            draw_pixel(x + w, y + i, color);
 
-    for (uint32_t i = 0; i < w; i++)
-        draw_pixel(x + i, y, color);
-    for (uint32_t i = 0; i < w; i++)
-        draw_pixel(x + i, y + h, color);
+        for (uint32_t i = 0; i < w; i++)
+            draw_pixel(x + i, y, color);
+        for (uint32_t i = 0; i < w; i++)
+            draw_pixel(x + i, y + h, color);
+    }
+    else // this is just easier to write for now, u can make a new function called draw_pixel_unsafe or something...
+    {
+        for (uint32_t i = 0; i < h; i++)
+            this->pixel_buffer_back[((y + i) * this->m_display_w + (x)) * 1] = (uint8_t)(color);
+        for (uint32_t i = 0; i < h; i++)
+            this->pixel_buffer_back[((y + i) * this->m_display_w + (x + w)) * 1] = (uint8_t)(color);
+
+        for (uint32_t i = 0; i < w; i++)
+            this->pixel_buffer_back[((y) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
+        for (uint32_t i = 0; i < w; i++)
+            this->pixel_buffer_back[((y + h) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
+    }
 
     return TINYENGINE_OK;
 }
@@ -119,11 +148,27 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_outline_rectangle(uint32_t x, ui
 tinyengine_status_t TinyEngineFrameBuffer::draw_filled_rectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h,
                                                                  uint8_t color)
 {
-    for (uint32_t i = 0; i < h; i++)
-        for (uint32_t j = 0; j < w; j++)
-            //this->pixel_buffer[j + i * this->display_w] = color;
-            draw_pixel(x + j, y + i, color);
+    // uint8_t* temp = malloc(sizeof(uint8_t) * this.m_pixel_buffer_size);
+    // memset(temp, color, this.m_pixel_buffer_size);
 
+    // if (!(x <= this->m_display_w && y <= this->m_display_h && x > 0 && y > 0))
+    // {
+    //     for (uint16_t i = 0; i < h; i++)
+    //         for (uint16_t j = 0; j < w; j++)
+    //             //this->pixel_buffer[j + i * this->display_w] = color;
+    //             draw_pixel(x + j, y + i, color);
+    // }
+    // else
+    // {
+    for (uint16_t i = 0; i < h; i++)
+        // for (uint16_t j = 0; j < w; j++)
+        //this->pixel_buffer[j + i * this->display_w] = color;
+        // draw_pixel(x + j, y + i, color);
+        memset(this->pixel_buffer_back + (y + i) * this->m_display_w + (x), color, w);
+    // this->pixel_buffer_back[((y + i) * this->m_display_w + (x + j)) * 1] = (uint8_t)(color);
+    // }
+    // {
+    // }
     return TINYENGINE_OK;
 }
 
@@ -284,7 +329,9 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_char(char _char, uint32_t x, uin
         {
             if (chr[j] & (1 << i))
             {
-                draw_pixel(x + j, y + i, _color);
+                // this added like 100FPS to the game on full optimizations
+                this->pixel_buffer_back[((y + i) * this->m_display_w + (x + j)) * 1] = (uint8_t)(_color);
+                // draw_pixel(x + j, y + i, _color);
             }
         }
     }

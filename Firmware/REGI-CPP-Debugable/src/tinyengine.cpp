@@ -162,6 +162,7 @@ tinyengine_status_t TinyEngine::start_loop()
             {
                 fps = frames;
                 telog("FPS: %d", frames);
+                printf("Test\r\n");
                 frameCounter = 0;
                 frames = 0;
             }

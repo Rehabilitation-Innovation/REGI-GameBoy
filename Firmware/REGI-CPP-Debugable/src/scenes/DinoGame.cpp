@@ -127,7 +127,7 @@ void DinoGame::render()
 {
     m_framebuffer.clear(0);
     // m_framebuffer.draw_grid(10, 15);
-    // GameScene::render();
+    GameScene::render();
 
     m_framebuffer.draw_sprite(dinoSprite);
     m_framebuffer.draw_sprite(cactusSprite);
@@ -142,7 +142,7 @@ void DinoGame::render()
     scoreboard.render(m_framebuffer);
     if (!gameStarted)
         banner.render(m_framebuffer);
-    m_renderer.wait_for_vsync();
+    // m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 

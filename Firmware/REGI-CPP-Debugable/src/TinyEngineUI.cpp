@@ -36,6 +36,7 @@ void TinyEngineUIBlinkingTextBox::render(TinyEngineFrameBuffer _framebuffer)
 {
     TinyEngineUI::render(_framebuffer);
 
+    // draw outline and filled can be one function called outline_filled.
     _framebuffer.draw_filled_rectangle(m_x, m_y, m_width, m_height, m_bg_color);
     _framebuffer.draw_outline_rectangle(m_x, m_y, m_width, m_height, m_fg_color);
     _framebuffer.draw_string(m_text.c_str(),
