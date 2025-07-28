@@ -22,6 +22,10 @@
 #include "dino_running.h"
 #include "dino_sprite.h"
 #include "TinyEngineUI.h"
+
+#include "hardware/dma.h"
+#include "hardware/interp.h"
+
 // Global variables for jump height and game speed
 int jumpHeight = 50, gameSpeed = 40;
 int jump = 1;
@@ -31,7 +35,7 @@ float vely = 0.0f, gravity = 0.5f;
 bool onGround = true, gameStarted = false;
 std::string start_text = "PRESS JUMP TO START";
 TinyEngineUIBlinkingTextBox banner(160 - (20 + start_text.length() * 7) / 2, 200, 20 + start_text.length() * 7, 20, 0,
-    15, start_text, 5);
+                                   15, start_text, 5);
 
 uint16_t jump_counter = 0, miss = 0;
 /**
@@ -80,7 +84,7 @@ void DinoGame::create()
     dinoSprite.set_m_animated(true);
     dinoSprite.set_m_x(100);
     dinoSprite.set_m_y(150);
-    dinoBox.min = { .x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y() };
+    dinoBox.min = {.x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y()};
     dinoBox.max = {
         .x = (float)dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
         .y = (float)dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
@@ -94,7 +98,7 @@ void DinoGame::create()
         });
     cactusSprite.set_m_x(240);
     cactusSprite.set_m_y(150);
-    cactusBox.min = { .x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y() };
+    cactusBox.min = {.x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y()};
     cactusBox.max = {
         .x = (float)cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
         .y = (float)cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height
@@ -121,43 +125,80 @@ void DinoGame::create()
     );
 }
 
-char detail[255] = { 0 };
+// char fps_frame_buf[8 * 9 * 10] = { 0 };
+
+static void blit_rect_dma(uint8_t* framebuffer)
+{
+    // int dma_chan = dma_claim_unused_channel(true);
+    // dma_channel_config cfg = dma_channel_get_default_config(dma_chan);
+    // channel_config_set_transfer_data_size(&cfg, DMA_SIZE_8);
+    // channel_config_set_read_increment(&cfg, true);
+    // channel_config_set_write_increment(&cfg, true);
+
+    // Set up interpolator to compute row base addresses
+    interp_config icfg = interp_default_config();
+    interp_config_set_add_raw(&icfg, true);
+    interp_config_set_shift(&icfg, 0);
+    interp_config_set_mask(&icfg, 0, 31); // full 32-bit mask
+    interp_set_config(interp0, 0, &icfg);
+
+
+    int src_index = 0;
+
+    for (int row = 0; row < 100; row++)
+    {
+        int row_start_index = (50 + row) * 320 + 50;
+
+        interp0->base[0] = row_start_index;
+        interp0->accum[0] = 0;
+
+        for (int col = 0; col < 100; col++)
+        {
+            // uint32_t framebuffer_index = interp_pop_full_result(interp0, 0);
+            printf("%d\r\n", interp_pop_full_result(interp0));
+            // framebuffer[interp0->pop[0]] = 15; //source_region[src_index++];
+            interp0->accum[0] += 1;
+        }
+    }
+}
+
 
 void DinoGame::render()
 {
     m_framebuffer.clear(0);
     // m_framebuffer.draw_grid(10, 15);
     GameScene::render();
-
-    m_framebuffer.draw_sprite(dinoSprite);
-    m_framebuffer.draw_sprite(cactusSprite);
-
-    // sprintf(detail, "vely: %f", vely);
-    // m_framebuffer.draw_string(detail, 5, 70, 130);
+    // m_framebuffer.draw_sprite(dinoSprite);
+    // m_framebuffer.draw_sprite(cactusSprite);
     //
-    // sprintf(detail, "Jump Input: %d", jump);
-    // m_framebuffer.draw_string(detail, 5, 80, 140);
-
-    // score.render(m_framebuffer);
-    scoreboard.render(m_framebuffer);
-    if (!gameStarted)
-        banner.render(m_framebuffer);
+    // // sprintf(detail, "vely: %f", vely);
+    // // m_framebuffer.draw_string(detail, 5, 70, 130);
+    // //
+    // // sprintf(detail, "Jump Input: %d", jump);
+    // // m_framebuffer.draw_string(detail, 5, 80, 140);
+    //
+    // blit_rect_dma(m_framebuffer.pixel_buffer_back);
+    m_framebuffer.draw_filled_rectangle(50, 50, 100, 100, 15);
+    // // score.render(m_framebuffer);
+    // scoreboard.render(m_framebuffer);
+    // if (!gameStarted)
+    //     banner.render(m_framebuffer);
     // m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 
-char temp[255] = { 0 };
+char temp[255] = {0};
 double t = 0;
 bool alreadyHit = false;
 
 void DinoGame::update(double frameTime)
 {
-    // GameScene::update(frameTime);
+    GameScene::update(frameTime);
     dinoSprite.set_m_frametime(dinoSprite.get_m_frametime() + frameTime * 100);
     vely += gravity;
     dinoSprite.set_m_y(dinoSprite.get_m_y() + vely);
 
-    dinoBox.min = { .x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y() };
+    dinoBox.min = {.x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y()};
     dinoBox.max = {
         .x = (float)dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
         .y = (float)dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
@@ -166,7 +207,7 @@ void DinoGame::update(double frameTime)
     if (gameStarted)
         cactusSprite.set_m_x(cactusSprite.get_m_x() - frameTime * 100);
 
-    cactusBox.min = { .x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y() };
+    cactusBox.min = {.x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y()};
     cactusBox.max = {
         .x = (float)cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
         .y = (float)cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height

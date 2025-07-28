@@ -94,11 +94,11 @@ target_link_libraries(REGI-CPP-Debugable
     pico_sync
 )
 
-target_compile_definitions(REGI-CPP-Debugable PRIVATE
-    PICO_DEFAULT_UART=0
-    PICO_DEFAULT_UART_TX_PIN=28
-    PICO_DEFAULT_UART_RX_PIN=29
-)
+# target_compile_definitions(REGI-CPP-Debugable PRIVATE
+# PICO_DEFAULT_UART=0
+# PICO_DEFAULT_UART_TX_PIN=28
+# PICO_DEFAULT_UART_RX_PIN=29
+# )
 
 # Add the standard include files to the build
 target_include_directories(REGI-CPP-Debugable PRIVATE

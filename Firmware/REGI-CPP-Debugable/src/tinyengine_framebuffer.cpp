@@ -48,6 +48,7 @@ tinyengine_status_t TinyEngineFrameBuffer::init()
     return TINYENGINE_OK;
 }
 
+
 tinyengine_status_t TinyEngineFrameBuffer::destroy()
 {
     free(pixel_buffer_back);
@@ -131,15 +132,19 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_outline_rectangle(uint32_t x, ui
     }
     else // this is just easier to write for now, u can make a new function called draw_pixel_unsafe or something...
     {
-        for (uint32_t i = 0; i < h; i++)
+        // draw sides
+        for (uint16_t i = 0; i < h; i++)
             this->pixel_buffer_back[((y + i) * this->m_display_w + (x)) * 1] = (uint8_t)(color);
-        for (uint32_t i = 0; i < h; i++)
+        for (uint16_t i = 0; i < h; i++)
             this->pixel_buffer_back[((y + i) * this->m_display_w + (x + w)) * 1] = (uint8_t)(color);
 
-        for (uint32_t i = 0; i < w; i++)
-            this->pixel_buffer_back[((y) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
-        for (uint32_t i = 0; i < w; i++)
-            this->pixel_buffer_back[((y + h) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
+        // draw top and bottom; Added 200 fps lol
+        // for (uint32_t i = 0; i < w; i++)
+        memset(pixel_buffer_back + ((y) * this->m_display_w + (x)) * 1, color, w);
+        // this->pixel_buffer_back[((y) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
+        // for (uint32_t i = 0; i < w; i++)
+        memset(pixel_buffer_back + ((y + h) * this->m_display_w + (x)) * 1, color, w);
+        // this->pixel_buffer_back[((y + h) * this->m_display_w + (x + i)) * 1] = (uint8_t)(color);
     }
 
     return TINYENGINE_OK;
@@ -273,18 +278,25 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_sprite(Sprite& sprite)
 tinyengine_status_t TinyEngineFrameBuffer::draw_sprite_raw(
     uint8_t* sprite, uint32_t w, uint32_t h, uint32_t x, uint32_t y)
 {
-    uint16_t _x, _y;
-    for (uint32_t i = 0; i < h * w; i++)
+    // uint16_t _x, _y;
+    // for (uint32_t i = 0; i < h * w; i++)
+    // {
+    //     _x = i / h;
+    //     _y = i % w;
+    //     // if (_x == 0 && _y == 0) {
+    //     //     draw_pixel(x, y, 0xC0);
+    //     //     continue;
+    //     // }
+    //     if (sprite[i] != 0x00)
+    //         draw_pixel(_y + x, _x + y, sprite[i]);
+    // }
+
+    // added 400 fps lol idk how, maybe i am wrong lmao
+    for (int i = 0; i < h; ++i)
     {
-        _x = i / h;
-        _y = i % w;
-        // if (_x == 0 && _y == 0) {
-        //     draw_pixel(x, y, 0xC0);
-        //     continue;
-        // }
-        if (sprite[i] != 0x00)
-            draw_pixel(_y + x, _x + y, sprite[i]);
+        memcpy(pixel_buffer_back + (y + i) * this->m_display_w + (x), sprite + i * w, w);
     }
+
     return TINYENGINE_OK;
 }
 
@@ -344,6 +356,20 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_string(const char* _string, uint
     {
         draw_char(*_string++, x, y, _color);
         x += CHAR_WIDTH;
+    }
+    return TINYENGINE_OK;
+}
+
+tinyengine_status_t TinyEngineFrameBuffer::copy_buffer_slow(TinyEngineFrameBuffer& _buffer_to_copy, uint16_t _dst_x,
+                                                            uint16_t _dst_y)
+{
+    for (int i = 0; i < _buffer_to_copy.m_display_h; ++i)
+    {
+        for (int j = 0; j < _buffer_to_copy.m_display_w; ++j)
+        {
+            this->pixel_buffer_back[((_dst_y + i) * this->m_display_w + (_dst_x + j)) * 1] = _buffer_to_copy.
+                pixel_buffer_back[i * _buffer_to_copy.m_display_w + j];
+        }
     }
     return TINYENGINE_OK;
 }
