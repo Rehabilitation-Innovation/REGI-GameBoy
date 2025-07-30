@@ -33,6 +33,9 @@
 #include "hardware/adc.h"
 #include "hardware/dma.h"
 
+#include "pico/time.h"
+#include "pico_tone.hpp"
+
 #define IS_RGBW true
 #define NUM_PIXELS 4
 
@@ -151,10 +154,16 @@ c2AABB dinoBox, cactusBox;
 
 PIO pio;
 uint sm;
-uint offset;
+uint offsetpio;
+Tone myPlayer(10, 50, 0, 20, 0, 20, 0, 10);
+int melody[] = {NOTE_C4, 4, NOTE_G3, 8, NOTE_G3, 8, NOTE_A3, 4, NOTE_G3, 4, 0, 4, NOTE_B3, 4, NOTE_C4, 4};
+
+int play_tone = 0;
 
 void DinoGame::create() {
-
+    printf("Init Machine & dma channel!\n");
+    int res = myPlayer.init(TONE_NON_BLOCKING, true);
+    printf("Result of initializing tone = 0x%X\n", res);
     adc_init();
 
     // Make sure GPIO is high-impedance, no pullups etc
@@ -163,18 +172,18 @@ void DinoGame::create() {
     adc_select_input(4);
 
 
-
     // todo get free sm
 
 
     // This will find a free pio and state machine for our program and load it for us
     // We use pio_claim_free_sm_and_add_program_for_gpio_range (for_gpio_range variant)
     // so we will get a PIO instance suitable for addressing gpios >= 32 if needed and supported by the hardware
-    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_program, &pio, &sm, &offset, WS2812_PIN, 1,
+    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_program, &pio, &sm, &offsetpio, WS2812_PIN,
+                                                                    1,
                                                                     true);
     hard_assert(success);
 
-    ws2812_program_init(pio, sm, offset, WS2812_PIN, 1000000, IS_RGBW);
+    ws2812_program_init(pio, sm, offsetpio, WS2812_PIN, 1000000, IS_RGBW);
 
     int t = 0;
     // while (1) {
@@ -190,7 +199,7 @@ void DinoGame::create() {
     // }
 
     // This will free resources and unload our program
-    pio_remove_program_and_unclaim_sm(&ws2812_program, pio, sm, offset);
+    pio_remove_program_and_unclaim_sm(&ws2812_program, pio, sm, offsetpio);
 
     GameScene::create();
     scoreboard.add_text("s", score);
@@ -243,7 +252,8 @@ void DinoGame::create() {
                 vely = -10;
                 onGround = false;
             }
-
+            play_tone = 1;
+            // myPlayer.tone(15000,0.25);
             // int pat = rand() % count_of(pattern_table);
             // int dir = (rand() >> 30) & 1 ? 1 : -1;
             // // puts(pattern_table[pat].name);
@@ -257,7 +267,6 @@ void DinoGame::create() {
             put_pixel(pio, sm, urgb_u32(0xff, 0, 0));
             put_pixel(pio, sm, urgb_u32(0, 0xff, 0));
             put_pixel(pio, sm, urgb_u32(0, 0, 0xff));
-
         }
     );
     m_engine.bind_serial_input_event(
@@ -323,7 +332,7 @@ void DinoGame::render() {
     scoreboard.render(m_framebuffer);
     if (!gameStarted)
         banner.render(m_framebuffer);
-    m_renderer.wait_for_vsync();
+    // m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 
@@ -337,8 +346,8 @@ void DinoGame::update(double frameTime) {
     vely += gravity;
 
     put_pixel(pio, sm, urgb_u32(0xff - vely, 0, 0));
-    put_pixel(pio, sm, urgb_u32(0, 0xff- vely, 0));
-    put_pixel(pio, sm, urgb_u32(0, 0, 0xff- vely));
+    put_pixel(pio, sm, urgb_u32(0, 0xff - vely, 0));
+    put_pixel(pio, sm, urgb_u32(0, 0, 0xff - vely));
 
     dinoSprite.set_m_y(dinoSprite.get_m_y() + vely);
 
@@ -390,6 +399,19 @@ void DinoGame::update(double frameTime) {
     sprintf(temp, "Input: %f", result * conversion_factor);
     input.set_text(temp);
     banner.update(frameTime);
+
+    static double tone_time = 0;
+
+    if (play_tone && tone_time <= 10) {
+        // myPlayer.play_melody(100, 3, new int[]{NOTE_A1, NOTE_D1, NOTE_A2});
+        myPlayer.tone(10000 + frameTime * 100, 0.01);
+        tone_time += frameTime * 100;
+    }
+
+    if (tone_time > 10) {
+        tone_time = 0;
+        play_tone = 0;
+    }
 }
 
 void DinoGame::destroy() {
