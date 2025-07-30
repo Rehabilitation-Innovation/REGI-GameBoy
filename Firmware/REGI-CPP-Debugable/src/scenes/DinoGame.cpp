@@ -26,6 +26,96 @@
 #include "hardware/dma.h"
 #include "hardware/interp.h"
 
+#include "pico/stdlib.h"
+#include "hardware/pio.h"
+#include "hardware/clocks.h"
+#include "ws2812.pio.h"
+#include "hardware/adc.h"
+#include "hardware/dma.h"
+
+#define IS_RGBW true
+#define NUM_PIXELS 4
+
+#ifdef PICO_DEFAULT_WS2812_PIN
+#define WS2812_PIN PICO_DEFAULT_WS2812_PIN
+#else
+// default to pin 2 if the board doesn't have a default WS2812 pin defined
+#define WS2812_PIN 6
+#endif
+
+// Check the pin is compatible with the platform
+#if WS2812_PIN >= NUM_BANK0_GPIOS
+#error Attempting to use a pin>=32 on a platform that does not support it
+#endif
+
+static inline void put_pixel(PIO pio, uint sm, uint32_t pixel_grb) {
+    pio_sm_put_blocking(pio, sm, pixel_grb << 8u);
+}
+
+static inline uint32_t urgb_u32(uint8_t r, uint8_t g, uint8_t b) {
+    return
+            ((uint32_t) (r) << 8) |
+            ((uint32_t) (g) << 16) |
+            (uint32_t) (b);
+}
+
+static inline uint32_t urgbw_u32(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+    return
+            ((uint32_t) (r) << 8) |
+            ((uint32_t) (g) << 16) |
+            ((uint32_t) (w) << 24) |
+            (uint32_t) (b);
+}
+
+void pattern_snakes(PIO pio, uint sm, uint len, uint t) {
+    for (uint i = 0; i < len; ++i) {
+        uint x = (i + (t >> 1)) % 64;
+        if (x < 10)
+            put_pixel(pio, sm, urgb_u32(0xff, 0, 0));
+        else if (x >= 15 && x < 25)
+            put_pixel(pio, sm, urgb_u32(0, 0xff, 0));
+        else if (x >= 30 && x < 40)
+            put_pixel(pio, sm, urgb_u32(0, 0, 0xff));
+        else
+            put_pixel(pio, sm, 0);
+    }
+}
+
+void pattern_random(PIO pio, uint sm, uint len, uint t) {
+    if (t % 8)
+        return;
+    for (uint i = 0; i < len; ++i)
+        put_pixel(pio, sm, rand());
+}
+
+void pattern_sparkle(PIO pio, uint sm, uint len, uint t) {
+    if (t % 8)
+        return;
+    for (uint i = 0; i < len; ++i)
+        put_pixel(pio, sm, rand() % 16 ? 0 : 0xffffffff);
+}
+
+void pattern_greys(PIO pio, uint sm, uint len, uint t) {
+    uint max = 100; // let's not draw too much current!
+    t %= max;
+    for (uint i = 0; i < len; ++i) {
+        put_pixel(pio, sm, t * 0x10101);
+        if (++t >= max) t = 0;
+    }
+}
+
+typedef void (*pattern)(PIO pio, uint sm, uint len, uint t);
+
+const struct {
+    pattern pat;
+    const char *name;
+} pattern_table[] = {
+    {pattern_snakes, "Snakes!"},
+    {pattern_random, "Random data"},
+    {pattern_sparkle, "Sparkles"},
+    {pattern_greys, "Greys"},
+};
+
 // Global variables for jump height and game speed
 int jumpHeight = 50, gameSpeed = 40;
 int jump = 1;
@@ -51,16 +141,57 @@ TinyEngineUIText missed_jumps(90, 30, "Missed Jumps: ", 15);
 
 TinyEngineUITextBox scoreboard(70, 180, 210, 50, 45);
 
-DinoGame::~DinoGame()
-{
+TinyEngineUIText input(0, 20, "Input: ", 15);
+
+DinoGame::~DinoGame() {
 }
 
 Sprite dinoSprite, cactusSprite;
 c2AABB dinoBox, cactusBox;
 
+PIO pio;
+uint sm;
+uint offset;
 
-void DinoGame::create()
-{
+void DinoGame::create() {
+
+    adc_init();
+
+    // Make sure GPIO is high-impedance, no pullups etc
+    adc_gpio_init(44);
+    // Select ADC input 0 (GPIO26)
+    adc_select_input(4);
+
+
+
+    // todo get free sm
+
+
+    // This will find a free pio and state machine for our program and load it for us
+    // We use pio_claim_free_sm_and_add_program_for_gpio_range (for_gpio_range variant)
+    // so we will get a PIO instance suitable for addressing gpios >= 32 if needed and supported by the hardware
+    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_program, &pio, &sm, &offset, WS2812_PIN, 1,
+                                                                    true);
+    hard_assert(success);
+
+    ws2812_program_init(pio, sm, offset, WS2812_PIN, 1000000, IS_RGBW);
+
+    int t = 0;
+    // while (1) {
+    //     int pat = rand() % count_of(pattern_table);
+    //     int dir = (rand() >> 30) & 1 ? 1 : -1;
+    //     puts(pattern_table[pat].name);
+    //     puts(dir == 1 ? "(forward)" : "(backward)");
+    //     for (int i = 0; i < 1000; ++i) {
+    //         pattern_table[pat].pat(pio, sm, NUM_PIXELS, t);
+    //         sleep_ms(10);
+    //         t += dir;
+    //     }
+    // }
+
+    // This will free resources and unload our program
+    pio_remove_program_and_unclaim_sm(&ws2812_program, pio, sm, offset);
+
     GameScene::create();
     scoreboard.add_text("s", score);
     scoreboard.add_text("j", jumps);
@@ -84,10 +215,10 @@ void DinoGame::create()
     dinoSprite.set_m_animated(true);
     dinoSprite.set_m_x(100);
     dinoSprite.set_m_y(150);
-    dinoBox.min = {.x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y()};
+    dinoBox.min = {.x = (float) dinoSprite.get_m_x(), .y = (float) dinoSprite.get_m_y()};
     dinoBox.max = {
-        .x = (float)dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
-        .y = (float)dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
+        .x = (float) dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
+        .y = (float) dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
     };
     cactusSprite = Sprite(
         te_sprite_t{
@@ -98,28 +229,40 @@ void DinoGame::create()
         });
     cactusSprite.set_m_x(240);
     cactusSprite.set_m_y(150);
-    cactusBox.min = {.x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y()};
+    cactusBox.min = {.x = (float) cactusSprite.get_m_x(), .y = (float) cactusSprite.get_m_y()};
     cactusBox.max = {
-        .x = (float)cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
-        .y = (float)cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height
+        .x = (float) cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
+        .y = (float) cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height
     };
     m_engine.bind_serial_input_event(
         'w',
-        [&]
-        {
+        [&] {
             if (!gameStarted) gameStarted = true;
-            if (true == onGround)
-            {
+            if (true == onGround) {
                 jump_counter++;
                 vely = -10;
                 onGround = false;
             }
+
+            // int pat = rand() % count_of(pattern_table);
+            // int dir = (rand() >> 30) & 1 ? 1 : -1;
+            // // puts(pattern_table[pat].name);
+            // // puts(dir == 1 ? "(forward)" : "(backward)");
+            // // for (int i = 0; i < 1000; ++i) {
+            // pattern_table[pat].pat(pio, sm, NUM_PIXELS, t);
+            // // sleep_ms(10);
+            // // t += dir;
+            // // }
+
+            put_pixel(pio, sm, urgb_u32(0xff, 0, 0));
+            put_pixel(pio, sm, urgb_u32(0, 0xff, 0));
+            put_pixel(pio, sm, urgb_u32(0, 0, 0xff));
+
         }
     );
     m_engine.bind_serial_input_event(
         'x',
-        [&]
-        {
+        [&] {
             gameStarted = false;
         }
     );
@@ -127,8 +270,7 @@ void DinoGame::create()
 
 // char fps_frame_buf[8 * 9 * 10] = { 0 };
 
-static void blit_rect_dma(uint8_t* framebuffer)
-{
+static void blit_rect_dma(uint8_t *framebuffer) {
     // int dma_chan = dma_claim_unused_channel(true);
     // dma_channel_config cfg = dma_channel_get_default_config(dma_chan);
     // channel_config_set_transfer_data_size(&cfg, DMA_SIZE_8);
@@ -145,15 +287,13 @@ static void blit_rect_dma(uint8_t* framebuffer)
 
     int src_index = 0;
 
-    for (int row = 0; row < 100; row++)
-    {
+    for (int row = 0; row < 100; row++) {
         int row_start_index = (50 + row) * 320 + 50;
 
         interp0->base[0] = row_start_index;
         interp0->accum[0] = 0;
 
-        for (int col = 0; col < 100; col++)
-        {
+        for (int col = 0; col < 100; col++) {
             // uint32_t framebuffer_index = interp_pop_full_result(interp0, 0);
             printf("%d\r\n", interp_pop_full_result(interp0));
             // framebuffer[interp0->pop[0]] = 15; //source_region[src_index++];
@@ -163,13 +303,13 @@ static void blit_rect_dma(uint8_t* framebuffer)
 }
 
 
-void DinoGame::render()
-{
+void DinoGame::render() {
     m_framebuffer.clear(0);
     // m_framebuffer.draw_grid(10, 15);
     GameScene::render();
-    // m_framebuffer.draw_sprite(dinoSprite);
-    // m_framebuffer.draw_sprite(cactusSprite);
+    m_framebuffer.draw_sprite(dinoSprite);
+    m_framebuffer.draw_sprite(cactusSprite);
+    input.render(m_framebuffer);
     //
     // // sprintf(detail, "vely: %f", vely);
     // // m_framebuffer.draw_string(detail, 5, 70, 130);
@@ -178,12 +318,12 @@ void DinoGame::render()
     // // m_framebuffer.draw_string(detail, 5, 80, 140);
     //
     // blit_rect_dma(m_framebuffer.pixel_buffer_back);
-    m_framebuffer.draw_filled_rectangle(50, 50, 100, 100, 15);
+    // m_framebuffer.draw_filled_rectangle(50, 50, 100, 100, 15);
     // // score.render(m_framebuffer);
-    // scoreboard.render(m_framebuffer);
-    // if (!gameStarted)
-    //     banner.render(m_framebuffer);
-    // m_renderer.wait_for_vsync();
+    scoreboard.render(m_framebuffer);
+    if (!gameStarted)
+        banner.render(m_framebuffer);
+    m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 
@@ -191,41 +331,42 @@ char temp[255] = {0};
 double t = 0;
 bool alreadyHit = false;
 
-void DinoGame::update(double frameTime)
-{
+void DinoGame::update(double frameTime) {
     GameScene::update(frameTime);
     dinoSprite.set_m_frametime(dinoSprite.get_m_frametime() + frameTime * 100);
     vely += gravity;
+
+    put_pixel(pio, sm, urgb_u32(0xff - vely, 0, 0));
+    put_pixel(pio, sm, urgb_u32(0, 0xff- vely, 0));
+    put_pixel(pio, sm, urgb_u32(0, 0, 0xff- vely));
+
     dinoSprite.set_m_y(dinoSprite.get_m_y() + vely);
 
-    dinoBox.min = {.x = (float)dinoSprite.get_m_x(), .y = (float)dinoSprite.get_m_y()};
+    dinoBox.min = {.x = (float) dinoSprite.get_m_x(), .y = (float) dinoSprite.get_m_y()};
     dinoBox.max = {
-        .x = (float)dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
-        .y = (float)dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
+        .x = (float) dinoSprite.get_m_x() + dinoSprite.get_m_sprite_data()->width,
+        .y = (float) dinoSprite.get_m_y() + dinoSprite.get_m_sprite_data()->height
     };
 
     if (gameStarted)
         cactusSprite.set_m_x(cactusSprite.get_m_x() - frameTime * 100);
 
-    cactusBox.min = {.x = (float)cactusSprite.get_m_x(), .y = (float)cactusSprite.get_m_y()};
+    cactusBox.min = {.x = (float) cactusSprite.get_m_x(), .y = (float) cactusSprite.get_m_y()};
     cactusBox.max = {
-        .x = (float)cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
-        .y = (float)cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height
+        .x = (float) cactusSprite.get_m_x() + cactusSprite.get_m_sprite_data()->width,
+        .y = (float) cactusSprite.get_m_y() + cactusSprite.get_m_sprite_data()->height
     };
 
-    if (cactusSprite.get_m_x() < 10)
-    {
+    if (cactusSprite.get_m_x() < 10) {
         alreadyHit = false;
         cactusSprite.set_m_x(310);
     }
-    if (c2AABBtoAABB(dinoBox, cactusBox) && !alreadyHit)
-    {
+    if (c2AABBtoAABB(dinoBox, cactusBox) && !alreadyHit) {
         alreadyHit = true;
         miss++;
     }
 
-    if (dinoSprite.get_m_y() > 150)
-    {
+    if (dinoSprite.get_m_y() > 150) {
         onGround = true;
         dinoSprite.set_m_y(150);
         vely = 0.0f;
@@ -241,11 +382,16 @@ void DinoGame::update(double frameTime)
     sprintf(temp, "Missed Jumps:%d", miss);
     missed_jumps.set_text(temp);
 
-
+    // 12-bit conversion, assume max value == ADC_VREF == 3.3 V
+    const float conversion_factor = 3.3f / (1 << 12);
+    uint16_t result = adc_read();
+    // printf("Raw value: 0x%03x, voltage: %f V\n", result, result * conversion_factor);
+    // sleep_ms(500);
+    sprintf(temp, "Input: %f", result * conversion_factor);
+    input.set_text(temp);
     banner.update(frameTime);
 }
 
-void DinoGame::destroy()
-{
+void DinoGame::destroy() {
     GameScene::destroy();
 }
