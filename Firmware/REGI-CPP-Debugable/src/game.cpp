@@ -29,8 +29,8 @@ void Game::run() {
     TinyEngineRendererDVI dvi(frame_buf);
     TinyEngine engine(dvi);
 
-    DinoGame scene(frame_buf, dvi, engine);
-    // BootLoaderScreen scene(frame_buf, dvi, engine);
+    // DinoGame scene(frame_buf, dvi, engine);
+    BootLoaderScreen scene(frame_buf, dvi, engine);
     scene.create();
 
     engine.set_pre_inti_clbk([&]() {

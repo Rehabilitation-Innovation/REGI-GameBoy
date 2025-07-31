@@ -402,15 +402,25 @@ void DinoGame::update(double frameTime) {
 
     static double tone_time = 0;
 
-    if (play_tone && tone_time <= 10) {
-        // myPlayer.play_melody(100, 3, new int[]{NOTE_A1, NOTE_D1, NOTE_A2});
-        myPlayer.tone(10000 + frameTime * 100, 0.01);
-        tone_time += frameTime * 100;
-    }
+    // if (play_tone && tone_time <= 10) {
+    //     // myPlayer.play_melody(100, 3, new int[]{NOTE_A1, NOTE_D1, NOTE_A2});
+    //     myPlayer.tone(10000 + frameTime * 100, 0.01);
+    //     tone_time += frameTime * 100;
+    // }
+    //
+    // if (tone_time > 10) {
+    //     tone_time = 0;
+    //     play_tone = 0;
+    // }
 
-    if (tone_time > 10) {
-        tone_time = 0;
-        play_tone = 0;
+    int pat = rand() % count_of(pattern_table);
+    int dir = (rand() >> 30) & 1 ? 1 : -1;
+    // puts(pattern_table[pat].name);
+    // puts(dir == 1 ? "(forward)" : "(backward)");
+    for (int i = 0; i < 1000; ++i) {
+        pattern_table[pat].pat(pio, sm, NUM_PIXELS, t);
+        // sleep_ms(10);
+        t += dir;
     }
 }
 
