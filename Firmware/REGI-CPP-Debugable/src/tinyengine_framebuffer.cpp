@@ -9,6 +9,7 @@
 #include "font.h"
 #include "renew_font.h"
 
+#define CHECK_BOUNDS(x, y) if (x < 0 || y < 0 || x > 320 || y > 240) return TINYENGINE_OUTOFBOUNDS_ERROR;
 
 /**
  * Improvement notes:
@@ -313,6 +314,9 @@ tinyengine_status_t TinyEngineFrameBuffer::draw_char(char _char, uint32_t x, uin
 }
 
 tinyengine_status_t TinyEngineFrameBuffer::draw_string(const char *_string, uint32_t x, uint32_t y, uint8_t _color) {
+
+    CHECK_BOUNDS(x, y);
+
     while (*_string) {
         draw_char(*_string++, x, y, _color);
         x += CHAR_WIDTH;
