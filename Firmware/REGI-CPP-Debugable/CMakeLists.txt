@@ -140,3 +140,5 @@ target_include_directories(REGI-CPP-Debugable PRIVATE
 )
 
 pico_add_extra_outputs(REGI-CPP-Debugable)
+
+#enable_sdcard_app(REGI-CPP-Debugable)
