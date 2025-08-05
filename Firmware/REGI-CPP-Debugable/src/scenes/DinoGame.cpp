@@ -393,8 +393,7 @@ char temp[255] = { 0 };
 double t = 0;
 bool alreadyHit = false;
 
-void DinoGame::update(double frameTime)
-{
+void DinoGame::update(double frameTime) {
     GameScene::update(frameTime);
     dinoSprite.set_m_frametime(dinoSprite.get_m_frametime() + frameTime * 100);
     vely += gravity;
@@ -479,7 +478,7 @@ void DinoGame::update(double frameTime)
     // // rgb_time += frameTime ;
     // if (rgb_time > 1)
     // {
-    //     pattern_table[1].pat(pio, sm, NUM_PIXELS, frameTime);
+    pattern_table[1].pat(pio, sm, NUM_PIXELS, frameTime);
     //     rgb_time = 0;
     // }
     // rgb_time += frameTime * 10;

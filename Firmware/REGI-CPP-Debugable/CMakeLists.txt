@@ -87,7 +87,7 @@ pico_set_program_version(REGI-CPP-Debugable "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(REGI-CPP-Debugable 1)
-pico_enable_stdio_usb(REGI-CPP-Debugable 0)
+pico_enable_stdio_usb(REGI-CPP-Debugable 1)
 
 pico_set_float_implementation(REGI-CPP-Debugable pico)
 pico_set_double_implementation(REGI-CPP-Debugable pico)

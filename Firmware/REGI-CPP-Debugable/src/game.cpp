@@ -36,20 +36,20 @@ void Game::run()
     scene.create();
 
     engine.set_pre_inti_clbk([&]()
-    {
-        return TINYENGINE_OK;
-    });
+        {
+            return TINYENGINE_OK;
+        });
     engine.set_render_clbk([&]()
-    {
-        scene.render();
-        return TINYENGINE_OK;
-    });
+        {
+            scene.render();
+            return TINYENGINE_OK;
+        });
     engine.set_update_clbk([&](double frameTime)
-    {
-        scene.update(frameTime);
+        {
+            scene.update(frameTime);
 
-        return TINYENGINE_OK;
-    });
+            return TINYENGINE_OK;
+        });
 
     engine.init();
     engine.start();

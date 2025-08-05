@@ -115,7 +115,7 @@ public:
 
     void set_m_frametime(const double m_frametime)
     {
-        this->m_frametime = m_frametime;
+        this->m_frametime += m_frametime;
     }
 
     uint16_t get_m_x() const
