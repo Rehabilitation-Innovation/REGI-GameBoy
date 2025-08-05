@@ -39,7 +39,7 @@ set(PICO_CXX_ENABLE_RTTI 1)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE PATH "Install prefix set to project root" FORCE)
 
-add_subdirectory(lib/pico-vfs-abi)
+add_subdirectory(lib/pico-vfs-rp2350)
 
 add_subdirectory(lib/pi-pico-tone/pico-tone)
 
