@@ -24,30 +24,34 @@
 #include "GameScene.h"
 #include "scenes/SnakeGame.h"
 
-void Game::run() {
+void Game::run()
+{
     TinyEngineFrameBuffer frame_buf(320, 240, true);
     TinyEngineRendererDVI dvi(frame_buf);
     TinyEngine engine(dvi);
 
-    // DinoGame scene(frame_buf, dvi, engine);
-    BootLoaderScreen scene(frame_buf, dvi, engine);
+    // SnakeGame scene(frame_buf, dvi, engine);
+    DinoGame scene(frame_buf, dvi, engine);
+    // BootLoaderScreen scene(frame_buf, dvi, engine);
     scene.create();
 
-    engine.set_pre_inti_clbk([&]() {
+    engine.set_pre_inti_clbk([&]()
+    {
         return TINYENGINE_OK;
-        });
-    engine.set_render_clbk([&]() {
+    });
+    engine.set_render_clbk([&]()
+    {
         scene.render();
         return TINYENGINE_OK;
-        });
-    engine.set_update_clbk([&](double frameTime) {
+    });
+    engine.set_update_clbk([&](double frameTime)
+    {
         scene.update(frameTime);
 
         return TINYENGINE_OK;
-        });
+    });
 
     engine.init();
     engine.start();
     engine.start_loop();
-
 }

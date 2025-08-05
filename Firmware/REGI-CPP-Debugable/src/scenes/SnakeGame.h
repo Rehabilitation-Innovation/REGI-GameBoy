@@ -7,10 +7,12 @@
 #include "GameScene.h"
 
 
-class SnakeGame : public GameScene {
+class SnakeGame : public GameScene
+{
 public:
-    SnakeGame(TinyEngineFrameBuffer &_framebuffer, TinyEngineRendererI &_renderer, TinyEngine &_engine)
-        : GameScene(_framebuffer, _renderer, _engine) {
+    SnakeGame(TinyEngineFrameBuffer& _framebuffer, TinyEngineRendererI& _renderer, TinyEngine& _engine)
+        : GameScene(_framebuffer, _renderer, _engine)
+    {
     }
 
     ~SnakeGame() override = default;

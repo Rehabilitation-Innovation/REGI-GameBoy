@@ -68,7 +68,8 @@ void TinyEngineUITextBox::render(TinyEngineFrameBuffer _framebuffer)
 
     for (auto text : m_texts)
     {
-        _framebuffer.draw_string(text.second.get_text().c_str(), m_x + text.second.get_m_x(), m_y + text.second.get_m_y(),
+        _framebuffer.draw_string(text.second.get_text().c_str(), m_x + text.second.get_m_x(),
+                                 m_y + text.second.get_m_y(),
                                  text.second.get_m_color());
     }
 }

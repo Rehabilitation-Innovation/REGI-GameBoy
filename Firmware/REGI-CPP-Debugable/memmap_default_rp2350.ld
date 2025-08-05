@@ -23,10 +23,24 @@
 
 MEMORY
 {
+/*
+    Changed 256k to 512k here to compesate for large graphics files.
+ */
+ /*
     FLASH(rx) : ORIGIN = 0x10000000 + 256k, LENGTH = 4096k - 256k
     RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 512k
     SCRATCH_X(rwx) : ORIGIN = 0x20080000, LENGTH = 4k
     SCRATCH_Y(rwx) : ORIGIN = 0x20081000, LENGTH = 4k
+  */
+
+  /*
+    1mb = 1024kb = 1024*1024b
+  */
+   FLASH(rx) : ORIGIN = 0x10000000 + 768k, LENGTH = 16384k - 768k
+   RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 512k
+   SCRATCH_X(rwx) : ORIGIN = 0x20080000, LENGTH = 4k
+   SCRATCH_Y(rwx) : ORIGIN = 0x20081000, LENGTH = 4k
+
 }
 
 ENTRY(_entry_point)

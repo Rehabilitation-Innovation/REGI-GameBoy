@@ -78,6 +78,16 @@ public:
     {
         this->m_height = m_height;
     }
+
+    uint16_t get_m_width() const
+    {
+        return m_width;
+    }
+
+    uint16_t get_m_height() const
+    {
+        return m_height;
+    }
 };
 
 class TinyEngineUIText : public TinyEngineUI

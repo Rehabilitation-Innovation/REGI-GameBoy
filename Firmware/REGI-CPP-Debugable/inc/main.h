@@ -28,11 +28,13 @@
 // This is typically set to 256KB for the Raspberry Pi Pico
 // This offset is used to ensure that the bootloader does not get overwritten
 // when loading a new application from the SD card
-#define SD_BOOT_FLASH_OFFSET         (256 * 1024)
+#define SD_BOOT_FLASH_OFFSET         (768 * 1024) // 1kb = 1024b so 768kb
 
 // Maximum size of the application that can be loaded
 // This ensures we don't overwrite the bootloader itself
-#define MAX_APP_SIZE                 (PICO_FLASH_SIZE_BYTES - SD_BOOT_FLASH_OFFSET)
+// 1mb = 1024kb = 1024*1024b
+#define MAX_APP_SIZE              ((16 * 1024 * 1024) - SD_BOOT_FLASH_OFFSET)    //  (PICO_FLASH_SIZE_BYTES - SD_BOOT_FLASH_OFFSET)
+
 
 
 // static int condition =0;

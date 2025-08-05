@@ -41,32 +41,38 @@ public:
 
     tinyengine_status_t write();
 
-    tinyengine_status_t clear(uint8_t color);
+    tinyengine_status_t clear(const uint8_t color);
+    tinyengine_status_t clear_with(const uint8_t* data);
 
-    tinyengine_status_t draw_pixel(uint32_t x, uint32_t y, uint8_t color);
+    tinyengine_status_t draw_pixel(const uint32_t x, const uint32_t y, const uint8_t color);
 
-    tinyengine_status_t draw_grid(uint32_t spacing, uint8_t color);
+    tinyengine_status_t draw_grid(const uint32_t spacing, const uint8_t color);
 
-    tinyengine_status_t draw_outline_rectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t color);
+    tinyengine_status_t draw_outline_rectangle(const uint32_t x, const uint32_t y, const uint32_t w, const uint32_t h,
+                                               const uint8_t color);
 
-    tinyengine_status_t draw_filled_rectangle(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint8_t color);
+    tinyengine_status_t draw_filled_rectangle(const uint32_t x, const uint32_t y, const uint32_t w, const uint32_t h,
+                                              const uint8_t color);
 
-    tinyengine_status_t draw_outline_circle(uint32_t x, uint32_t y, uint32_t r, uint8_t color);
+    tinyengine_status_t draw_outline_circle(const uint32_t x, const uint32_t y, const uint32_t r, const uint8_t color);
 
-    tinyengine_status_t draw_filled_circle(uint32_t x, uint32_t y, uint32_t r, uint8_t color);
+    tinyengine_status_t draw_filled_circle(const uint32_t x, const uint32_t y, const uint32_t r, const uint8_t color);
 
     tinyengine_status_t swap_blocking();
 
     tinyengine_status_t draw_sprite(Sprite& sprite);
 
-    tinyengine_status_t draw_sprite_raw(uint8_t* sprite, uint32_t w, uint32_t h, uint32_t x, uint32_t y);
+    tinyengine_status_t draw_sprite_raw(const uint8_t* sprite, const uint32_t w, const uint32_t h, const uint32_t x,
+                                        const uint32_t y);
 
-    tinyengine_status_t draw_sprite_raw_batch(uint8_t* sprite, uint32_t w, uint32_t h, uint16_t x[], uint16_t y[],
-                                              uint16_t count);
+    tinyengine_status_t draw_sprite_raw_batch(const uint8_t* sprite, const uint32_t w, const uint32_t h,
+                                              const uint16_t x[], const uint16_t y[],
+                                              const uint16_t count);
 
-    tinyengine_status_t draw_char(char _char, uint32_t x, uint32_t y, uint8_t _color);
+    tinyengine_status_t draw_char(const char _char, const uint32_t x, const uint32_t y, const uint8_t _color);
 
-    tinyengine_status_t draw_string(const char* _string, uint32_t x, uint32_t y, uint8_t _color);
+    tinyengine_status_t draw_string(const char* _string, const uint32_t x, const uint32_t y, const uint8_t _color);
 
-    tinyengine_status_t copy_buffer_slow(TinyEngineFrameBuffer& _buffer_to_copy, uint16_t _dst_x, uint16_t _dst_y);
+    tinyengine_status_t copy_buffer_slow(const TinyEngineFrameBuffer& _buffer_to_copy, const uint16_t _dst_x,
+                                         const uint16_t _dst_y);
 };
