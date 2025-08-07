@@ -22,6 +22,7 @@
 #include "BootLoaderScreen.h"
 #include "DinoGame.h"
 #include "GameScene.h"
+// #include "Pong.h"
 #include "scenes/SnakeGame.h"
 
 void Game::run()
@@ -31,8 +32,9 @@ void Game::run()
     TinyEngine engine(dvi);
 
     // SnakeGame scene(frame_buf, dvi, engine);
-    DinoGame scene(frame_buf, dvi, engine);
-    // BootLoaderScreen scene(frame_buf, dvi, engine);
+    // DinoGame scene(frame_buf, dvi, engine);
+    // Pong scene(frame_buf, dvi, engine);
+    BootLoaderScreen scene(frame_buf, dvi, engine);
     scene.create();
 
     engine.set_pre_inti_clbk([&]()

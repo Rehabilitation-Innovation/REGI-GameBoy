@@ -175,7 +175,7 @@ tinyengine_status_t TinyEngine::start_loop()
         lastTime = startTime;
         unproccessedTime += passedTime;
         frameCounter += passedTime;
-        render = 0; // run uncapped
+        render = 1; // run uncapped
         while ((unproccessedTime > frametime))
         {
             render = 1;

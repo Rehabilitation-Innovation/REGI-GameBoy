@@ -7,6 +7,8 @@
 #include <unordered_map>
 
 #include <functional>
+#define CUTE_C2_IMPLEMENTATION
+
 
 class TinyEngineFrameBuffer;
 class TinyEngineRendererI;

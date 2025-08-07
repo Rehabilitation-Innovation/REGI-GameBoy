@@ -9,13 +9,11 @@
 #include "tinyengine.h"
 #include "tinyengine_framebuffer.h"
 #include "tinyengine_sprite.h"
-#define CUTE_C2_IMPLEMENTATION
-#include "cute_c2.h"
 #include "hardware/gpio.h"
 #include <vector>
 #include  "pico/rand.h"
 #include "SnakeGame.h"
-
+#include "cute_c2.h"
 #include <malloc.h>
 
 #include "cactus_sprite.h"
