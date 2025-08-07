@@ -27,6 +27,10 @@
 #include "pico/sem.h"
 void measure_freqs(void);
 
+void isr_hardfault(void) {
+    printf("Hardfault\r\n");
+}
+
 int main()
 {
     // stdio_init_all();
