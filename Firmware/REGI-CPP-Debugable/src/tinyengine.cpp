@@ -2,42 +2,41 @@
 #include "pico/stdlib.h"
 #include <pico/time.h>
 #include "hardware/gpio.h"
-#include <tusb.h>
 
 #define UART_ID uart0
 
 volatile static int chars_rxed = 0;
 std::vector<uint8_t>* serial_input_queue;
 
-// callback when data is received on a CDC interface
-void tud_cdc_rx_cb(uint8_t itf)
-{
-    // allocate buffer for the data in the stack
-    uint8_t buf[CFG_TUD_CDC_RX_BUFSIZE];
+// // callback when data is received on a CDC interface
+// void tud_cdc_rx_cb(uint8_t itf)
+// {
+//     // allocate buffer for the data in the stack
+//     uint8_t buf[CFG_TUD_CDC_RX_BUFSIZE];
 
-    // printf("RX CDC %d\n", itf);
+//     // printf("RX CDC %d\n", itf);
 
-    // read the available data
-    // | IMPORTANT: also do this for CDC0 because otherwise
-    // | you won't be able to print anymore to CDC0
-    // | next time this function is called
-    uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
+//     // read the available data
+//     // | IMPORTANT: also do this for CDC0 because otherwise
+//     // | you won't be able to print anymore to CDC0
+//     // | next time this function is called
+//     uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
 
-    // check if the data was received on the second cdc interface
-    if (itf == 1) {
-        // process the received data
-        printf("%c", buf[0]);
-        serial_input_queue->emplace_back(buf[0]);
-        chars_rxed++;
-        // buf[count] = 0; // null-terminate the string
-        // now echo data back to the console on CDC 0
-        // printf("Received on CDC 1: %s\n", buf);
-        //
-        // // and echo back OK on CDC 1
-        // tud_cdc_n_write(itf, (uint8_t const *) "OK\r\n", 4);
-        // tud_cdc_n_write_flush(itf);
-    }
-}
+//     // check if the data was received on the second cdc interface
+//     if (itf == 1) {
+//         // process the received data
+//         printf("%c", buf[0]);
+//         serial_input_queue->emplace_back(buf[0]);
+//         chars_rxed++;
+//         // buf[count] = 0; // null-terminate the string
+//         // now echo data back to the console on CDC 0
+//         // printf("Received on CDC 1: %s\n", buf);
+//         //
+//         // // and echo back OK on CDC 1
+//         // tud_cdc_n_write(itf, (uint8_t const *) "OK\r\n", 4);
+//         // tud_cdc_n_write_flush(itf);
+//     }
+// }
 
 // RX interrupt handler
 void on_uart_rx()

@@ -41,6 +41,8 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE PATH "Install prefix set to p
 
 add_subdirectory(lib/pico-vfs-rp2350)
 
+add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
+
 add_subdirectory(lib/pi-pico-tone/pico-tone)
 
 # This function sets the custom linker script for SD card applications
@@ -87,7 +89,7 @@ pico_set_program_version(REGI-CPP-Debugable "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(REGI-CPP-Debugable 1)
-pico_enable_stdio_usb(REGI-CPP-Debugable 1)
+pico_enable_stdio_usb(REGI-CPP-Debugable 0)
 
 pico_set_float_implementation(REGI-CPP-Debugable pico)
 pico_set_double_implementation(REGI-CPP-Debugable pico)
@@ -95,6 +97,7 @@ pico_set_double_implementation(REGI-CPP-Debugable pico)
 target_include_directories(REGI-CPP-Debugable PRIVATE
     "inc/"
     "src/scenes/"
+    "lib/pico-distance-sensor-main/pico-distance-sensor-main/include"
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/src/generated)
@@ -126,6 +129,8 @@ target_link_libraries(REGI-CPP-Debugable
     filesystem_vfs
 
     pico_tone
+
+    distance-sensor
 )
 
 target_compile_definitions(REGI-CPP-Debugable PRIVATE
