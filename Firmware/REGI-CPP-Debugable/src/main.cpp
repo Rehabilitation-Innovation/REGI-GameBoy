@@ -25,6 +25,9 @@
 #include "hardware/structs/sio.h"
 #include "pico/multicore.h"
 #include "pico/sem.h"
+
+#include "distance_sensor.h"
+
 void measure_freqs(void);
 
 void isr_hardfault(void) {
@@ -60,6 +63,22 @@ int main()
         315000 * 1000,                               // Input frequency
         315000 / 2 * 1000                                // Output (must be same as no divider)
     );
+
+    // Create an instance of the sensor
+        // specify the pio, state machine, and gpio pin connected to trigger
+        // echo pin must be on gpio pin trigger + 1.
+    DistanceSensor hcsr04(pio0, 0, 40);
+
+    // Trigger background sense
+    hcsr04.TriggerRead();
+
+    // wait for sensor to get a result
+    while (hcsr04.is_sensing) {
+        sleep_us(100);
+    }
+
+    // Read result
+    printf("Reading %d centimeters\n", hcsr04.distance);
 
     // vreg_disable_voltage_limit();
     // vreg_set_voltage(VREG_VOLTAGE_1_50);
