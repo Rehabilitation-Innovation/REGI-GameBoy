@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-BootLoader
+# Install script for directory: C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/REGI-CPP-Debugable")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/REGI-Bootloader")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,14 +39,15 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-BootLoader/build/pico-sdk/cmake_install.cmake")
+  include("C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader/build/pico-sdk/cmake_install.cmake")
+  include("C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader/build/lib/REGI-TinyEngine/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-BootLoader/build/install_local_manifest.txt"
+  file(WRITE "C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -62,6 +63,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-BootLoader/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
