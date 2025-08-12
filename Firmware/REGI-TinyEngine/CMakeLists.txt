@@ -38,7 +38,7 @@ set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 set(PICO_CXX_ENABLE_RTTI 1)
 
 # set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE PATH "Install prefix set to project root" FORCE)
-add_subdirectory(lib/pico-vfs-rp2350)
+add_subdirectory(lib/pico-vfs-main) # modified vfs with asserts updated.
 
 add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
 
