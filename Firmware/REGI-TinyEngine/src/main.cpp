@@ -54,7 +54,7 @@ int main()
         315000 / 2 * 1000                                // Output (must be same as no divider)
     );
 
-    
+
 
     stdio_init_all();
 

@@ -38,8 +38,7 @@ std::vector<uint8_t>* serial_input_queue;
 //         // tud_cdc_n_write_flush(itf);
 //     }
 // }
-
-void hardfault_handler() {
+static void hardfault() {
     telog("HARD FAULT!!");
     gpio_init(0);
     gpio_set_dir(0, GPIO_OUT);
@@ -94,6 +93,7 @@ void hardfault_handler() {
 
 }
 
+
 void set_frequency() {
     vreg_set_voltage(VREG_VOLTAGE_1_30);
     set_sys_clock_khz(315000, false);
@@ -111,9 +111,7 @@ void set_frequency() {
         315000 * 1000,                               // Input frequency
         315000 / 2 * 1000                                // Output (must be same as no divider)
     );
-
-    // exception_set_exclusive_handler(HARDFAULT_EXCEPTION, hardfault_handler);
-
+    exception_set_exclusive_handler(HARDFAULT_EXCEPTION, hardfault);
 }
 
 // RX interrupt handler
@@ -143,6 +141,7 @@ void gpio_callback(uint gpio, uint32_t events) {
 
 tinyengine_status_t TinyEngine::init()
 {
+
     serial_input_queue = &m_serial_input_buffer;
     // Set up a RX interrupt
     // We need to set up the handler first
@@ -158,6 +157,7 @@ tinyengine_status_t TinyEngine::init()
     gpio_input_queue = &m_gpio_input_buffer;
 
     pre_init_clbk();
+
     return TINYENGINE_OK;
 }
 
@@ -223,6 +223,7 @@ void TinyEngine::bind_serial_input_event(uint8_t _char, std::function<void()> _e
 
 tinyengine_status_t TinyEngine::start_loop()
 {
+
     double lastTime = ((double)to_ms_since_boot(get_absolute_time())) / ((double)1000);
     double unproccessedTime = 0;
     double passedTime = 0;

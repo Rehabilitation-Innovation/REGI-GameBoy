@@ -4,6 +4,7 @@
 #include "tinyengine.h"
 #include "Bootloader.h"
 #include "BootLoaderScreen.h"
+#include "hardware/exception.h"
 
 void Bootloader::run() {
     TinyEngineFrameBuffer frame_buf(320, 240, true);
@@ -37,8 +38,11 @@ void Bootloader::run() {
     engine.start_loop();
 }
 
+
+
 int main()
 {
+
     set_frequency(); // We set this before stdio init
     stdio_init_all();
 

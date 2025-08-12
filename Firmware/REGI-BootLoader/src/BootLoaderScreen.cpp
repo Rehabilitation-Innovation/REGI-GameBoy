@@ -347,7 +347,8 @@ Sprite cat;
 
 void BootLoaderScreen::create() {
     GameScene::create();
-
+    // int* p = NULL;
+    // *p = 1;
     cat = Sprite(te_sprite_t{
                      .sprite_buffer = cat_frame1,
                      .width = NYAN_CAT_WIDTH,
