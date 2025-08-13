@@ -40,7 +40,7 @@ set(PICO_CXX_ENABLE_RTTI 1)
 # set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE PATH "Install prefix set to project root" FORCE)
 add_subdirectory(lib/pico-vfs-main) # modified vfs with asserts updated.
 
-add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
+# add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
 
 # add_subdirectory(lib/pi-pico-tone)
 
@@ -129,7 +129,7 @@ target_link_libraries(REGI-TinyEngine PUBLIC
     filesystem_vfs
 
     # pico_tone
-    distance-sensor
+    # distance-sensor
 )
 
 target_compile_definitions(REGI-TinyEngine PUBLIC

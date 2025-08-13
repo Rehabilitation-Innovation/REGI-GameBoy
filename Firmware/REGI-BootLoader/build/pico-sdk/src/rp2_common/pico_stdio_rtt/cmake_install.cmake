@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/abina/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_rtt
+# Install script for directory: C:/Users/GRHRehabTech/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_rtt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,12 +34,12 @@ endif()
 
 # Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Users/abina/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/GRHRehabTech/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-objdump.exe")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/abina/Desktop/REGI/REGI-GameBoy/Firmware/REGI-Bootloader/build/pico-sdk/src/rp2_common/pico_stdio_rtt/install_local_manifest.txt"
+  file(WRITE "C:/Users/GRHRehabTech/Desktop/Abinash Work Term/REGI/Firmware/REGI-BootLoader/build/pico-sdk/src/rp2_common/pico_stdio_rtt/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
