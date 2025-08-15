@@ -46,9 +46,9 @@ CMAKE_ASM_FLAGS_RELEASE:STRING=-g -O3 -DNDEBUG
 //Flags used by the ASM compiler during RELWITHDEBINFO builds.
 CMAKE_ASM_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//Choose the type of build, options are: 'Debug', 'Release', 'MinSizeRel',
-// 'RelWithDebInfo'.
-CMAKE_BUILD_TYPE:STRING=Release
+//Choose the type of build, options are: None Debug Release RelWithDebInfo
+// MinSizeRel ...
+CMAKE_BUILD_TYPE:STRING=Debug
 
 //CXX compiler
 CMAKE_CXX_COMPILER:STRING=C:/Users/GRHRehabTech/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-g++.exe
@@ -359,15 +359,6 @@ pico_sdk_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 pico_sdk_SOURCE_DIR:STATIC=C:/Users/GRHRehabTech/.pico-sdk/sdk/2.2.0
-
-//Value Computed by CMake
-test_project_BINARY_DIR:STATIC=C:/Users/GRHRehabTech/Desktop/Abinash Work Term/REGI/Firmware/REGI-BootLoader/build/lib/REGI-TinyEngine/lib/pico-distance-sensor-main/pico-distance-sensor-main
-
-//Value Computed by CMake
-test_project_IS_TOP_LEVEL:STATIC=OFF
-
-//Value Computed by CMake
-test_project_SOURCE_DIR:STATIC=C:/Users/GRHRehabTech/Desktop/Abinash Work Term/REGI/Firmware/REGI-TinyEngine/lib/pico-distance-sensor-main/pico-distance-sensor-main
 
 
 ########################

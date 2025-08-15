@@ -295,6 +295,18 @@ static const uint32_t aurora_1x[] = {
 #define MODE_V_BACK_PORCH    33
 #define MODE_V_ACTIVE_LINES  480
 
+// #define MODE_H_SYNC_POLARITY 0
+// #define MODE_H_FRONT_PORCH   8
+// #define MODE_H_SYNC_WIDTH    32
+// #define MODE_H_BACK_PORCH    40
+// #define MODE_H_ACTIVE_PIXELS 320
+
+// #define MODE_V_SYNC_POLARITY 1
+// #define MODE_V_FRONT_PORCH   3
+// #define MODE_V_SYNC_WIDTH    4
+// #define MODE_V_BACK_PORCH    6
+// #define MODE_V_ACTIVE_LINES  240
+
 #define TMDS_CTRL_00 0x354u
 #define TMDS_CTRL_01 0x0abu
 #define TMDS_CTRL_10 0x154u
@@ -426,15 +438,18 @@ void __scratch_x("display") TinyEngineRendererDVI::gfx_dma_handler()
             uint32_t* dst_ptr = &line_buffers[line_num * line_buf_total_len + count_of(vactive_line_header)];
 
             // uint8_t* src_ptr = &frame_buffer_display[y * (timing_mode->h_active_pixels >> h_repeat_shift)];
-            uint8_t* src_ptr = &m_frame_buf.pixel_buffer_display[y * (640 >> h_repeat_shift)];
+            uint8_t* src_ptr = &m_frame_buf.pixel_buffer_display[y * (MODE_H_ACTIVE_PIXELS >> h_repeat_shift)];
             // printf("%d\r\n", y * (640 >> h_repeat_shift));
             // for (int i = 0; i < timing_mode->h_active_pixels; i += 2) {
-            for (int i = 0; i < 640; i += 2)
+            for (int i = 0; i < MODE_H_ACTIVE_PIXELS; i += 2)
             {
                 // uint32_t val = display_palette[*src_ptr++];
                 // uint32_t val = aurora_1x[*src_ptr++];
                 uint32_t val = aurora_1x[*src_ptr++];
                 // src_ptr += 1;
+                // memset(dst_ptr++, val, 1);
+                // memset(dst_ptr++, val, 1);
+
                 *dst_ptr++ = val; //0xEB0000;
                 *dst_ptr++ = val; //0xEB0000;
                 // *src_ptr++;
@@ -576,7 +591,7 @@ tinyengine_status_t TinyEngineRendererDVI::tinyengine_renderer_init()
     for (int i = 0; i < frame_lines; ++i)
     {
         memcpy(&line_buffers[i * frame_line_words], vactive_line_header,
-               count_of(vactive_line_header) * sizeof(uint32_t));
+            count_of(vactive_line_header) * sizeof(uint32_t));
     }
 
     // Ensure HSTX FIFO is clear
@@ -616,7 +631,7 @@ tinyengine_status_t TinyEngineRendererDVI::tinyengine_renderer_init()
     // HSTX outputs 0 through 7 appear on GPIO 12 through 19.
     int HSTX_FIRST_PIN = 12;
     int clk_p = 12;
-    int rgb_p[3] = {14, 16, 18};
+    int rgb_p[3] = { 14, 16, 18 };
 
     // Assign clock pair to two neighbouring pins:
     {

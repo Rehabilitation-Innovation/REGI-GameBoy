@@ -7,14 +7,14 @@
 
 # =============================================================================
 # Project: REGI-Bootloader
-# Configurations: Release
+# Configurations: Debug
 # =============================================================================
 # =============================================================================
 
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__REGI-Bootloader_unscanned_Release
+rule ASM_COMPILER__REGI-Bootloader_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
@@ -24,7 +24,7 @@ rule ASM_COMPILER__REGI-Bootloader_unscanned_Release
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__REGI-Bootloader_unscanned_Release
+rule C_COMPILER__REGI-Bootloader_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -34,7 +34,7 @@ rule C_COMPILER__REGI-Bootloader_unscanned_Release
 #############################################
 # Rule for generating CXX dependencies.
 
-rule CXX_SCAN__REGI-Bootloader_Release
+rule CXX_SCAN__REGI-Bootloader_Debug
   depfile = $DEP_FILE
   command = C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -E -x c++ $in -MT $DYNDEP_INTERMEDIATE_FILE -MD -MF $DEP_FILE -fmodules-ts -fdeps-file=$DYNDEP_INTERMEDIATE_FILE -fdeps-target=$OBJ_FILE -fdeps-format=p1689r5 -o $PREPROCESSED_OUTPUT_FILE
   description = Scanning $in for CXX dependencies
@@ -43,7 +43,7 @@ rule CXX_SCAN__REGI-Bootloader_Release
 #############################################
 # Rule to generate ninja dyndep files for CXX.
 
-rule CXX_DYNDEP__REGI-Bootloader_Release
+rule CXX_DYNDEP__REGI-Bootloader_Debug
   command = C:\Users\GRHRehabTech\.pico-sdk\cmake\v3.31.5\bin\cmake.exe -E cmake_ninja_dyndep --tdi=CMakeFiles\REGI-Bootloader.dir\CXXDependInfo.json --lang=CXX --modmapfmt=gcc --dd=$out @$out.rsp
   description = Generating CXX dyndep file $out
   rspfile = $out.rsp
@@ -54,7 +54,7 @@ rule CXX_DYNDEP__REGI-Bootloader_Release
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__REGI-Bootloader_scanned_Release
+rule CXX_COMPILER__REGI-Bootloader_scanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -fmodules-ts -fmodule-mapper=$DYNDEP_MODULE_MAP_FILE -MD -fdeps-format=p1689r5 -x c++ -o $out -c $in
@@ -64,7 +64,7 @@ rule CXX_COMPILER__REGI-Bootloader_scanned_Release
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__REGI-Bootloader_unscanned_Release
+rule CXX_COMPILER__REGI-Bootloader_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -74,7 +74,7 @@ rule CXX_COMPILER__REGI-Bootloader_unscanned_Release
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__REGI-Bootloader_Release
+rule CXX_EXECUTABLE_LINKER__REGI-Bootloader_Debug
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $FLAGS -Wl,--build-id=none $LINK_FLAGS @$RSP_FILE -o $TARGET_FILE && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   rspfile = $RSP_FILE
@@ -93,7 +93,7 @@ rule CUSTOM_COMMAND
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__bs2_default_unscanned_Release
+rule ASM_COMPILER__bs2_default_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
@@ -103,7 +103,7 @@ rule ASM_COMPILER__bs2_default_unscanned_Release
 #############################################
 # Rule for linking ASM executable.
 
-rule ASM_EXECUTABLE_LINKER__bs2_default_Release
+rule ASM_EXECUTABLE_LINKER__bs2_default_Debug
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $FLAGS -Wl,--build-id=none $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking ASM executable $TARGET_FILE
   restat = $RESTAT
@@ -112,7 +112,7 @@ rule ASM_EXECUTABLE_LINKER__bs2_default_Release
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__bs2_default_library_unscanned_Release
+rule ASM_COMPILER__bs2_default_library_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
@@ -122,7 +122,7 @@ rule ASM_COMPILER__bs2_default_library_unscanned_Release
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__REGI-TinyEngine_unscanned_Release
+rule ASM_COMPILER__REGI-TinyEngine_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
@@ -132,7 +132,7 @@ rule ASM_COMPILER__REGI-TinyEngine_unscanned_Release
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__REGI-TinyEngine_unscanned_Release
+rule C_COMPILER__REGI-TinyEngine_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -142,7 +142,7 @@ rule C_COMPILER__REGI-TinyEngine_unscanned_Release
 #############################################
 # Rule for generating CXX dependencies.
 
-rule CXX_SCAN__REGI-TinyEngine_Release
+rule CXX_SCAN__REGI-TinyEngine_Debug
   depfile = $DEP_FILE
   command = C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -E -x c++ $in -MT $DYNDEP_INTERMEDIATE_FILE -MD -MF $DEP_FILE -fmodules-ts -fdeps-file=$DYNDEP_INTERMEDIATE_FILE -fdeps-target=$OBJ_FILE -fdeps-format=p1689r5 -o $PREPROCESSED_OUTPUT_FILE
   description = Scanning $in for CXX dependencies
@@ -151,7 +151,7 @@ rule CXX_SCAN__REGI-TinyEngine_Release
 #############################################
 # Rule to generate ninja dyndep files for CXX.
 
-rule CXX_DYNDEP__REGI-TinyEngine_Release
+rule CXX_DYNDEP__REGI-TinyEngine_Debug
   command = C:\Users\GRHRehabTech\.pico-sdk\cmake\v3.31.5\bin\cmake.exe -E cmake_ninja_dyndep --tdi=lib\REGI-TinyEngine\CMakeFiles\REGI-TinyEngine.dir\CXXDependInfo.json --lang=CXX --modmapfmt=gcc --dd=$out @$out.rsp
   description = Generating CXX dyndep file $out
   rspfile = $out.rsp
@@ -162,7 +162,7 @@ rule CXX_DYNDEP__REGI-TinyEngine_Release
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__REGI-TinyEngine_scanned_Release
+rule CXX_COMPILER__REGI-TinyEngine_scanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -fmodules-ts -fmodule-mapper=$DYNDEP_MODULE_MAP_FILE -MD -fdeps-format=p1689r5 -x c++ -o $out -c $in
@@ -172,7 +172,7 @@ rule CXX_COMPILER__REGI-TinyEngine_scanned_Release
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__REGI-TinyEngine_unscanned_Release
+rule CXX_COMPILER__REGI-TinyEngine_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -182,7 +182,7 @@ rule CXX_COMPILER__REGI-TinyEngine_unscanned_Release
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__REGI-TinyEngine_Release
+rule CXX_STATIC_LIBRARY_LINKER__REGI-TinyEngine_Debug
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\Users\GRHRehabTech\.pico-sdk\cmake\v3.31.5\bin\cmake.exe -E rm -f $TARGET_FILE && C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\Users\GRHRehabTech\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   rspfile = $RSP_FILE
