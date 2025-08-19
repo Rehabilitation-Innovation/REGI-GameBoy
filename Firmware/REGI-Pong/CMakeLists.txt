@@ -26,7 +26,10 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
+# set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
+# set(PICO_BOARD_HEADER_DIRS ${CMAKE_SOURCE_DIR})
+set(PICO_BOARD_HEADER_DIRS ../REGI-TinyEngine/boards)
+set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -54,6 +57,8 @@ file(GLOB INCLUDES
 # https://stackoverflow.com/questions/7980784/cmake-add-sub-directory-which-is-not-sub-directory-on-real-directory
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../REGI-TinyEngine ${CMAKE_CURRENT_BINARY_DIR}/lib/REGI-TinyEngine)
 
+add_subdirectory(lib/pico-distance-sensor)
+
 # Add executable. Default name is the project name, version 0.1
 add_executable(REGI-Pong ${SOURCES} ${INCLUDES})
 
@@ -68,6 +73,8 @@ pico_enable_stdio_usb(REGI-Pong 0)
 target_link_libraries(REGI-Pong PUBLIC
     pico_stdlib
 
+    distance-sensor
+
     REGI-TinyEngine
 )
 
@@ -80,4 +87,4 @@ target_include_directories(REGI-Pong PUBLIC
 
 pico_add_extra_outputs(REGI-Pong)
 
-pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350
+# pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350

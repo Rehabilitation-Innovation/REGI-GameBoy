@@ -43,4 +43,20 @@ int main()
     PongGame pong;
 
     pong.run();
+    // uint32_t dist2 = 0;
+
+    // gpio_init(40);
+    // gpio_init(41);
+    // gpio_set_dir(40, GPIO_OUT);
+    // gpio_set_dir(41, GPIO_IN);
+    // gpio_init(0);
+    // gpio_set_dir(0, GPIO_OUT);
+
+    // while (1) {
+    //     gpio_put(0, 1);
+    //     dist2 = getCm(40, 41);
+    //     printf("%d \r\n", dist2);
+    //     gpio_put(0, 0);
+    //     sleep_ms(500);
+    // }
 }
