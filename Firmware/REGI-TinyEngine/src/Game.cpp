@@ -20,40 +20,40 @@
 #include "Game.h"
 
 // #include "BootLoaderScreen.h"
-// #include "DinoGame.h"
-#include "GameScene.h"
+#include "DinoGame.h"
+// #include "GameScene.h"
 // #include "Pong.h"
 // #include "scenes/SnakeGame.h"
 
-// void Game::run()
-// {
-//     TinyEngineFrameBuffer frame_buf(320, 240, true);
-//     TinyEngineRendererDVI dvi(frame_buf);
-//     TinyEngine engine(dvi);
+void Game::run()
+{
+    TinyEngineFrameBuffer frame_buf(320, 240, true);
+    TinyEngineRendererDVI dvi(frame_buf);
+    TinyEngine engine(dvi);
 
-//     // SnakeGame scene(frame_buf, dvi, engine);
-//     // DinoGame scene(frame_buf, dvi, engine);
-//     Pong scene(frame_buf, dvi, engine);
-//     // BootLoaderScreen scene(frame_buf, dvi, engine);
-//     scene.create();
+    // SnakeGame scene(frame_buf, dvi, engine);
+    DinoGame scene(frame_buf, dvi, engine);
+    // Pong scene(frame_buf, dvi, engine);
+    // BootLoaderScreen scene(frame_buf, dvi, engine);
+    scene.create();
 
-//     engine.set_pre_inti_clbk([&]()
-//         {
-//             return TINYENGINE_OK;
-//         });
-//     engine.set_render_clbk([&]()
-//         {
-//             scene.render();
-//             return TINYENGINE_OK;
-//         });
-//     engine.set_update_clbk([&](double frameTime)
-//         {
-//             scene.update(frameTime);
+    engine.set_pre_inti_clbk([&]()
+        {
+            return TINYENGINE_OK;
+        });
+    engine.set_render_clbk([&]()
+        {
+            scene.render();
+            return TINYENGINE_OK;
+        });
+    engine.set_update_clbk([&](double frameTime)
+        {
+            scene.update(frameTime);
 
-//             return TINYENGINE_OK;
-//         });
+            return TINYENGINE_OK;
+        });
 
-//     engine.init();
-//     engine.start();
-//     engine.start_loop();
-// }
+    engine.init();
+    engine.start();
+    engine.start_loop();
+}

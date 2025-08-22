@@ -1,4 +1,4 @@
-// Padded and checksummed version of: C:/Users/GRHRehabTech/Desktop/Abinash Work Term/REGI/Firmware/REGI-BootLoader/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: C:/Users/abina/Desktop/REGI-Gameboy/REGI-GameBoy/Firmware/REGI-BootLoader/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb

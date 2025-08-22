@@ -26,9 +26,10 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-# set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
-set(PICO_BOARD_HEADER_DIRS boards/)
-set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
+set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
+
+# set(PICO_BOARD_HEADER_DIRS boards/)
+# set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -82,10 +83,10 @@ add_compile_options(-Wall -Wextra)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-# add_executable(REGI-TinyEngine ${SOURCES} ${INCLUDES}
-# )
-add_library(REGI-TinyEngine ${SOURCES} ${INCLUDES})
+add_executable(REGI-TinyEngine ${SOURCES} ${INCLUDES})
 
+# )
+# add_library(REGI-TinyEngine ${SOURCES} ${INCLUDES})
 pico_set_program_name(REGI-TinyEngine "REGI-TinyEngine")
 pico_set_program_version(REGI-TinyEngine "0.1")
 
@@ -145,6 +146,5 @@ target_include_directories(REGI-TinyEngine PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
 )
 
-# pico_add_extra_outputs(REGI-TinyEngine)
-
-# enable_sdcard_app(REGI-TinyEngine)
+pico_add_extra_outputs(REGI-TinyEngine)
+enable_sdcard_app(REGI-TinyEngine)
