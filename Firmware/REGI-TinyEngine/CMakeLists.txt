@@ -26,10 +26,9 @@ if(EXISTS ${picoVscode})
 endif()
 
 # ====================================================================================
-set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
-
-# set(PICO_BOARD_HEADER_DIRS boards/)
-# set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
+# set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
+set(PICO_BOARD_HEADER_DIRS boards/)
+set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -41,7 +40,7 @@ set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 set(PICO_CXX_ENABLE_RTTI 1)
 
 # set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE PATH "Install prefix set to project root" FORCE)
-add_subdirectory(lib/pico-vfs-main) # modified vfs with asserts updated.
+# add_subdirectory(lib/pico-vfs-main) # modified vfs with asserts updated.
 
 # add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
 
@@ -83,10 +82,10 @@ add_compile_options(-Wall -Wextra)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(REGI-TinyEngine ${SOURCES} ${INCLUDES})
+# add_executable(REGI-TinyEngine ${SOURCES} ${INCLUDES})
 
 # )
-# add_library(REGI-TinyEngine ${SOURCES} ${INCLUDES})
+add_library(REGI-TinyEngine ${SOURCES} ${INCLUDES})
 pico_set_program_name(REGI-TinyEngine "REGI-TinyEngine")
 pico_set_program_version(REGI-TinyEngine "0.1")
 
@@ -127,9 +126,9 @@ target_link_libraries(REGI-TinyEngine PUBLIC
     pico_multicore
     pico_sync
 
-    blockdevice_sd
-    filesystem_fat
-    filesystem_vfs
+    # blockdevice_sd
+    # filesystem_fat
+    # filesystem_vfs
 
     # pico_tone
     # distance-sensor
@@ -146,5 +145,5 @@ target_include_directories(REGI-TinyEngine PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
 )
 
-pico_add_extra_outputs(REGI-TinyEngine)
-enable_sdcard_app(REGI-TinyEngine)
+# pico_add_extra_outputs(REGI-TinyEngine)
+# enable_sdcard_app(REGI-TinyEngine)

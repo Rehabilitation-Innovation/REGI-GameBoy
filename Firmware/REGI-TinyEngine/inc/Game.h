@@ -3,7 +3,7 @@
 
 class Game {
 public:
-    virtual void run();
+    virtual void run() {};
 };
 
 

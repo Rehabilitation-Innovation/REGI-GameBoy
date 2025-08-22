@@ -87,4 +87,4 @@ target_include_directories(REGI-Pong PUBLIC
 
 pico_add_extra_outputs(REGI-Pong)
 
-# pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350
+pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350

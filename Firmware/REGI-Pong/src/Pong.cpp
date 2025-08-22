@@ -8,14 +8,15 @@
 #include "hardware/watchdog.h"
 #include "pico/multicore.h"
 #include "distance_sensor.h"
+#include "TinyEngineUI.h"
 
-int move_up, move_down, move_left, move_right;
+int move_up = 0, move_down = 0, move_left = 0, move_right = 0, toggle_move_up = 0, toggle_move_up2 = 0;
 
 struct paddle {
     float x = 0;
     float y = 0;
 
-    float move_speed = 200; // pixels
+    float move_speed = 100; // pixels
 };
 
 struct ball {
@@ -92,6 +93,22 @@ void core1_entry() {
     // tight_loop_contents();
 }
 
+
+/**
+ * ------------------------------------------
+ * High Score:               Pongs:
+ * Time:                Missed Pongs:
+ * ------------------------------------------
+ */
+TinyEngineUIText score(5, 5, "Score: ", 15);
+TinyEngineUIText time_(5, 30, "Time: ", 15);
+TinyEngineUIText pongs(90, 5, "Pongs: ", 15);
+TinyEngineUIText missed_pongs(90, 30, "Missed Pongs: ", 15);
+
+TinyEngineUITextBox scoreboard(70, 180, 210, 50, 45);
+
+TinyEngineUIText input(0, 20, "Input: ", 15);
+
 void PongScene::create() {
     GameScene::create();
     gpio_init(40);
@@ -100,6 +117,12 @@ void PongScene::create() {
     gpio_set_dir(41, GPIO_IN);
     gpio_init(0);
     gpio_set_dir(0, GPIO_OUT);
+
+    scoreboard.add_text("s", score);
+    scoreboard.add_text("j", pongs);
+    scoreboard.add_text("t", time_);
+    scoreboard.add_text("mj", missed_pongs);
+
     // d = DistanceSensor(pio0, 0, 2);
     // d.TriggerRead();
     // telog("Reading %d", d.distance);
@@ -112,6 +135,16 @@ void PongScene::create() {
 
     m_engine.bind_serial_input_event('s', [&] {
         move_up = 1;
+        });
+
+    m_engine.bind_gpio_input_event(2, [&] {
+        toggle_move_up = !toggle_move_up;
+        // printf("a\r\n");
+        });
+
+    m_engine.bind_gpio_input_event(24, [&] {
+        toggle_move_up2 = !toggle_move_up2;
+        // printf("a\r\n");
         });
 
     m_engine.bind_serial_input_event('r', [&] {
@@ -131,19 +164,22 @@ void PongScene::render() {
     GameScene::render();
     m_framebuffer.clear(0);
 
+    scoreboard.render(m_framebuffer);
+
     m_framebuffer.draw_filled_rectangle(a.x, a.y, 10, 50, 15);
 
     m_framebuffer.draw_filled_rectangle(b.x, b.y, 10, 50, 15);
 
     m_framebuffer.draw_filled_rectangle(ba.x, ba.y, 10, 10, 31);
 
-    // m_renderer.wait_for_vsync();
+    m_renderer.wait_for_vsync();
     m_framebuffer.swap_blocking();
 }
 
 c2AABB ballbox, pada, padb;
-
-
+uint16_t pong_counter = 0, miss = 0, hscore = 0;
+char temp[255] = { 0 };
+double t = 0;
 
 void PongScene::update(double frameTime) {
     // static DistanceSensor d{ pio0, 1, 2 };
@@ -152,16 +188,24 @@ void PongScene::update(double frameTime) {
     // while (d.is_sensing) {
     //     sleep_us(10);
 // }
-
+    t += frameTime;
+    sprintf(temp, "Score:%d", hscore);
+    score.set_text(temp);
+    sprintf(temp, "Pongs:%d", pong_counter);
+    pongs.set_text(temp);
+    sprintf(temp, "Time:%1.0fs", t);
+    time_.set_text(temp);
+    sprintf(temp, "Missed Pongs:%d", miss);
+    missed_pongs.set_text(temp);
 
     // telog("Reading %d", d.distance);
     // // Trigger background sense
     // // wait for sensor to get a result
-    if (!d.is_sensing) {
-        telog("Reading %d", d.distance);
-        a.y = d.distance;
-        d.TriggerRead();
-    }
+    // if (!d.is_sensing) {
+    //     telog("Reading %d", d.distance);
+    //     a.y = d.distance;
+    //     d.TriggerRead();
+    // }
     // telog("Reading %d", d.distance);
 
     // a.y = dist;
@@ -184,6 +228,7 @@ void PongScene::update(double frameTime) {
 
     if (c2AABBtoAABB(pada, ballbox) || c2AABBtoAABB(padb, ballbox)) {
         ba.dx *= -1;
+        pong_counter += 1;
     }
 
     ba.x += ba.dx * ba.move_speed * frameTime;
@@ -192,11 +237,14 @@ void PongScene::update(double frameTime) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
+        hscore += 1;
     }
     if (ba.x <= 0) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
+        hscore = 0;
+        miss += 1;
     }
 
     ba.y += ba.dy * ba.move_speed * frameTime;
@@ -215,10 +263,29 @@ void PongScene::update(double frameTime) {
     if (move_up) {
         a.y += a.move_speed * frameTime;
         move_up = 0;
+
     }
+
+    if (toggle_move_up) {
+        move_up = 1;
+        move_down = 0;
+    }
+    else {
+        move_up = 0;
+        move_down = 1;
+    }
+
+
     if (move_down) {
         a.y -= a.move_speed * frameTime;
         move_down = 0;
+    }
+
+    if (toggle_move_up2) {
+        b.y += b.move_speed * frameTime;
+    }
+    else {
+        b.y -= b.move_speed * frameTime;
     }
 
     b.y = a.y;

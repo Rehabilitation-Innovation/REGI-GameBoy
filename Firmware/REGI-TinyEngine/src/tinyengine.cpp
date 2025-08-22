@@ -133,8 +133,9 @@ void gpio_callback(uint gpio, uint32_t events) {
         gpio_debounce = time_us_32();
         return;
     }
-    if (500 <= (time_us_32() - gpio_debounce)) {
+    if ((uint32_t)250000 <= (time_us_32() - gpio_debounce)) {
         gpio_input_queue->emplace_back(gpio);
+        gpio_debounce = 0;
     }
 
 }

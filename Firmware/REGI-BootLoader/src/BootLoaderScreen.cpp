@@ -402,6 +402,26 @@ void BootLoaderScreen::create() {
             loading = 1;
         });
 
+    // Down
+    m_engine.bind_gpio_input_event(21, [&]
+        {
+            entry_curr++;
+            if (entry_curr > entry_count) entry_curr = 0;
+        });
+
+    // Up
+    m_engine.bind_gpio_input_event(22, [&]
+        {
+            if (entry_curr > 0) entry_curr--;
+        });
+
+    // Start
+    m_engine.bind_gpio_input_event(4, [&]
+        {
+            if (!loading)
+                loading = 1;
+        });
+
     // // Prepare filename with directory indicator
     // char full_file_name[300];
     // snprintf(full_file_name, sizeof(full_file_name), "%s%s",
