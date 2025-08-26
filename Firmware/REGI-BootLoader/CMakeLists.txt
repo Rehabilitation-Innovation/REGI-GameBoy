@@ -15,19 +15,17 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
-
 set(sdkVersion 2.2.0)
 set(toolchainVersion 14_2_Rel1)
 set(picotoolVersion 2.2.0)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-
-if(EXISTS ${picoVscode})
+if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
-
 # ====================================================================================
 # set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
 set(PICO_BOARD_HEADER_DIRS ../REGI-TinyEngine/boards/)
+
 set(PICO_BOARD regi_rev1 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)

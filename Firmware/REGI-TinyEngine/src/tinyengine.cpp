@@ -126,16 +126,27 @@ void on_uart_rx()
 }
 
 std::vector<uint8_t>* gpio_input_queue;
+std::unordered_map<uint8_t, uint32_t> gpio_debouce_map;
 static uint32_t gpio_debounce = 0;
 
 void gpio_callback(uint gpio, uint32_t events) {
-    if (!gpio_debounce) {
-        gpio_debounce = time_us_32();
+
+    // if (!gpio_debounce) {
+    //     gpio_debounce = time_us_32();
+    //     return;
+    // }
+    // if ((uint32_t)250000 <= (time_us_32() - gpio_debounce)) {
+    //     gpio_input_queue->emplace_back(gpio);
+    //     gpio_debounce = 0;
+    // }
+
+    if (!gpio_debouce_map[gpio]) {
+        gpio_debouce_map[gpio] = time_us_32();
         return;
     }
-    if ((uint32_t)250000 <= (time_us_32() - gpio_debounce)) {
+    if ((uint32_t)250000 <= (time_us_32() - gpio_debouce_map[gpio])) {
         gpio_input_queue->emplace_back(gpio);
-        gpio_debounce = 0;
+        gpio_debouce_map[gpio] = 0;
     }
 
 }
@@ -215,6 +226,7 @@ void TinyEngine::bind_gpio_input_event(uint8_t _gpio, std::function<void()> _eve
         true, &gpio_callback);
 
     m_gpio_input_events.emplace(_gpio, _event_callback);
+    gpio_debouce_map.emplace(_gpio, 0);
 }
 
 void TinyEngine::bind_serial_input_event(uint8_t _char, std::function<void()> _event_callback)
