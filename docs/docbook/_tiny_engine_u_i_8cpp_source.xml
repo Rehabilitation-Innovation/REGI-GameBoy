@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tiny_engine_u_i_8cpp_source" xml:lang="en-US">
+<title>TinyEngineUI.cpp</title>
+<indexterm><primary>src/TinyEngineUI.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00001"/>00001 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00002"/>00002 <emphasis role="comment">//&#32;Created&#32;by&#32;abina&#32;on&#32;7/18/2025.</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00003"/>00003 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00004"/>00004 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__tiny_engine_u_i_8h">TinyEngineUI.h</link>&quot;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00006"/>00006 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00007"/>00007 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00008"/><link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">00008</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">TinyEngineUI::render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00009"/>00009 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00010"/>00010 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00011"/>00011 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00012"/><link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">00012</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">TinyEngineUI::update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00013"/>00013 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00014"/>00014 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00015"/>00015 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00016"/><link linkend="_class_tiny_engine_u_i_1a787dcbf651a0bd9cc6629708356b5445">00016</link> <link linkend="_class_tiny_engine_u_i_1a787dcbf651a0bd9cc6629708356b5445">TinyEngineUI::~TinyEngineUI</link>()
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00017"/>00017 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00018"/>00018 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00019"/>00019 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00020"/><link linkend="_class_tiny_engine_u_i_text_1ad856c4689873554a1d27d210ce597925">00020</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1ad856c4689873554a1d27d210ce597925">TinyEngineUIText::render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00021"/>00021 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00022"/>00022 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TinyEngineUI::render(_framebuffer);</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00023"/>00023 &#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1affc105087005f183a2c39b2999b691e6">draw_string</link>(<link linkend="_class_tiny_engine_u_i_text_1a13d5ad4aad288cf1aac4aa35e64ad733">m_text</link>.c_str(),&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00024"/>00024 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00025"/>00025 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00026"/><link linkend="_class_tiny_engine_u_i_text_1a894a3cf6ee06f5c1c8d572b9d688108a">00026</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1a894a3cf6ee06f5c1c8d572b9d688108a">TinyEngineUIText::update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00027"/>00027 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">TinyEngineUI::update</link>(frameTime);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00029"/>00029 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00030"/>00030 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00031"/><link linkend="_class_tiny_engine_u_i_text_1a7896434f312ae8b076ff913d56dad996">00031</link> <link linkend="_class_tiny_engine_u_i_text_1a7896434f312ae8b076ff913d56dad996">TinyEngineUIText::~TinyEngineUIText</link>()
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00032"/>00032 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00033"/>00033 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00034"/>00034 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00035"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2795076dc9e802deb255f674278776b5">00035</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2795076dc9e802deb255f674278776b5">TinyEngineUIBlinkingTextBox::render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00036"/>00036 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">TinyEngineUI::render</link>(_framebuffer);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00038"/>00038 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;draw&#32;outline&#32;and&#32;filled&#32;can&#32;be&#32;one&#32;function&#32;called&#32;outline_filled.</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00040"/>00040 &#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1a60735e6091fa6c20638fb995b73193d5">draw_filled_rectangle</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>,&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00041"/>00041 &#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1a362cb5fdd287fbc4a95f04d593fa10e6">draw_outline_rectangle</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>,&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00042"/>00042 &#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1affc105087005f183a2c39b2999b691e6">draw_string</link>(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>.c_str(),
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>&#32;+&#32;(<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>&#32;/&#32;2)&#32;-&#32;(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>.length()&#32;/&#32;2&#32;*&#32;7),
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;get&#32;the&#32;half&#32;of&#32;the&#32;text.&#32;maybe&#32;make&#32;this&#32;cached&#32;value&#32;to&#32;make&#32;it&#32;more&#32;efficent.</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>&#32;+&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>&#32;/&#32;2&#32;-&#32;(8&#32;/&#32;2),&#32;<emphasis role="comment">//&#32;the&#32;8&#32;is&#32;fixed&#32;here&#32;since&#32;the&#32;chars&#32;are&#32;8&#32;bits&#32;tall.</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00047"/>00047 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00048"/>00048 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00049"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a390c428161e594f7e06aaecdae83cb5f">00049</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a390c428161e594f7e06aaecdae83cb5f">TinyEngineUIBlinkingTextBox::update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00050"/>00050 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">TinyEngineUI::update</link>(frameTime);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4ce7c8ecc3916abc1b5b21855ab82232">m_local_time</link>&#32;+=&#32;frameTime&#32;*&#32;10;
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4ce7c8ecc3916abc1b5b21855ab82232">m_local_time</link>&#32;&gt;=&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00054"/>00054 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4ce7c8ecc3916abc1b5b21855ab82232">m_local_time</link>&#32;=&#32;0;
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;std::swap(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>,&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00057"/>00057 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00058"/>00058 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00059"/>00059 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00060"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a0adae16927dd029ead020fe84fd0fa7c">00060</link> <link linkend="_class_tiny_engine_u_i_blinking_text_box_1a0adae16927dd029ead020fe84fd0fa7c">TinyEngineUIBlinkingTextBox::~TinyEngineUIBlinkingTextBox</link>()
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00061"/>00061 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00062"/>00062 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00063"/>00063 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00064"/><link linkend="_class_tiny_engine_u_i_text_box_1ab1068f0b54dea4bbf10d29c6c59f84fc">00064</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1ab1068f0b54dea4bbf10d29c6c59f84fc">TinyEngineUITextBox::render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00065"/>00065 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00066"/>00066 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">TinyEngineUI::render</link>(_framebuffer);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00067"/>00067 &#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1a362cb5fdd287fbc4a95f04d593fa10e6">draw_outline_rectangle</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>,&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00068"/>00068 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keyword">auto</emphasis>&#32;text&#32;:&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a43d5474262531f0b4937a623dafb2d66">m_texts</link>)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00070"/>00070 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_framebuffer.<link linkend="_class_tiny_engine_frame_buffer_1affc105087005f183a2c39b2999b691e6">draw_string</link>(text.second.get_text().c_str(),&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>&#32;+&#32;text.second.get_m_x(),
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>&#32;+&#32;text.second.get_m_y(),
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;text.second.get_m_color());
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00075"/>00075 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00076"/>00076 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00077"/><link linkend="_class_tiny_engine_u_i_text_box_1ae71f116c12369cdd955e801e41da86f5">00077</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1ae71f116c12369cdd955e801e41da86f5">TinyEngineUITextBox::update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00078"/>00078 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00079"/>00079 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">TinyEngineUI::update</link>(frameTime);
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00080"/>00080 }
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00081"/>00081 
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00082"/><link linkend="_class_tiny_engine_u_i_text_box_1a6b105d7543a54b097e1289fc223f8e74">00082</link> <link linkend="_class_tiny_engine_u_i_text_box_1a6b105d7543a54b097e1289fc223f8e74">TinyEngineUITextBox::~TinyEngineUITextBox</link>()
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00083"/>00083 {
+<anchor xml:id="__tiny_engine_u_i_8cpp_source_1l00084"/>00084 }
+</programlisting></section>

@@ -1,0 +1,186 @@
+\doxysection{tinyengine.\+h}
+\hypertarget{tinyengine_8h_source}{}\label{tinyengine_8h_source}\index{inc/tinyengine.h@{inc/tinyengine.h}}
+\mbox{\hyperlink{tinyengine_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}hardware/spi.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__scene_8h}{tinyengine\_scene.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}hardware/pll.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}hardware/vreg.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}hardware/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/pll.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}hardware/dma.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}hardware/gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}hardware/irq.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/bus\_ctrl.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/hstx\_ctrl.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/hstx\_fifo.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/sio.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}pico/multicore.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}pico/sem.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00023}\mbox{\hyperlink{tinyengine_8h_af09ded747d8574dde114e97c025ddc44}{00023}}\ \textcolor{preprocessor}{\#define\ CUTE\_C2\_IMPLEMENTATION}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00026}00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00027}00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00028}00028\ \textcolor{keyword}{class\ }TinyEngineScene;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00029}00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sprite}{Sprite}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00031}\mbox{\hyperlink{tinyengine_8h_abdeb08b95394f8152bb146fd9a9139c4}{00031}}\ \textcolor{preprocessor}{\#define\ telog(M,\ ...)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00032}00032\ \textcolor{preprocessor}{\ \ printf("{}[Tiny\ Engine\ Log]\ (\%s:\%d)"{}\ M\ "{}\(\backslash\)r\(\backslash\)n"{},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00034}\mbox{\hyperlink{tinyengine_8h_a38fde61de8aaed11e78da474addd0755}{00034}}\ \textcolor{preprocessor}{\#define\ teerr(M,\ ...)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00035}00035\ \textcolor{preprocessor}{\ \ printf("{}[Tiny\ Engine\ ERROR]\ (\%s:\%d)"{}\ M\ "{}\(\backslash\)r\(\backslash\)n"{},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00038}00038\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tinyengine_8h_a141e0e4cfccde883fde46e6908a6cf9e}{set\_frequency}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00040}\mbox{\hyperlink{structvec2}{00040}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00042}\mbox{\hyperlink{structvec2_a4650ad5518661324664b4dc6815bd054}{00042}}\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structvec2_a4650ad5518661324664b4dc6815bd054}{x}},\ \mbox{\hyperlink{structvec2_a75a994707129e6a5ad41ae3f174f4c38}{y}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00043}00043\ \}\ \mbox{\hyperlink{structvec2}{vec2}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00045}\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{00045}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00046}\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{00046}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}},}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00047}\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744}{00047}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744}{TINYENGINE\_ERROR}},}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00048}\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944}{00048}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944}{TINYENGINE\_RENDER\_ERROR}},}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00049}\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{00049}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\_OUTOFBOUNDS\_ERROR}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00050}00050\ \}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00052}00052\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00054}\mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{00054}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00055}\mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2}{00055}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2}{TINYENGINE\_RENDERER\_DVI}},}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00056}00056\ \ \ \ \ \textcolor{comment}{//\ TINYENGINE\_RENDERER\_LCD\_ST7735R,\ \ //\ 1.8\ in\ adafruit\ green\ tab\ with\ sdcard}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ TINYENGINE\_RENDERER\_LCD\_ILI9488,\ \ //\ 3.5\ in\ waveshare\ dev\ kit\ with\ sdcard}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00058}00058\ \}\ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{tinyengine\_renderer\_t}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00060}\mbox{\hyperlink{tinyengine_8h_a76b533bee9971abbcb979aa618d83a38}{00060}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(*\mbox{\hyperlink{tinyengine_8h_a76b533bee9971abbcb979aa618d83a38}{tinyengine\_init\_clbk\_t}})();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00063}\mbox{\hyperlink{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3}{00063}}\ \textcolor{keyword}{typedef}\ void(*\mbox{\hyperlink{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3}{te\_draw\_pixel\_func\_t}})(uint8\_t*\ pixel\_buffer,\ uint32\_t\ len);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00065}\mbox{\hyperlink{structtinyengine__renderer__handle__t}{00065}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00066}\mbox{\hyperlink{structtinyengine__renderer__handle__t_a40a93049250181d4c0f08ec3c59dc69c}{00066}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{tinyengine\_renderer\_t}}\ \mbox{\hyperlink{structtinyengine__renderer__handle__t_a40a93049250181d4c0f08ec3c59dc69c}{current\_output\_renderer}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00067}\mbox{\hyperlink{structtinyengine__renderer__handle__t_a6a574a7d4335e623fb3e3a8f95906ec6}{00067}}\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3}{te\_draw\_pixel\_func\_t}}\ \mbox{\hyperlink{structtinyengine__renderer__handle__t_a6a574a7d4335e623fb3e3a8f95906ec6}{set\_buffer}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00068}00068\ \}\ \mbox{\hyperlink{structtinyengine__renderer__handle__t}{tinyengine\_renderer\_handle\_t}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00070}00070\ \textcolor{comment}{//\ The\ reason\ this\ is\ a\ uint8\_t*\ in\ the\ paramenter\ is\ that\ its\ defined\ before\ the\ engine\ handle}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00071}00071\ \textcolor{comment}{//\ but\ it\ needs\ access\ to\ it.\ So\ to\ give\ it\ access\ i\ give\ it\ a\ uint8\_t*\ instead\ of\ struct*}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00072}\mbox{\hyperlink{tinyengine_8h_af40e0caed873f0d43c9aa17f9305097c}{00072}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(*\mbox{\hyperlink{tinyengine_8h_af40e0caed873f0d43c9aa17f9305097c}{tinyengine\_clbk\_t}})(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00074}\mbox{\hyperlink{class_tiny_engine_renderer_i}{00074}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00075}00075\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00076}\mbox{\hyperlink{class_tiny_engine_renderer_i_a2469b0b227cbc4ff8a27f292f929d0d3}{00076}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_i_a2469b0b227cbc4ff8a27f292f929d0d3}{swap\_blocking}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00077}\mbox{\hyperlink{class_tiny_engine_renderer_i_ab1c8fd0d87f133a519e26ae071765e9f}{00077}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_i_ab1c8fd0d87f133a519e26ae071765e9f}{swap\_non\_blocking}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00078}\mbox{\hyperlink{class_tiny_engine_renderer_i_a053505877ab12f6651964aaff7b4c75d}{00078}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_i_a053505877ab12f6651964aaff7b4c75d}{wait\_for\_vsync}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00079}\mbox{\hyperlink{class_tiny_engine_renderer_i_ab61c14e1610265da86010a83142674bd}{00079}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_i_ab61c14e1610265da86010a83142674bd}{tinyengine\_renderer\_init}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00080}00080\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00082}\mbox{\hyperlink{class_tiny_engine}{00082}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b}{TinyEngine}}\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00083}00083\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00084}00084\ \ \ \ \ spi\_inst\_t*\ lcd\_spi\_instance;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00085}00085\ \ \ \ \ uint8\_t\ lcd\_spi\_clk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00086}00086\ \ \ \ \ uint8\_t\ lcd\_spi\_miso;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00087}00087\ \ \ \ \ uint8\_t\ lcd\_spi\_mosi;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00088}00088\ \ \ \ \ uint8\_t\ lcd\_spi\_dc;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00089}00089\ \ \ \ \ uint8\_t\ lcd\_spi\_rst;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00090}00090\ \ \ \ \ uint8\_t\ lcd\_spi\_cs;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00091}00091\ \ \ \ \ uint8\_t\ lcd\_spi\_bklt;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00092}00092\ \ \ \ \ uint32\_t\ lcd\_spi\_speed;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00094}00094\ \ \ \ \ uint32\_t\ display\_w;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00095}00095\ \ \ \ \ uint32\_t\ display\_h;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00096}00096\ \ \ \ \ uint16\_t\ fps;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//\ std::vector<SceneI\&>\ scenes;\ //\ add\ suport\ for\ multiple\ scenes\ and\ switching\ between\ them}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00098}00098\ \ \ \ \ std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ pre\_init\_clbk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00100}00100\ \ \ \ \ std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ post\_init\_clbk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00101}00101\ \ \ \ \ std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ loop\_clbk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00102}00102\ \ \ \ \ std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ render\_clbk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00103}00103\ \ \ \ \ std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{double})>\ update\_clbk;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00104}00104\ \ \ \ \ \textcolor{comment}{//\ std::function<tinyengine\_status\_t(void)>\ input\_clbk;}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00105}00105\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_inputs();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00107}00107\ \ \ \ \ std::unordered\_map<uint8\_t,\ std::function<void()>>\ m\_gpio\_input\_events;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00108}00108\ \ \ \ \ std::unordered\_map<uint8\_t,\ std::function<void()>>\ m\_serial\_input\_events;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00109}00109\ \ \ \ \ std::vector<uint8\_t>\ m\_gpio\_input\_buffer;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00110}00110\ \ \ \ \ std::vector<uint8\_t>\ m\_serial\_input\_buffer;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00112}00112\ \ \ \ \ uint32\_t\ profile\_main\_loop\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00113}00113\ \ \ \ \ uint32\_t\ profile\_render\_loop\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00114}00114\ \ \ \ \ uint32\_t\ profile\_update\_loop\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00116}00116\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00117}\mbox{\hyperlink{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}{00117}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\&\ \mbox{\hyperlink{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}{renderer}};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00119}\mbox{\hyperlink{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b}{00119}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b}{TinyEngine}}(\mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\&\ rn)\ :\ \mbox{\hyperlink{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}{renderer}}(rn)\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00120}00120\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00122}\mbox{\hyperlink{class_tiny_engine_a3997a691027f02426800ce367fe633eb}{00122}}\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_tiny_engine_a3997a691027f02426800ce367fe633eb}{get\_fps}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00123}00123\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fps;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00125}00125\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00127}\mbox{\hyperlink{class_tiny_engine_a1f5d7e193cfe88674c7daeab050ed30c}{00127}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a1f5d7e193cfe88674c7daeab050ed30c}{set\_pre\_inti\_clbk}}(std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ \_pre\_init\_clbk)\ \{\ pre\_init\_clbk\ =\ \_pre\_init\_clbk;\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00128}\mbox{\hyperlink{class_tiny_engine_a2812e80e57c615c077c609b33dd97763}{00128}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a2812e80e57c615c077c609b33dd97763}{set\_post\_init\_clbk}}(std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ \_post\_init\_clbk)\ \{\ post\_init\_clbk\ =\ \_post\_init\_clbk;\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00129}\mbox{\hyperlink{class_tiny_engine_a02f63945d1cf474d461cd2a0998a3dfe}{00129}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a02f63945d1cf474d461cd2a0998a3dfe}{set\_loop\_clbk}}(std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ \_loop\_clbk)\ \{\ loop\_clbk\ =\ \_loop\_clbk;\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00130}\mbox{\hyperlink{class_tiny_engine_aaaedc7751f006ab31a66d23fab7261a3}{00130}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_aaaedc7751f006ab31a66d23fab7261a3}{set\_render\_clbk}}(std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{void})>\ \_render\_clbk)\ \{\ render\_clbk\ =\ \_render\_clbk;\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00131}\mbox{\hyperlink{class_tiny_engine_a494a9966c7d70a6dc5f8c871e3a1b09b}{00131}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a494a9966c7d70a6dc5f8c871e3a1b09b}{set\_update\_clbk}}(std::function<\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}(\textcolor{keywordtype}{double})>\ \_update\_clbk)\ \{\ update\_clbk\ =\ \_update\_clbk;\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00133}00133\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_a088cee984149455d5ae7aa308b23e506}{init}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00134}00134\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_a46a3a85a38bad4a41aaebb97f39b1456}{start}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00135}00135\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_a30d77a4f317c491bd8ebcf8d5e3852a3}{start\_loop}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00137}00137\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}}(\textcolor{keywordtype}{double}\ frametime);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00138}00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a11efed818cc74d5a830351df55744c9d}{update}}(\textcolor{keywordtype}{double}\ frametime);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00139}\mbox{\hyperlink{class_tiny_engine_ad7c433a810d3174a71a6fffcf4dba43f}{00139}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_ad7c433a810d3174a71a6fffcf4dba43f}{set\_scene}}(\mbox{\hyperlink{class_scene_i}{SceneI}}\&\ scene)\ \{\};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00141}00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a3a7db87bb4dbdc93b7bd831080207724}{bind\_gpio\_input\_event}}(uint8\_t\ \_gpio,\ std::function<\textcolor{keywordtype}{void}()>\ \_event\_callback);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00142}00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_a2094c36e13792cfde7dc90dc4637a2e7}{bind\_serial\_input\_event}}(uint8\_t\ \_char,\ std::function<\textcolor{keywordtype}{void}()>\ \_event\_callback);}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00144}\mbox{\hyperlink{class_tiny_engine_ac099f1be0c6e6ab04fe1b83898abad6e}{00144}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_tiny_engine_ac099f1be0c6e6ab04fe1b83898abad6e}{get\_profile\_main\_loop\_time}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_main\_loop\_time;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00148}\mbox{\hyperlink{class_tiny_engine_ad32e684c1f406b7fb9fba9b62549f76b}{00148}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_tiny_engine_ad32e684c1f406b7fb9fba9b62549f76b}{get\_profile\_render\_loop\_time}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_render\_loop\_time;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00152}\mbox{\hyperlink{class_tiny_engine_a3cb6d4d80ab0dbfc4a7378433d5ac850}{00152}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_tiny_engine_a3cb6d4d80ab0dbfc4a7378433d5ac850}{get\_profile\_update\_loop\_time}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_update\_loop\_time;}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00155}00155\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00157}\mbox{\hyperlink{tinyengine_8h_ab370040868943afd827cc4ce9d917242}{00157}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_BLUE\ \ 0x001F\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00158}\mbox{\hyperlink{tinyengine_8h_a2705ad9106922e638b43eb2bbf6ed8c4}{00158}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_RED\ \ 0xF800\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00159}\mbox{\hyperlink{tinyengine_8h_ae5c7c054055dc1d875a746b2606bdbac}{00159}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_GREEN\ \ 0x07E0\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00160}\mbox{\hyperlink{tinyengine_8h_a2051e8efc82d2958d05ab90a5eb138da}{00160}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_CYAN\ \ 0x07FF\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00161}\mbox{\hyperlink{tinyengine_8h_a68e43f2e4742f8526e59782457ea1c74}{00161}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_MAGENTA\ \ 0xF81F\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00162}\mbox{\hyperlink{tinyengine_8h_a6d4a160624bfb3f6f0a83787620cf912}{00162}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_YELLOW\ \ 0xFFE0\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00163}\mbox{\hyperlink{tinyengine_8h_a2be840f8f294d0a16018cb88c1cabb81}{00163}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_WHITE\ \ 0xFFFF\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00164}\mbox{\hyperlink{tinyengine_8h_a84244353ff413bf0752033faa8acf29d}{00164}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_TAN\ \ 0xED01\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00165}\mbox{\hyperlink{tinyengine_8h_ac0c0b32ed3d1d91e6f267e928e0d3660}{00165}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_GREY\ \ 0x9CD1\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00166}\mbox{\hyperlink{tinyengine_8h_a26f0b7ac0ea5e303c4e564a32599c53a}{00166}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_BROWN\ \ 0x6201\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00167}\mbox{\hyperlink{tinyengine_8h_ad41de79c985b48c62cdadbe19f8f27d4}{00167}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_DGREEN\ \ 0x01C0\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00168}\mbox{\hyperlink{tinyengine_8h_a1d95e97d9a1e82a66c7373b9cf745b08}{00168}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_ORANGE\ \ 0xFC00\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00169}\mbox{\hyperlink{tinyengine_8h_ade4675c86e06c0a997dc769f799ebf38}{00169}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_NAVY\ \ 0x000F\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00170}\mbox{\hyperlink{tinyengine_8h_ab11bb2f6e08ece2f89dc098d6e8c764f}{00170}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_DCYAN\ \ 0x03EF\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00171}\mbox{\hyperlink{tinyengine_8h_a8a8678b610892e342b813cb858ca8052}{00171}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_MAROON\ \ 0x7800\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00172}\mbox{\hyperlink{tinyengine_8h_aa36f08934c3b68f9df11d5b2aa2f405b}{00172}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_PURPLE\ \ 0x780F\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00173}\mbox{\hyperlink{tinyengine_8h_aa7f90910d1ed9db3fea93435031d1a6e}{00173}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_OLIVE\ \ 0x7BE0\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00174}\mbox{\hyperlink{tinyengine_8h_a30a3ab8acea6fff9e999949d841d81d8}{00174}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_LGREY\ \ 0xC618\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00175}\mbox{\hyperlink{tinyengine_8h_afd5404fa19a3f6a2a58cb2a32f6a1ff6}{00175}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_DGREY\ \ 0x7BEF\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00176}\mbox{\hyperlink{tinyengine_8h_a1f0100008e14391e317a43ff72310013}{00176}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_GYELLOW\ \ 0xAFE5\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00177}\mbox{\hyperlink{tinyengine_8h_a2d8c832e3867bbb0a9da62e452916552}{00177}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_PINK\ \ 0xFC18\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00178}\mbox{\hyperlink{tinyengine_8h_ae64d08f0e83482bd340af3026f96dfbc}{00178}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_LBLUE\ \ 0x7E5F\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00179}\mbox{\hyperlink{tinyengine_8h_a59d5594fe685d6af5d9e7b84df48c21f}{00179}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_BLACK\ \ 0x0000\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{tinyengine_8h_source_l00180}\mbox{\hyperlink{tinyengine_8h_a829fe390136dd6a8d694d3cb79239a1d}{00180}}\ \textcolor{preprocessor}{\#define\ TE\_COLOR\_BEIGE\ \ 0xB5D2\ \ }\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

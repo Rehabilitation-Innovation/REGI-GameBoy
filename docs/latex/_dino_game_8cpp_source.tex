@@ -1,0 +1,522 @@
+\doxysection{Dino\+Game.\+cpp}
+\hypertarget{_dino_game_8cpp_source}{}\label{_dino_game_8cpp_source}\index{src/scenes/DinoGame.cpp@{src/scenes/DinoGame.cpp}}
+\mbox{\hyperlink{_dino_game_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ abina\ on\ 7/16/2025.}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_dino_game_8h}{DinoGame.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <format>}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}hardware/gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ \ "{}pico/rand.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_snake_game_8h}{SnakeGame.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cute__c2_8h}{cute\_c2.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <malloc.h>}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cactus__sprite_8h}{cactus\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dino__running_8h}{dino\_running.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dino__sprite_8h}{dino\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_tiny_engine_u_i_8h}{TinyEngineUI.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}hardware/dma.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}hardware/interp.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}hardware/pio.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}hardware/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ws2812_8pio_8h}{ws2812.pio.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}hardware/adc.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#include\ "{}hardware/dma.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}pico/time.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00035}00035\ \textcolor{comment}{//\ \#include\ "{}pico\_tone.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}hardware/watchdog.h"{}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00038}\mbox{\hyperlink{_dino_game_8cpp_a493b9b7cc0c4de9e5d832a5b9c8fe0f0}{00038}}\ \textcolor{preprocessor}{\#define\ IS\_RGBW\ true}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00039}\mbox{\hyperlink{_dino_game_8cpp_a893011783fefc21f30baf08142cd3c35}{00039}}\ \textcolor{preprocessor}{\#define\ NUM\_PIXELS\ 4}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00041}00041\ \textcolor{preprocessor}{\#ifdef\ PICO\_DEFAULT\_WS2812\_PIN}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00042}00042\ \textcolor{preprocessor}{\#define\ WS2812\_PIN\ PICO\_DEFAULT\_WS2812\_PIN}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00043}00043\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00044}00044\ \textcolor{comment}{//\ default\ to\ pin\ 2\ if\ the\ board\ doesn't\ have\ a\ default\ WS2812\ pin\ defined}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00045}\mbox{\hyperlink{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3}{00045}}\ \textcolor{preprocessor}{\#define\ WS2812\_PIN\ 6}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00046}00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00048}00048\ \textcolor{comment}{//\ Check\ the\ pin\ is\ compatible\ with\ the\ platform}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00049}00049\ \textcolor{preprocessor}{\#if\ WS2812\_PIN\ >=\ NUM\_BANK0\_GPIOS}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00050}00050\ \textcolor{preprocessor}{\#error\ Attempting\ to\ use\ a\ pin>=32\ on\ a\ platform\ that\ does\ not\ support\ it}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00051}00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00053}00053\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ put\_pixel(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint32\_t\ pixel\_grb)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00055}00055\ \ \ \ \ pio\_sm\_put\_blocking(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ pixel\_grb\ <<\ 8u);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00058}00058\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ urgb\_u32(uint8\_t\ r,\ uint8\_t\ g,\ uint8\_t\ b)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ ((uint32\_t)(r)\ <<\ 8)\ |}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ ((uint32\_t)(g)\ <<\ 16)\ |}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ (uint32\_t)(b);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00066}00066\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ urgbw\_u32(uint8\_t\ r,\ uint8\_t\ g,\ uint8\_t\ b,\ uint8\_t\ w)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00067}00067\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ ((uint32\_t)(r)\ <<\ 8)\ |}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ ((uint32\_t)(g)\ <<\ 16)\ |}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ ((uint32\_t)(w)\ <<\ 24)\ |}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ (uint32\_t)(b);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00075}\mbox{\hyperlink{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}{00075}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}{pattern\_snakes}}(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint\ len,\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00076}00076\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ uint\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ (i\ +\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ >>\ 1))\ \%\ 64;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 10)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0xff,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ 15\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 25)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0,\ 0xff,\ 0));}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ 30\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 40)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0,\ 0,\ 0xff));}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00091}\mbox{\hyperlink{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}{00091}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}{pattern\_random}}(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint\ len,\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00092}00092\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%\ 8)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgbw\_u32(rand()\ /\ 100000,\ rand()\ /\ 100000,\ rand()\ /\ 100000,\ rand()\ /\ 100000));}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00099}\mbox{\hyperlink{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}{00099}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}{pattern\_sparkle}}(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint\ len,\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00100}00100\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%\ 8)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ rand()\ \%\ 16\ ?\ 0\ :\ 0xffffffff);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00107}\mbox{\hyperlink{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}{00107}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}{pattern\_greys}}(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint\ len,\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00108}00108\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00109}00109\ \ \ \ \ uint\ max\ =\ 100;\ \textcolor{comment}{//\ let's\ not\ draw\ too\ much\ current!}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00110}00110\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%=\ max;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00112}00112\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ *\ 0x10101);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (++\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ >=\ max)\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00116}00116\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00118}\mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{00118}}\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{pattern}})(PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint\ len,\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00120}00120\ \textcolor{keyword}{const}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00121}00121\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00122}\mbox{\hyperlink{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede}{00122}}\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{pattern}}\ \mbox{\hyperlink{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede}{pat}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00123}\mbox{\hyperlink{_dino_game_8cpp_a8f8f80d37794cde9472343e4487ba3eb}{00123}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{_dino_game_8cpp_a8f8f80d37794cde9472343e4487ba3eb}{name}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00124}00124\ \}\ \mbox{\hyperlink{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}{pattern\_table}}[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00125}00125\ \ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}{pattern\_snakes}},\ \textcolor{stringliteral}{"{}Snakes!"{}}\},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00126}00126\ \ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}{pattern\_random}},\ \textcolor{stringliteral}{"{}Random\ data"{}}\},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00127}00127\ \ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}{pattern\_sparkle}},\ \textcolor{stringliteral}{"{}Sparkles"{}}\},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00128}00128\ \ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}{pattern\_greys}},\ \textcolor{stringliteral}{"{}Greys"{}}\},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00129}\mbox{\hyperlink{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}{00129}}\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00131}00131\ \textcolor{comment}{//\ Global\ variables\ for\ jump\ height\ and\ game\ speed}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00132}\mbox{\hyperlink{_dino_game_8cpp_a64dd4fbaafe16e055e36cc3a0b3da6ba}{00132}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a3d52b88a55e8e61a6f4a2e99b61469e9}{jumpHeight}}\ =\ 50,\ \mbox{\hyperlink{_dino_game_8cpp_a64dd4fbaafe16e055e36cc3a0b3da6ba}{gameSpeed}}\ =\ 40;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00133}\mbox{\hyperlink{_dino_game_8cpp_a17538519ca141179ae5cee37717e7843}{00133}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a17538519ca141179ae5cee37717e7843}{jump}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00134}\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{00134}}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ 150;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00135}\mbox{\hyperlink{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f}{00135}}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}}\ =\ 0.0f,\ \mbox{\hyperlink{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f}{gravity}}\ =\ 0.5f;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00137}\mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{00137}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}}\ =\ \textcolor{keyword}{true},\ \mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00138}\mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{00138}}\ std::string\ \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\_text}}\ =\ \textcolor{stringliteral}{"{}PRESS\ JUMP\ TO\ START"{}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00139}\mbox{\hyperlink{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}{00139}}\ \mbox{\hyperlink{class_tiny_engine_u_i_blinking_text_box}{TinyEngineUIBlinkingTextBox}}\ \mbox{\hyperlink{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}{banner}}(160\ -\/\ (20\ +\ \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\_text}}.length()\ *\ 7)\ /\ 2,\ 200,\ 20\ +\ \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\_text}}.length()\ *\ 7,\ 20,\ 0,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00140}00140\ \ \ \ \ 15,\ \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\_text}},\ 5);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00142}\mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{00142}}\ uint16\_t\ \mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{jump\_counter}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_aff930da8859a062c15e30210acb11837}{miss}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00149}\mbox{\hyperlink{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}{00149}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text}{TinyEngineUIText}}\ \mbox{\hyperlink{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}{score}}(5,\ 5,\ \textcolor{stringliteral}{"{}Score:\ "{}},\ 15);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00150}\mbox{\hyperlink{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}{00150}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text}{TinyEngineUIText}}\ \mbox{\hyperlink{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}{time\_}}(5,\ 30,\ \textcolor{stringliteral}{"{}Time:\ "{}},\ 15);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00151}\mbox{\hyperlink{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}{00151}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text}{TinyEngineUIText}}\ \mbox{\hyperlink{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}{jumps}}(90,\ 5,\ \textcolor{stringliteral}{"{}Jumps:\ "{}},\ 15);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00152}\mbox{\hyperlink{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}{00152}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text}{TinyEngineUIText}}\ \mbox{\hyperlink{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}{missed\_jumps}}(90,\ 30,\ \textcolor{stringliteral}{"{}Missed\ Jumps:\ "{}},\ 15);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00154}\mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{00154}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text_box}{TinyEngineUITextBox}}\ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}(70,\ 180,\ 210,\ 50,\ 45);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00156}\mbox{\hyperlink{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00}{00156}}\ \mbox{\hyperlink{class_tiny_engine_u_i_text}{TinyEngineUIText}}\ \mbox{\hyperlink{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00}{input}}(0,\ 20,\ \textcolor{stringliteral}{"{}Input:\ "{}},\ 15);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00158}\mbox{\hyperlink{class_dino_game_aa28aa7f6869e9da56220b03800f3159a}{00158}}\ \mbox{\hyperlink{class_dino_game_aa28aa7f6869e9da56220b03800f3159a}{DinoGame::\string~DinoGame}}()}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00159}00159\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00162}\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{00162}}\ \mbox{\hyperlink{class_sprite}{Sprite}}\ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}},\ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00163}\mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{00163}}\ \mbox{\hyperlink{structc2_a_a_b_b}{c2AABB}}\ \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}},\ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00165}\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{00165}}\ PIO\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00166}\mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{00166}}\ uint\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00167}\mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{00167}}\ uint\ \mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{offsetpio}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00168}00168\ \textcolor{comment}{//\ Tone\ myPlayer(10,\ 50,\ 0,\ 20,\ 0,\ 20,\ 0,\ 10);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00169}00169\ \textcolor{comment}{//\ int\ melody[]\ =\ \{\ NOTE\_C4,\ 4,\ NOTE\_G3,\ 8,\ NOTE\_G3,\ 8,\ NOTE\_A3,\ 4,\ NOTE\_G3,\ 4,\ 0,\ 4,\ NOTE\_B3,\ 4,\ NOTE\_C4,\ 4\ \};}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00171}\mbox{\hyperlink{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}{00171}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}{play\_tone}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00173}\mbox{\hyperlink{class_dino_game_ae1d9e6cae7937318b7b0d39bc4b70990}{00173}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dino_game_ae1d9e6cae7937318b7b0d39bc4b70990}{DinoGame::create}}()}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00174}00174\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00175}00175\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Init\ Machine\ \&\ dma\ channel!\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00176}00176\ \ \ \ \ \textcolor{comment}{//\ int\ res\ =\ myPlayer.init(TONE\_NON\_BLOCKING,\ true);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00177}00177\ \ \ \ \ \textcolor{comment}{//\ printf("{}Result\ of\ initializing\ tone\ =\ 0x\%X\(\backslash\)n"{},\ res);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00178}00178\ \ \ \ \ adc\_init();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00180}00180\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ GPIO\ is\ high-\/impedance,\ no\ pullups\ etc}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00181}00181\ \ \ \ \ adc\_gpio\_init(44);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00182}00182\ \ \ \ \ \textcolor{comment}{//\ Select\ ADC\ input\ 0\ (GPIO26)}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00183}00183\ \ \ \ \ adc\_select\_input(4);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00186}00186\ \ \ \ \ \textcolor{comment}{//\ todo\ get\ free\ sm}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00189}00189\ \ \ \ \ \textcolor{comment}{//\ This\ will\ find\ a\ free\ pio\ and\ state\ machine\ for\ our\ program\ and\ load\ it\ for\ us}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{comment}{//\ We\ use\ pio\_claim\_free\_sm\_and\_add\_program\_for\_gpio\_range\ (for\_gpio\_range\ variant)}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00191}00191\ \ \ \ \ \textcolor{comment}{//\ so\ we\ will\ get\ a\ PIO\ instance\ suitable\ for\ addressing\ gpios\ >=\ 32\ if\ needed\ and\ supported\ by\ the\ hardware}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00192}00192\ \ \ \ \ \textcolor{keywordtype}{bool}\ success\ =\ pio\_claim\_free\_sm\_and\_add\_program\_for\_gpio\_range(\&ws2812\_program,\ \&\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \&\mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \&\mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{offsetpio}},\ \mbox{\hyperlink{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3}{WS2812\_PIN}},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ 1,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00195}00195\ \ \ \ \ hard\_assert(success);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00197}00197\ \ \ \ \ ws2812\_program\_init(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{offsetpio}},\ \mbox{\hyperlink{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3}{WS2812\_PIN}},\ 1000000,\ \mbox{\hyperlink{_dino_game_8cpp_a493b9b7cc0c4de9e5d832a5b9c8fe0f0}{IS\_RGBW}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{comment}{//\ while\ (1)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ int\ pat\ =\ rand()\ \%\ count\_of(pattern\_table);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00202}00202\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ int\ dir\ =\ (rand()\ >>\ 30)\ \&\ 1\ ?\ 1\ :\ -\/1;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ puts(pattern\_table[pat].name);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00204}00204\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ puts(dir\ ==\ 1\ ?\ "{}(forward)"{}\ :\ "{}(backward)"{});}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ 1000;\ ++i)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ pattern\_table[pat].pat(pio,\ sm,\ NUM\_PIXELS,\ t);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00207}00207\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ sleep\_ms(10);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ t\ +=\ dir;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00210}00210\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00212}00212\ \ \ \ \ \textcolor{comment}{//\ This\ will\ free\ resources\ and\ unload\ our\ program}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00213}00213\ \ \ \ \ pio\_remove\_program\_and\_unclaim\_sm(\&ws2812\_program,\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{offsetpio}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00215}00215\ \ \ \ \ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{GameScene::create}}();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00216}00216\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}.add\_text(\textcolor{stringliteral}{"{}s"{}},\ \mbox{\hyperlink{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}{score}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00217}00217\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}.add\_text(\textcolor{stringliteral}{"{}j"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}{jumps}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00218}00218\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}.add\_text(\textcolor{stringliteral}{"{}t"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}{time\_}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00219}00219\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}.add\_text(\textcolor{stringliteral}{"{}mj"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}{missed\_jumps}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00220}00220\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}\ =\ \mbox{\hyperlink{class_sprite}{Sprite}}(}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ dino\_data,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ .width\ =\ 24,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ .height\ =\ 24,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structte__sprite__animation__t}{te\_sprite\_animation\_t}}\{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ .sprite\_animation\_frames\ =\ dino\_frames,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ .animation\_delay\ =\ 5,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ .total\_frames\ =\ 11,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ .current\_frame\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ .start\_frame\ =\ 3,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ .end\_frame\ =\ 8}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00235}00235\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_animated(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_x(100);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00237}00237\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_y(150);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00238}00238\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}}.min\ =\ \{\ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_x(),\ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00239}00239\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}}.max\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_x()\ +\ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_sprite\_data()-\/>width,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ +\ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_sprite\_data()-\/>height}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00242}00242\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00243}00243\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}\ =\ \mbox{\hyperlink{class_sprite}{Sprite}}(}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ cactus\_data,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ .width\ =\ cactus\_width,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ .height\ =\ cactus\_height,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00250}00250\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.set\_m\_x(240);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00251}00251\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.set\_m\_y(150);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00252}00252\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}}.min\ =\ \{\ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x(),\ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_y()\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00253}00253\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}}.max\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x()\ +\ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_sprite\_data()-\/>width,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_y()\ +\ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_sprite\_data()-\/>height}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00256}00256\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00257}00257\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'w'},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ memset(m\_framebuffer.pixel\_buffer\_back,\ 0,\ m\_framebuffer.m\_pixel\_buffer\_size);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.swap\_blocking();}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{true}\ ==\ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{jump\_counter}}++;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}}\ =\ -\/10;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}{play\_tone}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ myPlayer.tone(15000,0.25);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ int\ pat\ =\ rand()\ \%\ count\_of(pattern\_table);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ int\ dir\ =\ (rand()\ >>\ 30)\ \&\ 1\ ?\ 1\ :\ -\/1;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ puts(pattern\_table[pat].name);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ puts(dir\ ==\ 1\ ?\ "{}(forward)"{}\ :\ "{}(backward)"{});}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ for\ (int\ i\ =\ 0;\ i\ <\ 1000;\ ++i)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ pattern\_table[pat].pat(pio,\ sm,\ NUM\_PIXELS,\ t);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ sleep\_ms(10);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ t\ +=\ dir;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0xff,\ 0,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0xff,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0,\ 0xff));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00288}00288\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00289}00289\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00290}00290\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'x'},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00296}00296\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00297}00297\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'r'},}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ watchdog\_reboot(0,\ 0,\ 10);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ gameStarted\ =\ false;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00304}00304\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00306}00306\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_gpio\_input\_event(2,\ [\&]\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ memset(m\_framebuffer.pixel\_buffer\_back,\ 0,\ m\_framebuffer.m\_pixel\_buffer\_size);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.swap\_blocking();}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00312}00312\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{true}\ ==\ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{jump\_counter}}++;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}}\ =\ -\/10;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}{play\_tone}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ myPlayer.tone(15000,0.25);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ int\ pat\ =\ rand()\ \%\ count\_of(pattern\_table);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ int\ dir\ =\ (rand()\ >>\ 30)\ \&\ 1\ ?\ 1\ :\ -\/1;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ puts(pattern\_table[pat].name);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ puts(dir\ ==\ 1\ ?\ "{}(forward)"{}\ :\ "{}(backward)"{});}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ for\ (int\ i\ =\ 0;\ i\ <\ 1000;\ ++i)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ pattern\_table[pat].pat(pio,\ sm,\ NUM\_PIXELS,\ t);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ sleep\_ms(10);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ t\ +=\ dir;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0xff,\ 0,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0xff,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0,\ 0xff));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00336}00336\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.clear(0);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00337}00337\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.swap\_blocking();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00338}00338\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.clear(0);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00339}00339\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00341}00341\ \textcolor{comment}{//\ char\ fps\_frame\_buf[8\ *\ 9\ *\ 10]\ =\ \{\ 0\ \};}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00343}00343\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ blit\_rect\_dma(uint8\_t*\ framebuffer)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00344}00344\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00345}00345\ \ \ \ \ \textcolor{comment}{//\ int\ dma\_chan\ =\ dma\_claim\_unused\_channel(true);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00346}00346\ \ \ \ \ \textcolor{comment}{//\ dma\_channel\_config\ cfg\ =\ dma\_channel\_get\_default\_config(dma\_chan);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{comment}{//\ channel\_config\_set\_transfer\_data\_size(\&cfg,\ DMA\_SIZE\_8);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00348}00348\ \ \ \ \ \textcolor{comment}{//\ channel\_config\_set\_read\_increment(\&cfg,\ true);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00349}00349\ \ \ \ \ \textcolor{comment}{//\ channel\_config\_set\_write\_increment(\&cfg,\ true);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00351}00351\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ interpolator\ to\ compute\ row\ base\ addresses}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00352}00352\ \ \ \ \ interp\_config\ icfg\ =\ interp\_default\_config();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00353}00353\ \ \ \ \ interp\_config\_set\_add\_raw(\&icfg,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00354}00354\ \ \ \ \ interp\_config\_set\_shift(\&icfg,\ 0);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00355}00355\ \ \ \ \ interp\_config\_set\_mask(\&icfg,\ 0,\ 31);\ \textcolor{comment}{//\ full\ 32-\/bit\ mask}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00356}00356\ \ \ \ \ interp\_set\_config(interp0,\ 0,\ \&icfg);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00359}00359\ \ \ \ \ \textcolor{keywordtype}{int}\ src\_index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00361}00361\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 100;\ row++)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00362}00362\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ row\_start\_index\ =\ (50\ +\ row)\ *\ 320\ +\ 50;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00365}00365\ \ \ \ \ \ \ \ \ interp0-\/>base[0]\ =\ row\_start\_index;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00366}00366\ \ \ \ \ \ \ \ \ interp0-\/>accum[0]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 100;\ col++)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ uint32\_t\ framebuffer\_index\ =\ interp\_pop\_full\_result(interp0,\ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%d\(\backslash\)r\(\backslash\)n"{}},\ interp\_pop\_full\_result(interp0));}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ framebuffer[interp0-\/>pop[0]]\ =\ 15;\ //source\_region[src\_index++];}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ interp0-\/>accum[0]\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00375}00375\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00376}00376\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00379}\mbox{\hyperlink{class_dino_game_abbbe0d7eb69274e8118e24baebd0c43f}{00379}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dino_game_abbbe0d7eb69274e8118e24baebd0c43f}{DinoGame::render}}()}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00380}00380\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00381}00381\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.clear(0);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00382}00382\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(0,\ 0,\ 100,\ 30,\ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00383}00383\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(0,\ 120,\ 320,\ 240-\/120,\ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00384}00384\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_grid(10,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00385}00385\ \ \ \ \ \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{GameScene::render}}();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00386}00386\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(dinoSprite.get\_m\_x(),\ dinoSprite.get\_m\_y(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00387}00387\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dinoSprite.get\_m\_sprite\_data()-\/>width,\ dinoSprite.get\_m\_sprite\_data()-\/>height,}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00388}00388\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00389}00389\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_sprite(\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00390}00390\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(cactusSprite.get\_m\_x(),\ cactusSprite.get\_m\_y(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00391}00391\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cactusSprite.get\_m\_sprite\_data()-\/>width,}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00392}00392\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cactusSprite.get\_m\_sprite\_data()-\/>height,}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00393}00393\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00394}00394\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_sprite(\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00395}00395\ \ \ \ \ \textcolor{comment}{//\ input.render(m\_framebuffer);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00396}00396\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00397}00397\ \ \ \ \ \textcolor{comment}{//\ //\ sprintf(detail,\ "{}vely:\ \%f"{},\ vely);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00398}00398\ \ \ \ \ \textcolor{comment}{//\ //\ m\_framebuffer.draw\_string(detail,\ 5,\ 70,\ 130);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00399}00399\ \ \ \ \ \textcolor{comment}{//\ //}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00400}00400\ \ \ \ \ \textcolor{comment}{//\ //\ sprintf(detail,\ "{}Jump\ Input:\ \%d"{},\ jump);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00401}00401\ \ \ \ \ \textcolor{comment}{//\ //\ m\_framebuffer.draw\_string(detail,\ 5,\ 80,\ 140);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00402}00402\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00403}00403\ \ \ \ \ \textcolor{comment}{//\ blit\_rect\_dma(m\_framebuffer.pixel\_buffer\_back);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00404}00404\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(50,\ 50,\ 100,\ 100,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00405}00405\ \ \ \ \ \textcolor{comment}{//\ //\ score.render(m\_framebuffer);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00406}00406\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(scoreboard.get\_m\_x(),\ scoreboard.get\_m\_y(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00407}00407\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scoreboard.get\_m\_width(),\ scoreboard.get\_m\_height(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00408}00408\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00409}00409\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}}.render(\mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00410}00410\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00411}00411\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_filled\_rectangle(banner.get\_m\_x(),\ banner.get\_m\_y(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00413}00413\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ banner.get\_m\_width(),\ banner.get\_m\_height(),}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00415}00415\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}{banner}}.render(\mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00416}00416\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00417}00417\ \ \ \ \ \textcolor{comment}{//\ m\_renderer.wait\_for\_vsync();}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00418}00418\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.swap\_blocking();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00419}00419\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00421}\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{00421}}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}}[255]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00422}\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{00422}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00423}\mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{00423}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{alreadyHit}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00425}\mbox{\hyperlink{class_dino_game_ac19a132cf8cef2a477b518df8a3b3db8}{00425}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dino_game_ac19a132cf8cef2a477b518df8a3b3db8}{DinoGame::update}}(\textcolor{keywordtype}{double}\ frameTime)\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00426}00426\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{GameScene::update}}(frameTime);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00427}00427\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_frametime(\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_frametime()\ +\ frameTime\ *\ 100);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00428}00428\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}}\ +=\ \mbox{\hyperlink{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f}{gravity}};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00430}00430\ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0xff\ -\/\ vely,\ 0,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00431}00431\ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0xff\ -\/\ vely,\ 0));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00432}00432\ \ \ \ \ \textcolor{comment}{//\ put\_pixel(pio,\ sm,\ urgb\_u32(0,\ 0,\ 0xff\ -\/\ vely));}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00434}00434\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_y(\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ +\ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00436}00436\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}}.min\ =\ \{\ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_x(),\ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00437}00437\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}}.max\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00438}00438\ \ \ \ \ \ \ \ \ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_x()\ +\ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_sprite\_data()-\/>width,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00439}00439\ \ \ \ \ \ \ \ \ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ +\ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_sprite\_data()-\/>height}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00440}00440\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00442}00442\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{gameStarted}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00443}00443\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.set\_m\_x(\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x()\ -\/\ frameTime\ *\ 100);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00445}00445\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}}.min\ =\ \{\ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x(),\ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_y()\ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00446}00446\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}}.max\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00447}00447\ \ \ \ \ \ \ \ \ .x\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x()\ +\ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_sprite\_data()-\/>width,}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00448}00448\ \ \ \ \ \ \ \ \ .y\ =\ (float)\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_y()\ +\ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_sprite\_data()-\/>height}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00449}00449\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00451}00451\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.get\_m\_x()\ <\ 10)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00452}00452\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00453}00453\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{alreadyHit}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00454}00454\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactusSprite}}.set\_m\_x(310);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00455}00455\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00456}00456\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{cute__c2_8h_ac2ffe6c3fb0b4a2865ab3d4fd966bc57}{c2AABBtoAABB}}(\mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dinoBox}},\ \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactusBox}})\ \&\&\ !\mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{alreadyHit}})}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00457}00457\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00458}00458\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{alreadyHit}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00459}00459\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_aff930da8859a062c15e30210acb11837}{miss}}++;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00460}00460\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00462}00462\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.get\_m\_y()\ >\ 150)}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00463}00463\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00464}00464\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{onGround}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00465}00465\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dinoSprite}}.set\_m\_y(150);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}}\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00467}00467\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00469}00469\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ +=\ frameTime;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00470}00470\ \ \ \ \ sprintf(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}},\ \textcolor{stringliteral}{"{}Score:\%.2f"{}},\ frameTime);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00471}00471\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}{score}}.set\_text(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00472}00472\ \ \ \ \ sprintf(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}},\ \textcolor{stringliteral}{"{}Jumps:\%d"{}},\ \mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{jump\_counter}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00473}00473\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}{jumps}}.set\_text(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00474}00474\ \ \ \ \ sprintf(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}},\ \textcolor{stringliteral}{"{}Time:\%1.0fs"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00475}00475\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}{time\_}}.set\_text(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00476}00476\ \ \ \ \ sprintf(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}},\ \textcolor{stringliteral}{"{}Missed\ Jumps:\%d"{}},\ \mbox{\hyperlink{_dino_game_8cpp_aff930da8859a062c15e30210acb11837}{miss}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00477}00477\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}{missed\_jumps}}.set\_text(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00479}00479\ \ \ \ \ \textcolor{comment}{//\ 12-\/bit\ conversion,\ assume\ max\ value\ ==\ ADC\_VREF\ ==\ 3.3\ V}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00480}00480\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ conversion\_factor\ =\ 3.3f\ /\ (1\ <<\ 12);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00481}00481\ \ \ \ \ uint16\_t\ result\ =\ adc\_read();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00482}00482\ \ \ \ \ \textcolor{comment}{//\ printf("{}Raw\ value:\ 0x\%03x,\ voltage:\ \%f\ V\(\backslash\)n"{},\ result,\ result\ *\ conversion\_factor);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00483}00483\ \ \ \ \ \textcolor{comment}{//\ sleep\_ms(500);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00484}00484\ \ \ \ \ sprintf(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}},\ \textcolor{stringliteral}{"{}Input:\ \%f"{}},\ result\ *\ conversion\_factor);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00485}00485\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00}{input}}.set\_text(\mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00486}00486\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}{banner}}.update(frameTime);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00488}00488\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ tone\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00490}00490\ \ \ \ \ \textcolor{comment}{//\ if\ (play\_tone\ \&\&\ tone\_time\ <=\ 10)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00491}00491\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ myPlayer.play\_melody(100,\ 3,\ new\ int[]\{NOTE\_A1,\ NOTE\_D1,\ NOTE\_A2\});}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00492}00492\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ myPlayer.tone(10000\ +\ frameTime\ *\ 100,\ 0.01);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00493}00493\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ tone\_time\ +=\ frameTime\ *\ 100;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00494}00494\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00495}00495\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00496}00496\ \ \ \ \ \textcolor{comment}{//\ if\ (tone\_time\ >\ 10)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00497}00497\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ tone\_time\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00498}00498\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ play\_tone\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00499}00499\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00501}00501\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede}{pat}}\ =\ rand()\ \%\ count\_of(\mbox{\hyperlink{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}{pattern\_table}});}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00502}00502\ \ \ \ \ \textcolor{keywordtype}{int}\ dir\ =\ (rand()\ >>\ 30)\ \&\ 1\ ?\ 1\ :\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00503}00503\ \ \ \ \ \textcolor{comment}{//\ puts(pattern\_table[pat].name);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00504}00504\ \ \ \ \ \textcolor{comment}{//\ puts(dir\ ==\ 1\ ?\ "{}(forward)"{}\ :\ "{}(backward)"{});}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00505}00505\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ 1000;\ ++i)\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00506}00506\ \ \ \ \ \textcolor{comment}{//\ static\ double\ rgb\_time\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00507}00507\ \ \ \ \ \textcolor{comment}{//\ //\ rgb\_time\ +=\ frameTime\ ;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00508}00508\ \ \ \ \ \textcolor{comment}{//\ if\ (rgb\_time\ >\ 1)}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00509}00509\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00510}00510\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}{pattern\_table}}[1].pat(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \mbox{\hyperlink{_dino_game_8cpp_a893011783fefc21f30baf08142cd3c35}{NUM\_PIXELS}},\ frameTime);}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00511}00511\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ rgb\_time\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00512}00512\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00513}00513\ \ \ \ \ \textcolor{comment}{//\ rgb\_time\ +=\ frameTime\ *\ 10;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00514}00514\ \ \ \ \ \textcolor{comment}{//\ sleep\_ms(10);}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00515}00515\ \ \ \ \ \textcolor{comment}{//\ t\ +=\ dir;}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00516}00516\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00517}00517\ \}}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00519}\mbox{\hyperlink{class_dino_game_afdfa24b50b4b98cca5ea1271bccf3c0d}{00519}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dino_game_afdfa24b50b4b98cca5ea1271bccf3c0d}{DinoGame::destroy}}()}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00520}00520\ \{}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00521}00521\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{GameScene::destroy}}();}
+\DoxyCodeLine{\Hypertarget{_dino_game_8cpp_source_l00522}00522\ \}}
+
+\end{DoxyCode}

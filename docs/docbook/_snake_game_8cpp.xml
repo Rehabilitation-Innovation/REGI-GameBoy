@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__snake_game_8cpp" xml:lang="en-US">
+<title>src/scenes/SnakeGame.cpp File Reference</title>
+<indexterm><primary>src/scenes/SnakeGame.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;cstdlib&gt;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;dino_running.h&quot;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;cactus.h&quot;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;SnakeGame.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="__snake_game_8cpp_1a874b952818d2197dd45b84e1f65f8b39">HEIGHT_SNAKE</link>&#160;&#160;&#160;240 - 1</para>
+</listitem>
+            <listitem><para>#define <link linkend="__snake_game_8cpp_1a3860afceb5fa79682a69fb8a4f101af0">WIDTH_SNAKE</link>&#160;&#160;&#160;320 - 1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1ae170759b728a81554c554cc328bb4911">snakeTailx_snake</link> [100]</para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1af7d39550ddd119a00436dfc0b308561a">snakeTaily_snake</link> [100]</para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a0c988e922b2bb3514a84d3a32d9769a9">snakeTailLen</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a78254252ef207b26bd5cbc668592fcee">gameover</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a4d3f43ca8bef050d60a7cc2cb94a184c">key_snake</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a8b980ec9e641de5222f057bb256c05c8">score_snake</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a9bf0425c6db61552a179ae9de2012251">x_snake</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1af6812ead07acd232d20f063781b13e1c">y_snake</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a3f18df933da679951146eeb824fd715a">fruitx_snake</link></para>
+</listitem>
+            <listitem><para>int <link linkend="__snake_game_8cpp_1a71cf12e315d2fecc02e043822bf09edf">fruity_snake</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="__snake_game_8cpp_1a874b952818d2197dd45b84e1f65f8b39"/><section>
+    <title>HEIGHT_SNAKE</title>
+<indexterm><primary>HEIGHT_SNAKE</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>HEIGHT_SNAKE</secondary></indexterm>
+<para><computeroutput>#define HEIGHT_SNAKE&#160;&#160;&#160;240 - 1</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00022">22</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a3860afceb5fa79682a69fb8a4f101af0"/><section>
+    <title>WIDTH_SNAKE</title>
+<indexterm><primary>WIDTH_SNAKE</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>WIDTH_SNAKE</secondary></indexterm>
+<para><computeroutput>#define WIDTH_SNAKE&#160;&#160;&#160;320 - 1</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00023">23</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="__snake_game_8cpp_1a3f18df933da679951146eeb824fd715a"/><section>
+    <title>fruitx_snake</title>
+<indexterm><primary>fruitx_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>fruitx_snake</secondary></indexterm>
+<para><computeroutput>int fruitx_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00037">37</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a71cf12e315d2fecc02e043822bf09edf"/><section>
+    <title>fruity_snake</title>
+<indexterm><primary>fruity_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>fruity_snake</secondary></indexterm>
+<para><computeroutput>int fruity_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00037">37</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a78254252ef207b26bd5cbc668592fcee"/><section>
+    <title>gameover</title>
+<indexterm><primary>gameover</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>gameover</secondary></indexterm>
+<para><computeroutput>int gameover</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00034">34</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a4d3f43ca8bef050d60a7cc2cb94a184c"/><section>
+    <title>key_snake</title>
+<indexterm><primary>key_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>key_snake</secondary></indexterm>
+<para><computeroutput>int key_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00034">34</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a8b980ec9e641de5222f057bb256c05c8"/><section>
+    <title>score_snake</title>
+<indexterm><primary>score_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>score_snake</secondary></indexterm>
+<para><computeroutput>int score_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00034">34</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a0c988e922b2bb3514a84d3a32d9769a9"/><section>
+    <title>snakeTailLen</title>
+<indexterm><primary>snakeTailLen</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>snakeTailLen</secondary></indexterm>
+<para><computeroutput>int snakeTailLen</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00031">31</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1ae170759b728a81554c554cc328bb4911"/><section>
+    <title>snakeTailx_snake</title>
+<indexterm><primary>snakeTailx_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>snakeTailx_snake</secondary></indexterm>
+<para><computeroutput>int snakeTailx_snake[100]</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00027">27</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1af7d39550ddd119a00436dfc0b308561a"/><section>
+    <title>snakeTaily_snake</title>
+<indexterm><primary>snakeTaily_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>snakeTaily_snake</secondary></indexterm>
+<para><computeroutput>int snakeTaily_snake[100]</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00027">27</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1a9bf0425c6db61552a179ae9de2012251"/><section>
+    <title>x_snake</title>
+<indexterm><primary>x_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>x_snake</secondary></indexterm>
+<para><computeroutput>int x_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00037">37</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+<anchor xml:id="__snake_game_8cpp_1af6812ead07acd232d20f063781b13e1c"/><section>
+    <title>y_snake</title>
+<indexterm><primary>y_snake</primary><secondary>SnakeGame.cpp</secondary></indexterm>
+<indexterm><primary>SnakeGame.cpp</primary><secondary>y_snake</secondary></indexterm>
+<para><computeroutput>int y_snake</computeroutput></para><para>
+Definition at line <link linkend="__snake_game_8cpp_source_1l00037">37</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
+</section>
+</section>
+</section>

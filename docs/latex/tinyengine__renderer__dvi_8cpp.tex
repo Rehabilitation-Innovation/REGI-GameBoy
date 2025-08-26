@@ -1,0 +1,486 @@
+\doxysection{src/tinyengine\+\_\+renderer\+\_\+dvi.cpp File Reference}
+\hypertarget{tinyengine__renderer__dvi_8cpp}{}\label{tinyengine__renderer__dvi_8cpp}\index{src/tinyengine\_renderer\_dvi.cpp@{src/tinyengine\_renderer\_dvi.cpp}}
+{\ttfamily \#include "{}tinyengine\+\_\+renderer\+\_\+dvi.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}memory.\+h"{}}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/dma.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/irq.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/bus\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+fifo.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/sio.\+h"{}}\newline
+{\ttfamily \#include "{}pico/multicore.\+h"{}}\newline
+{\ttfamily \#include "{}pico/sem.\+h"{}}\newline
+{\ttfamily \#include "{}pico/rand.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/vreg.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a7661ace794f2e28a1f301afab4c09738}{AURORA\+\_\+1\+X\+\_\+\+HEIGHT}}~1
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa803953a3961c5ba3eebbb1ee7770108}{AURORA\+\_\+1\+X\+\_\+\+WIDTH}}~256
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a8893119a4dc31b3e7feb7394975dc77c}{MODE\+\_\+\+H\+\_\+\+SYNC\+\_\+\+POLARITY}}~0
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}{MODE\+\_\+\+H\+\_\+\+FRONT\+\_\+\+PORCH}}~16
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}{MODE\+\_\+\+H\+\_\+\+SYNC\+\_\+\+WIDTH}}~96
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}{MODE\+\_\+\+H\+\_\+\+BACK\+\_\+\+PORCH}}~48
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}{MODE\+\_\+\+H\+\_\+\+ACTIVE\+\_\+\+PIXELS}}~640
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a105a38aad5ee400e8be07492b10cbb35}{MODE\+\_\+\+V\+\_\+\+SYNC\+\_\+\+POLARITY}}~0
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb}{MODE\+\_\+\+V\+\_\+\+FRONT\+\_\+\+PORCH}}~10
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a12e2ff5f3949e456139ab32153e276df}{MODE\+\_\+\+V\+\_\+\+SYNC\+\_\+\+WIDTH}}~2
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ae572b39c10ef4635a552fe095e0ad34e}{MODE\+\_\+\+V\+\_\+\+BACK\+\_\+\+PORCH}}~33
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a989ecfb618e13a471b7ad44cd9fda4fa}{MODE\+\_\+\+V\+\_\+\+ACTIVE\+\_\+\+LINES}}~480
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}}~0x354u
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a711c4e935d516d1f2213ce95ed3bc889}{TMDS\+\_\+\+CTRL\+\_\+01}}~0x0abu
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ab806647a2f46991faf12977f7b0a2980}{TMDS\+\_\+\+CTRL\+\_\+10}}~0x154u
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a904e89dc34346d7e5e98d3c58fc287a1}{TMDS\+\_\+\+CTRL\+\_\+11}}~0x2abu
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}}~0x307u
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aead23ec580b3e6424a2e0ce6be4e68c9}{TMDS\+\_\+\+BALANCED\+\_\+\+HIGH}}~0x2f0u
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}}~0x100u
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}}~0x1ffu
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a29db1628b45eab271991fc2da1ad01f5}{SYNC\+\_\+\+V0\+\_\+\+H0}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a34106096aae9fd6a6f8b50dde105dfeb}{SYNC\+\_\+\+V0\+\_\+\+H1}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a711c4e935d516d1f2213ce95ed3bc889}{TMDS\+\_\+\+CTRL\+\_\+01}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a83aa3de8e439e8c44fcd2d38bad7cd13}{SYNC\+\_\+\+V1\+\_\+\+H0}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ab806647a2f46991faf12977f7b0a2980}{TMDS\+\_\+\+CTRL\+\_\+10}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a33a88cfa260db3be502f5c95166e2a69}{SYNC\+\_\+\+V1\+\_\+\+H1}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a904e89dc34346d7e5e98d3c58fc287a1}{TMDS\+\_\+\+CTRL\+\_\+11}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a5a7d5f58641084dc650bcb8fc233e801}{MISSING\+\_\+\+PIXEL}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aead23ec580b3e6424a2e0ce6be4e68c9}{TMDS\+\_\+\+BALANCED\+\_\+\+HIGH}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa90b1bdc4d73c942cfb5aee6d1c83126}{BLACK\+\_\+\+PIXEL}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a913af424772ce9588089baaa25636cb7}{BLACK\+\_\+\+PIXEL\+\_\+A}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a776d675d2834015b9105fe6162d091bc}{BLACK\+\_\+\+PIXEL\+\_\+B}}~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} $<$$<$ 20))
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a1fd346b7041e8d751bd064377d27b104}{HSTX\+\_\+\+CMD\+\_\+\+RAW}}~(0x0u $<$$<$ 12)
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ab63aaecebc10430d900ecf81bc52bea9}{HSTX\+\_\+\+CMD\+\_\+\+RAW\+\_\+\+REPEAT}}~(0x1u $<$$<$ 12)
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a902ad164c5aaca226be47c57f56f4d39}{HSTX\+\_\+\+CMD\+\_\+\+TMDS}}~(0x2u $<$$<$ 12)
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_af62b4d170e8c2bba8400f54cb867d912}{HSTX\+\_\+\+CMD\+\_\+\+TMDS\+\_\+\+REPEAT}}~(0x3u $<$$<$ 12)
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a6da1c71fa3777274ad1a653387baeed0}{HSTX\+\_\+\+CMD\+\_\+\+NOP}}~(0xfu $<$$<$ 12)
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a36d53674f5dca77ee608b3d648c4409a}{DMACH\+\_\+\+PING}}~0
+\item 
+\#define \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a1c7cd79ccb99d7097a8a30ba57fddd12}{DMACH\+\_\+\+PONG}}~1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a7627854ab85aa985225468f2556d2221}{\+\_\+\+\_\+scratch\+\_\+x}} ("{}display"{}) dma\+\_\+irq\+\_\+handler()
+\item 
+void \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4bfff3f1d70f74509484b34c8461003b}{scroll\+\_\+framebuffer}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tinyengine__renderer__dvi_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a7661ace794f2e28a1f301afab4c09738}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!AURORA\_1X\_HEIGHT@{AURORA\_1X\_HEIGHT}}
+\index{AURORA\_1X\_HEIGHT@{AURORA\_1X\_HEIGHT}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{AURORA\_1X\_HEIGHT}{AURORA\_1X\_HEIGHT}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a7661ace794f2e28a1f301afab4c09738} 
+\#define AURORA\+\_\+1\+X\+\_\+\+HEIGHT~1}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aa803953a3961c5ba3eebbb1ee7770108}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!AURORA\_1X\_WIDTH@{AURORA\_1X\_WIDTH}}
+\index{AURORA\_1X\_WIDTH@{AURORA\_1X\_WIDTH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{AURORA\_1X\_WIDTH}{AURORA\_1X\_WIDTH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aa803953a3961c5ba3eebbb1ee7770108} 
+\#define AURORA\+\_\+1\+X\+\_\+\+WIDTH~256}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aa90b1bdc4d73c942cfb5aee6d1c83126}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!BLACK\_PIXEL@{BLACK\_PIXEL}}
+\index{BLACK\_PIXEL@{BLACK\_PIXEL}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{BLACK\_PIXEL}{BLACK\_PIXEL}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aa90b1bdc4d73c942cfb5aee6d1c83126} 
+\#define BLACK\+\_\+\+PIXEL~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00326}{326}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a913af424772ce9588089baaa25636cb7}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!BLACK\_PIXEL\_A@{BLACK\_PIXEL\_A}}
+\index{BLACK\_PIXEL\_A@{BLACK\_PIXEL\_A}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{BLACK\_PIXEL\_A}{BLACK\_PIXEL\_A}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a913af424772ce9588089baaa25636cb7} 
+\#define BLACK\+\_\+\+PIXEL\+\_\+A~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}{TMDS\+\_\+\+BLACK\+\_\+A}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00327}{327}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a776d675d2834015b9105fe6162d091bc}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!BLACK\_PIXEL\_B@{BLACK\_PIXEL\_B}}
+\index{BLACK\_PIXEL\_B@{BLACK\_PIXEL\_B}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{BLACK\_PIXEL\_B}{BLACK\_PIXEL\_B}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a776d675d2834015b9105fe6162d091bc} 
+\#define BLACK\+\_\+\+PIXEL\+\_\+B~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}{TMDS\+\_\+\+BLACK\+\_\+B}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00328}{328}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a36d53674f5dca77ee608b3d648c4409a}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!DMACH\_PING@{DMACH\_PING}}
+\index{DMACH\_PING@{DMACH\_PING}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{DMACH\_PING}{DMACH\_PING}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a36d53674f5dca77ee608b3d648c4409a} 
+\#define DMACH\+\_\+\+PING~0}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00401}{401}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a1c7cd79ccb99d7097a8a30ba57fddd12}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!DMACH\_PONG@{DMACH\_PONG}}
+\index{DMACH\_PONG@{DMACH\_PONG}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{DMACH\_PONG}{DMACH\_PONG}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a1c7cd79ccb99d7097a8a30ba57fddd12} 
+\#define DMACH\+\_\+\+PONG~1}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00402}{402}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a6da1c71fa3777274ad1a653387baeed0}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!HSTX\_CMD\_NOP@{HSTX\_CMD\_NOP}}
+\index{HSTX\_CMD\_NOP@{HSTX\_CMD\_NOP}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{HSTX\_CMD\_NOP}{HSTX\_CMD\_NOP}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a6da1c71fa3777274ad1a653387baeed0} 
+\#define HSTX\+\_\+\+CMD\+\_\+\+NOP~(0xfu $<$$<$ 12)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00334}{334}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a1fd346b7041e8d751bd064377d27b104}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!HSTX\_CMD\_RAW@{HSTX\_CMD\_RAW}}
+\index{HSTX\_CMD\_RAW@{HSTX\_CMD\_RAW}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{HSTX\_CMD\_RAW}{HSTX\_CMD\_RAW}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a1fd346b7041e8d751bd064377d27b104} 
+\#define HSTX\+\_\+\+CMD\+\_\+\+RAW~(0x0u $<$$<$ 12)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00330}{330}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_ab63aaecebc10430d900ecf81bc52bea9}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!HSTX\_CMD\_RAW\_REPEAT@{HSTX\_CMD\_RAW\_REPEAT}}
+\index{HSTX\_CMD\_RAW\_REPEAT@{HSTX\_CMD\_RAW\_REPEAT}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{HSTX\_CMD\_RAW\_REPEAT}{HSTX\_CMD\_RAW\_REPEAT}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_ab63aaecebc10430d900ecf81bc52bea9} 
+\#define HSTX\+\_\+\+CMD\+\_\+\+RAW\+\_\+\+REPEAT~(0x1u $<$$<$ 12)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00331}{331}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a902ad164c5aaca226be47c57f56f4d39}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!HSTX\_CMD\_TMDS@{HSTX\_CMD\_TMDS}}
+\index{HSTX\_CMD\_TMDS@{HSTX\_CMD\_TMDS}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{HSTX\_CMD\_TMDS}{HSTX\_CMD\_TMDS}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a902ad164c5aaca226be47c57f56f4d39} 
+\#define HSTX\+\_\+\+CMD\+\_\+\+TMDS~(0x2u $<$$<$ 12)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00332}{332}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_af62b4d170e8c2bba8400f54cb867d912}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!HSTX\_CMD\_TMDS\_REPEAT@{HSTX\_CMD\_TMDS\_REPEAT}}
+\index{HSTX\_CMD\_TMDS\_REPEAT@{HSTX\_CMD\_TMDS\_REPEAT}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{HSTX\_CMD\_TMDS\_REPEAT}{HSTX\_CMD\_TMDS\_REPEAT}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_af62b4d170e8c2bba8400f54cb867d912} 
+\#define HSTX\+\_\+\+CMD\+\_\+\+TMDS\+\_\+\+REPEAT~(0x3u $<$$<$ 12)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00333}{333}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a5a7d5f58641084dc650bcb8fc233e801}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MISSING\_PIXEL@{MISSING\_PIXEL}}
+\index{MISSING\_PIXEL@{MISSING\_PIXEL}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MISSING\_PIXEL}{MISSING\_PIXEL}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a5a7d5f58641084dc650bcb8fc233e801} 
+\#define MISSING\+\_\+\+PIXEL~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}{TMDS\+\_\+\+BALANCED\+\_\+\+LOW}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aead23ec580b3e6424a2e0ce6be4e68c9}{TMDS\+\_\+\+BALANCED\+\_\+\+HIGH}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00325}{325}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_H\_ACTIVE\_PIXELS@{MODE\_H\_ACTIVE\_PIXELS}}
+\index{MODE\_H\_ACTIVE\_PIXELS@{MODE\_H\_ACTIVE\_PIXELS}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_H\_ACTIVE\_PIXELS}{MODE\_H\_ACTIVE\_PIXELS}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6} 
+\#define MODE\+\_\+\+H\+\_\+\+ACTIVE\+\_\+\+PIXELS~640}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00290}{290}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_H\_BACK\_PORCH@{MODE\_H\_BACK\_PORCH}}
+\index{MODE\_H\_BACK\_PORCH@{MODE\_H\_BACK\_PORCH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_H\_BACK\_PORCH}{MODE\_H\_BACK\_PORCH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302} 
+\#define MODE\+\_\+\+H\+\_\+\+BACK\+\_\+\+PORCH~48}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00289}{289}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_H\_FRONT\_PORCH@{MODE\_H\_FRONT\_PORCH}}
+\index{MODE\_H\_FRONT\_PORCH@{MODE\_H\_FRONT\_PORCH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_H\_FRONT\_PORCH}{MODE\_H\_FRONT\_PORCH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d} 
+\#define MODE\+\_\+\+H\+\_\+\+FRONT\+\_\+\+PORCH~16}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00287}{287}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a8893119a4dc31b3e7feb7394975dc77c}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_H\_SYNC\_POLARITY@{MODE\_H\_SYNC\_POLARITY}}
+\index{MODE\_H\_SYNC\_POLARITY@{MODE\_H\_SYNC\_POLARITY}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_H\_SYNC\_POLARITY}{MODE\_H\_SYNC\_POLARITY}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a8893119a4dc31b3e7feb7394975dc77c} 
+\#define MODE\+\_\+\+H\+\_\+\+SYNC\+\_\+\+POLARITY~0}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00286}{286}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_H\_SYNC\_WIDTH@{MODE\_H\_SYNC\_WIDTH}}
+\index{MODE\_H\_SYNC\_WIDTH@{MODE\_H\_SYNC\_WIDTH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_H\_SYNC\_WIDTH}{MODE\_H\_SYNC\_WIDTH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0} 
+\#define MODE\+\_\+\+H\+\_\+\+SYNC\+\_\+\+WIDTH~96}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00288}{288}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a989ecfb618e13a471b7ad44cd9fda4fa}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_V\_ACTIVE\_LINES@{MODE\_V\_ACTIVE\_LINES}}
+\index{MODE\_V\_ACTIVE\_LINES@{MODE\_V\_ACTIVE\_LINES}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_V\_ACTIVE\_LINES}{MODE\_V\_ACTIVE\_LINES}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a989ecfb618e13a471b7ad44cd9fda4fa} 
+\#define MODE\+\_\+\+V\+\_\+\+ACTIVE\+\_\+\+LINES~480}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00296}{296}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_ae572b39c10ef4635a552fe095e0ad34e}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_V\_BACK\_PORCH@{MODE\_V\_BACK\_PORCH}}
+\index{MODE\_V\_BACK\_PORCH@{MODE\_V\_BACK\_PORCH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_V\_BACK\_PORCH}{MODE\_V\_BACK\_PORCH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_ae572b39c10ef4635a552fe095e0ad34e} 
+\#define MODE\+\_\+\+V\+\_\+\+BACK\+\_\+\+PORCH~33}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00295}{295}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_V\_FRONT\_PORCH@{MODE\_V\_FRONT\_PORCH}}
+\index{MODE\_V\_FRONT\_PORCH@{MODE\_V\_FRONT\_PORCH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_V\_FRONT\_PORCH}{MODE\_V\_FRONT\_PORCH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb} 
+\#define MODE\+\_\+\+V\+\_\+\+FRONT\+\_\+\+PORCH~10}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00293}{293}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a105a38aad5ee400e8be07492b10cbb35}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_V\_SYNC\_POLARITY@{MODE\_V\_SYNC\_POLARITY}}
+\index{MODE\_V\_SYNC\_POLARITY@{MODE\_V\_SYNC\_POLARITY}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_V\_SYNC\_POLARITY}{MODE\_V\_SYNC\_POLARITY}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a105a38aad5ee400e8be07492b10cbb35} 
+\#define MODE\+\_\+\+V\+\_\+\+SYNC\+\_\+\+POLARITY~0}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00292}{292}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a12e2ff5f3949e456139ab32153e276df}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!MODE\_V\_SYNC\_WIDTH@{MODE\_V\_SYNC\_WIDTH}}
+\index{MODE\_V\_SYNC\_WIDTH@{MODE\_V\_SYNC\_WIDTH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{MODE\_V\_SYNC\_WIDTH}{MODE\_V\_SYNC\_WIDTH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a12e2ff5f3949e456139ab32153e276df} 
+\#define MODE\+\_\+\+V\+\_\+\+SYNC\+\_\+\+WIDTH~2}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00294}{294}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a29db1628b45eab271991fc2da1ad01f5}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!SYNC\_V0\_H0@{SYNC\_V0\_H0}}
+\index{SYNC\_V0\_H0@{SYNC\_V0\_H0}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{SYNC\_V0\_H0}{SYNC\_V0\_H0}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a29db1628b45eab271991fc2da1ad01f5} 
+\#define SYNC\+\_\+\+V0\+\_\+\+H0~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00321}{321}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a34106096aae9fd6a6f8b50dde105dfeb}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!SYNC\_V0\_H1@{SYNC\_V0\_H1}}
+\index{SYNC\_V0\_H1@{SYNC\_V0\_H1}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{SYNC\_V0\_H1}{SYNC\_V0\_H1}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a34106096aae9fd6a6f8b50dde105dfeb} 
+\#define SYNC\+\_\+\+V0\+\_\+\+H1~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a711c4e935d516d1f2213ce95ed3bc889}{TMDS\+\_\+\+CTRL\+\_\+01}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00322}{322}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a83aa3de8e439e8c44fcd2d38bad7cd13}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!SYNC\_V1\_H0@{SYNC\_V1\_H0}}
+\index{SYNC\_V1\_H0@{SYNC\_V1\_H0}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{SYNC\_V1\_H0}{SYNC\_V1\_H0}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a83aa3de8e439e8c44fcd2d38bad7cd13} 
+\#define SYNC\+\_\+\+V1\+\_\+\+H0~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ab806647a2f46991faf12977f7b0a2980}{TMDS\+\_\+\+CTRL\+\_\+10}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00323}{323}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a33a88cfa260db3be502f5c95166e2a69}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!SYNC\_V1\_H1@{SYNC\_V1\_H1}}
+\index{SYNC\_V1\_H1@{SYNC\_V1\_H1}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{SYNC\_V1\_H1}{SYNC\_V1\_H1}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a33a88cfa260db3be502f5c95166e2a69} 
+\#define SYNC\+\_\+\+V1\+\_\+\+H1~(\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a904e89dc34346d7e5e98d3c58fc287a1}{TMDS\+\_\+\+CTRL\+\_\+11}} \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 10) \texorpdfstring{$\vert$}{|} (\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}{TMDS\+\_\+\+CTRL\+\_\+00}} $<$$<$ 20))}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00324}{324}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aead23ec580b3e6424a2e0ce6be4e68c9}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_BALANCED\_HIGH@{TMDS\_BALANCED\_HIGH}}
+\index{TMDS\_BALANCED\_HIGH@{TMDS\_BALANCED\_HIGH}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_BALANCED\_HIGH}{TMDS\_BALANCED\_HIGH}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aead23ec580b3e6424a2e0ce6be4e68c9} 
+\#define TMDS\+\_\+\+BALANCED\+\_\+\+HIGH~0x2f0u}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00316}{316}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_BALANCED\_LOW@{TMDS\_BALANCED\_LOW}}
+\index{TMDS\_BALANCED\_LOW@{TMDS\_BALANCED\_LOW}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_BALANCED\_LOW}{TMDS\_BALANCED\_LOW}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aa4672d929a1a1f12aeaf8bea4c425402} 
+\#define TMDS\+\_\+\+BALANCED\+\_\+\+LOW~0x307u}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00315}{315}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_BLACK\_A@{TMDS\_BLACK\_A}}
+\index{TMDS\_BLACK\_A@{TMDS\_BLACK\_A}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_BLACK\_A}{TMDS\_BLACK\_A}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a4b81fdc143eed70d6d44497614a244a4} 
+\#define TMDS\+\_\+\+BLACK\+\_\+A~0x100u}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00318}{318}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_BLACK\_B@{TMDS\_BLACK\_B}}
+\index{TMDS\_BLACK\_B@{TMDS\_BLACK\_B}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_BLACK\_B}{TMDS\_BLACK\_B}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_aaab4962a1a5ac9eda3349b23557e05e9} 
+\#define TMDS\+\_\+\+BLACK\+\_\+B~0x1ffu}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00319}{319}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_CTRL\_00@{TMDS\_CTRL\_00}}
+\index{TMDS\_CTRL\_00@{TMDS\_CTRL\_00}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_CTRL\_00}{TMDS\_CTRL\_00}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_ac3468de2ae47296003215ce508cf10a3} 
+\#define TMDS\+\_\+\+CTRL\+\_\+00~0x354u}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00310}{310}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a711c4e935d516d1f2213ce95ed3bc889}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_CTRL\_01@{TMDS\_CTRL\_01}}
+\index{TMDS\_CTRL\_01@{TMDS\_CTRL\_01}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_CTRL\_01}{TMDS\_CTRL\_01}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a711c4e935d516d1f2213ce95ed3bc889} 
+\#define TMDS\+\_\+\+CTRL\+\_\+01~0x0abu}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00311}{311}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_ab806647a2f46991faf12977f7b0a2980}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_CTRL\_10@{TMDS\_CTRL\_10}}
+\index{TMDS\_CTRL\_10@{TMDS\_CTRL\_10}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_CTRL\_10}{TMDS\_CTRL\_10}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_ab806647a2f46991faf12977f7b0a2980} 
+\#define TMDS\+\_\+\+CTRL\+\_\+10~0x154u}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00312}{312}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a904e89dc34346d7e5e98d3c58fc287a1}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!TMDS\_CTRL\_11@{TMDS\_CTRL\_11}}
+\index{TMDS\_CTRL\_11@{TMDS\_CTRL\_11}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{TMDS\_CTRL\_11}{TMDS\_CTRL\_11}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a904e89dc34346d7e5e98d3c58fc287a1} 
+\#define TMDS\+\_\+\+CTRL\+\_\+11~0x2abu}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00313}{313}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{tinyengine__renderer__dvi_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a7627854ab85aa985225468f2556d2221}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!\_\_scratch\_x@{\_\_scratch\_x}}
+\index{\_\_scratch\_x@{\_\_scratch\_x}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_scratch\_x()}{\_\_scratch\_x()}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a7627854ab85aa985225468f2556d2221} 
+void \+\_\+\+\_\+scratch\+\_\+x (\begin{DoxyParamCaption}\item[{"{}display"{}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00396}{396}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00397\ \{}
+\DoxyCodeLine{00398\ \ \ \ \ display-\/>gfx\_dma\_handler();}
+\DoxyCodeLine{00399\ \}}
+
+\end{DoxyCode}
+\Hypertarget{tinyengine__renderer__dvi_8cpp_a4bfff3f1d70f74509484b34c8461003b}\index{tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}!scroll\_framebuffer@{scroll\_framebuffer}}
+\index{scroll\_framebuffer@{scroll\_framebuffer}!tinyengine\_renderer\_dvi.cpp@{tinyengine\_renderer\_dvi.cpp}}
+\doxysubsubsection{\texorpdfstring{scroll\_framebuffer()}{scroll\_framebuffer()}}
+{\footnotesize\ttfamily \label{tinyengine__renderer__dvi_8cpp_a4bfff3f1d70f74509484b34c8461003b} 
+void scroll\+\_\+framebuffer (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

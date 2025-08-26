@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__scene_8h_source" xml:lang="en-US">
+<title>tinyengine_scene.h</title>
+<indexterm><primary>inc/tinyengine_scene.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__scene_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine__scene_8h_source_1l00002"/>00002 
+<anchor xml:id="_tinyengine__scene_8h_source_1l00003"/><link linkend="_class_scene_i">00003</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_scene_i">SceneI</link>&#32;{
+<anchor xml:id="_tinyengine__scene_8h_source_1l00004"/>00004 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine__scene_8h_source_1l00005"/><link linkend="_class_scene_i_1a9aca690ad096045ae588810c5dbcbd62">00005</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<link linkend="_class_scene_i_1a9aca690ad096045ae588810c5dbcbd62">~SceneI</link>()&#32;=&#32;<emphasis role="keywordflow">default</emphasis>;
+<anchor xml:id="_tinyengine__scene_8h_source_1l00006"/><link linkend="_class_scene_i_1a7f6b05370faed688686525fe2d3706a0">00006</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_scene_i_1a7f6b05370faed688686525fe2d3706a0">create</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine__scene_8h_source_1l00007"/><link linkend="_class_scene_i_1a573a66b660ce2e704f035ea27ac9ccac">00007</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_scene_i_1a573a66b660ce2e704f035ea27ac9ccac">render</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine__scene_8h_source_1l00008"/><link linkend="_class_scene_i_1a917d7c8e713381b6ff20b1878a997100">00008</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_scene_i_1a917d7c8e713381b6ff20b1878a997100">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;=&#32;0;
+<anchor xml:id="_tinyengine__scene_8h_source_1l00009"/><link linkend="_class_scene_i_1aad87a877cb92b4ea71b2f50dc06e132b">00009</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_scene_i_1aad87a877cb92b4ea71b2f50dc06e132b">destroy</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine__scene_8h_source_1l00010"/>00010 };
+</programlisting></section>

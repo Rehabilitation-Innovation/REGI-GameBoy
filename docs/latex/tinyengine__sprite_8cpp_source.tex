@@ -1,0 +1,74 @@
+\doxysection{tinyengine\+\_\+sprite.\+cpp}
+\hypertarget{tinyengine__sprite_8cpp_source}{}\label{tinyengine__sprite_8cpp_source}\index{src/tinyengine\_sprite.cpp@{src/tinyengine\_sprite.cpp}}
+\mbox{\hyperlink{tinyengine__sprite_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00004}\mbox{\hyperlink{class_sprite_a89a82a1160b2420743502c044b1aca99}{00004}}\ \mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite::Sprite}}(\mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}*\ \_sprite\_data)\ :}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00005}00005\ \ \ \ \ m\_sprite\_data(\_sprite\_data)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00007}00007\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00009}\mbox{\hyperlink{class_sprite_ab6535d95c0818a472c9f0b323b1600ce}{00009}}\ \mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite::Sprite}}(\mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\ \_sprite\_data)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00011}00011\ \ \ \ \ m\_sprite\_data\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00014}00014\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_aecee209c14bda6868e25c07c99147798}{sprite\_palette}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00016}00016\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00018}00018\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00021}\mbox{\hyperlink{class_sprite_aa188f688afaba7bf21ba549429f874a0}{00021}}\ \mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite::Sprite}}(uint8\_t*\ sprite\_buffer,\ uint16\_t\ width,\ uint16\_t\ height)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00022}00022\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00023}00023\ \ \ \ \ m\_sprite\_data\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ sprite\_buffer,}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ .width\ =\ width,}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ .height\ =\ height,}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ 0}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00028}00028\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00029}00029\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00032}\mbox{\hyperlink{class_sprite_a7502b3e66c3a8e30821e4b17833c89dc}{00032}}\ \mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite::Sprite}}(\mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}*\ \_sprite\_data,\ \mbox{\hyperlink{structte__sprite__animation__t}{te\_sprite\_animation\_t}}*\ \_sprite\_animation\_data)\ :}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00033}00033\ \ \ \ \ m\_sprite\_data(\_sprite\_data),}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00034}00034\ \ \ \ \ m\_animation\_data(\_sprite\_animation\_data)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00036}00036\ \ \ \ \ m\_animated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00037}00037\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00038}00038\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00040}\mbox{\hyperlink{class_sprite_a34d4bf8a3aba31921a71c2a12b3f2525}{00040}}\ \mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite::Sprite}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\&\ \_sprite\_data,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structte__sprite__animation__t}{te\_sprite\_animation\_t}}\&\ \_sprite\_animation\_data)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00042}00042\ \ \ \ \ m\_sprite\_data\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}\{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_aecee209c14bda6868e25c07c99147798}{sprite\_palette}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00047}00047\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00048}00048\ \ \ \ \ m\_animation\_data\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structte__sprite__animation__t}{te\_sprite\_animation\_t}}\{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ .sprite\_animation\_frames\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_ae8b1c132a79499b1a034c8dbaa5f4f07}{sprite\_animation\_frames}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ .animation\_delay\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a005d996826fc6306b464609827f3367e}{animation\_delay}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ .total\_frames\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a738b24e248655af58263162698329aa8}{total\_frames}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ .current\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ .start\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_ad761f161ae73abb8b94ca8c65b6b5196}{start\_frame}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ .end\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a937203fdf03fe9ded85ab00a0f29a94f}{end\_frame}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00055}00055\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00056}00056\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00059}\mbox{\hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{00059}}\ \mbox{\hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{Sprite::\string~Sprite}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00060}00060\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_externaly\_created)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ only\ destroy\ if\ we\ own\ the\ data.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00063}00063\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00065}\mbox{\hyperlink{class_sprite_a026f7b28d2047d2b17cfe90ba29598fc}{00065}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_a026f7b28d2047d2b17cfe90ba29598fc}{Sprite::render}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ \_fb)}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__sprite_8cpp_source_l00068}00068\ \};}
+
+\end{DoxyCode}

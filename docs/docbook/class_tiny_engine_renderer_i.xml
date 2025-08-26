@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_renderer_i" xml:lang="en-US">
+<title>TinyEngineRendererI Class Reference</title>
+<indexterm><primary>TinyEngineRendererI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TinyEngineRendererI:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine_renderer_i.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_i_1a2469b0b227cbc4ff8a27f292f929d0d3">swap_blocking</link> ()=0</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_i_1ab1c8fd0d87f133a519e26ae071765e9f">swap_non_blocking</link> ()=0</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_i_1a053505877ab12f6651964aaff7b4c75d">wait_for_vsync</link> ()=0</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_i_1ab61c14e1610265da86010a83142674bd">tinyengine_renderer_init</link> ()=0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00074">74</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderer_i_1a2469b0b227cbc4ff8a27f292f929d0d3"/><section>
+    <title>swap_blocking()</title>
+<indexterm><primary>swap_blocking</primary><secondary>TinyEngineRendererI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererI</primary><secondary>swap_blocking</secondary></indexterm>
+<para><computeroutput>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererI::swap_blocking ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_renderer_d_v_i_1ad9985d571f39928ba4cebd35d84cd5f0">TinyEngineRendererDVI</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_i_1ab1c8fd0d87f133a519e26ae071765e9f"/><section>
+    <title>swap_non_blocking()</title>
+<indexterm><primary>swap_non_blocking</primary><secondary>TinyEngineRendererI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererI</primary><secondary>swap_non_blocking</secondary></indexterm>
+<para><computeroutput>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererI::swap_non_blocking ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_renderer_d_v_i_1aa12a0ece831ea57ad7b912b069493ce7">TinyEngineRendererDVI</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_i_1ab61c14e1610265da86010a83142674bd"/><section>
+    <title>tinyengine_renderer_init()</title>
+<indexterm><primary>tinyengine_renderer_init</primary><secondary>TinyEngineRendererI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererI</primary><secondary>tinyengine_renderer_init</secondary></indexterm>
+<para><computeroutput>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererI::tinyengine_renderer_init ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_i_1a053505877ab12f6651964aaff7b4c75d"/><section>
+    <title>wait_for_vsync()</title>
+<indexterm><primary>wait_for_vsync</primary><secondary>TinyEngineRendererI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererI</primary><secondary>wait_for_vsync</secondary></indexterm>
+<para><computeroutput>virtual <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererI::wait_for_vsync ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+inc/<link linkend="_tinyengine_8h">tinyengine.h</link></section>
+</section>

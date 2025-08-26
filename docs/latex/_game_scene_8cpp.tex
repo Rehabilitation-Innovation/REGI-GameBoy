@@ -1,0 +1,106 @@
+\doxysection{src/\+Game\+Scene.cpp File Reference}
+\hypertarget{_game_scene_8cpp}{}\label{_game_scene_8cpp}\index{src/GameScene.cpp@{src/GameScene.cpp}}
+{\ttfamily \#include "{}Game\+Scene.\+h"{}}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}{get\+Total\+Heap}} (void)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_game_scene_8cpp_a09b44c846317da845941c1343a1fcf31}{get\+Free\+Heap}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\+\_\+\+\_\+\+Stack\+Limit}}
+\item 
+char \mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\+\_\+\+\_\+bss\+\_\+end\+\_\+\+\_\+}}
+\item 
+struct mallinfo \mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{info}}
+\item 
+char \mbox{\hyperlink{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8}{string}} \mbox{[}255\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_game_scene_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_game_scene_8cpp_a09b44c846317da845941c1343a1fcf31}\index{GameScene.cpp@{GameScene.cpp}!getFreeHeap@{getFreeHeap}}
+\index{getFreeHeap@{getFreeHeap}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{getFreeHeap()}{getFreeHeap()}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_a09b44c846317da845941c1343a1fcf31} 
+uint32\+\_\+t get\+Free\+Heap (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_game_scene_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{_game_scene_8cpp_source}{Game\+Scene.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{struct\ }mallinfo\ m\ =\ mallinfo();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}{getTotalHeap}}()\ -\/\ m.uordblks;}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+\Hypertarget{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}\index{GameScene.cpp@{GameScene.cpp}!getTotalHeap@{getTotalHeap}}
+\index{getTotalHeap@{getTotalHeap}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{getTotalHeap()}{getTotalHeap()}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7} 
+uint32\+\_\+t get\+Total\+Heap (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_game_scene_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{_game_scene_8cpp_source}{Game\+Scene.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\_\_StackLimit}},\ \mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\_\_bss\_end\_\_}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\_\_StackLimit}}\ -\/\ \&\mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\_\_bss\_end\_\_}};}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{_game_scene_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}\index{GameScene.cpp@{GameScene.cpp}!\_\_bss\_end\_\_@{\_\_bss\_end\_\_}}
+\index{\_\_bss\_end\_\_@{\_\_bss\_end\_\_}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_bss\_end\_\_}{\_\_bss\_end\_\_}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab} 
+char \+\_\+\+\_\+bss\+\_\+end\+\_\+\+\_\+}
+
+
+
+Definition at line \mbox{\hyperlink{_game_scene_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{_game_scene_8cpp_source}{Game\+Scene.\+cpp}}.
+
+\Hypertarget{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}\index{GameScene.cpp@{GameScene.cpp}!\_\_StackLimit@{\_\_StackLimit}}
+\index{\_\_StackLimit@{\_\_StackLimit}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_StackLimit}{\_\_StackLimit}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0} 
+char \+\_\+\+\_\+\+Stack\+Limit\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}\index{GameScene.cpp@{GameScene.cpp}!info@{info}}
+\index{info@{info}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{info}{info}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e} 
+struct mallinfo info}
+
+
+
+Definition at line \mbox{\hyperlink{_game_scene_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{_game_scene_8cpp_source}{Game\+Scene.\+cpp}}.
+
+\Hypertarget{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8}\index{GameScene.cpp@{GameScene.cpp}!string@{string}}
+\index{string@{string}!GameScene.cpp@{GameScene.cpp}}
+\doxysubsubsection{\texorpdfstring{string}{string}}
+{\footnotesize\ttfamily \label{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8} 
+char string\mbox{[}255\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_scene_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{_game_scene_8cpp_source}{Game\+Scene.\+cpp}}.
+

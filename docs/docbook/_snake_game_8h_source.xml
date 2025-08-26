@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__snake_game_8h_source" xml:lang="en-US">
+<title>SnakeGame.h</title>
+<indexterm><primary>src/scenes/SnakeGame.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__snake_game_8h_source_1l00001"/>00001 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00002"/>00002 <emphasis role="comment">//&#32;Created&#32;by&#32;GRHRehabTech&#32;on&#32;2025-07-15.</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00003"/>00003 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00004"/>00004 
+<anchor xml:id="__snake_game_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__game_8h">game.h</link>&quot;</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__game_scene_8h">GameScene.h</link>&quot;</emphasis>
+<anchor xml:id="__snake_game_8h_source_1l00008"/>00008 
+<anchor xml:id="__snake_game_8h_source_1l00009"/>00009 
+<anchor xml:id="__snake_game_8h_source_1l00010"/><link linkend="_class_snake_game">00010</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_snake_game_1afc575759bb084eefa5e95188d041d042">SnakeGame</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link>
+<anchor xml:id="__snake_game_8h_source_1l00011"/>00011 {
+<anchor xml:id="__snake_game_8h_source_1l00012"/>00012 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__snake_game_8h_source_1l00013"/><link linkend="_class_snake_game_1afc575759bb084eefa5e95188d041d042">00013</link> &#32;&#32;&#32;&#32;<link linkend="_class_snake_game_1afc575759bb084eefa5e95188d041d042">SnakeGame</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;_framebuffer,&#32;<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&amp;&#32;_renderer,&#32;<link linkend="_class_tiny_engine">TinyEngine</link>&amp;&#32;_engine)
+<anchor xml:id="__snake_game_8h_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link>(_framebuffer,&#32;_renderer,&#32;_engine)
+<anchor xml:id="__snake_game_8h_source_1l00015"/>00015 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__snake_game_8h_source_1l00016"/>00016 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__snake_game_8h_source_1l00017"/>00017 
+<anchor xml:id="__snake_game_8h_source_1l00018"/><link linkend="_class_snake_game_1acfeac5da2cb6b7e0e850f4e48137e4bf">00018</link> &#32;&#32;&#32;&#32;<link linkend="_class_snake_game_1acfeac5da2cb6b7e0e850f4e48137e4bf">~SnakeGame</link>()&#32;<emphasis role="keyword">override</emphasis>&#32;=&#32;<emphasis role="keywordflow">default</emphasis>;
+<anchor xml:id="__snake_game_8h_source_1l00019"/>00019 
+<anchor xml:id="__snake_game_8h_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_snake_game_1a98f4ebbe3303b1627cf738e4684b69b4">create</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__snake_game_8h_source_1l00021"/>00021 
+<anchor xml:id="__snake_game_8h_source_1l00022"/>00022 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_snake_game_1a09eac49a79e09f012c8c5ca6c4d4c7eb">render</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__snake_game_8h_source_1l00023"/>00023 
+<anchor xml:id="__snake_game_8h_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_snake_game_1a427ff7fbd06cf21fd64223a3c48d500d">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__snake_game_8h_source_1l00025"/>00025 
+<anchor xml:id="__snake_game_8h_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_snake_game_1ad05db6c6aaa3fad9f248d1e94df2a597">destroy</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__snake_game_8h_source_1l00027"/>00027 };
+</programlisting></section>

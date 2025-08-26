@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structtonegenerator__t" xml:lang="en-US">
+<title>tonegenerator_t Struct Reference</title>
+<indexterm><primary>tonegenerator_t</primary></indexterm>
+<para>
+
+<para>Represents a tone generator. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;pwm-tone.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_structtonegenerator__t_1a84865098cefc6908faebae557c2c1b94">playing</link></para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_structtonegenerator__t_1ac105968e84b3b30a88b20f508ed6fd3e">gpio</link></para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_structtonegenerator__t_1a588380257ed9bca9b3df52b4fcad01e7">slice</link></para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_structtonegenerator__t_1aa2d54b6286aa1ad974ccc4bedcc756de">channel</link></para>
+</listitem>
+            <listitem><para><link linkend="_structmelody__t">melody_t</link> <link linkend="_structtonegenerator__t_1ab0cb06243ba094d2001b922517e3f17e">mel</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Represents a tone generator. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00041">41</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structtonegenerator__t_1aa2d54b6286aa1ad974ccc4bedcc756de"/><section>
+    <title>channel</title>
+<indexterm><primary>channel</primary><secondary>tonegenerator_t</secondary></indexterm>
+<indexterm><primary>tonegenerator_t</primary><secondary>channel</secondary></indexterm>
+<para><computeroutput>uint8_t tonegenerator_t::channel</computeroutput></para>
+<para>PWM channel number for the tone generator. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00045">45</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<anchor xml:id="_structtonegenerator__t_1ac105968e84b3b30a88b20f508ed6fd3e"/><section>
+    <title>gpio</title>
+<indexterm><primary>gpio</primary><secondary>tonegenerator_t</secondary></indexterm>
+<indexterm><primary>tonegenerator_t</primary><secondary>gpio</secondary></indexterm>
+<para><computeroutput>uint8_t tonegenerator_t::gpio</computeroutput></para>
+<para>GPIO pin number for the tone generator. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00043">43</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<anchor xml:id="_structtonegenerator__t_1ab0cb06243ba094d2001b922517e3f17e"/><section>
+    <title>mel</title>
+<indexterm><primary>mel</primary><secondary>tonegenerator_t</secondary></indexterm>
+<indexterm><primary>tonegenerator_t</primary><secondary>mel</secondary></indexterm>
+<para><computeroutput><link linkend="_structmelody__t">melody_t</link> tonegenerator_t::mel</computeroutput></para>
+<para>Melody being played by the tone generator. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00046">46</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<anchor xml:id="_structtonegenerator__t_1a84865098cefc6908faebae557c2c1b94"/><section>
+    <title>playing</title>
+<indexterm><primary>playing</primary><secondary>tonegenerator_t</secondary></indexterm>
+<indexterm><primary>tonegenerator_t</primary><secondary>playing</secondary></indexterm>
+<para><computeroutput>bool tonegenerator_t::playing</computeroutput></para>
+<para>Flag indicating whether the tone generator is playing. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00042">42</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<anchor xml:id="_structtonegenerator__t_1a588380257ed9bca9b3df52b4fcad01e7"/><section>
+    <title>slice</title>
+<indexterm><primary>slice</primary><secondary>tonegenerator_t</secondary></indexterm>
+<indexterm><primary>tonegenerator_t</primary><secondary>slice</secondary></indexterm>
+<para><computeroutput>uint8_t tonegenerator_t::slice</computeroutput></para>
+<para>PWM slice number for the tone generator. </para>
+<para>
+Definition at line <link linkend="_pwm-tone_8h_source_1l00044">44</link> of file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+inc/<link linkend="_pwm-tone_8h">pwm-tone.h</link></section>
+</section>

@@ -1,0 +1,1510 @@
+\doxysection{inc/cute\+\_\+c2.h File Reference}
+\hypertarget{cute__c2_8h}{}\label{cute__c2_8h}\index{inc/cute\_c2.h@{inc/cute\_c2.h}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structc2v}{c2v}}
+\item 
+struct \mbox{\hyperlink{structc2r}{c2r}}
+\item 
+struct \mbox{\hyperlink{structc2m}{c2m}}
+\item 
+struct \mbox{\hyperlink{structc2x}{c2x}}
+\item 
+struct \mbox{\hyperlink{structc2h}{c2h}}
+\item 
+struct \mbox{\hyperlink{structc2_circle}{c2\+Circle}}
+\item 
+struct \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}
+\item 
+struct \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}
+\item 
+struct \mbox{\hyperlink{structc2_poly}{c2\+Poly}}
+\item 
+struct \mbox{\hyperlink{structc2_ray}{c2\+Ray}}
+\item 
+struct \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}}
+\item 
+struct \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}}
+\item 
+struct \mbox{\hyperlink{structc2_g_j_k_cache}{c2\+GJKCache}}
+\item 
+struct \mbox{\hyperlink{structc2_t_o_i_result}{c2\+TOIResult}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a0fd546d253398ad28a548afb19775d70}{C2\+\_\+\+MAX\+\_\+\+POLYGON\+\_\+\+VERTS}}~8
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a515b720ecf7e61647476bbc4a712f250}{c2\+Impact}}(ray,  \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}}~inline \+\_\+\+\_\+attribute\+\_\+\+\_\+((always\+\_\+inline))
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a847097bee54cfd2ece87ba0337247650}{c2\+Sin}}(radians)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a38ebab3d0198ef7c6d6cdc73a9c9b1fd}{c2\+Cos}}(radians)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a98459522a3c01e751b614fee1c18b286}{c2\+Sqrt}}(a)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}{c2\+Min}}(a,  b)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}{c2\+Max}}(a,  b)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}{c2\+Abs}}(a)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a4e81817e00147b07f8cdabe318d580a1}{c2\+Clamp}}(a,  lo,  hi)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_ad209a547c29ec4b2c9f5345637c2667a}{c2\+Sign}}(a)
+\item 
+\#define \mbox{\hyperlink{cute__c2_8h_a623ce88b9a0ddea241e4e4ee89d57329}{CUTE\+\_\+\+C2\+\_\+H}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct c2v \mbox{\hyperlink{cute__c2_8h_a85f65d6531100bebcb62a819b1078cf5}{c2v}}
+\item 
+typedef struct c2r \mbox{\hyperlink{cute__c2_8h_ae727e33a83132aac272fddf73c37065b}{c2r}}
+\item 
+typedef struct c2m \mbox{\hyperlink{cute__c2_8h_ae0f9555dc1e9aa05745989e85f6467f6}{c2m}}
+\item 
+typedef struct c2x \mbox{\hyperlink{cute__c2_8h_abceb13393b77a0e67fc8572852eaebf7}{c2x}}
+\item 
+typedef struct c2h \mbox{\hyperlink{cute__c2_8h_a0c0044fb4017b806769d57729b1c26f2}{c2h}}
+\item 
+typedef struct c2\+Circle \mbox{\hyperlink{cute__c2_8h_ae49d3b29e0d93e589637041beb7169b5}{c2\+Circle}}
+\item 
+typedef struct c2\+AABB \mbox{\hyperlink{cute__c2_8h_aecce28353056c358ba3fd4a31c47ba3f}{c2\+AABB}}
+\item 
+typedef struct c2\+Capsule \mbox{\hyperlink{cute__c2_8h_ab693bf2b35508e102694b3a5deb6eeaa}{c2\+Capsule}}
+\item 
+typedef struct c2\+Poly \mbox{\hyperlink{cute__c2_8h_ae62b97b89cf3c7fbccde3837f430a076}{c2\+Poly}}
+\item 
+typedef struct c2\+Ray \mbox{\hyperlink{cute__c2_8h_a5afa8e9e087a1507302b1d6ffdfe06cc}{c2\+Ray}}
+\item 
+typedef struct c2\+Raycast \mbox{\hyperlink{cute__c2_8h_a91cd2ba3529887bdb77d0279d675147e}{c2\+Raycast}}
+\item 
+typedef struct c2\+Manifold \mbox{\hyperlink{cute__c2_8h_a23a9949ff80d47a717bc45688906d04d}{c2\+Manifold}}
+\item 
+typedef struct c2\+GJKCache \mbox{\hyperlink{cute__c2_8h_a84c58e41573f821d39e98916f142ee10}{c2\+GJKCache}}
+\item 
+typedef struct c2\+TOIResult \mbox{\hyperlink{cute__c2_8h_a1df630e38477aac589bbcc6cec8103ee}{c2\+TOIResult}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} \{ \newline
+\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177}{C2\+\_\+\+TYPE\+\_\+\+NONE}}
+, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc}{C2\+\_\+\+TYPE\+\_\+\+CIRCLE}}
+, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20}{C2\+\_\+\+TYPE\+\_\+\+AABB}}
+, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550}{C2\+\_\+\+TYPE\+\_\+\+CAPSULE}}
+, \newline
+\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082}{C2\+\_\+\+TYPE\+\_\+\+POLY}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a2b381dd6079f81074aff99fce3304fe4}{c2\+Circleto\+Circle}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_circle}{c2\+Circle}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a6d32efa9a591b4261797da24d4303b6b}{c2\+Circleto\+AABB}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ae12e8d0fff1b8374d9547a9cf188ffa0}{c2\+Circleto\+Capsule}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ac2ffe6c3fb0b4a2865ab3d4fd966bc57}{c2\+AABBto\+AABB}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a2b57ddb58ac33c515d9a31f7e8ad4222}{c2\+AABBto\+Capsule}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_aeead757864ba3154953ef4ab7c1f571a}{c2\+Capsuleto\+Capsule}} (\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ad859a357fca1a7e8324aeaef87aeb455}{c2\+Circleto\+Poly}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_aa72ae2e07a37e79233a5d1fe25e5a2e9}{c2\+AABBto\+Poly}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a26cd06e6140acb1b08e5e0258538c38f}{c2\+Capsuleto\+Poly}} (\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a01341a99ed0c0b731970e8853531d263}{c2\+Polyto\+Poly}} (const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}A, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a3d8f4bd3f05216f8deb7fd53fae0e459}{c2\+Rayto\+Circle}} (\mbox{\hyperlink{structc2_ray}{c2\+Ray}} A, \mbox{\hyperlink{structc2_circle}{c2\+Circle}} B, \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}out)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a4d6b48728253a2c988cdc1ef40ba962f}{c2\+Rayto\+AABB}} (\mbox{\hyperlink{structc2_ray}{c2\+Ray}} A, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} B, \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}out)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_a1051e2151767c730da0e6d68188cf87f}{c2\+Rayto\+Capsule}} (\mbox{\hyperlink{structc2_ray}{c2\+Ray}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B, \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}out)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ad72453c4c53403ae7e46d328b95c4094}{c2\+Rayto\+Poly}} (\mbox{\hyperlink{structc2_ray}{c2\+Ray}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx\+\_\+ptr, \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}out)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a5a06fdc38e07b42f1aec7d1f9d7ca182}{c2\+Circleto\+Circle\+Manifold}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_circle}{c2\+Circle}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_aa1c135c6c0b3034ebf83b635dffdb73a}{c2\+Circleto\+AABBManifold}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a3292c71f5420bcc86da700a0372677a8}{c2\+Circleto\+Capsule\+Manifold}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_ac49ab094d5a04d7abc5436db613edb60}{c2\+AABBto\+AABBManifold}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a5a52f03fdba24e104858c016b21111e1}{c2\+AABBto\+Capsule\+Manifold}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_aa6453a9125cfb6e1fdd19f76e62f091a}{c2\+Capsuleto\+Capsule\+Manifold}} (\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} A, \mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} B, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_af9873986db8e12becd2e2961b70fe7ab}{c2\+Circleto\+Poly\+Manifold}} (\mbox{\hyperlink{structc2_circle}{c2\+Circle}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_abdca813eac285f3e9328c989ae9ea3a6}{c2\+AABBto\+Poly\+Manifold}} (\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a0bfa8ed7f41c7848bea8fbbc43cd8dd4}{c2\+Capsuleto\+Poly\+Manifold}} (\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}} A, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a9f7375003472cada253d2dc8e3ce82e1}{c2\+Polyto\+Poly\+Manifold}} (const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}A, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax, const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API float \mbox{\hyperlink{cute__c2_8h_a206e5641840f323422ebfe8182bd75a4}{c2\+GJK}} (const void \texorpdfstring{$\ast$}{*}A, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeA, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax\+\_\+ptr, const void \texorpdfstring{$\ast$}{*}B, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeB, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx\+\_\+ptr, \mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}outA, \mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}outB, int use\+\_\+radius, int \texorpdfstring{$\ast$}{*}iterations, \mbox{\hyperlink{structc2_g_j_k_cache}{c2\+GJKCache}} \texorpdfstring{$\ast$}{*}cache)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API \mbox{\hyperlink{structc2_t_o_i_result}{c2\+TOIResult}} \mbox{\hyperlink{cute__c2_8h_af037486725ac78fda6956b9e5732c123}{c2\+TOI}} (const void \texorpdfstring{$\ast$}{*}A, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeA, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax\+\_\+ptr, \mbox{\hyperlink{structc2v}{c2v}} vA, const void \texorpdfstring{$\ast$}{*}B, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeB, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx\+\_\+ptr, \mbox{\hyperlink{structc2v}{c2v}} vB, int use\+\_\+radius)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_abeac284a08d795a95718607e28b29f0d}{c2\+Inflate}} (void \texorpdfstring{$\ast$}{*}shape, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} type, float skin\+\_\+factor)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ac6a78404ac8cf8d93ecf905814e401b4}{c2\+Hull}} (\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}verts, int count)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a99a88540199bcc905683dd3aa8c9be4a}{c2\+Norms}} (\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}verts, \mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}norms, int count)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_ab774831fd26859f18b0a36a09cf7064b}{c2\+Make\+Poly}} (\mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}p)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_aa0d6ef52a468f3a261203e9a68ebe431}{c2\+Collided}} (const void \texorpdfstring{$\ast$}{*}A, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeA, const void \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeB)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API void \mbox{\hyperlink{cute__c2_8h_a3f412e0a34cd5d677478cca007be384c}{c2\+Collide}} (const void \texorpdfstring{$\ast$}{*}A, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}ax, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeA, const void \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeB, \mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}m)
+\item 
+CUTE\+\_\+\+C2\+\_\+\+API int \mbox{\hyperlink{cute__c2_8h_ad9acd66538a2e26fda403ed681996097}{c2\+Cast\+Ray}} (\mbox{\hyperlink{structc2_ray}{c2\+Ray}} A, const void \texorpdfstring{$\ast$}{*}B, const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}bx, \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}} typeB, \mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}out)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} void \mbox{\hyperlink{cute__c2_8h_ab79505fce1838f04a577094126815ac2}{c2\+Sin\+Cos}} (float radians, float \texorpdfstring{$\ast$}{*}s, float \texorpdfstring{$\ast$}{*}c)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}} (float \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, float \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2\+Add}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2\+Sub}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2\+Dot}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2\+Mulvs}} (\mbox{\hyperlink{structc2v}{c2v}} a, float b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ab4686d6b5ef8593f52dfcaded35ec920}{c2\+Mulvv}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a5dcf7563f13d8b8d5c2423a2f7134700}{c2\+Div}} (\mbox{\hyperlink{structc2v}{c2v}} a, float b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a797007d10175dd13b01c41fe60a14421}{c2\+Skew}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a18cff67645553684a30d36ca2773116d}{c2\+CCW90}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_a84afcee1b10b757401a0e8166f4ea4c7}{c2\+Det2}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_af92f21e15c4c80071db796f46ed8fcce}{c2\+Minv}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ae8614649b7105f62fd5d96924e25e147}{c2\+Maxv}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_afcfd33f860ff46ff49e4d6c7dfe3d948}{c2\+Clampv}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} lo, \mbox{\hyperlink{structc2v}{c2v}} hi)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ab36d7a2a5dbf2481e4deab61f7ef2e4a}{c2\+Absv}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_a854ce80a68565875555fbf95c757c31c}{c2\+Hmin}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_ad7f2ad537d84324b6cdf35aec402a533}{c2\+Hmax}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}{c2\+Len}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ae228814d5417858c78336a3e7e2aa834}{c2\+Norm}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a1d30280f8ccf7e8e1352848601c9a77e}{c2\+Safe\+Norm}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a7cb3cb1c48f3684b6db762bdc1ef8a71}{c2\+Neg}} (\mbox{\hyperlink{structc2v}{c2v}} a)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_afc415d7f1fa2031fed5130ac1758c461}{c2\+Lerp}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b, float \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} int \mbox{\hyperlink{cute__c2_8h_a631c57baa292018b735447e00f106ab3}{c2\+Parallel}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b, float k\+Tol)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} \mbox{\hyperlink{cute__c2_8h_adc13fd86afde5b2f5b89cde00d0de67a}{c2\+Rot}} (float radians)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} \mbox{\hyperlink{cute__c2_8h_a2dc32a46c98171df81d473bda36a9e3a}{c2\+Rot\+Identity}} (void)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_aecc03cc63f1ada7a320aa065e6b2f9ec}{c2\+RotX}} (\mbox{\hyperlink{structc2r}{c2r}} r)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a00ebd0f4663f055912b9eb8dc9c7dfd8}{c2\+RotY}} (\mbox{\hyperlink{structc2r}{c2r}} r)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b}{c2\+Mulrv}} (\mbox{\hyperlink{structc2r}{c2r}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43}{c2\+MulrvT}} (\mbox{\hyperlink{structc2r}{c2r}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} \mbox{\hyperlink{cute__c2_8h_a9bfacd10ac51218d70dbe8d5e719f799}{c2\+Mulrr}} (\mbox{\hyperlink{structc2r}{c2r}} a, \mbox{\hyperlink{structc2r}{c2r}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} \mbox{\hyperlink{cute__c2_8h_acd93f6c20f9979dac113ddec536e79c8}{c2\+MulrrT}} (\mbox{\hyperlink{structc2r}{c2r}} a, \mbox{\hyperlink{structc2r}{c2r}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ac12063c537c7aa685ee637d0362e1956}{c2\+Mulmv}} (\mbox{\hyperlink{structc2m}{c2m}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a02429730284c3db0b2c992f9e6b7f6ce}{c2\+MulmvT}} (\mbox{\hyperlink{structc2m}{c2m}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2m}{c2m}} \mbox{\hyperlink{cute__c2_8h_a5f9375d498fd4c2c84ea89751a5538ed}{c2\+Mulmm}} (\mbox{\hyperlink{structc2m}{c2m}} a, \mbox{\hyperlink{structc2m}{c2m}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2m}{c2m}} \mbox{\hyperlink{cute__c2_8h_a003777ba26a8c6440f4c9e379f75c077}{c2\+MulmmT}} (\mbox{\hyperlink{structc2m}{c2m}} a, \mbox{\hyperlink{structc2m}{c2m}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} \mbox{\hyperlink{cute__c2_8h_ab63b182f0108be1cfc2a6e3c370b57aa}{c2x\+Identity}} (void)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a00e7e5eeeffc98bc6d2c98b36d4c9a89}{c2\+Mulxv}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a5b6c48f69159b15f7b9299d2ed09c920}{c2\+MulxvT}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2v}{c2v}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} \mbox{\hyperlink{cute__c2_8h_a238ecbf634a5e68491cfff4725700501}{c2\+Mulxx}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2x}{c2x}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} \mbox{\hyperlink{cute__c2_8h_ad38af9936384626d0d9613687e662a06}{c2\+MulxxT}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2x}{c2x}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} \mbox{\hyperlink{cute__c2_8h_aa641f62915695506f3956bdd29afa5fe}{c2\+Transform}} (\mbox{\hyperlink{structc2v}{c2v}} p, float radians)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_aa6a22978ce1bf40972463d694bdbc60f}{c2\+Origin}} (\mbox{\hyperlink{structc2h}{c2h}} h)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float \mbox{\hyperlink{cute__c2_8h_a1aa5d97ad8706d1c527349fe02d231e6}{c2\+Dist}} (\mbox{\hyperlink{structc2h}{c2h}} h, \mbox{\hyperlink{structc2v}{c2v}} p)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_ad31c66f305695857b077d38bd09ec10b}{c2\+Project}} (\mbox{\hyperlink{structc2h}{c2h}} h, \mbox{\hyperlink{structc2v}{c2v}} p)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2h}{c2h}} \mbox{\hyperlink{cute__c2_8h_ae90ce92ed1ddfbec6833433841079d8d}{c2\+Mulxh}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2h}{c2h}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2h}{c2h}} \mbox{\hyperlink{cute__c2_8h_a578cab5d4e482419d9eaae4feb16802a}{c2\+MulxhT}} (\mbox{\hyperlink{structc2x}{c2x}} a, \mbox{\hyperlink{structc2h}{c2h}} b)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} \mbox{\hyperlink{cute__c2_8h_a9494e2e4322cd8bfc04b0d411f4c3cc0}{c2\+Intersect}} (\mbox{\hyperlink{structc2v}{c2v}} a, \mbox{\hyperlink{structc2v}{c2v}} b, float da, float db)
+\item 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} void \mbox{\hyperlink{cute__c2_8h_ad7f0678ab33a08f8804a7b30e2740d3f}{c2\+BBVerts}} (\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}out, \mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} \texorpdfstring{$\ast$}{*}bb)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{cute__c2_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}\index{cute\_c2.h@{cute\_c2.h}!C2\_INLINE@{C2\_INLINE}}
+\index{C2\_INLINE@{C2\_INLINE}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{C2\_INLINE}{C2\_INLINE}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd} 
+\#define C2\+\_\+\+INLINE~inline \+\_\+\+\_\+attribute\+\_\+\+\_\+((always\+\_\+inline))}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00434}{434}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a0fd546d253398ad28a548afb19775d70}\index{cute\_c2.h@{cute\_c2.h}!C2\_MAX\_POLYGON\_VERTS@{C2\_MAX\_POLYGON\_VERTS}}
+\index{C2\_MAX\_POLYGON\_VERTS@{C2\_MAX\_POLYGON\_VERTS}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{C2\_MAX\_POLYGON\_VERTS}{C2\_MAX\_POLYGON\_VERTS}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a0fd546d253398ad28a548afb19775d70} 
+\#define C2\+\_\+\+MAX\+\_\+\+POLYGON\+\_\+\+VERTS~8}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00171}{171}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}\index{cute\_c2.h@{cute\_c2.h}!c2Abs@{c2Abs}}
+\index{c2Abs@{c2Abs}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Abs}{c2Abs}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99} 
+\#define c2\+Abs(\begin{DoxyParamCaption}\item[{}]{a}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((a)\ <\ 0\ ?\ -\/(a)\ :\ (a))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00445}{445}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a4e81817e00147b07f8cdabe318d580a1}\index{cute\_c2.h@{cute\_c2.h}!c2Clamp@{c2Clamp}}
+\index{c2Clamp@{c2Clamp}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Clamp}{c2Clamp}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a4e81817e00147b07f8cdabe318d580a1} 
+\#define c2\+Clamp(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{lo}{, }\item[{}]{hi}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}{c2Max}}(lo,\ \mbox{\hyperlink{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}{c2Min}}(a,\ hi))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00446}{446}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a38ebab3d0198ef7c6d6cdc73a9c9b1fd}\index{cute\_c2.h@{cute\_c2.h}!c2Cos@{c2Cos}}
+\index{c2Cos@{c2Cos}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Cos}{c2Cos}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a38ebab3d0198ef7c6d6cdc73a9c9b1fd} 
+\#define c2\+Cos(\begin{DoxyParamCaption}\item[{}]{radians}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cosf(radians)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00441}{441}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a515b720ecf7e61647476bbc4a712f250}\index{cute\_c2.h@{cute\_c2.h}!c2Impact@{c2Impact}}
+\index{c2Impact@{c2Impact}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Impact}{c2Impact}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a515b720ecf7e61647476bbc4a712f250} 
+\#define c2\+Impact(\begin{DoxyParamCaption}\item[{}]{ray}{, }\item[{}]{\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2Add}}(ray.p,\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(ray.d,\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00261}{261}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}\index{cute\_c2.h@{cute\_c2.h}!c2Max@{c2Max}}
+\index{c2Max@{c2Max}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Max}{c2Max}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084} 
+\#define c2\+Max(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((a)\ >\ (b)\ ?\ (a)\ :\ (b))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00444}{444}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}\index{cute\_c2.h@{cute\_c2.h}!c2Min@{c2Min}}
+\index{c2Min@{c2Min}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Min}{c2Min}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e} 
+\#define c2\+Min(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((a)\ <\ (b)\ ?\ (a)\ :\ (b))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00443}{443}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_ad209a547c29ec4b2c9f5345637c2667a}\index{cute\_c2.h@{cute\_c2.h}!c2Sign@{c2Sign}}
+\index{c2Sign@{c2Sign}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Sign}{c2Sign}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad209a547c29ec4b2c9f5345637c2667a} 
+\#define c2\+Sign(\begin{DoxyParamCaption}\item[{}]{a}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(a\ <\ 0\ ?\ -\/1.0f\ :\ 1.0f)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00448}{448}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a847097bee54cfd2ece87ba0337247650}\index{cute\_c2.h@{cute\_c2.h}!c2Sin@{c2Sin}}
+\index{c2Sin@{c2Sin}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Sin}{c2Sin}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a847097bee54cfd2ece87ba0337247650} 
+\#define c2\+Sin(\begin{DoxyParamCaption}\item[{}]{radians}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sinf(radians)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00440}{440}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a98459522a3c01e751b614fee1c18b286}\index{cute\_c2.h@{cute\_c2.h}!c2Sqrt@{c2Sqrt}}
+\index{c2Sqrt@{c2Sqrt}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Sqrt}{c2Sqrt}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a98459522a3c01e751b614fee1c18b286} 
+\#define c2\+Sqrt(\begin{DoxyParamCaption}\item[{}]{a}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sqrtf(a)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00442}{442}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+\Hypertarget{cute__c2_8h_a623ce88b9a0ddea241e4e4ee89d57329}\index{cute\_c2.h@{cute\_c2.h}!CUTE\_C2\_H@{CUTE\_C2\_H}}
+\index{CUTE\_C2\_H@{CUTE\_C2\_H}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{CUTE\_C2\_H}{CUTE\_C2\_H}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a623ce88b9a0ddea241e4e4ee89d57329} 
+\#define CUTE\+\_\+\+C2\+\_\+H}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00529}{529}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{cute__c2_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{cute__c2_8h_aecce28353056c358ba3fd4a31c47ba3f}\index{cute\_c2.h@{cute\_c2.h}!c2AABB@{c2AABB}}
+\index{c2AABB@{c2AABB}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABB}{c2AABB}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aecce28353056c358ba3fd4a31c47ba3f} 
+typedef struct c2\+AABB c2\+AABB}
+
+\Hypertarget{cute__c2_8h_ab693bf2b35508e102694b3a5deb6eeaa}\index{cute\_c2.h@{cute\_c2.h}!c2Capsule@{c2Capsule}}
+\index{c2Capsule@{c2Capsule}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Capsule}{c2Capsule}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab693bf2b35508e102694b3a5deb6eeaa} 
+typedef struct c2\+Capsule c2\+Capsule}
+
+\Hypertarget{cute__c2_8h_ae49d3b29e0d93e589637041beb7169b5}\index{cute\_c2.h@{cute\_c2.h}!c2Circle@{c2Circle}}
+\index{c2Circle@{c2Circle}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Circle}{c2Circle}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae49d3b29e0d93e589637041beb7169b5} 
+typedef struct c2\+Circle c2\+Circle}
+
+\Hypertarget{cute__c2_8h_a84c58e41573f821d39e98916f142ee10}\index{cute\_c2.h@{cute\_c2.h}!c2GJKCache@{c2GJKCache}}
+\index{c2GJKCache@{c2GJKCache}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2GJKCache}{c2GJKCache}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a84c58e41573f821d39e98916f142ee10} 
+typedef struct c2\+GJKCache c2\+GJKCache}
+
+\Hypertarget{cute__c2_8h_a0c0044fb4017b806769d57729b1c26f2}\index{cute\_c2.h@{cute\_c2.h}!c2h@{c2h}}
+\index{c2h@{c2h}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2h}{c2h}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a0c0044fb4017b806769d57729b1c26f2} 
+typedef struct c2h c2h}
+
+\Hypertarget{cute__c2_8h_ae0f9555dc1e9aa05745989e85f6467f6}\index{cute\_c2.h@{cute\_c2.h}!c2m@{c2m}}
+\index{c2m@{c2m}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2m}{c2m}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae0f9555dc1e9aa05745989e85f6467f6} 
+typedef struct c2m c2m}
+
+\Hypertarget{cute__c2_8h_a23a9949ff80d47a717bc45688906d04d}\index{cute\_c2.h@{cute\_c2.h}!c2Manifold@{c2Manifold}}
+\index{c2Manifold@{c2Manifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Manifold}{c2Manifold}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a23a9949ff80d47a717bc45688906d04d} 
+typedef struct c2\+Manifold c2\+Manifold}
+
+\Hypertarget{cute__c2_8h_ae62b97b89cf3c7fbccde3837f430a076}\index{cute\_c2.h@{cute\_c2.h}!c2Poly@{c2Poly}}
+\index{c2Poly@{c2Poly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Poly}{c2Poly}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae62b97b89cf3c7fbccde3837f430a076} 
+typedef struct c2\+Poly c2\+Poly}
+
+\Hypertarget{cute__c2_8h_ae727e33a83132aac272fddf73c37065b}\index{cute\_c2.h@{cute\_c2.h}!c2r@{c2r}}
+\index{c2r@{c2r}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2r}{c2r}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae727e33a83132aac272fddf73c37065b} 
+typedef struct c2r c2r}
+
+\Hypertarget{cute__c2_8h_a5afa8e9e087a1507302b1d6ffdfe06cc}\index{cute\_c2.h@{cute\_c2.h}!c2Ray@{c2Ray}}
+\index{c2Ray@{c2Ray}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Ray}{c2Ray}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5afa8e9e087a1507302b1d6ffdfe06cc} 
+typedef struct c2\+Ray c2\+Ray}
+
+\Hypertarget{cute__c2_8h_a91cd2ba3529887bdb77d0279d675147e}\index{cute\_c2.h@{cute\_c2.h}!c2Raycast@{c2Raycast}}
+\index{c2Raycast@{c2Raycast}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Raycast}{c2Raycast}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a91cd2ba3529887bdb77d0279d675147e} 
+typedef struct c2\+Raycast c2\+Raycast}
+
+\Hypertarget{cute__c2_8h_a1df630e38477aac589bbcc6cec8103ee}\index{cute\_c2.h@{cute\_c2.h}!c2TOIResult@{c2TOIResult}}
+\index{c2TOIResult@{c2TOIResult}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2TOIResult}{c2TOIResult}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a1df630e38477aac589bbcc6cec8103ee} 
+typedef struct c2\+TOIResult c2\+TOIResult}
+
+\Hypertarget{cute__c2_8h_a85f65d6531100bebcb62a819b1078cf5}\index{cute\_c2.h@{cute\_c2.h}!c2v@{c2v}}
+\index{c2v@{c2v}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2v}{c2v}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a85f65d6531100bebcb62a819b1078cf5} 
+typedef struct c2v c2v}
+
+\Hypertarget{cute__c2_8h_abceb13393b77a0e67fc8572852eaebf7}\index{cute\_c2.h@{cute\_c2.h}!c2x@{c2x}}
+\index{c2x@{c2x}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2x}{c2x}}
+{\footnotesize\ttfamily \label{cute__c2_8h_abceb13393b77a0e67fc8572852eaebf7} 
+typedef struct c2x c2x}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{cute__c2_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE@{C2\_TYPE}}
+\index{C2\_TYPE@{C2\_TYPE}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{C2\_TYPE}{C2\_TYPE}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2} 
+enum \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C2\_TYPE\_NONE@{C2\_TYPE\_NONE}!cute\_c2.h@{cute\_c2.h}}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE\_NONE@{C2\_TYPE\_NONE}}}\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177}\label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177} 
+C2\+\_\+\+TYPE\+\_\+\+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C2\_TYPE\_CIRCLE@{C2\_TYPE\_CIRCLE}!cute\_c2.h@{cute\_c2.h}}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE\_CIRCLE@{C2\_TYPE\_CIRCLE}}}\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc}\label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc} 
+C2\+\_\+\+TYPE\+\_\+\+CIRCLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C2\_TYPE\_AABB@{C2\_TYPE\_AABB}!cute\_c2.h@{cute\_c2.h}}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE\_AABB@{C2\_TYPE\_AABB}}}\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20}\label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20} 
+C2\+\_\+\+TYPE\+\_\+\+AABB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C2\_TYPE\_CAPSULE@{C2\_TYPE\_CAPSULE}!cute\_c2.h@{cute\_c2.h}}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE\_CAPSULE@{C2\_TYPE\_CAPSULE}}}\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550}\label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550} 
+C2\+\_\+\+TYPE\+\_\+\+CAPSULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C2\_TYPE\_POLY@{C2\_TYPE\_POLY}!cute\_c2.h@{cute\_c2.h}}\index{cute\_c2.h@{cute\_c2.h}!C2\_TYPE\_POLY@{C2\_TYPE\_POLY}}}\Hypertarget{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082}\label{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082} 
+C2\+\_\+\+TYPE\+\_\+\+POLY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00322}{322}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00323\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177}{C2\_TYPE\_NONE}},}
+\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc}{C2\_TYPE\_CIRCLE}},}
+\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20}{C2\_TYPE\_AABB}},}
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550}{C2\_TYPE\_CAPSULE}},}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082}{C2\_TYPE\_POLY}}}
+\DoxyCodeLine{00329\ \}\ \mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\_TYPE}};}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{cute__c2_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cute__c2_8h_ac2ffe6c3fb0b4a2865ab3d4fd966bc57}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoAABB@{c2AABBtoAABB}}
+\index{c2AABBtoAABB@{c2AABBtoAABB}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoAABB()}{c2AABBtoAABB()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ac2ffe6c3fb0b4a2865ab3d4fd966bc57} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+AABBto\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ac49ab094d5a04d7abc5436db613edb60}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoAABBManifold@{c2AABBtoAABBManifold}}
+\index{c2AABBtoAABBManifold@{c2AABBtoAABBManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoAABBManifold()}{c2AABBtoAABBManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ac49ab094d5a04d7abc5436db613edb60} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+AABBto\+AABBManifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a2b57ddb58ac33c515d9a31f7e8ad4222}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoCapsule@{c2AABBtoCapsule}}
+\index{c2AABBtoCapsule@{c2AABBtoCapsule}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoCapsule()}{c2AABBtoCapsule()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a2b57ddb58ac33c515d9a31f7e8ad4222} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+AABBto\+Capsule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a5a52f03fdba24e104858c016b21111e1}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoCapsuleManifold@{c2AABBtoCapsuleManifold}}
+\index{c2AABBtoCapsuleManifold@{c2AABBtoCapsuleManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoCapsuleManifold()}{c2AABBtoCapsuleManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5a52f03fdba24e104858c016b21111e1} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+AABBto\+Capsule\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa72ae2e07a37e79233a5d1fe25e5a2e9}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoPoly@{c2AABBtoPoly}}
+\index{c2AABBtoPoly@{c2AABBtoPoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoPoly()}{c2AABBtoPoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa72ae2e07a37e79233a5d1fe25e5a2e9} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+AABBto\+Poly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_abdca813eac285f3e9328c989ae9ea3a6}\index{cute\_c2.h@{cute\_c2.h}!c2AABBtoPolyManifold@{c2AABBtoPolyManifold}}
+\index{c2AABBtoPolyManifold@{c2AABBtoPolyManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2AABBtoPolyManifold()}{c2AABBtoPolyManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_abdca813eac285f3e9328c989ae9ea3a6} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+AABBto\+Poly\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ab36d7a2a5dbf2481e4deab61f7ef2e4a}\index{cute\_c2.h@{cute\_c2.h}!c2Absv@{c2Absv}}
+\index{c2Absv@{c2Absv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Absv()}{c2Absv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab36d7a2a5dbf2481e4deab61f7ef2e4a} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Absv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00474}{474}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00474\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(\mbox{\hyperlink{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}{c2Abs}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}),\ \mbox{\hyperlink{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}{c2Abs}}(a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}\index{cute\_c2.h@{cute\_c2.h}!c2Add@{c2Add}}
+\index{c2Add@{c2Add}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Add()}{c2Add()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00462}{462}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00462\ \{\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +=\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ +=\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \textcolor{keywordflow}{return}\ a;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ad7f0678ab33a08f8804a7b30e2740d3f}\index{cute\_c2.h@{cute\_c2.h}!c2BBVerts@{c2BBVerts}}
+\index{c2BBVerts@{c2BBVerts}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2BBVerts()}{c2BBVerts()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad7f0678ab33a08f8804a7b30e2740d3f} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} void c2\+BBVerts (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} \texorpdfstring{$\ast$}{*}}]{bb}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00521}{521}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00522\ \{}
+\DoxyCodeLine{00523\ \ \ \ \ out[0]\ =\ bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_ac0a11c1e43a839f9777fed4f46360c0f}{min}};}
+\DoxyCodeLine{00524\ \ \ \ \ out[1]\ =\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_a4f59ea4fe9378131665388398396ff39}{max}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_ac0a11c1e43a839f9777fed4f46360c0f}{min}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});}
+\DoxyCodeLine{00525\ \ \ \ \ out[2]\ =\ bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_a4f59ea4fe9378131665388398396ff39}{max}};}
+\DoxyCodeLine{00526\ \ \ \ \ out[3]\ =\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_ac0a11c1e43a839f9777fed4f46360c0f}{min}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ bb-\/>\mbox{\hyperlink{structc2_a_a_b_b_a4f59ea4fe9378131665388398396ff39}{max}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});}
+\DoxyCodeLine{00527\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_aeead757864ba3154953ef4ab7c1f571a}\index{cute\_c2.h@{cute\_c2.h}!c2CapsuletoCapsule@{c2CapsuletoCapsule}}
+\index{c2CapsuletoCapsule@{c2CapsuletoCapsule}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CapsuletoCapsule()}{c2CapsuletoCapsule()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aeead757864ba3154953ef4ab7c1f571a} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Capsuleto\+Capsule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa6453a9125cfb6e1fdd19f76e62f091a}\index{cute\_c2.h@{cute\_c2.h}!c2CapsuletoCapsuleManifold@{c2CapsuletoCapsuleManifold}}
+\index{c2CapsuletoCapsuleManifold@{c2CapsuletoCapsuleManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CapsuletoCapsuleManifold()}{c2CapsuletoCapsuleManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa6453a9125cfb6e1fdd19f76e62f091a} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Capsuleto\+Capsule\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a26cd06e6140acb1b08e5e0258538c38f}\index{cute\_c2.h@{cute\_c2.h}!c2CapsuletoPoly@{c2CapsuletoPoly}}
+\index{c2CapsuletoPoly@{c2CapsuletoPoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CapsuletoPoly()}{c2CapsuletoPoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a26cd06e6140acb1b08e5e0258538c38f} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Capsuleto\+Poly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a0bfa8ed7f41c7848bea8fbbc43cd8dd4}\index{cute\_c2.h@{cute\_c2.h}!c2CapsuletoPolyManifold@{c2CapsuletoPolyManifold}}
+\index{c2CapsuletoPolyManifold@{c2CapsuletoPolyManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CapsuletoPolyManifold()}{c2CapsuletoPolyManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a0bfa8ed7f41c7848bea8fbbc43cd8dd4} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Capsuleto\+Poly\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ad9acd66538a2e26fda403ed681996097}\index{cute\_c2.h@{cute\_c2.h}!c2CastRay@{c2CastRay}}
+\index{c2CastRay@{c2CastRay}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CastRay()}{c2CastRay()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad9acd66538a2e26fda403ed681996097} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Cast\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_ray}{c2\+Ray}}}]{A}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeB}{, }\item[{\mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a18cff67645553684a30d36ca2773116d}\index{cute\_c2.h@{cute\_c2.h}!c2CCW90@{c2CCW90}}
+\index{c2CCW90@{c2CCW90}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CCW90()}{c2CCW90()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a18cff67645553684a30d36ca2773116d} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+CCW90 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00469}{469}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00469\ \{\ \mbox{\hyperlink{structc2v}{c2v}}\ b;\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ =\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ =\ -\/a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ \textcolor{keywordflow}{return}\ b;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a6d32efa9a591b4261797da24d4303b6b}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoAABB@{c2CircletoAABB}}
+\index{c2CircletoAABB@{c2CircletoAABB}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoAABB()}{c2CircletoAABB()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a6d32efa9a591b4261797da24d4303b6b} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Circleto\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa1c135c6c0b3034ebf83b635dffdb73a}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoAABBManifold@{c2CircletoAABBManifold}}
+\index{c2CircletoAABBManifold@{c2CircletoAABBManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoAABBManifold()}{c2CircletoAABBManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa1c135c6c0b3034ebf83b635dffdb73a} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Circleto\+AABBManifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ae12e8d0fff1b8374d9547a9cf188ffa0}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoCapsule@{c2CircletoCapsule}}
+\index{c2CircletoCapsule@{c2CircletoCapsule}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoCapsule()}{c2CircletoCapsule()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae12e8d0fff1b8374d9547a9cf188ffa0} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Circleto\+Capsule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a3292c71f5420bcc86da700a0372677a8}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoCapsuleManifold@{c2CircletoCapsuleManifold}}
+\index{c2CircletoCapsuleManifold@{c2CircletoCapsuleManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoCapsuleManifold()}{c2CircletoCapsuleManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a3292c71f5420bcc86da700a0372677a8} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Circleto\+Capsule\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a2b381dd6079f81074aff99fce3304fe4}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoCircle@{c2CircletoCircle}}
+\index{c2CircletoCircle@{c2CircletoCircle}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoCircle()}{c2CircletoCircle()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a2b381dd6079f81074aff99fce3304fe4} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Circleto\+Circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{B}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a5a06fdc38e07b42f1aec7d1f9d7ca182}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoCircleManifold@{c2CircletoCircleManifold}}
+\index{c2CircletoCircleManifold@{c2CircletoCircleManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoCircleManifold()}{c2CircletoCircleManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5a06fdc38e07b42f1aec7d1f9d7ca182} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Circleto\+Circle\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ad859a357fca1a7e8324aeaef87aeb455}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoPoly@{c2CircletoPoly}}
+\index{c2CircletoPoly@{c2CircletoPoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoPoly()}{c2CircletoPoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad859a357fca1a7e8324aeaef87aeb455} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Circleto\+Poly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_af9873986db8e12becd2e2961b70fe7ab}\index{cute\_c2.h@{cute\_c2.h}!c2CircletoPolyManifold@{c2CircletoPolyManifold}}
+\index{c2CircletoPolyManifold@{c2CircletoPolyManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2CircletoPolyManifold()}{c2CircletoPolyManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_af9873986db8e12becd2e2961b70fe7ab} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Circleto\+Poly\+Manifold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_afcfd33f860ff46ff49e4d6c7dfe3d948}\index{cute\_c2.h@{cute\_c2.h}!c2Clampv@{c2Clampv}}
+\index{c2Clampv@{c2Clampv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Clampv()}{c2Clampv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_afcfd33f860ff46ff49e4d6c7dfe3d948} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Clampv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{lo}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{hi}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00473}{473}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00473\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_ae8614649b7105f62fd5d96924e25e147}{c2Maxv}}(lo,\ \mbox{\hyperlink{cute__c2_8h_af92f21e15c4c80071db796f46ed8fcce}{c2Minv}}(a,\ hi));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a3f412e0a34cd5d677478cca007be384c}\index{cute\_c2.h@{cute\_c2.h}!c2Collide@{c2Collide}}
+\index{c2Collide@{c2Collide}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Collide()}{c2Collide()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a3f412e0a34cd5d677478cca007be384c} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Collide (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeA}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeB}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa0d6ef52a468f3a261203e9a68ebe431}\index{cute\_c2.h@{cute\_c2.h}!c2Collided@{c2Collided}}
+\index{c2Collided@{c2Collided}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Collided()}{c2Collided()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa0d6ef52a468f3a261203e9a68ebe431} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Collided (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeA}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeB}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a84afcee1b10b757401a0e8166f4ea4c7}\index{cute\_c2.h@{cute\_c2.h}!c2Det2@{c2Det2}}
+\index{c2Det2@{c2Det2}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Det2()}{c2Det2()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a84afcee1b10b757401a0e8166f4ea4c7} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Det2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00470}{470}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00470\ \{\ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ -\/\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a1aa5d97ad8706d1c527349fe02d231e6}\index{cute\_c2.h@{cute\_c2.h}!c2Dist@{c2Dist}}
+\index{c2Dist@{c2Dist}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Dist()}{c2Dist()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a1aa5d97ad8706d1c527349fe02d231e6} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Dist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2h}{c2h}}}]{h}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{p}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00515}{515}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00515\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2Dot}}(h.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}},\ p)\ -\/\ h.\mbox{\hyperlink{structc2h_ac08ea6658ab87a29f34ee49a081ffb3f}{d}};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a5dcf7563f13d8b8d5c2423a2f7134700}\index{cute\_c2.h@{cute\_c2.h}!c2Div@{c2Div}}
+\index{c2Div@{c2Div}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Div()}{c2Div()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5dcf7563f13d8b8d5c2423a2f7134700} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{float}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00467}{467}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00467\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(a,\ 1.0f\ /\ b);\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}\index{cute\_c2.h@{cute\_c2.h}!c2Dot@{c2Dot}}
+\index{c2Dot@{c2Dot}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Dot()}{c2Dot()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00464}{464}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00464\ \{\ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a206e5641840f323422ebfe8182bd75a4}\index{cute\_c2.h@{cute\_c2.h}!c2GJK@{c2GJK}}
+\index{c2GJK@{c2GJK}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2GJK()}{c2GJK()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a206e5641840f323422ebfe8182bd75a4} 
+CUTE\+\_\+\+C2\+\_\+\+API float c2\+GJK (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeA}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax\+\_\+ptr}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeB}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx\+\_\+ptr}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{outA}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{outB}{, }\item[{int}]{use\+\_\+radius}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{iterations}{, }\item[{\mbox{\hyperlink{structc2_g_j_k_cache}{c2\+GJKCache}} \texorpdfstring{$\ast$}{*}}]{cache}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ad7f2ad537d84324b6cdf35aec402a533}\index{cute\_c2.h@{cute\_c2.h}!c2Hmax@{c2Hmax}}
+\index{c2Hmax@{c2Hmax}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Hmax()}{c2Hmax()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad7f2ad537d84324b6cdf35aec402a533} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Hmax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00476}{476}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00476\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}{c2Max}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a854ce80a68565875555fbf95c757c31c}\index{cute\_c2.h@{cute\_c2.h}!c2Hmin@{c2Hmin}}
+\index{c2Hmin@{c2Hmin}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Hmin()}{c2Hmin()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a854ce80a68565875555fbf95c757c31c} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Hmin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00475}{475}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00475\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}{c2Min}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ac6a78404ac8cf8d93ecf905814e401b4}\index{cute\_c2.h@{cute\_c2.h}!c2Hull@{c2Hull}}
+\index{c2Hull@{c2Hull}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Hull()}{c2Hull()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ac6a78404ac8cf8d93ecf905814e401b4} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Hull (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{verts}{, }\item[{int}]{count}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_abeac284a08d795a95718607e28b29f0d}\index{cute\_c2.h@{cute\_c2.h}!c2Inflate@{c2Inflate}}
+\index{c2Inflate@{c2Inflate}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Inflate()}{c2Inflate()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_abeac284a08d795a95718607e28b29f0d} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Inflate (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{type}{, }\item[{float}]{skin\+\_\+factor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a9494e2e4322cd8bfc04b0d411f4c3cc0}\index{cute\_c2.h@{cute\_c2.h}!c2Intersect@{c2Intersect}}
+\index{c2Intersect@{c2Intersect}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Intersect()}{c2Intersect()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a9494e2e4322cd8bfc04b0d411f4c3cc0} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Intersect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{, }\item[{float}]{da}{, }\item[{float}]{db}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00519}{519}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00519\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2Add}}(a,\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(\mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2Sub}}(b,\ a),\ (da\ /\ (da\ -\/\ db))));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}\index{cute\_c2.h@{cute\_c2.h}!c2Len@{c2Len}}
+\index{c2Len@{c2Len}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Len()}{c2Len()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a96d836581f519684ee26c5ba51f96341} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} float c2\+Len (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00477}{477}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00477\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a98459522a3c01e751b614fee1c18b286}{c2Sqrt}}(\mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2Dot}}(a,\ a));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_afc415d7f1fa2031fed5130ac1758c461}\index{cute\_c2.h@{cute\_c2.h}!c2Lerp@{c2Lerp}}
+\index{c2Lerp@{c2Lerp}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Lerp()}{c2Lerp()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_afc415d7f1fa2031fed5130ac1758c461} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Lerp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{, }\item[{float}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00481}{481}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00481\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2Add}}(a,\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(\mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2Sub}}(b,\ a),\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ab774831fd26859f18b0a36a09cf7064b}\index{cute\_c2.h@{cute\_c2.h}!c2MakePoly@{c2MakePoly}}
+\index{c2MakePoly@{c2MakePoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MakePoly()}{c2MakePoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab774831fd26859f18b0a36a09cf7064b} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Make\+Poly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{p}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ae8614649b7105f62fd5d96924e25e147}\index{cute\_c2.h@{cute\_c2.h}!c2Maxv@{c2Maxv}}
+\index{c2Maxv@{c2Maxv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Maxv()}{c2Maxv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae8614649b7105f62fd5d96924e25e147} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Maxv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00472}{472}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00472\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(\mbox{\hyperlink{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}{c2Max}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}),\ \mbox{\hyperlink{cute__c2_8h_aece46f665bb44f92a188b15ff3fde084}{c2Max}}(a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}},\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_af92f21e15c4c80071db796f46ed8fcce}\index{cute\_c2.h@{cute\_c2.h}!c2Minv@{c2Minv}}
+\index{c2Minv@{c2Minv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Minv()}{c2Minv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_af92f21e15c4c80071db796f46ed8fcce} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Minv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00471}{471}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00471\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(\mbox{\hyperlink{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}{c2Min}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}),\ \mbox{\hyperlink{cute__c2_8h_a996cff903c9114ecb6fca37b698e762e}{c2Min}}(a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}},\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a5f9375d498fd4c2c84ea89751a5538ed}\index{cute\_c2.h@{cute\_c2.h}!c2Mulmm@{c2Mulmm}}
+\index{c2Mulmm@{c2Mulmm}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulmm()}{c2Mulmm()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5f9375d498fd4c2c84ea89751a5538ed} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2m}{c2m}} c2\+Mulmm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{a}{, }\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00502}{502}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00502\ \{\ \mbox{\hyperlink{structc2m}{c2m}}\ c;\ c.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}\ =\ \mbox{\hyperlink{cute__c2_8h_ac12063c537c7aa685ee637d0362e1956}{c2Mulmv}}(a,\ b.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}});\ \ c.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}\ =\ \mbox{\hyperlink{cute__c2_8h_ac12063c537c7aa685ee637d0362e1956}{c2Mulmv}}(a,\ b.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}});\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a003777ba26a8c6440f4c9e379f75c077}\index{cute\_c2.h@{cute\_c2.h}!c2MulmmT@{c2MulmmT}}
+\index{c2MulmmT@{c2MulmmT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulmmT()}{c2MulmmT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a003777ba26a8c6440f4c9e379f75c077} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2m}{c2m}} c2\+MulmmT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{a}{, }\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00503}{503}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00503\ \{\ \mbox{\hyperlink{structc2m}{c2m}}\ c;\ c.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}\ =\ \mbox{\hyperlink{cute__c2_8h_a02429730284c3db0b2c992f9e6b7f6ce}{c2MulmvT}}(a,\ b.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}});\ c.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}\ =\ \mbox{\hyperlink{cute__c2_8h_a02429730284c3db0b2c992f9e6b7f6ce}{c2MulmvT}}(a,\ b.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}});\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ac12063c537c7aa685ee637d0362e1956}\index{cute\_c2.h@{cute\_c2.h}!c2Mulmv@{c2Mulmv}}
+\index{c2Mulmv@{c2Mulmv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulmv()}{c2Mulmv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ac12063c537c7aa685ee637d0362e1956} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Mulmv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00500}{500}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00500\ \{\ \mbox{\hyperlink{structc2v}{c2v}}\ c;\ c.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ =\ a.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ c.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ =\ a.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a02429730284c3db0b2c992f9e6b7f6ce}\index{cute\_c2.h@{cute\_c2.h}!c2MulmvT@{c2MulmvT}}
+\index{c2MulmvT@{c2MulmvT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulmvT()}{c2MulmvT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a02429730284c3db0b2c992f9e6b7f6ce} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+MulmvT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2m}{c2m}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00501}{501}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00501\ \{\ \mbox{\hyperlink{structc2v}{c2v}}\ c;\ c.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ =\ a.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2m_ad8ae6359cbed9334321c927f25e65e73}{x}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ c.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ =\ a.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2m_a5a37b8965d957e956af7b73c49932fd7}{y}}.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a9bfacd10ac51218d70dbe8d5e719f799}\index{cute\_c2.h@{cute\_c2.h}!c2Mulrr@{c2Mulrr}}
+\index{c2Mulrr@{c2Mulrr}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulrr()}{c2Mulrr()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a9bfacd10ac51218d70dbe8d5e719f799} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} c2\+Mulrr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{a}{, }\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00497}{497}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00497\ \{\ \mbox{\hyperlink{structc2r}{c2r}}\ c;\ c.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ =\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ -\/\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}};\ c.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ =\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ +\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}};\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_acd93f6c20f9979dac113ddec536e79c8}\index{cute\_c2.h@{cute\_c2.h}!c2MulrrT@{c2MulrrT}}
+\index{c2MulrrT@{c2MulrrT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulrrT()}{c2MulrrT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_acd93f6c20f9979dac113ddec536e79c8} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} c2\+MulrrT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{a}{, }\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00498}{498}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00498\ \{\ \mbox{\hyperlink{structc2r}{c2r}}\ c;\ c.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ =\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ +\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}};\ c.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ =\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ -\/\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}};\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b}\index{cute\_c2.h@{cute\_c2.h}!c2Mulrv@{c2Mulrv}}
+\index{c2Mulrv@{c2Mulrv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulrv()}{c2Mulrv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Mulrv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00495}{495}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00495\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ -\/\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}},\ \ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43}\index{cute\_c2.h@{cute\_c2.h}!c2MulrvT@{c2MulrvT}}
+\index{c2MulrvT@{c2MulrvT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulrvT()}{c2MulrvT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+MulrvT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00496}{496}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00496\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}},\ -\/a.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ *\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ +\ a.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ *\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}\index{cute\_c2.h@{cute\_c2.h}!c2Mulvs@{c2Mulvs}}
+\index{c2Mulvs@{c2Mulvs}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulvs()}{c2Mulvs()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Mulvs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{float}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00465}{465}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00465\ \{\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *=\ b;\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *=\ b;\ \textcolor{keywordflow}{return}\ a;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ab4686d6b5ef8593f52dfcaded35ec920}\index{cute\_c2.h@{cute\_c2.h}!c2Mulvv@{c2Mulvv}}
+\index{c2Mulvv@{c2Mulvv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulvv()}{c2Mulvv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab4686d6b5ef8593f52dfcaded35ec920} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Mulvv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00466}{466}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00466\ \{\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ *=\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ *=\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \textcolor{keywordflow}{return}\ a;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ae90ce92ed1ddfbec6833433841079d8d}\index{cute\_c2.h@{cute\_c2.h}!c2Mulxh@{c2Mulxh}}
+\index{c2Mulxh@{c2Mulxh}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulxh()}{c2Mulxh()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae90ce92ed1ddfbec6833433841079d8d} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2h}{c2h}} c2\+Mulxh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2h}{c2h}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00517}{517}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00517\ \{\ \mbox{\hyperlink{structc2h}{c2h}}\ c;\ c.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}}\ =\ \mbox{\hyperlink{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b}{c2Mulrv}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}});\ c.\mbox{\hyperlink{structc2h_ac08ea6658ab87a29f34ee49a081ffb3f}{d}}\ =\ \mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2Dot}}(\mbox{\hyperlink{cute__c2_8h_a00e7e5eeeffc98bc6d2c98b36d4c9a89}{c2Mulxv}}(a,\ \mbox{\hyperlink{cute__c2_8h_aa6a22978ce1bf40972463d694bdbc60f}{c2Origin}}(b)),\ c.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}});\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a578cab5d4e482419d9eaae4feb16802a}\index{cute\_c2.h@{cute\_c2.h}!c2MulxhT@{c2MulxhT}}
+\index{c2MulxhT@{c2MulxhT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulxhT()}{c2MulxhT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a578cab5d4e482419d9eaae4feb16802a} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2h}{c2h}} c2\+MulxhT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2h}{c2h}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00518}{518}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00518\ \{\ \mbox{\hyperlink{structc2h}{c2h}}\ c;\ c.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}}\ =\ \mbox{\hyperlink{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43}{c2MulrvT}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}});\ c.\mbox{\hyperlink{structc2h_ac08ea6658ab87a29f34ee49a081ffb3f}{d}}\ =\ \mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2Dot}}(\mbox{\hyperlink{cute__c2_8h_a5b6c48f69159b15f7b9299d2ed09c920}{c2MulxvT}}(a,\ \mbox{\hyperlink{cute__c2_8h_aa6a22978ce1bf40972463d694bdbc60f}{c2Origin}}(b)),\ c.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}});\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a00e7e5eeeffc98bc6d2c98b36d4c9a89}\index{cute\_c2.h@{cute\_c2.h}!c2Mulxv@{c2Mulxv}}
+\index{c2Mulxv@{c2Mulxv}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulxv()}{c2Mulxv()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a00e7e5eeeffc98bc6d2c98b36d4c9a89} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Mulxv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00507}{507}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00507\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2Add}}(\mbox{\hyperlink{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b}{c2Mulrv}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b),\ a.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a5b6c48f69159b15f7b9299d2ed09c920}\index{cute\_c2.h@{cute\_c2.h}!c2MulxvT@{c2MulxvT}}
+\index{c2MulxvT@{c2MulxvT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulxvT()}{c2MulxvT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a5b6c48f69159b15f7b9299d2ed09c920} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+MulxvT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00508}{508}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00508\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43}{c2MulrvT}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ \mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2Sub}}(b,\ a.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}}));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a238ecbf634a5e68491cfff4725700501}\index{cute\_c2.h@{cute\_c2.h}!c2Mulxx@{c2Mulxx}}
+\index{c2Mulxx@{c2Mulxx}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Mulxx()}{c2Mulxx()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a238ecbf634a5e68491cfff4725700501} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} c2\+Mulxx (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00509}{509}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00509\ \{\ \mbox{\hyperlink{structc2x}{c2x}}\ c;\ c.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}}\ =\ \mbox{\hyperlink{cute__c2_8h_a9bfacd10ac51218d70dbe8d5e719f799}{c2Mulrr}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}});\ c.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}}\ =\ \mbox{\hyperlink{cute__c2_8h_af9c128f433c17ba8893c3e8ee1de18b1}{c2Add}}(\mbox{\hyperlink{cute__c2_8h_a802eb294e489b0a600840f5ba83c653b}{c2Mulrv}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}}),\ a.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}});\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ad38af9936384626d0d9613687e662a06}\index{cute\_c2.h@{cute\_c2.h}!c2MulxxT@{c2MulxxT}}
+\index{c2MulxxT@{c2MulxxT}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2MulxxT()}{c2MulxxT()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad38af9936384626d0d9613687e662a06} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} c2\+MulxxT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{a}{, }\item[{\mbox{\hyperlink{structc2x}{c2x}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00510}{510}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00510\ \{\ \mbox{\hyperlink{structc2x}{c2x}}\ c;\ c.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}}\ =\ \mbox{\hyperlink{cute__c2_8h_acd93f6c20f9979dac113ddec536e79c8}{c2MulrrT}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ b.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}});\ c.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}}\ =\ \mbox{\hyperlink{cute__c2_8h_a8c28ce5953b2e6760bc640dd50d92a43}{c2MulrvT}}(a.\mbox{\hyperlink{structc2x_a7542fe0c856a8cf3afab268c73b67fe7}{r}},\ \mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2Sub}}(b.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}},\ a.\mbox{\hyperlink{structc2x_a940d4b80ef8117f245811323a4fbef57}{p}}));\ \textcolor{keywordflow}{return}\ c;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a7cb3cb1c48f3684b6db762bdc1ef8a71}\index{cute\_c2.h@{cute\_c2.h}!c2Neg@{c2Neg}}
+\index{c2Neg@{c2Neg}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Neg()}{c2Neg()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a7cb3cb1c48f3684b6db762bdc1ef8a71} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Neg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00480}{480}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00480\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(-\/a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}},\ -\/a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ae228814d5417858c78336a3e7e2aa834}\index{cute\_c2.h@{cute\_c2.h}!c2Norm@{c2Norm}}
+\index{c2Norm@{c2Norm}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Norm()}{c2Norm()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ae228814d5417858c78336a3e7e2aa834} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Norm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00478}{478}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00478\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a5dcf7563f13d8b8d5c2423a2f7134700}{c2Div}}(a,\ \mbox{\hyperlink{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}{c2Len}}(a));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a99a88540199bcc905683dd3aa8c9be4a}\index{cute\_c2.h@{cute\_c2.h}!c2Norms@{c2Norms}}
+\index{c2Norms@{c2Norms}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Norms()}{c2Norms()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a99a88540199bcc905683dd3aa8c9be4a} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Norms (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{verts}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}} \texorpdfstring{$\ast$}{*}}]{norms}{, }\item[{int}]{count}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa6a22978ce1bf40972463d694bdbc60f}\index{cute\_c2.h@{cute\_c2.h}!c2Origin@{c2Origin}}
+\index{c2Origin@{c2Origin}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Origin()}{c2Origin()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa6a22978ce1bf40972463d694bdbc60f} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Origin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2h}{c2h}}}]{h}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00514}{514}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00514\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(h.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}},\ h.\mbox{\hyperlink{structc2h_ac08ea6658ab87a29f34ee49a081ffb3f}{d}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a631c57baa292018b735447e00f106ab3}\index{cute\_c2.h@{cute\_c2.h}!c2Parallel@{c2Parallel}}
+\index{c2Parallel@{c2Parallel}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Parallel()}{c2Parallel()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a631c57baa292018b735447e00f106ab3} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} int c2\+Parallel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{, }\item[{float}]{k\+Tol}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00482}{482}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00483\ \{}
+\DoxyCodeLine{00484\ \ \ \ \ \textcolor{keywordtype}{float}\ k\ =\ \mbox{\hyperlink{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}{c2Len}}(a)\ /\ \mbox{\hyperlink{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}{c2Len}}(b);}
+\DoxyCodeLine{00485\ \ \ \ \ b\ =\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(b,\ k);}
+\DoxyCodeLine{00486\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}{c2Abs}}(a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ -\/\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}})\ <\ kTol\ \&\&\ \mbox{\hyperlink{cute__c2_8h_aed326c8938c77a2a5644aa8a3f50cd99}{c2Abs}}(a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ -\/\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}})\ <\ kTol)\ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00487\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00488\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a01341a99ed0c0b731970e8853531d263}\index{cute\_c2.h@{cute\_c2.h}!c2PolytoPoly@{c2PolytoPoly}}
+\index{c2PolytoPoly@{c2PolytoPoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2PolytoPoly()}{c2PolytoPoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a01341a99ed0c0b731970e8853531d263} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Polyto\+Poly (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a9f7375003472cada253d2dc8e3ce82e1}\index{cute\_c2.h@{cute\_c2.h}!c2PolytoPolyManifold@{c2PolytoPolyManifold}}
+\index{c2PolytoPolyManifold@{c2PolytoPolyManifold}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2PolytoPolyManifold()}{c2PolytoPolyManifold()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a9f7375003472cada253d2dc8e3ce82e1} 
+CUTE\+\_\+\+C2\+\_\+\+API void c2\+Polyto\+Poly\+Manifold (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx}{, }\item[{\mbox{\hyperlink{structc2_manifold}{c2\+Manifold}} \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ad31c66f305695857b077d38bd09ec10b}\index{cute\_c2.h@{cute\_c2.h}!c2Project@{c2Project}}
+\index{c2Project@{c2Project}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Project()}{c2Project()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad31c66f305695857b077d38bd09ec10b} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Project (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2h}{c2h}}}]{h}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{p}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00516}{516}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00516\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}{c2Sub}}(p,\ \mbox{\hyperlink{cute__c2_8h_ad7bcce333f18b8c822b71380f91a2df6}{c2Mulvs}}(h.\mbox{\hyperlink{structc2h_ad9e65e9ed4970b9d482776b008a30747}{n}},\ \mbox{\hyperlink{cute__c2_8h_a1aa5d97ad8706d1c527349fe02d231e6}{c2Dist}}(h,\ p)));\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a4d6b48728253a2c988cdc1ef40ba962f}\index{cute\_c2.h@{cute\_c2.h}!c2RaytoAABB@{c2RaytoAABB}}
+\index{c2RaytoAABB@{c2RaytoAABB}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RaytoAABB()}{c2RaytoAABB()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a4d6b48728253a2c988cdc1ef40ba962f} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Rayto\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_ray}{c2\+Ray}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a1051e2151767c730da0e6d68188cf87f}\index{cute\_c2.h@{cute\_c2.h}!c2RaytoCapsule@{c2RaytoCapsule}}
+\index{c2RaytoCapsule@{c2RaytoCapsule}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RaytoCapsule()}{c2RaytoCapsule()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a1051e2151767c730da0e6d68188cf87f} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Rayto\+Capsule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_ray}{c2\+Ray}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_capsule}{c2\+Capsule}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_a3d8f4bd3f05216f8deb7fd53fae0e459}\index{cute\_c2.h@{cute\_c2.h}!c2RaytoCircle@{c2RaytoCircle}}
+\index{c2RaytoCircle@{c2RaytoCircle}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RaytoCircle()}{c2RaytoCircle()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a3d8f4bd3f05216f8deb7fd53fae0e459} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Rayto\+Circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_ray}{c2\+Ray}}}]{A}{, }\item[{\mbox{\hyperlink{structc2_circle}{c2\+Circle}}}]{B}{, }\item[{\mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_ad72453c4c53403ae7e46d328b95c4094}\index{cute\_c2.h@{cute\_c2.h}!c2RaytoPoly@{c2RaytoPoly}}
+\index{c2RaytoPoly@{c2RaytoPoly}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RaytoPoly()}{c2RaytoPoly()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ad72453c4c53403ae7e46d328b95c4094} 
+CUTE\+\_\+\+C2\+\_\+\+API int c2\+Rayto\+Poly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2_ray}{c2\+Ray}}}]{A}{, }\item[{const \mbox{\hyperlink{structc2_poly}{c2\+Poly}} \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx\+\_\+ptr}{, }\item[{\mbox{\hyperlink{structc2_raycast}{c2\+Raycast}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_adc13fd86afde5b2f5b89cde00d0de67a}\index{cute\_c2.h@{cute\_c2.h}!c2Rot@{c2Rot}}
+\index{c2Rot@{c2Rot}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Rot()}{c2Rot()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_adc13fd86afde5b2f5b89cde00d0de67a} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} c2\+Rot (\begin{DoxyParamCaption}\item[{float}]{radians}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00491}{491}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00491\ \{\ \mbox{\hyperlink{structc2r}{c2r}}\ r;\ \mbox{\hyperlink{cute__c2_8h_ab79505fce1838f04a577094126815ac2}{c2SinCos}}(radians,\ \&r.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}},\ \&r.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}});\ \textcolor{keywordflow}{return}\ r;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a2dc32a46c98171df81d473bda36a9e3a}\index{cute\_c2.h@{cute\_c2.h}!c2RotIdentity@{c2RotIdentity}}
+\index{c2RotIdentity@{c2RotIdentity}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RotIdentity()}{c2RotIdentity()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a2dc32a46c98171df81d473bda36a9e3a} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2r}{c2r}} c2\+Rot\+Identity (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00492}{492}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00492\ \{\ \mbox{\hyperlink{structc2r}{c2r}}\ r;\ r.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}}\ =\ 1.0f;\ r.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}}\ =\ 0;\ \textcolor{keywordflow}{return}\ r;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_aecc03cc63f1ada7a320aa065e6b2f9ec}\index{cute\_c2.h@{cute\_c2.h}!c2RotX@{c2RotX}}
+\index{c2RotX@{c2RotX}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RotX()}{c2RotX()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aecc03cc63f1ada7a320aa065e6b2f9ec} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+RotX (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{r}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00493}{493}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00493\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(r.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}},\ r.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a00ebd0f4663f055912b9eb8dc9c7dfd8}\index{cute\_c2.h@{cute\_c2.h}!c2RotY@{c2RotY}}
+\index{c2RotY@{c2RotY}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2RotY()}{c2RotY()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a00ebd0f4663f055912b9eb8dc9c7dfd8} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+RotY (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2r}{c2r}}}]{r}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00494}{494}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00494\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(-\/r.\mbox{\hyperlink{structc2r_aced979bcaf554926a02d825c4dad8269}{s}},\ r.\mbox{\hyperlink{structc2r_a29682141c9233279c6e56f4044008b7e}{c}});\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a1d30280f8ccf7e8e1352848601c9a77e}\index{cute\_c2.h@{cute\_c2.h}!c2SafeNorm@{c2SafeNorm}}
+\index{c2SafeNorm@{c2SafeNorm}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2SafeNorm()}{c2SafeNorm()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a1d30280f8ccf7e8e1352848601c9a77e} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Safe\+Norm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00479}{479}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00479\ \{\ \textcolor{keywordtype}{float}\ sq\ =\ \mbox{\hyperlink{cute__c2_8h_aa6626ef7243369048469b95c0b47a4f0}{c2Dot}}(a,\ a);\ \textcolor{keywordflow}{return}\ sq\ ?\ \mbox{\hyperlink{cute__c2_8h_a5dcf7563f13d8b8d5c2423a2f7134700}{c2Div}}(a,\ \mbox{\hyperlink{cute__c2_8h_a96d836581f519684ee26c5ba51f96341}{c2Len}}(a))\ :\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(0,\ 0);\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ab79505fce1838f04a577094126815ac2}\index{cute\_c2.h@{cute\_c2.h}!c2SinCos@{c2SinCos}}
+\index{c2SinCos@{c2SinCos}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2SinCos()}{c2SinCos()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab79505fce1838f04a577094126815ac2} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} void c2\+Sin\+Cos (\begin{DoxyParamCaption}\item[{float}]{radians}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{s}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{c}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00447}{447}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00447\ \{\ *c\ =\ \mbox{\hyperlink{cute__c2_8h_a38ebab3d0198ef7c6d6cdc73a9c9b1fd}{c2Cos}}(radians);\ *s\ =\ \mbox{\hyperlink{cute__c2_8h_a847097bee54cfd2ece87ba0337247650}{c2Sin}}(radians);\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a797007d10175dd13b01c41fe60a14421}\index{cute\_c2.h@{cute\_c2.h}!c2Skew@{c2Skew}}
+\index{c2Skew@{c2Skew}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Skew()}{c2Skew()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a797007d10175dd13b01c41fe60a14421} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Skew (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00468}{468}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00468\ \{\ \mbox{\hyperlink{structc2v}{c2v}}\ b;\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ =\ -\/a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ =\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ \textcolor{keywordflow}{return}\ b;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996}\index{cute\_c2.h@{cute\_c2.h}!c2Sub@{c2Sub}}
+\index{c2Sub@{c2Sub}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Sub()}{c2Sub()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab7708ad1d4e6eedff0e5d10e3fe75996} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2\+Sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{a}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00463}{463}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00463\ \{\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ -\/=\ b.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}};\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ -\/=\ b.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}};\ \textcolor{keywordflow}{return}\ a;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_af037486725ac78fda6956b9e5732c123}\index{cute\_c2.h@{cute\_c2.h}!c2TOI@{c2TOI}}
+\index{c2TOI@{c2TOI}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2TOI()}{c2TOI()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_af037486725ac78fda6956b9e5732c123} 
+CUTE\+\_\+\+C2\+\_\+\+API \mbox{\hyperlink{structc2_t_o_i_result}{c2\+TOIResult}} c2\+TOI (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeA}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{ax\+\_\+ptr}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{vA}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{B}{, }\item[{\mbox{\hyperlink{cute__c2_8h_a76ad98d209c84fd8a8b22e942fdb93f2}{C2\+\_\+\+TYPE}}}]{typeB}{, }\item[{const \mbox{\hyperlink{structc2x}{c2x}} \texorpdfstring{$\ast$}{*}}]{bx\+\_\+ptr}{, }\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{vB}{, }\item[{int}]{use\+\_\+radius}{}\end{DoxyParamCaption})}
+
+\Hypertarget{cute__c2_8h_aa641f62915695506f3956bdd29afa5fe}\index{cute\_c2.h@{cute\_c2.h}!c2Transform@{c2Transform}}
+\index{c2Transform@{c2Transform}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2Transform()}{c2Transform()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_aa641f62915695506f3956bdd29afa5fe} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} c2\+Transform (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structc2v}{c2v}}}]{p}{, }\item[{float}]{radians}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00511}{511}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00511\ \{\ \mbox{\hyperlink{structc2x}{c2x}}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}.r\ =\ \mbox{\hyperlink{cute__c2_8h_adc13fd86afde5b2f5b89cde00d0de67a}{c2Rot}}(radians);\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}.p\ =\ p;\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_a77928b3580137381eefee44c224b35ba}\index{cute\_c2.h@{cute\_c2.h}!c2V@{c2V}}
+\index{c2V@{c2V}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2V()}{c2V()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_a77928b3580137381eefee44c224b35ba} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2v}{c2v}} c2V (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00461}{461}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00461\ \{\ \mbox{\hyperlink{structc2v}{c2v}}\ a;\ a.\mbox{\hyperlink{structc2v_a480a2b2c9db79b067b36b3add1e07b57}{x}}\ =\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};\ a.\mbox{\hyperlink{structc2v_a9273a55d043c53cba2326256a1ea441a}{y}}\ =\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}};\ \textcolor{keywordflow}{return}\ a;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{cute__c2_8h_ab63b182f0108be1cfc2a6e3c370b57aa}\index{cute\_c2.h@{cute\_c2.h}!c2xIdentity@{c2xIdentity}}
+\index{c2xIdentity@{c2xIdentity}!cute\_c2.h@{cute\_c2.h}}
+\doxysubsubsection{\texorpdfstring{c2xIdentity()}{c2xIdentity()}}
+{\footnotesize\ttfamily \label{cute__c2_8h_ab63b182f0108be1cfc2a6e3c370b57aa} 
+\mbox{\hyperlink{cute__c2_8h_ab1bc0055fb0bfdf13d7cdd16390a73fd}{C2\+\_\+\+INLINE}} \mbox{\hyperlink{structc2x}{c2x}} c2x\+Identity (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{cute__c2_8h_source_l00506}{506}} of file \mbox{\hyperlink{cute__c2_8h_source}{cute\+\_\+c2.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00506\ \{\ \mbox{\hyperlink{structc2x}{c2x}}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}.p\ =\ \mbox{\hyperlink{cute__c2_8h_a77928b3580137381eefee44c224b35ba}{c2V}}(0,\ 0);\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}.r\ =\ \mbox{\hyperlink{cute__c2_8h_a2dc32a46c98171df81d473bda36a9e3a}{c2RotIdentity}}();\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};\ \}}
+
+\end{DoxyCode}

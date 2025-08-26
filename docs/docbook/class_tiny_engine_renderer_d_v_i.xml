@@ -1,0 +1,607 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_renderer_d_v_i" xml:lang="en-US">
+<title>TinyEngineRendererDVI Class Reference</title>
+<indexterm><primary>TinyEngineRendererDVI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine_renderer_dvi.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TinyEngineRendererDVI:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine_renderer_d_v_i.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Types    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5">Mode</link> { <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6">MODE_PALETTE</link> = 2
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075">MODE_RGB565</link> = 1
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1">MODE_RGB888</link> = 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5">MODE_TEXT_MONO</link> = 4
+, <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2">MODE_TEXT_RGB111</link> = 5
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850f">TextColour</link> { <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44">TEXT_BLACK</link> = 0
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48">TEXT_RED</link>
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc">TEXT_GREEN</link>
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2">TEXT_BLUE</link>
+, <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f">TEXT_YELLOW</link>
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219">TEXT_MAGENTA</link>
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b">TEXT_CYAN</link>
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d">TEXT_WHITE</link>
+, <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329">BG_BLACK</link> = 0
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b">BG_RED</link> = TEXT_RED &lt;&lt; 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13">BG_GREEN</link> = TEXT_GREEN &lt;&lt; 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8">BG_BLUE</link> = TEXT_BLUE &lt;&lt; 3
+, <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68">BG_YELLOW</link> = TEXT_YELLOW &lt;&lt; 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff">BG_MAGENTA</link> = TEXT_MAGENTA &lt;&lt; 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d">BG_CYAN</link> = TEXT_CYAN &lt;&lt; 3
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e">BG_WHITE</link> = TEXT_WHITE &lt;&lt; 3
+, <?linebreak?><link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2">ATTR_NORMAL_INTEN</link> = 0
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772">ATTR_LOW_INTEN</link> = 1 &lt;&lt; 6
+, <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79">ATTR_V_LOW_INTEN</link> = 1 &lt;&lt; 7 | ATTR_LOW_INTEN
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp;fr_buf)</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_renderer_d_v_i_1a09c4f163843cf199dc0afcfafd7953b5">~TinyEngineRendererDVI</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_renderer_d_v_i_1a3f7752c320d9957f7e88f85ac9d6f8de">gfx_dma_handler</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_tinyengine__renderer__dvi_8h_1a0e2f295d3fc0f6caf5e239667b4d5814">RGB888</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1ab7f8fc6782cb61207a95e29e526b34d6">palette</link> [<link linkend="_class_tiny_engine_renderer_d_v_i_1ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</link>]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static constexpr int <link linkend="_class_tiny_engine_renderer_d_v_i_1ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</link> = 256</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_renderer_d_v_i_1a7efbb691f0b7646dbdc00b2423b4d286">display_width</link> = 320</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_renderer_d_v_i_1af56769c02b832f3433261722d680669b">display_height</link> = 240</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_renderer_d_v_i_1a5c8198aeb53c231de91bbf790a59f77c">frame_width</link> = 320</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_renderer_d_v_i_1af9d293ec842669e58b5d58bcb6d761d0">frame_height</link> = 240</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_tiny_engine_renderer_d_v_i_1add867ce010cc772f7e993a7ac326a05d">frame_bytes_per_pixel</link> = 1</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_tiny_engine_renderer_d_v_i_1a8a99856f9ce556f04f5032daec14a5f1">h_repeat</link> = 4</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_tiny_engine_renderer_d_v_i_1aa6f8cc917454c16a374452cc66b03687">v_repeat</link> = 4</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5">Mode</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1a6ea8f792a8bf334e07c732c2dbc892f2">mode</link> = <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075">MODE_RGB565</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00009">9</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<section>
+<title>Member Enumeration Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5"/><section>
+    <title>Mode</title>
+<indexterm><primary>Mode</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>Mode</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5">TinyEngineRendererDVI::Mode</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>MODE_PALETTE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>MODE_PALETTE</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6"/>MODE_PALETTE</entry><entry></entry></row><row><entry><indexterm><primary>MODE_RGB565</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>MODE_RGB565</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075"/>MODE_RGB565</entry><entry></entry></row><row><entry><indexterm><primary>MODE_RGB888</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>MODE_RGB888</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1"/>MODE_RGB888</entry><entry></entry></row><row><entry><indexterm><primary>MODE_TEXT_MONO</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>MODE_TEXT_MONO</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5"/>MODE_TEXT_MONO</entry><entry></entry></row><row><entry><indexterm><primary>MODE_TEXT_RGB111</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>MODE_TEXT_RGB111</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2"/>MODE_TEXT_RGB111</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00040">40</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+<programlisting linenumbering="unnumbered">00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6">MODE_PALETTE</link>&#32;=&#32;2,
+00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075">MODE_RGB565</link>&#32;=&#32;1,
+00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1">MODE_RGB888</link>&#32;=&#32;3,
+00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5">MODE_TEXT_MONO</link>&#32;=&#32;4,
+00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2">MODE_TEXT_RGB111</link>&#32;=&#32;5,
+00046 &#32;&#32;&#32;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850f"/><section>
+    <title>TextColour</title>
+<indexterm><primary>TextColour</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TextColour</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850f">TinyEngineRendererDVI::TextColour</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>TEXT_BLACK</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_BLACK</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44"/>TEXT_BLACK</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_RED</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_RED</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48"/>TEXT_RED</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_GREEN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_GREEN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc"/>TEXT_GREEN</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_BLUE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_BLUE</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2"/>TEXT_BLUE</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_YELLOW</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_YELLOW</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f"/>TEXT_YELLOW</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_MAGENTA</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_MAGENTA</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219"/>TEXT_MAGENTA</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_CYAN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_CYAN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b"/>TEXT_CYAN</entry><entry></entry></row><row><entry><indexterm><primary>TEXT_WHITE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TEXT_WHITE</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d"/>TEXT_WHITE</entry><entry></entry></row><row><entry><indexterm><primary>BG_BLACK</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_BLACK</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329"/>BG_BLACK</entry><entry></entry></row><row><entry><indexterm><primary>BG_RED</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_RED</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b"/>BG_RED</entry><entry></entry></row><row><entry><indexterm><primary>BG_GREEN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_GREEN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13"/>BG_GREEN</entry><entry></entry></row><row><entry><indexterm><primary>BG_BLUE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_BLUE</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8"/>BG_BLUE</entry><entry></entry></row><row><entry><indexterm><primary>BG_YELLOW</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_YELLOW</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68"/>BG_YELLOW</entry><entry></entry></row><row><entry><indexterm><primary>BG_MAGENTA</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_MAGENTA</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff"/>BG_MAGENTA</entry><entry></entry></row><row><entry><indexterm><primary>BG_CYAN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_CYAN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d"/>BG_CYAN</entry><entry></entry></row><row><entry><indexterm><primary>BG_WHITE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>BG_WHITE</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e"/>BG_WHITE</entry><entry></entry></row><row><entry><indexterm><primary>ATTR_NORMAL_INTEN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>ATTR_NORMAL_INTEN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2"/>ATTR_NORMAL_INTEN</entry><entry></entry></row><row><entry><indexterm><primary>ATTR_LOW_INTEN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>ATTR_LOW_INTEN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772"/>ATTR_LOW_INTEN</entry><entry></entry></row><row><entry><indexterm><primary>ATTR_V_LOW_INTEN</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>ATTR_V_LOW_INTEN</secondary></indexterm>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79"/>ATTR_V_LOW_INTEN</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00048">48</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+<programlisting linenumbering="unnumbered">00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44">TEXT_BLACK</link>&#32;=&#32;0,
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48">TEXT_RED</link>,
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc">TEXT_GREEN</link>,
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2">TEXT_BLUE</link>,
+00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f">TEXT_YELLOW</link>,
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219">TEXT_MAGENTA</link>,
+00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b">TEXT_CYAN</link>,
+00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d">TEXT_WHITE</link>,
+00057 
+00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329">BG_BLACK</link>&#32;=&#32;0,
+00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b">BG_RED</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48">TEXT_RED</link>&#32;&lt;&lt;&#32;3,
+00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13">BG_GREEN</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc">TEXT_GREEN</link>&#32;&lt;&lt;&#32;3,
+00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8">BG_BLUE</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2">TEXT_BLUE</link>&#32;&lt;&lt;&#32;3,
+00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68">BG_YELLOW</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f">TEXT_YELLOW</link>&#32;&lt;&lt;&#32;3,
+00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff">BG_MAGENTA</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219">TEXT_MAGENTA</link>&#32;&lt;&lt;&#32;3,
+00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d">BG_CYAN</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b">TEXT_CYAN</link>&#32;&lt;&lt;&#32;3,
+00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e">BG_WHITE</link>&#32;=&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d">TEXT_WHITE</link>&#32;&lt;&lt;&#32;3,
+00066 
+00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2">ATTR_NORMAL_INTEN</link>&#32;=&#32;0,
+00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772">ATTR_LOW_INTEN</link>&#32;=&#32;1&#32;&lt;&lt;&#32;6,
+00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79">ATTR_V_LOW_INTEN</link>&#32;=&#32;1&#32;&lt;&lt;&#32;7&#32;|&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772">ATTR_LOW_INTEN</link>,
+00070 &#32;&#32;&#32;&#32;};
+</programlisting></section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324"/><section>
+    <title>TinyEngineRendererDVI()</title>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<para><computeroutput>TinyEngineRendererDVI::TinyEngineRendererDVI (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp; fr_buf)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8cpp_source_1l00729">729</link> of file <link linkend="_tinyengine__renderer__dvi_8cpp_source">tinyengine_renderer_dvi.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00729 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;m_frame_buf(fr_buf)&#x240D;
+00730 {
+00731 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Always&#32;use&#32;the&#32;bottom&#32;channels</emphasis>
+00732 &#32;&#32;&#32;&#32;dma_claim_mask((1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1);
+00733 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</link>();
+00734 };
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a09c4f163843cf199dc0afcfafd7953b5"/><section>
+    <title>~TinyEngineRendererDVI()</title>
+<indexterm><primary>~TinyEngineRendererDVI</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>~TinyEngineRendererDVI</secondary></indexterm>
+<para><computeroutput>TinyEngineRendererDVI::~TinyEngineRendererDVI ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00077">77</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+<programlisting linenumbering="unnumbered">00077 {};
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a3f7752c320d9957f7e88f85ac9d6f8de"/><section>
+    <title>gfx_dma_handler()</title>
+<indexterm><primary>gfx_dma_handler</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>gfx_dma_handler</secondary></indexterm>
+<para><computeroutput>void TinyEngineRendererDVI::gfx_dma_handler ( )</computeroutput></para></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1ad9985d571f39928ba4cebd35d84cd5f0"/><section>
+    <title>swap_blocking()</title>
+<indexterm><primary>swap_blocking</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>swap_blocking</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererDVI::swap_blocking ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderer_i_1a2469b0b227cbc4ff8a27f292f929d0d3">TinyEngineRendererI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00079">79</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+<programlisting linenumbering="unnumbered">00079 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1aa12a0ece831ea57ad7b912b069493ce7"/><section>
+    <title>swap_non_blocking()</title>
+<indexterm><primary>swap_non_blocking</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>swap_non_blocking</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererDVI::swap_non_blocking ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderer_i_1ab1c8fd0d87f133a519e26ae071765e9f">TinyEngineRendererI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00080">80</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+<programlisting linenumbering="unnumbered">00080 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a"/><section>
+    <title>tinyengine_renderer_init()</title>
+<indexterm><primary>tinyengine_renderer_init</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>tinyengine_renderer_init</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererDVI::tinyengine_renderer_init ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderer_i_1ab61c14e1610265da86010a83142674bd">TinyEngineRendererI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8cpp_source_1l00490">490</link> of file <link linkend="_tinyengine__renderer__dvi_8cpp_source">tinyengine_renderer_dvi.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00491 {
+00492 &#32;&#32;&#32;&#32;<emphasis role="comment">//framebuffer-&gt;flip_blocking&#32;=&#32;te_renderer_dvi_wait_vsync_blocking;//&#32;set&#32;this&#32;in&#32;the&#32;main&#32;initiator&#32;in&#32;tinyengine.c</emphasis>
+00493 &#32;&#32;&#32;&#32;display&#32;=&#32;<emphasis role="keyword">this</emphasis>;
+00494 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;dma_claim_mask((1&#32;&lt;&lt;&#32;NUM_CHANS)&#32;-&#32;1);</emphasis>
+00495 &#32;&#32;&#32;&#32;ch_num&#32;=&#32;0;
+00496 &#32;&#32;&#32;&#32;line_num&#32;=&#32;-1;
+00497 &#32;&#32;&#32;&#32;v_scanline&#32;=&#32;2;
+00498 &#32;&#32;&#32;&#32;flip_next&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+00499 
+00500 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;v_inactive_total&#32;=&#32;timing_mode-&gt;v_front_porch&#32;+&#32;timing_mode-&gt;v_sync_width&#32;+&#32;timing_mode-&gt;v_back_porch;</emphasis>
+00501 &#32;&#32;&#32;&#32;v_inactive_total&#32;=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</link>&#32;+&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a12e2ff5f3949e456139ab32153e276df">MODE_V_SYNC_WIDTH</link>&#32;+&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1ae572b39c10ef4635a552fe095e0ad34e">MODE_V_BACK_PORCH</link>;
+00502 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;v_total_active_lines&#32;=&#32;v_inactive_total&#32;+&#32;timing_mode-&gt;v_active_lines;</emphasis>
+00503 &#32;&#32;&#32;&#32;v_total_active_lines&#32;=&#32;v_inactive_total&#32;+&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a989ecfb618e13a471b7ad44cd9fda4fa">MODE_V_ACTIVE_LINES</link>;
+00504 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1aa6f8cc917454c16a374452cc66b03687">v_repeat</link>&#32;=&#32;1&#32;&lt;&lt;&#32;v_repeat_shift;
+00505 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a8a99856f9ce556f04f5032daec14a5f1">h_repeat</link>&#32;=&#32;1&#32;&lt;&lt;&#32;h_repeat_shift;
+00506 
+00507 &#32;&#32;&#32;&#32;memcpy(vblank_line_vsync_off,&#32;vblank_line_vsync_off_src,&#32;<emphasis role="keyword">sizeof</emphasis>(vblank_line_vsync_off_src));
+00508 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_off[0]&#32;|=&#32;timing_mode-&gt;h_front_porch;</emphasis>
+00509 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_off[2]&#32;|=&#32;timing_mode-&gt;h_sync_width;</emphasis>
+00510 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_off[4]&#32;|=&#32;timing_mode-&gt;h_back_porch&#32;+&#32;timing_mode-&gt;h_active_pixels;</emphasis>
+00511 &#32;&#32;&#32;&#32;vblank_line_vsync_off[0]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</link>;
+00512 &#32;&#32;&#32;&#32;vblank_line_vsync_off[2]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</link>;
+00513 &#32;&#32;&#32;&#32;vblank_line_vsync_off[4]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</link>&#32;+&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</link>;
+00514 
+00515 &#32;&#32;&#32;&#32;memcpy(vblank_line_vsync_on,&#32;vblank_line_vsync_on_src,&#32;<emphasis role="keyword">sizeof</emphasis>(vblank_line_vsync_on_src));
+00516 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_on[0]&#32;|=&#32;timing_mode-&gt;h_front_porch;</emphasis>
+00517 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_on[2]&#32;|=&#32;timing_mode-&gt;h_sync_width;</emphasis>
+00518 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vblank_line_vsync_on[4]&#32;|=&#32;timing_mode-&gt;h_back_porch&#32;+&#32;timing_mode-&gt;h_active_pixels;</emphasis>
+00519 &#32;&#32;&#32;&#32;vblank_line_vsync_on[0]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</link>;
+00520 &#32;&#32;&#32;&#32;vblank_line_vsync_on[2]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</link>;
+00521 &#32;&#32;&#32;&#32;vblank_line_vsync_on[4]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</link>&#32;+&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</link>;
+00522 
+00523 &#32;&#32;&#32;&#32;memcpy(vactive_line_header,&#32;vactive_line_header_src,&#32;<emphasis role="keyword">sizeof</emphasis>(vactive_line_header_src));
+00524 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_line_header[0]&#32;|=&#32;timing_mode-&gt;h_front_porch;</emphasis>
+00525 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_line_header[2]&#32;|=&#32;timing_mode-&gt;h_sync_width;</emphasis>
+00526 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_line_header[4]&#32;|=&#32;timing_mode-&gt;h_back_porch;</emphasis>
+00527 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_line_header[6]&#32;|=&#32;timing_mode-&gt;h_active_pixels;</emphasis>
+00528 &#32;&#32;&#32;&#32;vactive_line_header[0]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</link>;
+00529 &#32;&#32;&#32;&#32;vactive_line_header[2]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</link>;
+00530 &#32;&#32;&#32;&#32;vactive_line_header[4]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</link>;
+00531 &#32;&#32;&#32;&#32;vactive_line_header[6]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</link>;
+00532 
+00533 &#32;&#32;&#32;&#32;memcpy(vactive_text_line_header,&#32;vactive_text_line_header_src,&#32;<emphasis role="keyword">sizeof</emphasis>(vactive_text_line_header_src));
+00534 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_text_line_header[0]&#32;|=&#32;timing_mode-&gt;h_front_porch;</emphasis>
+00535 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_text_line_header[2]&#32;|=&#32;timing_mode-&gt;h_sync_width;</emphasis>
+00536 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_text_line_header[4]&#32;|=&#32;timing_mode-&gt;h_back_porch;</emphasis>
+00537 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vactive_text_line_header[7&#32;+&#32;6]&#32;|=&#32;timing_mode-&gt;h_active_pixels&#32;-&#32;6;</emphasis>
+00538 &#32;&#32;&#32;&#32;vactive_text_line_header[0]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</link>;
+00539 &#32;&#32;&#32;&#32;vactive_text_line_header[2]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</link>;
+00540 &#32;&#32;&#32;&#32;vactive_text_line_header[4]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</link>;
+00541 &#32;&#32;&#32;&#32;vactive_text_line_header[7&#32;+&#32;6]&#32;|=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</link>&#32;-&#32;6;
+00542 
+00543 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;RGB332&#32;pallete&#32;mode</emphasis>
+00544 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1add867ce010cc772f7e993a7ac326a05d">frame_bytes_per_pixel</link>&#32;=&#32;1;
+00545 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;RGB&#32;888&#32;mode.</emphasis>
+00546 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_bytes_per_pixel&#32;=&#32;4;</emphasis>
+00547 &#32;&#32;&#32;&#32;line_bytes_per_pixel&#32;=&#32;4;
+00548 
+00549 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_display&#32;=&#32;(uint8_t*)calloc(frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel,&#32;1);</emphasis>
+00550 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_back&#32;=&#32;(uint8_t*)calloc(frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel,&#32;1);</emphasis>
+00551 
+00552 
+00553 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;if&#32;(!framebuffer-&gt;is_dual)&#32;{</emphasis>
+00554 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;teerr(&quot;Frame&#32;buffer&#32;needs&#32;to&#32;be&#32;dual&#32;for&#32;DVI.&quot;);</emphasis>
+00555 
+00556 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;return&#32;TINYENGINE_ERROR;</emphasis>
+00557 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00558 
+00559 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;I&#32;just&#32;assign&#32;the&#32;pointers&#32;here&#32;because&#32;this&#32;makes&#32;the&#32;updating&#32;simpler.</emphasis>
+00560 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;s_frame_buf&#32;=&#32;framebuffer;</emphasis>
+00561 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;display_buf&#32;=&#32;_display_buffer;</emphasis>
+00562 &#32;&#32;&#32;&#32;frame_buffer_display&#32;=&#32;m_frame_buf.pixel_buffer_display;
+00563 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_back&#32;=&#32;framebuffer-&gt;pixel_buffer_back;</emphasis>
+00564 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_display&#32;=&#32;framebuffer-&gt;pixel_buffer_display;</emphasis>
+00565 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;memset(frame_buffer_display,&#32;(uint8_t)(0xF0),&#32;frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel);</emphasis>
+00566 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;memset(frame_buffer_back,&#32;(uint8_t)0xF0,&#32;frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel);</emphasis>
+00567 
+00568 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;if&#32;(m_frame_buf.m_pixel_buffer_size&#32;!=&#32;frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel)&#32;{</emphasis>
+00569 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;teerr(&quot;Frame&#32;buffer&#32;size&#32;Error,&#32;check&#32;size.&#32;Must&#32;be&#32;320x240x1&#32;bytes&quot;);</emphasis>
+00570 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;return;</emphasis>
+00571 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00572 
+00573 &#32;&#32;&#32;&#32;memset(display_palette,&#32;0,&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</link>&#32;*&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_tinyengine__renderer__dvi_8h_1a0e2f295d3fc0f6caf5e239667b4d5814">RGB888</link>));
+00574 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint8_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;255;&#32;i++)
+00575 &#32;&#32;&#32;&#32;{
+00576 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;r&#32;=&#32;(i&#32;&gt;&gt;&#32;6)&#32;*&#32;255&#32;/&#32;3;
+00577 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;g&#32;=&#32;((i&#32;&gt;&gt;&#32;2)&#32;&amp;&#32;7)&#32;*&#32;255&#32;/&#32;7;
+00578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;b&#32;=&#32;(i&#32;&amp;&#32;3)&#32;*&#32;255&#32;/&#32;3;
+00579 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;display_palette[i]&#32;=&#32;(r&#32;&lt;&lt;&#32;16)&#32;|&#32;(g&#32;&lt;&lt;&#32;8)&#32;|&#32;b;
+00580 &#32;&#32;&#32;&#32;}
+00581 
+00582 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;display_palette[255]&#32;=&#32;0xFFFFFF;&#32;//&#32;just&#32;need&#32;to&#32;set&#32;0xff&#32;to&#32;white&#32;this&#32;pallette&#32;method&#32;is&#32;clever.&#32;i&#32;wonder&#32;if&#32;i&#32;can&#32;switch&#32;pallettes&#32;based&#32;on&#32;sprites.</emphasis>
+00583 
+00584 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;const&#32;bool&#32;is_text_mode&#32;=&#32;(mode&#32;==&#32;MODE_TEXT_MONO&#32;||&#32;mode&#32;==&#32;MODE_TEXT_RGB111);</emphasis>
+00585 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;frame_pixel_words&#32;=&#32;(<link linkend="_class_tiny_engine_renderer_d_v_i_1a5c8198aeb53c231de91bbf790a59f77c">frame_width</link>&#32;*&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a8a99856f9ce556f04f5032daec14a5f1">h_repeat</link>&#32;*&#32;line_bytes_per_pixel&#32;+&#32;3)&#32;&gt;&gt;&#32;2;
+00586 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;const&#32;int&#32;frame_line_words&#32;=&#32;frame_pixel_words&#32;+&#32;(is_text_mode&#32;?&#32;count_of(vactive_text_line_header)&#32;:&#32;count_of(vactive_line_header));</emphasis>
+00587 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;frame_line_words&#32;=&#32;frame_pixel_words&#32;+&#32;count_of(vactive_line_header);
+00588 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;frame_lines&#32;=&#32;(<link linkend="_class_tiny_engine_renderer_d_v_i_1aa6f8cc917454c16a374452cc66b03687">v_repeat</link>&#32;==&#32;1)&#32;?&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>&#32;:&#32;<link linkend="_tinyengine__renderer__dvi_8h_1a426143609826cbf6d30a1ae2b3ae5753">NUM_FRAME_LINES</link>;
+00589 &#32;&#32;&#32;&#32;line_buffers&#32;=&#32;(uint32_t*)malloc(frame_line_words&#32;*&#32;4&#32;*&#32;frame_lines);
+00590 
+00591 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;frame_lines;&#32;++i)
+00592 &#32;&#32;&#32;&#32;{
+00593 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memcpy(&amp;line_buffers[i&#32;*&#32;frame_line_words],&#32;vactive_line_header,
+00594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;count_of(vactive_line_header)&#32;*&#32;<emphasis role="keyword">sizeof</emphasis>(uint32_t));
+00595 &#32;&#32;&#32;&#32;}
+00596 
+00597 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Ensure&#32;HSTX&#32;FIFO&#32;is&#32;clear</emphasis>
+00598 &#32;&#32;&#32;&#32;reset_block_num(RESET_HSTX);
+00599 &#32;&#32;&#32;&#32;sleep_us(10);
+00600 &#32;&#32;&#32;&#32;unreset_block_num_wait_blocking(RESET_HSTX);
+00601 &#32;&#32;&#32;&#32;sleep_us(10);
+00602 
+00603 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Configure&#32;HSTX&apos;s&#32;TMDS&#32;encoder&#32;for&#32;RGB888</emphasis>
+00604 &#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;expand_tmds&#32;=
+00605 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;7&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L2_NBITS_LSB&#32;|
+00606 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;16&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L2_ROT_LSB&#32;|
+00607 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;7&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L1_NBITS_LSB&#32;|
+00608 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;8&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L1_ROT_LSB&#32;|
+00609 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;7&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L0_NBITS_LSB&#32;|
+00610 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_TMDS_L0_ROT_LSB;
+00611 
+00612 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Pixels&#32;and&#32;control&#32;symbols&#32;(RAW)&#32;are&#32;an</emphasis>
+00613 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;entire&#32;32-bit&#32;word.</emphasis>
+00614 &#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;expand_shift&#32;=
+00615 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_SHIFT_ENC_N_SHIFTS_LSB&#32;|
+00616 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_SHIFT_ENC_SHIFT_LSB&#32;|
+00617 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_SHIFT_RAW_N_SHIFTS_LSB&#32;|
+00618 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0&#32;&lt;&lt;&#32;HSTX_CTRL_EXPAND_SHIFT_RAW_SHIFT_LSB;
+00619 
+00620 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Serial&#32;output&#32;config:&#32;clock&#32;period&#32;of&#32;5&#32;cycles,&#32;pop&#32;from&#32;command</emphasis>
+00621 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;expander&#32;every&#32;5&#32;cycles,&#32;shift&#32;the&#32;output&#32;shiftreg&#32;by&#32;2&#32;every&#32;cycle.</emphasis>
+00622 &#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;csr&#32;=&#32;0;
+00623 &#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;csr&#32;=
+00624 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HSTX_CTRL_CSR_EXPAND_EN_BITS&#32;|
+00625 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;5u&#32;&lt;&lt;&#32;HSTX_CTRL_CSR_CLKDIV_LSB&#32;|
+00626 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;5u&#32;&lt;&lt;&#32;HSTX_CTRL_CSR_N_SHIFTS_LSB&#32;|
+00627 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;2u&#32;&lt;&lt;&#32;HSTX_CTRL_CSR_SHIFT_LSB&#32;|
+00628 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HSTX_CTRL_CSR_EN_BITS;
+00629 
+00630 
+00631 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;HSTX&#32;outputs&#32;0&#32;through&#32;7&#32;appear&#32;on&#32;GPIO&#32;12&#32;through&#32;19.</emphasis>
+00632 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;HSTX_FIRST_PIN&#32;=&#32;12;
+00633 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;clk_p&#32;=&#32;12;
+00634 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;rgb_p[3]&#32;=&#32;{&#32;14,&#32;16,&#32;18&#32;};
+00635 
+00636 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assign&#32;clock&#32;pair&#32;to&#32;two&#32;neighbouring&#32;pins:</emphasis>
+00637 &#32;&#32;&#32;&#32;{
+00638 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;bit&#32;=&#32;clk_p&#32;-&#32;HSTX_FIRST_PIN;
+00639 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;bit[bit]&#32;=&#32;HSTX_CTRL_BIT0_CLK_BITS;
+00640 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;bit[bit&#32;^&#32;1]&#32;=&#32;HSTX_CTRL_BIT0_CLK_BITS&#32;|&#32;HSTX_CTRL_BIT0_INV_BITS;
+00641 &#32;&#32;&#32;&#32;}
+00642 
+00643 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint&#32;lane&#32;=&#32;0;&#32;lane&#32;&lt;&#32;3;&#32;++lane)
+00644 &#32;&#32;&#32;&#32;{
+00645 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;For&#32;each&#32;TMDS&#32;lane,&#32;assign&#32;it&#32;to&#32;the&#32;correct&#32;GPIO&#32;pair&#32;based&#32;on&#32;the</emphasis>
+00646 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;desired&#32;pinout:</emphasis>
+00647 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;bit&#32;=&#32;rgb_p[lane]&#32;-&#32;HSTX_FIRST_PIN;
+00648 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;even&#32;bits&#32;during&#32;first&#32;half&#32;of&#32;each&#32;HSTX&#32;cycle,&#32;and&#32;odd&#32;bits</emphasis>
+00649 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;during&#32;second&#32;half.&#32;The&#32;shifter&#32;advances&#32;by&#32;two&#32;bits&#32;each&#32;cycle.</emphasis>
+00650 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint32_t&#32;lane_data_sel_bits&#32;=
+00651 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(lane&#32;*&#32;10)&#32;&lt;&lt;&#32;HSTX_CTRL_BIT0_SEL_P_LSB&#32;|
+00652 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(lane&#32;*&#32;10&#32;+&#32;1)&#32;&lt;&lt;&#32;HSTX_CTRL_BIT0_SEL_N_LSB;
+00653 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;two&#32;halves&#32;of&#32;each&#32;pair&#32;get&#32;identical&#32;data,&#32;but&#32;one&#32;pin&#32;is&#32;inverted.</emphasis>
+00654 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;bit[bit]&#32;=&#32;lane_data_sel_bits;
+00655 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hstx_ctrl_hw-&gt;bit[bit&#32;^&#32;1]&#32;=&#32;lane_data_sel_bits&#32;|&#32;HSTX_CTRL_BIT0_INV_BITS;
+00656 &#32;&#32;&#32;&#32;}
+00657 
+00658 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;12;&#32;i&#32;&lt;=&#32;19;&#32;++i)
+00659 &#32;&#32;&#32;&#32;{
+00660 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;gpio_set_function(i,&#32;GPIO_FUNC_HSTX);
+00661 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;gpio_set_drive_strength(i,&#32;GPIO_DRIVE_STRENGTH_4MA);
+00662 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;if&#32;(252000&#32;&gt;&#32;900000)&#32;{</emphasis>
+00663 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;gpio_set_slew_rate(i,&#32;GPIO_SLEW_RATE_FAST);
+00664 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00665 &#32;&#32;&#32;&#32;}
+00666 
+00667 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;GPIO&#32;Done\r\n&quot;</emphasis>);
+00668 
+00669 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;channels&#32;are&#32;set&#32;up&#32;identically,&#32;to&#32;transfer&#32;a&#32;whole&#32;scanline&#32;and</emphasis>
+00670 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;then&#32;chain&#32;to&#32;the&#32;next&#32;channel.&#32;Each&#32;time&#32;a&#32;channel&#32;finishes,&#32;we</emphasis>
+00671 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;reconfigure&#32;the&#32;one&#32;that&#32;just&#32;finished,&#32;meanwhile&#32;the&#32;other&#32;channel(s)</emphasis>
+00672 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;are&#32;already&#32;making&#32;progress.</emphasis>
+00673 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Using&#32;just&#32;2&#32;channels&#32;was&#32;insufficient&#32;to&#32;avoid&#32;issues&#32;with&#32;the&#32;IRQ.</emphasis>
+00674 &#32;&#32;&#32;&#32;dma_channel_config&#32;c;
+00675 &#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(0);
+00676 &#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;1);
+00677 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+00678 &#32;&#32;&#32;&#32;dma_channel_configure(
+00679 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+00680 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
+00681 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;hstx_fifo_hw-&gt;fifo,
+00682 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;vblank_line_vsync_off,
+00683 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;count_of(vblank_line_vsync_off),
+00684 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>
+00685 &#32;&#32;&#32;&#32;);
+00686 &#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(1);
+00687 &#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;2);
+00688 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+00689 &#32;&#32;&#32;&#32;dma_channel_configure(
+00690 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1,
+00691 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
+00692 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;hstx_fifo_hw-&gt;fifo,
+00693 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;vblank_line_vsync_off,
+00694 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;count_of(vblank_line_vsync_off),
+00695 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>
+00696 &#32;&#32;&#32;&#32;);
+00697 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;2;&#32;i&#32;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>;&#32;++i)
+00698 &#32;&#32;&#32;&#32;{
+00699 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(i);
+00700 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;(i&#32;+&#32;1)&#32;%&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>);
+00701 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+00702 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dma_channel_configure(
+00703 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;i,
+00704 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
+00705 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;hstx_fifo_hw-&gt;fifo,
+00706 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;vblank_line_vsync_off,
+00707 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;count_of(vblank_line_vsync_off),
+00708 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>
+00709 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;);
+00710 &#32;&#32;&#32;&#32;}
+00711 
+00712 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;DMA&#32;channels&#32;claimed\r\n&quot;</emphasis>);
+00713 
+00714 &#32;&#32;&#32;&#32;dma_hw-&gt;intr&#32;=&#32;(1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1;
+00715 &#32;&#32;&#32;&#32;dma_hw-&gt;ints2&#32;=&#32;(1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1;
+00716 &#32;&#32;&#32;&#32;dma_hw-&gt;inte2&#32;=&#32;(1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1;
+00717 
+00718 &#32;&#32;&#32;&#32;irq_set_exclusive_handler(DMA_IRQ_2,&#32;dma_irq_handler);
+00719 &#32;&#32;&#32;&#32;irq_set_enabled(DMA_IRQ_2,&#32;<emphasis role="keyword">true</emphasis>);
+00720 
+00721 &#32;&#32;&#32;&#32;dma_channel_start(0);
+00722 
+00723 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;DVHSTX&#32;started\r\n&quot;</emphasis>);
+00724 
+00725 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00726 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414"/><section>
+    <title>wait_for_vsync()</title>
+<indexterm><primary>wait_for_vsync</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>wait_for_vsync</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineRendererDVI::wait_for_vsync ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderer_i_1a053505877ab12f6651964aaff7b4c75d">TinyEngineRendererI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8cpp_source_1l00736">736</link> of file <link linkend="_tinyengine__renderer__dvi_8cpp_source">tinyengine_renderer_dvi.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00737 {
+00738 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(v_scanline&#32;&gt;=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</link>)&#32;__wfe();
+00739 
+00740 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00741 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1af56769c02b832f3433261722d680669b"/><section>
+    <title>display_height</title>
+<indexterm><primary>display_height</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>display_height</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineRendererDVI::display_height = 240<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00088">88</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a7efbb691f0b7646dbdc00b2423b4d286"/><section>
+    <title>display_width</title>
+<indexterm><primary>display_width</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>display_width</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineRendererDVI::display_width = 320<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00087">87</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1add867ce010cc772f7e993a7ac326a05d"/><section>
+    <title>frame_bytes_per_pixel</title>
+<indexterm><primary>frame_bytes_per_pixel</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>frame_bytes_per_pixel</secondary></indexterm>
+<para><computeroutput>uint8_t TinyEngineRendererDVI::frame_bytes_per_pixel = 1<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00091">91</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1af9d293ec842669e58b5d58bcb6d761d0"/><section>
+    <title>frame_height</title>
+<indexterm><primary>frame_height</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>frame_height</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineRendererDVI::frame_height = 240<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00090">90</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a5c8198aeb53c231de91bbf790a59f77c"/><section>
+    <title>frame_width</title>
+<indexterm><primary>frame_width</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>frame_width</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineRendererDVI::frame_width = 320<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00089">89</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a8a99856f9ce556f04f5032daec14a5f1"/><section>
+    <title>h_repeat</title>
+<indexterm><primary>h_repeat</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>h_repeat</secondary></indexterm>
+<para><computeroutput>uint8_t TinyEngineRendererDVI::h_repeat = 4<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00092">92</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1a6ea8f792a8bf334e07c732c2dbc892f2"/><section>
+    <title>mode</title>
+<indexterm><primary>mode</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>mode</secondary></indexterm>
+<para><computeroutput><link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5">Mode</link> TinyEngineRendererDVI::mode = <link linkend="_class_tiny_engine_renderer_d_v_i_1a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075">MODE_RGB565</link><computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00094">94</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1ab7f8fc6782cb61207a95e29e526b34d6"/><section>
+    <title>palette</title>
+<indexterm><primary>palette</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>palette</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine__renderer__dvi_8h_1a0e2f295d3fc0f6caf5e239667b4d5814">RGB888</link> TinyEngineRendererDVI::palette[<link linkend="_class_tiny_engine_renderer_d_v_i_1ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</link>]</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00038">38</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1ad94c9d8daaaab3efae690638e787e24d"/><section>
+    <title>PALETTE_SIZE</title>
+<indexterm><primary>PALETTE_SIZE</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>PALETTE_SIZE</secondary></indexterm>
+<para><computeroutput>int TinyEngineRendererDVI::PALETTE_SIZE = 256<computeroutput>[static]</computeroutput>, <computeroutput>[constexpr]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00036">36</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderer_d_v_i_1aa6f8cc917454c16a374452cc66b03687"/><section>
+    <title>v_repeat</title>
+<indexterm><primary>v_repeat</primary><secondary>TinyEngineRendererDVI</secondary></indexterm>
+<indexterm><primary>TinyEngineRendererDVI</primary><secondary>v_repeat</secondary></indexterm>
+<para><computeroutput>uint8_t TinyEngineRendererDVI::v_repeat = 4<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__renderer__dvi_8h_source_1l00093">93</link> of file <link linkend="_tinyengine__renderer__dvi_8h_source">tinyengine_renderer_dvi.h</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="_tinyengine__renderer__dvi_8h">tinyengine_renderer_dvi.h</link>src/<link linkend="_tinyengine__renderer__dvi_8cpp">tinyengine_renderer_dvi.cpp</link></section>
+</section>

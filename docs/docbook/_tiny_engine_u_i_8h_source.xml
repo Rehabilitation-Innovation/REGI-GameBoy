@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tiny_engine_u_i_8h_source" xml:lang="en-US">
+<title>TinyEngineUI.h</title>
+<indexterm><primary>inc/TinyEngineUI.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tiny_engine_u_i_8h_source_1l00001"/>00001 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00002"/>00002 <emphasis role="comment">//&#32;Created&#32;by&#32;abina&#32;on&#32;7/18/2025.</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00003"/>00003 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00004"/>00004 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;cstdint&gt;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;string&gt;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;vector&gt;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;map&gt;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__tiny_engine_renderable_i_8h">TinyEngineRenderableI.h</link>&quot;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00011"/>00011 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00012"/><link linkend="_class_tiny_engine_u_i">00012</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_tiny_engine_renderable_i_1a83255f3fcb5830c49a88cd168f4f3639">TinyEngineRenderableI</link>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00013"/>00013 {
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00014"/>00014 <emphasis role="keyword">protected</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00015"/><link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">00015</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>,&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00016"/>00016 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00017"/>00017 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00018"/><link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">00018</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>(<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>(<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>(<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00023"/>00023 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>&#32;/&#32;2;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>&#32;/&#32;2;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00026"/>00026 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00027"/>00027 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00030"/>00030 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a787dcbf651a0bd9cc6629708356b5445">~TinyEngineUI</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00031"/>00031 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00032"/><link linkend="_class_tiny_engine_u_i_1ab02fc5c042713194e8ad28250a32af87">00032</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1ab02fc5c042713194e8ad28250a32af87">get_m_x</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00033"/>00033 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00035"/>00035 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00036"/>00036 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00037"/><link linkend="_class_tiny_engine_u_i_1a4270f2308794a2f424eda6f8aaaaaea1">00037</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a4270f2308794a2f424eda6f8aaaaaea1">get_m_y</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00038"/>00038 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00040"/>00040 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00041"/>00041 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00042"/><link linkend="_class_tiny_engine_u_i_1aba05a0381f98fce1172f1ca92871c0d8">00042</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1aba05a0381f98fce1172f1ca92871c0d8">get_m_x_half</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00043"/>00043 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00046"/>00046 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00047"/><link linkend="_class_tiny_engine_u_i_1a1b7b2ed2793e4072fcb1c89c1d006f00">00047</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a1b7b2ed2793e4072fcb1c89c1d006f00">get_m_y_half</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00048"/>00048 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00050"/>00050 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00051"/>00051 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00052"/><link linkend="_class_tiny_engine_u_i_1a37ec857f14ee965b27750cd0138ed1fe">00052</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a37ec857f14ee965b27750cd0138ed1fe">set_m_x</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00053"/>00053 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_x&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00055"/>00055 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00056"/>00056 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00057"/><link linkend="_class_tiny_engine_u_i_1ad15132e1ef66a11df628cc233bdbb768">00057</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1ad15132e1ef66a11df628cc233bdbb768">set_m_y</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00058"/>00058 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_y&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00060"/>00060 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00061"/>00061 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00062"/><link linkend="_class_tiny_engine_u_i_1af5bd3a750a3effa8e81615b70401a8e0">00062</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1af5bd3a750a3effa8e81615b70401a8e0">set_m_x_half</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00063"/>00063 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_x_half&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00065"/>00065 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00066"/>00066 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00067"/><link linkend="_class_tiny_engine_u_i_1a95fff03753fa25a0f1fa454a895a2588">00067</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a95fff03753fa25a0f1fa454a895a2588">set_m_y_half</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00068"/>00068 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_y_half&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00070"/>00070 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00071"/>00071 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00072"/><link linkend="_class_tiny_engine_u_i_1afaaf1d13440c7a8c8534e5bb430f46df">00072</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1afaaf1d13440c7a8c8534e5bb430f46df">set_m_width</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00073"/>00073 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_width&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00075"/>00075 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00076"/>00076 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00077"/><link linkend="_class_tiny_engine_u_i_1a7dfb78060715eaef646d7ac7ec1c6881">00077</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a7dfb78060715eaef646d7ac7ec1c6881">set_m_height</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00078"/>00078 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_height&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00080"/>00080 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00081"/>00081 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00082"/><link linkend="_class_tiny_engine_u_i_1a473e97311d8e8eda6c918cfd538c639e">00082</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a473e97311d8e8eda6c918cfd538c639e">get_m_width</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00083"/>00083 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00085"/>00085 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00086"/>00086 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00087"/><link linkend="_class_tiny_engine_u_i_1a79c776a400a866e3624eda016af02b97">00087</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a79c776a400a866e3624eda016af02b97">get_m_height</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00088"/>00088 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00090"/>00090 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00091"/>00091 };
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00092"/>00092 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00093"/><link linkend="_class_tiny_engine_u_i_text">00093</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_u_i_text_1ab9ff76cc1ff2cf4a84ade7ed8213b8c7">TinyEngineUIText</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00094"/>00094 {
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00095"/>00095 <emphasis role="keyword">protected</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00096"/>00096 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;vec2&#32;pos&#32;=&#32;{0,&#32;0};</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00097"/><link linkend="_class_tiny_engine_u_i_text_1a13d5ad4aad288cf1aac4aa35e64ad733">00097</link> &#32;&#32;&#32;&#32;std::string&#32;<link linkend="_class_tiny_engine_u_i_text_1a13d5ad4aad288cf1aac4aa35e64ad733">m_text</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00098"/><link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">00098</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00099"/>00099 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00100"/>00100 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00101"/>00101 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1ad856c4689873554a1d27d210ce597925">render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00102"/>00102 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1a894a3cf6ee06f5c1c8d572b9d688108a">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_1a7896434f312ae8b076ff913d56dad996">~TinyEngineUIText</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00104"/>00104 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00105"/><link linkend="_class_tiny_engine_u_i_text_1ab9ff76cc1ff2cf4a84ade7ed8213b8c7">00105</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_1ab9ff76cc1ff2cf4a84ade7ed8213b8c7">TinyEngineUIText</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<emphasis role="keyword">const</emphasis>&#32;std::string&amp;&#32;text,&#32;uint8_t&#32;_color)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;0,&#32;0),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_1a13d5ad4aad288cf1aac4aa35e64ad733">m_text</link>(text),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>(_color)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00109"/>00109 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00110"/>00110 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00111"/>00111 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00112"/><link linkend="_class_tiny_engine_u_i_text_1ac6bea5579c54349478fb9489740068a0">00112</link> &#32;&#32;&#32;&#32;std::string&amp;&#32;<link linkend="_class_tiny_engine_u_i_text_1ac6bea5579c54349478fb9489740068a0">get_text</link>()
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00113"/>00113 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1a13d5ad4aad288cf1aac4aa35e64ad733">m_text</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00115"/>00115 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00116"/>00116 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00117"/><link linkend="_class_tiny_engine_u_i_text_1a31fc35aeceb06b9e31449f81f03ccc0f">00117</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1a31fc35aeceb06b9e31449f81f03ccc0f">set_text</link>(<emphasis role="keyword">const</emphasis>&#32;std::string&amp;&#32;text)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00118"/>00118 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_text&#32;=&#32;text;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00120"/>00120 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00121"/>00121 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00122"/><link linkend="_class_tiny_engine_u_i_text_1a2155c803bd1cdf9051e9de28b691a1e9">00122</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_1a2155c803bd1cdf9051e9de28b691a1e9">get_m_color</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00123"/>00123 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00125"/>00125 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00126"/>00126 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00127"/><link linkend="_class_tiny_engine_u_i_text_1a1dd0b957f2e1ea2eea5a3d22c82b0870">00127</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_1a1dd0b957f2e1ea2eea5a3d22c82b0870">set_m_color</link>(uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00128"/>00128 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_color&#32;=&#32;<link linkend="_class_tiny_engine_u_i_text_1abed15a4f64420a636e1d409613f5aa65">m_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00130"/>00130 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00131"/>00131 };
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00132"/>00132 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00133"/><link linkend="_class_tiny_engine_u_i_blinking_text_box">00133</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4c5d790758cce25318da3fe7e3bc7928">TinyEngineUIBlinkingTextBox</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00134"/>00134 {
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00135"/>00135 <emphasis role="keyword">protected</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00136"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">00136</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>,&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00137"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">00137</link> &#32;&#32;&#32;&#32;std::string&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00138"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">00138</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00139"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4ce7c8ecc3916abc1b5b21855ab82232">00139</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4ce7c8ecc3916abc1b5b21855ab82232">m_local_time</link>&#32;=&#32;0;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00140"/>00140 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00141"/>00141 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00142"/>00142 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2795076dc9e802deb255f674278776b5">render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00143"/>00143 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a390c428161e594f7e06aaecdae83cb5f">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00144"/>00144 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a0adae16927dd029ead020fe84fd0fa7c">~TinyEngineUIBlinkingTextBox</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00145"/>00145 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00146"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4c5d790758cce25318da3fe7e3bc7928">00146</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a4c5d790758cce25318da3fe7e3bc7928">TinyEngineUIBlinkingTextBox</link>(uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>,&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>,&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>,&#32;<emphasis role="keyword">const</emphasis>&#32;std::string&amp;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>,
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>,&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>),
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>(<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00154"/>00154 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00155"/>00155 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00156"/>00156 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00166"/>00166 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TinyEngineBlinkingBanner(uint16_t&#32;_x,&#32;uint16_t&#32;_y,&#32;uint8_t&#32;_bg_color,&#32;uint8_t&#32;_fg_color,</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00167"/>00167 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;const&#32;std::string&amp;&#32;_text,</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00168"/>00168 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;_blink_delay&#32;=&#32;5)</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00169"/>00169 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00170"/>00170 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;TinyEngineUI(m_x,&#32;m_y,&#32;10,&#32;8);</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00171"/>00171 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;set_m_width(m_text.length()&#32;*&#32;7);</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00172"/>00172 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00173"/>00173 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_bg_color&#32;=&#32;_bg_color;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00174"/>00174 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_fg_color&#32;=&#32;_fg_color;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00175"/>00175 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_text&#32;=&#32;_text;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00176"/>00176 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_blink_delay&#32;=&#32;_blink_delay;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00177"/>00177 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00178"/>00178 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00179"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2ceacbfd830c55d16bded50ae96ab3b9">00179</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2ceacbfd830c55d16bded50ae96ab3b9">get_m_bg_color</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00180"/>00180 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a93b038ef476760652337e5cc0ab09b1e">m_bg_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00182"/>00182 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00183"/>00183 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00184"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a36421bb8a989866a0807d37c27016923">00184</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a36421bb8a989866a0807d37c27016923">get_m_fg_color</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00185"/>00185 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1aac79a0de4b746d3b8c5cd6ff55493837">m_fg_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00187"/>00187 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00188"/>00188 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00189"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a7db9d6c12350ed1bb7ab75781e8aeaec">00189</link> &#32;&#32;&#32;&#32;std::string&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a7db9d6c12350ed1bb7ab75781e8aeaec">get_m_text</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00190"/>00190 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1af0bb8b86ad3d5aa5b536bc9348adba75">m_text</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00192"/>00192 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00193"/>00193 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00194"/><link linkend="_class_tiny_engine_u_i_blinking_text_box_1a9cc93f2565b328aa5460fff9da8094d0">00194</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1a9cc93f2565b328aa5460fff9da8094d0">get_m_blink_delay</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00195"/>00195 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_blinking_text_box_1acadbc241a902da7afbe72ef48dc79c75">m_blink_delay</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00197"/>00197 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00198"/>00198 };
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00199"/>00199 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00200"/>00200 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00201"/><link linkend="_class_tiny_engine_u_i_text_box">00201</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_u_i_text_box_1adf37dad35adc8743ef3408cf8cf5eabf">TinyEngineUITextBox</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00202"/>00202 {
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00203"/>00203 <emphasis role="keyword">protected</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00204"/><link linkend="_class_tiny_engine_u_i_text_box_1a43d5474262531f0b4937a623dafb2d66">00204</link> &#32;&#32;&#32;&#32;std::map&lt;std::string,&#32;TinyEngineUIText&amp;&gt;&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a43d5474262531f0b4937a623dafb2d66">m_texts</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00205"/><link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">00205</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>&#32;=&#32;15;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00206"/>00206 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00207"/>00207 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00208"/>00208 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1ab1068f0b54dea4bbf10d29c6c59f84fc">render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&#32;_framebuffer)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00209"/>00209 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1ae71f116c12369cdd955e801e41da86f5">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00210"/>00210 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a6b105d7543a54b097e1289fc223f8e74">~TinyEngineUITextBox</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00211"/>00211 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00212"/><link linkend="_class_tiny_engine_u_i_text_box_1adf37dad35adc8743ef3408cf8cf5eabf">00212</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_box_1adf37dad35adc8743ef3408cf8cf5eabf">TinyEngineUITextBox</link>(uint16_t&#32;_x,&#32;uint16_t&#32;_y,&#32;uint16_t&#32;_width,&#32;uint16_t&#32;_height)&#32;:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>(_x,&#32;_y,&#32;_width,
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_height)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00215"/>00215 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00216"/>00216 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00217"/>00217 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00218"/><link linkend="_class_tiny_engine_u_i_text_box_1af51e6f76a6e07daf5e53ba94467a679b">00218</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_text_box_1af51e6f76a6e07daf5e53ba94467a679b">TinyEngineUITextBox</link>(uint16_t&#32;_x,&#32;uint16_t&#32;_y,&#32;uint16_t&#32;_width,&#32;uint16_t&#32;_height,&#32;uint8_t&#32;_outline_color)&#32;:
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link>(_x,&#32;_y,&#32;_width,
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_height),&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>(_outline_color)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00221"/>00221 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00222"/>00222 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00223"/>00223 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00224"/><link linkend="_class_tiny_engine_u_i_text_box_1a77ff35ef4c08a5af7f150a691323b0f4">00224</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a77ff35ef4c08a5af7f150a691323b0f4">add_text</link>(std::string&#32;_name,&#32;<link linkend="_class_tiny_engine_u_i_text">TinyEngineUIText</link>&amp;&#32;_text)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00225"/>00225 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;m_texts[_name]&#32;=&#32;_text;</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_texts.insert({_name,&#32;_text});
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00228"/>00228 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00229"/>00229 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00230"/><link linkend="_class_tiny_engine_u_i_text_box_1a527fd99d33429b60a7255ed15832d62a">00230</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a527fd99d33429b60a7255ed15832d62a">get_m_outline_color</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00231"/>00231 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00233"/>00233 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00234"/>00234 
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00235"/><link linkend="_class_tiny_engine_u_i_text_box_1a2425bd2b5c819c892b058d9e0c09cd12">00235</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a2425bd2b5c819c892b058d9e0c09cd12">set_m_outline_color</link>(uint8_t&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>)
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00236"/>00236 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_outline_color&#32;=&#32;<link linkend="_class_tiny_engine_u_i_text_box_1a9534b8a0fd10ec069c3e7d2f8fb06a87">m_outline_color</link>;
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00238"/>00238 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tiny_engine_u_i_8h_source_1l00239"/>00239 };
+</programlisting></section>

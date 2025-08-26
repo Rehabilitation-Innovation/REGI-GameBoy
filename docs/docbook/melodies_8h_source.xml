@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_melodies_8h_source" xml:lang="en-US">
+<title>melodies.h</title>
+<indexterm><primary>inc/melodies.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_melodies_8h_source_1l00001"/>00001 <emphasis role="comment">//&#32;/**</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00002"/>00002 <emphasis role="comment">//&#32;&#32;*&#32;@file&#32;melodies.h</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00003"/>00003 <emphasis role="comment">//&#32;&#32;*&#32;@brief&#32;Predefined&#32;melodies&#32;for&#32;the&#32;Pico&#32;PWM&#32;Tone&#32;generation&#32;library.</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00004"/>00004 <emphasis role="comment">//&#32;&#32;*&#32;@author&#32;Turi&#32;Scandurra</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00005"/>00005 <emphasis role="comment">//&#32;&#32;*&#32;@see&#32;https://turiscandurra.com/circuits</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00006"/>00006 <emphasis role="comment">//&#32;&#32;*/</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00007"/>00007 
+<anchor xml:id="_melodies_8h_source_1l00008"/>00008 <emphasis role="comment">//&#32;#ifndef&#32;TONE_MELODIES_H</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00009"/>00009 <emphasis role="comment">//&#32;#define&#32;TONE_MELODIES_H</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00010"/>00010 
+<anchor xml:id="_melodies_8h_source_1l00011"/>00011 <emphasis role="comment">//&#32;note_t&#32;POSITIVE[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00012"/>00012 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00013"/>00013 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_AS4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00014"/>00014 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;16},&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00015"/>00015 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00016"/>00016 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00017"/>00017 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00018"/>00018 
+<anchor xml:id="_melodies_8h_source_1l00019"/>00019 <emphasis role="comment">//&#32;note_t&#32;NEGATIVE[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00020"/>00020 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00021"/>00021 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_AS4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00022"/>00022 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;16},&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00023"/>00023 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00024"/>00024 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00025"/>00025 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00026"/>00026 
+<anchor xml:id="_melodies_8h_source_1l00027"/>00027 <emphasis role="comment">//&#32;note_t&#32;ERROR[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00028"/>00028 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00029"/>00029 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00030"/>00030 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00031"/>00031 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00032"/>00032 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00033"/>00033 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00034"/>00034 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00035"/>00035 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00036"/>00036 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00037"/>00037 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00038"/>00038 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00039"/>00039 
+<anchor xml:id="_melodies_8h_source_1l00040"/>00040 <emphasis role="comment">//&#32;note_t&#32;CONFIRM[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00041"/>00041 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00042"/>00042 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00043"/>00043 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00044"/>00044 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00045"/>00045 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00046"/>00046 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00047"/>00047 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00048"/>00048 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00049"/>00049 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00050"/>00050 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00051"/>00051 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00052"/>00052 
+<anchor xml:id="_melodies_8h_source_1l00053"/>00053 <emphasis role="comment">//&#32;note_t&#32;REJECT[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00054"/>00054 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00055"/>00055 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00056"/>00056 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00057"/>00057 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00058"/>00058 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00059"/>00059 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00060"/>00060 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00061"/>00061 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00062"/>00062 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00063"/>00063 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00064"/>00064 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00065"/>00065 
+<anchor xml:id="_melodies_8h_source_1l00066"/>00066 <emphasis role="comment">//&#32;note_t&#32;SWEEP[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00067"/>00067 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00068"/>00068 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C0,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00069"/>00069 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00070"/>00070 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C2,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00071"/>00071 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C3,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00072"/>00072 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00073"/>00073 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00074"/>00074 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00075"/>00075 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00076"/>00076 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00077"/>00077 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C9,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00078"/>00078 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00079"/>00079 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00080"/>00080 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00081"/>00081 
+<anchor xml:id="_melodies_8h_source_1l00082"/>00082 <emphasis role="comment">//&#32;note_t&#32;COIN[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00083"/>00083 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00084"/>00084 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00085"/>00085 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00086"/>00086 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00087"/>00087 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00088"/>00088 
+<anchor xml:id="_melodies_8h_source_1l00089"/>00089 <emphasis role="comment">//&#32;note_t&#32;LASER[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00090"/>00090 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00091"/>00091 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00092"/>00092 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00093"/>00093 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00094"/>00094 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00095"/>00095 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00096"/>00096 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00097"/>00097 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00098"/>00098 
+<anchor xml:id="_melodies_8h_source_1l00099"/>00099 <emphasis role="comment">//&#32;note_t&#32;POWERUP[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00100"/>00100 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00101"/>00101 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_CS5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00102"/>00102 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00103"/>00103 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_DS5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00104"/>00104 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00105"/>00105 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00106"/>00106 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_FS5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00107"/>00107 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00108"/>00108 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00109"/>00109 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00110"/>00110 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00111"/>00111 
+<anchor xml:id="_melodies_8h_source_1l00112"/>00112 <emphasis role="comment">//&#32;note_t&#32;VICTORY[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00113"/>00113 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00114"/>00114 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00115"/>00115 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00116"/>00116 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D5,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00117"/>00117 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00118"/>00118 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00119"/>00119 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00120"/>00120 
+<anchor xml:id="_melodies_8h_source_1l00121"/>00121 <emphasis role="comment">//&#32;note_t&#32;DEFEAT[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00122"/>00122 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00123"/>00123 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_AS3,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00124"/>00124 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G3,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00125"/>00125 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E3,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00126"/>00126 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C3,&#32;16},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00127"/>00127 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00128"/>00128 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00129"/>00129 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00130"/>00130 
+<anchor xml:id="_melodies_8h_source_1l00131"/>00131 <emphasis role="comment">//&#32;note_t&#32;FANFARE[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00132"/>00132 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00133"/>00133 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E4,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00134"/>00134 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00135"/>00135 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;2},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00136"/>00136 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00137"/>00137 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00138"/>00138 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00139"/>00139 
+<anchor xml:id="_melodies_8h_source_1l00140"/>00140 <emphasis role="comment">//&#32;note_t&#32;ALARM_1[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00141"/>00141 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00142"/>00142 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00143"/>00143 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00144"/>00144 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00145"/>00145 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00146"/>00146 
+<anchor xml:id="_melodies_8h_source_1l00147"/>00147 <emphasis role="comment">//&#32;note_t&#32;ALARM_2[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00148"/>00148 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00149"/>00149 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00150"/>00150 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00151"/>00151 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00152"/>00152 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00153"/>00153 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00154"/>00154 
+<anchor xml:id="_melodies_8h_source_1l00155"/>00155 <emphasis role="comment">//&#32;note_t&#32;ALARM_3[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00156"/>00156 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00157"/>00157 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00158"/>00158 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00159"/>00159 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00160"/>00160 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00161"/>00161 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00162"/>00162 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00163"/>00163 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-32},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00164"/>00164 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00165"/>00165 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00166"/>00166 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00167"/>00167 
+<anchor xml:id="_melodies_8h_source_1l00168"/>00168 <emphasis role="comment">//&#32;note_t&#32;RINGTONE_1[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00169"/>00169 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00170"/>00170 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00171"/>00171 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00172"/>00172 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00173"/>00173 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00174"/>00174 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00175"/>00175 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00176"/>00176 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00177"/>00177 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00178"/>00178 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00179"/>00179 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00180"/>00180 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00181"/>00181 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00182"/>00182 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00183"/>00183 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A7,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00184"/>00184 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A6,&#32;64},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00185"/>00185 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00186"/>00186 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00187"/>00187 
+<anchor xml:id="_melodies_8h_source_1l00188"/>00188 <emphasis role="comment">//&#32;note_t&#32;RINGTONE_2[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00189"/>00189 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00190"/>00190 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00191"/>00191 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00192"/>00192 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00193"/>00193 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00194"/>00194 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00195"/>00195 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00196"/>00196 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00197"/>00197 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00198"/>00198 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00199"/>00199 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00200"/>00200 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00201"/>00201 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00202"/>00202 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00203"/>00203 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00204"/>00204 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00205"/>00205 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00206"/>00206 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00207"/>00207 
+<anchor xml:id="_melodies_8h_source_1l00208"/>00208 <emphasis role="comment">//&#32;note_t&#32;RINGTONE_3[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00209"/>00209 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00210"/>00210 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00211"/>00211 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00212"/>00212 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00213"/>00213 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00214"/>00214 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00215"/>00215 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00216"/>00216 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00217"/>00217 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00218"/>00218 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00219"/>00219 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00220"/>00220 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00221"/>00221 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00222"/>00222 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00223"/>00223 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00224"/>00224 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00225"/>00225 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00226"/>00226 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00227"/>00227 
+<anchor xml:id="_melodies_8h_source_1l00228"/>00228 <emphasis role="comment">//&#32;note_t&#32;DANGER[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00229"/>00229 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_FS5,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00230"/>00230 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00231"/>00231 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_FS5,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00232"/>00232 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00233"/>00233 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_FS5,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00234"/>00234 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00235"/>00235 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_FS5,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00236"/>00236 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;-8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00237"/>00237 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00238"/>00238 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00239"/>00239 
+<anchor xml:id="_melodies_8h_source_1l00240"/>00240 
+<anchor xml:id="_melodies_8h_source_1l00241"/>00241 <emphasis role="comment">//&#32;note_t&#32;EXPLOSION[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00242"/>00242 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G9,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00243"/>00243 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E9,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00244"/>00244 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C9,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00245"/>00245 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00246"/>00246 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00247"/>00247 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C8,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00248"/>00248 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00249"/>00249 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00250"/>00250 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C7,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00251"/>00251 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00252"/>00252 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00253"/>00253 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C6,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00254"/>00254 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00255"/>00255 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00256"/>00256 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00257"/>00257 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00258"/>00258 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E4,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00259"/>00259 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00260"/>00260 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G3,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00261"/>00261 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E3,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00262"/>00262 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C3,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00263"/>00263 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G2,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00264"/>00264 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E2,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00265"/>00265 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C2,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00266"/>00266 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00267"/>00267 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00268"/>00268 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00269"/>00269 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G0,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00270"/>00270 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E0,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00271"/>00271 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C0,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00272"/>00272 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_GM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00273"/>00273 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_EM1,&#32;128},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00274"/>00274 
+<anchor xml:id="_melodies_8h_source_1l00275"/>00275 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00276"/>00276 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00277"/>00277 <emphasis role="comment">//&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00278"/>00278 
+<anchor xml:id="_melodies_8h_source_1l00279"/>00279 <emphasis role="comment">//&#32;note_t&#32;HAPPY_BIRTHDAY[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00280"/>00280 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00281"/>00281 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;8},&#32;</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00282"/>00282 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00283"/>00283 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00284"/>00284 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00285"/>00285 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E4,&#32;-2},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00286"/>00286 
+<anchor xml:id="_melodies_8h_source_1l00287"/>00287 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00288"/>00288 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;8},&#32;</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00289"/>00289 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00290"/>00290 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00291"/>00291 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00292"/>00292 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F4,&#32;-2},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00293"/>00293 
+<anchor xml:id="_melodies_8h_source_1l00294"/>00294 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00295"/>00295 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C4,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00296"/>00296 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_C5,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00297"/>00297 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00298"/>00298 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F4,&#32;-4},&#32;</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00299"/>00299 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_E4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00300"/>00300 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_D4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00301"/>00301 
+<anchor xml:id="_melodies_8h_source_1l00302"/>00302 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{REST,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00303"/>00303 
+<anchor xml:id="_melodies_8h_source_1l00304"/>00304 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_AS4,&#32;4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00305"/>00305 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_AS4,&#32;8},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00306"/>00306 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_A4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00307"/>00307 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00308"/>00308 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_G4,&#32;-4},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00309"/>00309 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{NOTE_F4,&#32;-2},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00310"/>00310 
+<anchor xml:id="_melodies_8h_source_1l00311"/>00311 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{MELODY_END,&#32;0},</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00312"/>00312 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;};</emphasis>
+<anchor xml:id="_melodies_8h_source_1l00313"/>00313 
+<anchor xml:id="_melodies_8h_source_1l00314"/>00314 <emphasis role="comment">//&#32;#endif&#32;//&#32;TONE_MELODIES_H</emphasis>
+</programlisting></section>

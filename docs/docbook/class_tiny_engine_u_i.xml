@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_u_i" xml:lang="en-US">
+<title>TinyEngineUI Class Reference</title>
+<indexterm><primary>TinyEngineUI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;TinyEngineUI.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TinyEngineUI:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine_u_i.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8">TinyEngineUI</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>, uint16_t <link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>, uint16_t <link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>, uint16_t <link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">render</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> _framebuffer) override</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">update</link> (double frameTime) override</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_u_i_1a787dcbf651a0bd9cc6629708356b5445">~TinyEngineUI</link> () override</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1ab02fc5c042713194e8ad28250a32af87">get_m_x</link> () const</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a4270f2308794a2f424eda6f8aaaaaea1">get_m_y</link> () const</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1aba05a0381f98fce1172f1ca92871c0d8">get_m_x_half</link> () const</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a1b7b2ed2793e4072fcb1c89c1d006f00">get_m_y_half</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1a37ec857f14ee965b27750cd0138ed1fe">set_m_x</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1ad15132e1ef66a11df628cc233bdbb768">set_m_y</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1af5bd3a750a3effa8e81615b70401a8e0">set_m_x_half</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1a95fff03753fa25a0f1fa454a895a2588">set_m_y_half</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1afaaf1d13440c7a8c8534e5bb430f46df">set_m_width</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_u_i_1a7dfb78060715eaef646d7ac7ec1c6881">set_m_height</link> (uint16_t <link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a473e97311d8e8eda6c918cfd538c639e">get_m_width</link> () const</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a79c776a400a866e3624eda016af02b97">get_m_height</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Public Member Functions inherited from <link linkend="_class_tiny_engine_renderable_i">TinyEngineRenderableI</link>        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_renderable_i_1a83255f3fcb5830c49a88cd168f4f3639">TinyEngineRenderableI</link> ()</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_class_tiny_engine_renderable_i_1aee85b424686201cc35d938fdbcf2d32d">~TinyEngineRenderableI</link> ()=default</para>
+</listitem>
+        </itemizedlist>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link></para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link></para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link></para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link></para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link></para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00012">12</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_u_i_1a5cca123a14fb3b3fc745d223c65e2fe8"/><section>
+    <title>TinyEngineUI()</title>
+<indexterm><primary>TinyEngineUI</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>TinyEngineUI</secondary></indexterm>
+<para><computeroutput>TinyEngineUI::TinyEngineUI (uint16_t m_x, uint16_t m_y, uint16_t m_width, uint16_t m_height)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00018">18</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>(<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>),
+00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>(<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>),
+00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>(<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>),
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>(<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>)&#x240D;
+00023 &#32;&#32;&#32;&#32;{
+00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>&#32;/&#32;2;
+00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>&#32;/&#32;2;
+00026 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a787dcbf651a0bd9cc6629708356b5445"/><section>
+    <title>~TinyEngineUI()</title>
+<indexterm><primary>~TinyEngineUI</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>~TinyEngineUI</secondary></indexterm>
+<para><computeroutput>TinyEngineUI::~TinyEngineUI ( )<computeroutput>[override]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8cpp_source_1l00016">16</link> of file <link linkend="__tiny_engine_u_i_8cpp_source">TinyEngineUI.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00017 {
+00018 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_u_i_1a79c776a400a866e3624eda016af02b97"/><section>
+    <title>get_m_height()</title>
+<indexterm><primary>get_m_height</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_height</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_height ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00087">87</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00088 &#32;&#32;&#32;&#32;{
+00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>;
+00090 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a473e97311d8e8eda6c918cfd538c639e"/><section>
+    <title>get_m_width()</title>
+<indexterm><primary>get_m_width</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_width</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_width ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00082">82</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00083 &#32;&#32;&#32;&#32;{
+00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>;
+00085 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1ab02fc5c042713194e8ad28250a32af87"/><section>
+    <title>get_m_x()</title>
+<indexterm><primary>get_m_x</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_x</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_x ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00032">32</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00033 &#32;&#32;&#32;&#32;{
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>;
+00035 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1aba05a0381f98fce1172f1ca92871c0d8"/><section>
+    <title>get_m_x_half()</title>
+<indexterm><primary>get_m_x_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_x_half</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_x_half ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00042">42</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00043 &#32;&#32;&#32;&#32;{
+00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>;
+00045 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a4270f2308794a2f424eda6f8aaaaaea1"/><section>
+    <title>get_m_y()</title>
+<indexterm><primary>get_m_y</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_y</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_y ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00037">37</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00038 &#32;&#32;&#32;&#32;{
+00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>;
+00040 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a1b7b2ed2793e4072fcb1c89c1d006f00"/><section>
+    <title>get_m_y_half()</title>
+<indexterm><primary>get_m_y_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>get_m_y_half</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::get_m_y_half ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00047">47</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00048 &#32;&#32;&#32;&#32;{
+00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>;
+00050 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::render (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> _framebuffer)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderable_i_1a08c6b4146af5b079f5c0573cc60ef94c">TinyEngineRenderableI</link>.</para>
+<para>
+Reimplemented in <link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2795076dc9e802deb255f674278776b5">TinyEngineUIBlinkingTextBox</link>, <link linkend="_class_tiny_engine_u_i_text_1ad856c4689873554a1d27d210ce597925">TinyEngineUIText</link>, and <link linkend="_class_tiny_engine_u_i_text_box_1ab1068f0b54dea4bbf10d29c6c59f84fc">TinyEngineUITextBox</link>.</para>
+<para>
+Definition at line <link linkend="__tiny_engine_u_i_8cpp_source_1l00008">8</link> of file <link linkend="__tiny_engine_u_i_8cpp_source">TinyEngineUI.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00009 {
+00010 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a7dfb78060715eaef646d7ac7ec1c6881"/><section>
+    <title>set_m_height()</title>
+<indexterm><primary>set_m_height</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_height</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_height (uint16_t m_height)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00077">77</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00078 &#32;&#32;&#32;&#32;{
+00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2">m_height</link>;
+00080 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1afaaf1d13440c7a8c8534e5bb430f46df"/><section>
+    <title>set_m_width()</title>
+<indexterm><primary>set_m_width</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_width</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_width (uint16_t m_width)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00072">72</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00073 &#32;&#32;&#32;&#32;{
+00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde">m_width</link>;
+00075 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a37ec857f14ee965b27750cd0138ed1fe"/><section>
+    <title>set_m_x()</title>
+<indexterm><primary>set_m_x</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_x</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_x (uint16_t m_x)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00052">52</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00053 &#32;&#32;&#32;&#32;{
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4">m_x</link>;
+00055 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1af5bd3a750a3effa8e81615b70401a8e0"/><section>
+    <title>set_m_x_half()</title>
+<indexterm><primary>set_m_x_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_x_half</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_x_half (uint16_t m_x_half)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00062">62</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00063 &#32;&#32;&#32;&#32;{
+00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba">m_x_half</link>;
+00065 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1ad15132e1ef66a11df628cc233bdbb768"/><section>
+    <title>set_m_y()</title>
+<indexterm><primary>set_m_y</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_y</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_y (uint16_t m_y)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00057">57</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00058 &#32;&#32;&#32;&#32;{
+00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3">m_y</link>;
+00060 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a95fff03753fa25a0f1fa454a895a2588"/><section>
+    <title>set_m_y_half()</title>
+<indexterm><primary>set_m_y_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>set_m_y_half</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::set_m_y_half (uint16_t m_y_half)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00067">67</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00068 &#32;&#32;&#32;&#32;{
+00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>&#32;=&#32;<link linkend="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb">m_y_half</link>;
+00070 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1"/><section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>void TinyEngineUI::update (double frameTime)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_tiny_engine_renderable_i_1a269a0beb4185bf0f35a3ad9a73f83021">TinyEngineRenderableI</link>.</para>
+<para>
+Reimplemented in <link linkend="_class_tiny_engine_u_i_blinking_text_box_1a390c428161e594f7e06aaecdae83cb5f">TinyEngineUIBlinkingTextBox</link>, <link linkend="_class_tiny_engine_u_i_text_1a894a3cf6ee06f5c1c8d572b9d688108a">TinyEngineUIText</link>, and <link linkend="_class_tiny_engine_u_i_text_box_1ae71f116c12369cdd955e801e41da86f5">TinyEngineUITextBox</link>.</para>
+<para>
+Definition at line <link linkend="__tiny_engine_u_i_8cpp_source_1l00012">12</link> of file <link linkend="__tiny_engine_u_i_8cpp_source">TinyEngineUI.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00013 {
+00014 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_tiny_engine_u_i_1a6ea1b4c2607d73d86a859c8d962d2ce2"/><section>
+    <title>m_height</title>
+<indexterm><primary>m_height</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_height</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_height<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_u_i_1a9584194d43b61258a304c882fa841bde"/><section>
+    <title>m_width</title>
+<indexterm><primary>m_width</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_width</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_width<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_u_i_1a43df8ccc82940d1fbb57334b676fa7f4"/><section>
+    <title>m_x</title>
+<indexterm><primary>m_x</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_x</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_x<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_u_i_1ac4658ea1dfbc1ec4fedb5e5909d9aaba"/><section>
+    <title>m_x_half</title>
+<indexterm><primary>m_x_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_x_half</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_x_half<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_u_i_1a6ee1da0c8fa7fae4a2bddeefe07de1d3"/><section>
+    <title>m_y</title>
+<indexterm><primary>m_y</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_y</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_y<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_u_i_1afc59f06f6c42cfdccfdc01c57cd785eb"/><section>
+    <title>m_y_half</title>
+<indexterm><primary>m_y_half</primary><secondary>TinyEngineUI</secondary></indexterm>
+<indexterm><primary>TinyEngineUI</primary><secondary>m_y_half</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngineUI::m_y_half<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_u_i_8h_source_1l00015">15</link> of file <link linkend="__tiny_engine_u_i_8h_source">TinyEngineUI.h</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="__tiny_engine_u_i_8h">TinyEngineUI.h</link>src/<link linkend="__tiny_engine_u_i_8cpp">TinyEngineUI.cpp</link></section>
+</section>

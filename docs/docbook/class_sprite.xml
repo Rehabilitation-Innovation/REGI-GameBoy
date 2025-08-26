@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_sprite" xml:lang="en-US">
+<title>Sprite Class Reference</title>
+<indexterm><primary>Sprite</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine_sprite.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_sprite_1ac8a2c4044d5a8bf1c8923156140355fa">Sprite</link> (bool m_externaly_created, <link linkend="_structte__sprite__t">te_sprite_t</link> *m_sprite_data, bool m_animated, <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> *m_animation_data, double m_frametime, uint16_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, uint16_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1aa188f688afaba7bf21ba549429f874a0">Sprite</link> (uint8_t *sprite_buffer, uint16_t width, uint16_t height)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1ab6535d95c0818a472c9f0b323b1600ce">Sprite</link> (<link linkend="_structte__sprite__t">te_sprite_t</link> _sprite_data)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1a89a82a1160b2420743502c044b1aca99">Sprite</link> (<link linkend="_structte__sprite__t">te_sprite_t</link> *_sprite_data)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1a7502b3e66c3a8e30821e4b17833c89dc">Sprite</link> (<link linkend="_structte__sprite__t">te_sprite_t</link> *_sprite_data, <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> *_sprite_animation_data)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1a34d4bf8a3aba31921a71c2a12b3f2525">Sprite</link> (const <link linkend="_structte__sprite__t">te_sprite_t</link> &amp;_sprite_data, const <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> &amp;_sprite_animation_data)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sprite_1a8accab430f9d90ae5117b57d67e32b84">~Sprite</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a026f7b28d2047d2b17cfe90ba29598fc">render</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp;_fb)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_sprite_1a5b5b40f49bab726d65ae5bdddb5095f6">is_m_externaly_created</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1af83cf02fb3cddef110ba586572d63cd1">set_m_externaly_created</link> (const bool m_externaly_created)</para>
+</listitem>
+            <listitem><para><link linkend="_structte__sprite__t">te_sprite_t</link> * <link linkend="_class_sprite_1aabab23ab32f0cee58b1f2715597458de">get_m_sprite_data</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a5edd832bb66f35c677f6f3517390640a">set_m_sprite_data</link> (<link linkend="_structte__sprite__t">te_sprite_t</link> *const m_sprite_data)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_sprite_1aa58f521454f0e700633a1555a1dcd7b3">is_m_animated</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1af4281d1664fda219368b190c0b233bcd">set_m_animated</link> (const bool m_animated)</para>
+</listitem>
+            <listitem><para><link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> * <link linkend="_class_sprite_1a1b864c55c1447308301665946d3b26de">get_m_animation_data</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1af6c4408de4c7b235abd8228d674ef2cb">set_m_animation_data</link> (<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> *const m_animation_data)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_sprite_1acae1b5a7536cf89c73c29797e21b780f">get_m_frametime</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a27f095629aeacb38f8dc1a3446ed29d9">set_m_frametime</link> (const double m_frametime)</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d">get_m_x</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a7c1f3afb104aa43c406d59ed0ae01413">set_m_x</link> (const uint16_t m_x)</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_sprite_1ac6985150992aae6e2a9642b47501faa1">get_m_y</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a0cae8bdfccd92955e9050871ad085c1d">set_m_y</link> (const uint16_t m_y)</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_sprite_1a12e57c0de479fec2d23866a7cfe4739f">get_m_scale_x</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a5f5ef1f7c6c636b80db6a65d90697362">set_m_scale_x</link> (const uint8_t m_scale_x)</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_sprite_1a5b15b006999653c1d976d7b014d3e8eb">get_m_scale_y</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1aa8c53d178b2a1470a217cc49e300360a">set_m_scale_y</link> (const uint8_t m_scale_y)</para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_class_sprite_1a34877f284d40cf2e5e7a9ea4966d02f2">get_m_animation_speed</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sprite_1a6d2a86f21f6dbfbc8e8ad6832301b22d">set_m_animation_speed</link> (uint8_t m_animation_speed)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00029">29</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_sprite_1ac8a2c4044d5a8bf1c8923156140355fa"/><section>
+    <title>Sprite()<computeroutput>[1/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (bool m_externaly_created, <link linkend="_structte__sprite__t">te_sprite_t</link> * m_sprite_data, bool m_animated, <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> * m_animation_data, double m_frametime, uint16_t x, uint16_t y)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00043">43</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;m_externaly_created(m_externaly_created),
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_sprite_data(m_sprite_data),
+00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_animated(m_animated),
+00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_animation_data(m_animation_data),
+00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_frametime(m_frametime),
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_x(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>),
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_y(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)&#x240D;
+00052 &#32;&#32;&#32;&#32;{
+00053 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615"/><section>
+    <title>Sprite()<computeroutput>[2/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00055">55</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00056 &#32;&#32;&#32;&#32;{
+00057 &#32;&#32;&#32;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_sprite_1aa188f688afaba7bf21ba549429f874a0"/><section>
+    <title>Sprite()<computeroutput>[3/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (uint8_t * sprite_buffer, uint16_t width, uint16_t height)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00021">21</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00022 {
+00023 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;te_sprite_t{
+00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;sprite_buffer,
+00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;width,
+00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;height,
+00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;0
+00028 &#32;&#32;&#32;&#32;};
+00029 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+00030 }
+</programlisting></section>
+<anchor xml:id="_class_sprite_1ab6535d95c0818a472c9f0b323b1600ce"/><section>
+    <title>Sprite()<computeroutput>[4/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (<link linkend="_structte__sprite__t">te_sprite_t</link> _sprite_data)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00009">9</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00010 {
+00011 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;te_sprite_t{
+00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>,
+00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">sprite_palette</link>,
+00016 &#32;&#32;&#32;&#32;};
+00017 
+00018 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+00019 }
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a89a82a1160b2420743502c044b1aca99"/><section>
+    <title>Sprite()<computeroutput>[5/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (<link linkend="_structte__sprite__t">te_sprite_t</link> * _sprite_data)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00004">4</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00004 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:
+00005 &#32;&#32;&#32;&#32;m_sprite_data(_sprite_data)&#x240D;
+00006 {
+00007 };
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a7502b3e66c3a8e30821e4b17833c89dc"/><section>
+    <title>Sprite()<computeroutput>[6/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (<link linkend="_structte__sprite__t">te_sprite_t</link> * _sprite_data, <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> * _sprite_animation_data)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00032">32</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:
+00033 &#32;&#32;&#32;&#32;m_sprite_data(_sprite_data),
+00034 &#32;&#32;&#32;&#32;m_animation_data(_sprite_animation_data)&#x240D;
+00035 {
+00036 &#32;&#32;&#32;&#32;m_animated&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+00037 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+00038 };
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a34d4bf8a3aba31921a71c2a12b3f2525"/><section>
+    <title>Sprite()<computeroutput>[7/7]</computeroutput></title>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::Sprite (const <link linkend="_structte__sprite__t">te_sprite_t</link> &amp; _sprite_data, const <link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> &amp; _sprite_animation_data)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00040">40</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00041 {
+00042 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;te_sprite_t{
+00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>,
+00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">sprite_palette</link>,
+00047 &#32;&#32;&#32;&#32;};
+00048 &#32;&#32;&#32;&#32;m_animation_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;te_sprite_animation_t{
+00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_animation_frames&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1ae8b1c132a79499b1a034c8dbaa5f4f07">sprite_animation_frames</link>,
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.animation_delay&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a005d996826fc6306b464609827f3367e">animation_delay</link>,
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.total_frames&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a738b24e248655af58263162698329aa8">total_frames</link>,
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.current_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>,
+00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.start_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1ad761f161ae73abb8b94ca8c65b6b5196">start_frame</link>,
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.end_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a937203fdf03fe9ded85ab00a0f29a94f">end_frame</link>,
+00055 &#32;&#32;&#32;&#32;};
+00056 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+00057 }
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a8accab430f9d90ae5117b57d67e32b84"/><section>
+    <title>~Sprite()</title>
+<indexterm><primary>~Sprite</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>~Sprite</secondary></indexterm>
+<para><computeroutput>Sprite::~Sprite ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00059">59</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00060 {
+00061 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(m_externaly_created)&#32;<emphasis role="keywordflow">return</emphasis>;
+00062 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;only&#32;destroy&#32;if&#32;we&#32;own&#32;the&#32;data.</emphasis>
+00063 };
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_sprite_1a1b864c55c1447308301665946d3b26de"/><section>
+    <title>get_m_animation_data()</title>
+<indexterm><primary>get_m_animation_data</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_animation_data</secondary></indexterm>
+<para><computeroutput><link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> * Sprite::get_m_animation_data ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00101">101</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00102 &#32;&#32;&#32;&#32;{
+00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animation_data;
+00104 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a34877f284d40cf2e5e7a9ea4966d02f2"/><section>
+    <title>get_m_animation_speed()</title>
+<indexterm><primary>get_m_animation_speed</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_animation_speed</secondary></indexterm>
+<para><computeroutput>uint8_t Sprite::get_m_animation_speed ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00161">161</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00162 &#32;&#32;&#32;&#32;{
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animation_speed;
+00164 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1acae1b5a7536cf89c73c29797e21b780f"/><section>
+    <title>get_m_frametime()</title>
+<indexterm><primary>get_m_frametime</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_frametime</secondary></indexterm>
+<para><computeroutput>double Sprite::get_m_frametime ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00111">111</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00112 &#32;&#32;&#32;&#32;{
+00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_frametime;
+00114 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a12e57c0de479fec2d23866a7cfe4739f"/><section>
+    <title>get_m_scale_x()</title>
+<indexterm><primary>get_m_scale_x</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_scale_x</secondary></indexterm>
+<para><computeroutput>uint8_t Sprite::get_m_scale_x ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00141">141</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00142 &#32;&#32;&#32;&#32;{
+00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_scale_x;
+00144 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a5b15b006999653c1d976d7b014d3e8eb"/><section>
+    <title>get_m_scale_y()</title>
+<indexterm><primary>get_m_scale_y</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_scale_y</secondary></indexterm>
+<para><computeroutput>uint8_t Sprite::get_m_scale_y ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00151">151</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00152 &#32;&#32;&#32;&#32;{
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_scale_y;
+00154 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1aabab23ab32f0cee58b1f2715597458de"/><section>
+    <title>get_m_sprite_data()</title>
+<indexterm><primary>get_m_sprite_data</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_sprite_data</secondary></indexterm>
+<para><computeroutput><link linkend="_structte__sprite__t">te_sprite_t</link> * Sprite::get_m_sprite_data ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00081">81</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00082 &#32;&#32;&#32;&#32;{
+00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_sprite_data;
+00084 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d"/><section>
+    <title>get_m_x()</title>
+<indexterm><primary>get_m_x</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_x</secondary></indexterm>
+<para><computeroutput>uint16_t Sprite::get_m_x ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00121">121</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00122 &#32;&#32;&#32;&#32;{
+00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_x;
+00124 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1ac6985150992aae6e2a9642b47501faa1"/><section>
+    <title>get_m_y()</title>
+<indexterm><primary>get_m_y</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>get_m_y</secondary></indexterm>
+<para><computeroutput>uint16_t Sprite::get_m_y ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00131">131</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00132 &#32;&#32;&#32;&#32;{
+00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_y;
+00134 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1aa58f521454f0e700633a1555a1dcd7b3"/><section>
+    <title>is_m_animated()</title>
+<indexterm><primary>is_m_animated</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>is_m_animated</secondary></indexterm>
+<para><computeroutput>bool Sprite::is_m_animated ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00091">91</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00092 &#32;&#32;&#32;&#32;{
+00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animated;
+00094 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a5b5b40f49bab726d65ae5bdddb5095f6"/><section>
+    <title>is_m_externaly_created()</title>
+<indexterm><primary>is_m_externaly_created</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>is_m_externaly_created</secondary></indexterm>
+<para><computeroutput>bool Sprite::is_m_externaly_created ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00071">71</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00072 &#32;&#32;&#32;&#32;{
+00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_externaly_created;
+00074 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a026f7b28d2047d2b17cfe90ba29598fc"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void Sprite::render (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp; _fb)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8cpp_source_1l00065">65</link> of file <link linkend="_tinyengine__sprite_8cpp_source">tinyengine_sprite.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00066 {
+00067 
+00068 }
+</programlisting></section>
+<anchor xml:id="_class_sprite_1af4281d1664fda219368b190c0b233bcd"/><section>
+    <title>set_m_animated()</title>
+<indexterm><primary>set_m_animated</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_animated</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_animated (const bool m_animated)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00096">96</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00097 &#32;&#32;&#32;&#32;{
+00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animated&#32;=&#32;m_animated;
+00099 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1af6c4408de4c7b235abd8228d674ef2cb"/><section>
+    <title>set_m_animation_data()</title>
+<indexterm><primary>set_m_animation_data</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_animation_data</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_animation_data (<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link> *const m_animation_data)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00106">106</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00107 &#32;&#32;&#32;&#32;{
+00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animation_data&#32;=&#32;m_animation_data;
+00109 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a6d2a86f21f6dbfbc8e8ad6832301b22d"/><section>
+    <title>set_m_animation_speed()</title>
+<indexterm><primary>set_m_animation_speed</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_animation_speed</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_animation_speed (uint8_t m_animation_speed)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00166">166</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00167 &#32;&#32;&#32;&#32;{
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animation_speed&#32;=&#32;m_animation_speed;
+00169 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1af83cf02fb3cddef110ba586572d63cd1"/><section>
+    <title>set_m_externaly_created()</title>
+<indexterm><primary>set_m_externaly_created</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_externaly_created</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_externaly_created (const bool m_externaly_created)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00076">76</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00077 &#32;&#32;&#32;&#32;{
+00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_externaly_created&#32;=&#32;m_externaly_created;
+00079 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a27f095629aeacb38f8dc1a3446ed29d9"/><section>
+    <title>set_m_frametime()</title>
+<indexterm><primary>set_m_frametime</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_frametime</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_frametime (const double m_frametime)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00116">116</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00117 &#32;&#32;&#32;&#32;{
+00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_frametime&#32;+=&#32;m_frametime;
+00119 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a5f5ef1f7c6c636b80db6a65d90697362"/><section>
+    <title>set_m_scale_x()</title>
+<indexterm><primary>set_m_scale_x</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_scale_x</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_scale_x (const uint8_t m_scale_x)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00146">146</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00147 &#32;&#32;&#32;&#32;{
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_scale_x&#32;=&#32;m_scale_x;
+00149 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1aa8c53d178b2a1470a217cc49e300360a"/><section>
+    <title>set_m_scale_y()</title>
+<indexterm><primary>set_m_scale_y</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_scale_y</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_scale_y (const uint8_t m_scale_y)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00156">156</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00157 &#32;&#32;&#32;&#32;{
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_scale_y&#32;=&#32;m_scale_y;
+00159 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a5edd832bb66f35c677f6f3517390640a"/><section>
+    <title>set_m_sprite_data()</title>
+<indexterm><primary>set_m_sprite_data</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_sprite_data</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_sprite_data (<link linkend="_structte__sprite__t">te_sprite_t</link> *const m_sprite_data)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00086">86</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00087 &#32;&#32;&#32;&#32;{
+00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_sprite_data&#32;=&#32;m_sprite_data;
+00089 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a7c1f3afb104aa43c406d59ed0ae01413"/><section>
+    <title>set_m_x()</title>
+<indexterm><primary>set_m_x</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_x</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_x (const uint16_t m_x)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00126">126</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00127 &#32;&#32;&#32;&#32;{
+00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_x&#32;=&#32;m_x;
+00129 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_sprite_1a0cae8bdfccd92955e9050871ad085c1d"/><section>
+    <title>set_m_y()</title>
+<indexterm><primary>set_m_y</primary><secondary>Sprite</secondary></indexterm>
+<indexterm><primary>Sprite</primary><secondary>set_m_y</secondary></indexterm>
+<para><computeroutput>void Sprite::set_m_y (const uint16_t m_y)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__sprite_8h_source_1l00136">136</link> of file <link linkend="_tinyengine__sprite_8h_source">tinyengine_sprite.h</link>.</para>
+<programlisting linenumbering="unnumbered">00137 &#32;&#32;&#32;&#32;{
+00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_y&#32;=&#32;m_y;
+00139 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="_tinyengine__sprite_8h">tinyengine_sprite.h</link>src/<link linkend="_tinyengine__sprite_8cpp">tinyengine_sprite.cpp</link></section>
+</section>

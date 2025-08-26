@@ -1,0 +1,589 @@
+\doxysection{src/scenes/\+Dino\+Game.cpp File Reference}
+\hypertarget{_dino_game_8cpp}{}\label{_dino_game_8cpp}\index{src/scenes/DinoGame.cpp@{src/scenes/DinoGame.cpp}}
+{\ttfamily \#include "{}Dino\+Game.\+h"{}}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$format$>$}\newline
+{\ttfamily \#include "{}tinyengine.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+framebuffer.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}pico/rand.\+h"{}}\newline
+{\ttfamily \#include "{}Snake\+Game.\+h"{}}\newline
+{\ttfamily \#include "{}cute\+\_\+c2.\+h"{}}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+{\ttfamily \#include "{}cactus\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}dino\+\_\+running.\+h"{}}\newline
+{\ttfamily \#include "{}dino\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}Tiny\+Engine\+UI.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/dma.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/interp.\+h"{}}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/pio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}ws2812.\+pio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/adc.\+h"{}}\newline
+{\ttfamily \#include "{}pico/time.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/watchdog.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_dino_game_8cpp_a493b9b7cc0c4de9e5d832a5b9c8fe0f0}{IS\+\_\+\+RGBW}}~true
+\item 
+\#define \mbox{\hyperlink{_dino_game_8cpp_a893011783fefc21f30baf08142cd3c35}{NUM\+\_\+\+PIXELS}}~4
+\item 
+\#define \mbox{\hyperlink{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3}{WS2812\+\_\+\+PIN}}~6
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{pattern}}) (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}{pattern\+\_\+snakes}} (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\item 
+void \mbox{\hyperlink{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}{pattern\+\_\+random}} (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\item 
+void \mbox{\hyperlink{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}{pattern\+\_\+sparkle}} (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\item 
+void \mbox{\hyperlink{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}{pattern\+\_\+greys}} (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{pattern}} \mbox{\hyperlink{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede}{pat}}\\
+\>const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_dino_game_8cpp_a8f8f80d37794cde9472343e4487ba3eb}{name}}\\
+\} \mbox{\hyperlink{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}{pattern\_table}} \mbox{[}$\,$\mbox{]}\\
+
+\end{tabbing}\item 
+int \mbox{\hyperlink{_dino_game_8cpp_a3d52b88a55e8e61a6f4a2e99b61469e9}{jump\+Height}} = 50
+\item 
+int \mbox{\hyperlink{_dino_game_8cpp_a64dd4fbaafe16e055e36cc3a0b3da6ba}{game\+Speed}} = 40
+\item 
+int \mbox{\hyperlink{_dino_game_8cpp_a17538519ca141179ae5cee37717e7843}{jump}} = 1
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}} = 150
+\item 
+float \mbox{\hyperlink{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}{vely}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f}{gravity}} = 0.\+5f
+\item 
+bool \mbox{\hyperlink{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}{on\+Ground}} = true
+\item 
+bool \mbox{\hyperlink{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}{game\+Started}} = false
+\item 
+\mbox{\hyperlink{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8}{std\+::string}} \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\+\_\+text}} = "{}PRESS JUMP TO START"{}
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_blinking_text_box}{Tiny\+Engine\+UIBlinking\+Text\+Box}} \mbox{\hyperlink{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}{banner}} (160 -\/(20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}7)/2, 200, 20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}7, 20, 0, 15, \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\+\_\+text}}, 5)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}{jump\+\_\+counter}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aff930da8859a062c15e30210acb11837}{miss}} = 0
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} \mbox{\hyperlink{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}{score}} (5, 5, "{}Score\+: "{}, 15)
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} \mbox{\hyperlink{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}{time\+\_\+}} (5, 30, "{}Time\+: "{}, 15)
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} \mbox{\hyperlink{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}{jumps}} (90, 5, "{}Jumps\+: "{}, 15)
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} \mbox{\hyperlink{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}{missed\+\_\+jumps}} (90, 30, "{}Missed Jumps\+: "{}, 15)
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text_box}{Tiny\+Engine\+UIText\+Box}} \mbox{\hyperlink{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}{scoreboard}} (70, 180, 210, 50, 45)
+\item 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} \mbox{\hyperlink{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00}{input}} (0, 20, "{}Input\+: "{}, 15)
+\item 
+\mbox{\hyperlink{class_sprite}{Sprite}} \mbox{\hyperlink{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}{dino\+Sprite}}
+\item 
+\mbox{\hyperlink{class_sprite}{Sprite}} \mbox{\hyperlink{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}{cactus\+Sprite}}
+\item 
+\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} \mbox{\hyperlink{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}{dino\+Box}}
+\item 
+\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} \mbox{\hyperlink{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}{cactus\+Box}}
+\item 
+PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}
+\item 
+uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}
+\item 
+uint \mbox{\hyperlink{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}{offsetpio}}
+\item 
+int \mbox{\hyperlink{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}{play\+\_\+tone}} = 0
+\item 
+char \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}} \mbox{[}255\mbox{]} = \{ 0 \}
+\item 
+double \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}} = 0
+\item 
+bool \mbox{\hyperlink{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}{already\+Hit}} = false
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_dino_game_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_dino_game_8cpp_a493b9b7cc0c4de9e5d832a5b9c8fe0f0}\index{DinoGame.cpp@{DinoGame.cpp}!IS\_RGBW@{IS\_RGBW}}
+\index{IS\_RGBW@{IS\_RGBW}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{IS\_RGBW}{IS\_RGBW}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a493b9b7cc0c4de9e5d832a5b9c8fe0f0} 
+\#define IS\+\_\+\+RGBW~true}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a893011783fefc21f30baf08142cd3c35}\index{DinoGame.cpp@{DinoGame.cpp}!NUM\_PIXELS@{NUM\_PIXELS}}
+\index{NUM\_PIXELS@{NUM\_PIXELS}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{NUM\_PIXELS}{NUM\_PIXELS}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a893011783fefc21f30baf08142cd3c35} 
+\#define NUM\+\_\+\+PIXELS~4}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3}\index{DinoGame.cpp@{DinoGame.cpp}!WS2812\_PIN@{WS2812\_PIN}}
+\index{WS2812\_PIN@{WS2812\_PIN}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{WS2812\_PIN}{WS2812\_PIN}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_af75dc8bf5891f41c539ef9b8ebd3d1c3} 
+\#define WS2812\+\_\+\+PIN~6}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_dino_game_8cpp_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}\index{DinoGame.cpp@{DinoGame.cpp}!pattern@{pattern}}
+\index{pattern@{pattern}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pattern}{pattern}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8} 
+typedef void(\texorpdfstring{$\ast$}{*} pattern) (PIO \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, uint \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint len, uint \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}})}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00118}{118}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_dino_game_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}\index{DinoGame.cpp@{DinoGame.cpp}!pattern\_greys@{pattern\_greys}}
+\index{pattern\_greys@{pattern\_greys}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pattern\_greys()}{pattern\_greys()}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b} 
+void pattern\+\_\+greys (\begin{DoxyParamCaption}\item[{PIO}]{pio}{, }\item[{uint}]{sm}{, }\item[{uint}]{len}{, }\item[{uint}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00107}{107}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00108\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ uint\ max\ =\ 100;\ \textcolor{comment}{//\ let's\ not\ draw\ too\ much\ current!}}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%=\ max;}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{00112\ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ *\ 0x10101);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (++\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ >=\ max)\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ 0;}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \}}
+
+\end{DoxyCode}
+\Hypertarget{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}\index{DinoGame.cpp@{DinoGame.cpp}!pattern\_random@{pattern\_random}}
+\index{pattern\_random@{pattern\_random}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pattern\_random()}{pattern\_random()}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4} 
+void pattern\+\_\+random (\begin{DoxyParamCaption}\item[{PIO}]{pio}{, }\item[{uint}]{sm}{, }\item[{uint}]{len}{, }\item[{uint}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00091}{91}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00092\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%\ 8)}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgbw\_u32(rand()\ /\ 100000,\ rand()\ /\ 100000,\ rand()\ /\ 100000,\ rand()\ /\ 100000));}
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+\Hypertarget{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}\index{DinoGame.cpp@{DinoGame.cpp}!pattern\_snakes@{pattern\_snakes}}
+\index{pattern\_snakes@{pattern\_snakes}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pattern\_snakes()}{pattern\_snakes()}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755} 
+void pattern\+\_\+snakes (\begin{DoxyParamCaption}\item[{PIO}]{pio}{, }\item[{uint}]{sm}{, }\item[{uint}]{len}{, }\item[{uint}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00075}{75}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ uint\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ (i\ +\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ >>\ 1))\ \%\ 64;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 10)}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0xff,\ 0,\ 0));}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ 15\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 25)}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0,\ 0xff,\ 0));}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ 30\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 40)}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ urgb\_u32(0,\ 0,\ 0xff));}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ 0);}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \}}
+
+\end{DoxyCode}
+\Hypertarget{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}\index{DinoGame.cpp@{DinoGame.cpp}!pattern\_sparkle@{pattern\_sparkle}}
+\index{pattern\_sparkle@{pattern\_sparkle}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pattern\_sparkle()}{pattern\_sparkle()}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec} 
+void pattern\+\_\+sparkle (\begin{DoxyParamCaption}\item[{PIO}]{pio}{, }\item[{uint}]{sm}{, }\item[{uint}]{len}{, }\item[{uint}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00099}{99}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ \%\ 8)}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ i\ =\ 0;\ i\ <\ len;\ ++i)}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ put\_pixel(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ rand()\ \%\ 16\ ?\ 0\ :\ 0xffffffff);}
+\DoxyCodeLine{00105\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{_dino_game_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060}\index{DinoGame.cpp@{DinoGame.cpp}!alreadyHit@{alreadyHit}}
+\index{alreadyHit@{alreadyHit}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{alreadyHit}{alreadyHit}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a65169b2e93e922142ca6273855d30060} 
+bool already\+Hit = false}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00423}{423}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296}\index{DinoGame.cpp@{DinoGame.cpp}!banner@{banner}}
+\index{banner@{banner}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{banner}{banner}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a098666c0e1caa450afbee4d9b39c2296} 
+\mbox{\hyperlink{class_tiny_engine_u_i_blinking_text_box}{Tiny\+Engine\+UIBlinking\+Text\+Box}} banner(160 -\/(20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}7)/2, 200, 20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}7, 20, 0, 15, \mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\+\_\+text}}, 5) (\begin{DoxyParamCaption}\item[{160 -\/(20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}7)/}]{2}{, }\item[{200}]{}{, }\item[{20+start\+\_\+text.\+length() \texorpdfstring{$\ast$}{*}}]{7}{, }\item[{20}]{}{, }\item[{0}]{}{, }\item[{15}]{}{, }\item[{\mbox{\hyperlink{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}{start\+\_\+text}}}]{}{, }\item[{5}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18}\index{DinoGame.cpp@{DinoGame.cpp}!cactusBox@{cactusBox}}
+\index{cactusBox@{cactusBox}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{cactusBox}{cactusBox}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_abe6d359cb3612c4c13f4f2c705b23e18} 
+\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} cactus\+Box}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00163}{163}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c}\index{DinoGame.cpp@{DinoGame.cpp}!cactusSprite@{cactusSprite}}
+\index{cactusSprite@{cactusSprite}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{cactusSprite}{cactusSprite}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_ab8ce246f91eb4b52e54fb7197fc23c9c} 
+\mbox{\hyperlink{class_sprite}{Sprite}} cactus\+Sprite}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00162}{162}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd}\index{DinoGame.cpp@{DinoGame.cpp}!dinoBox@{dinoBox}}
+\index{dinoBox@{dinoBox}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{dinoBox}{dinoBox}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a15a14f7c02f67365a3fc8edfe7e915cd} 
+\mbox{\hyperlink{structc2_a_a_b_b}{c2\+AABB}} dino\+Box}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00163}{163}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9}\index{DinoGame.cpp@{DinoGame.cpp}!dinoSprite@{dinoSprite}}
+\index{dinoSprite@{dinoSprite}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{dinoSprite}{dinoSprite}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a91d743c4b13d895bd19a0debffa433c9} 
+\mbox{\hyperlink{class_sprite}{Sprite}} dino\+Sprite}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00162}{162}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a64dd4fbaafe16e055e36cc3a0b3da6ba}\index{DinoGame.cpp@{DinoGame.cpp}!gameSpeed@{gameSpeed}}
+\index{gameSpeed@{gameSpeed}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{gameSpeed}{gameSpeed}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a64dd4fbaafe16e055e36cc3a0b3da6ba} 
+int game\+Speed = 40}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00132}{132}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c}\index{DinoGame.cpp@{DinoGame.cpp}!gameStarted@{gameStarted}}
+\index{gameStarted@{gameStarted}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{gameStarted}{gameStarted}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a520d5bf19a4fb31c15dd1200368b058c} 
+bool game\+Started = false}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00137}{137}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f}\index{DinoGame.cpp@{DinoGame.cpp}!gravity@{gravity}}
+\index{gravity@{gravity}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{gravity}{gravity}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a31924e6c9b17aad7f861e818b8be5d8f} 
+float gravity = 0.\+5f}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00135}{135}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00}\index{DinoGame.cpp@{DinoGame.cpp}!input@{input}}
+\index{input@{input}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a01094266c5c789fd93672e74f7f04a00} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} input(0, 20, "{}Input\+: "{}, 15) (\begin{DoxyParamCaption}\item[{0}]{}{, }\item[{20}]{}{, }\item[{"{}Input\+: "{}}]{}{, }\item[{15}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_a17538519ca141179ae5cee37717e7843}\index{DinoGame.cpp@{DinoGame.cpp}!jump@{jump}}
+\index{jump@{jump}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{jump}{jump}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a17538519ca141179ae5cee37717e7843} 
+int jump = 1}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00133}{133}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00}\index{DinoGame.cpp@{DinoGame.cpp}!jump\_counter@{jump\_counter}}
+\index{jump\_counter@{jump\_counter}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{jump\_counter}{jump\_counter}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_adcbe47c53a6e849aa28bf58cbf47ee00} 
+uint16\+\_\+t jump\+\_\+counter = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00142}{142}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a3d52b88a55e8e61a6f4a2e99b61469e9}\index{DinoGame.cpp@{DinoGame.cpp}!jumpHeight@{jumpHeight}}
+\index{jumpHeight@{jumpHeight}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{jumpHeight}{jumpHeight}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a3d52b88a55e8e61a6f4a2e99b61469e9} 
+int jump\+Height = 50}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00132}{132}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff}\index{DinoGame.cpp@{DinoGame.cpp}!jumps@{jumps}}
+\index{jumps@{jumps}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{jumps}{jumps}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a914c844a0a68fe9209a0fe76b9d4a2ff} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} jumps(90, 5, "{}Jumps\+: "{}, 15) (\begin{DoxyParamCaption}\item[{90}]{}{, }\item[{5}]{}{, }\item[{"{}Jumps\+: "{}}]{}{, }\item[{15}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_aff930da8859a062c15e30210acb11837}\index{DinoGame.cpp@{DinoGame.cpp}!miss@{miss}}
+\index{miss@{miss}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{miss}{miss}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_aff930da8859a062c15e30210acb11837} 
+uint16\+\_\+t miss = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00142}{142}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963}\index{DinoGame.cpp@{DinoGame.cpp}!missed\_jumps@{missed\_jumps}}
+\index{missed\_jumps@{missed\_jumps}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{missed\_jumps}{missed\_jumps}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a28a153104e54ba918bdf95684eeae963} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} missed\+\_\+jumps(90, 30, "{}Missed Jumps\+: "{}, 15) (\begin{DoxyParamCaption}\item[{90}]{}{, }\item[{30}]{}{, }\item[{"{}Missed Jumps\+: "{}}]{}{, }\item[{15}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_a8f8f80d37794cde9472343e4487ba3eb}\index{DinoGame.cpp@{DinoGame.cpp}!name@{name}}
+\index{name@{name}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a8f8f80d37794cde9472343e4487ba3eb} 
+const char\texorpdfstring{$\ast$}{*} name}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00123}{123}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0}\index{DinoGame.cpp@{DinoGame.cpp}!offsetpio@{offsetpio}}
+\index{offsetpio@{offsetpio}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{offsetpio}{offsetpio}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a1fd80d31707250feb35db451a8edb5a0} 
+uint offsetpio}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00167}{167}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66}\index{DinoGame.cpp@{DinoGame.cpp}!onGround@{onGround}}
+\index{onGround@{onGround}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{onGround}{onGround}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_afcbf95c3f0a20a7d68c5d9a241853c66} 
+bool on\+Ground = true}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00137}{137}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede}\index{DinoGame.cpp@{DinoGame.cpp}!pat@{pat}}
+\index{pat@{pat}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pat}{pat}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a24a31bc0d344f77c0b94c05f47cbeede} 
+\mbox{\hyperlink{_dino_game_8cpp_a0d20517626e480f07ceee32bcff56db8}{pattern}} pat}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00122}{122}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506}\index{DinoGame.cpp@{DinoGame.cpp}!pattern\_table@{pattern\_table}}
+\index{pattern\_table@{pattern\_table}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{[struct]}{[struct]}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a5a4c6b92e5ee81465b3510b5754da506} 
+const struct  \{ ... \}  pattern\+\_\+table\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_a936c520c77dd3640169856dda95c0755}{pattern\_snakes}},\ \textcolor{stringliteral}{"{}Snakes!"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_aa356ca9b38b898c4cf179a56267052d4}{pattern\_random}},\ \textcolor{stringliteral}{"{}Random\ data"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_a22d482c11872140be273ca3b3ddda1ec}{pattern\_sparkle}},\ \textcolor{stringliteral}{"{}Sparkles"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{_dino_game_8cpp_ae6cec91ea5288546a6516e72bafcd89b}{pattern\_greys}},\ \textcolor{stringliteral}{"{}Greys"{}}\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}\index{DinoGame.cpp@{DinoGame.cpp}!pio@{pio}}
+\index{pio@{pio}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{pio}{pio}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0} 
+PIO pio}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00165}{165}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb}\index{DinoGame.cpp@{DinoGame.cpp}!play\_tone@{play\_tone}}
+\index{play\_tone@{play\_tone}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{play\_tone}{play\_tone}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a10e04ce2c5a546147cbd9f4baee936cb} 
+int play\+\_\+tone = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00171}{171}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41}\index{DinoGame.cpp@{DinoGame.cpp}!score@{score}}
+\index{score@{score}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_ae7476f289721ad311a513f54dfcb6b41} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} score(5, 5, "{}Score\+: "{}, 15) (\begin{DoxyParamCaption}\item[{5}]{}{, }\item[{5}]{}{, }\item[{"{}Score\+: "{}}]{}{, }\item[{15}]{}{}\end{DoxyParamCaption})}
+
+\DoxyHorRuler{0}
+ Score\+: Jumps\+: \hypertarget{_dino_game_8cpp_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Time\+: Missed Jumps\+:}{Time\+: Missed Jumps\+:}}\label{_dino_game_8cpp_autotoc_md1}
+\Hypertarget{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee}\index{DinoGame.cpp@{DinoGame.cpp}!scoreboard@{scoreboard}}
+\index{scoreboard@{scoreboard}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{scoreboard}{scoreboard}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a81a7db0840e434f7c42887f2a04611ee} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text_box}{Tiny\+Engine\+UIText\+Box}} scoreboard(70, 180, 210, 50, 45) (\begin{DoxyParamCaption}\item[{70}]{}{, }\item[{180}]{}{, }\item[{210}]{}{, }\item[{50}]{}{, }\item[{45}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}\index{DinoGame.cpp@{DinoGame.cpp}!sm@{sm}}
+\index{sm@{sm}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{sm}{sm}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb} 
+uint sm}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00166}{166}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910}\index{DinoGame.cpp@{DinoGame.cpp}!start\_text@{start\_text}}
+\index{start\_text@{start\_text}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{start\_text}{start\_text}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_aa87b70da41217e2357375701aca8f910} 
+\mbox{\hyperlink{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8}{std\+::string}} start\+\_\+text = "{}PRESS JUMP TO START"{}}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00138}{138}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}\index{DinoGame.cpp@{DinoGame.cpp}!t@{t}}
+\index{t@{t}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec} 
+double t = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00422}{422}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}\index{DinoGame.cpp@{DinoGame.cpp}!temp@{temp}}
+\index{temp@{temp}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{temp}{temp}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448} 
+char temp\mbox{[}255\mbox{]} = \{ 0 \}}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00421}{421}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00421\ \{\ 0\ \};}
+
+\end{DoxyCode}
+\Hypertarget{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a}\index{DinoGame.cpp@{DinoGame.cpp}!time\_@{time\_}}
+\index{time\_@{time\_}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{time\_}{time\_}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a7713b8e35a97e9bb1ae59df540f16e9a} 
+\mbox{\hyperlink{class_tiny_engine_u_i_text}{Tiny\+Engine\+UIText}} time\+\_\+(5, 30, "{}Time\+: "{}, 15) (\begin{DoxyParamCaption}\item[{5}]{}{, }\item[{30}]{}{, }\item[{"{}Time\+: "{}}]{}{, }\item[{15}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a}\index{DinoGame.cpp@{DinoGame.cpp}!vely@{vely}}
+\index{vely@{vely}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{vely}{vely}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a1932044dc8b6aa5bd6ddf23c62a7ea1a} 
+float vely = 0.\+0f}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00135}{135}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}\index{DinoGame.cpp@{DinoGame.cpp}!x@{x}}
+\index{x@{x}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235} 
+uint32\+\_\+t x = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00134}{134}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+
+\Hypertarget{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}\index{DinoGame.cpp@{DinoGame.cpp}!y@{y}}
+\index{y@{y}!DinoGame.cpp@{DinoGame.cpp}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \label{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48} 
+uint32\+\_\+t y = 150}
+
+
+
+Definition at line \mbox{\hyperlink{_dino_game_8cpp_source_l00134}{134}} of file \mbox{\hyperlink{_dino_game_8cpp_source}{Dino\+Game.\+cpp}}.
+

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__audio_8h_source" xml:lang="en-US">
+<title>tinyengine_audio.h</title>
+<indexterm><primary>inc/tinyengine_audio.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__audio_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#ifndef&#32;__TINYENGINE_RENDERER_DVI_H__</emphasis>
+<anchor xml:id="_tinyengine__audio_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#define&#32;__TINYENGINE_RENDERER_DVI_H__</emphasis>
+<anchor xml:id="_tinyengine__audio_8h_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine_8h">tinyengine.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__audio_8h_source_1l00004"/>00004 
+<anchor xml:id="_tinyengine__audio_8h_source_1l00005"/><link linkend="_structte__audio__handle__t">00005</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_tinyengine__audio_8h_source_1l00006"/><link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">00006</link> &#32;&#32;&#32;&#32;uint&#32;<link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">audio_out_1</link>,&#32;<link linkend="_structte__audio__handle__t_1a6620755c05a3d560221b58e8712677fd">audio_out_2</link>;
+<anchor xml:id="_tinyengine__audio_8h_source_1l00007"/><link linkend="_structte__audio__handle__t_1a7ce1246af4ea9cc5ce1ffcca8cd2bdc2">00007</link> &#32;&#32;&#32;&#32;uint&#32;<link linkend="_structte__audio__handle__t_1a7ce1246af4ea9cc5ce1ffcca8cd2bdc2">period</link>;
+<anchor xml:id="_tinyengine__audio_8h_source_1l00008"/><link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">00008</link> &#32;&#32;&#32;&#32;uint&#32;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>;
+<anchor xml:id="_tinyengine__audio_8h_source_1l00009"/>00009 }&#32;<link linkend="_structte__audio__handle__t">te_audio_handle_t</link>;
+<anchor xml:id="_tinyengine__audio_8h_source_1l00010"/>00010 
+<anchor xml:id="_tinyengine__audio_8h_source_1l00011"/>00011 <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_tinyengine__audio_8h_1a063f751815bd2faa9b815f16f75c9243">te_audio_init</link>(<link linkend="_structte__audio__handle__t">te_audio_handle_t</link>*&#32;audio);
+<anchor xml:id="_tinyengine__audio_8h_source_1l00012"/>00012 
+<anchor xml:id="_tinyengine__audio_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#endif</emphasis>
+</programlisting></section>

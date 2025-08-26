@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine" xml:lang="en-US">
+<title>TinyEngine Class Reference</title>
+<indexterm><primary>TinyEngine</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_1a0865837c7dccaae8ac33f9f9d4f5119b">TinyEngine</link> (<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link> &amp;rn)</para>
+</listitem>
+            <listitem><para>uint16_t <link linkend="_class_tiny_engine_1a3997a691027f02426800ce367fe633eb">get_fps</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a1f5d7e193cfe88674c7daeab050ed30c">set_pre_inti_clbk</link> (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _pre_init_clbk)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a2812e80e57c615c077c609b33dd97763">set_post_init_clbk</link> (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _post_init_clbk)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a02f63945d1cf474d461cd2a0998a3dfe">set_loop_clbk</link> (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _loop_clbk)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1aaaedc7751f006ab31a66d23fab7261a3">set_render_clbk</link> (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _render_clbk)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a494a9966c7d70a6dc5f8c871e3a1b09b">set_update_clbk</link> (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(double)&gt; _update_clbk)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_1a088cee984149455d5ae7aa308b23e506">init</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_1a46a3a85a38bad4a41aaebb97f39b1456">start</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_1a30d77a4f317c491bd8ebcf8d5e3852a3">start_loop</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link> (double frametime)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a11efed818cc74d5a830351df55744c9d">update</link> (double frametime)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1ad7c433a810d3174a71a6fffcf4dba43f">set_scene</link> (<link linkend="_class_scene_i">SceneI</link> &amp;scene)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a3a7db87bb4dbdc93b7bd831080207724">bind_gpio_input_event</link> (uint8_t _gpio, std::function&lt; void()&gt; _event_callback)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_1a2094c36e13792cfde7dc90dc4637a2e7">bind_serial_input_event</link> (uint8_t _char, std::function&lt; void()&gt; _event_callback)</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_tiny_engine_1ac099f1be0c6e6ab04fe1b83898abad6e">get_profile_main_loop_time</link> () const</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_tiny_engine_1ad32e684c1f406b7fb9fba9b62549f76b">get_profile_render_loop_time</link> () const</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_tiny_engine_1a3cb6d4d80ab0dbfc4a7378433d5ac850">get_profile_update_loop_time</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link> &amp; <link linkend="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede">renderer</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00082">82</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_1a0865837c7dccaae8ac33f9f9d4f5119b"/><section>
+    <title>TinyEngine()</title>
+<indexterm><primary>TinyEngine</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>TinyEngine</secondary></indexterm>
+<para><computeroutput>TinyEngine::TinyEngine (<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link> &amp; rn)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00119">119</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede">renderer</link>(rn)&#32;{
+00120 &#32;&#32;&#32;&#32;};
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_1a3a7db87bb4dbdc93b7bd831080207724"/><section>
+    <title>bind_gpio_input_event()</title>
+<indexterm><primary>bind_gpio_input_event</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>bind_gpio_input_event</secondary></indexterm>
+<para><computeroutput>void TinyEngine::bind_gpio_input_event (uint8_t _gpio, std::function&lt; void()&gt; _event_callback)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00217">217</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00218 {
+00219 &#32;&#32;&#32;&#32;gpio_init(_gpio);
+00220 &#32;&#32;&#32;&#32;gpio_set_dir(_gpio,&#32;GPIO_IN);
+00221 &#32;&#32;&#32;&#32;gpio_pull_up(_gpio);
+00222 
+00223 &#32;&#32;&#32;&#32;gpio_set_irq_enabled_with_callback(_gpio,
+00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//GPIO_IRQ_EDGE_RISE&#32;|</emphasis>
+00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;GPIO_IRQ_EDGE_FALL,
+00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>,&#32;&amp;<link linkend="_tinyengine_8cpp_1a7f6538b252b233c2a00eeabf455b6ac8">gpio_callback</link>);
+00227 
+00228 &#32;&#32;&#32;&#32;m_gpio_input_events.emplace(_gpio,&#32;_event_callback);
+00229 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8cpp_1a72b938b7baf318c2932ae38612667ed8">gpio_debouce_map</link>.emplace(_gpio,&#32;0);
+00230 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a2094c36e13792cfde7dc90dc4637a2e7"/><section>
+    <title>bind_serial_input_event()</title>
+<indexterm><primary>bind_serial_input_event</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>bind_serial_input_event</secondary></indexterm>
+<para><computeroutput>void TinyEngine::bind_serial_input_event (uint8_t _char, std::function&lt; void()&gt; _event_callback)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00232">232</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00233 {
+00234 &#32;&#32;&#32;&#32;m_serial_input_events.emplace(_char,&#32;_event_callback);
+00235 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a3997a691027f02426800ce367fe633eb"/><section>
+    <title>get_fps()</title>
+<indexterm><primary>get_fps</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>get_fps</secondary></indexterm>
+<para><computeroutput>uint16_t TinyEngine::get_fps ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00122">122</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00123 &#32;&#32;&#32;&#32;{
+00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fps;
+00125 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1ac099f1be0c6e6ab04fe1b83898abad6e"/><section>
+    <title>get_profile_main_loop_time()</title>
+<indexterm><primary>get_profile_main_loop_time</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>get_profile_main_loop_time</secondary></indexterm>
+<para><computeroutput>uint32_t TinyEngine::get_profile_main_loop_time ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00144">144</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_main_loop_time;
+00146 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1ad32e684c1f406b7fb9fba9b62549f76b"/><section>
+    <title>get_profile_render_loop_time()</title>
+<indexterm><primary>get_profile_render_loop_time</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>get_profile_render_loop_time</secondary></indexterm>
+<para><computeroutput>uint32_t TinyEngine::get_profile_render_loop_time ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00148">148</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_render_loop_time;
+00150 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a3cb6d4d80ab0dbfc4a7378433d5ac850"/><section>
+    <title>get_profile_update_loop_time()</title>
+<indexterm><primary>get_profile_update_loop_time</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>get_profile_update_loop_time</secondary></indexterm>
+<para><computeroutput>uint32_t TinyEngine::get_profile_update_loop_time ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00152">152</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_update_loop_time;
+00154 &#32;&#32;&#32;&#32;}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a088cee984149455d5ae7aa308b23e506"/><section>
+    <title>init()</title>
+<indexterm><primary>init</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>init</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngine::init ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00154">154</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00155 {
+00156 
+00157 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8cpp_1a0d3ac15188af7c6cabbbe6e0e8fdf77e">serial_input_queue</link>&#32;=&#32;&amp;m_serial_input_buffer;
+00158 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Set&#32;up&#32;a&#32;RX&#32;interrupt</emphasis>
+00159 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;We&#32;need&#32;to&#32;set&#32;up&#32;the&#32;handler&#32;first</emphasis>
+00160 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Select&#32;correct&#32;interrupt&#32;for&#32;the&#32;UART&#32;we&#32;are&#32;using</emphasis>
+00161 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;UART_IRQ&#32;=&#32;<link linkend="_tinyengine_8cpp_1a1de69c73f829a03f46f5e7690da7e79a">UART_ID</link>&#32;==&#32;uart0&#32;?&#32;UART0_IRQ&#32;:&#32;UART1_IRQ;
+00162 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;And&#32;set&#32;up&#32;and&#32;enable&#32;the&#32;interrupt&#32;handlers</emphasis>
+00163 &#32;&#32;&#32;&#32;irq_set_exclusive_handler(UART_IRQ,&#32;<link linkend="_tinyengine_8cpp_1ad7fec5b2b07b712822dc8182d1796c22">on_uart_rx</link>);
+00164 &#32;&#32;&#32;&#32;irq_set_enabled(UART_IRQ,&#32;<emphasis role="keyword">true</emphasis>);
+00165 
+00166 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Now&#32;enable&#32;the&#32;UART&#32;to&#32;send&#32;interrupts&#32;-&#32;RX&#32;only</emphasis>
+00167 &#32;&#32;&#32;&#32;uart_set_irq_enables(<link linkend="_tinyengine_8cpp_1a1de69c73f829a03f46f5e7690da7e79a">UART_ID</link>,&#32;<emphasis role="keyword">true</emphasis>,&#32;<emphasis role="keyword">false</emphasis>);
+00168 
+00169 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8cpp_1a28efb0fa699c7320eb9bd7d21efb205b">gpio_input_queue</link>&#32;=&#32;&amp;m_gpio_input_buffer;
+00170 
+00171 &#32;&#32;&#32;&#32;pre_init_clbk();
+00172 
+00173 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00174 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void TinyEngine::render (double frametime)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00181">181</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00182 {
+00183 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a02f63945d1cf474d461cd2a0998a3dfe"/><section>
+    <title>set_loop_clbk()</title>
+<indexterm><primary>set_loop_clbk</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_loop_clbk</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_loop_clbk (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _loop_clbk)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00129">129</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00129 {&#32;loop_clbk&#32;=&#32;_loop_clbk;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a2812e80e57c615c077c609b33dd97763"/><section>
+    <title>set_post_init_clbk()</title>
+<indexterm><primary>set_post_init_clbk</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_post_init_clbk</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_post_init_clbk (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _post_init_clbk)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00128">128</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00128 {&#32;post_init_clbk&#32;=&#32;_post_init_clbk;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a1f5d7e193cfe88674c7daeab050ed30c"/><section>
+    <title>set_pre_inti_clbk()</title>
+<indexterm><primary>set_pre_inti_clbk</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_pre_inti_clbk</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_pre_inti_clbk (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _pre_init_clbk)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00127">127</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00127 {&#32;pre_init_clbk&#32;=&#32;_pre_init_clbk;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1aaaedc7751f006ab31a66d23fab7261a3"/><section>
+    <title>set_render_clbk()</title>
+<indexterm><primary>set_render_clbk</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_render_clbk</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_render_clbk (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(void)&gt; _render_clbk)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00130">130</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00130 {&#32;render_clbk&#32;=&#32;_render_clbk;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1ad7c433a810d3174a71a6fffcf4dba43f"/><section>
+    <title>set_scene()</title>
+<indexterm><primary>set_scene</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_scene</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_scene (<link linkend="_class_scene_i">SceneI</link> &amp; scene)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00139">139</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00139 {};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a494a9966c7d70a6dc5f8c871e3a1b09b"/><section>
+    <title>set_update_clbk()</title>
+<indexterm><primary>set_update_clbk</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>set_update_clbk</secondary></indexterm>
+<para><computeroutput>void TinyEngine::set_update_clbk (std::function&lt; <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(double)&gt; _update_clbk)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00131">131</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00131 {&#32;update_clbk&#32;=&#32;_update_clbk;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a46a3a85a38bad4a41aaebb97f39b1456"/><section>
+    <title>start()</title>
+<indexterm><primary>start</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>start</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngine::start ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00176">176</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00177 {
+00178 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00179 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a30d77a4f317c491bd8ebcf8d5e3852a3"/><section>
+    <title>start_loop()</title>
+<indexterm><primary>start_loop</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>start_loop</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngine::start_loop ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00237">237</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00238 {
+00239 
+00240 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;lastTime&#32;=&#32;((double)to_ms_since_boot(get_absolute_time()))&#32;/&#32;((<emphasis role="keywordtype">double</emphasis>)1000);
+00241 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;unproccessedTime&#32;=&#32;0;
+00242 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;passedTime&#32;=&#32;0;
+00243 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;startTime&#32;=&#32;0;
+00244 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link>&#32;=&#32;1;
+00245 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;frames&#32;=&#32;0;
+00246 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;framerate&#32;=&#32;60;
+00247 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;frametime&#32;=&#32;(double)1&#32;/&#32;(<emphasis role="keywordtype">double</emphasis>)framerate;
+00248 &#32;&#32;&#32;&#32;uint32_t&#32;startus&#32;=&#32;to_us_since_boot(get_absolute_time());
+00249 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;frameCounter&#32;=&#32;0;
+00250 
+00251 &#32;&#32;&#32;&#32;uint32_t&#32;profile_main_loop_start&#32;=&#32;0,&#32;profile_main_loop_end&#32;=&#32;0;
+00252 
+00253 &#32;&#32;&#32;&#32;uint32_t&#32;profile_render_loop_start&#32;=&#32;0,&#32;profile_render_loop_end&#32;=&#32;0;
+00254 
+00255 &#32;&#32;&#32;&#32;uint32_t&#32;profile_update_loop_start&#32;=&#32;0,&#32;profile_update_loop_end&#32;=&#32;0;
+00256 
+00257 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+00258 &#32;&#32;&#32;&#32;{
+00259 
+00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_main_loop_time&#32;=&#32;profile_main_loop_end&#32;-&#32;profile_main_loop_start;
+00261 
+00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_main_loop_start&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//isRunning</emphasis>
+00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startTime&#32;=&#32;((double)to_ms_since_boot(get_absolute_time()))&#32;/&#32;((<emphasis role="keywordtype">double</emphasis>)1000);
+00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;passedTime&#32;=&#32;startTime&#32;-&#32;lastTime;
+00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lastTime&#32;=&#32;startTime;
+00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;unproccessedTime&#32;+=&#32;passedTime;
+00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;frameCounter&#32;+=&#32;passedTime;
+00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link>&#32;=&#32;1;&#32;<emphasis role="comment">//&#32;run&#32;uncapped</emphasis>
+00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;((unproccessedTime&#32;&gt;&#32;frametime))
+00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link>&#32;=&#32;1;
+00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;telog(&quot;Running&quot;);</emphasis>
+00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;unproccessedTime&#32;-=&#32;frametime;
+00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;engine_handle-&gt;update_clbk(frametime);</emphasis>
+00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;tinyengine_update(engine_handle,&#32;frametime);</emphasis>
+00277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_update_loop_time&#32;=&#32;profile_update_loop_end&#32;-&#32;profile_update_loop_start;
+00278 
+00279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_update_loop_start&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;update_clbk(frametime);
+00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;update_inputs();
+00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_update_loop_end&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00283 
+00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(frameCounter&#32;&gt;=&#32;1)
+00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fps&#32;=&#32;frames;
+00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1abdeb08b95394f8152bb146fd9a9139c4">telog</link>(<emphasis role="stringliteral">&quot;FPS:&#32;%d&quot;</emphasis>,&#32;frames);
+00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Test\r\n&quot;</emphasis>);
+00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;frameCounter&#32;=&#32;0;
+00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;frames&#32;=&#32;0;
+00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link>)
+00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_render_loop_time&#32;=&#32;profile_render_loop_end&#32;-&#32;profile_render_loop_start;
+00296 
+00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_render_loop_start&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;engine_handle-&gt;render_clbk(frametime);</emphasis>
+00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;tinyengine_render(engine_handle,&#32;frametime);</emphasis>
+00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;render_clbk();
+00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;frames&#32;+=&#32;1;
+00302 
+00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_render_loop_end&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00304 
+00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sleep&#32;here&#32;for&#32;rtos;</emphasis>
+00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sleep_ms(1);</emphasis>
+00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00311 
+00312 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;profile_main_loop_end&#32;=&#32;to_us_since_boot(get_absolute_time())&#32;/&#32;1000;
+00313 
+00314 &#32;&#32;&#32;&#32;}
+00315 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00316 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_1a11efed818cc74d5a830351df55744c9d"/><section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>void TinyEngine::update (double frametime)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00185">185</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00186 {
+00187 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;engine_handle-&gt;update_clbk(frametime);</emphasis>
+00188 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede"/><section>
+    <title>renderer</title>
+<indexterm><primary>renderer</primary><secondary>TinyEngine</secondary></indexterm>
+<indexterm><primary>TinyEngine</primary><secondary>renderer</secondary></indexterm>
+<para><computeroutput><link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&amp; TinyEngine::renderer</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00117">117</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="_tinyengine_8h">tinyengine.h</link>src/<link linkend="_tinyengine_8cpp">tinyengine.cpp</link></section>
+</section>

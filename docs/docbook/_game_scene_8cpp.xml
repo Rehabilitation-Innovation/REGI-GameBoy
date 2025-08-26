@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__game_scene_8cpp" xml:lang="en-US">
+<title>src/GameScene.cpp File Reference</title>
+<indexterm><primary>src/GameScene.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;GameScene.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>uint32_t <link linkend="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7">getTotalHeap</link> (void)</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="__game_scene_8cpp_1a09b44c846317da845941c1343a1fcf31">getFreeHeap</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>char <link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link></para>
+</listitem>
+            <listitem><para>char <link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link></para>
+</listitem>
+            <listitem><para>struct mallinfo <link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link></para>
+</listitem>
+            <listitem><para>char <link linkend="__game_scene_8cpp_1a599ac9672c5ed92e22c3259396cbb7d8">string</link> [255]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__game_scene_8cpp_1a09b44c846317da845941c1343a1fcf31"/><section>
+    <title>getFreeHeap()</title>
+<indexterm><primary>getFreeHeap</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>getFreeHeap</secondary></indexterm>
+<para><computeroutput>uint32_t getFreeHeap (void )</computeroutput></para><para>
+Definition at line <link linkend="__game_scene_8cpp_source_1l00018">18</link> of file <link linkend="__game_scene_8cpp_source">GameScene.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>mallinfo&#32;m&#32;=&#32;mallinfo();
+00020 
+00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7">getTotalHeap</link>()&#32;-&#32;m.uordblks;
+00022 }
+</programlisting></section>
+<anchor xml:id="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7"/><section>
+    <title>getTotalHeap()</title>
+<indexterm><primary>getTotalHeap</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>getTotalHeap</secondary></indexterm>
+<para><computeroutput>uint32_t getTotalHeap (void )</computeroutput></para><para>
+Definition at line <link linkend="__game_scene_8cpp_source_1l00012">12</link> of file <link linkend="__game_scene_8cpp_source">GameScene.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">extern</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;<link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link>,&#32;<link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link>;
+00014 
+00015 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;&amp;<link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link>&#32;-&#32;&amp;<link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link>;
+00016 }
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab"/><section>
+    <title>__bss_end__</title>
+<indexterm><primary>__bss_end__</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>__bss_end__</secondary></indexterm>
+<para><computeroutput>char __bss_end__</computeroutput></para><para>
+Definition at line <link linkend="__game_scene_8cpp_source_1l00024">24</link> of file <link linkend="__game_scene_8cpp_source">GameScene.cpp</link>.</para>
+</section>
+<anchor xml:id="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0"/><section>
+    <title>__StackLimit</title>
+<indexterm><primary>__StackLimit</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>__StackLimit</secondary></indexterm>
+<para><computeroutput>char __StackLimit<computeroutput>[extern]</computeroutput></computeroutput></para></section>
+<anchor xml:id="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e"/><section>
+    <title>info</title>
+<indexterm><primary>info</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>info</secondary></indexterm>
+<para><computeroutput>struct mallinfo info</computeroutput></para><para>
+Definition at line <link linkend="__game_scene_8cpp_source_1l00026">26</link> of file <link linkend="__game_scene_8cpp_source">GameScene.cpp</link>.</para>
+</section>
+<anchor xml:id="__game_scene_8cpp_1a599ac9672c5ed92e22c3259396cbb7d8"/><section>
+    <title>string</title>
+<indexterm><primary>string</primary><secondary>GameScene.cpp</secondary></indexterm>
+<indexterm><primary>GameScene.cpp</primary><secondary>string</secondary></indexterm>
+<para><computeroutput>char string[255]</computeroutput></para><para>
+Definition at line <link linkend="__game_scene_8cpp_source_1l00027">27</link> of file <link linkend="__game_scene_8cpp_source">GameScene.cpp</link>.</para>
+</section>
+</section>
+</section>

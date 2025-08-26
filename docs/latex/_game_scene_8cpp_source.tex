@@ -1,0 +1,67 @@
+\doxysection{Game\+Scene.\+cpp}
+\hypertarget{_game_scene_8cpp_source}{}\label{_game_scene_8cpp_source}\index{src/GameScene.cpp@{src/GameScene.cpp}}
+\mbox{\hyperlink{_game_scene_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_scene_8h}{GameScene.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <malloc.h>}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00003}\mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{00003}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{GameScene::create}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00004}00004\ \}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00006}\mbox{\hyperlink{class_game_scene_add5bc48c372aaa7f526c02558a8adf00}{00006}}\ \mbox{\hyperlink{class_game_scene_add5bc48c372aaa7f526c02558a8adf00}{GameScene::\string~GameScene}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00007}00007\ \}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00009}\mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{00009}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{GameScene::destroy}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00010}00010\ \};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00012}\mbox{\hyperlink{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}{00012}}\ uint32\_t\ \mbox{\hyperlink{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}{getTotalHeap}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\_\_StackLimit}},\ \mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\_\_bss\_end\_\_}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\_\_StackLimit}}\ -\/\ \&\mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\_\_bss\_end\_\_}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00016}00016\ \}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00018}\mbox{\hyperlink{_game_scene_8cpp_a09b44c846317da845941c1343a1fcf31}{00018}}\ uint32\_t\ \mbox{\hyperlink{_game_scene_8cpp_a09b44c846317da845941c1343a1fcf31}{getFreeHeap}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{struct\ }mallinfo\ m\ =\ mallinfo();}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_game_scene_8cpp_ac167235a3af93d3e27861a67856f51c7}{getTotalHeap}}()\ -\/\ m.uordblks;}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00024}\mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{00024}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_game_scene_8cpp_a3d92ea4f573d5add6d568940793117d0}{\_\_StackLimit}},\ \mbox{\hyperlink{_game_scene_8cpp_a90d94159980d213c2c903b17da1ee8ab}{\_\_bss\_end\_\_}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00026}\mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{00026}}\ \textcolor{keyword}{struct\ }mallinfo\ \mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{info}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00027}\mbox{\hyperlink{_game_scene_8cpp_a599ac9672c5ed92e22c3259396cbb7d8}{00027}}\ \textcolor{keywordtype}{char}\ \textcolor{keywordtype}{string}[255];}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00029}\mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{00029}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{GameScene::render}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ Heap:\ \%d\ bytes\ |\ \ Free:\ \%d\ \(\backslash\)n"{},\ getTotalHeap(),\ getFreeHeap());}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 40,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ Render\ Time\ \%dms\ /\ \%dms\(\backslash\)n"{},\ m\_engine.get\_profile\_render\_loop\_time(),}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_engine.get\_profile\_main\_loop\_time());}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 50,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ Update:\ \%dms\ /\ \%dms\(\backslash\)n"{},}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_engine.get\_profile\_update\_loop\_time(),\ m\_engine.get\_profile\_main\_loop\_time());}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 60,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ allocated:\ \%d\ bytes\(\backslash\)n"{},\ info.uordblks);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 60,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ free:\ \%d\ bytes\(\backslash\)n"{},\ info.fordblks);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 70,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ heap\ size:\ \%d\ bytes\(\backslash\)n"{},\ info.arena);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 80,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Largest\ free\ block:\ \%d\ bytes\(\backslash\)n"{},\ info.ordblks);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 90,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00050}00050\ \ \ \ \ sprintf(\textcolor{keywordtype}{string},\ \textcolor{stringliteral}{"{}FPS:\ \%d\(\backslash\)r\(\backslash\)n"{}},\ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.get\_fps());}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_string(\textcolor{keywordtype}{string},\ 5,\ 10,\ 15);}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Press\ W,\ A,\ S,\ D\ for\ movement.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 20,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Press\ X\ to\ quit\ the\ game.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 30,\ 15);}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00057}00057\ \};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00059}\mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{00059}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{GameScene::update}}(\textcolor{keywordtype}{double}\ frameTime)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{info}}\ =\ mallinfo();}
+\DoxyCodeLine{\Hypertarget{_game_scene_8cpp_source_l00061}00061\ \};}
+
+\end{DoxyCode}

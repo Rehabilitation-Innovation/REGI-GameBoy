@@ -1,0 +1,483 @@
+\doxysection{Tiny\+Engine Class Reference}
+\hypertarget{class_tiny_engine}{}\label{class_tiny_engine}\index{TinyEngine@{TinyEngine}}
+
+
+{\ttfamily \#include $<$tinyengine.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b}{Tiny\+Engine}} (\mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \&rn)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_tiny_engine_a3997a691027f02426800ce367fe633eb}{get\+\_\+fps}} () const
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a1f5d7e193cfe88674c7daeab050ed30c}{set\+\_\+pre\+\_\+inti\+\_\+clbk}} (std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$ \+\_\+pre\+\_\+init\+\_\+clbk)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a2812e80e57c615c077c609b33dd97763}{set\+\_\+post\+\_\+init\+\_\+clbk}} (std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$ \+\_\+post\+\_\+init\+\_\+clbk)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a02f63945d1cf474d461cd2a0998a3dfe}{set\+\_\+loop\+\_\+clbk}} (std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$ \+\_\+loop\+\_\+clbk)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_aaaedc7751f006ab31a66d23fab7261a3}{set\+\_\+render\+\_\+clbk}} (std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$ \+\_\+render\+\_\+clbk)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a494a9966c7d70a6dc5f8c871e3a1b09b}{set\+\_\+update\+\_\+clbk}} (std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(double)$>$ \+\_\+update\+\_\+clbk)
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_a088cee984149455d5ae7aa308b23e506}{init}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_a46a3a85a38bad4a41aaebb97f39b1456}{start}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_a30d77a4f317c491bd8ebcf8d5e3852a3}{start\+\_\+loop}} ()
+\item 
+void \mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}} (double frametime)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a11efed818cc74d5a830351df55744c9d}{update}} (double frametime)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_ad7c433a810d3174a71a6fffcf4dba43f}{set\+\_\+scene}} (\mbox{\hyperlink{class_scene_i}{SceneI}} \&scene)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a3a7db87bb4dbdc93b7bd831080207724}{bind\+\_\+gpio\+\_\+input\+\_\+event}} (uint8\+\_\+t \+\_\+gpio, std\+::function$<$ void()$>$ \+\_\+event\+\_\+callback)
+\item 
+void \mbox{\hyperlink{class_tiny_engine_a2094c36e13792cfde7dc90dc4637a2e7}{bind\+\_\+serial\+\_\+input\+\_\+event}} (uint8\+\_\+t \+\_\+char, std\+::function$<$ void()$>$ \+\_\+event\+\_\+callback)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_tiny_engine_ac099f1be0c6e6ab04fe1b83898abad6e}{get\+\_\+profile\+\_\+main\+\_\+loop\+\_\+time}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_tiny_engine_ad32e684c1f406b7fb9fba9b62549f76b}{get\+\_\+profile\+\_\+render\+\_\+loop\+\_\+time}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_tiny_engine_a3cb6d4d80ab0dbfc4a7378433d5ac850}{get\+\_\+profile\+\_\+update\+\_\+loop\+\_\+time}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \& \mbox{\hyperlink{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}{renderer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00082}{82}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_tiny_engine_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b}\index{TinyEngine@{TinyEngine}!TinyEngine@{TinyEngine}}
+\index{TinyEngine@{TinyEngine}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{TinyEngine()}{TinyEngine()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a0865837c7dccaae8ac33f9f9d4f5119b} 
+Tiny\+Engine\+::\+Tiny\+Engine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \&}]{rn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00119}{119}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}{renderer}}(rn)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_tiny_engine_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tiny_engine_a3a7db87bb4dbdc93b7bd831080207724}\index{TinyEngine@{TinyEngine}!bind\_gpio\_input\_event@{bind\_gpio\_input\_event}}
+\index{bind\_gpio\_input\_event@{bind\_gpio\_input\_event}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{bind\_gpio\_input\_event()}{bind\_gpio\_input\_event()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a3a7db87bb4dbdc93b7bd831080207724} 
+void Tiny\+Engine\+::bind\+\_\+gpio\+\_\+input\+\_\+event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+gpio}{, }\item[{std\+::function$<$ void()$>$}]{\+\_\+event\+\_\+callback}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00217}{217}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00218\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ gpio\_init(\_gpio);}
+\DoxyCodeLine{00220\ \ \ \ \ gpio\_set\_dir(\_gpio,\ GPIO\_IN);}
+\DoxyCodeLine{00221\ \ \ \ \ gpio\_pull\_up(\_gpio);}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ gpio\_set\_irq\_enabled\_with\_callback(\_gpio,}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{//GPIO\_IRQ\_EDGE\_RISE\ |}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ GPIO\_IRQ\_EDGE\_FALL,}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},\ \&\mbox{\hyperlink{tinyengine_8cpp_a7f6538b252b233c2a00eeabf455b6ac8}{gpio\_callback}});}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ m\_gpio\_input\_events.emplace(\_gpio,\ \_event\_callback);}
+\DoxyCodeLine{00229\ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\_debouce\_map}}.emplace(\_gpio,\ 0);}
+\DoxyCodeLine{00230\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a2094c36e13792cfde7dc90dc4637a2e7}\index{TinyEngine@{TinyEngine}!bind\_serial\_input\_event@{bind\_serial\_input\_event}}
+\index{bind\_serial\_input\_event@{bind\_serial\_input\_event}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{bind\_serial\_input\_event()}{bind\_serial\_input\_event()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a2094c36e13792cfde7dc90dc4637a2e7} 
+void Tiny\+Engine\+::bind\+\_\+serial\+\_\+input\+\_\+event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+char}{, }\item[{std\+::function$<$ void()$>$}]{\+\_\+event\+\_\+callback}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00232}{232}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00233\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ m\_serial\_input\_events.emplace(\_char,\ \_event\_callback);}
+\DoxyCodeLine{00235\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a3997a691027f02426800ce367fe633eb}\index{TinyEngine@{TinyEngine}!get\_fps@{get\_fps}}
+\index{get\_fps@{get\_fps}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{get\_fps()}{get\_fps()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a3997a691027f02426800ce367fe633eb} 
+uint16\+\_\+t Tiny\+Engine\+::get\+\_\+fps (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00122}{122}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00123\ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fps;}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_ac099f1be0c6e6ab04fe1b83898abad6e}\index{TinyEngine@{TinyEngine}!get\_profile\_main\_loop\_time@{get\_profile\_main\_loop\_time}}
+\index{get\_profile\_main\_loop\_time@{get\_profile\_main\_loop\_time}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{get\_profile\_main\_loop\_time()}{get\_profile\_main\_loop\_time()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_ac099f1be0c6e6ab04fe1b83898abad6e} 
+uint32\+\_\+t Tiny\+Engine\+::get\+\_\+profile\+\_\+main\+\_\+loop\+\_\+time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00144}{144}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_main\_loop\_time;}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_ad32e684c1f406b7fb9fba9b62549f76b}\index{TinyEngine@{TinyEngine}!get\_profile\_render\_loop\_time@{get\_profile\_render\_loop\_time}}
+\index{get\_profile\_render\_loop\_time@{get\_profile\_render\_loop\_time}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{get\_profile\_render\_loop\_time()}{get\_profile\_render\_loop\_time()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_ad32e684c1f406b7fb9fba9b62549f76b} 
+uint32\+\_\+t Tiny\+Engine\+::get\+\_\+profile\+\_\+render\+\_\+loop\+\_\+time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00148}{148}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_render\_loop\_time;}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a3cb6d4d80ab0dbfc4a7378433d5ac850}\index{TinyEngine@{TinyEngine}!get\_profile\_update\_loop\_time@{get\_profile\_update\_loop\_time}}
+\index{get\_profile\_update\_loop\_time@{get\_profile\_update\_loop\_time}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{get\_profile\_update\_loop\_time()}{get\_profile\_update\_loop\_time()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a3cb6d4d80ab0dbfc4a7378433d5ac850} 
+uint32\+\_\+t Tiny\+Engine\+::get\+\_\+profile\+\_\+update\+\_\+loop\+\_\+time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00152}{152}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ profile\_update\_loop\_time;}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a088cee984149455d5ae7aa308b23e506}\index{TinyEngine@{TinyEngine}!init@{init}}
+\index{init@{init}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a088cee984149455d5ae7aa308b23e506} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+::init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00154}{154}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a0d3ac15188af7c6cabbbe6e0e8fdf77e}{serial\_input\_queue}}\ =\ \&m\_serial\_input\_buffer;}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ a\ RX\ interrupt}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ We\ need\ to\ set\ up\ the\ handler\ first}}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ Select\ correct\ interrupt\ for\ the\ UART\ we\ are\ using}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ UART\_IRQ\ =\ \mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}}\ ==\ uart0\ ?\ UART0\_IRQ\ :\ UART1\_IRQ;}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{//\ And\ set\ up\ and\ enable\ the\ interrupt\ handlers}}
+\DoxyCodeLine{00163\ \ \ \ \ irq\_set\_exclusive\_handler(UART\_IRQ,\ \mbox{\hyperlink{tinyengine_8cpp_ad7fec5b2b07b712822dc8182d1796c22}{on\_uart\_rx}});}
+\DoxyCodeLine{00164\ \ \ \ \ irq\_set\_enabled(UART\_IRQ,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//\ Now\ enable\ the\ UART\ to\ send\ interrupts\ -\/\ RX\ only}}
+\DoxyCodeLine{00167\ \ \ \ \ uart\_set\_irq\_enables(\mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a28efb0fa699c7320eb9bd7d21efb205b}{gpio\_input\_queue}}\ =\ \&m\_gpio\_input\_buffer;}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ pre\_init\_clbk();}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00174\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}\index{TinyEngine@{TinyEngine}!render@{render}}
+\index{render@{render}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1} 
+void Tiny\+Engine\+::render (\begin{DoxyParamCaption}\item[{double}]{frametime}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00181}{181}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a02f63945d1cf474d461cd2a0998a3dfe}\index{TinyEngine@{TinyEngine}!set\_loop\_clbk@{set\_loop\_clbk}}
+\index{set\_loop\_clbk@{set\_loop\_clbk}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_loop\_clbk()}{set\_loop\_clbk()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a02f63945d1cf474d461cd2a0998a3dfe} 
+void Tiny\+Engine\+::set\+\_\+loop\+\_\+clbk (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$}]{\+\_\+loop\+\_\+clbk}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00129}{129}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00129\ \{\ loop\_clbk\ =\ \_loop\_clbk;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a2812e80e57c615c077c609b33dd97763}\index{TinyEngine@{TinyEngine}!set\_post\_init\_clbk@{set\_post\_init\_clbk}}
+\index{set\_post\_init\_clbk@{set\_post\_init\_clbk}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_post\_init\_clbk()}{set\_post\_init\_clbk()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a2812e80e57c615c077c609b33dd97763} 
+void Tiny\+Engine\+::set\+\_\+post\+\_\+init\+\_\+clbk (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$}]{\+\_\+post\+\_\+init\+\_\+clbk}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00128}{128}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00128\ \{\ post\_init\_clbk\ =\ \_post\_init\_clbk;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a1f5d7e193cfe88674c7daeab050ed30c}\index{TinyEngine@{TinyEngine}!set\_pre\_inti\_clbk@{set\_pre\_inti\_clbk}}
+\index{set\_pre\_inti\_clbk@{set\_pre\_inti\_clbk}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_pre\_inti\_clbk()}{set\_pre\_inti\_clbk()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a1f5d7e193cfe88674c7daeab050ed30c} 
+void Tiny\+Engine\+::set\+\_\+pre\+\_\+inti\+\_\+clbk (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$}]{\+\_\+pre\+\_\+init\+\_\+clbk}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00127}{127}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00127\ \{\ pre\_init\_clbk\ =\ \_pre\_init\_clbk;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_aaaedc7751f006ab31a66d23fab7261a3}\index{TinyEngine@{TinyEngine}!set\_render\_clbk@{set\_render\_clbk}}
+\index{set\_render\_clbk@{set\_render\_clbk}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_render\_clbk()}{set\_render\_clbk()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_aaaedc7751f006ab31a66d23fab7261a3} 
+void Tiny\+Engine\+::set\+\_\+render\+\_\+clbk (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(void)$>$}]{\+\_\+render\+\_\+clbk}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00130}{130}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00130\ \{\ render\_clbk\ =\ \_render\_clbk;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_ad7c433a810d3174a71a6fffcf4dba43f}\index{TinyEngine@{TinyEngine}!set\_scene@{set\_scene}}
+\index{set\_scene@{set\_scene}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_scene()}{set\_scene()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_ad7c433a810d3174a71a6fffcf4dba43f} 
+void Tiny\+Engine\+::set\+\_\+scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_i}{SceneI}} \&}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00139}{139}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00139\ \{\};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a494a9966c7d70a6dc5f8c871e3a1b09b}\index{TinyEngine@{TinyEngine}!set\_update\_clbk@{set\_update\_clbk}}
+\index{set\_update\_clbk@{set\_update\_clbk}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{set\_update\_clbk()}{set\_update\_clbk()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a494a9966c7d70a6dc5f8c871e3a1b09b} 
+void Tiny\+Engine\+::set\+\_\+update\+\_\+clbk (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(double)$>$}]{\+\_\+update\+\_\+clbk}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00131}{131}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00131\ \{\ update\_clbk\ =\ \_update\_clbk;\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a46a3a85a38bad4a41aaebb97f39b1456}\index{TinyEngine@{TinyEngine}!start@{start}}
+\index{start@{start}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a46a3a85a38bad4a41aaebb97f39b1456} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+::start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00176}{176}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00177\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00179\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a30d77a4f317c491bd8ebcf8d5e3852a3}\index{TinyEngine@{TinyEngine}!start\_loop@{start\_loop}}
+\index{start\_loop@{start\_loop}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{start\_loop()}{start\_loop()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a30d77a4f317c491bd8ebcf8d5e3852a3} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+::start\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00237}{237}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00238\ \{}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{double}\ lastTime\ =\ ((double)to\_ms\_since\_boot(get\_absolute\_time()))\ /\ ((\textcolor{keywordtype}{double})1000);}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{double}\ unproccessedTime\ =\ 0;}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordtype}{double}\ passedTime\ =\ 0;}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{double}\ startTime\ =\ 0;}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}}\ =\ 1;}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{int}\ frames\ =\ 0;}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{int}\ framerate\ =\ 60;}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{double}\ frametime\ =\ (double)1\ /\ (\textcolor{keywordtype}{double})framerate;}
+\DoxyCodeLine{00248\ \ \ \ \ uint32\_t\ startus\ =\ to\_us\_since\_boot(get\_absolute\_time());}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{double}\ frameCounter\ =\ 0;}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ uint32\_t\ profile\_main\_loop\_start\ =\ 0,\ profile\_main\_loop\_end\ =\ 0;}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ uint32\_t\ profile\_render\_loop\_start\ =\ 0,\ profile\_render\_loop\_end\ =\ 0;}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ uint32\_t\ profile\_update\_loop\_start\ =\ 0,\ profile\_update\_loop\_end\ =\ 0;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{00258\ \ \ \ \ \{}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ profile\_main\_loop\_time\ =\ profile\_main\_loop\_end\ -\/\ profile\_main\_loop\_start;}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ profile\_main\_loop\_start\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{comment}{//isRunning}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ startTime\ =\ ((double)to\_ms\_since\_boot(get\_absolute\_time()))\ /\ ((\textcolor{keywordtype}{double})1000);}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ passedTime\ =\ startTime\ -\/\ lastTime;}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ lastTime\ =\ startTime;}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ unproccessedTime\ +=\ passedTime;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ frameCounter\ +=\ passedTime;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}}\ =\ 1;\ \textcolor{comment}{//\ run\ uncapped}}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((unproccessedTime\ >\ frametime))}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}}\ =\ 1;}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ telog("{}Running"{});}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ unproccessedTime\ -\/=\ frametime;}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ engine\_handle-\/>update\_clbk(frametime);}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ tinyengine\_update(engine\_handle,\ frametime);}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_update\_loop\_time\ =\ profile\_update\_loop\_end\ -\/\ profile\_update\_loop\_start;}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_update\_loop\_start\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ update\_clbk(frametime);}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ update\_inputs();}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_update\_loop\_end\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (frameCounter\ >=\ 1)}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fps\ =\ frames;}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_abdeb08b95394f8152bb146fd9a9139c4}{telog}}(\textcolor{stringliteral}{"{}FPS:\ \%d"{}},\ frames);}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Test\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameCounter\ =\ 0;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frames\ =\ 0;}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_tiny_engine_ad0fe7160d3a7c651c86ed06dae869de1}{render}})}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_render\_loop\_time\ =\ profile\_render\_loop\_end\ -\/\ profile\_render\_loop\_start;}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_render\_loop\_start\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ engine\_handle-\/>render\_clbk(frametime);}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ tinyengine\_render(engine\_handle,\ frametime);}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ render\_clbk();}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ frames\ +=\ 1;}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ profile\_render\_loop\_end\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sleep\ here\ for\ rtos;}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sleep\_ms(1);}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ profile\_main\_loop\_end\ =\ to\_us\_since\_boot(get\_absolute\_time())\ /\ 1000;}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00316\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_a11efed818cc74d5a830351df55744c9d}\index{TinyEngine@{TinyEngine}!update@{update}}
+\index{update@{update}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a11efed818cc74d5a830351df55744c9d} 
+void Tiny\+Engine\+::update (\begin{DoxyParamCaption}\item[{double}]{frametime}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00185}{185}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00186\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ engine\_handle-\/>update\_clbk(frametime);}}
+\DoxyCodeLine{00188\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_tiny_engine_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede}\index{TinyEngine@{TinyEngine}!renderer@{renderer}}
+\index{renderer@{renderer}!TinyEngine@{TinyEngine}}
+\doxysubsubsection{\texorpdfstring{renderer}{renderer}}
+{\footnotesize\ttfamily \label{class_tiny_engine_a4b90326e7c0476e9ac70f23a6426dede} 
+\mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}}\& Tiny\+Engine\+::renderer}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00117}{117}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{tinyengine_8h}{tinyengine.\+h}}\item 
+src/\mbox{\hyperlink{tinyengine_8cpp}{tinyengine.\+cpp}}\end{DoxyCompactItemize}

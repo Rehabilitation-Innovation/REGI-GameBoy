@@ -1,0 +1,23 @@
+\doxysection{tinyengine\+\_\+audio.\+cpp}
+\hypertarget{tinyengine__audio_8cpp_source}{}\label{tinyengine__audio_8cpp_source}\index{src/tinyengine\_audio.cpp@{src/tinyengine\_audio.cpp}}
+\mbox{\hyperlink{tinyengine__audio_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__audio_8h}{tinyengine\_audio.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}hardware/pwm.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00005}\mbox{\hyperlink{tinyengine__audio_8cpp_a063f751815bd2faa9b815f16f75c9243}{00005}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{tinyengine__audio_8cpp_a063f751815bd2faa9b815f16f75c9243}{te\_audio\_init}}(\mbox{\hyperlink{structte__audio__handle__t}{te\_audio\_handle\_t}}*\ audio)\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00007}00007\ \ \ \ \ gpio\_set\_function(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}},\ GPIO\_FUNC\_PWM);}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00008}00008\ \ \ \ \ gpio\_set\_slew\_rate(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}},\ GPIO\_SLEW\_RATE\_FAST);}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00009}00009\ \ \ \ \ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}}\ =\ pwm\_gpio\_to\_slice\_num(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00010}00010\ \ \ \ \ pwm\_set\_clkdiv(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00011}00011\ \ \ \ \ pwm\_set\_wrap(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00012}00012\ \ \ \ \ pwm\_set\_chan\_level(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ PWM\_CHAN\_A,\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}}\ *\ 0.9);}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00013}00013\ \ \ \ \ pwm\_set\_chan\_level(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ PWM\_CHAN\_B,\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}}\ /\ 3);}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00014}00014\ \ \ \ \ pwm\_set\_enabled(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__audio_8cpp_source_l00017}00017\ \}}
+
+\end{DoxyCode}

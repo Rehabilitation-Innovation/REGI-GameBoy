@@ -1,0 +1,77 @@
+\doxysection{src/tinyengine\+\_\+framebuffer.cpp File Reference}
+\hypertarget{tinyengine__framebuffer_8cpp}{}\label{tinyengine__framebuffer_8cpp}\index{src/tinyengine\_framebuffer.cpp@{src/tinyengine\_framebuffer.cpp}}
+{\ttfamily \#include "{}tinyengine\+\_\+framebuffer.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}memory.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/interp.\+h"{}}\newline
+{\ttfamily \#include "{}math.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}font.\+h"{}}\newline
+{\ttfamily \#include "{}renew\+\_\+font.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a}{CHECK\+\_\+\+BOUNDS}}(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},  \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})
+\item 
+\#define \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\+\_\+\+WIDTH}}~7
+\item 
+\#define \mbox{\hyperlink{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2}{CHAR\+\_\+\+HEIGHT}}~8
+\item 
+\#define \mbox{\hyperlink{tinyengine__framebuffer_8cpp_ad546866d6b629b02bca4560c2c1ef35a}{UNIT\+\_\+\+LSB}}~16
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tinyengine__framebuffer_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2}\index{tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}!CHAR\_HEIGHT@{CHAR\_HEIGHT}}
+\index{CHAR\_HEIGHT@{CHAR\_HEIGHT}!tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}}
+\doxysubsubsection{\texorpdfstring{CHAR\_HEIGHT}{CHAR\_HEIGHT}}
+{\footnotesize\ttfamily \label{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2} 
+\#define CHAR\+\_\+\+HEIGHT~8}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+
+\Hypertarget{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}\index{tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}!CHAR\_WIDTH@{CHAR\_WIDTH}}
+\index{CHAR\_WIDTH@{CHAR\_WIDTH}!tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}}
+\doxysubsubsection{\texorpdfstring{CHAR\_WIDTH}{CHAR\_WIDTH}}
+{\footnotesize\ttfamily \label{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3} 
+\#define CHAR\+\_\+\+WIDTH~7}
+
+Improvement notes\+:
+\begin{DoxyItemize}
+\item per pixel bounds checks have small impact in Release optimizations, but they are unneccesary if the full shape is insode the buffer. Add checks before drawing or just tell the user to be carefull; will save critical renderer time. Honestly, i dont think any one will make a game that completly saturates the renderer\textquotesingle{}s capabilities. Even with full screen writes it maintains \texorpdfstring{$\sim$}{\string~}800 FPS.
+\item Char rendering is a utter waste of renderer time. Do this on the second core, or dont do it all the time. Espeacially for static sentances. Most of the renderer time is wasted drawing the same thing from a look up table -\/ instead just write the text to a smaller buffer in static flash or psram and then just render pixel to pixel instead of doing the character look up every time. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00025}{25}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+
+\Hypertarget{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a}\index{tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}!CHECK\_BOUNDS@{CHECK\_BOUNDS}}
+\index{CHECK\_BOUNDS@{CHECK\_BOUNDS}!tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}}
+\doxysubsubsection{\texorpdfstring{CHECK\_BOUNDS}{CHECK\_BOUNDS}}
+{\footnotesize\ttfamily \label{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a} 
+\#define CHECK\+\_\+\+BOUNDS(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}}{, }\item[{}]{\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ 0\ ||\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y\ <\ 0\ ||\ x\ >}}\ 320\ ||\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >\ 240)\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\_OUTOFBOUNDS\_ERROR}};}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+
+\Hypertarget{tinyengine__framebuffer_8cpp_ad546866d6b629b02bca4560c2c1ef35a}\index{tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}!UNIT\_LSB@{UNIT\_LSB}}
+\index{UNIT\_LSB@{UNIT\_LSB}!tinyengine\_framebuffer.cpp@{tinyengine\_framebuffer.cpp}}
+\doxysubsubsection{\texorpdfstring{UNIT\_LSB}{UNIT\_LSB}}
+{\footnotesize\ttfamily \label{tinyengine__framebuffer_8cpp_ad546866d6b629b02bca4560c2c1ef35a} 
+\#define UNIT\+\_\+\+LSB~16}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00029}{29}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+

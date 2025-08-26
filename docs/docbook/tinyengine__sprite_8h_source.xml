@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__sprite_8h_source" xml:lang="en-US">
+<title>tinyengine_sprite.h</title>
+<indexterm><primary>inc/tinyengine_sprite.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__sprite_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__framebuffer_8h">tinyengine_framebuffer.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00006"/><link linkend="_structte__sprite__t">00006</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00007"/>00007 {
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00012"/><link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">00012</link> &#32;&#32;&#32;&#32;uint8_t*&#32;<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>;&#32;<emphasis role="comment">//&#32;un-used&#32;if&#32;animated.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00013"/><link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">00013</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00014"/><link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">00014</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Unsuported&#32;currently&#32;will&#32;implement&#32;later.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00016"/><link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">00016</link> &#32;&#32;&#32;&#32;uint32_t*&#32;<link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">sprite_palette</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00017"/>00017 }&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00018"/>00018 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00019"/>00019 <emphasis role="comment">//&#32;all&#32;frames&#32;must&#32;be&#32;the&#32;same&#32;dimentions.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00020"/><link linkend="_structte__sprite__animation__t">00020</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00021"/>00021 {
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00022"/><link linkend="_structte__sprite__animation__t_1ae8b1c132a79499b1a034c8dbaa5f4f07">00022</link> &#32;&#32;&#32;&#32;uint8_t**&#32;<link linkend="_structte__sprite__animation__t_1ae8b1c132a79499b1a034c8dbaa5f4f07">sprite_animation_frames</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00023"/><link linkend="_structte__sprite__animation__t_1a005d996826fc6306b464609827f3367e">00023</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structte__sprite__animation__t_1a005d996826fc6306b464609827f3367e">animation_delay</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00024"/><link linkend="_structte__sprite__animation__t_1a738b24e248655af58263162698329aa8">00024</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structte__sprite__animation__t_1a738b24e248655af58263162698329aa8">total_frames</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00025"/><link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">00025</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>;&#32;<emphasis role="comment">//&#32;a&#32;presistant&#32;frame&#32;index.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00026"/><link linkend="_structte__sprite__animation__t_1a937203fdf03fe9ded85ab00a0f29a94f">00026</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structte__sprite__animation__t_1ad761f161ae73abb8b94ca8c65b6b5196">start_frame</link>,&#32;<link linkend="_structte__sprite__animation__t_1a937203fdf03fe9ded85ab00a0f29a94f">end_frame</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00027"/>00027 }&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00028"/>00028 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00029"/><link linkend="_class_sprite">00029</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_sprite_1ac8a2c4044d5a8bf1c8923156140355fa">Sprite</link>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00030"/>00030 {
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00031"/>00031 <emphasis role="keyword">private</emphasis>:
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;m_sprite_data&#32;=&#32;0;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;m_animated&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;m_animation_data&#32;=&#32;0;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00036"/>00036 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;m_frametime&#32;=&#32;0.0;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00037"/>00037 &#32;&#32;&#32;&#32;uint8_t&#32;m_animation_speed&#32;=&#32;100;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;its&#32;debateble&#32;that&#32;this&#32;should&#32;be&#32;a&#32;data&#32;structure&#32;since&#32;all&#32;the&#32;frame&#32;times&#32;are&#32;updated&#32;at&#32;the&#32;same&#32;time.&#32;but&#32;we&#32;can&#32;also&#32;say&#32;that&#32;some&#32;sprites&#32;may&#32;be&#32;frozen.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00039"/>00039 &#32;&#32;&#32;&#32;uint16_t&#32;m_x&#32;=&#32;0,&#32;m_y&#32;=&#32;0;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00040"/>00040 &#32;&#32;&#32;&#32;uint8_t&#32;m_scale_x&#32;=&#32;0,&#32;m_scale_y&#32;=&#32;0;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00041"/>00041 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00042"/>00042 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00043"/><link linkend="_class_sprite_1ac8a2c4044d5a8bf1c8923156140355fa">00043</link> &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1ac8a2c4044d5a8bf1c8923156140355fa">Sprite</link>(<emphasis role="keywordtype">bool</emphasis>&#32;m_externaly_created,&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;m_sprite_data,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;m_animated,
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;m_animation_data,&#32;<emphasis role="keywordtype">double</emphasis>&#32;m_frametime,&#32;uint16_t&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;uint16_t&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;m_externaly_created(m_externaly_created),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_sprite_data(m_sprite_data),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_animated(m_animated),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_animation_data(m_animation_data),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_frametime(m_frametime),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_x(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>),
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_y(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00052"/>00052 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00053"/>00053 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00054"/>00054 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00055"/><link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">00055</link> &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>()
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00056"/>00056 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00057"/>00057 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00058"/>00058 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>(uint8_t*&#32;sprite_buffer,&#32;uint16_t&#32;width,&#32;uint16_t&#32;height);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00060"/>00060 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>&#32;_sprite_data);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;_sprite_data);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00063"/>00063 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;_sprite_data,&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;_sprite_animation_data);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00065"/>00065 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite</link>(<emphasis role="keyword">const</emphasis>&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>&amp;&#32;_sprite_data,&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>&amp;&#32;_sprite_animation_data);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00066"/>00066 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00067"/>00067 &#32;&#32;&#32;&#32;<link linkend="_class_sprite_1a8accab430f9d90ae5117b57d67e32b84">~Sprite</link>();
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00068"/>00068 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a026f7b28d2047d2b17cfe90ba29598fc">render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;_fb);
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00070"/>00070 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00071"/><link linkend="_class_sprite_1a5b5b40f49bab726d65ae5bdddb5095f6">00071</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_sprite_1a5b5b40f49bab726d65ae5bdddb5095f6">is_m_externaly_created</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00072"/>00072 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_externaly_created;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00075"/>00075 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00076"/><link linkend="_class_sprite_1af83cf02fb3cddef110ba586572d63cd1">00076</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1af83cf02fb3cddef110ba586572d63cd1">set_m_externaly_created</link>(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;m_externaly_created)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00077"/>00077 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_externaly_created&#32;=&#32;m_externaly_created;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00079"/>00079 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00080"/>00080 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00081"/><link linkend="_class_sprite_1aabab23ab32f0cee58b1f2715597458de">00081</link> &#32;&#32;&#32;&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;<link linkend="_class_sprite_1aabab23ab32f0cee58b1f2715597458de">get_m_sprite_data</link>()
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00082"/>00082 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_sprite_data;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00084"/>00084 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00085"/>00085 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00086"/><link linkend="_class_sprite_1a5edd832bb66f35c677f6f3517390640a">00086</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a5edd832bb66f35c677f6f3517390640a">set_m_sprite_data</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;<emphasis role="keyword">const</emphasis>&#32;m_sprite_data)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00087"/>00087 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_sprite_data&#32;=&#32;m_sprite_data;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00089"/>00089 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00090"/>00090 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00091"/><link linkend="_class_sprite_1aa58f521454f0e700633a1555a1dcd7b3">00091</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_sprite_1aa58f521454f0e700633a1555a1dcd7b3">is_m_animated</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00092"/>00092 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animated;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00094"/>00094 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00095"/>00095 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00096"/><link linkend="_class_sprite_1af4281d1664fda219368b190c0b233bcd">00096</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1af4281d1664fda219368b190c0b233bcd">set_m_animated</link>(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;m_animated)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00097"/>00097 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animated&#32;=&#32;m_animated;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00099"/>00099 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00100"/>00100 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00101"/><link linkend="_class_sprite_1a1b864c55c1447308301665946d3b26de">00101</link> &#32;&#32;&#32;&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;<link linkend="_class_sprite_1a1b864c55c1447308301665946d3b26de">get_m_animation_data</link>()
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00102"/>00102 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animation_data;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00104"/>00104 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00105"/>00105 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00106"/><link linkend="_class_sprite_1af6c4408de4c7b235abd8228d674ef2cb">00106</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1af6c4408de4c7b235abd8228d674ef2cb">set_m_animation_data</link>(<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;<emphasis role="keyword">const</emphasis>&#32;m_animation_data)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00107"/>00107 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animation_data&#32;=&#32;m_animation_data;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00109"/>00109 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00110"/>00110 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00111"/><link linkend="_class_sprite_1acae1b5a7536cf89c73c29797e21b780f">00111</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;<link linkend="_class_sprite_1acae1b5a7536cf89c73c29797e21b780f">get_m_frametime</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00112"/>00112 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_frametime;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00114"/>00114 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00115"/>00115 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00116"/><link linkend="_class_sprite_1a27f095629aeacb38f8dc1a3446ed29d9">00116</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a27f095629aeacb38f8dc1a3446ed29d9">set_m_frametime</link>(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">double</emphasis>&#32;m_frametime)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00117"/>00117 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_frametime&#32;+=&#32;m_frametime;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00119"/>00119 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00120"/>00120 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00121"/><link linkend="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d">00121</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d">get_m_x</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00122"/>00122 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_x;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00124"/>00124 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00125"/>00125 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00126"/><link linkend="_class_sprite_1a7c1f3afb104aa43c406d59ed0ae01413">00126</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a7c1f3afb104aa43c406d59ed0ae01413">set_m_x</link>(<emphasis role="keyword">const</emphasis>&#32;uint16_t&#32;m_x)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00127"/>00127 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_x&#32;=&#32;m_x;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00129"/>00129 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00130"/>00130 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00131"/><link linkend="_class_sprite_1ac6985150992aae6e2a9642b47501faa1">00131</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_sprite_1ac6985150992aae6e2a9642b47501faa1">get_m_y</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00132"/>00132 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_y;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00134"/>00134 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00135"/>00135 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00136"/><link linkend="_class_sprite_1a0cae8bdfccd92955e9050871ad085c1d">00136</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a0cae8bdfccd92955e9050871ad085c1d">set_m_y</link>(<emphasis role="keyword">const</emphasis>&#32;uint16_t&#32;m_y)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00137"/>00137 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_y&#32;=&#32;m_y;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00139"/>00139 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00140"/>00140 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00141"/><link linkend="_class_sprite_1a12e57c0de479fec2d23866a7cfe4739f">00141</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_sprite_1a12e57c0de479fec2d23866a7cfe4739f">get_m_scale_x</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00142"/>00142 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_scale_x;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00144"/>00144 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00145"/>00145 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00146"/><link linkend="_class_sprite_1a5f5ef1f7c6c636b80db6a65d90697362">00146</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a5f5ef1f7c6c636b80db6a65d90697362">set_m_scale_x</link>(<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;m_scale_x)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00147"/>00147 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_scale_x&#32;=&#32;m_scale_x;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00149"/>00149 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00150"/>00150 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00151"/><link linkend="_class_sprite_1a5b15b006999653c1d976d7b014d3e8eb">00151</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_sprite_1a5b15b006999653c1d976d7b014d3e8eb">get_m_scale_y</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00152"/>00152 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_scale_y;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00154"/>00154 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00155"/>00155 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00156"/><link linkend="_class_sprite_1aa8c53d178b2a1470a217cc49e300360a">00156</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1aa8c53d178b2a1470a217cc49e300360a">set_m_scale_y</link>(<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;m_scale_y)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00157"/>00157 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_scale_y&#32;=&#32;m_scale_y;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00159"/>00159 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00160"/>00160 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00161"/><link linkend="_class_sprite_1a34877f284d40cf2e5e7a9ea4966d02f2">00161</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_class_sprite_1a34877f284d40cf2e5e7a9ea4966d02f2">get_m_animation_speed</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00162"/>00162 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_animation_speed;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00164"/>00164 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00165"/>00165 
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00166"/><link linkend="_class_sprite_1a6d2a86f21f6dbfbc8e8ad6832301b22d">00166</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a6d2a86f21f6dbfbc8e8ad6832301b22d">set_m_animation_speed</link>(uint8_t&#32;m_animation_speed)
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00167"/>00167 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;m_animation_speed&#32;=&#32;m_animation_speed;
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00169"/>00169 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine__sprite_8h_source_1l00170"/>00170 };
+</programlisting></section>

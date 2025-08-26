@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pwm-tone_8h" xml:lang="en-US">
+<title>inc/pwm-tone.h File Reference</title>
+<indexterm><primary>inc/pwm-tone.h</primary></indexterm>
+<para>
+
+<para>PWM Tone generation library for Raspberry Pi Pico. Plays melodies and chirping sounds via PWM through a buzzer or speaker. </para>
+ 
+</para>
+<programlisting linenumbering="unnumbered">#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &quot;pitches.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structnote__t">note_t</link></para>
+
+<para>Represents a musical note. </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structmelody__t">melody_t</link></para>
+
+<para>Represents a musical melody. </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structtonegenerator__t">tonegenerator_t</link></para>
+
+<para>Represents a tone generator. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef struct note_t <link linkend="_pwm-tone_8h_1a740a9e45c23915e84ffa545cb51d2f91">note_t</link></para>
+</listitem>
+            <listitem><para>typedef struct melody_t <link linkend="_pwm-tone_8h_1a2e48bb77dbb3015af4376b157e8b2bd3">melody_t</link></para>
+</listitem>
+            <listitem><para>typedef struct tonegenerator_t <link linkend="_pwm-tone_8h_1aec190e0f4998d86760fd9820c9bce07e">tonegenerator_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a6007f918a626559d13695f7c8fccce1f">tone_init</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, uint8_t gpio)</para>
+
+<para>Initializes the tone generator. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a6be2aff54804e191b2eec031a3657cd3">tone</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, int freq, uint16_t duration)</para>
+
+<para>Plays a single tone. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1ab23c799acb63da00a9d9f0d1d5c5196a">melody</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, <link linkend="_structnote__t">note_t</link> *notes, int8_t repeat)</para>
+
+<para>Plays a melody. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1ac124ae29e40f75662b6327b3a99185b8">set_tempo</link> (uint16_t bpm)</para>
+
+<para>Sets the tempo (in bpm). </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a6004e97a98d19f40a6893e47e9d9e4f0">set_rest_duration</link> (uint16_t duration)</para>
+
+<para>Sets the rest duration (in ms). </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a3ec0d39f66fb7cfa934cac14e1d6a2a7">stop_tone</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen)</para>
+
+<para>Stops the current tone. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a3123c1851a4e308ee3b84662745a3d0c">stop_melody</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen)</para>
+
+<para>Stops the current melody. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a0e126b5cec56bfaae6e7f584d483be86">_pwm_set_freq</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, float freq)</para>
+
+<para>Sets the PWM frequency. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a9a9c51b018a140f3ee179340724dc633">_tone_pwm_on</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, int freq)</para>
+
+<para>Turns on the PWM tone. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1a4fe9d81d945334839eaf69c9fe47e272">_melody_step</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen)</para>
+
+<para>Steps through the melody. </para>
+</listitem>
+            <listitem><para>void <link linkend="_pwm-tone_8h_1add4161b3db73026e90a90549cae46a54">_melody_tone</link> (<link linkend="_structtonegenerator__t">tonegenerator_t</link> *gen, int freq, uint16_t duration)</para>
+
+<para>Plays a single note in the melody. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>PWM Tone generation library for Raspberry Pi Pico. Plays melodies and chirping sounds via PWM through a buzzer or speaker. </para>
+
+<para><formalpara><title>Author</title>
+
+<para>Turi Scandurra </para>
+</formalpara>
+<formalpara><title>See also</title>
+
+<para><link xlink:href="https://turiscandurra.com/circuits">https://turiscandurra.com/circuits</link> </para>
+</formalpara>
+</para>
+<para>
+Definition in file <link linkend="_pwm-tone_8h_source">pwm-tone.h</link>.</para>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_pwm-tone_8h_1a2e48bb77dbb3015af4376b157e8b2bd3"/><section>
+    <title>melody_t</title>
+<indexterm><primary>melody_t</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>melody_t</secondary></indexterm>
+<para><computeroutput>typedef struct melody_t melody_t</computeroutput></para></section>
+<anchor xml:id="_pwm-tone_8h_1a740a9e45c23915e84ffa545cb51d2f91"/><section>
+    <title>note_t</title>
+<indexterm><primary>note_t</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>note_t</secondary></indexterm>
+<para><computeroutput>typedef struct note_t note_t</computeroutput></para></section>
+<anchor xml:id="_pwm-tone_8h_1aec190e0f4998d86760fd9820c9bce07e"/><section>
+    <title>tonegenerator_t</title>
+<indexterm><primary>tonegenerator_t</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>tonegenerator_t</secondary></indexterm>
+<para><computeroutput>typedef struct tonegenerator_t tonegenerator_t</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pwm-tone_8h_1a4fe9d81d945334839eaf69c9fe47e272"/><section>
+    <title>_melody_step()</title>
+<indexterm><primary>_melody_step</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>_melody_step</secondary></indexterm>
+<para><computeroutput>void _melody_step (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen)</computeroutput></para><para>
+
+<para>Steps through the melody. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1add4161b3db73026e90a90549cae46a54"/><section>
+    <title>_melody_tone()</title>
+<indexterm><primary>_melody_tone</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>_melody_tone</secondary></indexterm>
+<para><computeroutput>void _melody_tone (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, int freq, uint16_t duration)</computeroutput></para><para>
+
+<para>Plays a single note in the melody. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>freq</entry><entry>
+<para>Frequency of the note (in Hz). </para>
+</entry>
+                            </row>
+                            <row>
+<entry>duration</entry><entry>
+<para>Duration of the note (in ms). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a0e126b5cec56bfaae6e7f584d483be86"/><section>
+    <title>_pwm_set_freq()</title>
+<indexterm><primary>_pwm_set_freq</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>_pwm_set_freq</secondary></indexterm>
+<para><computeroutput>void _pwm_set_freq (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, float freq)</computeroutput></para><para>
+
+<para>Sets the PWM frequency. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>freq</entry><entry>
+<para>Frequency value (in Hz). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a9a9c51b018a140f3ee179340724dc633"/><section>
+    <title>_tone_pwm_on()</title>
+<indexterm><primary>_tone_pwm_on</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>_tone_pwm_on</secondary></indexterm>
+<para><computeroutput>void _tone_pwm_on (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, int freq)</computeroutput></para><para>
+
+<para>Turns on the PWM tone. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>freq</entry><entry>
+<para>Frequency value (in Hz). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1ab23c799acb63da00a9d9f0d1d5c5196a"/><section>
+    <title>melody()</title>
+<indexterm><primary>melody</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>melody</secondary></indexterm>
+<para><computeroutput>void melody (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, <link linkend="_structnote__t">note_t</link> * notes, int8_t repeat)</computeroutput></para><para>
+
+<para>Plays a melody. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>notes</entry><entry>
+<para>Array of notes to play. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>repeat</entry><entry>
+<para>Number of times to repeat the melody. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a6004e97a98d19f40a6893e47e9d9e4f0"/><section>
+    <title>set_rest_duration()</title>
+<indexterm><primary>set_rest_duration</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>set_rest_duration</secondary></indexterm>
+<para><computeroutput>void set_rest_duration (uint16_t duration)</computeroutput></para><para>
+
+<para>Sets the rest duration (in ms). </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>duration</entry><entry>
+<para>Rest duration value (in ms). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1ac124ae29e40f75662b6327b3a99185b8"/><section>
+    <title>set_tempo()</title>
+<indexterm><primary>set_tempo</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>set_tempo</secondary></indexterm>
+<para><computeroutput>void set_tempo (uint16_t bpm)</computeroutput></para><para>
+
+<para>Sets the tempo (in bpm). </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>bpm</entry><entry>
+<para>Tempo value (in bpm). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a3123c1851a4e308ee3b84662745a3d0c"/><section>
+    <title>stop_melody()</title>
+<indexterm><primary>stop_melody</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>stop_melody</secondary></indexterm>
+<para><computeroutput>void stop_melody (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen)</computeroutput></para><para>
+
+<para>Stops the current melody. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a3ec0d39f66fb7cfa934cac14e1d6a2a7"/><section>
+    <title>stop_tone()</title>
+<indexterm><primary>stop_tone</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>stop_tone</secondary></indexterm>
+<para><computeroutput>void stop_tone (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen)</computeroutput></para><para>
+
+<para>Stops the current tone. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a6be2aff54804e191b2eec031a3657cd3"/><section>
+    <title>tone()</title>
+<indexterm><primary>tone</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>tone</secondary></indexterm>
+<para><computeroutput>void tone (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, int freq, uint16_t duration)</computeroutput></para><para>
+
+<para>Plays a single tone. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>freq</entry><entry>
+<para>Frequency of the tone (in Hz). </para>
+</entry>
+                            </row>
+                            <row>
+<entry>duration</entry><entry>
+<para>Duration of the tone (in ms). </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_pwm-tone_8h_1a6007f918a626559d13695f7c8fccce1f"/><section>
+    <title>tone_init()</title>
+<indexterm><primary>tone_init</primary><secondary>pwm-tone.h</secondary></indexterm>
+<indexterm><primary>pwm-tone.h</primary><secondary>tone_init</secondary></indexterm>
+<para><computeroutput>void tone_init (<link linkend="_structtonegenerator__t">tonegenerator_t</link> * gen, uint8_t gpio)</computeroutput></para><para>
+
+<para>Initializes the tone generator. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>gen</entry><entry>
+<para>Pointer to the tone generator structure. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>gpio</entry><entry>
+<para>GPIO pin number for the tone generator. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+</section>
+</section>

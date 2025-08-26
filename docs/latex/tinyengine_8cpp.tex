@@ -1,0 +1,175 @@
+\doxysection{src/tinyengine.cpp File Reference}
+\hypertarget{tinyengine_8cpp}{}\label{tinyengine_8cpp}\index{src/tinyengine.cpp@{src/tinyengine.cpp}}
+{\ttfamily \#include "{}tinyengine.\+h"{}}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include $<$pico/time.\+h$>$}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/exception.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\+\_\+\+ID}}~uart0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tinyengine_8cpp_a141e0e4cfccde883fde46e6908a6cf9e}{set\+\_\+frequency}} ()
+\item 
+void \mbox{\hyperlink{tinyengine_8cpp_ad7fec5b2b07b712822dc8182d1796c22}{on\+\_\+uart\+\_\+rx}} ()
+\item 
+void \mbox{\hyperlink{tinyengine_8cpp_a7f6538b252b233c2a00eeabf455b6ac8}{gpio\+\_\+callback}} (uint gpio, uint32\+\_\+t events)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tinyengine_8cpp_a0d3ac15188af7c6cabbbe6e0e8fdf77e}{serial\+\_\+input\+\_\+queue}}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tinyengine_8cpp_a28efb0fa699c7320eb9bd7d21efb205b}{gpio\+\_\+input\+\_\+queue}}
+\item 
+std\+::unordered\+\_\+map$<$ uint8\+\_\+t, uint32\+\_\+t $>$ \mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\+\_\+debouce\+\_\+map}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tinyengine_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}\index{tinyengine.cpp@{tinyengine.cpp}!UART\_ID@{UART\_ID}}
+\index{UART\_ID@{UART\_ID}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{UART\_ID}{UART\_ID}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a} 
+\#define UART\+\_\+\+ID~uart0}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{tinyengine_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{tinyengine_8cpp_a7f6538b252b233c2a00eeabf455b6ac8}\index{tinyengine.cpp@{tinyengine.cpp}!gpio\_callback@{gpio\_callback}}
+\index{gpio\_callback@{gpio\_callback}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{gpio\_callback()}{gpio\_callback()}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a7f6538b252b233c2a00eeabf455b6ac8} 
+void gpio\+\_\+callback (\begin{DoxyParamCaption}\item[{uint}]{gpio}{, }\item[{uint32\+\_\+t}]{events}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00132}{132}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//\ if\ (!gpio\_debounce)\ \{}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ gpio\_debounce\ =\ time\_us\_32();}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return;}}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ if\ ((uint32\_t)250000\ <=\ (time\_us\_32()\ -\/\ gpio\_debounce))\ \{}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ gpio\_input\_queue-\/>emplace\_back(gpio);}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ gpio\_debounce\ =\ 0;}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\_debouce\_map}}[gpio])\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\_debouce\_map}}[gpio]\ =\ time\_us\_32();}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)250000\ <=\ (time\_us\_32()\ -\/\ \mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\_debouce\_map}}[gpio]))\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a28efb0fa699c7320eb9bd7d21efb205b}{gpio\_input\_queue}}-\/>emplace\_back(gpio);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}{gpio\_debouce\_map}}[gpio]\ =\ 0;}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \}}
+
+\end{DoxyCode}
+\Hypertarget{tinyengine_8cpp_ad7fec5b2b07b712822dc8182d1796c22}\index{tinyengine.cpp@{tinyengine.cpp}!on\_uart\_rx@{on\_uart\_rx}}
+\index{on\_uart\_rx@{on\_uart\_rx}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{on\_uart\_rx()}{on\_uart\_rx()}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_ad7fec5b2b07b712822dc8182d1796c22} 
+void on\+\_\+uart\+\_\+rx (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00118}{118}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00119\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{while}\ (uart\_is\_readable(\mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}}))}
+\DoxyCodeLine{00121\ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ uint8\_t\ ch\ =\ uart\_getc(\mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tinyengine_8cpp_a0d3ac15188af7c6cabbbe6e0e8fdf77e}{serial\_input\_queue}}-\/>emplace\_back(ch);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ chars\_rxed++;}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \}}
+
+\end{DoxyCode}
+\Hypertarget{tinyengine_8cpp_a141e0e4cfccde883fde46e6908a6cf9e}\index{tinyengine.cpp@{tinyengine.cpp}!set\_frequency@{set\_frequency}}
+\index{set\_frequency@{set\_frequency}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{set\_frequency()}{set\_frequency()}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a141e0e4cfccde883fde46e6908a6cf9e} 
+void set\+\_\+frequency (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00097}{97}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ vreg\_set\_voltage(VREG\_VOLTAGE\_1\_30);}
+\DoxyCodeLine{00099\ \ \ \ \ set\_sys\_clock\_khz(315000,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00100\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ clk\_peri,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ 315000\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00106\ \ \ \ \ );}
+\DoxyCodeLine{00107\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ clk\_hstx,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ 315000\ /\ 2\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00113\ \ \ \ \ );}
+\DoxyCodeLine{00114\ \ \ \ \ exception\_set\_exclusive\_handler(HARDFAULT\_EXCEPTION,\ hardfault);}
+\DoxyCodeLine{00115\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{tinyengine_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8}\index{tinyengine.cpp@{tinyengine.cpp}!gpio\_debouce\_map@{gpio\_debouce\_map}}
+\index{gpio\_debouce\_map@{gpio\_debouce\_map}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{gpio\_debouce\_map}{gpio\_debouce\_map}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a72b938b7baf318c2932ae38612667ed8} 
+std\+::unordered\+\_\+map$<$uint8\+\_\+t, uint32\+\_\+t$>$ gpio\+\_\+debouce\+\_\+map}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00129}{129}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+\Hypertarget{tinyengine_8cpp_a28efb0fa699c7320eb9bd7d21efb205b}\index{tinyengine.cpp@{tinyengine.cpp}!gpio\_input\_queue@{gpio\_input\_queue}}
+\index{gpio\_input\_queue@{gpio\_input\_queue}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{gpio\_input\_queue}{gpio\_input\_queue}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a28efb0fa699c7320eb9bd7d21efb205b} 
+std\+::vector$<$uint8\+\_\+t$>$\texorpdfstring{$\ast$}{*} gpio\+\_\+input\+\_\+queue}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00128}{128}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+\Hypertarget{tinyengine_8cpp_a0d3ac15188af7c6cabbbe6e0e8fdf77e}\index{tinyengine.cpp@{tinyengine.cpp}!serial\_input\_queue@{serial\_input\_queue}}
+\index{serial\_input\_queue@{serial\_input\_queue}!tinyengine.cpp@{tinyengine.cpp}}
+\doxysubsubsection{\texorpdfstring{serial\_input\_queue}{serial\_input\_queue}}
+{\footnotesize\ttfamily \label{tinyengine_8cpp_a0d3ac15188af7c6cabbbe6e0e8fdf77e} 
+std\+::vector$<$uint8\+\_\+t$>$\texorpdfstring{$\ast$}{*} serial\+\_\+input\+\_\+queue}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+

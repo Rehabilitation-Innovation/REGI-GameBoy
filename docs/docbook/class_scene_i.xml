@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_scene_i" xml:lang="en-US">
+<title>SceneI Class Reference</title>
+<indexterm><primary>SceneI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine_scene.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for SceneI:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_scene_i.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_class_scene_i_1a9aca690ad096045ae588810c5dbcbd62">~SceneI</link> ()=default</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_scene_i_1a7f6b05370faed688686525fe2d3706a0">create</link> ()=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_scene_i_1a573a66b660ce2e704f035ea27ac9ccac">render</link> ()=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_scene_i_1a917d7c8e713381b6ff20b1878a997100">update</link> (double frameTime)=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_scene_i_1aad87a877cb92b4ea71b2f50dc06e132b">destroy</link> ()=0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine__scene_8h_source_1l00003">3</link> of file <link linkend="_tinyengine__scene_8h_source">tinyengine_scene.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_scene_i_1a9aca690ad096045ae588810c5dbcbd62"/><section>
+    <title>~SceneI()</title>
+<indexterm><primary>~SceneI</primary><secondary>SceneI</secondary></indexterm>
+<indexterm><primary>SceneI</primary><secondary>~SceneI</secondary></indexterm>
+<para><computeroutput>virtual SceneI::~SceneI ( )<computeroutput>[virtual]</computeroutput>, <computeroutput>[default]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_scene_i_1a7f6b05370faed688686525fe2d3706a0"/><section>
+    <title>create()</title>
+<indexterm><primary>create</primary><secondary>SceneI</secondary></indexterm>
+<indexterm><primary>SceneI</primary><secondary>create</secondary></indexterm>
+<para><computeroutput>virtual void SceneI::create ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_dino_game_1ae1d9e6cae7937318b7b0d39bc4b70990">DinoGame</link>, <link linkend="_class_game_scene_1ac4f0485291c1719b76b4ed425661143c">GameScene</link>, <link linkend="_class_snake_game_1a98f4ebbe3303b1627cf738e4684b69b4">SnakeGame</link>, and <link linkend="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3">TinyEngineSceneDefault</link>.</para>
+</section>
+<anchor xml:id="_class_scene_i_1aad87a877cb92b4ea71b2f50dc06e132b"/><section>
+    <title>destroy()</title>
+<indexterm><primary>destroy</primary><secondary>SceneI</secondary></indexterm>
+<indexterm><primary>SceneI</primary><secondary>destroy</secondary></indexterm>
+<para><computeroutput>virtual void SceneI::destroy ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_dino_game_1afdfa24b50b4b98cca5ea1271bccf3c0d">DinoGame</link>, <link linkend="_class_game_scene_1a79aa067bf23e490cdfcb4aec1b181b12">GameScene</link>, <link linkend="_class_snake_game_1ad05db6c6aaa3fad9f248d1e94df2a597">SnakeGame</link>, and <link linkend="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6">TinyEngineSceneDefault</link>.</para>
+</section>
+<anchor xml:id="_class_scene_i_1a573a66b660ce2e704f035ea27ac9ccac"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>SceneI</secondary></indexterm>
+<indexterm><primary>SceneI</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>virtual void SceneI::render ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_dino_game_1abbbe0d7eb69274e8118e24baebd0c43f">DinoGame</link>, <link linkend="_class_game_scene_1af107c5ffdf361b4e0b718f486cbc7d0e">GameScene</link>, <link linkend="_class_snake_game_1a09eac49a79e09f012c8c5ca6c4d4c7eb">SnakeGame</link>, and <link linkend="_class_tiny_engine_scene_default_1a41868b105d4c0ea63eec7b0e79745101">TinyEngineSceneDefault</link>.</para>
+</section>
+<anchor xml:id="_class_scene_i_1a917d7c8e713381b6ff20b1878a997100"/><section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>SceneI</secondary></indexterm>
+<indexterm><primary>SceneI</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>virtual void SceneI::update (double frameTime)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_dino_game_1ac19a132cf8cef2a477b518df8a3b3db8">DinoGame</link>, <link linkend="_class_game_scene_1a9bb2bd694b9c8399ea22aed23a6a809f">GameScene</link>, <link linkend="_class_snake_game_1a427ff7fbd06cf21fd64223a3c48d500d">SnakeGame</link>, and <link linkend="_class_tiny_engine_scene_default_1afc7c24f397889b79d308f3c42d21f75f">TinyEngineSceneDefault</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+inc/<link linkend="_tinyengine__scene_8h">tinyengine_scene.h</link></section>
+</section>

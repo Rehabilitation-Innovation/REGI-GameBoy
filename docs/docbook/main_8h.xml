@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_main_8h" xml:lang="en-US">
+<title>inc/main.h File Reference</title>
+<indexterm><primary>inc/main.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;hardware/spi.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_main_8h_1a627c51d5a15e65cf65f1f33821905c09">LCD_SPI_PORT</link>&#160;&#160;&#160;spi1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1aee4041b31de29e29989d71f8be204a8b">LCD_SPI_MISO</link>&#160;&#160;&#160;28</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a1c77990623e208f9e5ed95088cd09c48">LCD_SPI_MOSI</link>&#160;&#160;&#160;11</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1abd0f8f7ae98d5dbab30526b81bab60cc">LCD_SPI_CLK</link>&#160;&#160;&#160;10</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a1dc6c4886242abf4447d0da651125d5d">LCD_DC</link>&#160;&#160;&#160;8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1aec0f0ab242f1b58b1d017bc9ab4b898b">LCD_RST</link>&#160;&#160;&#160;9</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a71d24cab0e16b054de228f29139f1b79">LCD_CS</link>&#160;&#160;&#160;22</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1ac11ca0a9c85c11fa485e298e51b34f6d">LCD_BKLT</link>&#160;&#160;&#160;6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1ab0d72a395fa77f3dd4418076f87ea81c">SD_SPI0</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1af72f113c59e467dc74e8c79177da3a48">SD_SCLK_PIN</link>&#160;&#160;&#160;34</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a1150cf94392cb54e7e979e6b69f210fb">SD_MOSI_PIN</link>&#160;&#160;&#160;35</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1ad3aea67d9c7c7dc0be847a1467786abb">SD_MISO_PIN</link>&#160;&#160;&#160;32</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a04d57a6c18b2d5e81f31093e58ed0c62">SD_CS_PIN</link>&#160;&#160;&#160;33</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a172de278de1da90d09ac78f3de502671">SD_BOOT_FLASH_OFFSET</link>&#160;&#160;&#160;(768 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8h_1a5f38c1d2cbe1f9d2de789ebfe570c7a4">MAX_APP_SIZE</link>&#160;&#160;&#160;((16 * 1024 * 1024) - <link linkend="_main_8h_1a172de278de1da90d09ac78f3de502671">SD_BOOT_FLASH_OFFSET</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_main_8h_1ac11ca0a9c85c11fa485e298e51b34f6d"/><section>
+    <title>LCD_BKLT</title>
+<indexterm><primary>LCD_BKLT</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_BKLT</secondary></indexterm>
+<para><computeroutput>#define LCD_BKLT&#160;&#160;&#160;6</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00016">16</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a71d24cab0e16b054de228f29139f1b79"/><section>
+    <title>LCD_CS</title>
+<indexterm><primary>LCD_CS</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_CS</secondary></indexterm>
+<para><computeroutput>#define LCD_CS&#160;&#160;&#160;22</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00015">15</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a1dc6c4886242abf4447d0da651125d5d"/><section>
+    <title>LCD_DC</title>
+<indexterm><primary>LCD_DC</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_DC</secondary></indexterm>
+<para><computeroutput>#define LCD_DC&#160;&#160;&#160;8</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00013">13</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1aec0f0ab242f1b58b1d017bc9ab4b898b"/><section>
+    <title>LCD_RST</title>
+<indexterm><primary>LCD_RST</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_RST</secondary></indexterm>
+<para><computeroutput>#define LCD_RST&#160;&#160;&#160;9</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00014">14</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1abd0f8f7ae98d5dbab30526b81bab60cc"/><section>
+    <title>LCD_SPI_CLK</title>
+<indexterm><primary>LCD_SPI_CLK</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_SPI_CLK</secondary></indexterm>
+<para><computeroutput>#define LCD_SPI_CLK&#160;&#160;&#160;10</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00012">12</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1aee4041b31de29e29989d71f8be204a8b"/><section>
+    <title>LCD_SPI_MISO</title>
+<indexterm><primary>LCD_SPI_MISO</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_SPI_MISO</secondary></indexterm>
+<para><computeroutput>#define LCD_SPI_MISO&#160;&#160;&#160;28</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00010">10</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a1c77990623e208f9e5ed95088cd09c48"/><section>
+    <title>LCD_SPI_MOSI</title>
+<indexterm><primary>LCD_SPI_MOSI</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_SPI_MOSI</secondary></indexterm>
+<para><computeroutput>#define LCD_SPI_MOSI&#160;&#160;&#160;11</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00011">11</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a627c51d5a15e65cf65f1f33821905c09"/><section>
+    <title>LCD_SPI_PORT</title>
+<indexterm><primary>LCD_SPI_PORT</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>LCD_SPI_PORT</secondary></indexterm>
+<para><computeroutput>#define LCD_SPI_PORT&#160;&#160;&#160;spi1</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00009">9</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a5f38c1d2cbe1f9d2de789ebfe570c7a4"/><section>
+    <title>MAX_APP_SIZE</title>
+<indexterm><primary>MAX_APP_SIZE</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>MAX_APP_SIZE</secondary></indexterm>
+<para><computeroutput>#define MAX_APP_SIZE&#160;&#160;&#160;((16 * 1024 * 1024) - <link linkend="_main_8h_1a172de278de1da90d09ac78f3de502671">SD_BOOT_FLASH_OFFSET</link>)</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00036">36</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a172de278de1da90d09ac78f3de502671"/><section>
+    <title>SD_BOOT_FLASH_OFFSET</title>
+<indexterm><primary>SD_BOOT_FLASH_OFFSET</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_BOOT_FLASH_OFFSET</secondary></indexterm>
+<para><computeroutput>#define SD_BOOT_FLASH_OFFSET&#160;&#160;&#160;(768 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00031">31</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a04d57a6c18b2d5e81f31093e58ed0c62"/><section>
+    <title>SD_CS_PIN</title>
+<indexterm><primary>SD_CS_PIN</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_CS_PIN</secondary></indexterm>
+<para><computeroutput>#define SD_CS_PIN&#160;&#160;&#160;33</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00023">23</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1ad3aea67d9c7c7dc0be847a1467786abb"/><section>
+    <title>SD_MISO_PIN</title>
+<indexterm><primary>SD_MISO_PIN</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_MISO_PIN</secondary></indexterm>
+<para><computeroutput>#define SD_MISO_PIN&#160;&#160;&#160;32</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00022">22</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1a1150cf94392cb54e7e979e6b69f210fb"/><section>
+    <title>SD_MOSI_PIN</title>
+<indexterm><primary>SD_MOSI_PIN</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_MOSI_PIN</secondary></indexterm>
+<para><computeroutput>#define SD_MOSI_PIN&#160;&#160;&#160;35</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00021">21</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1af72f113c59e467dc74e8c79177da3a48"/><section>
+    <title>SD_SCLK_PIN</title>
+<indexterm><primary>SD_SCLK_PIN</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_SCLK_PIN</secondary></indexterm>
+<para><computeroutput>#define SD_SCLK_PIN&#160;&#160;&#160;34</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00020">20</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+<anchor xml:id="_main_8h_1ab0d72a395fa77f3dd4418076f87ea81c"/><section>
+    <title>SD_SPI0</title>
+<indexterm><primary>SD_SPI0</primary><secondary>main.h</secondary></indexterm>
+<indexterm><primary>main.h</primary><secondary>SD_SPI0</secondary></indexterm>
+<para><computeroutput>#define SD_SPI0&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_main_8h_source_1l00019">19</link> of file <link linkend="_main_8h_source">main.h</link>.</para>
+</section>
+</section>
+</section>

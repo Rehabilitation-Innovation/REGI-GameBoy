@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['s_0',['s',['../structc2r.html#aced979bcaf554926a02d825c4dad8269',1,'c2r']]],
+  ['score_1',['score',['../_dino_game_8cpp.html#ae7476f289721ad311a513f54dfcb6b41',1,'DinoGame.cpp']]],
+  ['score_5fsnake_2',['score_snake',['../_snake_game_8cpp.html#a8b980ec9e641de5222f057bb256c05c8',1,'SnakeGame.cpp']]],
+  ['scoreboard_3',['scoreboard',['../_dino_game_8cpp.html#a81a7db0840e434f7c42887f2a04611ee',1,'DinoGame.cpp']]],
+  ['serial_5finput_5fqueue_4',['serial_input_queue',['../tinyengine_8cpp.html#a0d3ac15188af7c6cabbbe6e0e8fdf77e',1,'tinyengine.cpp']]],
+  ['set_5fbuffer_5',['set_buffer',['../structtinyengine__renderer__handle__t.html#a6a574a7d4335e623fb3e3a8f95906ec6',1,'tinyengine_renderer_handle_t']]],
+  ['slice_6',['slice',['../structtonegenerator__t.html#a588380257ed9bca9b3df52b4fcad01e7',1,'tonegenerator_t']]],
+  ['slice_5fnum_7',['slice_num',['../structte__audio__handle__t.html#a08a7a348fd65d11fe1c64efb621db539',1,'te_audio_handle_t']]],
+  ['sm_8',['sm',['../_dino_game_8cpp.html#abeba240b99c2caa6556ccab58b8c8ebb',1,'DinoGame.cpp']]],
+  ['snaketaillen_9',['snakeTailLen',['../_snake_game_8cpp.html#a0c988e922b2bb3514a84d3a32d9769a9',1,'SnakeGame.cpp']]],
+  ['snaketailx_5fsnake_10',['snakeTailx_snake',['../_snake_game_8cpp.html#ae170759b728a81554c554cc328bb4911',1,'SnakeGame.cpp']]],
+  ['snaketaily_5fsnake_11',['snakeTaily_snake',['../_snake_game_8cpp.html#af7d39550ddd119a00436dfc0b308561a',1,'SnakeGame.cpp']]],
+  ['sprite_5fanimation_5fframes_12',['sprite_animation_frames',['../structte__sprite__animation__t.html#ae8b1c132a79499b1a034c8dbaa5f4f07',1,'te_sprite_animation_t']]],
+  ['sprite_5fbuffer_13',['sprite_buffer',['../structte__sprite__t.html#a21524697256e082e5b35bbbc2801a537',1,'te_sprite_t']]],
+  ['sprite_5fpalette_14',['sprite_palette',['../structte__sprite__t.html#aecee209c14bda6868e25c07c99147798',1,'te_sprite_t']]],
+  ['sprites_15',['sprites',['../class_game_scene.html#a73a24f18b5cb2d7cf13efc1e2ce87b48',1,'GameScene']]],
+  ['start_5fframe_16',['start_frame',['../structte__sprite__animation__t.html#ad761f161ae73abb8b94ca8c65b6b5196',1,'te_sprite_animation_t']]],
+  ['start_5ftext_17',['start_text',['../_dino_game_8cpp.html#aa87b70da41217e2357375701aca8f910',1,'DinoGame.cpp']]],
+  ['string_18',['string',['../_game_scene_8cpp.html#a599ac9672c5ed92e22c3259396cbb7d8',1,'GameScene.cpp']]]
+];

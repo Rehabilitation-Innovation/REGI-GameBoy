@@ -1,0 +1,463 @@
+\doxysection{tinyengine\+\_\+framebuffer.\+cpp}
+\hypertarget{tinyengine__framebuffer_8cpp_source}{}\label{tinyengine__framebuffer_8cpp_source}\index{src/tinyengine\_framebuffer.cpp@{src/tinyengine\_framebuffer.cpp}}
+\mbox{\hyperlink{tinyengine__framebuffer_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <malloc.h>}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{main_8h}{main.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}memory.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}hardware/interp.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}math.h"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{font_8h}{font.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{renew__font_8h}{renew\_font.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00012}\mbox{\hyperlink{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a}{00012}}\ \textcolor{preprocessor}{\#define\ CHECK\_BOUNDS(x,\ y)\ if\ (x\ <\ 0\ ||\ y\ <\ 0\ ||\ x\ >\ 320\ ||\ y\ >\ 240)\ return\ TINYENGINE\_OUTOFBOUNDS\_ERROR;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00025}\mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{00025}}\ \textcolor{preprocessor}{\#define\ CHAR\_WIDTH\ 7}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00026}\mbox{\hyperlink{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2}{00026}}\ \textcolor{preprocessor}{\#define\ CHAR\_HEIGHT\ 8}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00028}00028\ \ \textcolor{comment}{//\ This\ is\ the\ fractional\ part\ of\ a\ number\ when\ expressing\ a\ float\ as\ a\ fixed\ point\ integer.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00029}\mbox{\hyperlink{tinyengine__framebuffer_8cpp_ad546866d6b629b02bca4560c2c1ef35a}{00029}}\ \textcolor{preprocessor}{\#define\ UNIT\_LSB\ 16}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00031}00031\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ TinyEngineFrameBuffer::init()}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ this-\/>m\_display\_h\ =\ frame\_height;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ this-\/>m\_display\_w\ =\ frame\_width;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ this-\/>m\_is\_dual\ =\ is\_dual;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}}\ =\ this-\/>m\_display\_h\ *\ this-\/>m\_display\_w\ *\ 1;\ \textcolor{comment}{//\ dont\ support\ color\ depth\ yet.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ =\ (uint8\_t*)calloc(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}},\ 1);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ all\ buffers\ must\ be\ dual\ in\ this\ current\ version,\ will\ implement\ single\ in\ the\ future\ if\ memory\ starts\ to\ run\ out\ at\ higher\ resolutions}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\_dual}}())}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}}\ =\ (uint8\_t*)calloc(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}},\ 1);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}}\ =\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00048}00048\ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}},\ 0xC0,\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00053}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939}{00053}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939}{TinyEngineFrameBuffer::destroy}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00055}00055\ \ \ \ \ free(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\_dual}}())}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ free(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00065}\mbox{\hyperlink{class_tiny_engine_frame_buffer_ac3bf2f988fc71c133bb8b4627963d77f}{00065}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_ac3bf2f988fc71c133bb8b4627963d77f}{TinyEngineFrameBuffer::write}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00070}\mbox{\hyperlink{class_tiny_engine_frame_buffer_aae5e1ac121730bf70e2faf97b6db7760}{00070}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aae5e1ac121730bf70e2faf97b6db7760}{TinyEngineFrameBuffer::clear}}(\textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00071}00071\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00072}00072\ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ color,\ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{comment}{//\ didnt\ really\ work;\ it\ was\ a\ late\ night\ idea.\ needs\ more\ work;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{comment}{//\ //\ only\ clear\ stuff\ thats\ changed\ in\ 4\ byte\ blocks.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ this-\/>m\_pixel\_buffer\_size;\ i\ +=\ 128)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (memcmp(pixel\_buffer\_back\ +\ i,\ pixel\_buffer\_display\ +\ i,\ 128)\ !=\ 0)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ memset(pixel\_buffer\_back\ +\ i,\ 0,\ 128);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00082}00082\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{comment}{//\ uint16\_t\ \_x\ =\ 0,\ \_y\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{comment}{//\ for\ (\_x\ =\ 0;\ \_x\ <\ m\_display\_w;\ ++\_x)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (\_y\ =\ 0;\ \_y\ <\ m\_display\_h;\ ++\_y)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ this-\/>pixel\_buffer\_back[(\_y\ *\ this-\/>m\_display\_w\ +\ \_x)\ *\ 1]\ =\ color;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ if\ (\_y\ \%\ 10\ ==\ 0\ \&\&\ \_x\ \%\ 10\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ \ \ \ \ this-\/>pixel\_buffer\_back[(\_y\ *\ this-\/>m\_display\_w\ +\ \_x)\ *\ 1]\ =\ 15;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00099}00099\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00106}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897}{00106}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897}{TinyEngineFrameBuffer::clear\_with}}(\textcolor{keyword}{const}\ uint8\_t*\ data)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00107}00107\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00108}00108\ \ \ \ \ memcpy(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ data,\ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{comment}{//\ uint16\_t\ \_x\ =\ 0,\ \_y\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00110}00110\ \ \ \ \ \textcolor{comment}{//\ for\ (\_x\ =\ 0;\ \_x\ <\ m\_display\_w;\ ++\_x)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (\_y\ =\ 0;\ \_y\ <\ m\_display\_h;\ ++\_y)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00113}00113\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ this-\/>pixel\_buffer\_back[(\_y\ *\ this-\/>m\_display\_w\ +\ \_x)\ *\ 1]\ =\ color;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00115}00115\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ if\ (\_y\ \%\ 10\ ==\ 0\ \&\&\ \_x\ \%\ 10\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ \ \ \ \ this-\/>pixel\_buffer\_back[(\_y\ *\ this-\/>m\_display\_w\ +\ \_x)\ *\ 1]\ =\ 15;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00124}00124\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00126}\mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{00126}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{TinyEngineFrameBuffer::draw\_pixel}}(\textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00127}00127\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{comment}{//TODO:\ Find\ a\ better\ way\ to\ do\ this,\ rather\ than\ calling\ it\ all\ the\ time.\ this\ will\ work\ for\ now.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00129}00129\ \ \ \ \ \textcolor{comment}{//\ I\ predict\ this\ will\ significantly\ boost\ fps\ if\ it\ was\ implemented\ higher\ up\ in\ the\ draw\ calls.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Rather\ than\ checking\ every\ pixel.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ this-\/>m\_display\_w)\ ||\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >=\ this-\/>m\_display\_h))}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\_OUTOFBOUNDS\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00133}00133\ \ \ \ \ \textcolor{comment}{//\ Write\ the\ color\ to\ the\ buffer}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00134}00134\ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ *\ this-\/>m\_display\_w\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})\ *\ 1]\ =\ (uint8\_t)(color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ *\ 1\ is\ because\ we\ store\ 1\ byte\ per\ pixel\ if\ it\ was\ RGB888\ then\ it\ would\ be\ 3}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00141}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a5f55e06ce4f4fe1dc7577ef14b851794}{00141}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5f55e06ce4f4fe1dc7577ef14b851794}{TinyEngineFrameBuffer::draw\_grid}}(\textcolor{keyword}{const}\ uint32\_t\ spacing,\ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00142}00142\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00143}00143\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ m\_display\_w;\ ++\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00145}00145\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ <\ m\_display\_h;\ ++\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ \%\ spacing\ ==\ 0\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ \%\ spacing\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ *\ this-\/>m\_display\_w\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})\ *\ 1]\ =\ (uint8\_t)(color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00155}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a362cb5fdd287fbc4a95f04d593fa10e6}{00155}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a362cb5fdd287fbc4a95f04d593fa10e6}{TinyEngineFrameBuffer::draw\_outline\_rectangle}}(\textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \textcolor{keyword}{const}\ uint32\_t\ w,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00156}00156\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ h,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00157}00157\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00158}00158\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x\ <=\ this-\/>}}m\_display\_w\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y\ <=\ this-\/>}}m\_display\_h\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >\ 0\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >\ 0))}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00160}00160\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ draw\_pixel(x,\ y\ +\ i,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ draw\_pixel(x\ +\ w,\ y\ +\ i,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ draw\_pixel(x\ +\ i,\ y,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ draw\_pixel(x\ +\ i,\ y\ +\ h,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{comment}{//\ this\ is\ just\ easier\ to\ write\ for\ now,\ u\ can\ make\ a\ new\ function\ called\ draw\_pixel\_unsafe\ or\ something...}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00172}00172\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\ sides}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x))\ *\ 1]\ =\ (uint8\_t)(color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ 1);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ w))\ *\ 1]\ =\ (uint8\_t)(color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ w))\ *\ 1,\ color,\ 1);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\ top\ and\ bottom;\ Added\ 200\ fps\ lol}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00182}00182\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00183}00183\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})*this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ w);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ i))\ *\ 1]\ =\ (uint8\_t)(color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00186}00186\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ h)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ w);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ h)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ i))\ *\ 1]\ =\ (uint8\_t)(color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00191}00191\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00193}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a60735e6091fa6c20638fb995b73193d5}{00193}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a60735e6091fa6c20638fb995b73193d5}{TinyEngineFrameBuffer::draw\_filled\_rectangle}}(\textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \textcolor{keyword}{const}\ uint32\_t\ w,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00194}00194\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ h,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00195}00195\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00196}00196\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00197}00197\ \ \ \ \ \textcolor{comment}{//\ uint8\_t*\ temp\ =\ malloc(sizeof(uint8\_t)\ *\ this.m\_pixel\_buffer\_size);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ memset(temp,\ color,\ this.m\_pixel\_buffer\_size);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{comment}{//\ if\ (!(x\ <=\ this-\/>m\_display\_w\ \&\&\ y\ <=\ this-\/>m\_display\_h\ \&\&\ x\ >\ 0\ \&\&\ y\ >\ 0))}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00202}00202\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ for\ (uint16\_t\ j\ =\ 0;\ j\ <\ w;\ j++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00204}00204\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ //this-\/>pixel\_buffer[j\ +\ i\ *\ this-\/>display\_w]\ =\ color;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ draw\_pixel(x\ +\ j,\ y\ +\ i,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00207}00207\ \ \ \ \ \textcolor{comment}{//\ else}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint16\_t\ j\ =\ 0;\ j\ <\ w;\ j++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{//this-\/>pixel\_buffer[j\ +\ i\ *\ this-\/>display\_w]\ =\ color;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\_pixel(x\ +\ j,\ y\ +\ i,\ color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}),\ color,\ w);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00214}00214\ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ j))\ *\ 1]\ =\ (uint8\_t)(color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00215}00215\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00216}00216\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00218}00218\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00219}00219\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00221}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4beca939063b7270bf66e7872c689128}{00221}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4beca939063b7270bf66e7872c689128}{TinyEngineFrameBuffer::draw\_outline\_circle}}(\textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \textcolor{keyword}{const}\ uint32\_t\ r,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00222}00222\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00223}00223\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00224}00224\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00225}00225\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00227}00227\ \textcolor{comment}{//\ https://www.geeksforgeeks.org/bresenhams-\/circle-\/drawing-\/algorithm/}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00229}\mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{00229}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{TinyEngineFrameBuffer::drawCircle1}}(\textcolor{keywordtype}{int}\ xc,\ \textcolor{keywordtype}{int}\ yc,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00230}00230\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00231}00231\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00232}00232\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00234}00234\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00235}00235\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00237}00237\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00238}00238\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00239}00239\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00241}\mbox{\hyperlink{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330}{00241}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330}{TinyEngineFrameBuffer::draw\_filled\_circle}}(\textcolor{keyword}{const}\ uint32\_t\ xc,\ \textcolor{keyword}{const}\ uint32\_t\ yc,\ \textcolor{keyword}{const}\ uint32\_t\ r,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00242}00242\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00243}00243\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00244}00244\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ r;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{keywordtype}{int}\ d\ =\ 3\ -\/\ 2\ *\ r;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00246}00246\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{drawCircle1}}(xc,\ yc,\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >=\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00248}00248\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ for\ decision\ parameter}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ correspondingly}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ update\ d,\ y}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})\ +\ 10;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ 6;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ x\ after\ updating\ decision\ parameter}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}++;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ circle\ using\ the\ new\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{drawCircle1}}(xc,\ yc,\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00265}00265\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00268}00268\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00270}\mbox{\hyperlink{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d}{00270}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d}{TinyEngineFrameBuffer::swap\_blocking}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00271}00271\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{comment}{//\ this-\/>wait\_vsync\_blocking\_func\_ptr();}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00273}00273\ \ \ \ \ \textcolor{comment}{//\ uint8\_t*\ frame\_buffer\_temp\ =\ this-\/>pixel\_buffer\_back;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00274}00274\ \ \ \ \ \textcolor{comment}{//\ //\ display-\/>flip\_now();}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00275}00275\ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back\ =\ this-\/>pixel\_buffer\_display;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00276}00276\ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_display\ =\ frame\_buffer\_temp;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00278}00278\ \ \ \ \ std::swap(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}},\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00280}00280\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00281}00281\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00283}\mbox{\hyperlink{class_tiny_engine_frame_buffer_aef92d2f3ff2cf2a130a86bdc0779d2ac}{00283}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aef92d2f3ff2cf2a130a86bdc0779d2ac}{TinyEngineFrameBuffer::draw\_sprite}}(\mbox{\hyperlink{class_sprite}{Sprite}}\&\ sprite)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00284}00284\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00285}00285\ \ \ \ \ \mbox{\hyperlink{structte__sprite__t}{te\_sprite\_t}}*\ data\ =\ sprite.\mbox{\hyperlink{class_sprite_aabab23ab32f0cee58b1f2715597458de}{get\_m\_sprite\_data}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00287}00287\ \ \ \ \ \textcolor{keywordflow}{if}\ (!sprite.\mbox{\hyperlink{class_sprite_aa58f521454f0e700633a1555a1dcd7b3}{is\_m\_animated}}())}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00288}00288\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\_sprite\_raw}}(}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a1c5fb11a08c7da650adbf5e82f8d4d1d}{get\_m\_x}}(),}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_ac6985150992aae6e2a9642b47501faa1}{get\_m\_y}}());}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00295}00295\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00297}00297\ \ \ \ \ \mbox{\hyperlink{structte__sprite__animation__t}{te\_sprite\_animation\_t}}*\ ani\ =\ sprite.\mbox{\hyperlink{class_sprite_a1b864c55c1447308301665946d3b26de}{get\_m\_animation\_data}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00299}00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite.\mbox{\hyperlink{class_sprite_acae1b5a7536cf89c73c29797e21b780f}{get\_m\_frametime}}()\ >=\ (\textcolor{keywordtype}{float})ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a005d996826fc6306b464609827f3367e}{animation\_delay}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00300}00300\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ani-\/>current\_frame\_time\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a27f095629aeacb38f8dc1a3446ed29d9}{set\_m\_frametime}}(0);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00304}00304\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00306}00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ >\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a738b24e248655af58263162698329aa8}{total\_frames}}\ -\/\ 1}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ ||\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ >=\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a937203fdf03fe9ded85ab00a0f29a94f}{end\_frame}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00308}00308\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ =\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_ad761f161ae73abb8b94ca8c65b6b5196}{start\_frame}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00310}00310\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00312}00312\ \ \ \ \ \textcolor{comment}{//\ ani-\/>current\_frame\_time\ +=\ sprite.get\_m\_frametime()\ *\ 100;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00313}00313\ \ \ \ \ \textcolor{comment}{//\ sprite.set\_m\_frametime(sprite.get\_m\_frametime()\ *\ sprite.get\_m\_animation\_speed());}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00314}00314\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\_sprite\_raw}}(ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_ae8b1c132a79499b1a034c8dbaa5f4f07}{sprite\_animation\_frames}}[ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}],}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a1c5fb11a08c7da650adbf5e82f8d4d1d}{get\_m\_x}}(),}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_ac6985150992aae6e2a9642b47501faa1}{get\_m\_y}}());}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00319}00319\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00321}\mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{00321}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{TinyEngineFrameBuffer::draw\_sprite\_raw}}(}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00322}00322\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ sprite,\ \textcolor{keyword}{const}\ uint32\_t\ w,\ \textcolor{keyword}{const}\ uint32\_t\ h,\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00323}00323\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00324}00324\ \ \ \ \ uint16\_t\ \_y;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00326}00326\ \ \ \ \ \textcolor{comment}{//\ calculate\ the\ full\ row\ of\ opaque\ pixels\ before\ hand.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00328}00328\ \ \ \ \ \textcolor{comment}{//\ //\ Added\ 800FPS}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00329}00329\ \ \ \ \ \textcolor{keywordflow}{for}\ (\_y\ =\ 0;\ \_y\ <\ h;\ \_y++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00330}00330\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ uint16\_t\ start\_of\_sprite\ =\ 0,\ end\_of\_sprite\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ \_x\ =\ 0;\ \_x\ <\ w;\ \_x++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)sprite[(\_y\ *\ w\ +\ \_x)]\ !=\ 0x00)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ start\_of\_sprite\ =\ \_x;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \_x\ =\ w\ -\/\ 1;\ \_x\ >=\ 0;\ -\/-\/\_x)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)sprite[(\_y\ *\ w\ +\ \_x)]\ !=\ 0x00)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ end\_of\_sprite\ =\ \_x;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ memcpy(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ \_y)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ start\_of\_sprite)),}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t*)sprite\ +\ (\_y\ *\ w\ +\ start\_of\_sprite)),}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ end\_of\_sprite\ -\/\ start\_of\_sprite);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00352}00352\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00354}00354\ \ \ \ \ \textcolor{comment}{//\ you\ can\ account\ for\ mid\ sprite\ transperency\ here\ but\ it}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00356}00356\ \ \ \ \ \textcolor{comment}{//\ Inefficent\ reduces\ FPS\ by\ 800FPS}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00357}00357\ \ \ \ \ \textcolor{comment}{//\ uint16\_t\ \_x;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00358}00358\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00359}00359\ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ h\ *\ w;\ i++)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00360}00360\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00361}00361\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_x\ =\ i\ \%\ w;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00362}00362\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_y\ =\ i\ /\ w;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00363}00363\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ if\ (\_x\ ==\ 0\ \&\&\ \_y\ ==\ 0)\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00364}00364\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ \ \ \ \ draw\_pixel(x,\ y,\ 0xC0);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00365}00365\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ \ \ \ \ continue;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00366}00366\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00367}00367\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (sprite[i]\ !=\ 0x00)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00368}00368\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ draw\_pixel(\_y\ +\ x,\ \_x\ +\ y,\ sprite[i]);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00369}00369\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ this-\/>pixel\_buffer\_back[((y\ +\ \_y)\ *\ this-\/>m\_display\_w\ +\ x\ +\ \_x)\ *\ 1]\ =\ sprite[i];}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00370}00370\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ memset(pixel\_buffer\_back\ +\ (((y\ +\ \_y)\ *\ this-\/>m\_display\_w\ +\ x\ +\ \_x)\ *\ 1),\ sprite[i],\ 1);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00371}00371\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00373}00373\ \ \ \ \ \textcolor{comment}{//\ added\ 400\ fps\ lol\ idk\ how,\ maybe\ i\ am\ wrong\ lmao}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00374}00374\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ h;\ ++i)}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00375}00375\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00376}00376\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ memcpy(pixel\_buffer\_back\ +\ (y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x),\ sprite\ +\ i\ *\ w,\ w);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00377}00377\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00379}00379\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00380}00380\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00382}\mbox{\hyperlink{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf}{00382}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf}{TinyEngineFrameBuffer::draw\_sprite\_raw\_batch}}(\textcolor{keyword}{const}\ uint8\_t*\ sprite,\ \textcolor{keyword}{const}\ uint32\_t\ w,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00383}00383\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ h,\ \textcolor{keyword}{const}\ uint16\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}[],}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00384}00384\ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}[],\ \textcolor{keyword}{const}\ uint16\_t\ count)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00385}00385\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00386}00386\ \ \ \ \ uint16\_t\ \_x,\ \_y;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00387}00387\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h\ *\ w;\ i++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00388}00388\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00389}00389\ \ \ \ \ \ \ \ \ \_x\ =\ i\ /\ h;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00390}00390\ \ \ \ \ \ \ \ \ \_y\ =\ i\ \%\ w;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00391}00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite[i]\ !=\ 0x00)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ count;\ j++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}[j]\ -\/\ \_y,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}[j]\ +\ \_x,\ sprite[i]);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00396}00396\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00399}00399\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00400}00400\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00402}00402\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ \_draw\_char\_temp\_index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00404}\mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{00404}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{TinyEngineFrameBuffer::draw\_char}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \_char,\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00405}00405\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \_color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00406}00406\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00407}00407\ \ \ \ \ \_draw\_char\_temp\_index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00408}00408\ \ \ \ \ \textcolor{comment}{//\ Convert\ the\ character\ to\ an\ index}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00409}00409\ \ \ \ \ \_draw\_char\_temp\_index\ =\ \_char\ \&\ 0x7F;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00410}00410\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_draw\_char\_temp\_index\ <\ \textcolor{charliteral}{'\ '})}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00411}00411\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00412}00412\ \ \ \ \ \ \ \ \ \_draw\_char\_temp\_index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00413}00413\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00414}00414\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00415}00415\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00416}00416\ \ \ \ \ \ \ \ \ \_draw\_char\_temp\_index\ -\/=\ \textcolor{charliteral}{'\ '};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00417}00417\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00418}00418\ \ \ \ \ \textcolor{comment}{//\ 'font'\ is\ a\ multidimensional\ array\ of\ [96][char\_width]}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00419}00419\ \ \ \ \ \textcolor{comment}{//\ which\ is\ really\ just\ a\ 1D\ array\ of\ size\ 96*char\_width.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00420}00420\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ chr\ =\ \mbox{\hyperlink{renew__font_8h_a54965403f79c53e640e1179d0661194e}{renew\_font}}[\_draw\_char\_temp\_index];}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00421}00421\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};\ j++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00423}00423\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00424}00424\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}}\ |=\ chr[j];}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00425}00425\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00427}00427\ \ \ \ \ \textcolor{comment}{//\ Draw\ pixels}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00428}00428\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};\ j++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00429}00429\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00430}00430\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2}{CHAR\_HEIGHT}};\ i++)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00431}00431\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chr[j]\ \&\ (1\ <<\ i))}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this\ added\ like\ 100FPS\ to\ the\ game\ on\ full\ optimizations}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ j))\ *\ 1]\ =\ (uint8\_t)(\_color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ j))\ *\ 1),\ \_color,\ 1);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 300FPS\ improvement\ lol.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\_pixel(x\ +\ j,\ y\ +\ i,\ \_color);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00440}00440\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00441}00441\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00442}00442\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00443}00443\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00445}00445\ \textcolor{keyword}{static}\ uint32\_t\ \_draw\_str\_temp\_index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00447}\mbox{\hyperlink{class_tiny_engine_frame_buffer_affc105087005f183a2c39b2999b691e6}{00447}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_affc105087005f183a2c39b2999b691e6}{TinyEngineFrameBuffer::draw\_string}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \_string,\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00448}00448\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \_color)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00449}00449\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00450}00450\ \ \ \ \ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a}{CHECK\_BOUNDS}}(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}});}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00451}00451\ \ \ \ \ \_draw\_str\_temp\_index\ =\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00452}00452\ \ \ \ \ \textcolor{keywordflow}{while}\ (*\_string)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00453}00453\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00454}00454\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{draw\_char}}(*\_string++,\ \_draw\_str\_temp\_index,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \_color);}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00455}00455\ \ \ \ \ \ \ \ \ \_draw\_str\_temp\_index\ +=\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00456}00456\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00457}00457\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00458}00458\ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00460}\mbox{\hyperlink{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152}{00460}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152}{TinyEngineFrameBuffer::copy\_buffer\_slow}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a154593a2274a9e154b42730c913470cb}{TinyEngineFrameBuffer}}\&\ \_buffer\_to\_copy,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00461}00461\ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ \_dst\_x,}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00462}00462\ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ \_dst\_y)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00463}00463\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00464}00464\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \_buffer\_to\_copy.m\_display\_h;\ ++i)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00465}00465\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \_buffer\_to\_copy.m\_display\_w;\ ++j)}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00467}00467\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[((\_dst\_y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\_dst\_x\ +\ j))\ *\ 1]\ =\ \_buffer\_to\_copy.}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[i\ *\ \_buffer\_to\_copy.m\_display\_w\ +\ j];}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00470}00470\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00471}00471\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00472}00472\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{\Hypertarget{tinyengine__framebuffer_8cpp_source_l00473}00473\ \}}
+
+\end{DoxyCode}

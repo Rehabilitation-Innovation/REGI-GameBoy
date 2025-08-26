@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine_8h" xml:lang="en-US">
+<title>inc/tinyengine.h File Reference</title>
+<indexterm><primary>inc/tinyengine.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;stdio.h&quot;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &quot;tinyengine_scene.h&quot;<?linebreak?>#include &lt;unordered_map&gt;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &lt;functional&gt;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structvec2">vec2</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structtinyengine__renderer__handle__t">tinyengine_renderer_handle_t</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_tiny_engine">TinyEngine</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1af09ded747d8574dde114e97c025ddc44">CUTE_C2_IMPLEMENTATION</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1abdeb08b95394f8152bb146fd9a9139c4">telog</link>(M, ...)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a38fde61de8aaed11e78da474addd0755">teerr</link>(M, ...)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ab370040868943afd827cc4ce9d917242">TE_COLOR_BLUE</link>&#160;&#160;&#160;0x001F</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a2705ad9106922e638b43eb2bbf6ed8c4">TE_COLOR_RED</link>&#160;&#160;&#160;0xF800</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ae5c7c054055dc1d875a746b2606bdbac">TE_COLOR_GREEN</link>&#160;&#160;&#160;0x07E0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a2051e8efc82d2958d05ab90a5eb138da">TE_COLOR_CYAN</link>&#160;&#160;&#160;0x07FF</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a68e43f2e4742f8526e59782457ea1c74">TE_COLOR_MAGENTA</link>&#160;&#160;&#160;0xF81F</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a6d4a160624bfb3f6f0a83787620cf912">TE_COLOR_YELLOW</link>&#160;&#160;&#160;0xFFE0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a2be840f8f294d0a16018cb88c1cabb81">TE_COLOR_WHITE</link>&#160;&#160;&#160;0xFFFF</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a84244353ff413bf0752033faa8acf29d">TE_COLOR_TAN</link>&#160;&#160;&#160;0xED01</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ac0c0b32ed3d1d91e6f267e928e0d3660">TE_COLOR_GREY</link>&#160;&#160;&#160;0x9CD1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a26f0b7ac0ea5e303c4e564a32599c53a">TE_COLOR_BROWN</link>&#160;&#160;&#160;0x6201</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ad41de79c985b48c62cdadbe19f8f27d4">TE_COLOR_DGREEN</link>&#160;&#160;&#160;0x01C0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a1d95e97d9a1e82a66c7373b9cf745b08">TE_COLOR_ORANGE</link>&#160;&#160;&#160;0xFC00</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ade4675c86e06c0a997dc769f799ebf38">TE_COLOR_NAVY</link>&#160;&#160;&#160;0x000F</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ab11bb2f6e08ece2f89dc098d6e8c764f">TE_COLOR_DCYAN</link>&#160;&#160;&#160;0x03EF</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a8a8678b610892e342b813cb858ca8052">TE_COLOR_MAROON</link>&#160;&#160;&#160;0x7800</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1aa36f08934c3b68f9df11d5b2aa2f405b">TE_COLOR_PURPLE</link>&#160;&#160;&#160;0x780F</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1aa7f90910d1ed9db3fea93435031d1a6e">TE_COLOR_OLIVE</link>&#160;&#160;&#160;0x7BE0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a30a3ab8acea6fff9e999949d841d81d8">TE_COLOR_LGREY</link>&#160;&#160;&#160;0xC618</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1afd5404fa19a3f6a2a58cb2a32f6a1ff6">TE_COLOR_DGREY</link>&#160;&#160;&#160;0x7BEF</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a1f0100008e14391e317a43ff72310013">TE_COLOR_GYELLOW</link>&#160;&#160;&#160;0xAFE5</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a2d8c832e3867bbb0a9da62e452916552">TE_COLOR_PINK</link>&#160;&#160;&#160;0xFC18</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1ae64d08f0e83482bd340af3026f96dfbc">TE_COLOR_LBLUE</link>&#160;&#160;&#160;0x7E5F</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a59d5594fe685d6af5d9e7b84df48c21f">TE_COLOR_BLACK</link>&#160;&#160;&#160;0x0000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine_8h_1a829fe390136dd6a8d694d3cb79239a1d">TE_COLOR_BEIGE</link>&#160;&#160;&#160;0xB5D2</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(* <link linkend="_tinyengine_8h_1a76b533bee9971abbcb979aa618d83a38">tinyengine_init_clbk_t</link>) ()</para>
+</listitem>
+            <listitem><para>typedef void(* <link linkend="_tinyengine_8h_1af37f7e92fca39d7c407aa23781bf1ac3">te_draw_pixel_func_t</link>) (uint8_t *pixel_buffer, uint32_t len)</para>
+</listitem>
+            <listitem><para>typedef <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(* <link linkend="_tinyengine_8h_1af40e0caed873f0d43c9aa17f9305097c">tinyengine_clbk_t</link>) (double delta)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> { <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>
+, <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744">TINYENGINE_ERROR</link>
+, <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944">TINYENGINE_RENDER_ERROR</link>
+, <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">TINYENGINE_OUTOFBOUNDS_ERROR</link>
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine_renderer_t</link> { <link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2">TINYENGINE_RENDERER_DVI</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_tinyengine_8h_1a141e0e4cfccde883fde46e6908a6cf9e">set_frequency</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_tinyengine_8h_1af09ded747d8574dde114e97c025ddc44"/><section>
+    <title>CUTE_C2_IMPLEMENTATION</title>
+<indexterm><primary>CUTE_C2_IMPLEMENTATION</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>CUTE_C2_IMPLEMENTATION</secondary></indexterm>
+<para><computeroutput>#define CUTE_C2_IMPLEMENTATION</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00023">23</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a829fe390136dd6a8d694d3cb79239a1d"/><section>
+    <title>TE_COLOR_BEIGE</title>
+<indexterm><primary>TE_COLOR_BEIGE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_BEIGE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_BEIGE&#160;&#160;&#160;0xB5D2</computeroutput></para>
+<para>Beige </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00180">180</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a59d5594fe685d6af5d9e7b84df48c21f"/><section>
+    <title>TE_COLOR_BLACK</title>
+<indexterm><primary>TE_COLOR_BLACK</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_BLACK</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_BLACK&#160;&#160;&#160;0x0000</computeroutput></para>
+<para>Black </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00179">179</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ab370040868943afd827cc4ce9d917242"/><section>
+    <title>TE_COLOR_BLUE</title>
+<indexterm><primary>TE_COLOR_BLUE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_BLUE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_BLUE&#160;&#160;&#160;0x001F</computeroutput></para>
+<para>Blue </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00157">157</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a26f0b7ac0ea5e303c4e564a32599c53a"/><section>
+    <title>TE_COLOR_BROWN</title>
+<indexterm><primary>TE_COLOR_BROWN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_BROWN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_BROWN&#160;&#160;&#160;0x6201</computeroutput></para>
+<para>Brown </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00166">166</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a2051e8efc82d2958d05ab90a5eb138da"/><section>
+    <title>TE_COLOR_CYAN</title>
+<indexterm><primary>TE_COLOR_CYAN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_CYAN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_CYAN&#160;&#160;&#160;0x07FF</computeroutput></para>
+<para>Cyan </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00160">160</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ab11bb2f6e08ece2f89dc098d6e8c764f"/><section>
+    <title>TE_COLOR_DCYAN</title>
+<indexterm><primary>TE_COLOR_DCYAN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_DCYAN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_DCYAN&#160;&#160;&#160;0x03EF</computeroutput></para>
+<para>Dark Cyan </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00170">170</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ad41de79c985b48c62cdadbe19f8f27d4"/><section>
+    <title>TE_COLOR_DGREEN</title>
+<indexterm><primary>TE_COLOR_DGREEN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_DGREEN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_DGREEN&#160;&#160;&#160;0x01C0</computeroutput></para>
+<para>Dark Green </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00167">167</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1afd5404fa19a3f6a2a58cb2a32f6a1ff6"/><section>
+    <title>TE_COLOR_DGREY</title>
+<indexterm><primary>TE_COLOR_DGREY</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_DGREY</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_DGREY&#160;&#160;&#160;0x7BEF</computeroutput></para>
+<para>Dark Grey </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00175">175</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ae5c7c054055dc1d875a746b2606bdbac"/><section>
+    <title>TE_COLOR_GREEN</title>
+<indexterm><primary>TE_COLOR_GREEN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_GREEN&#160;&#160;&#160;0x07E0</computeroutput></para>
+<para>Green </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00159">159</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ac0c0b32ed3d1d91e6f267e928e0d3660"/><section>
+    <title>TE_COLOR_GREY</title>
+<indexterm><primary>TE_COLOR_GREY</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_GREY</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_GREY&#160;&#160;&#160;0x9CD1</computeroutput></para>
+<para>Grey </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00165">165</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a1f0100008e14391e317a43ff72310013"/><section>
+    <title>TE_COLOR_GYELLOW</title>
+<indexterm><primary>TE_COLOR_GYELLOW</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_GYELLOW</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_GYELLOW&#160;&#160;&#160;0xAFE5</computeroutput></para>
+<para>Greenish Yellow </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00176">176</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ae64d08f0e83482bd340af3026f96dfbc"/><section>
+    <title>TE_COLOR_LBLUE</title>
+<indexterm><primary>TE_COLOR_LBLUE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_LBLUE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_LBLUE&#160;&#160;&#160;0x7E5F</computeroutput></para>
+<para>Light Blue </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00178">178</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a30a3ab8acea6fff9e999949d841d81d8"/><section>
+    <title>TE_COLOR_LGREY</title>
+<indexterm><primary>TE_COLOR_LGREY</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_LGREY</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_LGREY&#160;&#160;&#160;0xC618</computeroutput></para>
+<para>Light Grey </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00174">174</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a68e43f2e4742f8526e59782457ea1c74"/><section>
+    <title>TE_COLOR_MAGENTA</title>
+<indexterm><primary>TE_COLOR_MAGENTA</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_MAGENTA</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_MAGENTA&#160;&#160;&#160;0xF81F</computeroutput></para>
+<para>Magenta </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00161">161</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a8a8678b610892e342b813cb858ca8052"/><section>
+    <title>TE_COLOR_MAROON</title>
+<indexterm><primary>TE_COLOR_MAROON</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_MAROON</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_MAROON&#160;&#160;&#160;0x7800</computeroutput></para>
+<para>Maroon </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00171">171</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1ade4675c86e06c0a997dc769f799ebf38"/><section>
+    <title>TE_COLOR_NAVY</title>
+<indexterm><primary>TE_COLOR_NAVY</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_NAVY</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_NAVY&#160;&#160;&#160;0x000F</computeroutput></para>
+<para>Navy </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00169">169</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1aa7f90910d1ed9db3fea93435031d1a6e"/><section>
+    <title>TE_COLOR_OLIVE</title>
+<indexterm><primary>TE_COLOR_OLIVE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_OLIVE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_OLIVE&#160;&#160;&#160;0x7BE0</computeroutput></para>
+<para>Olive </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00173">173</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a1d95e97d9a1e82a66c7373b9cf745b08"/><section>
+    <title>TE_COLOR_ORANGE</title>
+<indexterm><primary>TE_COLOR_ORANGE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_ORANGE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_ORANGE&#160;&#160;&#160;0xFC00</computeroutput></para>
+<para>Orange </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00168">168</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a2d8c832e3867bbb0a9da62e452916552"/><section>
+    <title>TE_COLOR_PINK</title>
+<indexterm><primary>TE_COLOR_PINK</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_PINK</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_PINK&#160;&#160;&#160;0xFC18</computeroutput></para>
+<para>Pink </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00177">177</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1aa36f08934c3b68f9df11d5b2aa2f405b"/><section>
+    <title>TE_COLOR_PURPLE</title>
+<indexterm><primary>TE_COLOR_PURPLE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_PURPLE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_PURPLE&#160;&#160;&#160;0x780F</computeroutput></para>
+<para>Purple </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00172">172</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a2705ad9106922e638b43eb2bbf6ed8c4"/><section>
+    <title>TE_COLOR_RED</title>
+<indexterm><primary>TE_COLOR_RED</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_RED</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_RED&#160;&#160;&#160;0xF800</computeroutput></para>
+<para>Red </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00158">158</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a84244353ff413bf0752033faa8acf29d"/><section>
+    <title>TE_COLOR_TAN</title>
+<indexterm><primary>TE_COLOR_TAN</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_TAN</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_TAN&#160;&#160;&#160;0xED01</computeroutput></para>
+<para>Tan </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00164">164</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a2be840f8f294d0a16018cb88c1cabb81"/><section>
+    <title>TE_COLOR_WHITE</title>
+<indexterm><primary>TE_COLOR_WHITE</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_WHITE</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_WHITE&#160;&#160;&#160;0xFFFF</computeroutput></para>
+<para>White </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00163">163</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a6d4a160624bfb3f6f0a83787620cf912"/><section>
+    <title>TE_COLOR_YELLOW</title>
+<indexterm><primary>TE_COLOR_YELLOW</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TE_COLOR_YELLOW</secondary></indexterm>
+<para><computeroutput>#define TE_COLOR_YELLOW&#160;&#160;&#160;0xFFE0</computeroutput></para>
+<para>Yellow </para>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00162">162</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a38fde61de8aaed11e78da474addd0755"/><section>
+    <title>teerr</title>
+<indexterm><primary>teerr</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>teerr</secondary></indexterm>
+<para><computeroutput>#define teerr( M,  ...)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">&#32;&#32;printf(<emphasis role="stringliteral">&quot;[Tiny&#32;Engine&#32;ERROR]&#32;(%s:%d)&quot;</emphasis>&#32;M&#32;<emphasis role="stringliteral">&quot;\r\n&quot;</emphasis>,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)
+</programlisting><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00034">34</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00034 <emphasis role="preprocessor">#define&#32;teerr(M,&#32;...)&#32;\&#x240D;</emphasis>
+00035 <emphasis role="preprocessor">&#32;&#32;printf(&quot;[Tiny&#32;Engine&#32;ERROR]&#32;(%s:%d)&quot;&#32;M&#32;&quot;\r\n&quot;,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)&#x240D;</emphasis>
+</programlisting></section>
+<anchor xml:id="_tinyengine_8h_1abdeb08b95394f8152bb146fd9a9139c4"/><section>
+    <title>telog</title>
+<indexterm><primary>telog</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>telog</secondary></indexterm>
+<para><computeroutput>#define telog( M,  ...)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">&#32;&#32;printf(<emphasis role="stringliteral">&quot;[Tiny&#32;Engine&#32;Log]&#32;(%s:%d)&quot;</emphasis>&#32;M&#32;<emphasis role="stringliteral">&quot;\r\n&quot;</emphasis>,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)
+</programlisting><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00031">31</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00031 <emphasis role="preprocessor">#define&#32;telog(M,&#32;...)&#32;\&#x240D;</emphasis>
+00032 <emphasis role="preprocessor">&#32;&#32;printf(&quot;[Tiny&#32;Engine&#32;Log]&#32;(%s:%d)&quot;&#32;M&#32;&quot;\r\n&quot;,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)&#x240D;</emphasis>
+</programlisting></section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_tinyengine_8h_1af37f7e92fca39d7c407aa23781bf1ac3"/><section>
+    <title>te_draw_pixel_func_t</title>
+<indexterm><primary>te_draw_pixel_func_t</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>te_draw_pixel_func_t</secondary></indexterm>
+<para><computeroutput>typedef void(* te_draw_pixel_func_t) (uint8_t *pixel_buffer, uint32_t len)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00063">63</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1af40e0caed873f0d43c9aa17f9305097c"/><section>
+    <title>tinyengine_clbk_t</title>
+<indexterm><primary>tinyengine_clbk_t</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>tinyengine_clbk_t</secondary></indexterm>
+<para><computeroutput>typedef <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(* tinyengine_clbk_t) (double delta)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00072">72</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+<anchor xml:id="_tinyengine_8h_1a76b533bee9971abbcb979aa618d83a38"/><section>
+    <title>tinyengine_init_clbk_t</title>
+<indexterm><primary>tinyengine_init_clbk_t</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>tinyengine_init_clbk_t</secondary></indexterm>
+<para><computeroutput>typedef <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(* tinyengine_init_clbk_t) ()</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00060">60</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b"/><section>
+    <title>tinyengine_renderer_t</title>
+<indexterm><primary>tinyengine_renderer_t</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>tinyengine_renderer_t</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine_renderer_t</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>TINYENGINE_RENDERER_DVI</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TINYENGINE_RENDERER_DVI</secondary></indexterm>
+<anchor xml:id="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2"/>TINYENGINE_RENDERER_DVI</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00054">54</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00055 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2">TINYENGINE_RENDERER_DVI</link>,
+00056 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TINYENGINE_RENDERER_LCD_ST7735R,&#32;&#32;//&#32;1.8&#32;in&#32;adafruit&#32;green&#32;tab&#32;with&#32;sdcard</emphasis>
+00057 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TINYENGINE_RENDERER_LCD_ILI9488,&#32;&#32;//&#32;3.5&#32;in&#32;waveshare&#32;dev&#32;kit&#32;with&#32;sdcard</emphasis>
+00058 }&#32;<link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine_renderer_t</link>;
+</programlisting></section>
+<anchor xml:id="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40"/><section>
+    <title>tinyengine_status_t</title>
+<indexterm><primary>tinyengine_status_t</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>tinyengine_status_t</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>TINYENGINE_OK</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TINYENGINE_OK</secondary></indexterm>
+<anchor xml:id="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7"/>TINYENGINE_OK</entry><entry></entry></row><row><entry><indexterm><primary>TINYENGINE_ERROR</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TINYENGINE_ERROR</secondary></indexterm>
+<anchor xml:id="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744"/>TINYENGINE_ERROR</entry><entry></entry></row><row><entry><indexterm><primary>TINYENGINE_RENDER_ERROR</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TINYENGINE_RENDER_ERROR</secondary></indexterm>
+<anchor xml:id="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944"/>TINYENGINE_RENDER_ERROR</entry><entry></entry></row><row><entry><indexterm><primary>TINYENGINE_OUTOFBOUNDS_ERROR</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>TINYENGINE_OUTOFBOUNDS_ERROR</secondary></indexterm>
+<anchor xml:id="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d"/>TINYENGINE_OUTOFBOUNDS_ERROR</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_tinyengine_8h_source_1l00045">45</link> of file <link linkend="_tinyengine_8h_source">tinyengine.h</link>.</para>
+<programlisting linenumbering="unnumbered">00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00046 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>,
+00047 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744">TINYENGINE_ERROR</link>,
+00048 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944">TINYENGINE_RENDER_ERROR</link>,
+00049 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">TINYENGINE_OUTOFBOUNDS_ERROR</link>
+00050 }&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>;
+</programlisting></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_tinyengine_8h_1a141e0e4cfccde883fde46e6908a6cf9e"/><section>
+    <title>set_frequency()</title>
+<indexterm><primary>set_frequency</primary><secondary>tinyengine.h</secondary></indexterm>
+<indexterm><primary>tinyengine.h</primary><secondary>set_frequency</secondary></indexterm>
+<para><computeroutput>void set_frequency ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine_8cpp_source_1l00097">97</link> of file <link linkend="_tinyengine_8cpp_source">tinyengine.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00098 &#32;&#32;&#32;&#32;vreg_set_voltage(VREG_VOLTAGE_1_30);
+00099 &#32;&#32;&#32;&#32;set_sys_clock_khz(315000,&#32;<emphasis role="keyword">false</emphasis>);
+00100 &#32;&#32;&#32;&#32;clock_configure(
+00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_peri,
+00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+00106 &#32;&#32;&#32;&#32;);
+00107 &#32;&#32;&#32;&#32;clock_configure(
+00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_hstx,
+00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;/&#32;2&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+00113 &#32;&#32;&#32;&#32;);
+00114 &#32;&#32;&#32;&#32;exception_set_exclusive_handler(HARDFAULT_EXCEPTION,&#32;hardfault);
+00115 }
+</programlisting></section>
+</section>
+</section>

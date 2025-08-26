@@ -1,0 +1,45 @@
+\doxysection{inc/tinyengine\+\_\+audio.h File Reference}
+\hypertarget{tinyengine__audio_8h}{}\label{tinyengine__audio_8h}\index{inc/tinyengine\_audio.h@{inc/tinyengine\_audio.h}}
+{\ttfamily \#include "{}tinyengine.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structte__audio__handle__t}{te\+\_\+audio\+\_\+handle\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{tinyengine__audio_8h_a063f751815bd2faa9b815f16f75c9243}{te\+\_\+audio\+\_\+init}} (\mbox{\hyperlink{structte__audio__handle__t}{te\+\_\+audio\+\_\+handle\+\_\+t}} \texorpdfstring{$\ast$}{*}audio)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{tinyengine__audio_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{tinyengine__audio_8h_a063f751815bd2faa9b815f16f75c9243}\index{tinyengine\_audio.h@{tinyengine\_audio.h}!te\_audio\_init@{te\_audio\_init}}
+\index{te\_audio\_init@{te\_audio\_init}!tinyengine\_audio.h@{tinyengine\_audio.h}}
+\doxysubsubsection{\texorpdfstring{te\_audio\_init()}{te\_audio\_init()}}
+{\footnotesize\ttfamily \label{tinyengine__audio_8h_a063f751815bd2faa9b815f16f75c9243} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} te\+\_\+audio\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__audio__handle__t}{te\+\_\+audio\+\_\+handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{audio}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__audio_8cpp_source_l00005}{5}} of file \mbox{\hyperlink{tinyengine__audio_8cpp_source}{tinyengine\+\_\+audio.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \ \ \ \ gpio\_set\_function(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}},\ GPIO\_FUNC\_PWM);}
+\DoxyCodeLine{00008\ \ \ \ \ gpio\_set\_slew\_rate(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}},\ GPIO\_SLEW\_RATE\_FAST);}
+\DoxyCodeLine{00009\ \ \ \ \ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}}\ =\ pwm\_gpio\_to\_slice\_num(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}});}
+\DoxyCodeLine{00010\ \ \ \ \ pwm\_set\_clkdiv(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a6d2c27d7528f98adf99cf2cf416c3d71}{audio\_out\_1}});}
+\DoxyCodeLine{00011\ \ \ \ \ pwm\_set\_wrap(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}});}
+\DoxyCodeLine{00012\ \ \ \ \ pwm\_set\_chan\_level(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ PWM\_CHAN\_A,\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}}\ *\ 0.9);}
+\DoxyCodeLine{00013\ \ \ \ \ pwm\_set\_chan\_level(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ PWM\_CHAN\_B,\ audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a7ce1246af4ea9cc5ce1ffcca8cd2bdc2}{period}}\ /\ 3);}
+\DoxyCodeLine{00014\ \ \ \ \ pwm\_set\_enabled(audio-\/>\mbox{\hyperlink{structte__audio__handle__t_a08a7a348fd65d11fe1c64efb621db539}{slice\_num}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}

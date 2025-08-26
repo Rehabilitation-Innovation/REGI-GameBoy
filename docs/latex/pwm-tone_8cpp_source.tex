@@ -1,0 +1,246 @@
+\doxysection{pwm-\/tone.cpp}
+\hypertarget{pwm-tone_8cpp_source}{}\label{pwm-tone_8cpp_source}\index{src/pwm-\/tone.cpp@{src/pwm-\/tone.cpp}}
+\mbox{\hyperlink{pwm-tone_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00001}00001\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00002}00002\ \textcolor{comment}{//\ \ *\ @file\ pwm-\/tone.c}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00003}00003\ \textcolor{comment}{//\ \ *\ @brief\ PWM\ Tone\ generation\ library\ for\ Raspberry\ Pi\ Pico.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00004}00004\ \textcolor{comment}{//\ \ *\ Plays\ melodies\ and\ chirping\ sounds\ via\ PWM\ through\ a\ buzzer\ or\ speaker.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00005}00005\ \textcolor{comment}{//\ \ *\ @author\ Turi\ Scandurra}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00006}00006\ \textcolor{comment}{//\ \ *\ @see\ https://turiscandurra.com/circuits}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00007}00007\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00009}00009\ \textcolor{comment}{//\ \#include\ "{}pwm-\/tone.h"{}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00010}00010\ \textcolor{comment}{//\ \#include\ "{}hardware/pwm.h"{}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00011}00011\ \textcolor{comment}{//\ \#include\ "{}hardware/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00012}00012\ \textcolor{comment}{//\ \#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ *\ @brief\ Alarm\ IDs\ for\ tone,\ melody,\ and\ rest.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00017}00017\ \textcolor{comment}{//\ static\ alarm\_id\_t\ tone\_a;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00018}00018\ \textcolor{comment}{//\ static\ alarm\_id\_t\ melody\_a;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00019}00019\ \textcolor{comment}{//\ static\ alarm\_id\_t\ rest\_a;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00021}00021\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00022}00022\ \textcolor{comment}{//\ \ *\ @brief\ System\ clock\ frequency.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00023}00023\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00024}00024\ \textcolor{comment}{//\ static\ uint32\_t\ clock;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00026}00026\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00027}00027\ \textcolor{comment}{//\ \ *\ @brief\ Melody\ repeat\ counter.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00028}00028\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00029}00029\ \textcolor{comment}{//\ static\ uint16\_t\ melody\_repeat;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00031}00031\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00032}00032\ \textcolor{comment}{//\ \ *\ @brief\ Current\ melody\ index.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00033}00033\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00034}00034\ \textcolor{comment}{//\ static\ uint16\_t\ melody\_index;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00036}00036\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00037}00037\ \textcolor{comment}{//\ \ *\ @brief\ Default\ rest\ duration\ (10ms).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00038}00038\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00039}00039\ \textcolor{comment}{//\ static\ uint16\_t\ rest\_duration\ =\ 10;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00041}00041\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00042}00042\ \textcolor{comment}{//\ \ *\ @brief\ Default\ tempo\ (120bpm).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00043}00043\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00044}00044\ \textcolor{comment}{//\ static\ uint16\_t\ tempo\ =\ 120;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00046}00046\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00047}00047\ \textcolor{comment}{//\ \ *\ @brief\ Initializes\ the\ tone\ generator.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00048}00048\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00049}00049\ \textcolor{comment}{//\ \ *\ @param\ gpio\ GPIO\ pin\ number\ for\ the\ tone\ generator.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00050}00050\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00051}00051\ \textcolor{comment}{//\ void\ tone\_init(tonegenerator\_t*\ gen,\ uint8\_t\ gpio)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00052}00052\ \textcolor{comment}{//\ \ \ \ \ gen-\/>gpio\ =\ gpio;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00053}00053\ \textcolor{comment}{//\ \ \ \ \ gen-\/>slice\ =\ pwm\_gpio\_to\_slice\_num(gpio);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00054}00054\ \textcolor{comment}{//\ \ \ \ \ gen-\/>channel\ =\ pwm\_gpio\_to\_channel(gpio);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00055}00055\ \textcolor{comment}{//\ \ \ \ \ gpio\_init(gpio);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00056}00056\ \textcolor{comment}{//\ \ \ \ \ gpio\_set\_function(gpio,\ GPIO\_FUNC\_PWM);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00057}00057\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_chan\_level(gen-\/>slice,\ gen-\/>channel,\ 2048);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00058}00058\ \textcolor{comment}{//\ \ \ \ \ clock\ =\ clock\_get\_hz(clk\_sys);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00059}00059\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00061}00061\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00062}00062\ \textcolor{comment}{//\ \ *\ @brief\ Plays\ a\ single\ tone.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00063}00063\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00064}00064\ \textcolor{comment}{//\ \ *\ @param\ freq\ Frequency\ of\ the\ tone\ (in\ Hz).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00065}00065\ \textcolor{comment}{//\ \ *\ @param\ duration\ Duration\ of\ the\ tone\ (in\ ms).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00066}00066\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00067}00067\ \textcolor{comment}{//\ void\ tone(tonegenerator\_t*\ gen,\ int\ freq,\ uint16\_t\ duration)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00068}00068\ \textcolor{comment}{//\ \ \ \ \ if\ (freq\ !=\ REST)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00069}00069\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_tone\_pwm\_on(gen,\ freq);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00070}00070\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (tone\_a)\ cancel\_alarm(tone\_a);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00071}00071\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ tone\_a\ =\ add\_alarm\_in\_ms(duration,\ \_tone\_complete,\ gen,\ true);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00072}00072\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00073}00073\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00075}00075\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00076}00076\ \textcolor{comment}{//\ \ *\ @brief\ Plays\ a\ melody.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00077}00077\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00078}00078\ \textcolor{comment}{//\ \ *\ @param\ notes\ Array\ of\ notes\ to\ play.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00079}00079\ \textcolor{comment}{//\ \ *\ @param\ repeat\ Number\ of\ times\ to\ repeat\ the\ melody.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00080}00080\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00081}00081\ \textcolor{comment}{//\ void\ melody(tonegenerator\_t*\ gen,\ note\_t*\ notes,\ int8\_t\ repeat)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00082}00082\ \textcolor{comment}{//\ \ \ \ \ melody\_repeat\ =\ repeat;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00083}00083\ \textcolor{comment}{//\ \ \ \ \ melody\_index\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00084}00084\ \textcolor{comment}{//\ \ \ \ \ melody\_t\ mel;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00085}00085\ \textcolor{comment}{//\ \ \ \ \ mel.notes\ =\ notes;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00086}00086\ \textcolor{comment}{//\ \ \ \ \ gen-\/>mel\ =\ mel;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00087}00087\ \textcolor{comment}{//\ \ \ \ \ gen-\/>playing\ =\ true;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00088}00088\ \textcolor{comment}{//\ \ \ \ \ \_melody\_step(gen);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00089}00089\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00091}00091\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00092}00092\ \textcolor{comment}{//\ \ *\ @brief\ Sets\ the\ tempo\ (in\ bpm).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00093}00093\ \textcolor{comment}{//\ \ *\ @param\ bpm\ Tempo\ value\ (in\ bpm).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00094}00094\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00095}00095\ \textcolor{comment}{//\ void\ set\_tempo(uint16\_t\ bpm)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00096}00096\ \textcolor{comment}{//\ \ \ \ \ tempo\ =\ bpm;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00097}00097\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00099}00099\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00100}00100\ \textcolor{comment}{//\ \ *\ @brief\ Sets\ the\ rest\ duration\ (in\ ms).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00101}00101\ \textcolor{comment}{//\ \ *\ @param\ duration\ Rest\ duration\ value\ (in\ ms).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00102}00102\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00103}00103\ \textcolor{comment}{//\ void\ set\_rest\_duration(uint16\_t\ duration)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00104}00104\ \textcolor{comment}{//\ \ \ \ \ rest\_duration\ =\ duration;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00105}00105\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00107}00107\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00108}00108\ \textcolor{comment}{//\ \ *\ @brief\ Stops\ the\ current\ tone.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00109}00109\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00110}00110\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00111}00111\ \textcolor{comment}{//\ void\ stop\_tone(tonegenerator\_t*\ gen)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00112}00112\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ false);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00113}00113\ \textcolor{comment}{//\ \ \ \ \ gen-\/>playing\ =\ false;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00114}00114\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00116}00116\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00117}00117\ \textcolor{comment}{//\ \ *\ @brief\ Stops\ the\ current\ melody.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00118}00118\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00119}00119\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00120}00120\ \textcolor{comment}{//\ void\ stop\_melody(tonegenerator\_t*\ gen)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00121}00121\ \textcolor{comment}{//\ \ \ \ \ if\ (tone\_a)\ cancel\_alarm(tone\_a);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00122}00122\ \textcolor{comment}{//\ \ \ \ \ if\ (melody\_a)\ cancel\_alarm(melody\_a);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00123}00123\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ false);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00124}00124\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00126}00126\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00127}00127\ \textcolor{comment}{//\ \ *\ @brief\ Sets\ the\ PWM\ frequency.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00128}00128\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00129}00129\ \textcolor{comment}{//\ \ *\ @param\ freq\ Frequency\ value\ (in\ Hz).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00130}00130\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00131}00131\ \textcolor{comment}{//\ void\ \_pwm\_set\_freq(tonegenerator\_t*\ gen,\ float\ freq)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00132}00132\ \textcolor{comment}{//\ \ \ \ \ float\ divider\ =\ (float)clock\ /\ (freq\ *\ 10000.0);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00133}00133\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_clkdiv(gen-\/>slice,\ divider);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00134}00134\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_wrap(gen-\/>slice,\ 10000);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00135}00135\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_gpio\_level(gen-\/>gpio,\ 5000);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00136}00136\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00138}00138\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00139}00139\ \textcolor{comment}{//\ \ *\ @brief\ Turns\ on\ the\ PWM\ tone.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00140}00140\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00141}00141\ \textcolor{comment}{//\ \ *\ @param\ freq\ Frequency\ value\ (in\ Hz).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00142}00142\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00143}00143\ \textcolor{comment}{//\ void\ \_tone\_pwm\_on(tonegenerator\_t*\ gen,\ int\ freq)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00144}00144\ \textcolor{comment}{//\ \ \ \ \ if\ (freq\ <\ NOTE\_G1)\ \{\ freq\ =\ REST;\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00145}00145\ \textcolor{comment}{//\ \ \ \ \ else\ if\ (freq\ >\ NOTE\_FS9)\ \{\ freq\ =\ REST;\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00146}00146\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ false);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00147}00147\ \textcolor{comment}{//\ \ \ \ \ \_pwm\_set\_freq(gen,\ freq);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00148}00148\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ true);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00149}00149\ \textcolor{comment}{//\ \ \ \ \ gen-\/>playing\ =\ true;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00150}00150\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00152}00152\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00153}00153\ \textcolor{comment}{//\ \ *\ @brief\ Steps\ through\ the\ melody.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00154}00154\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00155}00155\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00156}00156\ \textcolor{comment}{//\ void\ \_melody\_step(tonegenerator\_t*\ gen)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00157}00157\ \textcolor{comment}{//\ \ \ \ \ melody\_t\ mel\ =\ gen-\/>mel;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00158}00158\ \textcolor{comment}{//\ \ \ \ \ note\_t\ note\ =\ mel.notes[melody\_index];}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00160}00160\ \textcolor{comment}{//\ \ \ \ \ if\ (note.freq\ ==\ MELODY\_END)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00161}00161\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ melody\_index\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00162}00162\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (melody\_repeat\ >\ 0)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00163}00163\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ melody\_repeat-\/-\/;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00164}00164\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00165}00165\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (melody\_repeat\ !=\ 0)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00166}00166\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \_melody\_step(gen);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00167}00167\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00168}00168\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ else\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00169}00169\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ gen-\/>playing\ =\ false;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00170}00170\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00172}00172\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00173}00173\ \textcolor{comment}{//\ \ \ \ \ else\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00174}00174\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ int8\_t\ measure\ =\ note.measure;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00175}00175\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ int\ whole\_note\ =\ (60000\ *\ 4)\ /\ tempo;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00176}00176\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ int\ duration\ =\ whole\_note\ /\ abs(measure);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00177}00177\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (measure\ <\ 0)\ \{\ //\ Dotted\ note}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00178}00178\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ duration\ *=\ 1.5;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00179}00179\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00180}00180\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_melody\_tone(gen,\ note.freq,\ duration);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00181}00181\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ melody\_index++;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00182}00182\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00183}00183\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00185}00185\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00186}00186\ \textcolor{comment}{//\ \ *\ @brief\ Plays\ a\ single\ note\ in\ the\ melody.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00187}00187\ \textcolor{comment}{//\ \ *\ @param\ gen\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00188}00188\ \textcolor{comment}{//\ \ *\ @param\ freq\ Frequency\ of\ the\ note\ (in\ Hz).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00189}00189\ \textcolor{comment}{//\ \ *\ @param\ duration\ Duration\ of\ the\ note\ (in\ ms).}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00190}00190\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00191}00191\ \textcolor{comment}{//\ void\ \_melody\_tone(tonegenerator\_t*\ gen,\ int\ freq,\ uint16\_t\ duration)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00192}00192\ \textcolor{comment}{//\ \ \ \ \ if\ (freq\ !=\ REST)\ \{\ \_tone\_pwm\_on(gen,\ freq);\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00193}00193\ \textcolor{comment}{//\ \ \ \ \ if\ (melody\_a)\ cancel\_alarm(melody\_a);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00194}00194\ \textcolor{comment}{//\ \ \ \ \ melody\_a\ =\ add\_alarm\_in\_ms(duration,\ \_melody\_note\_complete,\ gen,\ true);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00195}00195\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00197}00197\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00198}00198\ \textcolor{comment}{//\ \ *\ @brief\ Callback\ for\ the\ tone\ playback.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00199}00199\ \textcolor{comment}{//\ \ *\ @param\ id\ Alarm\ ID.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00200}00200\ \textcolor{comment}{//\ \ *\ @param\ user\_data\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00201}00201\ \textcolor{comment}{//\ \ *\ @return\ 0\ on\ success.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00202}00202\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00203}00203\ \textcolor{comment}{//\ static\ int64\_t\ \_tone\_complete(alarm\_id\_t\ id,\ void*\ user\_data)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00204}00204\ \textcolor{comment}{//\ \ \ \ \ tonegenerator\_t*\ gen\ =\ (tonegenerator\_t*)user\_data;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00205}00205\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ false);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00206}00206\ \textcolor{comment}{//\ \ \ \ \ gen-\/>playing\ =\ false;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00207}00207\ \textcolor{comment}{//\ \ \ \ \ return\ 0;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00208}00208\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00210}00210\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00211}00211\ \textcolor{comment}{//\ \ *\ @brief\ Callback\ for\ the\ melody\ note\ playback.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00212}00212\ \textcolor{comment}{//\ \ *\ @param\ id\ Alarm\ ID.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00213}00213\ \textcolor{comment}{//\ \ *\ @param\ user\_data\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00214}00214\ \textcolor{comment}{//\ \ *\ @return\ 0\ on\ success.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00215}00215\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00216}00216\ \textcolor{comment}{//\ static\ int64\_t\ \_melody\_note\_complete(alarm\_id\_t\ id,\ void*\ user\_data)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00217}00217\ \textcolor{comment}{//\ \ \ \ \ tonegenerator\_t*\ gen\ =\ (tonegenerator\_t*)user\_data;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00218}00218\ \textcolor{comment}{//\ \ \ \ \ pwm\_set\_enabled(gen-\/>slice,\ false);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00220}00220\ \textcolor{comment}{//\ \ \ \ \ if\ (rest\_duration\ >\ 0)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00221}00221\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (rest\_a)\ cancel\_alarm(rest\_a);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00222}00222\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ rest\_a\ =\ add\_alarm\_in\_ms(rest\_duration,\ \_rest\_complete,\ user\_data,\ true);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00223}00223\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00224}00224\ \textcolor{comment}{//\ \ \ \ \ else\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00225}00225\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_melody\_step(user\_data);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00226}00226\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00227}00227\ \textcolor{comment}{//\ \ \ \ \ return\ 0;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00228}00228\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00230}00230\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00231}00231\ \textcolor{comment}{//\ \ *\ @brief\ Callback\ for\ the\ rest\ period.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00232}00232\ \textcolor{comment}{//\ \ *\ @param\ id\ Alarm\ ID.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00233}00233\ \textcolor{comment}{//\ \ *\ @param\ user\_data\ Pointer\ to\ the\ tone\ generator\ structure.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00234}00234\ \textcolor{comment}{//\ \ *\ @return\ 0\ on\ success.}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00235}00235\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00236}00236\ \textcolor{comment}{//\ static\ int64\_t\ \_rest\_complete(alarm\_id\_t\ id,\ void*\ user\_data)\ \{}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00237}00237\ \textcolor{comment}{//\ \ \ \ \ \_melody\_step(user\_data);}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00238}00238\ \textcolor{comment}{//\ \ \ \ \ return\ 0;}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00239}00239\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8cpp_source_l00240}00240\ }
+
+\end{DoxyCode}

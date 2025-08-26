@@ -1,0 +1,49 @@
+\doxysection{main.\+h}
+\hypertarget{main_8h_source}{}\label{main_8h_source}\index{inc/main.h@{inc/main.h}}
+\mbox{\hyperlink{main_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ \_\_MAIN\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ \_\_MAIN\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}hardware/spi.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00006}00006\ \textcolor{comment}{/*\ GPIO\ Numbers\ */}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00008}00008\ \textcolor{comment}{//\ also\ defined\ in\ Cmake\ as\ compile\ definitions}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00009}\mbox{\hyperlink{main_8h_a627c51d5a15e65cf65f1f33821905c09}{00009}}\ \textcolor{preprocessor}{\#define\ LCD\_SPI\_PORT\ spi1}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00010}\mbox{\hyperlink{main_8h_aee4041b31de29e29989d71f8be204a8b}{00010}}\ \textcolor{preprocessor}{\#define\ LCD\_SPI\_MISO\ 28}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00011}\mbox{\hyperlink{main_8h_a1c77990623e208f9e5ed95088cd09c48}{00011}}\ \textcolor{preprocessor}{\#define\ LCD\_SPI\_MOSI\ 11}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00012}\mbox{\hyperlink{main_8h_abd0f8f7ae98d5dbab30526b81bab60cc}{00012}}\ \textcolor{preprocessor}{\#define\ LCD\_SPI\_CLK\ 10}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00013}\mbox{\hyperlink{main_8h_a1dc6c4886242abf4447d0da651125d5d}{00013}}\ \textcolor{preprocessor}{\#define\ LCD\_DC\ 8}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00014}\mbox{\hyperlink{main_8h_aec0f0ab242f1b58b1d017bc9ab4b898b}{00014}}\ \textcolor{preprocessor}{\#define\ LCD\_RST\ 9}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00015}\mbox{\hyperlink{main_8h_a71d24cab0e16b054de228f29139f1b79}{00015}}\ \textcolor{preprocessor}{\#define\ LCD\_CS\ 22}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00016}\mbox{\hyperlink{main_8h_ac11ca0a9c85c11fa485e298e51b34f6d}{00016}}\ \textcolor{preprocessor}{\#define\ LCD\_BKLT\ 6}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00018}00018\ \textcolor{comment}{//\ GPIOs\ for\ SPI\ interface\ (SD\ card)}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00019}\mbox{\hyperlink{main_8h_ab0d72a395fa77f3dd4418076f87ea81c}{00019}}\ \textcolor{preprocessor}{\#define\ SD\_SPI0\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00020}\mbox{\hyperlink{main_8h_af72f113c59e467dc74e8c79177da3a48}{00020}}\ \textcolor{preprocessor}{\#define\ SD\_SCLK\_PIN\ \ \ \ \ 34}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00021}\mbox{\hyperlink{main_8h_a1150cf94392cb54e7e979e6b69f210fb}{00021}}\ \textcolor{preprocessor}{\#define\ SD\_MOSI\_PIN\ \ \ \ \ 35}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00022}\mbox{\hyperlink{main_8h_ad3aea67d9c7c7dc0be847a1467786abb}{00022}}\ \textcolor{preprocessor}{\#define\ SD\_MISO\_PIN\ \ \ \ \ 32}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00023}\mbox{\hyperlink{main_8h_a04d57a6c18b2d5e81f31093e58ed0c62}{00023}}\ \textcolor{preprocessor}{\#define\ SD\_CS\_PIN\ \ \ \ \ \ \ 33}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00024}00024\ \textcolor{comment}{//\ \#define\ SD\_DET\_PIN\ 22}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00026}00026\ \textcolor{comment}{//\ PicoCalc\ SD\ Firmware\ Loader}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00027}00027\ \textcolor{comment}{//\ SD\_BOOT\_FLASH\_OFFSET\ is\ the\ offset\ in\ flash\ memory\ where\ the\ bootloader\ starts}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00028}00028\ \textcolor{comment}{//\ This\ is\ typically\ set\ to\ 256KB\ for\ the\ Raspberry\ Pi\ Pico}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00029}00029\ \textcolor{comment}{//\ This\ offset\ is\ used\ to\ ensure\ that\ the\ bootloader\ does\ not\ get\ overwritten}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00030}00030\ \textcolor{comment}{//\ when\ loading\ a\ new\ application\ from\ the\ SD\ card}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00031}\mbox{\hyperlink{main_8h_a172de278de1da90d09ac78f3de502671}{00031}}\ \textcolor{preprocessor}{\#define\ SD\_BOOT\_FLASH\_OFFSET\ \ \ \ \ \ \ \ \ (768\ *\ 1024)\ }\textcolor{comment}{//\ 1kb\ =\ 1024b\ so\ 768kb}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00033}00033\ \textcolor{comment}{//\ Maximum\ size\ of\ the\ application\ that\ can\ be\ loaded}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00034}00034\ \textcolor{comment}{//\ This\ ensures\ we\ don't\ overwrite\ the\ bootloader\ itself}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00035}00035\ \textcolor{comment}{//\ 1mb\ =\ 1024kb\ =\ 1024*1024b}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00036}\mbox{\hyperlink{main_8h_a5f38c1d2cbe1f9d2de789ebfe570c7a4}{00036}}\ \textcolor{preprocessor}{\#define\ MAX\_APP\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((16\ *\ 1024\ *\ 1024)\ -\/\ SD\_BOOT\_FLASH\_OFFSET)\ \ \ \ }\textcolor{comment}{//\ \ (PICO\_FLASH\_SIZE\_BYTES\ -\/\ SD\_BOOT\_FLASH\_OFFSET)}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00040}00040\ \textcolor{comment}{//\ static\ int\ condition\ =0;}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00041}00041\ \textcolor{comment}{//\ \#define\ LCD\_SPI\_SPEED\ 1000000\ \ //\ 2\ MHz}}
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{main_8h_source_l00043}00043\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

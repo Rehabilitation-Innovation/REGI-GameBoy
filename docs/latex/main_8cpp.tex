@@ -1,0 +1,129 @@
+\doxysection{src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}hardware/spi.\+h"{}}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}pico/rand.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/vreg.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}game.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/dma.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/irq.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/bus\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+fifo.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/sio.\+h"{}}\newline
+{\ttfamily \#include "{}pico/multicore.\+h"{}}\newline
+{\ttfamily \#include "{}pico/sem.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/exception.\+h"{}}\newline
+{\ttfamily \#include "{}distance\+\_\+sensor.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{measure\+\_\+freqs}} (void)
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ vreg\_set\_voltage(VREG\_VOLTAGE\_1\_30);}
+\DoxyCodeLine{00041\ \ \ \ \ set\_sys\_clock\_khz(315000,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00042\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ clk\_peri,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ 315000\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00048\ \ \ \ \ );}
+\DoxyCodeLine{00049\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ clk\_hstx,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ 315000\ /\ 2\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00055\ \ \ \ \ );}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{measure\_freqs}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_game}{Game}}\ game;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ game.\mbox{\hyperlink{class_game_a701403e278b6f4849f12dda2bf26fd2f}{run}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ maybe\ shut\ down\ and\ reboot\ after?}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \}}
+
+\end{DoxyCode}
+\Hypertarget{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}\index{main.cpp@{main.cpp}!measure\_freqs@{measure\_freqs}}
+\index{measure\_freqs@{measure\_freqs}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{measure\_freqs()}{measure\_freqs()}}
+{\footnotesize\ttfamily \label{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f} 
+void measure\+\_\+freqs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00076}{76}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ uint\ f\_pll\_sys\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_PLL\_SYS\_CLKSRC\_PRIMARY);}
+\DoxyCodeLine{00078\ \ \ \ \ uint\ f\_pll\_usb\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_PLL\_USB\_CLKSRC\_PRIMARY);}
+\DoxyCodeLine{00079\ \ \ \ \ uint\ f\_rosc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_ROSC\_CLKSRC);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ uint\ f\_clk\_sys\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_SYS);}
+\DoxyCodeLine{00082\ \ \ \ \ uint\ f\_clk\_peri\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_PERI);}
+\DoxyCodeLine{00083\ \ \ \ \ uint\ f\_clk\_usb\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_USB);}
+\DoxyCodeLine{00084\ \ \ \ \ uint\ f\_clk\_adc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_ADC);}
+\DoxyCodeLine{00085\ \ \ \ \ uint\ f\_clk\_hstx\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_HSTX);}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#ifdef\ CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC }}
+\DoxyCodeLine{00087\ \ \ \ \ uint\ f\_clk\_rtc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC);}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ printf(\textcolor{stringliteral}{"{}pll\_sys\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_pll\_sys);}
+\DoxyCodeLine{00091\ \ \ \ \ printf(\textcolor{stringliteral}{"{}pll\_usb\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_pll\_usb);}
+\DoxyCodeLine{00092\ \ \ \ \ printf(\textcolor{stringliteral}{"{}rosc\ \ \ \ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_rosc);}
+\DoxyCodeLine{00093\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_sys\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_sys);}
+\DoxyCodeLine{00094\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_peri\ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_peri);}
+\DoxyCodeLine{00095\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_usb\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_usb);}
+\DoxyCodeLine{00096\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_adc\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_adc);}
+\DoxyCodeLine{00097\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_hstx\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_hstx);}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC }}
+\DoxyCodeLine{00099\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_rtc\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_rtc);}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ Can't\ measure\ clk\_ref\ /\ xosc\ as\ it\ is\ the\ ref}}
+\DoxyCodeLine{00103\ \}}
+
+\end{DoxyCode}

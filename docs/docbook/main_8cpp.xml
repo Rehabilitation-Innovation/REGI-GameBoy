@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_main_8cpp" xml:lang="en-US">
+<title>src/main.cpp File Reference</title>
+<indexterm><primary>src/main.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;main.h&quot;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;game.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &quot;hardware/exception.h&quot;<?linebreak?>#include &quot;distance_sensor.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.cpp</secondary></indexterm>
+<indexterm><primary>main.cpp</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main ( )</computeroutput></para><para>
+Definition at line <link linkend="_main_8cpp_source_1l00037">37</link> of file <link linkend="_main_8cpp_source">main.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00038 {
+00039 
+00040 &#32;&#32;&#32;&#32;vreg_set_voltage(VREG_VOLTAGE_1_30);
+00041 &#32;&#32;&#32;&#32;set_sys_clock_khz(315000,&#32;<emphasis role="keyword">false</emphasis>);
+00042 &#32;&#32;&#32;&#32;clock_configure(
+00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_peri,
+00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+00048 &#32;&#32;&#32;&#32;);
+00049 &#32;&#32;&#32;&#32;clock_configure(
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_hstx,
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;/&#32;2&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+00055 &#32;&#32;&#32;&#32;);
+00056 
+00057 
+00058 
+00059 &#32;&#32;&#32;&#32;stdio_init_all();
+00060 
+00061 &#32;&#32;&#32;&#32;<link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link>();
+00062 
+00063 &#32;&#32;&#32;&#32;<link linkend="_class_game">Game</link>&#32;game;
+00064 
+00065 &#32;&#32;&#32;&#32;game.<link linkend="_class_game_1a701403e278b6f4849f12dda2bf26fd2f">run</link>();
+00066 
+00067 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;maybe&#32;shut&#32;down&#32;and&#32;reboot&#32;after?</emphasis>
+00068 
+00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)&#32;{
+00070 &#32;&#32;&#32;&#32;}
+00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00072 
+00073 }
+</programlisting></section>
+<anchor xml:id="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f"/><section>
+    <title>measure_freqs()</title>
+<indexterm><primary>measure_freqs</primary><secondary>main.cpp</secondary></indexterm>
+<indexterm><primary>main.cpp</primary><secondary>measure_freqs</secondary></indexterm>
+<para><computeroutput>void measure_freqs (void )</computeroutput></para><para>
+Definition at line <link linkend="_main_8cpp_source_1l00076">76</link> of file <link linkend="_main_8cpp_source">main.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00077 &#32;&#32;&#32;&#32;uint&#32;f_pll_sys&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
+00078 &#32;&#32;&#32;&#32;uint&#32;f_pll_usb&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_USB_CLKSRC_PRIMARY);
+00079 &#32;&#32;&#32;&#32;uint&#32;f_rosc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_ROSC_CLKSRC);
+00080 
+00081 &#32;&#32;&#32;&#32;uint&#32;f_clk_sys&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
+00082 &#32;&#32;&#32;&#32;uint&#32;f_clk_peri&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_PERI);
+00083 &#32;&#32;&#32;&#32;uint&#32;f_clk_usb&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_USB);
+00084 &#32;&#32;&#32;&#32;uint&#32;f_clk_adc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_ADC);
+00085 &#32;&#32;&#32;&#32;uint&#32;f_clk_hstx&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_HSTX);
+00086 <emphasis role="preprocessor">#ifdef&#32;CLOCKS_FC0_SRC_VALUE_CLK_RTC&#x240D;</emphasis>
+00087 &#32;&#32;&#32;&#32;uint&#32;f_clk_rtc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_RTC);
+00088 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00089 
+00090 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;pll_sys&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_pll_sys);
+00091 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;pll_usb&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_pll_usb);
+00092 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;rosc&#32;&#32;&#32;&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_rosc);
+00093 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_sys&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_sys);
+00094 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_peri&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_peri);
+00095 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_usb&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_usb);
+00096 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_adc&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_adc);
+00097 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_hstx&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_hstx);
+00098 <emphasis role="preprocessor">#ifdef&#32;CLOCKS_FC0_SRC_VALUE_CLK_RTC&#x240D;</emphasis>
+00099 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_rtc&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_rtc);
+00100 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00101 
+00102 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Can&apos;t&#32;measure&#32;clk_ref&#32;/&#32;xosc&#32;as&#32;it&#32;is&#32;the&#32;ref</emphasis>
+00103 }
+</programlisting></section>
+</section>
+</section>

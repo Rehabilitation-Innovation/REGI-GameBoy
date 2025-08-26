@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine_8h_source" xml:lang="en-US">
+<title>tinyengine.h</title>
+<indexterm><primary>inc/tinyengine.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;pico/stdlib.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;stdio.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&quot;hardware/spi.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;stdint.h&gt;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__scene_8h">tinyengine_scene.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;unordered_map&gt;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&quot;hardware/pll.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&quot;hardware/vreg.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&quot;hardware/clocks.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/pll.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/clocks.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&quot;hardware/dma.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&quot;hardware/gpio.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#include&#32;&quot;hardware/irq.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/bus_ctrl.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/hstx_ctrl.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00018"/>00018 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/hstx_fifo.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00019"/>00019 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/sio.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00020"/>00020 <emphasis role="preprocessor">#include&#32;&quot;pico/multicore.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00021"/>00021 <emphasis role="preprocessor">#include&#32;&quot;pico/sem.h&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00022"/>00022 <emphasis role="preprocessor">#include&#32;&lt;functional&gt;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00023"/><link linkend="_tinyengine_8h_1af09ded747d8574dde114e97c025ddc44">00023</link> <emphasis role="preprocessor">#define&#32;CUTE_C2_IMPLEMENTATION</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00024"/>00024 
+<anchor xml:id="_tinyengine_8h_source_1l00025"/>00025 
+<anchor xml:id="_tinyengine_8h_source_1l00026"/>00026 <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00027"/>00027 <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00028"/>00028 <emphasis role="keyword">class&#32;</emphasis>TinyEngineScene;
+<anchor xml:id="_tinyengine_8h_source_1l00029"/>00029 <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_sprite">Sprite</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00030"/>00030 
+<anchor xml:id="_tinyengine_8h_source_1l00031"/><link linkend="_tinyengine_8h_1abdeb08b95394f8152bb146fd9a9139c4">00031</link> <emphasis role="preprocessor">#define&#32;telog(M,&#32;...)&#32;\</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00032"/>00032 <emphasis role="preprocessor">&#32;&#32;printf(&quot;[Tiny&#32;Engine&#32;Log]&#32;(%s:%d)&quot;&#32;M&#32;&quot;\r\n&quot;,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00033"/>00033 
+<anchor xml:id="_tinyengine_8h_source_1l00034"/><link linkend="_tinyengine_8h_1a38fde61de8aaed11e78da474addd0755">00034</link> <emphasis role="preprocessor">#define&#32;teerr(M,&#32;...)&#32;\</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00035"/>00035 <emphasis role="preprocessor">&#32;&#32;printf(&quot;[Tiny&#32;Engine&#32;ERROR]&#32;(%s:%d)&quot;&#32;M&#32;&quot;\r\n&quot;,&#32;__BASE_FILE__,&#32;__LINE__,&#32;##__VA_ARGS__)</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00036"/>00036 
+<anchor xml:id="_tinyengine_8h_source_1l00037"/>00037 
+<anchor xml:id="_tinyengine_8h_source_1l00038"/>00038 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_tinyengine_8h_1a141e0e4cfccde883fde46e6908a6cf9e">set_frequency</link>();
+<anchor xml:id="_tinyengine_8h_source_1l00039"/>00039 
+<anchor xml:id="_tinyengine_8h_source_1l00040"/><link linkend="_structvec2">00040</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00041"/>00041 {
+<anchor xml:id="_tinyengine_8h_source_1l00042"/><link linkend="_structvec2_1a4650ad5518661324664b4dc6815bd054">00042</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_structvec2_1a4650ad5518661324664b4dc6815bd054">x</link>,&#32;<link linkend="_structvec2_1a75a994707129e6a5ad41ae3f174f4c38">y</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00043"/>00043 }&#32;<link linkend="_structvec2">vec2</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00044"/>00044 
+<anchor xml:id="_tinyengine_8h_source_1l00045"/><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">00045</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">enum</emphasis>&#32;{
+<anchor xml:id="_tinyengine_8h_source_1l00046"/><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">00046</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>,
+<anchor xml:id="_tinyengine_8h_source_1l00047"/><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744">00047</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744">TINYENGINE_ERROR</link>,
+<anchor xml:id="_tinyengine_8h_source_1l00048"/><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944">00048</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944">TINYENGINE_RENDER_ERROR</link>,
+<anchor xml:id="_tinyengine_8h_source_1l00049"/><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">00049</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">TINYENGINE_OUTOFBOUNDS_ERROR</link>
+<anchor xml:id="_tinyengine_8h_source_1l00050"/>00050 }&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00051"/>00051 
+<anchor xml:id="_tinyengine_8h_source_1l00052"/>00052 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__framebuffer_8h">tinyengine_framebuffer.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00053"/>00053 
+<anchor xml:id="_tinyengine_8h_source_1l00054"/><link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">00054</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">enum</emphasis>&#32;{
+<anchor xml:id="_tinyengine_8h_source_1l00055"/><link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2">00055</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2">TINYENGINE_RENDERER_DVI</link>,
+<anchor xml:id="_tinyengine_8h_source_1l00056"/>00056 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TINYENGINE_RENDERER_LCD_ST7735R,&#32;&#32;//&#32;1.8&#32;in&#32;adafruit&#32;green&#32;tab&#32;with&#32;sdcard</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00057"/>00057 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TINYENGINE_RENDERER_LCD_ILI9488,&#32;&#32;//&#32;3.5&#32;in&#32;waveshare&#32;dev&#32;kit&#32;with&#32;sdcard</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00058"/>00058 }&#32;<link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine_renderer_t</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00059"/>00059 
+<anchor xml:id="_tinyengine_8h_source_1l00060"/><link linkend="_tinyengine_8h_1a76b533bee9971abbcb979aa618d83a38">00060</link> <emphasis role="keyword">typedef</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(*<link linkend="_tinyengine_8h_1a76b533bee9971abbcb979aa618d83a38">tinyengine_init_clbk_t</link>)();
+<anchor xml:id="_tinyengine_8h_source_1l00061"/>00061 
+<anchor xml:id="_tinyengine_8h_source_1l00062"/>00062 
+<anchor xml:id="_tinyengine_8h_source_1l00063"/><link linkend="_tinyengine_8h_1af37f7e92fca39d7c407aa23781bf1ac3">00063</link> <emphasis role="keyword">typedef</emphasis>&#32;void(*<link linkend="_tinyengine_8h_1af37f7e92fca39d7c407aa23781bf1ac3">te_draw_pixel_func_t</link>)(uint8_t*&#32;pixel_buffer,&#32;uint32_t&#32;len);
+<anchor xml:id="_tinyengine_8h_source_1l00064"/>00064 
+<anchor xml:id="_tinyengine_8h_source_1l00065"/><link linkend="_structtinyengine__renderer__handle__t">00065</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_tinyengine_8h_source_1l00066"/><link linkend="_structtinyengine__renderer__handle__t_1a40a93049250181d4c0f08ec3c59dc69c">00066</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine_renderer_t</link>&#32;<link linkend="_structtinyengine__renderer__handle__t_1a40a93049250181d4c0f08ec3c59dc69c">current_output_renderer</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00067"/><link linkend="_structtinyengine__renderer__handle__t_1a6a574a7d4335e623fb3e3a8f95906ec6">00067</link> &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1af37f7e92fca39d7c407aa23781bf1ac3">te_draw_pixel_func_t</link>&#32;<link linkend="_structtinyengine__renderer__handle__t_1a6a574a7d4335e623fb3e3a8f95906ec6">set_buffer</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00068"/>00068 }&#32;<link linkend="_structtinyengine__renderer__handle__t">tinyengine_renderer_handle_t</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00069"/>00069 
+<anchor xml:id="_tinyengine_8h_source_1l00070"/>00070 <emphasis role="comment">//&#32;The&#32;reason&#32;this&#32;is&#32;a&#32;uint8_t*&#32;in&#32;the&#32;paramenter&#32;is&#32;that&#32;its&#32;defined&#32;before&#32;the&#32;engine&#32;handle</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00071"/>00071 <emphasis role="comment">//&#32;but&#32;it&#32;needs&#32;access&#32;to&#32;it.&#32;So&#32;to&#32;give&#32;it&#32;access&#32;i&#32;give&#32;it&#32;a&#32;uint8_t*&#32;instead&#32;of&#32;struct*</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00072"/><link linkend="_tinyengine_8h_1af40e0caed873f0d43c9aa17f9305097c">00072</link> <emphasis role="keyword">typedef</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(*<link linkend="_tinyengine_8h_1af40e0caed873f0d43c9aa17f9305097c">tinyengine_clbk_t</link>)(<emphasis role="keywordtype">double</emphasis>&#32;delta);
+<anchor xml:id="_tinyengine_8h_source_1l00073"/>00073 
+<anchor xml:id="_tinyengine_8h_source_1l00074"/><link linkend="_class_tiny_engine_renderer_i">00074</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&#32;{
+<anchor xml:id="_tinyengine_8h_source_1l00075"/>00075 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine_8h_source_1l00076"/><link linkend="_class_tiny_engine_renderer_i_1a2469b0b227cbc4ff8a27f292f929d0d3">00076</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_i_1a2469b0b227cbc4ff8a27f292f929d0d3">swap_blocking</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00077"/><link linkend="_class_tiny_engine_renderer_i_1ab1c8fd0d87f133a519e26ae071765e9f">00077</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_i_1ab1c8fd0d87f133a519e26ae071765e9f">swap_non_blocking</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00078"/><link linkend="_class_tiny_engine_renderer_i_1a053505877ab12f6651964aaff7b4c75d">00078</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_i_1a053505877ab12f6651964aaff7b4c75d">wait_for_vsync</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00079"/><link linkend="_class_tiny_engine_renderer_i_1ab61c14e1610265da86010a83142674bd">00079</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">virtual</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_i_1ab61c14e1610265da86010a83142674bd">tinyengine_renderer_init</link>()&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00080"/>00080 };
+<anchor xml:id="_tinyengine_8h_source_1l00081"/>00081 
+<anchor xml:id="_tinyengine_8h_source_1l00082"/><link linkend="_class_tiny_engine">00082</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_1a0865837c7dccaae8ac33f9f9d4f5119b">TinyEngine</link>&#32;{
+<anchor xml:id="_tinyengine_8h_source_1l00083"/>00083 <emphasis role="keyword">private</emphasis>:
+<anchor xml:id="_tinyengine_8h_source_1l00084"/>00084 &#32;&#32;&#32;&#32;spi_inst_t*&#32;lcd_spi_instance;
+<anchor xml:id="_tinyengine_8h_source_1l00085"/>00085 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_clk;
+<anchor xml:id="_tinyengine_8h_source_1l00086"/>00086 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_miso;
+<anchor xml:id="_tinyengine_8h_source_1l00087"/>00087 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_mosi;
+<anchor xml:id="_tinyengine_8h_source_1l00088"/>00088 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_dc;
+<anchor xml:id="_tinyengine_8h_source_1l00089"/>00089 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_rst;
+<anchor xml:id="_tinyengine_8h_source_1l00090"/>00090 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_cs;
+<anchor xml:id="_tinyengine_8h_source_1l00091"/>00091 &#32;&#32;&#32;&#32;uint8_t&#32;lcd_spi_bklt;
+<anchor xml:id="_tinyengine_8h_source_1l00092"/>00092 &#32;&#32;&#32;&#32;uint32_t&#32;lcd_spi_speed;
+<anchor xml:id="_tinyengine_8h_source_1l00093"/>00093 
+<anchor xml:id="_tinyengine_8h_source_1l00094"/>00094 &#32;&#32;&#32;&#32;uint32_t&#32;display_w;
+<anchor xml:id="_tinyengine_8h_source_1l00095"/>00095 &#32;&#32;&#32;&#32;uint32_t&#32;display_h;
+<anchor xml:id="_tinyengine_8h_source_1l00096"/>00096 &#32;&#32;&#32;&#32;uint16_t&#32;fps;
+<anchor xml:id="_tinyengine_8h_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;std::vector&lt;SceneI&amp;&gt;&#32;scenes;&#32;//&#32;add&#32;suport&#32;for&#32;multiple&#32;scenes&#32;and&#32;switching&#32;between&#32;them</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00098"/>00098 &#32;&#32;&#32;&#32;std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;pre_init_clbk;
+<anchor xml:id="_tinyengine_8h_source_1l00099"/>00099 
+<anchor xml:id="_tinyengine_8h_source_1l00100"/>00100 &#32;&#32;&#32;&#32;std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;post_init_clbk;
+<anchor xml:id="_tinyengine_8h_source_1l00101"/>00101 &#32;&#32;&#32;&#32;std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;loop_clbk;
+<anchor xml:id="_tinyengine_8h_source_1l00102"/>00102 &#32;&#32;&#32;&#32;std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;render_clbk;
+<anchor xml:id="_tinyengine_8h_source_1l00103"/>00103 &#32;&#32;&#32;&#32;std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">double</emphasis>)&gt;&#32;update_clbk;
+<anchor xml:id="_tinyengine_8h_source_1l00104"/>00104 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;std::function&lt;tinyengine_status_t(void)&gt;&#32;input_clbk;</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00105"/>00105 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;update_inputs();
+<anchor xml:id="_tinyengine_8h_source_1l00106"/>00106 
+<anchor xml:id="_tinyengine_8h_source_1l00107"/>00107 &#32;&#32;&#32;&#32;std::unordered_map&lt;uint8_t,&#32;std::function&lt;void()&gt;&gt;&#32;m_gpio_input_events;
+<anchor xml:id="_tinyengine_8h_source_1l00108"/>00108 &#32;&#32;&#32;&#32;std::unordered_map&lt;uint8_t,&#32;std::function&lt;void()&gt;&gt;&#32;m_serial_input_events;
+<anchor xml:id="_tinyengine_8h_source_1l00109"/>00109 &#32;&#32;&#32;&#32;std::vector&lt;uint8_t&gt;&#32;m_gpio_input_buffer;
+<anchor xml:id="_tinyengine_8h_source_1l00110"/>00110 &#32;&#32;&#32;&#32;std::vector&lt;uint8_t&gt;&#32;m_serial_input_buffer;
+<anchor xml:id="_tinyengine_8h_source_1l00111"/>00111 
+<anchor xml:id="_tinyengine_8h_source_1l00112"/>00112 &#32;&#32;&#32;&#32;uint32_t&#32;profile_main_loop_time&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00113"/>00113 &#32;&#32;&#32;&#32;uint32_t&#32;profile_render_loop_time&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00114"/>00114 &#32;&#32;&#32;&#32;uint32_t&#32;profile_update_loop_time&#32;=&#32;0;
+<anchor xml:id="_tinyengine_8h_source_1l00115"/>00115 
+<anchor xml:id="_tinyengine_8h_source_1l00116"/>00116 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine_8h_source_1l00117"/><link linkend="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede">00117</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&amp;&#32;<link linkend="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede">renderer</link>;
+<anchor xml:id="_tinyengine_8h_source_1l00118"/>00118 
+<anchor xml:id="_tinyengine_8h_source_1l00119"/><link linkend="_class_tiny_engine_1a0865837c7dccaae8ac33f9f9d4f5119b">00119</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_1a0865837c7dccaae8ac33f9f9d4f5119b">TinyEngine</link>(<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&amp;&#32;rn)&#32;:&#32;<link linkend="_class_tiny_engine_1a4b90326e7c0476e9ac70f23a6426dede">renderer</link>(rn)&#32;{
+<anchor xml:id="_tinyengine_8h_source_1l00120"/>00120 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00121"/>00121 
+<anchor xml:id="_tinyengine_8h_source_1l00122"/><link linkend="_class_tiny_engine_1a3997a691027f02426800ce367fe633eb">00122</link> &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="_class_tiny_engine_1a3997a691027f02426800ce367fe633eb">get_fps</link>()<emphasis role="keyword">&#32;const</emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00123"/>00123 <emphasis role="keyword">&#32;&#32;&#32;&#32;</emphasis>{
+<anchor xml:id="_tinyengine_8h_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fps;
+<anchor xml:id="_tinyengine_8h_source_1l00125"/>00125 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine_8h_source_1l00126"/>00126 
+<anchor xml:id="_tinyengine_8h_source_1l00127"/><link linkend="_class_tiny_engine_1a1f5d7e193cfe88674c7daeab050ed30c">00127</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a1f5d7e193cfe88674c7daeab050ed30c">set_pre_inti_clbk</link>(std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;_pre_init_clbk)&#32;{&#32;pre_init_clbk&#32;=&#32;_pre_init_clbk;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00128"/><link linkend="_class_tiny_engine_1a2812e80e57c615c077c609b33dd97763">00128</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a2812e80e57c615c077c609b33dd97763">set_post_init_clbk</link>(std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;_post_init_clbk)&#32;{&#32;post_init_clbk&#32;=&#32;_post_init_clbk;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00129"/><link linkend="_class_tiny_engine_1a02f63945d1cf474d461cd2a0998a3dfe">00129</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a02f63945d1cf474d461cd2a0998a3dfe">set_loop_clbk</link>(std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;_loop_clbk)&#32;{&#32;loop_clbk&#32;=&#32;_loop_clbk;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00130"/><link linkend="_class_tiny_engine_1aaaedc7751f006ab31a66d23fab7261a3">00130</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1aaaedc7751f006ab31a66d23fab7261a3">set_render_clbk</link>(std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">void</emphasis>)&gt;&#32;_render_clbk)&#32;{&#32;render_clbk&#32;=&#32;_render_clbk;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00131"/><link linkend="_class_tiny_engine_1a494a9966c7d70a6dc5f8c871e3a1b09b">00131</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a494a9966c7d70a6dc5f8c871e3a1b09b">set_update_clbk</link>(std::function&lt;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>(<emphasis role="keywordtype">double</emphasis>)&gt;&#32;_update_clbk)&#32;{&#32;update_clbk&#32;=&#32;_update_clbk;&#32;};
+<anchor xml:id="_tinyengine_8h_source_1l00132"/>00132 
+<anchor xml:id="_tinyengine_8h_source_1l00133"/>00133 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_1a088cee984149455d5ae7aa308b23e506">init</link>();
+<anchor xml:id="_tinyengine_8h_source_1l00134"/>00134 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_1a46a3a85a38bad4a41aaebb97f39b1456">start</link>();
+<anchor xml:id="_tinyengine_8h_source_1l00135"/>00135 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_1a30d77a4f317c491bd8ebcf8d5e3852a3">start_loop</link>();
+<anchor xml:id="_tinyengine_8h_source_1l00136"/>00136 
+<anchor xml:id="_tinyengine_8h_source_1l00137"/>00137 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1ad0fe7160d3a7c651c86ed06dae869de1">render</link>(<emphasis role="keywordtype">double</emphasis>&#32;frametime);
+<anchor xml:id="_tinyengine_8h_source_1l00138"/>00138 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a11efed818cc74d5a830351df55744c9d">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frametime);
+<anchor xml:id="_tinyengine_8h_source_1l00139"/><link linkend="_class_tiny_engine_1ad7c433a810d3174a71a6fffcf4dba43f">00139</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1ad7c433a810d3174a71a6fffcf4dba43f">set_scene</link>(<link linkend="_class_scene_i">SceneI</link>&amp;&#32;scene)&#32;{};
+<anchor xml:id="_tinyengine_8h_source_1l00140"/>00140 
+<anchor xml:id="_tinyengine_8h_source_1l00141"/>00141 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a3a7db87bb4dbdc93b7bd831080207724">bind_gpio_input_event</link>(uint8_t&#32;_gpio,&#32;std::function&lt;<emphasis role="keywordtype">void</emphasis>()&gt;&#32;_event_callback);
+<anchor xml:id="_tinyengine_8h_source_1l00142"/>00142 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_1a2094c36e13792cfde7dc90dc4637a2e7">bind_serial_input_event</link>(uint8_t&#32;_char,&#32;std::function&lt;<emphasis role="keywordtype">void</emphasis>()&gt;&#32;_event_callback);
+<anchor xml:id="_tinyengine_8h_source_1l00143"/>00143 
+<anchor xml:id="_tinyengine_8h_source_1l00144"/><link linkend="_class_tiny_engine_1ac099f1be0c6e6ab04fe1b83898abad6e">00144</link> &#32;&#32;&#32;&#32;uint32_t&#32;<link linkend="_class_tiny_engine_1ac099f1be0c6e6ab04fe1b83898abad6e">get_profile_main_loop_time</link>()<emphasis role="keyword">&#32;const&#32;</emphasis>{
+<anchor xml:id="_tinyengine_8h_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_main_loop_time;
+<anchor xml:id="_tinyengine_8h_source_1l00146"/>00146 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine_8h_source_1l00147"/>00147 
+<anchor xml:id="_tinyengine_8h_source_1l00148"/><link linkend="_class_tiny_engine_1ad32e684c1f406b7fb9fba9b62549f76b">00148</link> &#32;&#32;&#32;&#32;uint32_t&#32;<link linkend="_class_tiny_engine_1ad32e684c1f406b7fb9fba9b62549f76b">get_profile_render_loop_time</link>()<emphasis role="keyword">&#32;const&#32;</emphasis>{
+<anchor xml:id="_tinyengine_8h_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_render_loop_time;
+<anchor xml:id="_tinyengine_8h_source_1l00150"/>00150 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine_8h_source_1l00151"/>00151 
+<anchor xml:id="_tinyengine_8h_source_1l00152"/><link linkend="_class_tiny_engine_1a3cb6d4d80ab0dbfc4a7378433d5ac850">00152</link> &#32;&#32;&#32;&#32;uint32_t&#32;<link linkend="_class_tiny_engine_1a3cb6d4d80ab0dbfc4a7378433d5ac850">get_profile_update_loop_time</link>()<emphasis role="keyword">&#32;const&#32;</emphasis>{
+<anchor xml:id="_tinyengine_8h_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;profile_update_loop_time;
+<anchor xml:id="_tinyengine_8h_source_1l00154"/>00154 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_tinyengine_8h_source_1l00155"/>00155 };
+<anchor xml:id="_tinyengine_8h_source_1l00156"/>00156 
+<anchor xml:id="_tinyengine_8h_source_1l00157"/><link linkend="_tinyengine_8h_1ab370040868943afd827cc4ce9d917242">00157</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_BLUE&#32;&#32;0x001F&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00158"/><link linkend="_tinyengine_8h_1a2705ad9106922e638b43eb2bbf6ed8c4">00158</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_RED&#32;&#32;0xF800&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00159"/><link linkend="_tinyengine_8h_1ae5c7c054055dc1d875a746b2606bdbac">00159</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_GREEN&#32;&#32;0x07E0&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00160"/><link linkend="_tinyengine_8h_1a2051e8efc82d2958d05ab90a5eb138da">00160</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_CYAN&#32;&#32;0x07FF&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00161"/><link linkend="_tinyengine_8h_1a68e43f2e4742f8526e59782457ea1c74">00161</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_MAGENTA&#32;&#32;0xF81F&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00162"/><link linkend="_tinyengine_8h_1a6d4a160624bfb3f6f0a83787620cf912">00162</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_YELLOW&#32;&#32;0xFFE0&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00163"/><link linkend="_tinyengine_8h_1a2be840f8f294d0a16018cb88c1cabb81">00163</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_WHITE&#32;&#32;0xFFFF&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00164"/><link linkend="_tinyengine_8h_1a84244353ff413bf0752033faa8acf29d">00164</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_TAN&#32;&#32;0xED01&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00165"/><link linkend="_tinyengine_8h_1ac0c0b32ed3d1d91e6f267e928e0d3660">00165</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_GREY&#32;&#32;0x9CD1&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00166"/><link linkend="_tinyengine_8h_1a26f0b7ac0ea5e303c4e564a32599c53a">00166</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_BROWN&#32;&#32;0x6201&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00167"/><link linkend="_tinyengine_8h_1ad41de79c985b48c62cdadbe19f8f27d4">00167</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_DGREEN&#32;&#32;0x01C0&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00168"/><link linkend="_tinyengine_8h_1a1d95e97d9a1e82a66c7373b9cf745b08">00168</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_ORANGE&#32;&#32;0xFC00&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00169"/><link linkend="_tinyengine_8h_1ade4675c86e06c0a997dc769f799ebf38">00169</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_NAVY&#32;&#32;0x000F&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00170"/><link linkend="_tinyengine_8h_1ab11bb2f6e08ece2f89dc098d6e8c764f">00170</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_DCYAN&#32;&#32;0x03EF&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00171"/><link linkend="_tinyengine_8h_1a8a8678b610892e342b813cb858ca8052">00171</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_MAROON&#32;&#32;0x7800&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00172"/><link linkend="_tinyengine_8h_1aa36f08934c3b68f9df11d5b2aa2f405b">00172</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_PURPLE&#32;&#32;0x780F&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00173"/><link linkend="_tinyengine_8h_1aa7f90910d1ed9db3fea93435031d1a6e">00173</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_OLIVE&#32;&#32;0x7BE0&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00174"/><link linkend="_tinyengine_8h_1a30a3ab8acea6fff9e999949d841d81d8">00174</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_LGREY&#32;&#32;0xC618&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00175"/><link linkend="_tinyengine_8h_1afd5404fa19a3f6a2a58cb2a32f6a1ff6">00175</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_DGREY&#32;&#32;0x7BEF&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00176"/><link linkend="_tinyengine_8h_1a1f0100008e14391e317a43ff72310013">00176</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_GYELLOW&#32;&#32;0xAFE5&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00177"/><link linkend="_tinyengine_8h_1a2d8c832e3867bbb0a9da62e452916552">00177</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_PINK&#32;&#32;0xFC18&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00178"/><link linkend="_tinyengine_8h_1ae64d08f0e83482bd340af3026f96dfbc">00178</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_LBLUE&#32;&#32;0x7E5F&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00179"/><link linkend="_tinyengine_8h_1a59d5594fe685d6af5d9e7b84df48c21f">00179</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_BLACK&#32;&#32;0x0000&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_tinyengine_8h_source_1l00180"/><link linkend="_tinyengine_8h_1a829fe390136dd6a8d694d3cb79239a1d">00180</link> <emphasis role="preprocessor">#define&#32;TE_COLOR_BEIGE&#32;&#32;0xB5D2&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+</programlisting></section>

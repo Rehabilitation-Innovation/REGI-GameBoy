@@ -1,0 +1,644 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_frame_buffer" xml:lang="en-US">
+<title>TinyEngineFrameBuffer Class Reference</title>
+<indexterm><primary>TinyEngineFrameBuffer</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine_framebuffer.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_tiny_engine_frame_buffer_1a871da8c140298754c26c13331654f890">is_dual</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_frame_buffer_1af66ebbabb0bd56a14f77f9ba437b0c41">drawCircle1</link> (int xc, int yc, int <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, int <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_frame_buffer_1a154593a2274a9e154b42730c913470cb">TinyEngineFrameBuffer</link> (uint32_t frame_width, uint32_t frame_height, int <link linkend="_class_tiny_engine_frame_buffer_1a871da8c140298754c26c13331654f890">is_dual</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_frame_buffer_1a67e6ae3613bd0ab2933990df90ab6091">~TinyEngineFrameBuffer</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a1553a22e5974bf4990184c5b3f9c8939">destroy</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1ac3bf2f988fc71c133bb8b4627963d77f">write</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1aae5e1ac121730bf70e2faf97b6db7760">clear</link> (const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a08e38bc9f21443a014f294c8ddd1b897">clear_with</link> (const uint8_t *data)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link> (const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a5f55e06ce4f4fe1dc7577ef14b851794">draw_grid</link> (const uint32_t spacing, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a362cb5fdd287fbc4a95f04d593fa10e6">draw_outline_rectangle</link> (const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint32_t w, const uint32_t h, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a60735e6091fa6c20638fb995b73193d5">draw_filled_rectangle</link> (const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint32_t w, const uint32_t h, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a4beca939063b7270bf66e7872c689128">draw_outline_circle</link> (const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint32_t r, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1af99e05afb9c2710684e3be5d12de5330">draw_filled_circle</link> (const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint32_t r, const uint8_t color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1af33ffd30dcce76dc620c8e5bb7c1a28d">swap_blocking</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1aef92d2f3ff2cf2a130a86bdc0779d2ac">draw_sprite</link> (<link linkend="_class_sprite">Sprite</link> &amp;sprite)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1af84da7bf88f0105c71cb05f719c3928c">draw_sprite_raw</link> (const uint8_t *sprite, const uint32_t w, const uint32_t h, const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1aa44092c9eb6d9b0ae8c1edac53c34cbf">draw_sprite_raw_batch</link> (const uint8_t *sprite, const uint32_t w, const uint32_t h, const uint16_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>[], const uint16_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>[], const uint16_t count)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1a5c0048002467262f546585b4f2552c4b">draw_char</link> (const char _char, const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint8_t _color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1affc105087005f183a2c39b2999b691e6">draw_string</link> (const char *_string, const uint32_t <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, const uint32_t <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>, const uint8_t _color)</para>
+</listitem>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_class_tiny_engine_frame_buffer_1ad46c02986f2666b1a63b851c3e5ab152">copy_buffer_slow</link> (const <link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp;_buffer_to_copy, const uint16_t _dst_x, const uint16_t _dst_y)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint8_t * <link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link></para>
+</listitem>
+            <listitem><para>uint8_t * <link linkend="_class_tiny_engine_frame_buffer_1a54c83662f0ff4edc1ad54f8064eca159">pixel_buffer_display</link></para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_tiny_engine_frame_buffer_1a0483df712b86f7a10cc0cd3b59981cce">m_pixel_buffer_size</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>No need to edit this struct init will return a filled struct. </para>
+<para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00013">13</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a154593a2274a9e154b42730c913470cb"/><section>
+    <title>TinyEngineFrameBuffer()</title>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<para><computeroutput>TinyEngineFrameBuffer::TinyEngineFrameBuffer (uint32_t frame_width, uint32_t frame_height, int is_dual)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00033">33</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+<programlisting linenumbering="unnumbered">00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;m_display_h(frame_height),
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;m_display_w(frame_width),&#32;m_is_dual(<link linkend="_class_tiny_engine_frame_buffer_1a871da8c140298754c26c13331654f890">is_dual</link>)&#32;{&#32;init();&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a67e6ae3613bd0ab2933990df90ab6091"/><section>
+    <title>~TinyEngineFrameBuffer()</title>
+<indexterm><primary>~TinyEngineFrameBuffer</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>~TinyEngineFrameBuffer</secondary></indexterm>
+<para><computeroutput>TinyEngineFrameBuffer::~TinyEngineFrameBuffer ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00036">36</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+<programlisting linenumbering="unnumbered">00037 &#32;&#32;&#32;&#32;{
+00038 &#32;&#32;&#32;&#32;};
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1aae5e1ac121730bf70e2faf97b6db7760"/><section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::clear (const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00070">70</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00071 {
+00072 &#32;&#32;&#32;&#32;memset(this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>,&#32;color,&#32;this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a0483df712b86f7a10cc0cd3b59981cce">m_pixel_buffer_size</link>);
+00073 
+00074 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;didnt&#32;really&#32;work;&#32;it&#32;was&#32;a&#32;late&#32;night&#32;idea.&#32;needs&#32;more&#32;work;</emphasis>
+00075 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;//&#32;only&#32;clear&#32;stuff&#32;thats&#32;changed&#32;in&#32;4&#32;byte&#32;blocks.</emphasis>
+00076 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(int&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;this-&gt;m_pixel_buffer_size;&#32;i&#32;+=&#32;128)</emphasis>
+00077 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00078 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;if&#32;(memcmp(pixel_buffer_back&#32;+&#32;i,&#32;pixel_buffer_display&#32;+&#32;i,&#32;128)&#32;!=&#32;0)</emphasis>
+00079 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{</emphasis>
+00080 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pixel_buffer_back&#32;+&#32;i,&#32;0,&#32;128);</emphasis>
+00081 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;}</emphasis>
+00082 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00083 
+00084 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;uint16_t&#32;_x&#32;=&#32;0,&#32;_y&#32;=&#32;0;</emphasis>
+00085 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(_x&#32;=&#32;0;&#32;_x&#32;&lt;&#32;m_display_w;&#32;++_x)</emphasis>
+00086 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00087 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;for&#32;(_y&#32;=&#32;0;&#32;_y&#32;&lt;&#32;m_display_h;&#32;++_y)</emphasis>
+00088 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{</emphasis>
+00089 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;pixel_buffer_back[(_y&#32;*&#32;this-&gt;m_display_w&#32;+&#32;_x)&#32;*&#32;1]&#32;=&#32;color;</emphasis>
+00090 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;if&#32;(_y&#32;%&#32;10&#32;==&#32;0&#32;&amp;&amp;&#32;_x&#32;%&#32;10&#32;==&#32;0)</emphasis>
+00091 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;&#32;&#32;&#32;&#32;this-&gt;pixel_buffer_back[(_y&#32;*&#32;this-&gt;m_display_w&#32;+&#32;_x)&#32;*&#32;1]&#32;=&#32;15;</emphasis>
+00092 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00093 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00094 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;}</emphasis>
+00095 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00096 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00097 
+00098 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00099 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a08e38bc9f21443a014f294c8ddd1b897"/><section>
+    <title>clear_with()</title>
+<indexterm><primary>clear_with</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>clear_with</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::clear_with (const uint8_t * data)</computeroutput></para>
+<para>Clears screen with a texture rather than a solid color. 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>data</entry><entry>
+<para>must be exact size as m_pixel_buffer_size </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00106">106</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00107 {
+00108 &#32;&#32;&#32;&#32;memcpy(this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>,&#32;data,&#32;this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a0483df712b86f7a10cc0cd3b59981cce">m_pixel_buffer_size</link>);
+00109 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;uint16_t&#32;_x&#32;=&#32;0,&#32;_y&#32;=&#32;0;</emphasis>
+00110 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(_x&#32;=&#32;0;&#32;_x&#32;&lt;&#32;m_display_w;&#32;++_x)</emphasis>
+00111 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00112 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;for&#32;(_y&#32;=&#32;0;&#32;_y&#32;&lt;&#32;m_display_h;&#32;++_y)</emphasis>
+00113 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;{</emphasis>
+00114 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;pixel_buffer_back[(_y&#32;*&#32;this-&gt;m_display_w&#32;+&#32;_x)&#32;*&#32;1]&#32;=&#32;color;</emphasis>
+00115 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;if&#32;(_y&#32;%&#32;10&#32;==&#32;0&#32;&amp;&amp;&#32;_x&#32;%&#32;10&#32;==&#32;0)</emphasis>
+00116 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;&#32;&#32;&#32;&#32;this-&gt;pixel_buffer_back[(_y&#32;*&#32;this-&gt;m_display_w&#32;+&#32;_x)&#32;*&#32;1]&#32;=&#32;15;</emphasis>
+00117 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00118 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00119 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;}</emphasis>
+00120 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00121 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00122 
+00123 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00124 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1ad46c02986f2666b1a63b851c3e5ab152"/><section>
+    <title>copy_buffer_slow()</title>
+<indexterm><primary>copy_buffer_slow</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>copy_buffer_slow</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::copy_buffer_slow (const <link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp; _buffer_to_copy, const uint16_t _dst_x, const uint16_t _dst_y)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00460">460</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00463 {
+00464 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;_buffer_to_copy.m_display_h;&#32;++i)
+00465 &#32;&#32;&#32;&#32;{
+00466 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;_buffer_to_copy.m_display_w;&#32;++j)
+00467 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00468 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>[((_dst_y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(_dst_x&#32;+&#32;j))&#32;*&#32;1]&#32;=&#32;_buffer_to_copy.
+00469 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>[i&#32;*&#32;_buffer_to_copy.m_display_w&#32;+&#32;j];
+00470 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00471 &#32;&#32;&#32;&#32;}
+00472 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00473 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a1553a22e5974bf4990184c5b3f9c8939"/><section>
+    <title>destroy()</title>
+<indexterm><primary>destroy</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>destroy</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::destroy ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00053">53</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00054 {
+00055 &#32;&#32;&#32;&#32;free(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>);
+00056 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_tiny_engine_frame_buffer_1a871da8c140298754c26c13331654f890">is_dual</link>())
+00057 &#32;&#32;&#32;&#32;{
+00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(<link linkend="_class_tiny_engine_frame_buffer_1a54c83662f0ff4edc1ad54f8064eca159">pixel_buffer_display</link>);
+00059 &#32;&#32;&#32;&#32;}
+00060 
+00061 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00062 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a5c0048002467262f546585b4f2552c4b"/><section>
+    <title>draw_char()</title>
+<indexterm><primary>draw_char</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_char</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_char (const char _char, const uint32_t x, const uint32_t y, const uint8_t _color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00404">404</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00406 {
+00407 &#32;&#32;&#32;&#32;_draw_char_temp_index&#32;=&#32;0;
+00408 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Convert&#32;the&#32;character&#32;to&#32;an&#32;index</emphasis>
+00409 &#32;&#32;&#32;&#32;_draw_char_temp_index&#32;=&#32;_char&#32;&amp;&#32;0x7F;
+00410 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_draw_char_temp_index&#32;&lt;&#32;<emphasis role="charliteral">&apos;&#32;&apos;</emphasis>)
+00411 &#32;&#32;&#32;&#32;{
+00412 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_draw_char_temp_index&#32;=&#32;0;
+00413 &#32;&#32;&#32;&#32;}
+00414 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+00415 &#32;&#32;&#32;&#32;{
+00416 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_draw_char_temp_index&#32;-=&#32;<emphasis role="charliteral">&apos;&#32;&apos;</emphasis>;
+00417 &#32;&#32;&#32;&#32;}
+00418 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&apos;font&apos;&#32;is&#32;a&#32;multidimensional&#32;array&#32;of&#32;[96][char_width]</emphasis>
+00419 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;which&#32;is&#32;really&#32;just&#32;a&#32;1D&#32;array&#32;of&#32;size&#32;96*char_width.</emphasis>
+00420 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;uint8_t*&#32;chr&#32;=&#32;<link linkend="_renew__font_8h_1a54965403f79c53e640e1179d0661194e">renew_font</link>[_draw_char_temp_index];
+00421 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;<link linkend="__dino_game_8cpp_1acbe7ef91b8715ffcdfb80354ca7cc448">temp</link>&#32;=&#32;0;
+00422 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint8_t&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;<link linkend="_tinyengine__framebuffer_8cpp_1a655981006fca173dd2e056bf81a63dc3">CHAR_WIDTH</link>;&#32;j++)
+00423 &#32;&#32;&#32;&#32;{
+00424 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="__dino_game_8cpp_1acbe7ef91b8715ffcdfb80354ca7cc448">temp</link>&#32;|=&#32;chr[j];
+00425 &#32;&#32;&#32;&#32;}
+00426 
+00427 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Draw&#32;pixels</emphasis>
+00428 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint8_t&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;<link linkend="_tinyengine__framebuffer_8cpp_1a655981006fca173dd2e056bf81a63dc3">CHAR_WIDTH</link>;&#32;j++)
+00429 &#32;&#32;&#32;&#32;{
+00430 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint8_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_tinyengine__framebuffer_8cpp_1ae2eecd07a9b6a2256002a15b28e388f2">CHAR_HEIGHT</link>;&#32;i++)
+00431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00432 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(chr[j]&#32;&amp;&#32;(1&#32;&lt;&lt;&#32;i))
+00433 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00434 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this&#32;added&#32;like&#32;100FPS&#32;to&#32;the&#32;game&#32;on&#32;full&#32;optimizations</emphasis>
+00435 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x&#32;+&#32;j))&#32;*&#32;1]&#32;=&#32;(uint8_t)(_color);</emphasis>
+00436 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;(((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;+&#32;j))&#32;*&#32;1),&#32;_color,&#32;1);
+00437 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;300FPS&#32;improvement&#32;lol.</emphasis>
+00438 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;draw_pixel(x&#32;+&#32;j,&#32;y&#32;+&#32;i,&#32;_color);</emphasis>
+00439 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00440 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00441 &#32;&#32;&#32;&#32;}
+00442 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00443 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1af99e05afb9c2710684e3be5d12de5330"/><section>
+    <title>draw_filled_circle()</title>
+<indexterm><primary>draw_filled_circle</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_filled_circle</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_filled_circle (const uint32_t x, const uint32_t y, const uint32_t r, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00241">241</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00243 {
+00244 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;=&#32;0,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;=&#32;r;
+00245 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;d&#32;=&#32;3&#32;-&#32;2&#32;*&#32;r;
+00246 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1af66ebbabb0bd56a14f77f9ba437b0c41">drawCircle1</link>(xc,&#32;yc,&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00247 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;&gt;=&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)
+00248 &#32;&#32;&#32;&#32;{
+00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;check&#32;for&#32;decision&#32;parameter</emphasis>
+00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;and&#32;correspondingly</emphasis>
+00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;update&#32;d,&#32;y</emphasis>
+00252 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(d&#32;&gt;&#32;0)
+00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>--;
+00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;d&#32;=&#32;d&#32;+&#32;4&#32;*&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;-&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)&#32;+&#32;10;
+00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;d&#32;=&#32;d&#32;+&#32;4&#32;*&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;+&#32;6;
+00259 
+00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Increment&#32;x&#32;after&#32;updating&#32;decision&#32;parameter</emphasis>
+00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>++;
+00262 
+00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Draw&#32;the&#32;circle&#32;using&#32;the&#32;new&#32;coordinates</emphasis>
+00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1af66ebbabb0bd56a14f77f9ba437b0c41">drawCircle1</link>(xc,&#32;yc,&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00265 &#32;&#32;&#32;&#32;}
+00266 
+00267 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00268 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a60735e6091fa6c20638fb995b73193d5"/><section>
+    <title>draw_filled_rectangle()</title>
+<indexterm><primary>draw_filled_rectangle</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_filled_rectangle</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_filled_rectangle (const uint32_t x, const uint32_t y, const uint32_t w, const uint32_t h, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00193">193</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00196 {
+00197 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;uint8_t*&#32;temp&#32;=&#32;malloc(sizeof(uint8_t)&#32;*&#32;this.m_pixel_buffer_size);</emphasis>
+00198 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;memset(temp,&#32;color,&#32;this.m_pixel_buffer_size);</emphasis>
+00199 
+00200 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;if&#32;(!(x&#32;&lt;=&#32;this-&gt;m_display_w&#32;&amp;&amp;&#32;y&#32;&lt;=&#32;this-&gt;m_display_h&#32;&amp;&amp;&#32;x&#32;&gt;&#32;0&#32;&amp;&amp;&#32;y&#32;&gt;&#32;0))</emphasis>
+00201 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00202 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;for&#32;(uint16_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)</emphasis>
+00203 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;for&#32;(uint16_t&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;w;&#32;j++)</emphasis>
+00204 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//this-&gt;pixel_buffer[j&#32;+&#32;i&#32;*&#32;this-&gt;display_w]&#32;=&#32;color;</emphasis>
+00205 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_pixel(x&#32;+&#32;j,&#32;y&#32;+&#32;i,&#32;color);</emphasis>
+00206 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00207 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;else</emphasis>
+00208 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00209 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint16_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)
+00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint16_t&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;w;&#32;j++)</emphasis>
+00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//this-&gt;pixel_buffer[j&#32;+&#32;i&#32;*&#32;this-&gt;display_w]&#32;=&#32;color;</emphasis>
+00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;draw_pixel(x&#32;+&#32;j,&#32;y&#32;+&#32;i,&#32;color);</emphasis>
+00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>),&#32;color,&#32;w);
+00214 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x&#32;+&#32;j))&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);</emphasis>
+00215 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00216 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00217 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00218 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00219 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a5f55e06ce4f4fe1dc7577ef14b851794"/><section>
+    <title>draw_grid()</title>
+<indexterm><primary>draw_grid</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_grid</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_grid (const uint32_t spacing, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00141">141</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00142 {
+00143 &#32;&#32;&#32;&#32;uint16_t&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;=&#32;0,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;=&#32;0;
+00144 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;=&#32;0;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;&lt;&#32;m_display_w;&#32;++<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)
+00145 &#32;&#32;&#32;&#32;{
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;=&#32;0;&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;&lt;&#32;m_display_h;&#32;++<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)
+00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;%&#32;spacing&#32;==&#32;0&#32;&amp;&amp;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;%&#32;spacing&#32;==&#32;0)
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>[(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;*&#32;this-&gt;m_display_w&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);
+00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00151 &#32;&#32;&#32;&#32;}
+00152 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00153 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a4beca939063b7270bf66e7872c689128"/><section>
+    <title>draw_outline_circle()</title>
+<indexterm><primary>draw_outline_circle</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_outline_circle</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_outline_circle (const uint32_t x, const uint32_t y, const uint32_t r, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00221">221</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00223 {
+00224 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00225 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a362cb5fdd287fbc4a95f04d593fa10e6"/><section>
+    <title>draw_outline_rectangle()</title>
+<indexterm><primary>draw_outline_rectangle</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_outline_rectangle</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_outline_rectangle (const uint32_t x, const uint32_t y, const uint32_t w, const uint32_t h, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00155">155</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00158 {
+00159 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x &lt;= this-&gt;</link>m_display_w&#32;&amp;&amp;&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y &lt;= this-&gt;</link>m_display_h&#32;&amp;&amp;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;&gt;&#32;0&#32;&amp;&amp;&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;&gt;&#32;0))
+00160 &#32;&#32;&#32;&#32;{
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)</emphasis>
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;draw_pixel(x,&#32;y&#32;+&#32;i,&#32;color);</emphasis>
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)</emphasis>
+00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;draw_pixel(x&#32;+&#32;w,&#32;y&#32;+&#32;i,&#32;color);</emphasis>
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;w;&#32;i++)</emphasis>
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;draw_pixel(x&#32;+&#32;i,&#32;y,&#32;color);</emphasis>
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;w;&#32;i++)</emphasis>
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;draw_pixel(x&#32;+&#32;i,&#32;y&#32;+&#32;h,&#32;color);</emphasis>
+00170 &#32;&#32;&#32;&#32;}
+00171 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="comment">//&#32;this&#32;is&#32;just&#32;easier&#32;to&#32;write&#32;for&#32;now,&#32;u&#32;can&#32;make&#32;a&#32;new&#32;function&#32;called&#32;draw_pixel_unsafe&#32;or&#32;something...</emphasis>
+00172 &#32;&#32;&#32;&#32;{
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;draw&#32;sides</emphasis>
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint16_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x))&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);</emphasis>
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>))&#32;*&#32;1,&#32;color,&#32;1);
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint16_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;i++)
+00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x&#32;+&#32;w))&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);</emphasis>
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;+&#32;w))&#32;*&#32;1,&#32;color,&#32;1);
+00180 
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;draw&#32;top&#32;and&#32;bottom;&#32;Added&#32;200&#32;fps&#32;lol</emphasis>
+00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;w;&#32;i++)</emphasis>
+00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)*this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>))&#32;*&#32;1,&#32;color,&#32;w);
+00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x&#32;+&#32;i))&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);</emphasis>
+00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;w;&#32;i++)</emphasis>
+00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;h)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>))&#32;*&#32;1,&#32;color,&#32;w);
+00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;h)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x&#32;+&#32;i))&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);</emphasis>
+00188 &#32;&#32;&#32;&#32;}
+00189 
+00190 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00191 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12"/><section>
+    <title>draw_pixel()</title>
+<indexterm><primary>draw_pixel</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_pixel</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_pixel (const uint32_t x, const uint32_t y, const uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00126">126</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00127 {
+00128 &#32;&#32;&#32;&#32;<emphasis role="comment">//TODO:&#32;Find&#32;a&#32;better&#32;way&#32;to&#32;do&#32;this,&#32;rather&#32;than&#32;calling&#32;it&#32;all&#32;the&#32;time.&#32;this&#32;will&#32;work&#32;for&#32;now.</emphasis>
+00129 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;I&#32;predict&#32;this&#32;will&#32;significantly&#32;boost&#32;fps&#32;if&#32;it&#32;was&#32;implemented&#32;higher&#32;up&#32;in&#32;the&#32;draw&#32;calls.</emphasis>
+00130 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Rather&#32;than&#32;checking&#32;every&#32;pixel.</emphasis>
+00131 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;((<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;&gt;=&#32;this-&gt;m_display_w)&#32;||&#32;(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;&gt;=&#32;this-&gt;m_display_h))
+00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">TINYENGINE_OUTOFBOUNDS_ERROR</link>;
+00133 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Write&#32;the&#32;color&#32;to&#32;the&#32;buffer</emphasis>
+00134 &#32;&#32;&#32;&#32;this-&gt;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>[(<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;*&#32;this-&gt;m_display_w&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)&#32;*&#32;1]&#32;=&#32;(uint8_t)(color);
+00135 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;*&#32;1&#32;is&#32;because&#32;we&#32;store&#32;1&#32;byte&#32;per&#32;pixel&#32;if&#32;it&#32;was&#32;RGB888&#32;then&#32;it&#32;would&#32;be&#32;3</emphasis>
+00136 
+00137 
+00138 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00139 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1aef92d2f3ff2cf2a130a86bdc0779d2ac"/><section>
+    <title>draw_sprite()</title>
+<indexterm><primary>draw_sprite</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_sprite</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_sprite (<link linkend="_class_sprite">Sprite</link> &amp; sprite)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00283">283</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00284 {
+00285 &#32;&#32;&#32;&#32;te_sprite_t*&#32;data&#32;=&#32;sprite.<link linkend="_class_sprite_1aabab23ab32f0cee58b1f2715597458de">get_m_sprite_data</link>();
+00286 
+00287 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!sprite.<link linkend="_class_sprite_1aa58f521454f0e700633a1555a1dcd7b3">is_m_animated</link>())
+00288 &#32;&#32;&#32;&#32;{
+00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_frame_buffer_1af84da7bf88f0105c71cb05f719c3928c">draw_sprite_raw</link>(
+00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data-&gt;<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>,
+00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data-&gt;<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data-&gt;<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sprite.<link linkend="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d">get_m_x</link>(),
+00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sprite.<link linkend="_class_sprite_1ac6985150992aae6e2a9642b47501faa1">get_m_y</link>());
+00295 &#32;&#32;&#32;&#32;}
+00296 
+00297 &#32;&#32;&#32;&#32;te_sprite_animation_t*&#32;ani&#32;=&#32;sprite.<link linkend="_class_sprite_1a1b864c55c1447308301665946d3b26de">get_m_animation_data</link>();
+00298 
+00299 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sprite.<link linkend="_class_sprite_1acae1b5a7536cf89c73c29797e21b780f">get_m_frametime</link>()&#32;&gt;=&#32;(<emphasis role="keywordtype">float</emphasis>)ani-&gt;<link linkend="_structte__sprite__animation__t_1a005d996826fc6306b464609827f3367e">animation_delay</link>)
+00300 &#32;&#32;&#32;&#32;{
+00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>&#32;+=&#32;1;
+00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;ani-&gt;current_frame_time&#32;=&#32;0;</emphasis>
+00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sprite.<link linkend="_class_sprite_1a27f095629aeacb38f8dc1a3446ed29d9">set_m_frametime</link>(0);
+00304 &#32;&#32;&#32;&#32;}
+00305 
+00306 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ani-&gt;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>&#32;&gt;&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1a738b24e248655af58263162698329aa8">total_frames</link>&#32;-&#32;1
+00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;||&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>&#32;&gt;=&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1a937203fdf03fe9ded85ab00a0f29a94f">end_frame</link>)
+00308 &#32;&#32;&#32;&#32;{
+00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>&#32;=&#32;ani-&gt;<link linkend="_structte__sprite__animation__t_1ad761f161ae73abb8b94ca8c65b6b5196">start_frame</link>;
+00310 &#32;&#32;&#32;&#32;}
+00311 
+00312 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;ani-&gt;current_frame_time&#32;+=&#32;sprite.get_m_frametime()&#32;*&#32;100;</emphasis>
+00313 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprite.set_m_frametime(sprite.get_m_frametime()&#32;*&#32;sprite.get_m_animation_speed());</emphasis>
+00314 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_tiny_engine_frame_buffer_1af84da7bf88f0105c71cb05f719c3928c">draw_sprite_raw</link>(ani-&gt;<link linkend="_structte__sprite__animation__t_1ae8b1c132a79499b1a034c8dbaa5f4f07">sprite_animation_frames</link>[ani-&gt;<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>],
+00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data-&gt;<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+00316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data-&gt;<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sprite.<link linkend="_class_sprite_1a1c5fb11a08c7da650adbf5e82f8d4d1d">get_m_x</link>(),
+00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sprite.<link linkend="_class_sprite_1ac6985150992aae6e2a9642b47501faa1">get_m_y</link>());
+00319 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1af84da7bf88f0105c71cb05f719c3928c"/><section>
+    <title>draw_sprite_raw()</title>
+<indexterm><primary>draw_sprite_raw</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_sprite_raw</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_sprite_raw (const uint8_t * sprite, const uint32_t w, const uint32_t h, const uint32_t x, const uint32_t y)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00321">321</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00323 {
+00324 &#32;&#32;&#32;&#32;uint16_t&#32;_y;
+00325 
+00326 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;calculate&#32;the&#32;full&#32;row&#32;of&#32;opaque&#32;pixels&#32;before&#32;hand.</emphasis>
+00327 
+00328 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;//&#32;Added&#32;800FPS</emphasis>
+00329 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(_y&#32;=&#32;0;&#32;_y&#32;&lt;&#32;h;&#32;_y++)
+00330 &#32;&#32;&#32;&#32;{
+00331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint16_t&#32;start_of_sprite&#32;=&#32;0,&#32;end_of_sprite&#32;=&#32;0;
+00332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint16_t&#32;_x&#32;=&#32;0;&#32;_x&#32;&lt;&#32;w;&#32;_x++)
+00333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00334 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;((uint8_t)sprite[(_y&#32;*&#32;w&#32;+&#32;_x)]&#32;!=&#32;0x00)
+00335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;start_of_sprite&#32;=&#32;_x;
+00337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00339 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00340 
+00341 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;_x&#32;=&#32;w&#32;-&#32;1;&#32;_x&#32;&gt;=&#32;0;&#32;--_x)
+00342 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;((uint8_t)sprite[(_y&#32;*&#32;w&#32;+&#32;_x)]&#32;!=&#32;0x00)
+00344 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;end_of_sprite&#32;=&#32;_x;
+00346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00347 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00348 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00349 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memcpy(<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>&#32;+&#32;((<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;+&#32;_y)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;+&#32;start_of_sprite)),
+00350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;((uint8_t*)sprite&#32;+&#32;(_y&#32;*&#32;w&#32;+&#32;start_of_sprite)),
+00351 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;end_of_sprite&#32;-&#32;start_of_sprite);
+00352 &#32;&#32;&#32;&#32;}
+00353 
+00354 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;you&#32;can&#32;account&#32;for&#32;mid&#32;sprite&#32;transperency&#32;here&#32;but&#32;it</emphasis>
+00355 
+00356 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Inefficent&#32;reduces&#32;FPS&#32;by&#32;800FPS</emphasis>
+00357 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;uint16_t&#32;_x;</emphasis>
+00358 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+00359 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(uint32_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h&#32;*&#32;w;&#32;i++)</emphasis>
+00360 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00361 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;_x&#32;=&#32;i&#32;%&#32;w;</emphasis>
+00362 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;_y&#32;=&#32;i&#32;/&#32;w;</emphasis>
+00363 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;if&#32;(_x&#32;==&#32;0&#32;&amp;&amp;&#32;_y&#32;==&#32;0)&#32;{</emphasis>
+00364 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;&#32;&#32;&#32;&#32;draw_pixel(x,&#32;y,&#32;0xC0);</emphasis>
+00365 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;&#32;&#32;&#32;&#32;continue;</emphasis>
+00366 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;}</emphasis>
+00367 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;if&#32;(sprite[i]&#32;!=&#32;0x00)</emphasis>
+00368 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;draw_pixel(_y&#32;+&#32;x,&#32;_x&#32;+&#32;y,&#32;sprite[i]);</emphasis>
+00369 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;this-&gt;pixel_buffer_back[((y&#32;+&#32;_y)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;x&#32;+&#32;_x)&#32;*&#32;1]&#32;=&#32;sprite[i];</emphasis>
+00370 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pixel_buffer_back&#32;+&#32;(((y&#32;+&#32;_y)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;x&#32;+&#32;_x)&#32;*&#32;1),&#32;sprite[i],&#32;1);</emphasis>
+00371 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00372 
+00373 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;added&#32;400&#32;fps&#32;lol&#32;idk&#32;how,&#32;maybe&#32;i&#32;am&#32;wrong&#32;lmao</emphasis>
+00374 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;for&#32;(int&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h;&#32;++i)</emphasis>
+00375 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+00376 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;memcpy(pixel_buffer_back&#32;+&#32;(y&#32;+&#32;i)&#32;*&#32;this-&gt;m_display_w&#32;+&#32;(x),&#32;sprite&#32;+&#32;i&#32;*&#32;w,&#32;w);</emphasis>
+00377 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00378 
+00379 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00380 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1aa44092c9eb6d9b0ae8c1edac53c34cbf"/><section>
+    <title>draw_sprite_raw_batch()</title>
+<indexterm><primary>draw_sprite_raw_batch</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_sprite_raw_batch</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_sprite_raw_batch (const uint8_t * sprite, const uint32_t w, const uint32_t h, const uint16_t x[], const uint16_t y[], const uint16_t count)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00382">382</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00385 {
+00386 &#32;&#32;&#32;&#32;uint16_t&#32;_x,&#32;_y;
+00387 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint16_t&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;h&#32;*&#32;w;&#32;i++)
+00388 &#32;&#32;&#32;&#32;{
+00389 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_x&#32;=&#32;i&#32;/&#32;h;
+00390 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_y&#32;=&#32;i&#32;%&#32;w;
+00391 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sprite[i]&#32;!=&#32;0x00)
+00392 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(uint8_t&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;count;&#32;j++)
+00393 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00394 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>[j]&#32;-&#32;_y,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>[j]&#32;+&#32;_x,&#32;sprite[i]);
+00395 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00396 &#32;&#32;&#32;&#32;}
+00397 
+00398 
+00399 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00400 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1affc105087005f183a2c39b2999b691e6"/><section>
+    <title>draw_string()</title>
+<indexterm><primary>draw_string</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>draw_string</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::draw_string (const char * _string, const uint32_t x, const uint32_t y, const uint8_t _color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00447">447</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00449 {
+00450 &#32;&#32;&#32;&#32;<link linkend="_tinyengine__framebuffer_8cpp_1adcc3b85c751f64cda0dec4912e314a2a">CHECK_BOUNDS</link>(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>);
+00451 &#32;&#32;&#32;&#32;_draw_str_temp_index&#32;=&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;
+00452 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(*_string)
+00453 &#32;&#32;&#32;&#32;{
+00454 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1a5c0048002467262f546585b4f2552c4b">draw_char</link>(*_string++,&#32;_draw_str_temp_index,&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;_color);
+00455 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_draw_str_temp_index&#32;+=&#32;<link linkend="_tinyengine__framebuffer_8cpp_1a655981006fca173dd2e056bf81a63dc3">CHAR_WIDTH</link>;
+00456 &#32;&#32;&#32;&#32;}
+00457 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00458 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1af66ebbabb0bd56a14f77f9ba437b0c41"/><section>
+    <title>drawCircle1()</title>
+<indexterm><primary>drawCircle1</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>drawCircle1</secondary></indexterm>
+<para><computeroutput>void TinyEngineFrameBuffer::drawCircle1 (int xc, int yc, int x, int y, uint8_t color)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00229">229</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00230 {
+00231 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;yc&#32;+&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00232 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;-&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;yc&#32;+&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00233 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;yc&#32;-&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00234 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;-&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;yc&#32;-&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;color);
+00235 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;+&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;yc&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;color);
+00236 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;-&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;yc&#32;+&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;color);
+00237 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;+&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;yc&#32;-&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;color);
+00238 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer_1aca0e4a3363f7e018cc4b3bc7c3221f12">draw_pixel</link>(xc&#32;-&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>,&#32;yc&#32;-&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,&#32;color);
+00239 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a871da8c140298754c26c13331654f890"/><section>
+    <title>is_dual()</title>
+<indexterm><primary>is_dual</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>is_dual</secondary></indexterm>
+<para><computeroutput>bool TinyEngineFrameBuffer::is_dual ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00029">29</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+<programlisting linenumbering="unnumbered">00029 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;m_is_dual;&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1af33ffd30dcce76dc620c8e5bb7c1a28d"/><section>
+    <title>swap_blocking()</title>
+<indexterm><primary>swap_blocking</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>swap_blocking</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::swap_blocking ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00270">270</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00271 {
+00272 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;wait_vsync_blocking_func_ptr();</emphasis>
+00273 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;uint8_t*&#32;frame_buffer_temp&#32;=&#32;this-&gt;pixel_buffer_back;</emphasis>
+00274 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;//&#32;display-&gt;flip_now();</emphasis>
+00275 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_back&#32;=&#32;this-&gt;pixel_buffer_display;</emphasis>
+00276 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;this-&gt;pixel_buffer_display&#32;=&#32;frame_buffer_temp;</emphasis>
+00277 
+00278 &#32;&#32;&#32;&#32;std::swap(<link linkend="_class_tiny_engine_frame_buffer_1a54c83662f0ff4edc1ad54f8064eca159">pixel_buffer_display</link>,&#32;<link linkend="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e">pixel_buffer_back</link>);
+00279 
+00280 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00281 }
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1ac3bf2f988fc71c133bb8b4627963d77f"/><section>
+    <title>write()</title>
+<indexterm><primary>write</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>write</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> TinyEngineFrameBuffer::write ( )</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00065">65</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00066 {
+00067 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00068 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a0483df712b86f7a10cc0cd3b59981cce"/><section>
+    <title>m_pixel_buffer_size</title>
+<indexterm><primary>m_pixel_buffer_size</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>m_pixel_buffer_size</secondary></indexterm>
+<para><computeroutput>uint32_t TinyEngineFrameBuffer::m_pixel_buffer_size</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00027">27</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a4554efab10c073b52faf4d7aa7d4b50e"/><section>
+    <title>pixel_buffer_back</title>
+<indexterm><primary>pixel_buffer_back</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>pixel_buffer_back</secondary></indexterm>
+<para><computeroutput>uint8_t* TinyEngineFrameBuffer::pixel_buffer_back</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00025">25</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_frame_buffer_1a54c83662f0ff4edc1ad54f8064eca159"/><section>
+    <title>pixel_buffer_display</title>
+<indexterm><primary>pixel_buffer_display</primary><secondary>TinyEngineFrameBuffer</secondary></indexterm>
+<indexterm><primary>TinyEngineFrameBuffer</primary><secondary>pixel_buffer_display</secondary></indexterm>
+<para><computeroutput>uint8_t* TinyEngineFrameBuffer::pixel_buffer_display</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8h_source_1l00026">26</link> of file <link linkend="_tinyengine__framebuffer_8h_source">tinyengine_framebuffer.h</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="_tinyengine__framebuffer_8h">tinyengine_framebuffer.h</link>src/<link linkend="_tinyengine__framebuffer_8cpp">tinyengine_framebuffer.cpp</link></section>
+</section>

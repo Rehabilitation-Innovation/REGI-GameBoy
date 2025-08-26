@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__sprite_8cpp_source" xml:lang="en-US">
+<title>tinyengine_sprite.cpp</title>
+<indexterm><primary>src/tinyengine_sprite.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__sprite_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine_8h">tinyengine.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__sprite_8h">tinyengine_sprite.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00003"/>00003 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00004"/><link linkend="_class_sprite_1a89a82a1160b2420743502c044b1aca99">00004</link> <link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;_sprite_data)&#32;:
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00005"/>00005 &#32;&#32;&#32;&#32;m_sprite_data(_sprite_data)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00006"/>00006 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00007"/>00007 };
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00008"/>00008 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00009"/><link linkend="_class_sprite_1ab6535d95c0818a472c9f0b323b1600ce">00009</link> <link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>&#32;_sprite_data)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00010"/>00010 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00011"/>00011 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>{
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00012"/>00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00013"/>00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">sprite_palette</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00016"/>00016 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00017"/>00017 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00018"/>00018 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00019"/>00019 }
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00020"/>00020 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00021"/><link linkend="_class_sprite_1aa188f688afaba7bf21ba549429f874a0">00021</link> <link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</link>(uint8_t*&#32;sprite_buffer,&#32;uint16_t&#32;width,&#32;uint16_t&#32;height)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00022"/>00022 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00023"/>00023 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>{
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;sprite_buffer,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;width,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;height,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;0
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00028"/>00028 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00029"/>00029 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00030"/>00030 }
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00031"/>00031 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00032"/><link linkend="_class_sprite_1a7502b3e66c3a8e30821e4b17833c89dc">00032</link> <link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</link>(<link linkend="_structte__sprite__t">te_sprite_t</link>*&#32;_sprite_data,&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>*&#32;_sprite_animation_data)&#32;:
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00033"/>00033 &#32;&#32;&#32;&#32;m_sprite_data(_sprite_data),
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00034"/>00034 &#32;&#32;&#32;&#32;m_animation_data(_sprite_animation_data)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00035"/>00035 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00036"/>00036 &#32;&#32;&#32;&#32;m_animated&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00037"/>00037 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00038"/>00038 };
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00039"/>00039 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00040"/><link linkend="_class_sprite_1a34d4bf8a3aba31921a71c2a12b3f2525">00040</link> <link linkend="_class_sprite_1a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</link>(<emphasis role="keyword">const</emphasis>&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>&amp;&#32;_sprite_data,&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>&amp;&#32;_sprite_animation_data)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00041"/>00041 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00042"/>00042 &#32;&#32;&#32;&#32;m_sprite_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_structte__sprite__t">te_sprite_t</link>{
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_buffer&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a21524697256e082e5b35bbbc2801a537">sprite_buffer</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.width&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a0fe0406c1a75cb8db0fcae2dfbc29bf2">width</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.height&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1a6818a63ebf2d3c4908f8c9f4a5c61c9c">height</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_palette&#32;=&#32;_sprite_data.<link linkend="_structte__sprite__t_1aecee209c14bda6868e25c07c99147798">sprite_palette</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00047"/>00047 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00048"/>00048 &#32;&#32;&#32;&#32;m_animation_data&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_structte__sprite__animation__t">te_sprite_animation_t</link>{
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sprite_animation_frames&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1ae8b1c132a79499b1a034c8dbaa5f4f07">sprite_animation_frames</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.animation_delay&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a005d996826fc6306b464609827f3367e">animation_delay</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.total_frames&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a738b24e248655af58263162698329aa8">total_frames</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.current_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a92c62133cf7757cf33c044b29d9f50e9">current_frame</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.start_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1ad761f161ae73abb8b94ca8c65b6b5196">start_frame</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.end_frame&#32;=&#32;_sprite_animation_data.<link linkend="_structte__sprite__animation__t_1a937203fdf03fe9ded85ab00a0f29a94f">end_frame</link>,
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00055"/>00055 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00056"/>00056 &#32;&#32;&#32;&#32;m_externaly_created&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00057"/>00057 }
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00058"/>00058 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00059"/><link linkend="_class_sprite_1a8accab430f9d90ae5117b57d67e32b84">00059</link> <link linkend="_class_sprite_1a8accab430f9d90ae5117b57d67e32b84">Sprite::~Sprite</link>()
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00060"/>00060 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(m_externaly_created)&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;only&#32;destroy&#32;if&#32;we&#32;own&#32;the&#32;data.</emphasis>
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00063"/>00063 };
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00064"/>00064 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00065"/><link linkend="_class_sprite_1a026f7b28d2047d2b17cfe90ba29598fc">00065</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_sprite_1a026f7b28d2047d2b17cfe90ba29598fc">Sprite::render</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;_fb)
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00066"/>00066 {
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00067"/>00067 
+<anchor xml:id="_tinyengine__sprite_8cpp_source_1l00068"/>00068 };
+</programlisting></section>

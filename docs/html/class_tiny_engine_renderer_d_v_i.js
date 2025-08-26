@@ -1,0 +1,47 @@
+var class_tiny_engine_renderer_d_v_i =
+[
+    [ "Mode", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5", [
+      [ "MODE_PALETTE", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6", null ],
+      [ "MODE_RGB565", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075", null ],
+      [ "MODE_RGB888", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1", null ],
+      [ "MODE_TEXT_MONO", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5", null ],
+      [ "MODE_TEXT_RGB111", "class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2", null ]
+    ] ],
+    [ "TextColour", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850f", [
+      [ "TEXT_BLACK", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44", null ],
+      [ "TEXT_RED", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48", null ],
+      [ "TEXT_GREEN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc", null ],
+      [ "TEXT_BLUE", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2", null ],
+      [ "TEXT_YELLOW", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f", null ],
+      [ "TEXT_MAGENTA", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219", null ],
+      [ "TEXT_CYAN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b", null ],
+      [ "TEXT_WHITE", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d", null ],
+      [ "BG_BLACK", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329", null ],
+      [ "BG_RED", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b", null ],
+      [ "BG_GREEN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13", null ],
+      [ "BG_BLUE", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8", null ],
+      [ "BG_YELLOW", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68", null ],
+      [ "BG_MAGENTA", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff", null ],
+      [ "BG_CYAN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d", null ],
+      [ "BG_WHITE", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e", null ],
+      [ "ATTR_NORMAL_INTEN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2", null ],
+      [ "ATTR_LOW_INTEN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772", null ],
+      [ "ATTR_V_LOW_INTEN", "class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79", null ]
+    ] ],
+    [ "TinyEngineRendererDVI", "class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324", null ],
+    [ "~TinyEngineRendererDVI", "class_tiny_engine_renderer_d_v_i.html#a09c4f163843cf199dc0afcfafd7953b5", null ],
+    [ "gfx_dma_handler", "class_tiny_engine_renderer_d_v_i.html#a3f7752c320d9957f7e88f85ac9d6f8de", null ],
+    [ "swap_blocking", "class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0", null ],
+    [ "swap_non_blocking", "class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7", null ],
+    [ "tinyengine_renderer_init", "class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a", null ],
+    [ "wait_for_vsync", "class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414", null ],
+    [ "display_height", "class_tiny_engine_renderer_d_v_i.html#af56769c02b832f3433261722d680669b", null ],
+    [ "display_width", "class_tiny_engine_renderer_d_v_i.html#a7efbb691f0b7646dbdc00b2423b4d286", null ],
+    [ "frame_bytes_per_pixel", "class_tiny_engine_renderer_d_v_i.html#add867ce010cc772f7e993a7ac326a05d", null ],
+    [ "frame_height", "class_tiny_engine_renderer_d_v_i.html#af9d293ec842669e58b5d58bcb6d761d0", null ],
+    [ "frame_width", "class_tiny_engine_renderer_d_v_i.html#a5c8198aeb53c231de91bbf790a59f77c", null ],
+    [ "h_repeat", "class_tiny_engine_renderer_d_v_i.html#a8a99856f9ce556f04f5032daec14a5f1", null ],
+    [ "mode", "class_tiny_engine_renderer_d_v_i.html#a6ea8f792a8bf334e07c732c2dbc892f2", null ],
+    [ "palette", "class_tiny_engine_renderer_d_v_i.html#ab7f8fc6782cb61207a95e29e526b34d6", null ],
+    [ "v_repeat", "class_tiny_engine_renderer_d_v_i.html#aa6f8cc917454c16a374452cc66b03687", null ]
+];

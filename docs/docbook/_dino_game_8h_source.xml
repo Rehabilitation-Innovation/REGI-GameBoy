@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__dino_game_8h_source" xml:lang="en-US">
+<title>DinoGame.h</title>
+<indexterm><primary>src/scenes/DinoGame.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__dino_game_8h_source_1l00001"/>00001 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__dino_game_8h_source_1l00002"/>00002 <emphasis role="comment">//&#32;Created&#32;by&#32;abina&#32;on&#32;7/16/2025.</emphasis>
+<anchor xml:id="__dino_game_8h_source_1l00003"/>00003 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__dino_game_8h_source_1l00004"/>00004 
+<anchor xml:id="__dino_game_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="__dino_game_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__game_scene_8h">GameScene.h</link>&quot;</emphasis>
+<anchor xml:id="__dino_game_8h_source_1l00007"/>00007 
+<anchor xml:id="__dino_game_8h_source_1l00008"/><link linkend="_class_dino_game">00008</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_dino_game_1a24898012db5fdb59f106958b2047bc87">DinoGame</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link>&#32;{
+<anchor xml:id="__dino_game_8h_source_1l00009"/>00009 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="__dino_game_8h_source_1l00010"/><link linkend="_class_dino_game_1a24898012db5fdb59f106958b2047bc87">00010</link> &#32;&#32;&#32;&#32;<link linkend="_class_dino_game_1a24898012db5fdb59f106958b2047bc87">DinoGame</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;_framebuffer,&#32;<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&amp;&#32;_renderer,&#32;<link linkend="_class_tiny_engine">TinyEngine</link>&amp;&#32;_engine)
+<anchor xml:id="__dino_game_8h_source_1l00011"/>00011 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link>(_framebuffer,&#32;_renderer,&#32;_engine)
+<anchor xml:id="__dino_game_8h_source_1l00012"/>00012 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__dino_game_8h_source_1l00013"/>00013 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__dino_game_8h_source_1l00014"/>00014 
+<anchor xml:id="__dino_game_8h_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<link linkend="_class_dino_game_1aa28aa7f6869e9da56220b03800f3159a">~DinoGame</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__dino_game_8h_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_dino_game_1ae1d9e6cae7937318b7b0d39bc4b70990">create</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__dino_game_8h_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_dino_game_1abbbe0d7eb69274e8118e24baebd0c43f">render</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__dino_game_8h_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_dino_game_1ac19a132cf8cef2a477b518df8a3b3db8">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__dino_game_8h_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_dino_game_1afdfa24b50b4b98cca5ea1271bccf3c0d">destroy</link>()&#32;<emphasis role="keyword">override</emphasis>;
+<anchor xml:id="__dino_game_8h_source_1l00020"/>00020 };
+<anchor xml:id="__dino_game_8h_source_1l00021"/>00021 
+</programlisting></section>

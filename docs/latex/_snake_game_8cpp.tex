@@ -1,0 +1,173 @@
+\doxysection{src/scenes/\+Snake\+Game.cpp File Reference}
+\hypertarget{_snake_game_8cpp}{}\label{_snake_game_8cpp}\index{src/scenes/SnakeGame.cpp@{src/scenes/SnakeGame.cpp}}
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include "{}tinyengine.\+h"{}}\newline
+{\ttfamily \#include "{}dino\+\_\+running.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+framebuffer.\+h"{}}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}cactus.\+h"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}pico/rand.\+h"{}}\newline
+{\ttfamily \#include "{}Snake\+Game.\+h"{}}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\+\_\+\+SNAKE}}~240 -\/ 1
+\item 
+\#define \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\+\_\+\+SNAKE}}~320 -\/ 1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snake\+Tailx\+\_\+snake}} \mbox{[}100\mbox{]}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snake\+Taily\+\_\+snake}} \mbox{[}100\mbox{]}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snake\+Tail\+Len}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\+\_\+snake}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\+\_\+snake}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\+\_\+snake}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\+\_\+snake}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\+\_\+snake}}
+\item 
+int \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\+\_\+snake}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_snake_game_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}\index{SnakeGame.cpp@{SnakeGame.cpp}!HEIGHT\_SNAKE@{HEIGHT\_SNAKE}}
+\index{HEIGHT\_SNAKE@{HEIGHT\_SNAKE}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{HEIGHT\_SNAKE}{HEIGHT\_SNAKE}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39} 
+\#define HEIGHT\+\_\+\+SNAKE~240 -\/ 1}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}\index{SnakeGame.cpp@{SnakeGame.cpp}!WIDTH\_SNAKE@{WIDTH\_SNAKE}}
+\index{WIDTH\_SNAKE@{WIDTH\_SNAKE}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{WIDTH\_SNAKE}{WIDTH\_SNAKE}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0} 
+\#define WIDTH\+\_\+\+SNAKE~320 -\/ 1}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_snake_game_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}\index{SnakeGame.cpp@{SnakeGame.cpp}!fruitx\_snake@{fruitx\_snake}}
+\index{fruitx\_snake@{fruitx\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{fruitx\_snake}{fruitx\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a} 
+int fruitx\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}\index{SnakeGame.cpp@{SnakeGame.cpp}!fruity\_snake@{fruity\_snake}}
+\index{fruity\_snake@{fruity\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{fruity\_snake}{fruity\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf} 
+int fruity\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}\index{SnakeGame.cpp@{SnakeGame.cpp}!gameover@{gameover}}
+\index{gameover@{gameover}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{gameover}{gameover}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee} 
+int gameover}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}\index{SnakeGame.cpp@{SnakeGame.cpp}!key\_snake@{key\_snake}}
+\index{key\_snake@{key\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{key\_snake}{key\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c} 
+int key\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}\index{SnakeGame.cpp@{SnakeGame.cpp}!score\_snake@{score\_snake}}
+\index{score\_snake@{score\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{score\_snake}{score\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8} 
+int score\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}\index{SnakeGame.cpp@{SnakeGame.cpp}!snakeTailLen@{snakeTailLen}}
+\index{snakeTailLen@{snakeTailLen}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{snakeTailLen}{snakeTailLen}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9} 
+int snake\+Tail\+Len}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}\index{SnakeGame.cpp@{SnakeGame.cpp}!snakeTailx\_snake@{snakeTailx\_snake}}
+\index{snakeTailx\_snake@{snakeTailx\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{snakeTailx\_snake}{snakeTailx\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911} 
+int snake\+Tailx\+\_\+snake\mbox{[}100\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}\index{SnakeGame.cpp@{SnakeGame.cpp}!snakeTaily\_snake@{snakeTaily\_snake}}
+\index{snakeTaily\_snake@{snakeTaily\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{snakeTaily\_snake}{snakeTaily\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a} 
+int snake\+Taily\+\_\+snake\mbox{[}100\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}\index{SnakeGame.cpp@{SnakeGame.cpp}!x\_snake@{x\_snake}}
+\index{x\_snake@{x\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{x\_snake}{x\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251} 
+int x\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+
+\Hypertarget{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}\index{SnakeGame.cpp@{SnakeGame.cpp}!y\_snake@{y\_snake}}
+\index{y\_snake@{y\_snake}!SnakeGame.cpp@{SnakeGame.cpp}}
+\doxysubsubsection{\texorpdfstring{y\_snake}{y\_snake}}
+{\footnotesize\ttfamily \label{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c} 
+int y\+\_\+snake}
+
+
+
+Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
+

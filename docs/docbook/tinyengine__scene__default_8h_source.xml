@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__scene__default_8h_source" xml:lang="en-US">
+<title>tinyengine_scene_default.h</title>
+<indexterm><primary>inc/tinyengine_scene_default.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__scene__default_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__scene_8h">tinyengine_scene.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00003"/><link linkend="_class_tiny_engine_scene_default">00003</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_scene_default_1adbfe2e0e9cafb608ab1462388bc56e05">TinyEngineSceneDefault</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_scene_i">SceneI</link>&#32;{
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00004"/>00004 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00005"/><link linkend="_class_tiny_engine_scene_default_1adbfe2e0e9cafb608ab1462388bc56e05">00005</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_scene_default_1adbfe2e0e9cafb608ab1462388bc56e05">TinyEngineSceneDefault</link>()&#32;{&#32;<link linkend="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3">create</link>();&#32;};
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00006"/><link linkend="_class_tiny_engine_scene_default_1acaa36b599d0b9a47b36f222163e240c5">00006</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_scene_default_1acaa36b599d0b9a47b36f222163e240c5">~TinyEngineSceneDefault</link>()&#32;{&#32;<link linkend="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6">destroy</link>();&#32;};
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00007"/>00007 
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00008"/>00008 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_scene_default_1a41868b105d4c0ea63eec7b0e79745101">render</link>();
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00009"/>00009 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_scene_default_1afc7c24f397889b79d308f3c42d21f75f">update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime);
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00010"/>00010 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3">create</link>();
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6">destroy</link>();
+<anchor xml:id="_tinyengine__scene__default_8h_source_1l00012"/>00012 };
+</programlisting></section>

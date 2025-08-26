@@ -1,0 +1,1046 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_cute__c2_8h" xml:lang="en-US">
+<title>inc/cute_c2.h File Reference</title>
+<indexterm><primary>inc/cute_c2.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;string.h&gt;<?linebreak?>#include &lt;math.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structc2v">c2v</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2r">c2r</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2m">c2m</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2x">c2x</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2h">c2h</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_circle">c2Circle</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_a_a_b_b">c2AABB</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_capsule">c2Capsule</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_poly">c2Poly</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_ray">c2Ray</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_raycast">c2Raycast</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_manifold">c2Manifold</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_g_j_k_cache">c2GJKCache</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structc2_t_o_i_result">c2TOIResult</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a0fd546d253398ad28a548afb19775d70">C2_MAX_POLYGON_VERTS</link>&#160;&#160;&#160;8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a515b720ecf7e61647476bbc4a712f250">c2Impact</link>(ray,  <link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link>&#160;&#160;&#160;inline __attribute__((always_inline))</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a847097bee54cfd2ece87ba0337247650">c2Sin</link>(radians)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a38ebab3d0198ef7c6d6cdc73a9c9b1fd">c2Cos</link>(radians)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a98459522a3c01e751b614fee1c18b286">c2Sqrt</link>(a)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e">c2Min</link>(a,  b)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084">c2Max</link>(a,  b)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99">c2Abs</link>(a)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a4e81817e00147b07f8cdabe318d580a1">c2Clamp</link>(a,  lo,  hi)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1ad209a547c29ec4b2c9f5345637c2667a">c2Sign</link>(a)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_cute__c2_8h_1a623ce88b9a0ddea241e4e4ee89d57329">CUTE_C2_H</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef struct c2v <link linkend="_cute__c2_8h_1a85f65d6531100bebcb62a819b1078cf5">c2v</link></para>
+</listitem>
+            <listitem><para>typedef struct c2r <link linkend="_cute__c2_8h_1ae727e33a83132aac272fddf73c37065b">c2r</link></para>
+</listitem>
+            <listitem><para>typedef struct c2m <link linkend="_cute__c2_8h_1ae0f9555dc1e9aa05745989e85f6467f6">c2m</link></para>
+</listitem>
+            <listitem><para>typedef struct c2x <link linkend="_cute__c2_8h_1abceb13393b77a0e67fc8572852eaebf7">c2x</link></para>
+</listitem>
+            <listitem><para>typedef struct c2h <link linkend="_cute__c2_8h_1a0c0044fb4017b806769d57729b1c26f2">c2h</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Circle <link linkend="_cute__c2_8h_1ae49d3b29e0d93e589637041beb7169b5">c2Circle</link></para>
+</listitem>
+            <listitem><para>typedef struct c2AABB <link linkend="_cute__c2_8h_1aecce28353056c358ba3fd4a31c47ba3f">c2AABB</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Capsule <link linkend="_cute__c2_8h_1ab693bf2b35508e102694b3a5deb6eeaa">c2Capsule</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Poly <link linkend="_cute__c2_8h_1ae62b97b89cf3c7fbccde3837f430a076">c2Poly</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Ray <link linkend="_cute__c2_8h_1a5afa8e9e087a1507302b1d6ffdfe06cc">c2Ray</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Raycast <link linkend="_cute__c2_8h_1a91cd2ba3529887bdb77d0279d675147e">c2Raycast</link></para>
+</listitem>
+            <listitem><para>typedef struct c2Manifold <link linkend="_cute__c2_8h_1a23a9949ff80d47a717bc45688906d04d">c2Manifold</link></para>
+</listitem>
+            <listitem><para>typedef struct c2GJKCache <link linkend="_cute__c2_8h_1a84c58e41573f821d39e98916f142ee10">c2GJKCache</link></para>
+</listitem>
+            <listitem><para>typedef struct c2TOIResult <link linkend="_cute__c2_8h_1a1df630e38477aac589bbcc6cec8103ee">c2TOIResult</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> { <?linebreak?><link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177">C2_TYPE_NONE</link>
+, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc">C2_TYPE_CIRCLE</link>
+, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20">C2_TYPE_AABB</link>
+, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550">C2_TYPE_CAPSULE</link>
+, <?linebreak?><link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082">C2_TYPE_POLY</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a2b381dd6079f81074aff99fce3304fe4">c2CircletoCircle</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_circle">c2Circle</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a6d32efa9a591b4261797da24d4303b6b">c2CircletoAABB</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ae12e8d0fff1b8374d9547a9cf188ffa0">c2CircletoCapsule</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ac2ffe6c3fb0b4a2865ab3d4fd966bc57">c2AABBtoAABB</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a2b57ddb58ac33c515d9a31f7e8ad4222">c2AABBtoCapsule</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1aeead757864ba3154953ef4ab7c1f571a">c2CapsuletoCapsule</link> (<link linkend="_structc2_capsule">c2Capsule</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ad859a357fca1a7e8324aeaef87aeb455">c2CircletoPoly</link> (<link linkend="_structc2_circle">c2Circle</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1aa72ae2e07a37e79233a5d1fe25e5a2e9">c2AABBtoPoly</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a26cd06e6140acb1b08e5e0258538c38f">c2CapsuletoPoly</link> (<link linkend="_structc2_capsule">c2Capsule</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a01341a99ed0c0b731970e8853531d263">c2PolytoPoly</link> (const <link linkend="_structc2_poly">c2Poly</link> *A, const <link linkend="_structc2x">c2x</link> *ax, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a3d8f4bd3f05216f8deb7fd53fae0e459">c2RaytoCircle</link> (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_circle">c2Circle</link> B, <link linkend="_structc2_raycast">c2Raycast</link> *out)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a4d6b48728253a2c988cdc1ef40ba962f">c2RaytoAABB</link> (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_raycast">c2Raycast</link> *out)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1a1051e2151767c730da0e6d68188cf87f">c2RaytoCapsule</link> (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_raycast">c2Raycast</link> *out)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ad72453c4c53403ae7e46d328b95c4094">c2RaytoPoly</link> (<link linkend="_structc2_ray">c2Ray</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx_ptr, <link linkend="_structc2_raycast">c2Raycast</link> *out)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a5a06fdc38e07b42f1aec7d1f9d7ca182">c2CircletoCircleManifold</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_circle">c2Circle</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1aa1c135c6c0b3034ebf83b635dffdb73a">c2CircletoAABBManifold</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a3292c71f5420bcc86da700a0372677a8">c2CircletoCapsuleManifold</link> (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1ac49ab094d5a04d7abc5436db613edb60">c2AABBtoAABBManifold</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a5a52f03fdba24e104858c016b21111e1">c2AABBtoCapsuleManifold</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1aa6453a9125cfb6e1fdd19f76e62f091a">c2CapsuletoCapsuleManifold</link> (<link linkend="_structc2_capsule">c2Capsule</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1af9873986db8e12becd2e2961b70fe7ab">c2CircletoPolyManifold</link> (<link linkend="_structc2_circle">c2Circle</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1abdca813eac285f3e9328c989ae9ea3a6">c2AABBtoPolyManifold</link> (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a0bfa8ed7f41c7848bea8fbbc43cd8dd4">c2CapsuletoPolyManifold</link> (<link linkend="_structc2_capsule">c2Capsule</link> A, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a9f7375003472cada253d2dc8e3ce82e1">c2PolytoPolyManifold</link> (const <link linkend="_structc2_poly">c2Poly</link> *A, const <link linkend="_structc2x">c2x</link> *ax, const <link linkend="_structc2_poly">c2Poly</link> *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API float <link linkend="_cute__c2_8h_1a206e5641840f323422ebfe8182bd75a4">c2GJK</link> (const void *A, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const <link linkend="_structc2x">c2x</link> *ax_ptr, const void *B, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, const <link linkend="_structc2x">c2x</link> *bx_ptr, <link linkend="_structc2v">c2v</link> *outA, <link linkend="_structc2v">c2v</link> *outB, int use_radius, int *iterations, <link linkend="_structc2_g_j_k_cache">c2GJKCache</link> *cache)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API <link linkend="_structc2_t_o_i_result">c2TOIResult</link> <link linkend="_cute__c2_8h_1af037486725ac78fda6956b9e5732c123">c2TOI</link> (const void *A, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const <link linkend="_structc2x">c2x</link> *ax_ptr, <link linkend="_structc2v">c2v</link> vA, const void *B, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, const <link linkend="_structc2x">c2x</link> *bx_ptr, <link linkend="_structc2v">c2v</link> vB, int use_radius)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1abeac284a08d795a95718607e28b29f0d">c2Inflate</link> (void *shape, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> type, float skin_factor)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ac6a78404ac8cf8d93ecf905814e401b4">c2Hull</link> (<link linkend="_structc2v">c2v</link> *verts, int count)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a99a88540199bcc905683dd3aa8c9be4a">c2Norms</link> (<link linkend="_structc2v">c2v</link> *verts, <link linkend="_structc2v">c2v</link> *norms, int count)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1ab774831fd26859f18b0a36a09cf7064b">c2MakePoly</link> (<link linkend="_structc2_poly">c2Poly</link> *p)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1aa0d6ef52a468f3a261203e9a68ebe431">c2Collided</link> (const void *A, const <link linkend="_structc2x">c2x</link> *ax, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const void *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API void <link linkend="_cute__c2_8h_1a3f412e0a34cd5d677478cca007be384c">c2Collide</link> (const void *A, const <link linkend="_structc2x">c2x</link> *ax, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const void *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, <link linkend="_structc2_manifold">c2Manifold</link> *m)</para>
+</listitem>
+            <listitem><para>CUTE_C2_API int <link linkend="_cute__c2_8h_1ad9acd66538a2e26fda403ed681996097">c2CastRay</link> (<link linkend="_structc2_ray">c2Ray</link> A, const void *B, const <link linkend="_structc2x">c2x</link> *bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, <link linkend="_structc2_raycast">c2Raycast</link> *out)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> void <link linkend="_cute__c2_8h_1ab79505fce1838f04a577094126815ac2">c2SinCos</link> (float radians, float *s, float *c)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link> (float <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>, float <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link> (<link linkend="_structc2v">c2v</link> a, float b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ab4686d6b5ef8593f52dfcaded35ec920">c2Mulvv</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a5dcf7563f13d8b8d5c2423a2f7134700">c2Div</link> (<link linkend="_structc2v">c2v</link> a, float b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a797007d10175dd13b01c41fe60a14421">c2Skew</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a18cff67645553684a30d36ca2773116d">c2CCW90</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1a84afcee1b10b757401a0e8166f4ea4c7">c2Det2</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1af92f21e15c4c80071db796f46ed8fcce">c2Minv</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ae8614649b7105f62fd5d96924e25e147">c2Maxv</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1afcfd33f860ff46ff49e4d6c7dfe3d948">c2Clampv</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> lo, <link linkend="_structc2v">c2v</link> hi)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ab36d7a2a5dbf2481e4deab61f7ef2e4a">c2Absv</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1a854ce80a68565875555fbf95c757c31c">c2Hmin</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1ad7f2ad537d84324b6cdf35aec402a533">c2Hmax</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341">c2Len</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ae228814d5417858c78336a3e7e2aa834">c2Norm</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a1d30280f8ccf7e8e1352848601c9a77e">c2SafeNorm</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a7cb3cb1c48f3684b6db762bdc1ef8a71">c2Neg</link> (<link linkend="_structc2v">c2v</link> a)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1afc415d7f1fa2031fed5130ac1758c461">c2Lerp</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float <link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> int <link linkend="_cute__c2_8h_1a631c57baa292018b735447e00f106ab3">c2Parallel</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float kTol)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> <link linkend="_cute__c2_8h_1adc13fd86afde5b2f5b89cde00d0de67a">c2Rot</link> (float radians)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> <link linkend="_cute__c2_8h_1a2dc32a46c98171df81d473bda36a9e3a">c2RotIdentity</link> (void)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1aecc03cc63f1ada7a320aa065e6b2f9ec">c2RotX</link> (<link linkend="_structc2r">c2r</link> r)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a00ebd0f4663f055912b9eb8dc9c7dfd8">c2RotY</link> (<link linkend="_structc2r">c2r</link> r)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a802eb294e489b0a600840f5ba83c653b">c2Mulrv</link> (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a8c28ce5953b2e6760bc640dd50d92a43">c2MulrvT</link> (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> <link linkend="_cute__c2_8h_1a9bfacd10ac51218d70dbe8d5e719f799">c2Mulrr</link> (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2r">c2r</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> <link linkend="_cute__c2_8h_1acd93f6c20f9979dac113ddec536e79c8">c2MulrrT</link> (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2r">c2r</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ac12063c537c7aa685ee637d0362e1956">c2Mulmv</link> (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a02429730284c3db0b2c992f9e6b7f6ce">c2MulmvT</link> (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2m">c2m</link> <link linkend="_cute__c2_8h_1a5f9375d498fd4c2c84ea89751a5538ed">c2Mulmm</link> (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2m">c2m</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2m">c2m</link> <link linkend="_cute__c2_8h_1a003777ba26a8c6440f4c9e379f75c077">c2MulmmT</link> (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2m">c2m</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> <link linkend="_cute__c2_8h_1ab63b182f0108be1cfc2a6e3c370b57aa">c2xIdentity</link> (void)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a00e7e5eeeffc98bc6d2c98b36d4c9a89">c2Mulxv</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a5b6c48f69159b15f7b9299d2ed09c920">c2MulxvT</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2v">c2v</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> <link linkend="_cute__c2_8h_1a238ecbf634a5e68491cfff4725700501">c2Mulxx</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2x">c2x</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> <link linkend="_cute__c2_8h_1ad38af9936384626d0d9613687e662a06">c2MulxxT</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2x">c2x</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> <link linkend="_cute__c2_8h_1aa641f62915695506f3956bdd29afa5fe">c2Transform</link> (<link linkend="_structc2v">c2v</link> p, float radians)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1aa6a22978ce1bf40972463d694bdbc60f">c2Origin</link> (<link linkend="_structc2h">c2h</link> h)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float <link linkend="_cute__c2_8h_1a1aa5d97ad8706d1c527349fe02d231e6">c2Dist</link> (<link linkend="_structc2h">c2h</link> h, <link linkend="_structc2v">c2v</link> p)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1ad31c66f305695857b077d38bd09ec10b">c2Project</link> (<link linkend="_structc2h">c2h</link> h, <link linkend="_structc2v">c2v</link> p)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2h">c2h</link> <link linkend="_cute__c2_8h_1ae90ce92ed1ddfbec6833433841079d8d">c2Mulxh</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2h">c2h</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2h">c2h</link> <link linkend="_cute__c2_8h_1a578cab5d4e482419d9eaae4feb16802a">c2MulxhT</link> (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2h">c2h</link> b)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> <link linkend="_cute__c2_8h_1a9494e2e4322cd8bfc04b0d411f4c3cc0">c2Intersect</link> (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float da, float db)</para>
+</listitem>
+            <listitem><para><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> void <link linkend="_cute__c2_8h_1ad7f0678ab33a08f8804a7b30e2740d3f">c2BBVerts</link> (<link linkend="_structc2v">c2v</link> *out, <link linkend="_structc2_a_a_b_b">c2AABB</link> *bb)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd"/><section>
+    <title>C2_INLINE</title>
+<indexterm><primary>C2_INLINE</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_INLINE</secondary></indexterm>
+<para><computeroutput>#define C2_INLINE&#160;&#160;&#160;inline __attribute__((always_inline))</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00434">434</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a0fd546d253398ad28a548afb19775d70"/><section>
+    <title>C2_MAX_POLYGON_VERTS</title>
+<indexterm><primary>C2_MAX_POLYGON_VERTS</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_MAX_POLYGON_VERTS</secondary></indexterm>
+<para><computeroutput>#define C2_MAX_POLYGON_VERTS&#160;&#160;&#160;8</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00171">171</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99"/><section>
+    <title>c2Abs</title>
+<indexterm><primary>c2Abs</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Abs</secondary></indexterm>
+<para><computeroutput>#define c2Abs( a)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">((a)&#32;&lt;&#32;0&#32;?&#32;-(a)&#32;:&#32;(a))
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00445">445</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a4e81817e00147b07f8cdabe318d580a1"/><section>
+    <title>c2Clamp</title>
+<indexterm><primary>c2Clamp</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Clamp</secondary></indexterm>
+<para><computeroutput>#define c2Clamp( a,  lo,  hi)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered"><link linkend="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084">c2Max</link>(lo,&#32;<link linkend="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e">c2Min</link>(a,&#32;hi))
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00446">446</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a38ebab3d0198ef7c6d6cdc73a9c9b1fd"/><section>
+    <title>c2Cos</title>
+<indexterm><primary>c2Cos</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Cos</secondary></indexterm>
+<para><computeroutput>#define c2Cos( radians)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">cosf(radians)
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00441">441</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a515b720ecf7e61647476bbc4a712f250"/><section>
+    <title>c2Impact</title>
+<indexterm><primary>c2Impact</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Impact</secondary></indexterm>
+<para><computeroutput>#define c2Impact( ray,  <link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered"><link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link>(ray.p,&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(ray.d,&#32;<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>))
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00261">261</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084"/><section>
+    <title>c2Max</title>
+<indexterm><primary>c2Max</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Max</secondary></indexterm>
+<para><computeroutput>#define c2Max( a,  b)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">((a)&#32;&gt;&#32;(b)&#32;?&#32;(a)&#32;:&#32;(b))
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00444">444</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e"/><section>
+    <title>c2Min</title>
+<indexterm><primary>c2Min</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Min</secondary></indexterm>
+<para><computeroutput>#define c2Min( a,  b)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">((a)&#32;&lt;&#32;(b)&#32;?&#32;(a)&#32;:&#32;(b))
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00443">443</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1ad209a547c29ec4b2c9f5345637c2667a"/><section>
+    <title>c2Sign</title>
+<indexterm><primary>c2Sign</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Sign</secondary></indexterm>
+<para><computeroutput>#define c2Sign( a)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(a&#32;&lt;&#32;0&#32;?&#32;-1.0f&#32;:&#32;1.0f)
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00448">448</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a847097bee54cfd2ece87ba0337247650"/><section>
+    <title>c2Sin</title>
+<indexterm><primary>c2Sin</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Sin</secondary></indexterm>
+<para><computeroutput>#define c2Sin( radians)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">sinf(radians)
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00440">440</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a98459522a3c01e751b614fee1c18b286"/><section>
+    <title>c2Sqrt</title>
+<indexterm><primary>c2Sqrt</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Sqrt</secondary></indexterm>
+<para><computeroutput>#define c2Sqrt( a)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">sqrtf(a)
+</programlisting><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00442">442</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+<anchor xml:id="_cute__c2_8h_1a623ce88b9a0ddea241e4e4ee89d57329"/><section>
+    <title>CUTE_C2_H</title>
+<indexterm><primary>CUTE_C2_H</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>CUTE_C2_H</secondary></indexterm>
+<para><computeroutput>#define CUTE_C2_H</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00529">529</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_cute__c2_8h_1aecce28353056c358ba3fd4a31c47ba3f"/><section>
+    <title>c2AABB</title>
+<indexterm><primary>c2AABB</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABB</secondary></indexterm>
+<para><computeroutput>typedef struct c2AABB c2AABB</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ab693bf2b35508e102694b3a5deb6eeaa"/><section>
+    <title>c2Capsule</title>
+<indexterm><primary>c2Capsule</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Capsule</secondary></indexterm>
+<para><computeroutput>typedef struct c2Capsule c2Capsule</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae49d3b29e0d93e589637041beb7169b5"/><section>
+    <title>c2Circle</title>
+<indexterm><primary>c2Circle</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Circle</secondary></indexterm>
+<para><computeroutput>typedef struct c2Circle c2Circle</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a84c58e41573f821d39e98916f142ee10"/><section>
+    <title>c2GJKCache</title>
+<indexterm><primary>c2GJKCache</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2GJKCache</secondary></indexterm>
+<para><computeroutput>typedef struct c2GJKCache c2GJKCache</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a0c0044fb4017b806769d57729b1c26f2"/><section>
+    <title>c2h</title>
+<indexterm><primary>c2h</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2h</secondary></indexterm>
+<para><computeroutput>typedef struct c2h c2h</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae0f9555dc1e9aa05745989e85f6467f6"/><section>
+    <title>c2m</title>
+<indexterm><primary>c2m</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2m</secondary></indexterm>
+<para><computeroutput>typedef struct c2m c2m</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a23a9949ff80d47a717bc45688906d04d"/><section>
+    <title>c2Manifold</title>
+<indexterm><primary>c2Manifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Manifold</secondary></indexterm>
+<para><computeroutput>typedef struct c2Manifold c2Manifold</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae62b97b89cf3c7fbccde3837f430a076"/><section>
+    <title>c2Poly</title>
+<indexterm><primary>c2Poly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Poly</secondary></indexterm>
+<para><computeroutput>typedef struct c2Poly c2Poly</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae727e33a83132aac272fddf73c37065b"/><section>
+    <title>c2r</title>
+<indexterm><primary>c2r</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2r</secondary></indexterm>
+<para><computeroutput>typedef struct c2r c2r</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a5afa8e9e087a1507302b1d6ffdfe06cc"/><section>
+    <title>c2Ray</title>
+<indexterm><primary>c2Ray</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Ray</secondary></indexterm>
+<para><computeroutput>typedef struct c2Ray c2Ray</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a91cd2ba3529887bdb77d0279d675147e"/><section>
+    <title>c2Raycast</title>
+<indexterm><primary>c2Raycast</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Raycast</secondary></indexterm>
+<para><computeroutput>typedef struct c2Raycast c2Raycast</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a1df630e38477aac589bbcc6cec8103ee"/><section>
+    <title>c2TOIResult</title>
+<indexterm><primary>c2TOIResult</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2TOIResult</secondary></indexterm>
+<para><computeroutput>typedef struct c2TOIResult c2TOIResult</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a85f65d6531100bebcb62a819b1078cf5"/><section>
+    <title>c2v</title>
+<indexterm><primary>c2v</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2v</secondary></indexterm>
+<para><computeroutput>typedef struct c2v c2v</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1abceb13393b77a0e67fc8572852eaebf7"/><section>
+    <title>c2x</title>
+<indexterm><primary>c2x</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2x</secondary></indexterm>
+<para><computeroutput>typedef struct c2x c2x</computeroutput></para></section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2"/><section>
+    <title>C2_TYPE</title>
+<indexterm><primary>C2_TYPE</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>C2_TYPE_NONE</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE_NONE</secondary></indexterm>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177"/>C2_TYPE_NONE</entry><entry></entry></row><row><entry><indexterm><primary>C2_TYPE_CIRCLE</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE_CIRCLE</secondary></indexterm>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc"/>C2_TYPE_CIRCLE</entry><entry></entry></row><row><entry><indexterm><primary>C2_TYPE_AABB</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE_AABB</secondary></indexterm>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20"/>C2_TYPE_AABB</entry><entry></entry></row><row><entry><indexterm><primary>C2_TYPE_CAPSULE</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE_CAPSULE</secondary></indexterm>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550"/>C2_TYPE_CAPSULE</entry><entry></entry></row><row><entry><indexterm><primary>C2_TYPE_POLY</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>C2_TYPE_POLY</secondary></indexterm>
+<anchor xml:id="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082"/>C2_TYPE_POLY</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00322">322</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00323 {
+00324 &#32;&#32;&#32;&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a4f99a2111574b08dcad765b327114177">C2_TYPE_NONE</link>,
+00325 &#32;&#32;&#32;&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a7752b1fbfe6111a342ae3a1c34f0a1fc">C2_TYPE_CIRCLE</link>,
+00326 &#32;&#32;&#32;&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2ac4e9038fc69ff331b0fae47ae2b14d20">C2_TYPE_AABB</link>,
+00327 &#32;&#32;&#32;&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a990d064825b2c3c0f1411ca8becb9550">C2_TYPE_CAPSULE</link>,
+00328 &#32;&#32;&#32;&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2a30720465186a1465738499b1e7e03082">C2_TYPE_POLY</link>
+00329 }&#32;<link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link>;
+</programlisting></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_cute__c2_8h_1ac2ffe6c3fb0b4a2865ab3d4fd966bc57"/><section>
+    <title>c2AABBtoAABB()</title>
+<indexterm><primary>c2AABBtoAABB</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoAABB</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2AABBtoAABB (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ac49ab094d5a04d7abc5436db613edb60"/><section>
+    <title>c2AABBtoAABBManifold()</title>
+<indexterm><primary>c2AABBtoAABBManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoAABBManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2AABBtoAABBManifold (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a2b57ddb58ac33c515d9a31f7e8ad4222"/><section>
+    <title>c2AABBtoCapsule()</title>
+<indexterm><primary>c2AABBtoCapsule</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoCapsule</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2AABBtoCapsule (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a5a52f03fdba24e104858c016b21111e1"/><section>
+    <title>c2AABBtoCapsuleManifold()</title>
+<indexterm><primary>c2AABBtoCapsuleManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoCapsuleManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2AABBtoCapsuleManifold (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa72ae2e07a37e79233a5d1fe25e5a2e9"/><section>
+    <title>c2AABBtoPoly()</title>
+<indexterm><primary>c2AABBtoPoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoPoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2AABBtoPoly (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1abdca813eac285f3e9328c989ae9ea3a6"/><section>
+    <title>c2AABBtoPolyManifold()</title>
+<indexterm><primary>c2AABBtoPolyManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2AABBtoPolyManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2AABBtoPolyManifold (<link linkend="_structc2_a_a_b_b">c2AABB</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ab36d7a2a5dbf2481e4deab61f7ef2e4a"/><section>
+    <title>c2Absv()</title>
+<indexterm><primary>c2Absv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Absv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Absv (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00474">474</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00474 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(<link linkend="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99">c2Abs</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>),&#32;<link linkend="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99">c2Abs</link>(a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1"/><section>
+    <title>c2Add()</title>
+<indexterm><primary>c2Add</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Add</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Add (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00462">462</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00462 {&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+=&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;+=&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;a;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ad7f0678ab33a08f8804a7b30e2740d3f"/><section>
+    <title>c2BBVerts()</title>
+<indexterm><primary>c2BBVerts</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2BBVerts</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> void c2BBVerts (<link linkend="_structc2v">c2v</link> * out, <link linkend="_structc2_a_a_b_b">c2AABB</link> * bb)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00521">521</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00522 {
+00523 &#32;&#32;&#32;&#32;out[0]&#32;=&#32;bb-&gt;<link linkend="_structc2_a_a_b_b_1ac0a11c1e43a839f9777fed4f46360c0f">min</link>;
+00524 &#32;&#32;&#32;&#32;out[1]&#32;=&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(bb-&gt;<link linkend="_structc2_a_a_b_b_1a4f59ea4fe9378131665388398396ff39">max</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;bb-&gt;<link linkend="_structc2_a_a_b_b_1ac0a11c1e43a839f9777fed4f46360c0f">min</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);
+00525 &#32;&#32;&#32;&#32;out[2]&#32;=&#32;bb-&gt;<link linkend="_structc2_a_a_b_b_1a4f59ea4fe9378131665388398396ff39">max</link>;
+00526 &#32;&#32;&#32;&#32;out[3]&#32;=&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(bb-&gt;<link linkend="_structc2_a_a_b_b_1ac0a11c1e43a839f9777fed4f46360c0f">min</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;bb-&gt;<link linkend="_structc2_a_a_b_b_1a4f59ea4fe9378131665388398396ff39">max</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);
+00527 }
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1aeead757864ba3154953ef4ab7c1f571a"/><section>
+    <title>c2CapsuletoCapsule()</title>
+<indexterm><primary>c2CapsuletoCapsule</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CapsuletoCapsule</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CapsuletoCapsule (<link linkend="_structc2_capsule">c2Capsule</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa6453a9125cfb6e1fdd19f76e62f091a"/><section>
+    <title>c2CapsuletoCapsuleManifold()</title>
+<indexterm><primary>c2CapsuletoCapsuleManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CapsuletoCapsuleManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CapsuletoCapsuleManifold (<link linkend="_structc2_capsule">c2Capsule</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a26cd06e6140acb1b08e5e0258538c38f"/><section>
+    <title>c2CapsuletoPoly()</title>
+<indexterm><primary>c2CapsuletoPoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CapsuletoPoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CapsuletoPoly (<link linkend="_structc2_capsule">c2Capsule</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a0bfa8ed7f41c7848bea8fbbc43cd8dd4"/><section>
+    <title>c2CapsuletoPolyManifold()</title>
+<indexterm><primary>c2CapsuletoPolyManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CapsuletoPolyManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CapsuletoPolyManifold (<link linkend="_structc2_capsule">c2Capsule</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ad9acd66538a2e26fda403ed681996097"/><section>
+    <title>c2CastRay()</title>
+<indexterm><primary>c2CastRay</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CastRay</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CastRay (<link linkend="_structc2_ray">c2Ray</link> A, const void * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, <link linkend="_structc2_raycast">c2Raycast</link> * out)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a18cff67645553684a30d36ca2773116d"/><section>
+    <title>c2CCW90()</title>
+<indexterm><primary>c2CCW90</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CCW90</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2CCW90 (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00469">469</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00469 {&#32;<link linkend="_structc2v">c2v</link>&#32;b;&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;=&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;=&#32;-a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;b;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a6d32efa9a591b4261797da24d4303b6b"/><section>
+    <title>c2CircletoAABB()</title>
+<indexterm><primary>c2CircletoAABB</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoAABB</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CircletoAABB (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa1c135c6c0b3034ebf83b635dffdb73a"/><section>
+    <title>c2CircletoAABBManifold()</title>
+<indexterm><primary>c2CircletoAABBManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoAABBManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CircletoAABBManifold (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae12e8d0fff1b8374d9547a9cf188ffa0"/><section>
+    <title>c2CircletoCapsule()</title>
+<indexterm><primary>c2CircletoCapsule</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoCapsule</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CircletoCapsule (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a3292c71f5420bcc86da700a0372677a8"/><section>
+    <title>c2CircletoCapsuleManifold()</title>
+<indexterm><primary>c2CircletoCapsuleManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoCapsuleManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CircletoCapsuleManifold (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a2b381dd6079f81074aff99fce3304fe4"/><section>
+    <title>c2CircletoCircle()</title>
+<indexterm><primary>c2CircletoCircle</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoCircle</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CircletoCircle (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_circle">c2Circle</link> B)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a5a06fdc38e07b42f1aec7d1f9d7ca182"/><section>
+    <title>c2CircletoCircleManifold()</title>
+<indexterm><primary>c2CircletoCircleManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoCircleManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CircletoCircleManifold (<link linkend="_structc2_circle">c2Circle</link> A, <link linkend="_structc2_circle">c2Circle</link> B, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ad859a357fca1a7e8324aeaef87aeb455"/><section>
+    <title>c2CircletoPoly()</title>
+<indexterm><primary>c2CircletoPoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoPoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2CircletoPoly (<link linkend="_structc2_circle">c2Circle</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1af9873986db8e12becd2e2961b70fe7ab"/><section>
+    <title>c2CircletoPolyManifold()</title>
+<indexterm><primary>c2CircletoPolyManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2CircletoPolyManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2CircletoPolyManifold (<link linkend="_structc2_circle">c2Circle</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1afcfd33f860ff46ff49e4d6c7dfe3d948"/><section>
+    <title>c2Clampv()</title>
+<indexterm><primary>c2Clampv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Clampv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Clampv (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> lo, <link linkend="_structc2v">c2v</link> hi)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00473">473</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00473 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1ae8614649b7105f62fd5d96924e25e147">c2Maxv</link>(lo,&#32;<link linkend="_cute__c2_8h_1af92f21e15c4c80071db796f46ed8fcce">c2Minv</link>(a,&#32;hi));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a3f412e0a34cd5d677478cca007be384c"/><section>
+    <title>c2Collide()</title>
+<indexterm><primary>c2Collide</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Collide</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2Collide (const void * A, const <link linkend="_structc2x">c2x</link> * ax, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const void * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa0d6ef52a468f3a261203e9a68ebe431"/><section>
+    <title>c2Collided()</title>
+<indexterm><primary>c2Collided</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Collided</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2Collided (const void * A, const <link linkend="_structc2x">c2x</link> * ax, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const void * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a84afcee1b10b757401a0e8166f4ea4c7"/><section>
+    <title>c2Det2()</title>
+<indexterm><primary>c2Det2</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Det2</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Det2 (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00470">470</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00470 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;-&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a1aa5d97ad8706d1c527349fe02d231e6"/><section>
+    <title>c2Dist()</title>
+<indexterm><primary>c2Dist</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Dist</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Dist (<link linkend="_structc2h">c2h</link> h, <link linkend="_structc2v">c2v</link> p)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00515">515</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00515 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link>(h.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>,&#32;p)&#32;-&#32;h.<link linkend="_structc2h_1ac08ea6658ab87a29f34ee49a081ffb3f">d</link>;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a5dcf7563f13d8b8d5c2423a2f7134700"/><section>
+    <title>c2Div()</title>
+<indexterm><primary>c2Div</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Div</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Div (<link linkend="_structc2v">c2v</link> a, float b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00467">467</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00467 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(a,&#32;1.0f&#32;/&#32;b);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0"/><section>
+    <title>c2Dot()</title>
+<indexterm><primary>c2Dot</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Dot</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Dot (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00464">464</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00464 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a206e5641840f323422ebfe8182bd75a4"/><section>
+    <title>c2GJK()</title>
+<indexterm><primary>c2GJK</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2GJK</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API float c2GJK (const void * A, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const <link linkend="_structc2x">c2x</link> * ax_ptr, const void * B, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, const <link linkend="_structc2x">c2x</link> * bx_ptr, <link linkend="_structc2v">c2v</link> * outA, <link linkend="_structc2v">c2v</link> * outB, int use_radius, int * iterations, <link linkend="_structc2_g_j_k_cache">c2GJKCache</link> * cache)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ad7f2ad537d84324b6cdf35aec402a533"/><section>
+    <title>c2Hmax()</title>
+<indexterm><primary>c2Hmax</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Hmax</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Hmax (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00476">476</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00476 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084">c2Max</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a854ce80a68565875555fbf95c757c31c"/><section>
+    <title>c2Hmin()</title>
+<indexterm><primary>c2Hmin</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Hmin</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Hmin (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00475">475</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00475 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e">c2Min</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ac6a78404ac8cf8d93ecf905814e401b4"/><section>
+    <title>c2Hull()</title>
+<indexterm><primary>c2Hull</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Hull</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2Hull (<link linkend="_structc2v">c2v</link> * verts, int count)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1abeac284a08d795a95718607e28b29f0d"/><section>
+    <title>c2Inflate()</title>
+<indexterm><primary>c2Inflate</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Inflate</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2Inflate (void * shape, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> type, float skin_factor)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a9494e2e4322cd8bfc04b0d411f4c3cc0"/><section>
+    <title>c2Intersect()</title>
+<indexterm><primary>c2Intersect</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Intersect</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Intersect (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float da, float db)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00519">519</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00519 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link>(a,&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(<link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link>(b,&#32;a),&#32;(da&#32;/&#32;(da&#32;-&#32;db))));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341"/><section>
+    <title>c2Len()</title>
+<indexterm><primary>c2Len</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Len</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> float c2Len (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00477">477</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00477 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a98459522a3c01e751b614fee1c18b286">c2Sqrt</link>(<link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link>(a,&#32;a));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1afc415d7f1fa2031fed5130ac1758c461"/><section>
+    <title>c2Lerp()</title>
+<indexterm><primary>c2Lerp</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Lerp</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Lerp (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float t)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00481">481</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00481 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link>(a,&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(<link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link>(b,&#32;a),&#32;<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ab774831fd26859f18b0a36a09cf7064b"/><section>
+    <title>c2MakePoly()</title>
+<indexterm><primary>c2MakePoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MakePoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2MakePoly (<link linkend="_structc2_poly">c2Poly</link> * p)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ae8614649b7105f62fd5d96924e25e147"/><section>
+    <title>c2Maxv()</title>
+<indexterm><primary>c2Maxv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Maxv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Maxv (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00472">472</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00472 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(<link linkend="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084">c2Max</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>),&#32;<link linkend="_cute__c2_8h_1aece46f665bb44f92a188b15ff3fde084">c2Max</link>(a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>,&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1af92f21e15c4c80071db796f46ed8fcce"/><section>
+    <title>c2Minv()</title>
+<indexterm><primary>c2Minv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Minv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Minv (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00471">471</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00471 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(<link linkend="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e">c2Min</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>),&#32;<link linkend="_cute__c2_8h_1a996cff903c9114ecb6fca37b698e762e">c2Min</link>(a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>,&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a5f9375d498fd4c2c84ea89751a5538ed"/><section>
+    <title>c2Mulmm()</title>
+<indexterm><primary>c2Mulmm</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulmm</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2m">c2m</link> c2Mulmm (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2m">c2m</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00502">502</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00502 {&#32;<link linkend="_structc2m">c2m</link>&#32;c;&#32;c.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>&#32;=&#32;<link linkend="_cute__c2_8h_1ac12063c537c7aa685ee637d0362e1956">c2Mulmv</link>(a,&#32;b.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>);&#32;&#32;c.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>&#32;=&#32;<link linkend="_cute__c2_8h_1ac12063c537c7aa685ee637d0362e1956">c2Mulmv</link>(a,&#32;b.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a003777ba26a8c6440f4c9e379f75c077"/><section>
+    <title>c2MulmmT()</title>
+<indexterm><primary>c2MulmmT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulmmT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2m">c2m</link> c2MulmmT (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2m">c2m</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00503">503</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00503 {&#32;<link linkend="_structc2m">c2m</link>&#32;c;&#32;c.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a02429730284c3db0b2c992f9e6b7f6ce">c2MulmvT</link>(a,&#32;b.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>);&#32;c.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a02429730284c3db0b2c992f9e6b7f6ce">c2MulmvT</link>(a,&#32;b.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ac12063c537c7aa685ee637d0362e1956"/><section>
+    <title>c2Mulmv()</title>
+<indexterm><primary>c2Mulmv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulmv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Mulmv (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00500">500</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00500 {&#32;<link linkend="_structc2v">c2v</link>&#32;c;&#32;c.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;=&#32;a.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;c.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;=&#32;a.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a02429730284c3db0b2c992f9e6b7f6ce"/><section>
+    <title>c2MulmvT()</title>
+<indexterm><primary>c2MulmvT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulmvT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2MulmvT (<link linkend="_structc2m">c2m</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00501">501</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00501 {&#32;<link linkend="_structc2v">c2v</link>&#32;c;&#32;c.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;=&#32;a.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2m_1ad8ae6359cbed9334321c927f25e65e73">x</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;c.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;=&#32;a.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2m_1a5a37b8965d957e956af7b73c49932fd7">y</link>.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a9bfacd10ac51218d70dbe8d5e719f799"/><section>
+    <title>c2Mulrr()</title>
+<indexterm><primary>c2Mulrr</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulrr</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> c2Mulrr (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2r">c2r</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00497">497</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00497 {&#32;<link linkend="_structc2r">c2r</link>&#32;c;&#32;c.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;=&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;-&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>;&#32;c.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;=&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;+&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1acd93f6c20f9979dac113ddec536e79c8"/><section>
+    <title>c2MulrrT()</title>
+<indexterm><primary>c2MulrrT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulrrT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> c2MulrrT (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2r">c2r</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00498">498</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00498 {&#32;<link linkend="_structc2r">c2r</link>&#32;c;&#32;c.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;=&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;+&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>;&#32;c.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;=&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;-&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a802eb294e489b0a600840f5ba83c653b"/><section>
+    <title>c2Mulrv()</title>
+<indexterm><primary>c2Mulrv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulrv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Mulrv (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00495">495</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00495 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;-&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>,&#32;&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a8c28ce5953b2e6760bc640dd50d92a43"/><section>
+    <title>c2MulrvT()</title>
+<indexterm><primary>c2MulrvT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulrvT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2MulrvT (<link linkend="_structc2r">c2r</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00496">496</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00496 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>,&#32;-a.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;*&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;+&#32;a.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;*&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6"/><section>
+    <title>c2Mulvs()</title>
+<indexterm><primary>c2Mulvs</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulvs</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Mulvs (<link linkend="_structc2v">c2v</link> a, float b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00465">465</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00465 {&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*=&#32;b;&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*=&#32;b;&#32;<emphasis role="keywordflow">return</emphasis>&#32;a;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ab4686d6b5ef8593f52dfcaded35ec920"/><section>
+    <title>c2Mulvv()</title>
+<indexterm><primary>c2Mulvv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulvv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Mulvv (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00466">466</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00466 {&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;*=&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;*=&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;a;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ae90ce92ed1ddfbec6833433841079d8d"/><section>
+    <title>c2Mulxh()</title>
+<indexterm><primary>c2Mulxh</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulxh</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2h">c2h</link> c2Mulxh (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2h">c2h</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00517">517</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00517 {&#32;<link linkend="_structc2h">c2h</link>&#32;c;&#32;c.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a802eb294e489b0a600840f5ba83c653b">c2Mulrv</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>);&#32;c.<link linkend="_structc2h_1ac08ea6658ab87a29f34ee49a081ffb3f">d</link>&#32;=&#32;<link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link>(<link linkend="_cute__c2_8h_1a00e7e5eeeffc98bc6d2c98b36d4c9a89">c2Mulxv</link>(a,&#32;<link linkend="_cute__c2_8h_1aa6a22978ce1bf40972463d694bdbc60f">c2Origin</link>(b)),&#32;c.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a578cab5d4e482419d9eaae4feb16802a"/><section>
+    <title>c2MulxhT()</title>
+<indexterm><primary>c2MulxhT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulxhT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2h">c2h</link> c2MulxhT (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2h">c2h</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00518">518</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00518 {&#32;<link linkend="_structc2h">c2h</link>&#32;c;&#32;c.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a8c28ce5953b2e6760bc640dd50d92a43">c2MulrvT</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>);&#32;c.<link linkend="_structc2h_1ac08ea6658ab87a29f34ee49a081ffb3f">d</link>&#32;=&#32;<link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link>(<link linkend="_cute__c2_8h_1a5b6c48f69159b15f7b9299d2ed09c920">c2MulxvT</link>(a,&#32;<link linkend="_cute__c2_8h_1aa6a22978ce1bf40972463d694bdbc60f">c2Origin</link>(b)),&#32;c.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a00e7e5eeeffc98bc6d2c98b36d4c9a89"/><section>
+    <title>c2Mulxv()</title>
+<indexterm><primary>c2Mulxv</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulxv</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Mulxv (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00507">507</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00507 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link>(<link linkend="_cute__c2_8h_1a802eb294e489b0a600840f5ba83c653b">c2Mulrv</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b),&#32;a.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a5b6c48f69159b15f7b9299d2ed09c920"/><section>
+    <title>c2MulxvT()</title>
+<indexterm><primary>c2MulxvT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulxvT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2MulxvT (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00508">508</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00508 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a8c28ce5953b2e6760bc640dd50d92a43">c2MulrvT</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;<link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link>(b,&#32;a.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a238ecbf634a5e68491cfff4725700501"/><section>
+    <title>c2Mulxx()</title>
+<indexterm><primary>c2Mulxx</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Mulxx</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> c2Mulxx (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2x">c2x</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00509">509</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00509 {&#32;<link linkend="_structc2x">c2x</link>&#32;c;&#32;c.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a9bfacd10ac51218d70dbe8d5e719f799">c2Mulrr</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>);&#32;c.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>&#32;=&#32;<link linkend="_cute__c2_8h_1af9c128f433c17ba8893c3e8ee1de18b1">c2Add</link>(<link linkend="_cute__c2_8h_1a802eb294e489b0a600840f5ba83c653b">c2Mulrv</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>),&#32;a.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ad38af9936384626d0d9613687e662a06"/><section>
+    <title>c2MulxxT()</title>
+<indexterm><primary>c2MulxxT</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2MulxxT</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> c2MulxxT (<link linkend="_structc2x">c2x</link> a, <link linkend="_structc2x">c2x</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00510">510</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00510 {&#32;<link linkend="_structc2x">c2x</link>&#32;c;&#32;c.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>&#32;=&#32;<link linkend="_cute__c2_8h_1acd93f6c20f9979dac113ddec536e79c8">c2MulrrT</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;b.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>);&#32;c.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>&#32;=&#32;<link linkend="_cute__c2_8h_1a8c28ce5953b2e6760bc640dd50d92a43">c2MulrvT</link>(a.<link linkend="_structc2x_1a7542fe0c856a8cf3afab268c73b67fe7">r</link>,&#32;<link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link>(b.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>,&#32;a.<link linkend="_structc2x_1a940d4b80ef8117f245811323a4fbef57">p</link>));&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a7cb3cb1c48f3684b6db762bdc1ef8a71"/><section>
+    <title>c2Neg()</title>
+<indexterm><primary>c2Neg</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Neg</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Neg (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00480">480</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00480 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(-a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>,&#32;-a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ae228814d5417858c78336a3e7e2aa834"/><section>
+    <title>c2Norm()</title>
+<indexterm><primary>c2Norm</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Norm</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Norm (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00478">478</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00478 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a5dcf7563f13d8b8d5c2423a2f7134700">c2Div</link>(a,&#32;<link linkend="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341">c2Len</link>(a));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a99a88540199bcc905683dd3aa8c9be4a"/><section>
+    <title>c2Norms()</title>
+<indexterm><primary>c2Norms</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Norms</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2Norms (<link linkend="_structc2v">c2v</link> * verts, <link linkend="_structc2v">c2v</link> * norms, int count)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa6a22978ce1bf40972463d694bdbc60f"/><section>
+    <title>c2Origin()</title>
+<indexterm><primary>c2Origin</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Origin</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Origin (<link linkend="_structc2h">c2h</link> h)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00514">514</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00514 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(h.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>,&#32;h.<link linkend="_structc2h_1ac08ea6658ab87a29f34ee49a081ffb3f">d</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a631c57baa292018b735447e00f106ab3"/><section>
+    <title>c2Parallel()</title>
+<indexterm><primary>c2Parallel</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Parallel</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> int c2Parallel (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b, float kTol)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00482">482</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00483 {
+00484 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;k&#32;=&#32;<link linkend="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341">c2Len</link>(a)&#32;/&#32;<link linkend="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341">c2Len</link>(b);
+00485 &#32;&#32;&#32;&#32;b&#32;=&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(b,&#32;k);
+00486 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99">c2Abs</link>(a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;-&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>)&#32;&lt;&#32;kTol&#32;&amp;&amp;&#32;<link linkend="_cute__c2_8h_1aed326c8938c77a2a5644aa8a3f50cd99">c2Abs</link>(a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;-&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>)&#32;&lt;&#32;kTol)&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00487 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00488 }
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a01341a99ed0c0b731970e8853531d263"/><section>
+    <title>c2PolytoPoly()</title>
+<indexterm><primary>c2PolytoPoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2PolytoPoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2PolytoPoly (const <link linkend="_structc2_poly">c2Poly</link> * A, const <link linkend="_structc2x">c2x</link> * ax, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a9f7375003472cada253d2dc8e3ce82e1"/><section>
+    <title>c2PolytoPolyManifold()</title>
+<indexterm><primary>c2PolytoPolyManifold</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2PolytoPolyManifold</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API void c2PolytoPolyManifold (const <link linkend="_structc2_poly">c2Poly</link> * A, const <link linkend="_structc2x">c2x</link> * ax, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx, <link linkend="_structc2_manifold">c2Manifold</link> * m)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ad31c66f305695857b077d38bd09ec10b"/><section>
+    <title>c2Project()</title>
+<indexterm><primary>c2Project</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Project</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Project (<link linkend="_structc2h">c2h</link> h, <link linkend="_structc2v">c2v</link> p)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00516">516</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00516 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996">c2Sub</link>(p,&#32;<link linkend="_cute__c2_8h_1ad7bcce333f18b8c822b71380f91a2df6">c2Mulvs</link>(h.<link linkend="_structc2h_1ad9e65e9ed4970b9d482776b008a30747">n</link>,&#32;<link linkend="_cute__c2_8h_1a1aa5d97ad8706d1c527349fe02d231e6">c2Dist</link>(h,&#32;p)));&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a4d6b48728253a2c988cdc1ef40ba962f"/><section>
+    <title>c2RaytoAABB()</title>
+<indexterm><primary>c2RaytoAABB</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RaytoAABB</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2RaytoAABB (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_a_a_b_b">c2AABB</link> B, <link linkend="_structc2_raycast">c2Raycast</link> * out)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a1051e2151767c730da0e6d68188cf87f"/><section>
+    <title>c2RaytoCapsule()</title>
+<indexterm><primary>c2RaytoCapsule</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RaytoCapsule</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2RaytoCapsule (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_capsule">c2Capsule</link> B, <link linkend="_structc2_raycast">c2Raycast</link> * out)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1a3d8f4bd3f05216f8deb7fd53fae0e459"/><section>
+    <title>c2RaytoCircle()</title>
+<indexterm><primary>c2RaytoCircle</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RaytoCircle</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2RaytoCircle (<link linkend="_structc2_ray">c2Ray</link> A, <link linkend="_structc2_circle">c2Circle</link> B, <link linkend="_structc2_raycast">c2Raycast</link> * out)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1ad72453c4c53403ae7e46d328b95c4094"/><section>
+    <title>c2RaytoPoly()</title>
+<indexterm><primary>c2RaytoPoly</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RaytoPoly</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API int c2RaytoPoly (<link linkend="_structc2_ray">c2Ray</link> A, const <link linkend="_structc2_poly">c2Poly</link> * B, const <link linkend="_structc2x">c2x</link> * bx_ptr, <link linkend="_structc2_raycast">c2Raycast</link> * out)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1adc13fd86afde5b2f5b89cde00d0de67a"/><section>
+    <title>c2Rot()</title>
+<indexterm><primary>c2Rot</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Rot</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> c2Rot (float radians)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00491">491</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00491 {&#32;<link linkend="_structc2r">c2r</link>&#32;r;&#32;<link linkend="_cute__c2_8h_1ab79505fce1838f04a577094126815ac2">c2SinCos</link>(radians,&#32;&amp;r.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>,&#32;&amp;r.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>);&#32;<emphasis role="keywordflow">return</emphasis>&#32;r;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a2dc32a46c98171df81d473bda36a9e3a"/><section>
+    <title>c2RotIdentity()</title>
+<indexterm><primary>c2RotIdentity</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RotIdentity</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2r">c2r</link> c2RotIdentity (void )</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00492">492</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00492 {&#32;<link linkend="_structc2r">c2r</link>&#32;r;&#32;r.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>&#32;=&#32;1.0f;&#32;r.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>&#32;=&#32;0;&#32;<emphasis role="keywordflow">return</emphasis>&#32;r;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1aecc03cc63f1ada7a320aa065e6b2f9ec"/><section>
+    <title>c2RotX()</title>
+<indexterm><primary>c2RotX</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RotX</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2RotX (<link linkend="_structc2r">c2r</link> r)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00493">493</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00493 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(r.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>,&#32;r.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a00ebd0f4663f055912b9eb8dc9c7dfd8"/><section>
+    <title>c2RotY()</title>
+<indexterm><primary>c2RotY</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2RotY</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2RotY (<link linkend="_structc2r">c2r</link> r)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00494">494</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00494 {&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(-r.<link linkend="_structc2r_1aced979bcaf554926a02d825c4dad8269">s</link>,&#32;r.<link linkend="_structc2r_1a29682141c9233279c6e56f4044008b7e">c</link>);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a1d30280f8ccf7e8e1352848601c9a77e"/><section>
+    <title>c2SafeNorm()</title>
+<indexterm><primary>c2SafeNorm</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2SafeNorm</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2SafeNorm (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00479">479</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00479 {&#32;<emphasis role="keywordtype">float</emphasis>&#32;sq&#32;=&#32;<link linkend="_cute__c2_8h_1aa6626ef7243369048469b95c0b47a4f0">c2Dot</link>(a,&#32;a);&#32;<emphasis role="keywordflow">return</emphasis>&#32;sq&#32;?&#32;<link linkend="_cute__c2_8h_1a5dcf7563f13d8b8d5c2423a2f7134700">c2Div</link>(a,&#32;<link linkend="_cute__c2_8h_1a96d836581f519684ee26c5ba51f96341">c2Len</link>(a))&#32;:&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(0,&#32;0);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ab79505fce1838f04a577094126815ac2"/><section>
+    <title>c2SinCos()</title>
+<indexterm><primary>c2SinCos</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2SinCos</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> void c2SinCos (float radians, float * s, float * c)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00447">447</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00447 {&#32;*c&#32;=&#32;<link linkend="_cute__c2_8h_1a38ebab3d0198ef7c6d6cdc73a9c9b1fd">c2Cos</link>(radians);&#32;*s&#32;=&#32;<link linkend="_cute__c2_8h_1a847097bee54cfd2ece87ba0337247650">c2Sin</link>(radians);&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a797007d10175dd13b01c41fe60a14421"/><section>
+    <title>c2Skew()</title>
+<indexterm><primary>c2Skew</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Skew</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Skew (<link linkend="_structc2v">c2v</link> a)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00468">468</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00468 {&#32;<link linkend="_structc2v">c2v</link>&#32;b;&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;=&#32;-a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;=&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;b;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ab7708ad1d4e6eedff0e5d10e3fe75996"/><section>
+    <title>c2Sub()</title>
+<indexterm><primary>c2Sub</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Sub</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2Sub (<link linkend="_structc2v">c2v</link> a, <link linkend="_structc2v">c2v</link> b)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00463">463</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00463 {&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;-=&#32;b.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>;&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;-=&#32;b.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;a;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1af037486725ac78fda6956b9e5732c123"/><section>
+    <title>c2TOI()</title>
+<indexterm><primary>c2TOI</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2TOI</secondary></indexterm>
+<para><computeroutput>CUTE_C2_API <link linkend="_structc2_t_o_i_result">c2TOIResult</link> c2TOI (const void * A, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeA, const <link linkend="_structc2x">c2x</link> * ax_ptr, <link linkend="_structc2v">c2v</link> vA, const void * B, <link linkend="_cute__c2_8h_1a76ad98d209c84fd8a8b22e942fdb93f2">C2_TYPE</link> typeB, const <link linkend="_structc2x">c2x</link> * bx_ptr, <link linkend="_structc2v">c2v</link> vB, int use_radius)</computeroutput></para></section>
+<anchor xml:id="_cute__c2_8h_1aa641f62915695506f3956bdd29afa5fe"/><section>
+    <title>c2Transform()</title>
+<indexterm><primary>c2Transform</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2Transform</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> c2Transform (<link linkend="_structc2v">c2v</link> p, float radians)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00511">511</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00511 {&#32;<link linkend="_structc2x">c2x</link>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>.r&#32;=&#32;<link linkend="_cute__c2_8h_1adc13fd86afde5b2f5b89cde00d0de67a">c2Rot</link>(radians);&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>.p&#32;=&#32;p;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba"/><section>
+    <title>c2V()</title>
+<indexterm><primary>c2V</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2V</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2v">c2v</link> c2V (float x, float y)</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00461">461</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00461 {&#32;<link linkend="_structc2v">c2v</link>&#32;a;&#32;a.<link linkend="_structc2v_1a480a2b2c9db79b067b36b3add1e07b57">x</link>&#32;=&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;&#32;a.<link linkend="_structc2v_1a9273a55d043c53cba2326256a1ea441a">y</link>&#32;=&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>;&#32;<emphasis role="keywordflow">return</emphasis>&#32;a;&#32;}
+</programlisting></section>
+<anchor xml:id="_cute__c2_8h_1ab63b182f0108be1cfc2a6e3c370b57aa"/><section>
+    <title>c2xIdentity()</title>
+<indexterm><primary>c2xIdentity</primary><secondary>cute_c2.h</secondary></indexterm>
+<indexterm><primary>cute_c2.h</primary><secondary>c2xIdentity</secondary></indexterm>
+<para><computeroutput><link linkend="_cute__c2_8h_1ab1bc0055fb0bfdf13d7cdd16390a73fd">C2_INLINE</link> <link linkend="_structc2x">c2x</link> c2xIdentity (void )</computeroutput></para><para>
+Definition at line <link linkend="_cute__c2_8h_source_1l00506">506</link> of file <link linkend="_cute__c2_8h_source">cute_c2.h</link>.</para>
+<programlisting linenumbering="unnumbered">00506 {&#32;<link linkend="_structc2x">c2x</link>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>.p&#32;=&#32;<link linkend="_cute__c2_8h_1a77928b3580137381eefee44c224b35ba">c2V</link>(0,&#32;0);&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>.r&#32;=&#32;<link linkend="_cute__c2_8h_1a2dc32a46c98171df81d473bda36a9e3a">c2RotIdentity</link>();&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>;&#32;}
+</programlisting></section>
+</section>
+</section>

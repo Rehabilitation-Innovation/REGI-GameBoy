@@ -1,0 +1,556 @@
+\doxysection{inc/tinyengine.h File Reference}
+\hypertarget{tinyengine_8h}{}\label{tinyengine_8h}\index{inc/tinyengine.h@{inc/tinyengine.h}}
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}stdio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/spi.\+h"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+scene.\+h"{}}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include "{}hardware/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/vreg.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/pll.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/clocks.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/dma.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/irq.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/bus\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+ctrl.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/hstx\+\_\+fifo.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/structs/sio.\+h"{}}\newline
+{\ttfamily \#include "{}pico/multicore.\+h"{}}\newline
+{\ttfamily \#include "{}pico/sem.\+h"{}}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include "{}tinyengine\+\_\+framebuffer.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvec2}{vec2}}
+\item 
+struct \mbox{\hyperlink{structtinyengine__renderer__handle__t}{tinyengine\+\_\+renderer\+\_\+handle\+\_\+t}}
+\item 
+class \mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}}
+\item 
+class \mbox{\hyperlink{class_tiny_engine}{Tiny\+Engine}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_af09ded747d8574dde114e97c025ddc44}{CUTE\+\_\+\+C2\+\_\+\+IMPLEMENTATION}}
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_abdeb08b95394f8152bb146fd9a9139c4}{telog}}(M, ...)
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a38fde61de8aaed11e78da474addd0755}{teerr}}(M, ...)
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ab370040868943afd827cc4ce9d917242}{TE\+\_\+\+COLOR\+\_\+\+BLUE}}~0x001F
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a2705ad9106922e638b43eb2bbf6ed8c4}{TE\+\_\+\+COLOR\+\_\+\+RED}}~0x\+F800
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ae5c7c054055dc1d875a746b2606bdbac}{TE\+\_\+\+COLOR\+\_\+\+GREEN}}~0x07\+E0
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a2051e8efc82d2958d05ab90a5eb138da}{TE\+\_\+\+COLOR\+\_\+\+CYAN}}~0x07\+FF
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a68e43f2e4742f8526e59782457ea1c74}{TE\+\_\+\+COLOR\+\_\+\+MAGENTA}}~0x\+F81F
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a6d4a160624bfb3f6f0a83787620cf912}{TE\+\_\+\+COLOR\+\_\+\+YELLOW}}~0x\+FFE0
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a2be840f8f294d0a16018cb88c1cabb81}{TE\+\_\+\+COLOR\+\_\+\+WHITE}}~0x\+FFFF
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a84244353ff413bf0752033faa8acf29d}{TE\+\_\+\+COLOR\+\_\+\+TAN}}~0x\+ED01
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ac0c0b32ed3d1d91e6f267e928e0d3660}{TE\+\_\+\+COLOR\+\_\+\+GREY}}~0x9\+CD1
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a26f0b7ac0ea5e303c4e564a32599c53a}{TE\+\_\+\+COLOR\+\_\+\+BROWN}}~0x6201
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ad41de79c985b48c62cdadbe19f8f27d4}{TE\+\_\+\+COLOR\+\_\+\+DGREEN}}~0x01\+C0
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a1d95e97d9a1e82a66c7373b9cf745b08}{TE\+\_\+\+COLOR\+\_\+\+ORANGE}}~0x\+FC00
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ade4675c86e06c0a997dc769f799ebf38}{TE\+\_\+\+COLOR\+\_\+\+NAVY}}~0x000F
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ab11bb2f6e08ece2f89dc098d6e8c764f}{TE\+\_\+\+COLOR\+\_\+\+DCYAN}}~0x03\+EF
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a8a8678b610892e342b813cb858ca8052}{TE\+\_\+\+COLOR\+\_\+\+MAROON}}~0x7800
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_aa36f08934c3b68f9df11d5b2aa2f405b}{TE\+\_\+\+COLOR\+\_\+\+PURPLE}}~0x780F
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_aa7f90910d1ed9db3fea93435031d1a6e}{TE\+\_\+\+COLOR\+\_\+\+OLIVE}}~0x7\+BE0
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a30a3ab8acea6fff9e999949d841d81d8}{TE\+\_\+\+COLOR\+\_\+\+LGREY}}~0x\+C618
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_afd5404fa19a3f6a2a58cb2a32f6a1ff6}{TE\+\_\+\+COLOR\+\_\+\+DGREY}}~0x7\+BEF
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a1f0100008e14391e317a43ff72310013}{TE\+\_\+\+COLOR\+\_\+\+GYELLOW}}~0x\+AFE5
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a2d8c832e3867bbb0a9da62e452916552}{TE\+\_\+\+COLOR\+\_\+\+PINK}}~0x\+FC18
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_ae64d08f0e83482bd340af3026f96dfbc}{TE\+\_\+\+COLOR\+\_\+\+LBLUE}}~0x7\+E5F
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a59d5594fe685d6af5d9e7b84df48c21f}{TE\+\_\+\+COLOR\+\_\+\+BLACK}}~0x0000
+\item 
+\#define \mbox{\hyperlink{tinyengine_8h_a829fe390136dd6a8d694d3cb79239a1d}{TE\+\_\+\+COLOR\+\_\+\+BEIGE}}~0x\+B5\+D2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tinyengine_8h_a76b533bee9971abbcb979aa618d83a38}{tinyengine\+\_\+init\+\_\+clbk\+\_\+t}}) ()
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3}{te\+\_\+draw\+\_\+pixel\+\_\+func\+\_\+t}}) (uint8\+\_\+t \texorpdfstring{$\ast$}{*}pixel\+\_\+buffer, uint32\+\_\+t len)
+\item 
+typedef \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tinyengine_8h_af40e0caed873f0d43c9aa17f9305097c}{tinyengine\+\_\+clbk\+\_\+t}}) (double delta)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \{ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\+\_\+\+OK}}
+, \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744}{TINYENGINE\+\_\+\+ERROR}}
+, \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944}{TINYENGINE\+\_\+\+RENDER\+\_\+\+ERROR}}
+, \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\+\_\+\+OUTOFBOUNDS\+\_\+\+ERROR}}
+ \}
+\item 
+enum \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{tinyengine\+\_\+renderer\+\_\+t}} \{ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2}{TINYENGINE\+\_\+\+RENDERER\+\_\+\+DVI}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tinyengine_8h_a141e0e4cfccde883fde46e6908a6cf9e}{set\+\_\+frequency}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tinyengine_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tinyengine_8h_af09ded747d8574dde114e97c025ddc44}\index{tinyengine.h@{tinyengine.h}!CUTE\_C2\_IMPLEMENTATION@{CUTE\_C2\_IMPLEMENTATION}}
+\index{CUTE\_C2\_IMPLEMENTATION@{CUTE\_C2\_IMPLEMENTATION}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{CUTE\_C2\_IMPLEMENTATION}{CUTE\_C2\_IMPLEMENTATION}}
+{\footnotesize\ttfamily \label{tinyengine_8h_af09ded747d8574dde114e97c025ddc44} 
+\#define CUTE\+\_\+\+C2\+\_\+\+IMPLEMENTATION}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00023}{23}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a829fe390136dd6a8d694d3cb79239a1d}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_BEIGE@{TE\_COLOR\_BEIGE}}
+\index{TE\_COLOR\_BEIGE@{TE\_COLOR\_BEIGE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_BEIGE}{TE\_COLOR\_BEIGE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a829fe390136dd6a8d694d3cb79239a1d} 
+\#define TE\+\_\+\+COLOR\+\_\+\+BEIGE~0x\+B5\+D2}
+
+Beige 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00180}{180}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a59d5594fe685d6af5d9e7b84df48c21f}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_BLACK@{TE\_COLOR\_BLACK}}
+\index{TE\_COLOR\_BLACK@{TE\_COLOR\_BLACK}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_BLACK}{TE\_COLOR\_BLACK}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a59d5594fe685d6af5d9e7b84df48c21f} 
+\#define TE\+\_\+\+COLOR\+\_\+\+BLACK~0x0000}
+
+Black 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00179}{179}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ab370040868943afd827cc4ce9d917242}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_BLUE@{TE\_COLOR\_BLUE}}
+\index{TE\_COLOR\_BLUE@{TE\_COLOR\_BLUE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_BLUE}{TE\_COLOR\_BLUE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ab370040868943afd827cc4ce9d917242} 
+\#define TE\+\_\+\+COLOR\+\_\+\+BLUE~0x001F}
+
+Blue 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00157}{157}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a26f0b7ac0ea5e303c4e564a32599c53a}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_BROWN@{TE\_COLOR\_BROWN}}
+\index{TE\_COLOR\_BROWN@{TE\_COLOR\_BROWN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_BROWN}{TE\_COLOR\_BROWN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a26f0b7ac0ea5e303c4e564a32599c53a} 
+\#define TE\+\_\+\+COLOR\+\_\+\+BROWN~0x6201}
+
+Brown 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00166}{166}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a2051e8efc82d2958d05ab90a5eb138da}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_CYAN@{TE\_COLOR\_CYAN}}
+\index{TE\_COLOR\_CYAN@{TE\_COLOR\_CYAN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_CYAN}{TE\_COLOR\_CYAN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a2051e8efc82d2958d05ab90a5eb138da} 
+\#define TE\+\_\+\+COLOR\+\_\+\+CYAN~0x07\+FF}
+
+Cyan 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00160}{160}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ab11bb2f6e08ece2f89dc098d6e8c764f}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_DCYAN@{TE\_COLOR\_DCYAN}}
+\index{TE\_COLOR\_DCYAN@{TE\_COLOR\_DCYAN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_DCYAN}{TE\_COLOR\_DCYAN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ab11bb2f6e08ece2f89dc098d6e8c764f} 
+\#define TE\+\_\+\+COLOR\+\_\+\+DCYAN~0x03\+EF}
+
+Dark Cyan 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00170}{170}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ad41de79c985b48c62cdadbe19f8f27d4}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_DGREEN@{TE\_COLOR\_DGREEN}}
+\index{TE\_COLOR\_DGREEN@{TE\_COLOR\_DGREEN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_DGREEN}{TE\_COLOR\_DGREEN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ad41de79c985b48c62cdadbe19f8f27d4} 
+\#define TE\+\_\+\+COLOR\+\_\+\+DGREEN~0x01\+C0}
+
+Dark Green 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00167}{167}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_afd5404fa19a3f6a2a58cb2a32f6a1ff6}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_DGREY@{TE\_COLOR\_DGREY}}
+\index{TE\_COLOR\_DGREY@{TE\_COLOR\_DGREY}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_DGREY}{TE\_COLOR\_DGREY}}
+{\footnotesize\ttfamily \label{tinyengine_8h_afd5404fa19a3f6a2a58cb2a32f6a1ff6} 
+\#define TE\+\_\+\+COLOR\+\_\+\+DGREY~0x7\+BEF}
+
+Dark Grey 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00175}{175}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ae5c7c054055dc1d875a746b2606bdbac}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_GREEN@{TE\_COLOR\_GREEN}}
+\index{TE\_COLOR\_GREEN@{TE\_COLOR\_GREEN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_GREEN}{TE\_COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ae5c7c054055dc1d875a746b2606bdbac} 
+\#define TE\+\_\+\+COLOR\+\_\+\+GREEN~0x07\+E0}
+
+Green 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00159}{159}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ac0c0b32ed3d1d91e6f267e928e0d3660}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_GREY@{TE\_COLOR\_GREY}}
+\index{TE\_COLOR\_GREY@{TE\_COLOR\_GREY}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_GREY}{TE\_COLOR\_GREY}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ac0c0b32ed3d1d91e6f267e928e0d3660} 
+\#define TE\+\_\+\+COLOR\+\_\+\+GREY~0x9\+CD1}
+
+Grey 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00165}{165}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a1f0100008e14391e317a43ff72310013}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_GYELLOW@{TE\_COLOR\_GYELLOW}}
+\index{TE\_COLOR\_GYELLOW@{TE\_COLOR\_GYELLOW}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_GYELLOW}{TE\_COLOR\_GYELLOW}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a1f0100008e14391e317a43ff72310013} 
+\#define TE\+\_\+\+COLOR\+\_\+\+GYELLOW~0x\+AFE5}
+
+Greenish Yellow 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00176}{176}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ae64d08f0e83482bd340af3026f96dfbc}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_LBLUE@{TE\_COLOR\_LBLUE}}
+\index{TE\_COLOR\_LBLUE@{TE\_COLOR\_LBLUE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_LBLUE}{TE\_COLOR\_LBLUE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ae64d08f0e83482bd340af3026f96dfbc} 
+\#define TE\+\_\+\+COLOR\+\_\+\+LBLUE~0x7\+E5F}
+
+Light Blue 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00178}{178}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a30a3ab8acea6fff9e999949d841d81d8}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_LGREY@{TE\_COLOR\_LGREY}}
+\index{TE\_COLOR\_LGREY@{TE\_COLOR\_LGREY}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_LGREY}{TE\_COLOR\_LGREY}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a30a3ab8acea6fff9e999949d841d81d8} 
+\#define TE\+\_\+\+COLOR\+\_\+\+LGREY~0x\+C618}
+
+Light Grey 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00174}{174}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a68e43f2e4742f8526e59782457ea1c74}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_MAGENTA@{TE\_COLOR\_MAGENTA}}
+\index{TE\_COLOR\_MAGENTA@{TE\_COLOR\_MAGENTA}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_MAGENTA}{TE\_COLOR\_MAGENTA}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a68e43f2e4742f8526e59782457ea1c74} 
+\#define TE\+\_\+\+COLOR\+\_\+\+MAGENTA~0x\+F81F}
+
+Magenta 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00161}{161}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a8a8678b610892e342b813cb858ca8052}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_MAROON@{TE\_COLOR\_MAROON}}
+\index{TE\_COLOR\_MAROON@{TE\_COLOR\_MAROON}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_MAROON}{TE\_COLOR\_MAROON}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a8a8678b610892e342b813cb858ca8052} 
+\#define TE\+\_\+\+COLOR\+\_\+\+MAROON~0x7800}
+
+Maroon 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00171}{171}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_ade4675c86e06c0a997dc769f799ebf38}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_NAVY@{TE\_COLOR\_NAVY}}
+\index{TE\_COLOR\_NAVY@{TE\_COLOR\_NAVY}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_NAVY}{TE\_COLOR\_NAVY}}
+{\footnotesize\ttfamily \label{tinyengine_8h_ade4675c86e06c0a997dc769f799ebf38} 
+\#define TE\+\_\+\+COLOR\+\_\+\+NAVY~0x000F}
+
+Navy 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00169}{169}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_aa7f90910d1ed9db3fea93435031d1a6e}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_OLIVE@{TE\_COLOR\_OLIVE}}
+\index{TE\_COLOR\_OLIVE@{TE\_COLOR\_OLIVE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_OLIVE}{TE\_COLOR\_OLIVE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_aa7f90910d1ed9db3fea93435031d1a6e} 
+\#define TE\+\_\+\+COLOR\+\_\+\+OLIVE~0x7\+BE0}
+
+Olive 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00173}{173}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a1d95e97d9a1e82a66c7373b9cf745b08}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_ORANGE@{TE\_COLOR\_ORANGE}}
+\index{TE\_COLOR\_ORANGE@{TE\_COLOR\_ORANGE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_ORANGE}{TE\_COLOR\_ORANGE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a1d95e97d9a1e82a66c7373b9cf745b08} 
+\#define TE\+\_\+\+COLOR\+\_\+\+ORANGE~0x\+FC00}
+
+Orange 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00168}{168}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a2d8c832e3867bbb0a9da62e452916552}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_PINK@{TE\_COLOR\_PINK}}
+\index{TE\_COLOR\_PINK@{TE\_COLOR\_PINK}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_PINK}{TE\_COLOR\_PINK}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a2d8c832e3867bbb0a9da62e452916552} 
+\#define TE\+\_\+\+COLOR\+\_\+\+PINK~0x\+FC18}
+
+Pink 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00177}{177}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_aa36f08934c3b68f9df11d5b2aa2f405b}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_PURPLE@{TE\_COLOR\_PURPLE}}
+\index{TE\_COLOR\_PURPLE@{TE\_COLOR\_PURPLE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_PURPLE}{TE\_COLOR\_PURPLE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_aa36f08934c3b68f9df11d5b2aa2f405b} 
+\#define TE\+\_\+\+COLOR\+\_\+\+PURPLE~0x780F}
+
+Purple 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00172}{172}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a2705ad9106922e638b43eb2bbf6ed8c4}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_RED@{TE\_COLOR\_RED}}
+\index{TE\_COLOR\_RED@{TE\_COLOR\_RED}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_RED}{TE\_COLOR\_RED}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a2705ad9106922e638b43eb2bbf6ed8c4} 
+\#define TE\+\_\+\+COLOR\+\_\+\+RED~0x\+F800}
+
+Red 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00158}{158}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a84244353ff413bf0752033faa8acf29d}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_TAN@{TE\_COLOR\_TAN}}
+\index{TE\_COLOR\_TAN@{TE\_COLOR\_TAN}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_TAN}{TE\_COLOR\_TAN}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a84244353ff413bf0752033faa8acf29d} 
+\#define TE\+\_\+\+COLOR\+\_\+\+TAN~0x\+ED01}
+
+Tan 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00164}{164}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a2be840f8f294d0a16018cb88c1cabb81}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_WHITE@{TE\_COLOR\_WHITE}}
+\index{TE\_COLOR\_WHITE@{TE\_COLOR\_WHITE}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_WHITE}{TE\_COLOR\_WHITE}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a2be840f8f294d0a16018cb88c1cabb81} 
+\#define TE\+\_\+\+COLOR\+\_\+\+WHITE~0x\+FFFF}
+
+White 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00163}{163}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a6d4a160624bfb3f6f0a83787620cf912}\index{tinyengine.h@{tinyengine.h}!TE\_COLOR\_YELLOW@{TE\_COLOR\_YELLOW}}
+\index{TE\_COLOR\_YELLOW@{TE\_COLOR\_YELLOW}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{TE\_COLOR\_YELLOW}{TE\_COLOR\_YELLOW}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a6d4a160624bfb3f6f0a83787620cf912} 
+\#define TE\+\_\+\+COLOR\+\_\+\+YELLOW~0x\+FFE0}
+
+Yellow 
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00162}{162}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a38fde61de8aaed11e78da474addd0755}\index{tinyengine.h@{tinyengine.h}!teerr@{teerr}}
+\index{teerr@{teerr}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{teerr}{teerr}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a38fde61de8aaed11e78da474addd0755} 
+\#define teerr(\begin{DoxyParamCaption}\item[{}]{M}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ printf(\textcolor{stringliteral}{"{}[Tiny\ Engine\ ERROR]\ (\%s:\%d)"{}}\ M\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00034}{34}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ teerr(M,\ ...)\ \(\backslash\) }}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ printf("{}[Tiny\ Engine\ ERROR]\ (\%s:\%d)"{}\ M\ "{}\(\backslash\)r\(\backslash\)n"{},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_) }}
+
+\end{DoxyCode}
+\Hypertarget{tinyengine_8h_abdeb08b95394f8152bb146fd9a9139c4}\index{tinyengine.h@{tinyengine.h}!telog@{telog}}
+\index{telog@{telog}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{telog}{telog}}
+{\footnotesize\ttfamily \label{tinyengine_8h_abdeb08b95394f8152bb146fd9a9139c4} 
+\#define telog(\begin{DoxyParamCaption}\item[{}]{M}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ printf(\textcolor{stringliteral}{"{}[Tiny\ Engine\ Log]\ (\%s:\%d)"{}}\ M\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00031}{31}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ telog(M,\ ...)\ \(\backslash\) }}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ printf("{}[Tiny\ Engine\ Log]\ (\%s:\%d)"{}\ M\ "{}\(\backslash\)r\(\backslash\)n"{},\ \_\_BASE\_FILE\_\_,\ \_\_LINE\_\_,\ \#\#\_\_VA\_ARGS\_\_) }}
+
+\end{DoxyCode}
+
+
+\label{doc-typedef-members}
+\Hypertarget{tinyengine_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3}\index{tinyengine.h@{tinyengine.h}!te\_draw\_pixel\_func\_t@{te\_draw\_pixel\_func\_t}}
+\index{te\_draw\_pixel\_func\_t@{te\_draw\_pixel\_func\_t}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{te\_draw\_pixel\_func\_t}{te\_draw\_pixel\_func\_t}}
+{\footnotesize\ttfamily \label{tinyengine_8h_af37f7e92fca39d7c407aa23781bf1ac3} 
+typedef void(\texorpdfstring{$\ast$}{*} te\+\_\+draw\+\_\+pixel\+\_\+func\+\_\+t) (uint8\+\_\+t \texorpdfstring{$\ast$}{*}pixel\+\_\+buffer, uint32\+\_\+t len)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00063}{63}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_af40e0caed873f0d43c9aa17f9305097c}\index{tinyengine.h@{tinyengine.h}!tinyengine\_clbk\_t@{tinyengine\_clbk\_t}}
+\index{tinyengine\_clbk\_t@{tinyengine\_clbk\_t}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{tinyengine\_clbk\_t}{tinyengine\_clbk\_t}}
+{\footnotesize\ttfamily \label{tinyengine_8h_af40e0caed873f0d43c9aa17f9305097c} 
+typedef \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(\texorpdfstring{$\ast$}{*} tinyengine\+\_\+clbk\+\_\+t) (double delta)}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00072}{72}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+\Hypertarget{tinyengine_8h_a76b533bee9971abbcb979aa618d83a38}\index{tinyengine.h@{tinyengine.h}!tinyengine\_init\_clbk\_t@{tinyengine\_init\_clbk\_t}}
+\index{tinyengine\_init\_clbk\_t@{tinyengine\_init\_clbk\_t}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{tinyengine\_init\_clbk\_t}{tinyengine\_init\_clbk\_t}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a76b533bee9971abbcb979aa618d83a38} 
+typedef \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}(\texorpdfstring{$\ast$}{*} tinyengine\+\_\+init\+\_\+clbk\+\_\+t) ()}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00060}{60}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{tinyengine_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}\index{tinyengine.h@{tinyengine.h}!tinyengine\_renderer\_t@{tinyengine\_renderer\_t}}
+\index{tinyengine\_renderer\_t@{tinyengine\_renderer\_t}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{tinyengine\_renderer\_t}{tinyengine\_renderer\_t}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b} 
+enum \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{tinyengine\+\_\+renderer\+\_\+t}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TINYENGINE\_RENDERER\_DVI@{TINYENGINE\_RENDERER\_DVI}!tinyengine.h@{tinyengine.h}}\index{tinyengine.h@{tinyengine.h}!TINYENGINE\_RENDERER\_DVI@{TINYENGINE\_RENDERER\_DVI}}}\Hypertarget{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2}\label{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2} 
+TINYENGINE\+\_\+\+RENDERER\+\_\+\+DVI&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00054}{54}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2}{TINYENGINE\_RENDERER\_DVI}},}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ TINYENGINE\_RENDERER\_LCD\_ST7735R,\ \ //\ 1.8\ in\ adafruit\ green\ tab\ with\ sdcard}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//\ TINYENGINE\_RENDERER\_LCD\_ILI9488,\ \ //\ 3.5\ in\ waveshare\ dev\ kit\ with\ sdcard}}
+\DoxyCodeLine{00058\ \}\ \mbox{\hyperlink{tinyengine_8h_a5e3e54543d9b8db6eb20aac03f3c8e9b}{tinyengine\_renderer\_t}};}
+
+\end{DoxyCode}
+\Hypertarget{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}\index{tinyengine.h@{tinyengine.h}!tinyengine\_status\_t@{tinyengine\_status\_t}}
+\index{tinyengine\_status\_t@{tinyengine\_status\_t}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{tinyengine\_status\_t}{tinyengine\_status\_t}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40} 
+enum \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TINYENGINE\_OK@{TINYENGINE\_OK}!tinyengine.h@{tinyengine.h}}\index{tinyengine.h@{tinyengine.h}!TINYENGINE\_OK@{TINYENGINE\_OK}}}\Hypertarget{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}\label{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7} 
+TINYENGINE\+\_\+\+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TINYENGINE\_ERROR@{TINYENGINE\_ERROR}!tinyengine.h@{tinyengine.h}}\index{tinyengine.h@{tinyengine.h}!TINYENGINE\_ERROR@{TINYENGINE\_ERROR}}}\Hypertarget{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744}\label{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744} 
+TINYENGINE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TINYENGINE\_RENDER\_ERROR@{TINYENGINE\_RENDER\_ERROR}!tinyengine.h@{tinyengine.h}}\index{tinyengine.h@{tinyengine.h}!TINYENGINE\_RENDER\_ERROR@{TINYENGINE\_RENDER\_ERROR}}}\Hypertarget{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944}\label{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944} 
+TINYENGINE\+\_\+\+RENDER\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TINYENGINE\_OUTOFBOUNDS\_ERROR@{TINYENGINE\_OUTOFBOUNDS\_ERROR}!tinyengine.h@{tinyengine.h}}\index{tinyengine.h@{tinyengine.h}!TINYENGINE\_OUTOFBOUNDS\_ERROR@{TINYENGINE\_OUTOFBOUNDS\_ERROR}}}\Hypertarget{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}\label{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d} 
+TINYENGINE\+\_\+\+OUTOFBOUNDS\+\_\+\+ERROR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8h_source_l00045}{45}} of file \mbox{\hyperlink{tinyengine_8h_source}{tinyengine.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}},}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744}{TINYENGINE\_ERROR}},}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944}{TINYENGINE\_RENDER\_ERROR}},}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\_OUTOFBOUNDS\_ERROR}}}
+\DoxyCodeLine{00050\ \}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}};}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{tinyengine_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{tinyengine_8h_a141e0e4cfccde883fde46e6908a6cf9e}\index{tinyengine.h@{tinyengine.h}!set\_frequency@{set\_frequency}}
+\index{set\_frequency@{set\_frequency}!tinyengine.h@{tinyengine.h}}
+\doxysubsubsection{\texorpdfstring{set\_frequency()}{set\_frequency()}}
+{\footnotesize\ttfamily \label{tinyengine_8h_a141e0e4cfccde883fde46e6908a6cf9e} 
+void set\+\_\+frequency (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00097}{97}} of file \mbox{\hyperlink{tinyengine_8cpp_source}{tinyengine.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ vreg\_set\_voltage(VREG\_VOLTAGE\_1\_30);}
+\DoxyCodeLine{00099\ \ \ \ \ set\_sys\_clock\_khz(315000,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00100\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ clk\_peri,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ 315000\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00106\ \ \ \ \ );}
+\DoxyCodeLine{00107\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ clk\_hstx,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ 315000\ /\ 2\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{00113\ \ \ \ \ );}
+\DoxyCodeLine{00114\ \ \ \ \ exception\_set\_exclusive\_handler(HARDFAULT\_EXCEPTION,\ hardfault);}
+\DoxyCodeLine{00115\ \}}
+
+\end{DoxyCode}

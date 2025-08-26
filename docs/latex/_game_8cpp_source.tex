@@ -1,0 +1,65 @@
+\doxysection{Game.\+cpp}
+\hypertarget{_game_8cpp_source}{}\label{_game_8cpp_source}\index{src/Game.cpp@{src/Game.cpp}}
+\mbox{\hyperlink{_game_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__renderer_8h}{tinyengine\_renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__audio_8h}{tinyengine\_audio.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__renderer__dvi_8h}{tinyengine\_renderer\_dvi.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}pico/rand.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}hardware/pwm.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}memory.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <malloc.h>}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_8h}{Game.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00022}00022\ \textcolor{comment}{//\ \#include\ "{}BootLoaderScreen.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00023}00023\ \textcolor{comment}{//\ \#include\ "{}DinoGame.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00024}00024\ \textcolor{comment}{//\ \#include\ "{}GameScene.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00025}00025\ \textcolor{comment}{//\ \#include\ "{}Pong.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00026}00026\ \textcolor{comment}{//\ \#include\ "{}scenes/SnakeGame.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00028}00028\ \textcolor{comment}{//\ void\ Game::run()}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00029}00029\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00030}00030\ \textcolor{comment}{//\ \ \ \ \ TinyEngineFrameBuffer\ frame\_buf(320,\ 240,\ true);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00031}00031\ \textcolor{comment}{//\ \ \ \ \ TinyEngineRendererDVI\ dvi(frame\_buf);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00032}00032\ \textcolor{comment}{//\ \ \ \ \ TinyEngine\ engine(dvi);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00034}00034\ \textcolor{comment}{//\ \ \ \ \ //\ SnakeGame\ scene(frame\_buf,\ dvi,\ engine);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00035}00035\ \textcolor{comment}{//\ \ \ \ \ DinoGame\ scene(frame\_buf,\ dvi,\ engine);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00036}00036\ \textcolor{comment}{//\ \ \ \ \ //\ Pong\ scene(frame\_buf,\ dvi,\ engine);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00037}00037\ \textcolor{comment}{//\ \ \ \ \ //\ BootLoaderScreen\ scene(frame\_buf,\ dvi,\ engine);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00038}00038\ \textcolor{comment}{//\ \ \ \ \ scene.create();}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00040}00040\ \textcolor{comment}{//\ \ \ \ \ engine.set\_pre\_inti\_clbk([\&]()}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00041}00041\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00042}00042\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ TINYENGINE\_OK;}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00043}00043\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00044}00044\ \textcolor{comment}{//\ \ \ \ \ engine.set\_render\_clbk([\&]()}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00045}00045\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00046}00046\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ scene.render();}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00047}00047\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ TINYENGINE\_OK;}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00048}00048\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00049}00049\ \textcolor{comment}{//\ \ \ \ \ engine.set\_update\_clbk([\&](double\ frameTime)}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00050}00050\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00051}00051\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ scene.update(frameTime);}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00053}00053\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ TINYENGINE\_OK;}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00054}00054\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00056}00056\ \textcolor{comment}{//\ \ \ \ \ engine.init();}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00057}00057\ \textcolor{comment}{//\ \ \ \ \ engine.start();}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00058}00058\ \textcolor{comment}{//\ \ \ \ \ engine.start\_loop();}}
+\DoxyCodeLine{\Hypertarget{_game_8cpp_source_l00059}00059\ \textcolor{comment}{//\ \}}}
+
+\end{DoxyCode}

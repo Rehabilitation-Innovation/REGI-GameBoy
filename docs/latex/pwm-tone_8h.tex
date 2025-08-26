@@ -1,0 +1,278 @@
+\doxysection{inc/pwm-\/tone.h File Reference}
+\hypertarget{pwm-tone_8h}{}\label{pwm-tone_8h}\index{inc/pwm-\/tone.h@{inc/pwm-\/tone.h}}
+
+
+PWM Tone generation library for Raspberry Pi Pico. Plays melodies and chirping sounds via PWM through a buzzer or speaker.  
+
+
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}pitches.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnote__t}{note\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a musical note. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmelody__t}{melody\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a musical melody. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a tone generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct note\+\_\+t \mbox{\hyperlink{pwm-tone_8h_a740a9e45c23915e84ffa545cb51d2f91}{note\+\_\+t}}
+\item 
+typedef struct melody\+\_\+t \mbox{\hyperlink{pwm-tone_8h_a2e48bb77dbb3015af4376b157e8b2bd3}{melody\+\_\+t}}
+\item 
+typedef struct tonegenerator\+\_\+t \mbox{\hyperlink{pwm-tone_8h_aec190e0f4998d86760fd9820c9bce07e}{tonegenerator\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pwm-tone_8h_a6007f918a626559d13695f7c8fccce1f}{tone\+\_\+init}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, uint8\+\_\+t gpio)
+\begin{DoxyCompactList}\small\item\em Initializes the tone generator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a6be2aff54804e191b2eec031a3657cd3}{tone}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, int freq, uint16\+\_\+t duration)
+\begin{DoxyCompactList}\small\item\em Plays a single tone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_ab23c799acb63da00a9d9f0d1d5c5196a}{melody}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, \mbox{\hyperlink{structnote__t}{note\+\_\+t}} \texorpdfstring{$\ast$}{*}notes, int8\+\_\+t repeat)
+\begin{DoxyCompactList}\small\item\em Plays a melody. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_ac124ae29e40f75662b6327b3a99185b8}{set\+\_\+tempo}} (uint16\+\_\+t bpm)
+\begin{DoxyCompactList}\small\item\em Sets the tempo (in bpm). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a6004e97a98d19f40a6893e47e9d9e4f0}{set\+\_\+rest\+\_\+duration}} (uint16\+\_\+t duration)
+\begin{DoxyCompactList}\small\item\em Sets the rest duration (in ms). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a3ec0d39f66fb7cfa934cac14e1d6a2a7}{stop\+\_\+tone}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen)
+\begin{DoxyCompactList}\small\item\em Stops the current tone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a3123c1851a4e308ee3b84662745a3d0c}{stop\+\_\+melody}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen)
+\begin{DoxyCompactList}\small\item\em Stops the current melody. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a0e126b5cec56bfaae6e7f584d483be86}{\+\_\+pwm\+\_\+set\+\_\+freq}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, float freq)
+\begin{DoxyCompactList}\small\item\em Sets the PWM frequency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a9a9c51b018a140f3ee179340724dc633}{\+\_\+tone\+\_\+pwm\+\_\+on}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, int freq)
+\begin{DoxyCompactList}\small\item\em Turns on the PWM tone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_a4fe9d81d945334839eaf69c9fe47e272}{\+\_\+melody\+\_\+step}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen)
+\begin{DoxyCompactList}\small\item\em Steps through the melody. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm-tone_8h_add4161b3db73026e90a90549cae46a54}{\+\_\+melody\+\_\+tone}} (\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}gen, int freq, uint16\+\_\+t duration)
+\begin{DoxyCompactList}\small\item\em Plays a single note in the melody. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+PWM Tone generation library for Raspberry Pi Pico. Plays melodies and chirping sounds via PWM through a buzzer or speaker. 
+
+\begin{DoxyAuthor}{Author}
+Turi Scandurra 
+\end{DoxyAuthor}
+\begin{DoxySeeAlso}{See also}
+\href{https://turiscandurra.com/circuits}{\texttt{https\+://turiscandurra.\+com/circuits}} 
+\end{DoxySeeAlso}
+
+
+Definition in file \mbox{\hyperlink{pwm-tone_8h_source}{pwm-\/tone.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{pwm-tone_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{pwm-tone_8h_a2e48bb77dbb3015af4376b157e8b2bd3}\index{pwm-\/tone.h@{pwm-\/tone.h}!melody\_t@{melody\_t}}
+\index{melody\_t@{melody\_t}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{melody\_t}{melody\_t}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a2e48bb77dbb3015af4376b157e8b2bd3} 
+typedef struct melody\+\_\+t melody\+\_\+t}
+
+\Hypertarget{pwm-tone_8h_a740a9e45c23915e84ffa545cb51d2f91}\index{pwm-\/tone.h@{pwm-\/tone.h}!note\_t@{note\_t}}
+\index{note\_t@{note\_t}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{note\_t}{note\_t}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a740a9e45c23915e84ffa545cb51d2f91} 
+typedef struct note\+\_\+t note\+\_\+t}
+
+\Hypertarget{pwm-tone_8h_aec190e0f4998d86760fd9820c9bce07e}\index{pwm-\/tone.h@{pwm-\/tone.h}!tonegenerator\_t@{tonegenerator\_t}}
+\index{tonegenerator\_t@{tonegenerator\_t}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{tonegenerator\_t}{tonegenerator\_t}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_aec190e0f4998d86760fd9820c9bce07e} 
+typedef struct tonegenerator\+\_\+t tonegenerator\+\_\+t}
+
+
+
+\label{doc-func-members}
+\Hypertarget{pwm-tone_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pwm-tone_8h_a4fe9d81d945334839eaf69c9fe47e272}\index{pwm-\/tone.h@{pwm-\/tone.h}!\_melody\_step@{\_melody\_step}}
+\index{\_melody\_step@{\_melody\_step}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{\_melody\_step()}{\_melody\_step()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a4fe9d81d945334839eaf69c9fe47e272} 
+void \+\_\+melody\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{}\end{DoxyParamCaption})}
+
+
+
+Steps through the melody. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_add4161b3db73026e90a90549cae46a54}\index{pwm-\/tone.h@{pwm-\/tone.h}!\_melody\_tone@{\_melody\_tone}}
+\index{\_melody\_tone@{\_melody\_tone}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{\_melody\_tone()}{\_melody\_tone()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_add4161b3db73026e90a90549cae46a54} 
+void \+\_\+melody\+\_\+tone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{int}]{freq}{, }\item[{uint16\+\_\+t}]{duration}{}\end{DoxyParamCaption})}
+
+
+
+Plays a single note in the melody. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em freq} & Frequency of the note (in Hz). \\
+\hline
+{\em duration} & Duration of the note (in ms). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a0e126b5cec56bfaae6e7f584d483be86}\index{pwm-\/tone.h@{pwm-\/tone.h}!\_pwm\_set\_freq@{\_pwm\_set\_freq}}
+\index{\_pwm\_set\_freq@{\_pwm\_set\_freq}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{\_pwm\_set\_freq()}{\_pwm\_set\_freq()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a0e126b5cec56bfaae6e7f584d483be86} 
+void \+\_\+pwm\+\_\+set\+\_\+freq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{float}]{freq}{}\end{DoxyParamCaption})}
+
+
+
+Sets the PWM frequency. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em freq} & Frequency value (in Hz). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a9a9c51b018a140f3ee179340724dc633}\index{pwm-\/tone.h@{pwm-\/tone.h}!\_tone\_pwm\_on@{\_tone\_pwm\_on}}
+\index{\_tone\_pwm\_on@{\_tone\_pwm\_on}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{\_tone\_pwm\_on()}{\_tone\_pwm\_on()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a9a9c51b018a140f3ee179340724dc633} 
+void \+\_\+tone\+\_\+pwm\+\_\+on (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{int}]{freq}{}\end{DoxyParamCaption})}
+
+
+
+Turns on the PWM tone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em freq} & Frequency value (in Hz). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_ab23c799acb63da00a9d9f0d1d5c5196a}\index{pwm-\/tone.h@{pwm-\/tone.h}!melody@{melody}}
+\index{melody@{melody}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{melody()}{melody()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_ab23c799acb63da00a9d9f0d1d5c5196a} 
+void melody (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{\mbox{\hyperlink{structnote__t}{note\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{notes}{, }\item[{int8\+\_\+t}]{repeat}{}\end{DoxyParamCaption})}
+
+
+
+Plays a melody. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em notes} & Array of notes to play. \\
+\hline
+{\em repeat} & Number of times to repeat the melody. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a6004e97a98d19f40a6893e47e9d9e4f0}\index{pwm-\/tone.h@{pwm-\/tone.h}!set\_rest\_duration@{set\_rest\_duration}}
+\index{set\_rest\_duration@{set\_rest\_duration}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{set\_rest\_duration()}{set\_rest\_duration()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a6004e97a98d19f40a6893e47e9d9e4f0} 
+void set\+\_\+rest\+\_\+duration (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{duration}{}\end{DoxyParamCaption})}
+
+
+
+Sets the rest duration (in ms). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duration} & Rest duration value (in ms). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_ac124ae29e40f75662b6327b3a99185b8}\index{pwm-\/tone.h@{pwm-\/tone.h}!set\_tempo@{set\_tempo}}
+\index{set\_tempo@{set\_tempo}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{set\_tempo()}{set\_tempo()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_ac124ae29e40f75662b6327b3a99185b8} 
+void set\+\_\+tempo (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{bpm}{}\end{DoxyParamCaption})}
+
+
+
+Sets the tempo (in bpm). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bpm} & Tempo value (in bpm). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a3123c1851a4e308ee3b84662745a3d0c}\index{pwm-\/tone.h@{pwm-\/tone.h}!stop\_melody@{stop\_melody}}
+\index{stop\_melody@{stop\_melody}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{stop\_melody()}{stop\_melody()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a3123c1851a4e308ee3b84662745a3d0c} 
+void stop\+\_\+melody (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{}\end{DoxyParamCaption})}
+
+
+
+Stops the current melody. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a3ec0d39f66fb7cfa934cac14e1d6a2a7}\index{pwm-\/tone.h@{pwm-\/tone.h}!stop\_tone@{stop\_tone}}
+\index{stop\_tone@{stop\_tone}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{stop\_tone()}{stop\_tone()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a3ec0d39f66fb7cfa934cac14e1d6a2a7} 
+void stop\+\_\+tone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{}\end{DoxyParamCaption})}
+
+
+
+Stops the current tone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a6be2aff54804e191b2eec031a3657cd3}\index{pwm-\/tone.h@{pwm-\/tone.h}!tone@{tone}}
+\index{tone@{tone}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{tone()}{tone()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a6be2aff54804e191b2eec031a3657cd3} 
+void tone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{int}]{freq}{, }\item[{uint16\+\_\+t}]{duration}{}\end{DoxyParamCaption})}
+
+
+
+Plays a single tone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em freq} & Frequency of the tone (in Hz). \\
+\hline
+{\em duration} & Duration of the tone (in ms). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pwm-tone_8h_a6007f918a626559d13695f7c8fccce1f}\index{pwm-\/tone.h@{pwm-\/tone.h}!tone\_init@{tone\_init}}
+\index{tone\_init@{tone\_init}!pwm-\/tone.h@{pwm-\/tone.h}}
+\doxysubsubsection{\texorpdfstring{tone\_init()}{tone\_init()}}
+{\footnotesize\ttfamily \label{pwm-tone_8h_a6007f918a626559d13695f7c8fccce1f} 
+void tone\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{gen}{, }\item[{uint8\+\_\+t}]{gpio}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the tone generator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Pointer to the tone generator structure. \\
+\hline
+{\em gpio} & GPIO pin number for the tone generator. \\
+\hline
+\end{DoxyParams}

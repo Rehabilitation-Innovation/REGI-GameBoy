@@ -1,0 +1,109 @@
+\doxysection{main.\+cpp}
+\hypertarget{main_8cpp_source}{}\label{main_8cpp_source}\index{src/main.cpp@{src/main.cpp}}
+\mbox{\hyperlink{main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{main_8h}{main.h}}"{}}\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}hardware/spi.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}pico/rand.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}hardware/pll.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}hardware/vreg.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}hardware/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/pll.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/clocks.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_8h}{game.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}hardware/dma.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}hardware/gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}hardware/irq.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/bus\_ctrl.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/hstx\_ctrl.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/hstx\_fifo.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}hardware/structs/sio.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}pico/multicore.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}pico/sem.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}hardware/exception.h"{}}\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}distance\_sensor.h"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{measure\_freqs}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}\mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00037}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}00040\ \ \ \ \ vreg\_set\_voltage(VREG\_VOLTAGE\_1\_30);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041\ \ \ \ \ set\_sys\_clock\_khz(315000,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ clk\_peri,}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ 315000\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049\ \ \ \ \ clock\_configure(}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ clk\_hstx,}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ glitchless\ mux}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ CLOCKS\_CLK\_PERI\_CTRL\_AUXSRC\_VALUE\_CLKSRC\_PLL\_SYS,\ \textcolor{comment}{//\ System\ PLL\ on\ AUX\ mux}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ 315000\ *\ 1000,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ frequency}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ 315000\ /\ 2\ *\ 1000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ (must\ be\ same\ as\ no\ divider)}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{measure\_freqs}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063\ \ \ \ \ \mbox{\hyperlink{class_game}{Game}}\ game;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065\ \ \ \ \ game.\mbox{\hyperlink{class_game_a701403e278b6f4849f12dda2bf26fd2f}{run}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ maybe\ shut\ down\ and\ reboot\ after?}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00076}\mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{00076}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a3f30a40dd935bbd0bbe480669e726f7f}{measure\_freqs}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00077}00077\ \ \ \ \ uint\ f\_pll\_sys\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_PLL\_SYS\_CLKSRC\_PRIMARY);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00078}00078\ \ \ \ \ uint\ f\_pll\_usb\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_PLL\_USB\_CLKSRC\_PRIMARY);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00079}00079\ \ \ \ \ uint\ f\_rosc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_ROSC\_CLKSRC);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00081}00081\ \ \ \ \ uint\ f\_clk\_sys\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_SYS);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00082}00082\ \ \ \ \ uint\ f\_clk\_peri\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_PERI);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00083}00083\ \ \ \ \ uint\ f\_clk\_usb\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_USB);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00084}00084\ \ \ \ \ uint\ f\_clk\_adc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_ADC);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00085}00085\ \ \ \ \ uint\ f\_clk\_hstx\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_HSTX);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00086}00086\ \textcolor{preprocessor}{\#ifdef\ CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00087}00087\ \ \ \ \ uint\ f\_clk\_rtc\ =\ frequency\_count\_khz(CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00088}00088\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00090}00090\ \ \ \ \ printf(\textcolor{stringliteral}{"{}pll\_sys\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_pll\_sys);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00091}00091\ \ \ \ \ printf(\textcolor{stringliteral}{"{}pll\_usb\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_pll\_usb);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00092}00092\ \ \ \ \ printf(\textcolor{stringliteral}{"{}rosc\ \ \ \ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_rosc);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00093}00093\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_sys\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_sys);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00094}00094\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_peri\ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_peri);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00095}00095\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_usb\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_usb);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00096}00096\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_adc\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_adc);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00097}00097\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_hstx\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_hstx);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00098}00098\ \textcolor{preprocessor}{\#ifdef\ CLOCKS\_FC0\_SRC\_VALUE\_CLK\_RTC}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00099}00099\ \ \ \ \ printf(\textcolor{stringliteral}{"{}clk\_rtc\ \ =\ \%dkHz\(\backslash\)n"{}},\ f\_clk\_rtc);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00100}00100\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ Can't\ measure\ clk\_ref\ /\ xosc\ as\ it\ is\ the\ ref}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00103}00103\ \}}
+
+\end{DoxyCode}

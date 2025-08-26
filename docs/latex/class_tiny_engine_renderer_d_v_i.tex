@@ -1,0 +1,743 @@
+\doxysection{Tiny\+Engine\+Renderer\+DVI Class Reference}
+\hypertarget{class_tiny_engine_renderer_d_v_i}{}\label{class_tiny_engine_renderer_d_v_i}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+
+
+{\ttfamily \#include $<$tinyengine\+\_\+renderer\+\_\+dvi.\+h$>$}
+
+Inheritance diagram for Tiny\+Engine\+Renderer\+DVI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tiny_engine_renderer_d_v_i}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5}{Mode}} \{ \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6}{MODE\+\_\+\+PALETTE}} = 2
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075}{MODE\+\_\+\+RGB565}} = 1
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1}{MODE\+\_\+\+RGB888}} = 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5}{MODE\+\_\+\+TEXT\+\_\+\+MONO}} = 4
+, \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2}{MODE\+\_\+\+TEXT\+\_\+\+RGB111}} = 5
+ \}
+\item 
+enum \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850f}{Text\+Colour}} \{ \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44}{TEXT\+\_\+\+BLACK}} = 0
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48}{TEXT\+\_\+\+RED}}
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc}{TEXT\+\_\+\+GREEN}}
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2}{TEXT\+\_\+\+BLUE}}
+, \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f}{TEXT\+\_\+\+YELLOW}}
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219}{TEXT\+\_\+\+MAGENTA}}
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b}{TEXT\+\_\+\+CYAN}}
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d}{TEXT\+\_\+\+WHITE}}
+, \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329}{BG\+\_\+\+BLACK}} = 0
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b}{BG\+\_\+\+RED}} = TEXT\+\_\+\+RED \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13}{BG\+\_\+\+GREEN}} = TEXT\+\_\+\+GREEN \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8}{BG\+\_\+\+BLUE}} = TEXT\+\_\+\+BLUE \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68}{BG\+\_\+\+YELLOW}} = TEXT\+\_\+\+YELLOW \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff}{BG\+\_\+\+MAGENTA}} = TEXT\+\_\+\+MAGENTA \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d}{BG\+\_\+\+CYAN}} = TEXT\+\_\+\+CYAN \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e}{BG\+\_\+\+WHITE}} = TEXT\+\_\+\+WHITE \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \newline
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2}{ATTR\+\_\+\+NORMAL\+\_\+\+INTEN}} = 0
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772}{ATTR\+\_\+\+LOW\+\_\+\+INTEN}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 6
+, \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79}{ATTR\+\_\+\+V\+\_\+\+LOW\+\_\+\+INTEN}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 7 \texorpdfstring{$\vert$}{|} ATTR\+\_\+\+LOW\+\_\+\+INTEN
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{Tiny\+Engine\+Renderer\+DVI}} (\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&fr\+\_\+buf)
+\item 
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a09c4f163843cf199dc0afcfafd7953b5}{\texorpdfstring{$\sim$}{\string~}\+Tiny\+Engine\+Renderer\+DVI}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad9985d571f39928ba4cebd35d84cd5f0}{swap\+\_\+blocking}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_aa12a0ece831ea57ad7b912b069493ce7}{swap\+\_\+non\+\_\+blocking}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}{wait\+\_\+for\+\_\+vsync}} ()
+\item 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{tinyengine\+\_\+renderer\+\_\+init}} ()
+\item 
+void \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a3f7752c320d9957f7e88f85ac9d6f8de}{gfx\+\_\+dma\+\_\+handler}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tinyengine__renderer__dvi_8h_a0e2f295d3fc0f6caf5e239667b4d5814}{RGB888}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ab7f8fc6782cb61207a95e29e526b34d6}{palette}} \mbox{[}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d}{PALETTE\+\_\+\+SIZE}}\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d}{PALETTE\+\_\+\+SIZE}} = 256
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a7efbb691f0b7646dbdc00b2423b4d286}{display\+\_\+width}} = 320
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af56769c02b832f3433261722d680669b}{display\+\_\+height}} = 240
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a5c8198aeb53c231de91bbf790a59f77c}{frame\+\_\+width}} = 320
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af9d293ec842669e58b5d58bcb6d761d0}{frame\+\_\+height}} = 240
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_add867ce010cc772f7e993a7ac326a05d}{frame\+\_\+bytes\+\_\+per\+\_\+pixel}} = 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a8a99856f9ce556f04f5032daec14a5f1}{h\+\_\+repeat}} = 4
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_aa6f8cc917454c16a374452cc66b03687}{v\+\_\+repeat}} = 4
+\item 
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5}{Mode}} \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a6ea8f792a8bf334e07c732c2dbc892f2}{mode}} = \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075}{MODE\+\_\+\+RGB565}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00009}{9}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!Mode@{Mode}}
+\index{Mode@{Mode}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5} 
+enum \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5}{Tiny\+Engine\+Renderer\+DVI\+::\+Mode}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_PALETTE@{MODE\_PALETTE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!MODE\_PALETTE@{MODE\_PALETTE}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6}\label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6} 
+MODE\+\_\+\+PALETTE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_RGB565@{MODE\_RGB565}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!MODE\_RGB565@{MODE\_RGB565}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075}\label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075} 
+MODE\+\_\+\+RGB565&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_RGB888@{MODE\_RGB888}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!MODE\_RGB888@{MODE\_RGB888}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1}\label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1} 
+MODE\+\_\+\+RGB888&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_TEXT\_MONO@{MODE\_TEXT\_MONO}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!MODE\_TEXT\_MONO@{MODE\_TEXT\_MONO}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5}\label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5} 
+MODE\+\_\+\+TEXT\+\_\+\+MONO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_TEXT\_RGB111@{MODE\_TEXT\_RGB111}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!MODE\_TEXT\_RGB111@{MODE\_TEXT\_RGB111}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2}\label{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2} 
+MODE\+\_\+\+TEXT\+\_\+\+RGB111&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00040}{40}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a6f7a2aa8b91a5cc9fad917bd8481d2e6}{MODE\_PALETTE}}\ =\ 2,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075}{MODE\_RGB565}}\ =\ 1,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a8b855e02f51d2d70679ef9d5a1480bb1}{MODE\_RGB888}}\ =\ 3,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a7071928bc3abfb0109ddc368380f66c5}{MODE\_TEXT\_MONO}}\ =\ 4,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2}{MODE\_TEXT\_RGB111}}\ =\ 5,}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850f}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TextColour@{TextColour}}
+\index{TextColour@{TextColour}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{TextColour}{TextColour}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850f} 
+enum \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850f}{Tiny\+Engine\+Renderer\+DVI\+::\+Text\+Colour}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_BLACK@{TEXT\_BLACK}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_BLACK@{TEXT\_BLACK}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44} 
+TEXT\+\_\+\+BLACK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_RED@{TEXT\_RED}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_RED@{TEXT\_RED}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48} 
+TEXT\+\_\+\+RED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_GREEN@{TEXT\_GREEN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_GREEN@{TEXT\_GREEN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc} 
+TEXT\+\_\+\+GREEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_BLUE@{TEXT\_BLUE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_BLUE@{TEXT\_BLUE}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2} 
+TEXT\+\_\+\+BLUE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_YELLOW@{TEXT\_YELLOW}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_YELLOW@{TEXT\_YELLOW}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f} 
+TEXT\+\_\+\+YELLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_MAGENTA@{TEXT\_MAGENTA}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_MAGENTA@{TEXT\_MAGENTA}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219} 
+TEXT\+\_\+\+MAGENTA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_CYAN@{TEXT\_CYAN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_CYAN@{TEXT\_CYAN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b} 
+TEXT\+\_\+\+CYAN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TEXT\_WHITE@{TEXT\_WHITE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TEXT\_WHITE@{TEXT\_WHITE}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d} 
+TEXT\+\_\+\+WHITE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_BLACK@{BG\_BLACK}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_BLACK@{BG\_BLACK}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329} 
+BG\+\_\+\+BLACK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_RED@{BG\_RED}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_RED@{BG\_RED}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b} 
+BG\+\_\+\+RED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_GREEN@{BG\_GREEN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_GREEN@{BG\_GREEN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13} 
+BG\+\_\+\+GREEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_BLUE@{BG\_BLUE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_BLUE@{BG\_BLUE}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8} 
+BG\+\_\+\+BLUE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_YELLOW@{BG\_YELLOW}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_YELLOW@{BG\_YELLOW}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68} 
+BG\+\_\+\+YELLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_MAGENTA@{BG\_MAGENTA}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_MAGENTA@{BG\_MAGENTA}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff} 
+BG\+\_\+\+MAGENTA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_CYAN@{BG\_CYAN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_CYAN@{BG\_CYAN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d} 
+BG\+\_\+\+CYAN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BG\_WHITE@{BG\_WHITE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!BG\_WHITE@{BG\_WHITE}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e} 
+BG\+\_\+\+WHITE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ATTR\_NORMAL\_INTEN@{ATTR\_NORMAL\_INTEN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!ATTR\_NORMAL\_INTEN@{ATTR\_NORMAL\_INTEN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2} 
+ATTR\+\_\+\+NORMAL\+\_\+\+INTEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ATTR\_LOW\_INTEN@{ATTR\_LOW\_INTEN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!ATTR\_LOW\_INTEN@{ATTR\_LOW\_INTEN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772} 
+ATTR\+\_\+\+LOW\+\_\+\+INTEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ATTR\_V\_LOW\_INTEN@{ATTR\_V\_LOW\_INTEN}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!ATTR\_V\_LOW\_INTEN@{ATTR\_V\_LOW\_INTEN}}}\Hypertarget{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79}\label{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79} 
+ATTR\+\_\+\+V\+\_\+\+LOW\+\_\+\+INTEN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00048}{48}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44}{TEXT\_BLACK}}\ =\ 0,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48}{TEXT\_RED}},}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc}{TEXT\_GREEN}},}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2}{TEXT\_BLUE}},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f}{TEXT\_YELLOW}},}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219}{TEXT\_MAGENTA}},}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b}{TEXT\_CYAN}},}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d}{TEXT\_WHITE}},}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faff07d705ea6b675337d904a591e28329}{BG\_BLACK}}\ =\ 0,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faba0d67ef6b5f7fb33271655387663b2b}{BG\_RED}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa7bba7635ebeb84eea4588db6279e9a48}{TEXT\_RED}}\ <<\ 3,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa58b791cf306ac4e1f7e12ac7e8e87d13}{BG\_GREEN}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac3936b15eb42f024504322befab76adc}{TEXT\_GREEN}}\ <<\ 3,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fadb72d174fb5c14ffa554c85626fe13d8}{BG\_BLUE}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2}{TEXT\_BLUE}}\ <<\ 3,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fad0919505950ade988e0bddbd72c5af68}{BG\_YELLOW}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f}{TEXT\_YELLOW}}\ <<\ 3,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fac571fc913a60c21ceb89205dad4a22ff}{BG\_MAGENTA}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa6a82db001699930653e35a56ad586219}{TEXT\_MAGENTA}}\ <<\ 3,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa0140c7c88b22d014c3f6d1951ce3b81d}{BG\_CYAN}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faca1915b536e0c04f5e8134e2dc405f6b}{TEXT\_CYAN}}\ <<\ 3,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa127a061045390912892ef473845c612e}{BG\_WHITE}}\ =\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faa154b3c527ff91e02418357d92ca538d}{TEXT\_WHITE}}\ <<\ 3,}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2}{ATTR\_NORMAL\_INTEN}}\ =\ 0,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772}{ATTR\_LOW\_INTEN}}\ =\ 1\ <<\ 6,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850fa463ee4f19e326491f4f8dfbd5b0c8b79}{ATTR\_V\_LOW\_INTEN}}\ =\ 1\ <<\ 7\ |\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a03955c82103a092f45c54b2e918a850faeddb47c26c4b09133adfd5fa881a6772}{ATTR\_LOW\_INTEN}},}
+\DoxyCodeLine{00070\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{doc-constructors}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{TinyEngineRendererDVI()}{TinyEngineRendererDVI()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324} 
+Tiny\+Engine\+Renderer\+DVI\+::\+Tiny\+Engine\+Renderer\+DVI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&}]{fr\+\_\+buf}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00729}{729}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_frame\_buf(fr\_buf) }
+\DoxyCodeLine{00730\ \{}
+\DoxyCodeLine{00731\ \ \ \ \ \textcolor{comment}{//\ Always\ use\ the\ bottom\ channels}}
+\DoxyCodeLine{00732\ \ \ \ \ dma\_claim\_mask((1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1);}
+\DoxyCodeLine{00733\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{tinyengine\_renderer\_init}}();}
+\DoxyCodeLine{00734\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a09c4f163843cf199dc0afcfafd7953b5}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!````~TinyEngineRendererDVI@{\texorpdfstring{$\sim$}{\string~}TinyEngineRendererDVI}}
+\index{````~TinyEngineRendererDVI@{\texorpdfstring{$\sim$}{\string~}TinyEngineRendererDVI}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TinyEngineRendererDVI()}{\string~TinyEngineRendererDVI()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a09c4f163843cf199dc0afcfafd7953b5} 
+Tiny\+Engine\+Renderer\+DVI\+::\texorpdfstring{$\sim$}{\string~}\+Tiny\+Engine\+Renderer\+DVI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00077}{77}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00077\ \{\};}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a3f7752c320d9957f7e88f85ac9d6f8de}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!gfx\_dma\_handler@{gfx\_dma\_handler}}
+\index{gfx\_dma\_handler@{gfx\_dma\_handler}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{gfx\_dma\_handler()}{gfx\_dma\_handler()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a3f7752c320d9957f7e88f85ac9d6f8de} 
+void Tiny\+Engine\+Renderer\+DVI\+::gfx\+\_\+dma\+\_\+handler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_ad9985d571f39928ba4cebd35d84cd5f0}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!swap\_blocking@{swap\_blocking}}
+\index{swap\_blocking@{swap\_blocking}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{swap\_blocking()}{swap\_blocking()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_ad9985d571f39928ba4cebd35d84cd5f0} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Renderer\+DVI\+::swap\+\_\+blocking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_tiny_engine_renderer_i_a2469b0b227cbc4ff8a27f292f929d0d3}{Tiny\+Engine\+RendererI}}.
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00079}{79}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00079\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_aa12a0ece831ea57ad7b912b069493ce7}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!swap\_non\_blocking@{swap\_non\_blocking}}
+\index{swap\_non\_blocking@{swap\_non\_blocking}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{swap\_non\_blocking()}{swap\_non\_blocking()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_aa12a0ece831ea57ad7b912b069493ce7} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Renderer\+DVI\+::swap\+\_\+non\+\_\+blocking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_tiny_engine_renderer_i_ab1c8fd0d87f133a519e26ae071765e9f}{Tiny\+Engine\+RendererI}}.
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00080}{80}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00080\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};\ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!tinyengine\_renderer\_init@{tinyengine\_renderer\_init}}
+\index{tinyengine\_renderer\_init@{tinyengine\_renderer\_init}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{tinyengine\_renderer\_init()}{tinyengine\_renderer\_init()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Renderer\+DVI\+::tinyengine\+\_\+renderer\+\_\+init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_tiny_engine_renderer_i_ab61c14e1610265da86010a83142674bd}{Tiny\+Engine\+RendererI}}.
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00490}{490}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00491\ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \textcolor{comment}{//framebuffer-\/>flip\_blocking\ =\ te\_renderer\_dvi\_wait\_vsync\_blocking;//\ set\ this\ in\ the\ main\ initiator\ in\ tinyengine.c}}
+\DoxyCodeLine{00493\ \ \ \ \ display\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00494\ \ \ \ \ \textcolor{comment}{//\ dma\_claim\_mask((1\ <<\ NUM\_CHANS)\ -\/\ 1);}}
+\DoxyCodeLine{00495\ \ \ \ \ ch\_num\ =\ 0;}
+\DoxyCodeLine{00496\ \ \ \ \ line\_num\ =\ -\/1;}
+\DoxyCodeLine{00497\ \ \ \ \ v\_scanline\ =\ 2;}
+\DoxyCodeLine{00498\ \ \ \ \ flip\_next\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ \ \ \ \ \textcolor{comment}{//\ v\_inactive\_total\ =\ timing\_mode-\/>v\_front\_porch\ +\ timing\_mode-\/>v\_sync\_width\ +\ timing\_mode-\/>v\_back\_porch;}}
+\DoxyCodeLine{00501\ \ \ \ \ v\_inactive\_total\ =\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb}{MODE\_V\_FRONT\_PORCH}}\ +\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a12e2ff5f3949e456139ab32153e276df}{MODE\_V\_SYNC\_WIDTH}}\ +\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ae572b39c10ef4635a552fe095e0ad34e}{MODE\_V\_BACK\_PORCH}};}
+\DoxyCodeLine{00502\ \ \ \ \ \textcolor{comment}{//\ v\_total\_active\_lines\ =\ v\_inactive\_total\ +\ timing\_mode-\/>v\_active\_lines;}}
+\DoxyCodeLine{00503\ \ \ \ \ v\_total\_active\_lines\ =\ v\_inactive\_total\ +\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a989ecfb618e13a471b7ad44cd9fda4fa}{MODE\_V\_ACTIVE\_LINES}};}
+\DoxyCodeLine{00504\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_aa6f8cc917454c16a374452cc66b03687}{v\_repeat}}\ =\ 1\ <<\ v\_repeat\_shift;}
+\DoxyCodeLine{00505\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a8a99856f9ce556f04f5032daec14a5f1}{h\_repeat}}\ =\ 1\ <<\ h\_repeat\_shift;}
+\DoxyCodeLine{00506\ }
+\DoxyCodeLine{00507\ \ \ \ \ memcpy(vblank\_line\_vsync\_off,\ vblank\_line\_vsync\_off\_src,\ \textcolor{keyword}{sizeof}(vblank\_line\_vsync\_off\_src));}
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_off[0]\ |=\ timing\_mode-\/>h\_front\_porch;}}
+\DoxyCodeLine{00509\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_off[2]\ |=\ timing\_mode-\/>h\_sync\_width;}}
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_off[4]\ |=\ timing\_mode-\/>h\_back\_porch\ +\ timing\_mode-\/>h\_active\_pixels;}}
+\DoxyCodeLine{00511\ \ \ \ \ vblank\_line\_vsync\_off[0]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}{MODE\_H\_FRONT\_PORCH}};}
+\DoxyCodeLine{00512\ \ \ \ \ vblank\_line\_vsync\_off[2]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}{MODE\_H\_SYNC\_WIDTH}};}
+\DoxyCodeLine{00513\ \ \ \ \ vblank\_line\_vsync\_off[4]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}{MODE\_H\_BACK\_PORCH}}\ +\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}{MODE\_H\_ACTIVE\_PIXELS}};}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \ \ \ \ memcpy(vblank\_line\_vsync\_on,\ vblank\_line\_vsync\_on\_src,\ \textcolor{keyword}{sizeof}(vblank\_line\_vsync\_on\_src));}
+\DoxyCodeLine{00516\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_on[0]\ |=\ timing\_mode-\/>h\_front\_porch;}}
+\DoxyCodeLine{00517\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_on[2]\ |=\ timing\_mode-\/>h\_sync\_width;}}
+\DoxyCodeLine{00518\ \ \ \ \ \textcolor{comment}{//\ vblank\_line\_vsync\_on[4]\ |=\ timing\_mode-\/>h\_back\_porch\ +\ timing\_mode-\/>h\_active\_pixels;}}
+\DoxyCodeLine{00519\ \ \ \ \ vblank\_line\_vsync\_on[0]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}{MODE\_H\_FRONT\_PORCH}};}
+\DoxyCodeLine{00520\ \ \ \ \ vblank\_line\_vsync\_on[2]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}{MODE\_H\_SYNC\_WIDTH}};}
+\DoxyCodeLine{00521\ \ \ \ \ vblank\_line\_vsync\_on[4]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}{MODE\_H\_BACK\_PORCH}}\ +\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}{MODE\_H\_ACTIVE\_PIXELS}};}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00523\ \ \ \ \ memcpy(vactive\_line\_header,\ vactive\_line\_header\_src,\ \textcolor{keyword}{sizeof}(vactive\_line\_header\_src));}
+\DoxyCodeLine{00524\ \ \ \ \ \textcolor{comment}{//\ vactive\_line\_header[0]\ |=\ timing\_mode-\/>h\_front\_porch;}}
+\DoxyCodeLine{00525\ \ \ \ \ \textcolor{comment}{//\ vactive\_line\_header[2]\ |=\ timing\_mode-\/>h\_sync\_width;}}
+\DoxyCodeLine{00526\ \ \ \ \ \textcolor{comment}{//\ vactive\_line\_header[4]\ |=\ timing\_mode-\/>h\_back\_porch;}}
+\DoxyCodeLine{00527\ \ \ \ \ \textcolor{comment}{//\ vactive\_line\_header[6]\ |=\ timing\_mode-\/>h\_active\_pixels;}}
+\DoxyCodeLine{00528\ \ \ \ \ vactive\_line\_header[0]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}{MODE\_H\_FRONT\_PORCH}};}
+\DoxyCodeLine{00529\ \ \ \ \ vactive\_line\_header[2]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}{MODE\_H\_SYNC\_WIDTH}};}
+\DoxyCodeLine{00530\ \ \ \ \ vactive\_line\_header[4]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}{MODE\_H\_BACK\_PORCH}};}
+\DoxyCodeLine{00531\ \ \ \ \ vactive\_line\_header[6]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}{MODE\_H\_ACTIVE\_PIXELS}};}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \ \ \ \ memcpy(vactive\_text\_line\_header,\ vactive\_text\_line\_header\_src,\ \textcolor{keyword}{sizeof}(vactive\_text\_line\_header\_src));}
+\DoxyCodeLine{00534\ \ \ \ \ \textcolor{comment}{//\ vactive\_text\_line\_header[0]\ |=\ timing\_mode-\/>h\_front\_porch;}}
+\DoxyCodeLine{00535\ \ \ \ \ \textcolor{comment}{//\ vactive\_text\_line\_header[2]\ |=\ timing\_mode-\/>h\_sync\_width;}}
+\DoxyCodeLine{00536\ \ \ \ \ \textcolor{comment}{//\ vactive\_text\_line\_header[4]\ |=\ timing\_mode-\/>h\_back\_porch;}}
+\DoxyCodeLine{00537\ \ \ \ \ \textcolor{comment}{//\ vactive\_text\_line\_header[7\ +\ 6]\ |=\ timing\_mode-\/>h\_active\_pixels\ -\/\ 6;}}
+\DoxyCodeLine{00538\ \ \ \ \ vactive\_text\_line\_header[0]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4f132d63585d0891d2cb4875b4cb510d}{MODE\_H\_FRONT\_PORCH}};}
+\DoxyCodeLine{00539\ \ \ \ \ vactive\_text\_line\_header[2]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a644450016364544cd55de3d60b841cd0}{MODE\_H\_SYNC\_WIDTH}};}
+\DoxyCodeLine{00540\ \ \ \ \ vactive\_text\_line\_header[4]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a3e83d04552dd9878c880de3f4efff302}{MODE\_H\_BACK\_PORCH}};}
+\DoxyCodeLine{00541\ \ \ \ \ vactive\_text\_line\_header[7\ +\ 6]\ |=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_ada3711590ea435fdbc8316125e08c7d6}{MODE\_H\_ACTIVE\_PIXELS}}\ -\/\ 6;}
+\DoxyCodeLine{00542\ }
+\DoxyCodeLine{00543\ \ \ \ \ \textcolor{comment}{//\ RGB332\ pallete\ mode}}
+\DoxyCodeLine{00544\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_add867ce010cc772f7e993a7ac326a05d}{frame\_bytes\_per\_pixel}}\ =\ 1;}
+\DoxyCodeLine{00545\ \ \ \ \ \textcolor{comment}{//\ RGB\ 888\ mode.}}
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{comment}{//\ frame\_bytes\_per\_pixel\ =\ 4;}}
+\DoxyCodeLine{00547\ \ \ \ \ line\_bytes\_per\_pixel\ =\ 4;}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_display\ =\ (uint8\_t*)calloc(frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel,\ 1);}}
+\DoxyCodeLine{00550\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_back\ =\ (uint8\_t*)calloc(frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel,\ 1);}}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ }
+\DoxyCodeLine{00553\ \ \ \ \ \textcolor{comment}{//\ if\ (!framebuffer-\/>is\_dual)\ \{}}
+\DoxyCodeLine{00554\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ teerr("{}Frame\ buffer\ needs\ to\ be\ dual\ for\ DVI."{});}}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ TINYENGINE\_ERROR;}}
+\DoxyCodeLine{00557\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00559\ \ \ \ \ \textcolor{comment}{//\ I\ just\ assign\ the\ pointers\ here\ because\ this\ makes\ the\ updating\ simpler.}}
+\DoxyCodeLine{00560\ \ \ \ \ \textcolor{comment}{//\ s\_frame\_buf\ =\ framebuffer;}}
+\DoxyCodeLine{00561\ \ \ \ \ \textcolor{comment}{//\ display\_buf\ =\ \_display\_buffer;}}
+\DoxyCodeLine{00562\ \ \ \ \ frame\_buffer\_display\ =\ m\_frame\_buf.pixel\_buffer\_display;}
+\DoxyCodeLine{00563\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_back\ =\ framebuffer-\/>pixel\_buffer\_back;}}
+\DoxyCodeLine{00564\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_display\ =\ framebuffer-\/>pixel\_buffer\_display;}}
+\DoxyCodeLine{00565\ \ \ \ \ \textcolor{comment}{//\ memset(frame\_buffer\_display,\ (uint8\_t)(0xF0),\ frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel);}}
+\DoxyCodeLine{00566\ \ \ \ \ \textcolor{comment}{//\ memset(frame\_buffer\_back,\ (uint8\_t)0xF0,\ frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel);}}
+\DoxyCodeLine{00567\ }
+\DoxyCodeLine{00568\ \ \ \ \ \textcolor{comment}{//\ if\ (m\_frame\_buf.m\_pixel\_buffer\_size\ !=\ frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel)\ \{}}
+\DoxyCodeLine{00569\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ teerr("{}Frame\ buffer\ size\ Error,\ check\ size.\ Must\ be\ 320x240x1\ bytes"{});}}
+\DoxyCodeLine{00570\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return;}}
+\DoxyCodeLine{00571\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00573\ \ \ \ \ memset(display\_palette,\ 0,\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d}{PALETTE\_SIZE}}\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{tinyengine__renderer__dvi_8h_a0e2f295d3fc0f6caf5e239667b4d5814}{RGB888}}));}
+\DoxyCodeLine{00574\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ 255;\ i++)}
+\DoxyCodeLine{00575\ \ \ \ \ \{}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ uint8\_t\ r\ =\ (i\ >>\ 6)\ *\ 255\ /\ 3;}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ uint8\_t\ g\ =\ ((i\ >>\ 2)\ \&\ 7)\ *\ 255\ /\ 7;}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ uint8\_t\ b\ =\ (i\ \&\ 3)\ *\ 255\ /\ 3;}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ display\_palette[i]\ =\ (r\ <<\ 16)\ |\ (g\ <<\ 8)\ |\ b;}
+\DoxyCodeLine{00580\ \ \ \ \ \}}
+\DoxyCodeLine{00581\ }
+\DoxyCodeLine{00582\ \ \ \ \ \textcolor{comment}{//\ display\_palette[255]\ =\ 0xFFFFFF;\ //\ just\ need\ to\ set\ 0xff\ to\ white\ this\ pallette\ method\ is\ clever.\ i\ wonder\ if\ i\ can\ switch\ pallettes\ based\ on\ sprites.}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \ \ \ \ \textcolor{comment}{//\ const\ bool\ is\_text\_mode\ =\ (mode\ ==\ MODE\_TEXT\_MONO\ ||\ mode\ ==\ MODE\_TEXT\_RGB111);}}
+\DoxyCodeLine{00585\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ frame\_pixel\_words\ =\ (\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a5c8198aeb53c231de91bbf790a59f77c}{frame\_width}}\ *\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a8a99856f9ce556f04f5032daec14a5f1}{h\_repeat}}\ *\ line\_bytes\_per\_pixel\ +\ 3)\ >>\ 2;}
+\DoxyCodeLine{00586\ \ \ \ \ \textcolor{comment}{//\ const\ int\ frame\_line\_words\ =\ frame\_pixel\_words\ +\ (is\_text\_mode\ ?\ count\_of(vactive\_text\_line\_header)\ :\ count\_of(vactive\_line\_header));}}
+\DoxyCodeLine{00587\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ frame\_line\_words\ =\ frame\_pixel\_words\ +\ count\_of(vactive\_line\_header);}
+\DoxyCodeLine{00588\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ frame\_lines\ =\ (\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_aa6f8cc917454c16a374452cc66b03687}{v\_repeat}}\ ==\ 1)\ ?\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}}\ :\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_a426143609826cbf6d30a1ae2b3ae5753}{NUM\_FRAME\_LINES}};}
+\DoxyCodeLine{00589\ \ \ \ \ line\_buffers\ =\ (uint32\_t*)malloc(frame\_line\_words\ *\ 4\ *\ frame\_lines);}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00591\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frame\_lines;\ ++i)}
+\DoxyCodeLine{00592\ \ \ \ \ \{}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ memcpy(\&line\_buffers[i\ *\ frame\_line\_words],\ vactive\_line\_header,}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ count\_of(vactive\_line\_header)\ *\ \textcolor{keyword}{sizeof}(uint32\_t));}
+\DoxyCodeLine{00595\ \ \ \ \ \}}
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00597\ \ \ \ \ \textcolor{comment}{//\ Ensure\ HSTX\ FIFO\ is\ clear}}
+\DoxyCodeLine{00598\ \ \ \ \ reset\_block\_num(RESET\_HSTX);}
+\DoxyCodeLine{00599\ \ \ \ \ sleep\_us(10);}
+\DoxyCodeLine{00600\ \ \ \ \ unreset\_block\_num\_wait\_blocking(RESET\_HSTX);}
+\DoxyCodeLine{00601\ \ \ \ \ sleep\_us(10);}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \ \ \ \ \textcolor{comment}{//\ Configure\ HSTX's\ TMDS\ encoder\ for\ RGB888}}
+\DoxyCodeLine{00604\ \ \ \ \ hstx\_ctrl\_hw-\/>expand\_tmds\ =}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ 7\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L2\_NBITS\_LSB\ |}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ 16\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L2\_ROT\_LSB\ |}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ 7\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L1\_NBITS\_LSB\ |}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ 8\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L1\_ROT\_LSB\ |}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ 7\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L0\_NBITS\_LSB\ |}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ 0\ <<\ HSTX\_CTRL\_EXPAND\_TMDS\_L0\_ROT\_LSB;}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \ \ \ \ \textcolor{comment}{//\ Pixels\ and\ control\ symbols\ (RAW)\ are\ an}}
+\DoxyCodeLine{00613\ \ \ \ \ \textcolor{comment}{//\ entire\ 32-\/bit\ word.}}
+\DoxyCodeLine{00614\ \ \ \ \ hstx\_ctrl\_hw-\/>expand\_shift\ =}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ 1\ <<\ HSTX\_CTRL\_EXPAND\_SHIFT\_ENC\_N\_SHIFTS\_LSB\ |}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ 0\ <<\ HSTX\_CTRL\_EXPAND\_SHIFT\_ENC\_SHIFT\_LSB\ |}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ 1\ <<\ HSTX\_CTRL\_EXPAND\_SHIFT\_RAW\_N\_SHIFTS\_LSB\ |}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ 0\ <<\ HSTX\_CTRL\_EXPAND\_SHIFT\_RAW\_SHIFT\_LSB;}
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{comment}{//\ Serial\ output\ config:\ clock\ period\ of\ 5\ cycles,\ pop\ from\ command}}
+\DoxyCodeLine{00621\ \ \ \ \ \textcolor{comment}{//\ expander\ every\ 5\ cycles,\ shift\ the\ output\ shiftreg\ by\ 2\ every\ cycle.}}
+\DoxyCodeLine{00622\ \ \ \ \ hstx\_ctrl\_hw-\/>csr\ =\ 0;}
+\DoxyCodeLine{00623\ \ \ \ \ hstx\_ctrl\_hw-\/>csr\ =}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ HSTX\_CTRL\_CSR\_EXPAND\_EN\_BITS\ |}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ 5u\ <<\ HSTX\_CTRL\_CSR\_CLKDIV\_LSB\ |}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ 5u\ <<\ HSTX\_CTRL\_CSR\_N\_SHIFTS\_LSB\ |}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ 2u\ <<\ HSTX\_CTRL\_CSR\_SHIFT\_LSB\ |}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ HSTX\_CTRL\_CSR\_EN\_BITS;}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \ \ \ \ \textcolor{comment}{//\ HSTX\ outputs\ 0\ through\ 7\ appear\ on\ GPIO\ 12\ through\ 19.}}
+\DoxyCodeLine{00632\ \ \ \ \ \textcolor{keywordtype}{int}\ HSTX\_FIRST\_PIN\ =\ 12;}
+\DoxyCodeLine{00633\ \ \ \ \ \textcolor{keywordtype}{int}\ clk\_p\ =\ 12;}
+\DoxyCodeLine{00634\ \ \ \ \ \textcolor{keywordtype}{int}\ rgb\_p[3]\ =\ \{\ 14,\ 16,\ 18\ \};}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ \ \ \ \ \textcolor{comment}{//\ Assign\ clock\ pair\ to\ two\ neighbouring\ pins:}}
+\DoxyCodeLine{00637\ \ \ \ \ \{}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ clk\_p\ -\/\ HSTX\_FIRST\_PIN;}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ hstx\_ctrl\_hw-\/>bit[bit]\ =\ HSTX\_CTRL\_BIT0\_CLK\_BITS;}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ hstx\_ctrl\_hw-\/>bit[bit\ \string^\ 1]\ =\ HSTX\_CTRL\_BIT0\_CLK\_BITS\ |\ HSTX\_CTRL\_BIT0\_INV\_BITS;}
+\DoxyCodeLine{00641\ \ \ \ \ \}}
+\DoxyCodeLine{00642\ }
+\DoxyCodeLine{00643\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint\ lane\ =\ 0;\ lane\ <\ 3;\ ++lane)}
+\DoxyCodeLine{00644\ \ \ \ \ \{}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ each\ TMDS\ lane,\ assign\ it\ to\ the\ correct\ GPIO\ pair\ based\ on\ the}}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ desired\ pinout:}}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ rgb\_p[lane]\ -\/\ HSTX\_FIRST\_PIN;}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ even\ bits\ during\ first\ half\ of\ each\ HSTX\ cycle,\ and\ odd\ bits}}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ during\ second\ half.\ The\ shifter\ advances\ by\ two\ bits\ each\ cycle.}}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ uint32\_t\ lane\_data\_sel\_bits\ =}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ (lane\ *\ 10)\ <<\ HSTX\_CTRL\_BIT0\_SEL\_P\_LSB\ |}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ (lane\ *\ 10\ +\ 1)\ <<\ HSTX\_CTRL\_BIT0\_SEL\_N\_LSB;}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ two\ halves\ of\ each\ pair\ get\ identical\ data,\ but\ one\ pin\ is\ inverted.}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ hstx\_ctrl\_hw-\/>bit[bit]\ =\ lane\_data\_sel\_bits;}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ hstx\_ctrl\_hw-\/>bit[bit\ \string^\ 1]\ =\ lane\_data\_sel\_bits\ |\ HSTX\_CTRL\_BIT0\_INV\_BITS;}
+\DoxyCodeLine{00656\ \ \ \ \ \}}
+\DoxyCodeLine{00657\ }
+\DoxyCodeLine{00658\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 12;\ i\ <=\ 19;\ ++i)}
+\DoxyCodeLine{00659\ \ \ \ \ \{}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ gpio\_set\_function(i,\ GPIO\_FUNC\_HSTX);}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ gpio\_set\_drive\_strength(i,\ GPIO\_DRIVE\_STRENGTH\_4MA);}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (252000\ >\ 900000)\ \{}}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ gpio\_set\_slew\_rate(i,\ GPIO\_SLEW\_RATE\_FAST);}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00665\ \ \ \ \ \}}
+\DoxyCodeLine{00666\ }
+\DoxyCodeLine{00667\ \ \ \ \ printf(\textcolor{stringliteral}{"{}GPIO\ Done\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00668\ }
+\DoxyCodeLine{00669\ \ \ \ \ \textcolor{comment}{//\ The\ channels\ are\ set\ up\ identically,\ to\ transfer\ a\ whole\ scanline\ and}}
+\DoxyCodeLine{00670\ \ \ \ \ \textcolor{comment}{//\ then\ chain\ to\ the\ next\ channel.\ Each\ time\ a\ channel\ finishes,\ we}}
+\DoxyCodeLine{00671\ \ \ \ \ \textcolor{comment}{//\ reconfigure\ the\ one\ that\ just\ finished,\ meanwhile\ the\ other\ channel(s)}}
+\DoxyCodeLine{00672\ \ \ \ \ \textcolor{comment}{//\ are\ already\ making\ progress.}}
+\DoxyCodeLine{00673\ \ \ \ \ \textcolor{comment}{//\ Using\ just\ 2\ channels\ was\ insufficient\ to\ avoid\ issues\ with\ the\ IRQ.}}
+\DoxyCodeLine{00674\ \ \ \ \ dma\_channel\_config\ c;}
+\DoxyCodeLine{00675\ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(0);}
+\DoxyCodeLine{00676\ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ 1);}
+\DoxyCodeLine{00677\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{00678\ \ \ \ \ dma\_channel\_configure(}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \&c,}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \&hstx\_fifo\_hw-\/>fifo,}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ vblank\_line\_vsync\_off,}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ count\_of(vblank\_line\_vsync\_off),}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \textcolor{keyword}{false}}
+\DoxyCodeLine{00685\ \ \ \ \ );}
+\DoxyCodeLine{00686\ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(1);}
+\DoxyCodeLine{00687\ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ 2);}
+\DoxyCodeLine{00688\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{00689\ \ \ \ \ dma\_channel\_configure(}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ 1,}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \&c,}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \&hstx\_fifo\_hw-\/>fifo,}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ vblank\_line\_vsync\_off,}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ count\_of(vblank\_line\_vsync\_off),}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \textcolor{keyword}{false}}
+\DoxyCodeLine{00696\ \ \ \ \ );}
+\DoxyCodeLine{00697\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 2;\ i\ <\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}};\ ++i)}
+\DoxyCodeLine{00698\ \ \ \ \ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(i);}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ (i\ +\ 1)\ \%\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}});}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ dma\_channel\_configure(}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ i,}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ \&c,}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \ \ \ \ \&hstx\_fifo\_hw-\/>fifo,}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \ \ \ \ vblank\_line\_vsync\_off,}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ count\_of(vblank\_line\_vsync\_off),}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false}}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00710\ \ \ \ \ \}}
+\DoxyCodeLine{00711\ }
+\DoxyCodeLine{00712\ \ \ \ \ printf(\textcolor{stringliteral}{"{}DMA\ channels\ claimed\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00713\ }
+\DoxyCodeLine{00714\ \ \ \ \ dma\_hw-\/>intr\ =\ (1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1;}
+\DoxyCodeLine{00715\ \ \ \ \ dma\_hw-\/>ints2\ =\ (1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1;}
+\DoxyCodeLine{00716\ \ \ \ \ dma\_hw-\/>inte2\ =\ (1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1;}
+\DoxyCodeLine{00717\ }
+\DoxyCodeLine{00718\ \ \ \ \ irq\_set\_exclusive\_handler(DMA\_IRQ\_2,\ dma\_irq\_handler);}
+\DoxyCodeLine{00719\ \ \ \ \ irq\_set\_enabled(DMA\_IRQ\_2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00721\ \ \ \ \ dma\_channel\_start(0);}
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \ \ \ \ printf(\textcolor{stringliteral}{"{}DVHSTX\ started\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00724\ }
+\DoxyCodeLine{00725\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00726\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!wait\_for\_vsync@{wait\_for\_vsync}}
+\index{wait\_for\_vsync@{wait\_for\_vsync}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{wait\_for\_vsync()}{wait\_for\_vsync()}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414} 
+\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Renderer\+DVI\+::wait\+\_\+for\+\_\+vsync (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_tiny_engine_renderer_i_a053505877ab12f6651964aaff7b4c75d}{Tiny\+Engine\+RendererI}}.
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source_l00736}{736}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00737\ \{}
+\DoxyCodeLine{00738\ \ \ \ \ \textcolor{keywordflow}{while}\ (v\_scanline\ >=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb}{MODE\_V\_FRONT\_PORCH}})\ \_\_wfe();}
+\DoxyCodeLine{00739\ }
+\DoxyCodeLine{00740\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00741\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_tiny_engine_renderer_d_v_i_af56769c02b832f3433261722d680669b}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!display\_height@{display\_height}}
+\index{display\_height@{display\_height}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{display\_height}{display\_height}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_af56769c02b832f3433261722d680669b} 
+uint16\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::display\+\_\+height = 240\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00088}{88}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a7efbb691f0b7646dbdc00b2423b4d286}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!display\_width@{display\_width}}
+\index{display\_width@{display\_width}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{display\_width}{display\_width}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a7efbb691f0b7646dbdc00b2423b4d286} 
+uint16\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::display\+\_\+width = 320\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00087}{87}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_add867ce010cc772f7e993a7ac326a05d}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!frame\_bytes\_per\_pixel@{frame\_bytes\_per\_pixel}}
+\index{frame\_bytes\_per\_pixel@{frame\_bytes\_per\_pixel}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{frame\_bytes\_per\_pixel}{frame\_bytes\_per\_pixel}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_add867ce010cc772f7e993a7ac326a05d} 
+uint8\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::frame\+\_\+bytes\+\_\+per\+\_\+pixel = 1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00091}{91}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_af9d293ec842669e58b5d58bcb6d761d0}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!frame\_height@{frame\_height}}
+\index{frame\_height@{frame\_height}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{frame\_height}{frame\_height}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_af9d293ec842669e58b5d58bcb6d761d0} 
+uint16\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::frame\+\_\+height = 240\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00090}{90}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a5c8198aeb53c231de91bbf790a59f77c}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!frame\_width@{frame\_width}}
+\index{frame\_width@{frame\_width}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{frame\_width}{frame\_width}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a5c8198aeb53c231de91bbf790a59f77c} 
+uint16\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::frame\+\_\+width = 320\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00089}{89}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a8a99856f9ce556f04f5032daec14a5f1}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!h\_repeat@{h\_repeat}}
+\index{h\_repeat@{h\_repeat}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{h\_repeat}{h\_repeat}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a8a99856f9ce556f04f5032daec14a5f1} 
+uint8\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::h\+\_\+repeat = 4\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00092}{92}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_a6ea8f792a8bf334e07c732c2dbc892f2}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!mode@{mode}}
+\index{mode@{mode}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_a6ea8f792a8bf334e07c732c2dbc892f2} 
+\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5}{Mode}} Tiny\+Engine\+Renderer\+DVI\+::mode = \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a1907e8c778a78214ee236e72eb522ed5a64fca74c5b7eea92425e0663682a4075}{MODE\+\_\+\+RGB565}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00094}{94}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_ab7f8fc6782cb61207a95e29e526b34d6}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!palette@{palette}}
+\index{palette@{palette}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{palette}{palette}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_ab7f8fc6782cb61207a95e29e526b34d6} 
+\mbox{\hyperlink{tinyengine__renderer__dvi_8h_a0e2f295d3fc0f6caf5e239667b4d5814}{RGB888}} Tiny\+Engine\+Renderer\+DVI\+::palette\mbox{[}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d}{PALETTE\+\_\+\+SIZE}}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00038}{38}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!PALETTE\_SIZE@{PALETTE\_SIZE}}
+\index{PALETTE\_SIZE@{PALETTE\_SIZE}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{PALETTE\_SIZE}{PALETTE\_SIZE}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_ad94c9d8daaaab3efae690638e787e24d} 
+int Tiny\+Engine\+Renderer\+DVI\+::\+PALETTE\+\_\+\+SIZE = 256\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00036}{36}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+\Hypertarget{class_tiny_engine_renderer_d_v_i_aa6f8cc917454c16a374452cc66b03687}\index{TinyEngineRendererDVI@{TinyEngineRendererDVI}!v\_repeat@{v\_repeat}}
+\index{v\_repeat@{v\_repeat}!TinyEngineRendererDVI@{TinyEngineRendererDVI}}
+\doxysubsubsection{\texorpdfstring{v\_repeat}{v\_repeat}}
+{\footnotesize\ttfamily \label{class_tiny_engine_renderer_d_v_i_aa6f8cc917454c16a374452cc66b03687} 
+uint8\+\_\+t Tiny\+Engine\+Renderer\+DVI\+::v\+\_\+repeat = 4\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source_l00093}{93}} of file \mbox{\hyperlink{tinyengine__renderer__dvi_8h_source}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{tinyengine__renderer__dvi_8h}{tinyengine\+\_\+renderer\+\_\+dvi.\+h}}\item 
+src/\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp}{tinyengine\+\_\+renderer\+\_\+dvi.\+cpp}}\end{DoxyCompactItemize}

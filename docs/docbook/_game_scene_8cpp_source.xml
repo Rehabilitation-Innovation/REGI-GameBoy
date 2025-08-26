@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__game_scene_8cpp_source" xml:lang="en-US">
+<title>GameScene.cpp</title>
+<indexterm><primary>src/GameScene.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__game_scene_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__game_scene_8h">GameScene.h</link>&quot;</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&lt;malloc.h&gt;</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00003"/><link linkend="_class_game_scene_1ac4f0485291c1719b76b4ed425661143c">00003</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_game_scene_1ac4f0485291c1719b76b4ed425661143c">GameScene::create</link>()&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00004"/>00004 }
+<anchor xml:id="__game_scene_8cpp_source_1l00005"/>00005 
+<anchor xml:id="__game_scene_8cpp_source_1l00006"/><link linkend="_class_game_scene_1add5bc48c372aaa7f526c02558a8adf00">00006</link> <link linkend="_class_game_scene_1add5bc48c372aaa7f526c02558a8adf00">GameScene::~GameScene</link>()&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00007"/>00007 }
+<anchor xml:id="__game_scene_8cpp_source_1l00008"/>00008 
+<anchor xml:id="__game_scene_8cpp_source_1l00009"/><link linkend="_class_game_scene_1a79aa067bf23e490cdfcb4aec1b181b12">00009</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_game_scene_1a79aa067bf23e490cdfcb4aec1b181b12">GameScene::destroy</link>()&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00010"/>00010 };
+<anchor xml:id="__game_scene_8cpp_source_1l00011"/>00011 
+<anchor xml:id="__game_scene_8cpp_source_1l00012"/><link linkend="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7">00012</link> uint32_t&#32;<link linkend="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7">getTotalHeap</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">extern</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;<link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link>,&#32;<link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link>;
+<anchor xml:id="__game_scene_8cpp_source_1l00014"/>00014 
+<anchor xml:id="__game_scene_8cpp_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;&amp;<link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link>&#32;-&#32;&amp;<link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link>;
+<anchor xml:id="__game_scene_8cpp_source_1l00016"/>00016 }
+<anchor xml:id="__game_scene_8cpp_source_1l00017"/>00017 
+<anchor xml:id="__game_scene_8cpp_source_1l00018"/><link linkend="__game_scene_8cpp_1a09b44c846317da845941c1343a1fcf31">00018</link> uint32_t&#32;<link linkend="__game_scene_8cpp_1a09b44c846317da845941c1343a1fcf31">getFreeHeap</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>mallinfo&#32;m&#32;=&#32;mallinfo();
+<anchor xml:id="__game_scene_8cpp_source_1l00020"/>00020 
+<anchor xml:id="__game_scene_8cpp_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="__game_scene_8cpp_1ac167235a3af93d3e27861a67856f51c7">getTotalHeap</link>()&#32;-&#32;m.uordblks;
+<anchor xml:id="__game_scene_8cpp_source_1l00022"/>00022 }
+<anchor xml:id="__game_scene_8cpp_source_1l00023"/>00023 
+<anchor xml:id="__game_scene_8cpp_source_1l00024"/><link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">00024</link> <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;<link linkend="__game_scene_8cpp_1a3d92ea4f573d5add6d568940793117d0">__StackLimit</link>,&#32;<link linkend="__game_scene_8cpp_1a90d94159980d213c2c903b17da1ee8ab">__bss_end__</link>;
+<anchor xml:id="__game_scene_8cpp_source_1l00025"/>00025 
+<anchor xml:id="__game_scene_8cpp_source_1l00026"/><link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">00026</link> <emphasis role="keyword">struct&#32;</emphasis>mallinfo&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>;
+<anchor xml:id="__game_scene_8cpp_source_1l00027"/><link linkend="__game_scene_8cpp_1a599ac9672c5ed92e22c3259396cbb7d8">00027</link> <emphasis role="keywordtype">char</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>[255];
+<anchor xml:id="__game_scene_8cpp_source_1l00028"/>00028 
+<anchor xml:id="__game_scene_8cpp_source_1l00029"/><link linkend="_class_game_scene_1af107c5ffdf361b4e0b718f486cbc7d0e">00029</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_game_scene_1af107c5ffdf361b4e0b718f486cbc7d0e">GameScene::render</link>()&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00030"/>00030 
+<anchor xml:id="__game_scene_8cpp_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;Heap:&#32;%d&#32;bytes&#32;|&#32;&#32;Free:&#32;%d&#32;\n&quot;,&#32;getTotalHeap(),&#32;getFreeHeap());</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;40,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;Render&#32;Time&#32;%dms&#32;/&#32;%dms\n&quot;,&#32;m_engine.get_profile_render_loop_time(),</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_engine.get_profile_main_loop_time());</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00036"/>00036 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;50,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;Update:&#32;%dms&#32;/&#32;%dms\n&quot;,</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;m_engine.get_profile_update_loop_time(),&#32;m_engine.get_profile_main_loop_time());</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;60,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00041"/>00041 
+<anchor xml:id="__game_scene_8cpp_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;allocated:&#32;%d&#32;bytes\n&quot;,&#32;info.uordblks);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;60,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00044"/>00044 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;free:&#32;%d&#32;bytes\n&quot;,&#32;info.fordblks);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00045"/>00045 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;70,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00046"/>00046 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Total&#32;heap&#32;size:&#32;%d&#32;bytes\n&quot;,&#32;info.arena);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;80,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00048"/>00048 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Largest&#32;free&#32;block:&#32;%d&#32;bytes\n&quot;,&#32;info.ordblks);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;90,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00050"/>00050 &#32;&#32;&#32;&#32;sprintf(<emphasis role="keywordtype">string</emphasis>,&#32;<emphasis role="stringliteral">&quot;FPS:&#32;%d\r\n&quot;</emphasis>,&#32;<link linkend="_class_game_scene_1a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</link>.get_fps());
+<anchor xml:id="__game_scene_8cpp_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<link linkend="_class_game_scene_1a6ce64a6f7dc23c88abe2d43d594ee269">m_framebuffer</link>.draw_string(<emphasis role="keywordtype">string</emphasis>,&#32;5,&#32;10,&#32;15);
+<anchor xml:id="__game_scene_8cpp_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Press&#32;W,&#32;A,&#32;S,&#32;D&#32;for&#32;movement.\r\n&quot;);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;20,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00054"/>00054 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sprintf(string,&#32;&quot;Press&#32;X&#32;to&#32;quit&#32;the&#32;game.\r\n&quot;);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;m_framebuffer.draw_string(string,&#32;5,&#32;30,&#32;15);</emphasis>
+<anchor xml:id="__game_scene_8cpp_source_1l00056"/>00056 
+<anchor xml:id="__game_scene_8cpp_source_1l00057"/>00057 };
+<anchor xml:id="__game_scene_8cpp_source_1l00058"/>00058 
+<anchor xml:id="__game_scene_8cpp_source_1l00059"/><link linkend="_class_game_scene_1a9bb2bd694b9c8399ea22aed23a6a809f">00059</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_game_scene_1a9bb2bd694b9c8399ea22aed23a6a809f">GameScene::update</link>(<emphasis role="keywordtype">double</emphasis>&#32;frameTime)&#32;{
+<anchor xml:id="__game_scene_8cpp_source_1l00060"/>00060 &#32;&#32;&#32;&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>&#32;=&#32;mallinfo();
+<anchor xml:id="__game_scene_8cpp_source_1l00061"/>00061 };
+</programlisting></section>

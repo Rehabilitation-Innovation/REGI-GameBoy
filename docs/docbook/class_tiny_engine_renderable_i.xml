@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_renderable_i" xml:lang="en-US">
+<title>TinyEngineRenderableI Class Reference</title>
+<indexterm><primary>TinyEngineRenderableI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;TinyEngineRenderableI.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TinyEngineRenderableI:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine_renderable_i.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_renderable_i_1a83255f3fcb5830c49a88cd168f4f3639">TinyEngineRenderableI</link> ()</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_class_tiny_engine_renderable_i_1aee85b424686201cc35d938fdbcf2d32d">~TinyEngineRenderableI</link> ()=default</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_tiny_engine_renderable_i_1a08c6b4146af5b079f5c0573cc60ef94c">render</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> _framebuffer)=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_class_tiny_engine_renderable_i_1a269a0beb4185bf0f35a3ad9a73f83021">update</link> (double frameTime)=0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__tiny_engine_renderable_i_8h_source_1l00008">8</link> of file <link linkend="__tiny_engine_renderable_i_8h_source">TinyEngineRenderableI.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderable_i_1a83255f3fcb5830c49a88cd168f4f3639"/><section>
+    <title>TinyEngineRenderableI()</title>
+<indexterm><primary>TinyEngineRenderableI</primary><secondary>TinyEngineRenderableI</secondary></indexterm>
+<indexterm><primary>TinyEngineRenderableI</primary><secondary>TinyEngineRenderableI</secondary></indexterm>
+<para><computeroutput>TinyEngineRenderableI::TinyEngineRenderableI ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__tiny_engine_renderable_i_8h_source_1l00011">11</link> of file <link linkend="__tiny_engine_renderable_i_8h_source">TinyEngineRenderableI.h</link>.</para>
+<programlisting linenumbering="unnumbered">00011 {};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_renderable_i_1aee85b424686201cc35d938fdbcf2d32d"/><section>
+    <title>~TinyEngineRenderableI()</title>
+<indexterm><primary>~TinyEngineRenderableI</primary><secondary>TinyEngineRenderableI</secondary></indexterm>
+<indexterm><primary>TinyEngineRenderableI</primary><secondary>~TinyEngineRenderableI</secondary></indexterm>
+<para><computeroutput>virtual TinyEngineRenderableI::~TinyEngineRenderableI ( )<computeroutput>[virtual]</computeroutput>, <computeroutput>[default]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_renderable_i_1a08c6b4146af5b079f5c0573cc60ef94c"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>TinyEngineRenderableI</secondary></indexterm>
+<indexterm><primary>TinyEngineRenderableI</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>virtual void TinyEngineRenderableI::render (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> _framebuffer)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_u_i_1ad13809e7051f9e6dd57fd3cc6d53c04b">TinyEngineUI</link>, <link linkend="_class_tiny_engine_u_i_blinking_text_box_1a2795076dc9e802deb255f674278776b5">TinyEngineUIBlinkingTextBox</link>, <link linkend="_class_tiny_engine_u_i_text_1ad856c4689873554a1d27d210ce597925">TinyEngineUIText</link>, and <link linkend="_class_tiny_engine_u_i_text_box_1ab1068f0b54dea4bbf10d29c6c59f84fc">TinyEngineUITextBox</link>.</para>
+</section>
+<anchor xml:id="_class_tiny_engine_renderable_i_1a269a0beb4185bf0f35a3ad9a73f83021"/><section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>TinyEngineRenderableI</secondary></indexterm>
+<indexterm><primary>TinyEngineRenderableI</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>virtual void TinyEngineRenderableI::update (double frameTime)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_tiny_engine_u_i_1a8c908c59573e6c15d48a154c1b4d5db1">TinyEngineUI</link>, <link linkend="_class_tiny_engine_u_i_blinking_text_box_1a390c428161e594f7e06aaecdae83cb5f">TinyEngineUIBlinkingTextBox</link>, <link linkend="_class_tiny_engine_u_i_text_1a894a3cf6ee06f5c1c8d572b9d688108a">TinyEngineUIText</link>, and <link linkend="_class_tiny_engine_u_i_text_box_1ae71f116c12369cdd955e801e41da86f5">TinyEngineUITextBox</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+inc/<link linkend="__tiny_engine_renderable_i_8h">TinyEngineRenderableI.h</link></section>
+</section>

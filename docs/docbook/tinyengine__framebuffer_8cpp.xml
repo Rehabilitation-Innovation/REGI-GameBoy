@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__framebuffer_8cpp" xml:lang="en-US">
+<title>src/tinyengine_framebuffer.cpp File Reference</title>
+<indexterm><primary>src/tinyengine_framebuffer.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?>#include &quot;main.h&quot;<?linebreak?>#include &quot;memory.h&quot;<?linebreak?>#include &quot;hardware/interp.h&quot;<?linebreak?>#include &quot;math.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;font.h&quot;<?linebreak?>#include &quot;renew_font.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_tinyengine__framebuffer_8cpp_1adcc3b85c751f64cda0dec4912e314a2a">CHECK_BOUNDS</link>(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,  <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine__framebuffer_8cpp_1a655981006fca173dd2e056bf81a63dc3">CHAR_WIDTH</link>&#160;&#160;&#160;7</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine__framebuffer_8cpp_1ae2eecd07a9b6a2256002a15b28e388f2">CHAR_HEIGHT</link>&#160;&#160;&#160;8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tinyengine__framebuffer_8cpp_1ad546866d6b629b02bca4560c2c1ef35a">UNIT_LSB</link>&#160;&#160;&#160;16</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_tinyengine__framebuffer_8cpp_1ae2eecd07a9b6a2256002a15b28e388f2"/><section>
+    <title>CHAR_HEIGHT</title>
+<indexterm><primary>CHAR_HEIGHT</primary><secondary>tinyengine_framebuffer.cpp</secondary></indexterm>
+<indexterm><primary>tinyengine_framebuffer.cpp</primary><secondary>CHAR_HEIGHT</secondary></indexterm>
+<para><computeroutput>#define CHAR_HEIGHT&#160;&#160;&#160;8</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00026">26</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+</section>
+<anchor xml:id="_tinyengine__framebuffer_8cpp_1a655981006fca173dd2e056bf81a63dc3"/><section>
+    <title>CHAR_WIDTH</title>
+<indexterm><primary>CHAR_WIDTH</primary><secondary>tinyengine_framebuffer.cpp</secondary></indexterm>
+<indexterm><primary>tinyengine_framebuffer.cpp</primary><secondary>CHAR_WIDTH</secondary></indexterm>
+<para><computeroutput>#define CHAR_WIDTH&#160;&#160;&#160;7</computeroutput></para>
+<para>Improvement notes:<itemizedlist>
+<listitem>
+<para>per pixel bounds checks have small impact in Release optimizations, but they are unneccesary if the full shape is insode the buffer. Add checks before drawing or just tell the user to be carefull; will save critical renderer time. Honestly, i dont think any one will make a game that completly saturates the renderer&apos;s capabilities. Even with full screen writes it maintains ~800 FPS.</para>
+</listitem><listitem>
+<para>Char rendering is a utter waste of renderer time. Do this on the second core, or dont do it all the time. Espeacially for static sentances. Most of the renderer time is wasted drawing the same thing from a look up table - instead just write the text to a smaller buffer in static flash or psram and then just render pixel to pixel instead of doing the character look up every time. </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00025">25</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+</section>
+<anchor xml:id="_tinyengine__framebuffer_8cpp_1adcc3b85c751f64cda0dec4912e314a2a"/><section>
+    <title>CHECK_BOUNDS</title>
+<indexterm><primary>CHECK_BOUNDS</primary><secondary>tinyengine_framebuffer.cpp</secondary></indexterm>
+<indexterm><primary>tinyengine_framebuffer.cpp</primary><secondary>CHECK_BOUNDS</secondary></indexterm>
+<para><computeroutput>#define CHECK_BOUNDS( <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>,  <link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered"><emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;&lt;&#32;0&#32;||&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y &lt; 0 || x &gt;</link>&#32;320&#32;||&#32;<link linkend="__dino_game_8cpp_1a9c02f93c9698e4486878867c4f265c48">y</link>&#32;&gt;&#32;240)&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">TINYENGINE_OUTOFBOUNDS_ERROR</link>;
+</programlisting><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00012">12</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+</section>
+<anchor xml:id="_tinyengine__framebuffer_8cpp_1ad546866d6b629b02bca4560c2c1ef35a"/><section>
+    <title>UNIT_LSB</title>
+<indexterm><primary>UNIT_LSB</primary><secondary>tinyengine_framebuffer.cpp</secondary></indexterm>
+<indexterm><primary>tinyengine_framebuffer.cpp</primary><secondary>UNIT_LSB</secondary></indexterm>
+<para><computeroutput>#define UNIT_LSB&#160;&#160;&#160;16</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__framebuffer_8cpp_source_1l00029">29</link> of file <link linkend="_tinyengine__framebuffer_8cpp_source">tinyengine_framebuffer.cpp</link>.</para>
+</section>
+</section>
+</section>

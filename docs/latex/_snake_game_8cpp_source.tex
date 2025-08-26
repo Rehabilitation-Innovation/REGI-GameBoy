@@ -1,0 +1,278 @@
+\doxysection{Snake\+Game.\+cpp}
+\hypertarget{_snake_game_8cpp_source}{}\label{_snake_game_8cpp_source}\index{src/scenes/SnakeGame.cpp@{src/scenes/SnakeGame.cpp}}
+\mbox{\hyperlink{_snake_game_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\_snake\ GRHRehabTech\ on\ 2025-\/07-\/15.}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dino__running_8h}{dino\_running.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}hardware/gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ \ "{}\mbox{\hyperlink{cactus_8h}{cactus.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ \ "{}pico/rand.h"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_snake_game_8h}{SnakeGame.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <malloc.h>}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00019}00019\ \textcolor{comment}{//\ char\ string[255]\ =\ "{}"{};}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00021}00021\ \textcolor{comment}{//\ Macros\ variable\ (HEIGHT\_SNAKE,\ WIDTH\_SNAKE)}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00022}\mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{00022}}\ \textcolor{preprocessor}{\#define\ HEIGHT\_SNAKE\ 240\ -\/\ 1}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00023}\mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{00023}}\ \textcolor{preprocessor}{\#define\ WIDTH\_SNAKE\ 320\ -\/\ 1}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00025}00025\ \textcolor{comment}{//\ Array\_snake\ to\ store\ the\ coordinates\ of\ snake}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00026}00026\ \textcolor{comment}{//\ tail\ (x\_snake-\/ax\_snakeis,\ y\_snake-\/ax\_snakeis)}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00027}\mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{00027}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[100],\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[100];}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00029}00029\ \textcolor{comment}{//\ Variable\ to\ store\ the\ length\ of\ the}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00030}00030\ \textcolor{comment}{//\ snake's\ tail}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00031}\mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{00031}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00033}00033\ \textcolor{comment}{//\ Score\ and\ signal\ flags}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00034}\mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{00034}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}},\ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00036}00036\ \textcolor{comment}{//\ Coordinates\ of\ snake's\ head\ and\ fruit}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00037}\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{00037}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00040}\mbox{\hyperlink{class_snake_game_a98f4ebbe3303b1627cf738e4684b69b4}{00040}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_snake_game_a98f4ebbe3303b1627cf738e4684b69b4}{SnakeGame::create}}()}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{GameScene::create}}();}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ signal\ the\ gameover}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Initial\ coordinates\ of\ the\ snake}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}}\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}}\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ Initial\ coordinates\ of\ the\ fruit}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00053}00053\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Score\ initialzed}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\_snake}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00063}00063\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'w'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00069}00069\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'a'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00077}00077\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00079}00079\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'s'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00085}00085\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'d'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00093}00093\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00095}00095\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'x\_snake'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00101}00101\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'f'},}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ [\&]}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00110}00110\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00113}\mbox{\hyperlink{class_snake_game_a09eac49a79e09f012c8c5ca6c4d4c7eb}{00113}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_snake_game_a09eac49a79e09f012c8c5ca6c4d4c7eb}{SnakeGame::render}}()}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00114}00114\ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{GameScene::render}}();}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.clear(0);\ \textcolor{comment}{//\ colors\ are\ based\ on\ pallette}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ Creating\ top\ wall}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ WIDTH\_SNAKE;\ i++)\ \{}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ printf("{}-\/"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00122}00122\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_framebuffer.draw\_pix\_snakeel(i,\ 0,\ 66);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{comment}{//\ printf("{}\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00126}00126\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_outline\_rectangle(0,\ 0,\ 320\ -\/\ 1,\ 240\ -\/\ 1,\ 45);}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00127}00127\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_pix\_snakeel(x\_snake,\ y\_snake,\ 66);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00128}00128\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}},\ 10,\ 10,\ 45);}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00129}00129\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_pix\_snakeel(fruitx\_snake,\ fruity\_snake,\ 66);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00130}00130\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}},\ 5,\ 5,\ 31);}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00133}00133\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ k++)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00134}00134\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[k],\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[k],\ 10,\ 10,\ 45);}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00139}00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ >\ 320)\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ <\ 0)\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ 320;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ >\ 240)\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ <\ 0)\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00147}00147\ \ \ \ \ \textcolor{comment}{//\ Creating\ bottom\ walls\ with\ '-\/'}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00148}00148\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ WIDTH\_SNAKE;\ i++)\ \{}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00149}00149\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ printf("{}-\/"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_framebuffer.draw\_pix\_snakeel(i,\ 239,\ 27);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00151}00151\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{comment}{//\ printf("{}\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00154}00154\ \ \ \ \ \textcolor{comment}{//\ Print\ the\ score\ and\ instructions}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00155}00155\ \ \ \ \ \textcolor{comment}{//\ printf("{}score\ =\ \%d\(\backslash\)r\(\backslash\)n"{},\ score);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00156}00156\ \ \ \ \ \textcolor{comment}{//\ printf("{}Press\ W,\ A,\ S,\ D\ for\ movement.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00157}00157\ \ \ \ \ \textcolor{comment}{//\ printf("{}Press\ x\_snake\ to\ quit\ the\ game.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00158}00158\ \ \ \ \ \textcolor{keyword}{struct\ }mallinfo\ \mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{info}}\ =\ mallinfo();}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00160}00160\ \ \ \ \ \textcolor{comment}{//\ sprintf(fps\_string,\ "{}Total\ Heap:\ \%d\ by\_snaketes\ |\ \ Free:\ \%d\ \(\backslash\)n"{},\ getTotalHeap(),\ getFreeHeap());}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00161}00161\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(fps\_string,\ 5,\ 0,\ 100);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00162}00162\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00163}00163\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ Render\ Time\ \%dms\ /\ \%dms\(\backslash\)n"{},\ m\_engine.get\_profile\_render\_loop\_time(),}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00164}00164\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_engine.get\_profile\_main\_loop\_time());}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00165}00165\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 110);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00167}00167\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ Update:\ \%dms\ /\ \%dms\(\backslash\)n"{},}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00168}00168\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ m\_engine.get\_profile\_update\_loop\_time(),\ m\_engine.get\_profile\_main\_loop\_time());}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00169}00169\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 120);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00170}00170\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ allocated:\ \%d\ by\_snaketes\(\backslash\)n"{},\ info.uordblks);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00172}00172\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 60);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00173}00173\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ free:\ \%d\ by\_snaketes\(\backslash\)n"{},\ info.fordblks);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00174}00174\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 70);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00175}00175\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Total\ heap\ size:\ \%d\ by\_snaketes\(\backslash\)n"{},\ info.arena);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00176}00176\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 80);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00177}00177\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Largest\ free\ block:\ \%d\ by\_snaketes\(\backslash\)n"{},\ info.ordblks);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00178}00178\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 90);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00179}00179\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}FPS:\ \%d\(\backslash\)r\(\backslash\)n"{},\ m\_engine.get\_fps());}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00180}00180\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 0);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00181}00181\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}score\ =\ \%d\(\backslash\)r\(\backslash\)n"{},\ score);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00182}00182\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 10);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Press\ W,\ A,\ S,\ D\ for\ movement.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00184}00184\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 20);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00185}00185\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Press\ x\_snake\ to\ quit\ the\ game.\(\backslash\)r\(\backslash\)n"{});}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00186}00186\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 30);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00187}00187\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Snake\ Coords:\ \%d,\ \%d\(\backslash\)r\(\backslash\)n"{},\ x\_snake,\ y\_snake);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00188}00188\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 40);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00189}00189\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}Food\ Coords:\ \%d,\ \%d\(\backslash\)r\(\backslash\)n"{},\ fruitx\_snake,\ fruity\_snake);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(string,\ 5,\ 0,\ 50);}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00192}00192\ \ \ \ \ \mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\_renderer}}.wait\_for\_vsync();\ \textcolor{comment}{//\ If\ this\ is\ enabled\ debugging\ will\ not\ work,\ since\ this\ uses\ a\ blocking\ loop}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{comment}{//\ with\ hardware\ event\ listeners\ it\ will\ just\ stay\_snake\ here\ forever.\ Comment\ out\ the\ line\ when\ debugging}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00195}00195\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.swap\_blocking();}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00196}00196\ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00198}\mbox{\hyperlink{class_snake_game_a427ff7fbd06cf21fd64223a3c48d500d}{00198}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_snake_game_a427ff7fbd06cf21fd64223a3c48d500d}{SnakeGame::update}}(\textcolor{keywordtype}{double}\ frameTime)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00199}00199\ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00200}00200\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{GameScene::update}}(frameTime);}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}FPS:\ \%d\(\backslash\)r\(\backslash\)n"{},\ m\_engine.get\_fps());}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00202}00202\ \ \ \ \ \textcolor{comment}{//\ Updating\ the\ coordinates\ for\ continous}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{comment}{//\ movement\ of\ snake}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00204}00204\ \ \ \ \ \textcolor{keywordtype}{int}\ prevx\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[0];}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00205}00205\ \ \ \ \ \textcolor{keywordtype}{int}\ prevy\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[0];}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{keywordtype}{int}\ prev2x\_snake,\ prev2y\_snake;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00207}00207\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[0]\ =\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00208}00208\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[0]\ =\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ i++)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00210}00210\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ prev2x\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i];}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ prev2y\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i];}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i]\ =\ prevx\_snake;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i]\ =\ prevy\_snake;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ prevx\_snake\ =\ prev2x\_snake;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ prevy\_snake\ =\ prev2y\_snake;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00217}00217\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00219}00219\ \ \ \ \ \textcolor{comment}{//\ Changing\ the\ direction\ of\ movement\ of\ snake}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00220}00220\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}})}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00221}00221\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}++;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}++;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00236}00236\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00238}00238\ \ \ \ \ \textcolor{comment}{//\ If\ the\ game\ is\ over}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00239}00239\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake\ <\ 0\ ||\ x\_snake\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}}\ ||\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake\ <\ 0\ ||\ y\_snake\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}})}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00242}00242\ \ \ \ \ \textcolor{comment}{//\ Checks\ for\ collision\ with\ the\ tail\ (o)}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ i++)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00244}00244\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i]\ ==\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ \&\&\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i]\ ==\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}})}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00247}00247\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00249}00249\ \ \ \ \ \textcolor{comment}{//\ If\ snake\ reaches\ the\ fruit}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00250}00250\ \ \ \ \ \textcolor{comment}{//\ then\ update\ the\ score}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}})}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake\ <=\ fruitx\_snake\ \&\&\ x\_snake\ +\ 10\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}})\ \&\&\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake\ <=\ fruity\_snake\ \&\&\ y\_snake\ +\ 10\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}))}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generation\ of\ new\ fruit}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\_snake}}\ +=\ 10;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}}++;}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00267}00267\ \}}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00269}\mbox{\hyperlink{class_snake_game_ad05db6c6aaa3fad9f248d1e94df2a597}{00269}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_snake_game_ad05db6c6aaa3fad9f248d1e94df2a597}{SnakeGame::destroy}}()}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00270}00270\ \{}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00271}00271\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{GameScene::destroy}}();}
+\DoxyCodeLine{\Hypertarget{_snake_game_8cpp_source_l00272}00272\ \}}
+
+\end{DoxyCode}

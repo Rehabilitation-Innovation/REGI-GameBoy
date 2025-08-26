@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_main_8cpp_source" xml:lang="en-US">
+<title>main.cpp</title>
+<indexterm><primary>src/main.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_main_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_main_8h">main.h</link>&quot;</emphasis>&#32;
+<anchor xml:id="_main_8cpp_source_1l00002"/>00002 
+<anchor xml:id="_main_8cpp_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00004"/>00004 
+<anchor xml:id="_main_8cpp_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&quot;hardware/spi.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00006"/>00006 
+<anchor xml:id="_main_8cpp_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&quot;pico/stdlib.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00008"/>00008 
+<anchor xml:id="_main_8cpp_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&quot;pico/rand.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine_8h">tinyengine.h</link>&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00011"/>00011 
+<anchor xml:id="_main_8cpp_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&quot;hardware/pll.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&quot;hardware/vreg.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&quot;hardware/clocks.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00015"/>00015 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/pll.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/clocks.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="__game_8h">game.h</link>&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00018"/>00018 
+<anchor xml:id="_main_8cpp_source_1l00019"/>00019 <emphasis role="preprocessor">#include&#32;&quot;hardware/dma.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00020"/>00020 <emphasis role="preprocessor">#include&#32;&quot;hardware/gpio.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00021"/>00021 <emphasis role="preprocessor">#include&#32;&quot;hardware/irq.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00022"/>00022 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/bus_ctrl.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00023"/>00023 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/hstx_ctrl.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00024"/>00024 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/hstx_fifo.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00025"/>00025 <emphasis role="preprocessor">#include&#32;&quot;hardware/structs/sio.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00026"/>00026 <emphasis role="preprocessor">#include&#32;&quot;pico/multicore.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00027"/>00027 <emphasis role="preprocessor">#include&#32;&quot;pico/sem.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00028"/>00028 
+<anchor xml:id="_main_8cpp_source_1l00029"/>00029 <emphasis role="preprocessor">#include&#32;&quot;hardware/exception.h&quot;</emphasis>&#32;
+<anchor xml:id="_main_8cpp_source_1l00030"/>00030 
+<anchor xml:id="_main_8cpp_source_1l00031"/>00031 <emphasis role="preprocessor">#include&#32;&quot;distance_sensor.h&quot;</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00032"/>00032 
+<anchor xml:id="_main_8cpp_source_1l00033"/>00033 
+<anchor xml:id="_main_8cpp_source_1l00034"/>00034 
+<anchor xml:id="_main_8cpp_source_1l00035"/>00035 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link>(<emphasis role="keywordtype">void</emphasis>);
+<anchor xml:id="_main_8cpp_source_1l00036"/>00036 
+<anchor xml:id="_main_8cpp_source_1l00037"/><link linkend="_main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">00037</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link>()
+<anchor xml:id="_main_8cpp_source_1l00038"/>00038 {
+<anchor xml:id="_main_8cpp_source_1l00039"/>00039 
+<anchor xml:id="_main_8cpp_source_1l00040"/>00040 &#32;&#32;&#32;&#32;vreg_set_voltage(VREG_VOLTAGE_1_30);
+<anchor xml:id="_main_8cpp_source_1l00041"/>00041 &#32;&#32;&#32;&#32;set_sys_clock_khz(315000,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="_main_8cpp_source_1l00042"/>00042 &#32;&#32;&#32;&#32;clock_configure(
+<anchor xml:id="_main_8cpp_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_peri,
+<anchor xml:id="_main_8cpp_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00048"/>00048 &#32;&#32;&#32;&#32;);
+<anchor xml:id="_main_8cpp_source_1l00049"/>00049 &#32;&#32;&#32;&#32;clock_configure(
+<anchor xml:id="_main_8cpp_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clk_hstx,
+<anchor xml:id="_main_8cpp_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;glitchless&#32;mux</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,&#32;<emphasis role="comment">//&#32;System&#32;PLL&#32;on&#32;AUX&#32;mux</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;*&#32;1000,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;frequency</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;315000&#32;/&#32;2&#32;*&#32;1000&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Output&#32;(must&#32;be&#32;same&#32;as&#32;no&#32;divider)</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00055"/>00055 &#32;&#32;&#32;&#32;);
+<anchor xml:id="_main_8cpp_source_1l00056"/>00056 
+<anchor xml:id="_main_8cpp_source_1l00057"/>00057 
+<anchor xml:id="_main_8cpp_source_1l00058"/>00058 
+<anchor xml:id="_main_8cpp_source_1l00059"/>00059 &#32;&#32;&#32;&#32;stdio_init_all();
+<anchor xml:id="_main_8cpp_source_1l00060"/>00060 
+<anchor xml:id="_main_8cpp_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link>();
+<anchor xml:id="_main_8cpp_source_1l00062"/>00062 
+<anchor xml:id="_main_8cpp_source_1l00063"/>00063 &#32;&#32;&#32;&#32;<link linkend="_class_game">Game</link>&#32;game;
+<anchor xml:id="_main_8cpp_source_1l00064"/>00064 
+<anchor xml:id="_main_8cpp_source_1l00065"/>00065 &#32;&#32;&#32;&#32;game.<link linkend="_class_game_1a701403e278b6f4849f12dda2bf26fd2f">run</link>();
+<anchor xml:id="_main_8cpp_source_1l00066"/>00066 
+<anchor xml:id="_main_8cpp_source_1l00067"/>00067 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;maybe&#32;shut&#32;down&#32;and&#32;reboot&#32;after?</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00068"/>00068 
+<anchor xml:id="_main_8cpp_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)&#32;{
+<anchor xml:id="_main_8cpp_source_1l00070"/>00070 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_main_8cpp_source_1l00071"/>00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_main_8cpp_source_1l00072"/>00072 
+<anchor xml:id="_main_8cpp_source_1l00073"/>00073 }
+<anchor xml:id="_main_8cpp_source_1l00074"/>00074 
+<anchor xml:id="_main_8cpp_source_1l00075"/>00075 
+<anchor xml:id="_main_8cpp_source_1l00076"/><link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">00076</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_main_8cpp_source_1l00077"/>00077 &#32;&#32;&#32;&#32;uint&#32;f_pll_sys&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
+<anchor xml:id="_main_8cpp_source_1l00078"/>00078 &#32;&#32;&#32;&#32;uint&#32;f_pll_usb&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_USB_CLKSRC_PRIMARY);
+<anchor xml:id="_main_8cpp_source_1l00079"/>00079 &#32;&#32;&#32;&#32;uint&#32;f_rosc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_ROSC_CLKSRC);
+<anchor xml:id="_main_8cpp_source_1l00080"/>00080 
+<anchor xml:id="_main_8cpp_source_1l00081"/>00081 &#32;&#32;&#32;&#32;uint&#32;f_clk_sys&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
+<anchor xml:id="_main_8cpp_source_1l00082"/>00082 &#32;&#32;&#32;&#32;uint&#32;f_clk_peri&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_PERI);
+<anchor xml:id="_main_8cpp_source_1l00083"/>00083 &#32;&#32;&#32;&#32;uint&#32;f_clk_usb&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_USB);
+<anchor xml:id="_main_8cpp_source_1l00084"/>00084 &#32;&#32;&#32;&#32;uint&#32;f_clk_adc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_ADC);
+<anchor xml:id="_main_8cpp_source_1l00085"/>00085 &#32;&#32;&#32;&#32;uint&#32;f_clk_hstx&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_HSTX);
+<anchor xml:id="_main_8cpp_source_1l00086"/>00086 <emphasis role="preprocessor">#ifdef&#32;CLOCKS_FC0_SRC_VALUE_CLK_RTC</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00087"/>00087 &#32;&#32;&#32;&#32;uint&#32;f_clk_rtc&#32;=&#32;frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_RTC);
+<anchor xml:id="_main_8cpp_source_1l00088"/>00088 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00089"/>00089 
+<anchor xml:id="_main_8cpp_source_1l00090"/>00090 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;pll_sys&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_pll_sys);
+<anchor xml:id="_main_8cpp_source_1l00091"/>00091 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;pll_usb&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_pll_usb);
+<anchor xml:id="_main_8cpp_source_1l00092"/>00092 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;rosc&#32;&#32;&#32;&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_rosc);
+<anchor xml:id="_main_8cpp_source_1l00093"/>00093 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_sys&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_sys);
+<anchor xml:id="_main_8cpp_source_1l00094"/>00094 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_peri&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_peri);
+<anchor xml:id="_main_8cpp_source_1l00095"/>00095 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_usb&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_usb);
+<anchor xml:id="_main_8cpp_source_1l00096"/>00096 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_adc&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_adc);
+<anchor xml:id="_main_8cpp_source_1l00097"/>00097 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_hstx&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_hstx);
+<anchor xml:id="_main_8cpp_source_1l00098"/>00098 <emphasis role="preprocessor">#ifdef&#32;CLOCKS_FC0_SRC_VALUE_CLK_RTC</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00099"/>00099 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;clk_rtc&#32;&#32;=&#32;%dkHz\n&quot;</emphasis>,&#32;f_clk_rtc);
+<anchor xml:id="_main_8cpp_source_1l00100"/>00100 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00101"/>00101 
+<anchor xml:id="_main_8cpp_source_1l00102"/>00102 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Can&apos;t&#32;measure&#32;clk_ref&#32;/&#32;xosc&#32;as&#32;it&#32;is&#32;the&#32;ref</emphasis>
+<anchor xml:id="_main_8cpp_source_1l00103"/>00103 }
+</programlisting></section>

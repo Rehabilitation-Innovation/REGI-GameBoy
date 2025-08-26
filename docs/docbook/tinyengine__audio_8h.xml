@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__audio_8h" xml:lang="en-US">
+<title>inc/tinyengine_audio.h File Reference</title>
+<indexterm><primary>inc/tinyengine_audio.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;tinyengine.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structte__audio__handle__t">te_audio_handle_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> <link linkend="_tinyengine__audio_8h_1a063f751815bd2faa9b815f16f75c9243">te_audio_init</link> (<link linkend="_structte__audio__handle__t">te_audio_handle_t</link> *audio)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_tinyengine__audio_8h_1a063f751815bd2faa9b815f16f75c9243"/><section>
+    <title>te_audio_init()</title>
+<indexterm><primary>te_audio_init</primary><secondary>tinyengine_audio.h</secondary></indexterm>
+<indexterm><primary>tinyengine_audio.h</primary><secondary>te_audio_init</secondary></indexterm>
+<para><computeroutput><link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link> te_audio_init (<link linkend="_structte__audio__handle__t">te_audio_handle_t</link> * audio)</computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__audio_8cpp_source_1l00005">5</link> of file <link linkend="_tinyengine__audio_8cpp_source">tinyengine_audio.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00005 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00006 
+00007 &#32;&#32;&#32;&#32;gpio_set_function(audio-&gt;<link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">audio_out_1</link>,&#32;GPIO_FUNC_PWM);
+00008 &#32;&#32;&#32;&#32;gpio_set_slew_rate(audio-&gt;<link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">audio_out_1</link>,&#32;GPIO_SLEW_RATE_FAST);
+00009 &#32;&#32;&#32;&#32;audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>&#32;=&#32;pwm_gpio_to_slice_num(audio-&gt;<link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">audio_out_1</link>);
+00010 &#32;&#32;&#32;&#32;pwm_set_clkdiv(audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>,&#32;audio-&gt;<link linkend="_structte__audio__handle__t_1a6d2c27d7528f98adf99cf2cf416c3d71">audio_out_1</link>);
+00011 &#32;&#32;&#32;&#32;pwm_set_wrap(audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>,&#32;audio-&gt;<link linkend="_structte__audio__handle__t_1a7ce1246af4ea9cc5ce1ffcca8cd2bdc2">period</link>);
+00012 &#32;&#32;&#32;&#32;pwm_set_chan_level(audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>,&#32;PWM_CHAN_A,&#32;audio-&gt;<link linkend="_structte__audio__handle__t_1a7ce1246af4ea9cc5ce1ffcca8cd2bdc2">period</link>&#32;*&#32;0.9);
+00013 &#32;&#32;&#32;&#32;pwm_set_chan_level(audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>,&#32;PWM_CHAN_B,&#32;audio-&gt;<link linkend="_structte__audio__handle__t_1a7ce1246af4ea9cc5ce1ffcca8cd2bdc2">period</link>&#32;/&#32;3);
+00014 &#32;&#32;&#32;&#32;pwm_set_enabled(audio-&gt;<link linkend="_structte__audio__handle__t_1a08a7a348fd65d11fe1c64efb621db539">slice_num</link>,&#32;<emphasis role="keyword">true</emphasis>);
+00015 
+00016 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</link>;
+00017 }
+</programlisting></section>
+</section>
+</section>

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_tiny_engine_scene_default" xml:lang="en-US">
+<title>TinyEngineSceneDefault Class Reference</title>
+<indexterm><primary>TinyEngineSceneDefault</primary></indexterm>
+<para>
+<computeroutput>#include &lt;tinyengine_scene_default.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TinyEngineSceneDefault:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine_scene_default.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_tiny_engine_scene_default_1adbfe2e0e9cafb608ab1462388bc56e05">TinyEngineSceneDefault</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_tiny_engine_scene_default_1acaa36b599d0b9a47b36f222163e240c5">~TinyEngineSceneDefault</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_scene_default_1a41868b105d4c0ea63eec7b0e79745101">render</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_scene_default_1afc7c24f397889b79d308f3c42d21f75f">update</link> (double frameTime)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3">create</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6">destroy</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Public Member Functions inherited from <link linkend="_class_scene_i">SceneI</link>        <itemizedlist>
+            <listitem><para>virtual <link linkend="_class_scene_i_1a9aca690ad096045ae588810c5dbcbd62">~SceneI</link> ()=default</para>
+</listitem>
+        </itemizedlist>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_tinyengine__scene__default_8h_source_1l00003">3</link> of file <link linkend="_tinyengine__scene__default_8h_source">tinyengine_scene_default.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_tiny_engine_scene_default_1adbfe2e0e9cafb608ab1462388bc56e05"/><section>
+    <title>TinyEngineSceneDefault()</title>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<para><computeroutput>TinyEngineSceneDefault::TinyEngineSceneDefault ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__scene__default_8h_source_1l00005">5</link> of file <link linkend="_tinyengine__scene__default_8h_source">tinyengine_scene_default.h</link>.</para>
+<programlisting linenumbering="unnumbered">00005 {&#32;<link linkend="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3">create</link>();&#32;};
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_scene_default_1acaa36b599d0b9a47b36f222163e240c5"/><section>
+    <title>~TinyEngineSceneDefault()</title>
+<indexterm><primary>~TinyEngineSceneDefault</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>~TinyEngineSceneDefault</secondary></indexterm>
+<para><computeroutput>TinyEngineSceneDefault::~TinyEngineSceneDefault ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_tinyengine__scene__default_8h_source_1l00006">6</link> of file <link linkend="_tinyengine__scene__default_8h_source">tinyengine_scene_default.h</link>.</para>
+<programlisting linenumbering="unnumbered">00006 {&#32;<link linkend="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6">destroy</link>();&#32;};
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_tiny_engine_scene_default_1a87cf43024a7073c5b5b36446727940c3"/><section>
+    <title>create()</title>
+<indexterm><primary>create</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>create</secondary></indexterm>
+<para><computeroutput>void TinyEngineSceneDefault::create ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_scene_i_1a7f6b05370faed688686525fe2d3706a0">SceneI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__scene__default_8cpp_source_1l00004">4</link> of file <link linkend="_tinyengine__scene__default_8cpp_source">tinyengine_scene_default.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00004 {}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_scene_default_1af443526f24f7571636e79348a2d13af6"/><section>
+    <title>destroy()</title>
+<indexterm><primary>destroy</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>destroy</secondary></indexterm>
+<para><computeroutput>void TinyEngineSceneDefault::destroy ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_scene_i_1aad87a877cb92b4ea71b2f50dc06e132b">SceneI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__scene__default_8cpp_source_1l00005">5</link> of file <link linkend="_tinyengine__scene__default_8cpp_source">tinyengine_scene_default.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00005 {}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_scene_default_1a41868b105d4c0ea63eec7b0e79745101"/><section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void TinyEngineSceneDefault::render ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_scene_i_1a573a66b660ce2e704f035ea27ac9ccac">SceneI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__scene__default_8cpp_source_1l00002">2</link> of file <link linkend="_tinyengine__scene__default_8cpp_source">tinyengine_scene_default.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00002 {}
+</programlisting></section>
+<anchor xml:id="_class_tiny_engine_scene_default_1afc7c24f397889b79d308f3c42d21f75f"/><section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>TinyEngineSceneDefault</secondary></indexterm>
+<indexterm><primary>TinyEngineSceneDefault</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>void TinyEngineSceneDefault::update (double frameTime)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_scene_i_1a917d7c8e713381b6ff20b1878a997100">SceneI</link>.</para>
+<para>
+Definition at line <link linkend="_tinyengine__scene__default_8cpp_source_1l00003">3</link> of file <link linkend="_tinyengine__scene__default_8cpp_source">tinyengine_scene_default.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00003 {}
+</programlisting></section>
+<para>
+The documentation for this class was generated from the following files:</para>
+inc/<link linkend="_tinyengine__scene__default_8h">tinyengine_scene_default.h</link>src/<link linkend="_tinyengine__scene__default_8cpp">tinyengine_scene_default.cpp</link></section>
+</section>

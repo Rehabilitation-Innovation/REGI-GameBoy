@@ -1,0 +1,70 @@
+\doxysection{pwm-\/tone.h}
+\hypertarget{pwm-tone_8h_source}{}\label{pwm-tone_8h_source}\index{inc/pwm-\/tone.h@{inc/pwm-\/tone.h}}
+\mbox{\hyperlink{pwm-tone_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00009}00009\ \textcolor{preprocessor}{\#ifndef\ PWM\_TONE\_H}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00010}00010\ \textcolor{preprocessor}{\#define\ PWM\_TONE\_H}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <pico/stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pitches_8h}{pitches.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00015}00015\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00016}00016\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00017}00017\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00023}\mbox{\hyperlink{structnote__t}{00023}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structnote__t}{note\_t}}\ \{}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00024}\mbox{\hyperlink{structnote__t_a0d9b26aeebe2673d53fa33bf146d8f61}{00024}}\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structnote__t_a0d9b26aeebe2673d53fa33bf146d8f61}{freq}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00025}\mbox{\hyperlink{structnote__t_a75232368b566fc09f821fd3d14a2754c}{00025}}\ \ \ \ \ int8\_t\ \mbox{\hyperlink{structnote__t_a75232368b566fc09f821fd3d14a2754c}{measure}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00026}\mbox{\hyperlink{pwm-tone_8h_a740a9e45c23915e84ffa545cb51d2f91}{00026}}\ \}\ \mbox{\hyperlink{structnote__t}{note\_t}};}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00032}\mbox{\hyperlink{structmelody__t}{00032}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmelody__t}{melody\_t}}\ \{\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00033}\mbox{\hyperlink{structmelody__t_ab9bbd2dab6495fb9e6f99d350bd623da}{00033}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structmelody__t_ab9bbd2dab6495fb9e6f99d350bd623da}{playing}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00034}\mbox{\hyperlink{structmelody__t_a5313da539e085878a64b398a8675fdfd}{00034}}\ \ \ \ \ \mbox{\hyperlink{structnote__t}{note\_t}}\ *\ \mbox{\hyperlink{structmelody__t_a5313da539e085878a64b398a8675fdfd}{notes}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00035}\mbox{\hyperlink{pwm-tone_8h_a2e48bb77dbb3015af4376b157e8b2bd3}{00035}}\ \}\ \mbox{\hyperlink{structmelody__t}{melody\_t}};}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00041}\mbox{\hyperlink{structtonegenerator__t}{00041}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ \{}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00042}\mbox{\hyperlink{structtonegenerator__t_a84865098cefc6908faebae557c2c1b94}{00042}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structtonegenerator__t_a84865098cefc6908faebae557c2c1b94}{playing}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00043}\mbox{\hyperlink{structtonegenerator__t_ac105968e84b3b30a88b20f508ed6fd3e}{00043}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtonegenerator__t_ac105968e84b3b30a88b20f508ed6fd3e}{gpio}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00044}\mbox{\hyperlink{structtonegenerator__t_a588380257ed9bca9b3df52b4fcad01e7}{00044}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtonegenerator__t_a588380257ed9bca9b3df52b4fcad01e7}{slice}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00045}\mbox{\hyperlink{structtonegenerator__t_aa2d54b6286aa1ad974ccc4bedcc756de}{00045}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtonegenerator__t_aa2d54b6286aa1ad974ccc4bedcc756de}{channel}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00046}\mbox{\hyperlink{structtonegenerator__t_ab0cb06243ba094d2001b922517e3f17e}{00046}}\ \ \ \ \ \mbox{\hyperlink{structmelody__t}{melody\_t}}\ \mbox{\hyperlink{structtonegenerator__t_ab0cb06243ba094d2001b922517e3f17e}{mel}};\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00047}\mbox{\hyperlink{pwm-tone_8h_aec190e0f4998d86760fd9820c9bce07e}{00047}}\ \}\ \mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}};}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00054}\mbox{\hyperlink{pwm-tone_8h_a6007f918a626559d13695f7c8fccce1f}{00054}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a6007f918a626559d13695f7c8fccce1f}{tone\_init}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ uint8\_t\ gpio);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00062}\mbox{\hyperlink{pwm-tone_8h_a6be2aff54804e191b2eec031a3657cd3}{00062}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a6be2aff54804e191b2eec031a3657cd3}{tone}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ \textcolor{keywordtype}{int}\ freq,\ uint16\_t\ duration);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00070}\mbox{\hyperlink{pwm-tone_8h_ab23c799acb63da00a9d9f0d1d5c5196a}{00070}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_ab23c799acb63da00a9d9f0d1d5c5196a}{melody}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ \mbox{\hyperlink{structnote__t}{note\_t}}\ *notes,\ int8\_t\ repeat);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00076}\mbox{\hyperlink{pwm-tone_8h_ac124ae29e40f75662b6327b3a99185b8}{00076}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_ac124ae29e40f75662b6327b3a99185b8}{set\_tempo}}(uint16\_t\ bpm);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00082}\mbox{\hyperlink{pwm-tone_8h_a6004e97a98d19f40a6893e47e9d9e4f0}{00082}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a6004e97a98d19f40a6893e47e9d9e4f0}{set\_rest\_duration}}(uint16\_t\ duration);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00088}\mbox{\hyperlink{pwm-tone_8h_a3ec0d39f66fb7cfa934cac14e1d6a2a7}{00088}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a3ec0d39f66fb7cfa934cac14e1d6a2a7}{stop\_tone}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00094}\mbox{\hyperlink{pwm-tone_8h_a3123c1851a4e308ee3b84662745a3d0c}{00094}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a3123c1851a4e308ee3b84662745a3d0c}{stop\_melody}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00101}\mbox{\hyperlink{pwm-tone_8h_a0e126b5cec56bfaae6e7f584d483be86}{00101}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a0e126b5cec56bfaae6e7f584d483be86}{\_pwm\_set\_freq}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ \textcolor{keywordtype}{float}\ freq);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00108}\mbox{\hyperlink{pwm-tone_8h_a9a9c51b018a140f3ee179340724dc633}{00108}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a9a9c51b018a140f3ee179340724dc633}{\_tone\_pwm\_on}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ \textcolor{keywordtype}{int}\ freq);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00114}\mbox{\hyperlink{pwm-tone_8h_a4fe9d81d945334839eaf69c9fe47e272}{00114}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_a4fe9d81d945334839eaf69c9fe47e272}{\_melody\_step}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00122}\mbox{\hyperlink{pwm-tone_8h_add4161b3db73026e90a90549cae46a54}{00122}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pwm-tone_8h_add4161b3db73026e90a90549cae46a54}{\_melody\_tone}}(\mbox{\hyperlink{structtonegenerator__t}{tonegenerator\_t}}\ *gen,\ \textcolor{keywordtype}{int}\ freq,\ uint16\_t\ duration);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00130}00130\ \textcolor{keyword}{static}\ int64\_t\ \_tone\_complete(alarm\_id\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{void}\ *user\_data);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00138}00138\ \textcolor{keyword}{static}\ int64\_t\ \_melody\_note\_complete(alarm\_id\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{void}\ *user\_data);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00146}00146\ \textcolor{keyword}{static}\ int64\_t\ \_rest\_complete(alarm\_id\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{void}\ *user\_data);}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00148}00148\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00149}00149\ \}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00150}00150\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00152}00152\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PWM\_TONE\_H}}
+\DoxyCodeLine{\Hypertarget{pwm-tone_8h_source_l00153}00153\ }
+
+\end{DoxyCode}

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pwm-tone_8h_source" xml:lang="en-US">
+<title>pwm-tone.h</title>
+<indexterm><primary>inc/pwm-tone.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_pwm-tone_8h_source_1l00001"/>00001 
+<anchor xml:id="_pwm-tone_8h_source_1l00008"/>00008 
+<anchor xml:id="_pwm-tone_8h_source_1l00009"/>00009 <emphasis role="preprocessor">#ifndef&#32;PWM_TONE_H</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00010"/>00010 <emphasis role="preprocessor">#define&#32;PWM_TONE_H</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00011"/>00011 
+<anchor xml:id="_pwm-tone_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&lt;pico/stdlib.h&gt;</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_pitches_8h">pitches.h</link>&quot;</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00014"/>00014 
+<anchor xml:id="_pwm-tone_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00016"/>00016 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_pwm-tone_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00018"/>00018 
+<anchor xml:id="_pwm-tone_8h_source_1l00023"/><link linkend="_structnote__t">00023</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structnote__t">note_t</link>&#32;{
+<anchor xml:id="_pwm-tone_8h_source_1l00024"/><link linkend="_structnote__t_1a0d9b26aeebe2673d53fa33bf146d8f61">00024</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;<link linkend="_structnote__t_1a0d9b26aeebe2673d53fa33bf146d8f61">freq</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00025"/><link linkend="_structnote__t_1a75232368b566fc09f821fd3d14a2754c">00025</link> &#32;&#32;&#32;&#32;int8_t&#32;<link linkend="_structnote__t_1a75232368b566fc09f821fd3d14a2754c">measure</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00026"/><link linkend="_pwm-tone_8h_1a740a9e45c23915e84ffa545cb51d2f91">00026</link> }&#32;<link linkend="_structnote__t">note_t</link>;
+<anchor xml:id="_pwm-tone_8h_source_1l00027"/>00027 
+<anchor xml:id="_pwm-tone_8h_source_1l00032"/><link linkend="_structmelody__t">00032</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structmelody__t">melody_t</link>&#32;{&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00033"/><link linkend="_structmelody__t_1ab9bbd2dab6495fb9e6f99d350bd623da">00033</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_structmelody__t_1ab9bbd2dab6495fb9e6f99d350bd623da">playing</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00034"/><link linkend="_structmelody__t_1a5313da539e085878a64b398a8675fdfd">00034</link> &#32;&#32;&#32;&#32;<link linkend="_structnote__t">note_t</link>&#32;*&#32;<link linkend="_structmelody__t_1a5313da539e085878a64b398a8675fdfd">notes</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00035"/><link linkend="_pwm-tone_8h_1a2e48bb77dbb3015af4376b157e8b2bd3">00035</link> }&#32;<link linkend="_structmelody__t">melody_t</link>;
+<anchor xml:id="_pwm-tone_8h_source_1l00036"/>00036 
+<anchor xml:id="_pwm-tone_8h_source_1l00041"/><link linkend="_structtonegenerator__t">00041</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;{
+<anchor xml:id="_pwm-tone_8h_source_1l00042"/><link linkend="_structtonegenerator__t_1a84865098cefc6908faebae557c2c1b94">00042</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_structtonegenerator__t_1a84865098cefc6908faebae557c2c1b94">playing</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00043"/><link linkend="_structtonegenerator__t_1ac105968e84b3b30a88b20f508ed6fd3e">00043</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structtonegenerator__t_1ac105968e84b3b30a88b20f508ed6fd3e">gpio</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00044"/><link linkend="_structtonegenerator__t_1a588380257ed9bca9b3df52b4fcad01e7">00044</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structtonegenerator__t_1a588380257ed9bca9b3df52b4fcad01e7">slice</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00045"/><link linkend="_structtonegenerator__t_1aa2d54b6286aa1ad974ccc4bedcc756de">00045</link> &#32;&#32;&#32;&#32;uint8_t&#32;<link linkend="_structtonegenerator__t_1aa2d54b6286aa1ad974ccc4bedcc756de">channel</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00046"/><link linkend="_structtonegenerator__t_1ab0cb06243ba094d2001b922517e3f17e">00046</link> &#32;&#32;&#32;&#32;<link linkend="_structmelody__t">melody_t</link>&#32;<link linkend="_structtonegenerator__t_1ab0cb06243ba094d2001b922517e3f17e">mel</link>;&#32;
+<anchor xml:id="_pwm-tone_8h_source_1l00047"/><link linkend="_pwm-tone_8h_1aec190e0f4998d86760fd9820c9bce07e">00047</link> }&#32;<link linkend="_structtonegenerator__t">tonegenerator_t</link>;
+<anchor xml:id="_pwm-tone_8h_source_1l00048"/>00048 
+<anchor xml:id="_pwm-tone_8h_source_1l00054"/><link linkend="_pwm-tone_8h_1a6007f918a626559d13695f7c8fccce1f">00054</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a6007f918a626559d13695f7c8fccce1f">tone_init</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;uint8_t&#32;gpio);
+<anchor xml:id="_pwm-tone_8h_source_1l00055"/>00055 
+<anchor xml:id="_pwm-tone_8h_source_1l00062"/><link linkend="_pwm-tone_8h_1a6be2aff54804e191b2eec031a3657cd3">00062</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a6be2aff54804e191b2eec031a3657cd3">tone</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;<emphasis role="keywordtype">int</emphasis>&#32;freq,&#32;uint16_t&#32;duration);
+<anchor xml:id="_pwm-tone_8h_source_1l00063"/>00063 
+<anchor xml:id="_pwm-tone_8h_source_1l00070"/><link linkend="_pwm-tone_8h_1ab23c799acb63da00a9d9f0d1d5c5196a">00070</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1ab23c799acb63da00a9d9f0d1d5c5196a">melody</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;<link linkend="_structnote__t">note_t</link>&#32;*notes,&#32;int8_t&#32;repeat);
+<anchor xml:id="_pwm-tone_8h_source_1l00071"/>00071 
+<anchor xml:id="_pwm-tone_8h_source_1l00076"/><link linkend="_pwm-tone_8h_1ac124ae29e40f75662b6327b3a99185b8">00076</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1ac124ae29e40f75662b6327b3a99185b8">set_tempo</link>(uint16_t&#32;bpm);
+<anchor xml:id="_pwm-tone_8h_source_1l00077"/>00077 
+<anchor xml:id="_pwm-tone_8h_source_1l00082"/><link linkend="_pwm-tone_8h_1a6004e97a98d19f40a6893e47e9d9e4f0">00082</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a6004e97a98d19f40a6893e47e9d9e4f0">set_rest_duration</link>(uint16_t&#32;duration);
+<anchor xml:id="_pwm-tone_8h_source_1l00083"/>00083 
+<anchor xml:id="_pwm-tone_8h_source_1l00088"/><link linkend="_pwm-tone_8h_1a3ec0d39f66fb7cfa934cac14e1d6a2a7">00088</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a3ec0d39f66fb7cfa934cac14e1d6a2a7">stop_tone</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen);
+<anchor xml:id="_pwm-tone_8h_source_1l00089"/>00089 
+<anchor xml:id="_pwm-tone_8h_source_1l00094"/><link linkend="_pwm-tone_8h_1a3123c1851a4e308ee3b84662745a3d0c">00094</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a3123c1851a4e308ee3b84662745a3d0c">stop_melody</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen);
+<anchor xml:id="_pwm-tone_8h_source_1l00095"/>00095 
+<anchor xml:id="_pwm-tone_8h_source_1l00101"/><link linkend="_pwm-tone_8h_1a0e126b5cec56bfaae6e7f584d483be86">00101</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a0e126b5cec56bfaae6e7f584d483be86">_pwm_set_freq</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;<emphasis role="keywordtype">float</emphasis>&#32;freq);
+<anchor xml:id="_pwm-tone_8h_source_1l00102"/>00102 
+<anchor xml:id="_pwm-tone_8h_source_1l00108"/><link linkend="_pwm-tone_8h_1a9a9c51b018a140f3ee179340724dc633">00108</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a9a9c51b018a140f3ee179340724dc633">_tone_pwm_on</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;<emphasis role="keywordtype">int</emphasis>&#32;freq);
+<anchor xml:id="_pwm-tone_8h_source_1l00109"/>00109 
+<anchor xml:id="_pwm-tone_8h_source_1l00114"/><link linkend="_pwm-tone_8h_1a4fe9d81d945334839eaf69c9fe47e272">00114</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1a4fe9d81d945334839eaf69c9fe47e272">_melody_step</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen);
+<anchor xml:id="_pwm-tone_8h_source_1l00115"/>00115 
+<anchor xml:id="_pwm-tone_8h_source_1l00122"/><link linkend="_pwm-tone_8h_1add4161b3db73026e90a90549cae46a54">00122</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_pwm-tone_8h_1add4161b3db73026e90a90549cae46a54">_melody_tone</link>(<link linkend="_structtonegenerator__t">tonegenerator_t</link>&#32;*gen,&#32;<emphasis role="keywordtype">int</emphasis>&#32;freq,&#32;uint16_t&#32;duration);
+<anchor xml:id="_pwm-tone_8h_source_1l00123"/>00123 
+<anchor xml:id="_pwm-tone_8h_source_1l00130"/>00130 <emphasis role="keyword">static</emphasis>&#32;int64_t&#32;_tone_complete(alarm_id_t&#32;<emphasis role="keywordtype">id</emphasis>,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*user_data);
+<anchor xml:id="_pwm-tone_8h_source_1l00131"/>00131 
+<anchor xml:id="_pwm-tone_8h_source_1l00138"/>00138 <emphasis role="keyword">static</emphasis>&#32;int64_t&#32;_melody_note_complete(alarm_id_t&#32;<emphasis role="keywordtype">id</emphasis>,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*user_data);
+<anchor xml:id="_pwm-tone_8h_source_1l00139"/>00139 
+<anchor xml:id="_pwm-tone_8h_source_1l00146"/>00146 <emphasis role="keyword">static</emphasis>&#32;int64_t&#32;_rest_complete(alarm_id_t&#32;<emphasis role="keywordtype">id</emphasis>,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*user_data);
+<anchor xml:id="_pwm-tone_8h_source_1l00147"/>00147 
+<anchor xml:id="_pwm-tone_8h_source_1l00148"/>00148 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00149"/>00149 }
+<anchor xml:id="_pwm-tone_8h_source_1l00150"/>00150 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00151"/>00151 
+<anchor xml:id="_pwm-tone_8h_source_1l00152"/>00152 <emphasis role="preprocessor">#endif&#32;</emphasis><emphasis role="comment">//&#32;PWM_TONE_H</emphasis>
+<anchor xml:id="_pwm-tone_8h_source_1l00153"/>00153 
+</programlisting></section>
