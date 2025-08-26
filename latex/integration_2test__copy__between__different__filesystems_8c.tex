@@ -1,0 +1,145 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/integration/test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.c File Reference}
+\hypertarget{integration_2test__copy__between__different__filesystems_8c}{}\label{integration_2test__copy__between__different__filesystems_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_copy\_between\_different\_filesystems.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_copy\_between\_different\_filesystems.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/clocks.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/sd.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcombination__map}{combination\+\_\+map}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_a7edd94b16025f39d4aca113469771df9}{NUM\+\_\+\+COMBINATION}}~6
+\item 
+\#define \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_add89fbb6b753518ca2f4fa0249456c8f}{TEST\+\_\+\+FILE\+\_\+\+SIZE}}~100 \texorpdfstring{$\ast$}{*} 1024;
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_aa39763d4cd60a15a1e2ba5a310e8401e}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{integration_2test__copy__between__different__filesystems_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source_l00014}{14}} of file \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.\+c}}.
+
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_a7edd94b16025f39d4aca113469771df9}\index{test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}!NUM\_COMBINATION@{NUM\_COMBINATION}}
+\index{NUM\_COMBINATION@{NUM\_COMBINATION}!test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}}
+\doxysubsubsection{\texorpdfstring{NUM\_COMBINATION}{NUM\_COMBINATION}}
+{\footnotesize\ttfamily \label{integration_2test__copy__between__different__filesystems_8c_a7edd94b16025f39d4aca113469771df9} 
+\#define NUM\+\_\+\+COMBINATION~6}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source_l00023}{23}} of file \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.\+c}}.
+
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_add89fbb6b753518ca2f4fa0249456c8f}\index{test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}!TEST\_FILE\_SIZE@{TEST\_FILE\_SIZE}}
+\index{TEST\_FILE\_SIZE@{TEST\_FILE\_SIZE}!test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}}
+\doxysubsubsection{\texorpdfstring{TEST\_FILE\_SIZE}{TEST\_FILE\_SIZE}}
+{\footnotesize\ttfamily \label{integration_2test__copy__between__different__filesystems_8c_add89fbb6b753518ca2f4fa0249456c8f} 
+\#define TEST\+\_\+\+FILE\+\_\+\+SIZE~100 \texorpdfstring{$\ast$}{*} 1024;}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source_l00062}{62}} of file \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{integration_2test__copy__between__different__filesystems_8c_aa39763d4cd60a15a1e2ba5a310e8401e}\index{test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}!test\_copy\_between\_different\_filesystems@{test\_copy\_between\_different\_filesystems}}
+\index{test\_copy\_between\_different\_filesystems@{test\_copy\_between\_different\_filesystems}!test\_copy\_between\_different\_filesystems.c@{test\_copy\_between\_different\_filesystems.c}}
+\doxysubsubsection{\texorpdfstring{test\_copy\_between\_different\_filesystems()}{test\_copy\_between\_different\_filesystems()}}
+{\footnotesize\ttfamily \label{integration_2test__copy__between__different__filesystems_8c_aa39763d4cd60a15a1e2ba5a310e8401e} 
+void test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source_l00137}{137}} of file \mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_source}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Copy\ between\ different\ file\ system:\(\backslash\)n"{}});}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ init\_filesystem\_combination();}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a7edd94b16025f39d4aca113469771df9}{NUM\_COMBINATION}};\ i++)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcombination__map}{combination\_map}}\ setting\ =\ combination[i];}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}from\ \%s(\%s)\ to\ \%s(\%s)"{}},}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setting.\mbox{\hyperlink{structcombination__map_afbc8923aa5672188de0e81b9f1bad0d9}{filesystem1}}-\/>\mbox{\hyperlink{structfilesystem_a72ec4af591f1c4d4538ea3baaf5fb8db}{name}},\ setting.\mbox{\hyperlink{structcombination__map_a5d011206898e96c1bf4928d4bcaedf3e}{device1}}-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}},}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setting.\mbox{\hyperlink{structcombination__map_ae263a6eb20a69d12ebd27eb4c318dc3e}{filesystem2}}-\/>\mbox{\hyperlink{structfilesystem_a72ec4af591f1c4d4538ea3baaf5fb8db}{name}},\ setting.\mbox{\hyperlink{structcombination__map_a15072b685b35279e1ba685eef6770079}{device2}}-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}});}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(setting.\mbox{\hyperlink{structcombination__map_afbc8923aa5672188de0e81b9f1bad0d9}{filesystem1}},\ setting.\mbox{\hyperlink{structcombination__map_a5d011206898e96c1bf4928d4bcaedf3e}{device1}});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1\ \&\&\ errno\ ==\ 5005)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}skip,\ device\ not\ connected\(\backslash\)n"{}});}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(setting.\mbox{\hyperlink{structcombination__map_ae263a6eb20a69d12ebd27eb4c318dc3e}{filesystem2}},\ setting.\mbox{\hyperlink{structcombination__map_a15072b685b35279e1ba685eef6770079}{device2}});}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1\ \&\&\ errno\ ==\ 5005)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}skip,\ device\ not\ connected\(\backslash\)n"{}});}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/a"{}},\ setting.\mbox{\hyperlink{structcombination__map_afbc8923aa5672188de0e81b9f1bad0d9}{filesystem1}},\ setting.\mbox{\hyperlink{structcombination__map_a5d011206898e96c1bf4928d4bcaedf3e}{device1}});}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/b"{}},\ setting.\mbox{\hyperlink{structcombination__map_ae263a6eb20a69d12ebd27eb4c318dc3e}{filesystem2}},\ setting.\mbox{\hyperlink{structcombination__map_a15072b685b35279e1ba685eef6770079}{device2}});}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ srand(i);}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ test\_write(\textcolor{stringliteral}{"{}/a/source"{}});}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ test\_copy(\textcolor{stringliteral}{"{}/a/source"{}},\ \textcolor{stringliteral}{"{}/b/dist"{}});}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ srand(i);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ test\_read(\textcolor{stringliteral}{"{}/b/dist"{}});}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}from\ \%s(\%s)\ to\ \%s(\%s)"{}},}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setting.\mbox{\hyperlink{structcombination__map_ae263a6eb20a69d12ebd27eb4c318dc3e}{filesystem2}}-\/>\mbox{\hyperlink{structfilesystem_a72ec4af591f1c4d4538ea3baaf5fb8db}{name}},\ setting.\mbox{\hyperlink{structcombination__map_a15072b685b35279e1ba685eef6770079}{device2}}-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}},}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setting.\mbox{\hyperlink{structcombination__map_afbc8923aa5672188de0e81b9f1bad0d9}{filesystem1}}-\/>\mbox{\hyperlink{structfilesystem_a72ec4af591f1c4d4538ea3baaf5fb8db}{name}},\ setting.\mbox{\hyperlink{structcombination__map_a5d011206898e96c1bf4928d4bcaedf3e}{device1}}-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}),}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ srand(i);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ test\_write(\textcolor{stringliteral}{"{}/b/source"{}});}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ test\_copy(\textcolor{stringliteral}{"{}/b/source"{}},\ \textcolor{stringliteral}{"{}/a/dist"{}});}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ srand(i);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ test\_read(\textcolor{stringliteral}{"{}/a/dist"{}});}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/a"{}});}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/b"{}});}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__copy__between__different__filesystems_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00189\ \ \ \ \ \}}
+\DoxyCodeLine{00190\ \}}
+
+\end{DoxyCode}

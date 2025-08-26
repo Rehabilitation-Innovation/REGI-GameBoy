@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_blockdevice_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/blockdevice/blockdevice.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/blockdevice/blockdevice.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &lt;stdbool.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice">blockdevice</link></para>
+
+<para>block device abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef uint64_t <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link></para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structblockdevice">blockdevice</link> <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link></para>
+
+<para>block device abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abb">bd_error</link> { <link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link> = 0
+, <link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774">BD_ERROR_DEVICE_ERROR</link> = -4001
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6"/><section>
+    <title>bd_size_t</title>
+<indexterm><primary>bd_size_t</primary><secondary>blockdevice.h</secondary></indexterm>
+<indexterm><primary>blockdevice.h</primary><secondary>bd_size_t</secondary></indexterm>
+<para><computeroutput>typedef uint64_t <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link></computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00020">20</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abb"/><section>
+    <title>bd_error</title>
+<indexterm><primary>bd_error</primary><secondary>blockdevice.h</secondary></indexterm>
+<indexterm><primary>blockdevice.h</primary><secondary>bd_error</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abb">bd_error</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>BD_ERROR_OK</primary><secondary>blockdevice.h</secondary></indexterm>
+<indexterm><primary>blockdevice.h</primary><secondary>BD_ERROR_OK</secondary></indexterm>
+<anchor xml:id="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c"/>BD_ERROR_OK</entry><entry>
+<para>no error </para>
+</entry></row><row><entry><indexterm><primary>BD_ERROR_DEVICE_ERROR</primary><secondary>blockdevice.h</secondary></indexterm>
+<indexterm><primary>blockdevice.h</primary><secondary>BD_ERROR_DEVICE_ERROR</secondary></indexterm>
+<anchor xml:id="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774"/>BD_ERROR_DEVICE_ERROR</entry><entry>
+<para>device specific error </para>
+</entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00022">22</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+<programlisting linenumbering="unnumbered">00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00023 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0,&#32;&#32;&#32;&#32;&#32;
+00024 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774">BD_ERROR_DEVICE_ERROR</link>&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;-4001,&#32;
+00025 };
+</programlisting></section>
+</section>
+</section>

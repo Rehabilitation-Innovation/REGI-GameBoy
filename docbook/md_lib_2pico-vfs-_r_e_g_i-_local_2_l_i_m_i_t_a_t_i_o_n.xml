@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n" xml:lang="en-US">
+<title>
+<para>Limitations of pico-vfs </para>
+</title>
+<indexterm><primary>Limitations of pico-vfs</primary></indexterm>
+
+<para><anchor xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_1autotoc_md14"/></para>
+
+<para>When using pico-vfs, there are several limitations and behavior specifics that users should be aware of. These limitations are particularly important when performing multicore operations.</para>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_1autotoc_md15">
+<title>File System Limitations</title>
+<para><orderedlist>
+<listitem>
+<para><emphasis role="bold">Multiple Open Instances</emphasis>: The current implementations of littlefs and FatFs do not support opening the same file multiple times simultaneously[^1][^2]. This limitation can affect scenarios where multiple accesses to the same file are required concurrently.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Access to on-board flash from <computeroutput>core1</computeroutput></emphasis>: When operating file systems using the onboard flash block device on <computeroutput>core1</computeroutput>, it is necessary to run the operations from RAM[^3].</para>
+</listitem><listitem>
+<para><emphasis role="bold">Access on-board flash in FreeRTOS</emphasis>: To access the flash device, the firmware must be stored in RAM or run with <computeroutput>#define configNUMBER_OF_CORES 1</computeroutput>.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Memory maped IO</emphasis>: <computeroutput>mmap</computeroutput> system call not supported.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Max File Size for FAT</emphasis>: The maximum single file size of a FAT file system depends on the capacity of the storage medium. Check the size of the SD card used and the type of FAT (FAT16/32/ExFat) automatically assigned.</para>
+</listitem></orderedlist>
+</para>
+
+<para>We recommend reviewing these limitations before designing systems that heavily rely on multicore operations or require high file access availability.</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_1autotoc_md16">
+<title>References</title>
+<para>[^1]: <link xlink:href="https://github.com/littlefs-project/littlefs/issues/483">littlefs Issue#483</link> [^2]: <link xlink:href="http://elm-chan.org/fsw/ff/doc/appnote.html#dup">FatFs Module Application Note</link> [^3]: <link xlink:href="https://forums.raspberrypi.com/viewtopic.php?t=311709">Raspberry Pi Pico Forum</link> </para>
+</section>
+</section>

@@ -1,0 +1,44 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/include/blockdevice/sd.h File Reference}
+\hypertarget{sd_8h}{}\label{sd_8h}\index{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/sd.h@{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/sd.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/spi.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/blockdevice.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sd_8h_a350d0200109d5c6deb52568dddf82d82}{CONF\+\_\+\+SD\+\_\+\+INIT\+\_\+\+FREQUENCY}}~(10 \texorpdfstring{$\ast$}{*} 1000 \texorpdfstring{$\ast$}{*} 1000)
+\item 
+\#define \mbox{\hyperlink{sd_8h_a731016452cda5737bf6c2d2cdea4c1fe}{CONF\+\_\+\+SD\+\_\+\+TRX\+\_\+\+FREQUENCY}}~(24 \texorpdfstring{$\ast$}{*} MHZ)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\+\_\+sd\+\_\+create}} (spi\+\_\+inst\+\_\+t \texorpdfstring{$\ast$}{*}spi\+\_\+inst, uint8\+\_\+t mosi, uint8\+\_\+t miso, uint8\+\_\+t sckl, uint8\+\_\+t cs, uint32\+\_\+t hz, bool enable\+\_\+crc)
+\begin{DoxyCompactList}\small\item\em Create SD card block device with SPI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{blockdevice\+\_\+sd\+\_\+free}} (\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Release the SD card device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{sd_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sd_8h_a350d0200109d5c6deb52568dddf82d82}\index{sd.h@{sd.h}!CONF\_SD\_INIT\_FREQUENCY@{CONF\_SD\_INIT\_FREQUENCY}}
+\index{CONF\_SD\_INIT\_FREQUENCY@{CONF\_SD\_INIT\_FREQUENCY}!sd.h@{sd.h}}
+\doxysubsubsection{\texorpdfstring{CONF\_SD\_INIT\_FREQUENCY}{CONF\_SD\_INIT\_FREQUENCY}}
+{\footnotesize\ttfamily \label{sd_8h_a350d0200109d5c6deb52568dddf82d82} 
+\#define CONF\+\_\+\+SD\+\_\+\+INIT\+\_\+\+FREQUENCY~(10 \texorpdfstring{$\ast$}{*} 1000 \texorpdfstring{$\ast$}{*} 1000)}
+
+
+
+Definition at line \mbox{\hyperlink{sd_8h_source_l00021}{21}} of file \mbox{\hyperlink{sd_8h_source}{sd.\+h}}.
+
+\Hypertarget{sd_8h_a731016452cda5737bf6c2d2cdea4c1fe}\index{sd.h@{sd.h}!CONF\_SD\_TRX\_FREQUENCY@{CONF\_SD\_TRX\_FREQUENCY}}
+\index{CONF\_SD\_TRX\_FREQUENCY@{CONF\_SD\_TRX\_FREQUENCY}!sd.h@{sd.h}}
+\doxysubsubsection{\texorpdfstring{CONF\_SD\_TRX\_FREQUENCY}{CONF\_SD\_TRX\_FREQUENCY}}
+{\footnotesize\ttfamily \label{sd_8h_a731016452cda5737bf6c2d2cdea4c1fe} 
+\#define CONF\+\_\+\+SD\+\_\+\+TRX\+\_\+\+FREQUENCY~(24 \texorpdfstring{$\ast$}{*} MHZ)}
+
+
+
+Definition at line \mbox{\hyperlink{sd_8h_source_l00022}{22}} of file \mbox{\hyperlink{sd_8h_source}{sd.\+h}}.
+

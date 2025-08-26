@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__init_8cpp" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/tests/test_init.cpp File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/tests/test_init.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;distance_sensor.h&quot;<?linebreak?>#include &quot;test_harness.h&quot;<?linebreak?>#include &lt;cassert&gt;<?linebreak?>#include &lt;cstdio&gt;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link> ()</para>
+</listitem>
+            <listitem><para>int <link linkend="_test__init_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_test_harness">TestHarness</link> * <link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_test__init_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>test_init.cpp</secondary></indexterm>
+<indexterm><primary>test_init.cpp</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_test__init_8cpp_source_1l00080">80</link> of file <link linkend="_test__init_8cpp_source">test_init.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00081 &#32;&#32;&#32;&#32;<link linkend="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link>();
+00082 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00083 }
+</programlisting></section>
+<anchor xml:id="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572"/><section>
+    <title>test_IsProgramLoaded_AtFirst()</title>
+<indexterm><primary>test_IsProgramLoaded_AtFirst</primary><secondary>test_init.cpp</secondary></indexterm>
+<indexterm><primary>test_init.cpp</primary><secondary>test_IsProgramLoaded_AtFirst</secondary></indexterm>
+<para><computeroutput>void test_IsProgramLoaded_AtFirst ( )</computeroutput></para>
+<para>Load programs into pico&apos;s memory and test that the addresses are cached correctly Tests that in the beginning, the programs are not loaded into pico memory </para>
+<para>
+Definition at line <link linkend="_test__init_8cpp_source_1l00060">60</link> of file <link linkend="_test__init_8cpp_source">test_init.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00061 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;that&#32;at&#32;the&#32;start&#32;of&#32;the&#32;program</emphasis>
+00062 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;each&#32;distance&#32;sensor&#32;is&#32;not&#32;loaded</emphasis>
+00063 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Checking&#32;that&#32;programs&#32;are&#32;not&#32;loaded&#32;in&#32;memory:&#32;&quot;</emphasis>);
+00064 &#32;&#32;&#32;&#32;assert(<link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link>-&gt;IsLoaded(0)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+00065 &#32;&#32;&#32;&#32;assert(<link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link>-&gt;IsLoaded(1)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+00066 &#32;&#32;&#32;&#32;puts(<emphasis role="stringliteral">&quot;Success.&quot;</emphasis>);
+00067 }
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d"/><section>
+    <title>test</title>
+<indexterm><primary>test</primary><secondary>test_init.cpp</secondary></indexterm>
+<indexterm><primary>test_init.cpp</primary><secondary>test</secondary></indexterm>
+<para><computeroutput><link linkend="_class_test_harness">TestHarness</link>* test</computeroutput></para>
+<para>MIT License</para>
+
+<para>Copyright (c) 2022 Daniel Garcia-Briseno</para>
+
+<para>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </para>
+<para>
+Definition at line <link linkend="_test__init_8cpp_source_1l00030">30</link> of file <link linkend="_test__init_8cpp_source">test_init.cpp</link>.</para>
+</section>
+</section>
+</section>

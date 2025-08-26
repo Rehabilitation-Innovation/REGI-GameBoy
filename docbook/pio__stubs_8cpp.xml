@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pio__stubs_8cpp" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/hardware/pio_stubs.cpp File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/hardware/pio_stubs.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;pio.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_pio__stubs_8cpp_1a3571e3c7c6e645e92b8d438203a911b9">pio_add_program</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, const <link linkend="_structpio__program__t">pio_program_t</link> *program)</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_pio__stubs_8cpp_1a70a47a122f289106c36bcacc76add2bb">pio_sm_get</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_pio__stubs_8cpp_1a028cdc4974a8af6f8a295741cb695d7b">pio_interrupt_get</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pio__stubs_8cpp_1a3571e3c7c6e645e92b8d438203a911b9"/><section>
+    <title>pio_add_program()</title>
+<indexterm><primary>pio_add_program</primary><secondary>pio_stubs.cpp</secondary></indexterm>
+<indexterm><primary>pio_stubs.cpp</primary><secondary>pio_add_program</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> pio_add_program (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, const <link linkend="_structpio__program__t">pio_program_t</link> * program)</computeroutput></para>
+<para>Simulates adding a program to the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> Using an ID means that each time a program is loaded, it will have a different result which can be used to verify that it is distinct from a separate program that was loaded <formalpara><title>Returns</title>
+
+<para>ID representing the offset into memory for a given program </para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00010">10</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00010 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00011 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;simulated_offset&#32;=&#32;0;
+00012 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;simulated_offset++;
+00013 };
+</programlisting></section>
+<anchor xml:id="_pio__stubs_8cpp_1a028cdc4974a8af6f8a295741cb695d7b"/><section>
+    <title>pio_interrupt_get()</title>
+<indexterm><primary>pio_interrupt_get</primary><secondary>pio_stubs.cpp</secondary></indexterm>
+<indexterm><primary>pio_stubs.cpp</primary><secondary>pio_interrupt_get</secondary></indexterm>
+<para><computeroutput>bool pio_interrupt_get (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para><para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00019">19</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00020 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+00021 }
+</programlisting></section>
+<anchor xml:id="_pio__stubs_8cpp_1a70a47a122f289106c36bcacc76add2bb"/><section>
+    <title>pio_sm_get()</title>
+<indexterm><primary>pio_sm_get</primary><secondary>pio_stubs.cpp</secondary></indexterm>
+<indexterm><primary>pio_stubs.cpp</primary><secondary>pio_sm_get</secondary></indexterm>
+<para><computeroutput>uint32_t pio_sm_get (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para><para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00015">15</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00016 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0xDEADBEEF;
+00017 }
+</programlisting></section>
+</section>
+</section>

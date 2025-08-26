@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/benchmark/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/benchmark/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;errno.h&gt;<?linebreak?>#include &lt;fcntl.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;blockdevice/sd.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structcombination__map">combination_map</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a651a11ec99f631ed1d1d171a4b51078e">COLOR_RED</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>&#160;&#160;&#160;(1.0 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</link>&#160;&#160;&#160;(1024 * 64)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a7edd94b16025f39d4aca113469771df9">NUM_COMBINATION</link>&#160;&#160;&#160;4</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f"/><section>
+    <title>BENCHMARK_SIZE</title>
+<indexterm><primary>BENCHMARK_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BENCHMARK_SIZE</secondary></indexterm>
+<para><computeroutput>#define BENCHMARK_SIZE&#160;&#160;&#160;(1.0 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00023">23</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7"/><section>
+    <title>BUFFER_SIZE</title>
+<indexterm><primary>BUFFER_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BUFFER_SIZE</secondary></indexterm>
+<para><computeroutput>#define BUFFER_SIZE&#160;&#160;&#160;(1024 * 64)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00024">24</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00022">22</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a651a11ec99f631ed1d1d171a4b51078e"/><section>
+    <title>COLOR_RED</title>
+<indexterm><primary>COLOR_RED</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_RED</secondary></indexterm>
+<para><computeroutput>#define COLOR_RED( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[31m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00021">21</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a7edd94b16025f39d4aca113469771df9"/><section>
+    <title>NUM_COMBINATION</title>
+<indexterm><primary>NUM_COMBINATION</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>NUM_COMBINATION</secondary></indexterm>
+<para><computeroutput>#define NUM_COMBINATION&#160;&#160;&#160;4</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00031">31</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source_1l00161">161</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00162 &#32;&#32;&#32;&#32;stdio_init_all();
+00163 &#32;&#32;&#32;&#32;init_filesystem_combination();
+00164 
+00165 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a7edd94b16025f39d4aca113469771df9">NUM_COMBINATION</link>;&#32;i++)&#32;{
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structcombination__map">combination_map</link>&#32;setting&#32;=&#32;combination[i];
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Test&#32;of&#32;%s&#32;on&#32;%s:\n&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1a802d35808ce09444ad0859982065abf2">filesystem</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a7e3e2e815cf4fac0e70caea043c38b70">device</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>);
+00168 
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(setting.<link linkend="_structcombination__map_1a802d35808ce09444ad0859982065abf2">filesystem</link>,&#32;setting.<link linkend="_structcombination__map_1a7e3e2e815cf4fac0e70caea043c38b70">device</link>);
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1&#32;&amp;&amp;&#32;errno&#32;==&#32;5005)&#32;{
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_format&#32;error:&#32;%s\n&quot;</emphasis>,&#32;<link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link>(errno));
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1a802d35808ce09444ad0859982065abf2">filesystem</link>,&#32;setting.<link linkend="_structcombination__map_1a7e3e2e815cf4fac0e70caea043c38b70">device</link>);
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_mount&#32;/&#32;error:&#32;%s\n&quot;</emphasis>,&#32;<link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link>(errno));
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00183 
+00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;benchmark_write();
+00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;benchmark_read();
+00186 
+00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>);
+00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;01)&#32;{
+00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_unmount&#32;/&#32;error:&#32;%s\n&quot;</emphasis>,&#32;<link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link>(errno));
+00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00192 &#32;&#32;&#32;&#32;}
+00193 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00194 }
+</programlisting></section>
+</section>
+</section>

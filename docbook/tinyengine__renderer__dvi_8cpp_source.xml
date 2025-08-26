@@ -491,7 +491,7 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00487"/><link linkend="_tinyengine__renderer__dvi_8cpp_1a4bfff3f1d70f74509484b34c8461003b">00487</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1a4bfff3f1d70f74509484b34c8461003b">scroll_framebuffer</link>(<emphasis role="keywordtype">void</emphasis>);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00488"/>00488 
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00489"/>00489 <emphasis role="comment">//&#32;void&#32;tinyengine_renderer_dvi_init(uint8_t*&#32;_display_buffer,&#32;uint32_t&#32;size,&#32;uint32_t&#32;width,&#32;uint32_t&#32;height)&#32;{</emphasis>
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00490"/><link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">00490</link> <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</link>()
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00490"/>00490 <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</link>()
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00491"/>00491 {
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00492"/>00492 &#32;&#32;&#32;&#32;<emphasis role="comment">//framebuffer-&gt;flip_blocking&#32;=&#32;te_renderer_dvi_wait_vsync_blocking;//&#32;set&#32;this&#32;in&#32;the&#32;main&#32;initiator&#32;in&#32;tinyengine.c</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00493"/>00493 &#32;&#32;&#32;&#32;display&#32;=&#32;<emphasis role="keyword">this</emphasis>;
@@ -563,7 +563,7 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00559"/>00559 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;I&#32;just&#32;assign&#32;the&#32;pointers&#32;here&#32;because&#32;this&#32;makes&#32;the&#32;updating&#32;simpler.</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00560"/>00560 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;s_frame_buf&#32;=&#32;framebuffer;</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00561"/>00561 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;display_buf&#32;=&#32;_display_buffer;</emphasis>
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00562"/>00562 &#32;&#32;&#32;&#32;frame_buffer_display&#32;=&#32;m_frame_buf.pixel_buffer_display;
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00562"/>00562 &#32;&#32;&#32;&#32;frame_buffer_display&#32;=&#32;m_frame_buf.<link linkend="_class_tiny_engine_frame_buffer_1a54c83662f0ff4edc1ad54f8064eca159">pixel_buffer_display</link>;
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00563"/>00563 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_back&#32;=&#32;framebuffer-&gt;pixel_buffer_back;</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00564"/>00564 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;frame_buffer_display&#32;=&#32;framebuffer-&gt;pixel_buffer_display;</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00565"/>00565 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;memset(frame_buffer_display,&#32;(uint8_t)(0xF0),&#32;frame_width&#32;*&#32;frame_height&#32;*&#32;frame_bytes_per_pixel);</emphasis>
@@ -678,7 +678,7 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00674"/>00674 &#32;&#32;&#32;&#32;dma_channel_config&#32;c;
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00675"/>00675 &#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(0);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00676"/>00676 &#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;1);
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00677"/>00677 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00677"/>00677 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</link>);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00678"/>00678 &#32;&#32;&#32;&#32;dma_channel_configure(
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00679"/>00679 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00680"/>00680 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
@@ -689,7 +689,7 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00685"/>00685 &#32;&#32;&#32;&#32;);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00686"/>00686 &#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(1);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00687"/>00687 &#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;2);
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00688"/>00688 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00688"/>00688 &#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</link>);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00689"/>00689 &#32;&#32;&#32;&#32;dma_channel_configure(
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00690"/>00690 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1,
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00691"/>00691 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
@@ -702,7 +702,7 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00698"/>00698 &#32;&#32;&#32;&#32;{
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00699"/>00699 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;dma_channel_get_default_config(i);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00700"/>00700 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;channel_config_set_chain_to(&amp;c,&#32;(i&#32;+&#32;1)&#32;%&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>);
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00701"/>00701 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;DREQ_HSTX);
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00701"/>00701 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;channel_config_set_dreq(&amp;c,&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</link>);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00702"/>00702 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dma_channel_configure(
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00703"/>00703 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;i,
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00704"/>00704 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&amp;c,
@@ -719,8 +719,8 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00715"/>00715 &#32;&#32;&#32;&#32;dma_hw-&gt;ints2&#32;=&#32;(1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1;
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00716"/>00716 &#32;&#32;&#32;&#32;dma_hw-&gt;inte2&#32;=&#32;(1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1;
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00717"/>00717 
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00718"/>00718 &#32;&#32;&#32;&#32;irq_set_exclusive_handler(DMA_IRQ_2,&#32;dma_irq_handler);
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00719"/>00719 &#32;&#32;&#32;&#32;irq_set_enabled(DMA_IRQ_2,&#32;<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00718"/>00718 &#32;&#32;&#32;&#32;irq_set_exclusive_handler(<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_1a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955">DMA_IRQ_2</link>,&#32;dma_irq_handler);
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00719"/>00719 &#32;&#32;&#32;&#32;irq_set_enabled(<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_1a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955">DMA_IRQ_2</link>,&#32;<emphasis role="keyword">true</emphasis>);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00720"/>00720 
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00721"/>00721 &#32;&#32;&#32;&#32;dma_channel_start(0);
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00722"/>00722 
@@ -730,14 +730,14 @@ Go to the documentation of this file.<programlisting linenumbering="unnumbered">
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00726"/>00726 }
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00727"/>00727 
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00728"/>00728 
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00729"/><link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">00729</link> <link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;fr_buf)&#32;:&#32;m_frame_buf(fr_buf)
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00729"/>00729 <link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;fr_buf)&#32;:&#32;m_frame_buf(fr_buf)
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00730"/>00730 {
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00731"/>00731 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Always&#32;use&#32;the&#32;bottom&#32;channels</emphasis>
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00732"/>00732 &#32;&#32;&#32;&#32;dma_claim_mask((1&#32;&lt;&lt;&#32;<link linkend="_tinyengine__renderer__dvi_8h_1ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</link>)&#32;-&#32;1);
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00733"/>00733 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</link>();
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00733"/>00733 &#32;&#32;&#32;&#32;tinyengine_renderer_init();
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00734"/>00734 };
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00735"/>00735 
-<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00736"/><link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">00736</link> <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</link>()
+<anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00736"/>00736 <link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</link>()
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00737"/>00737 {
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00738"/>00738 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(v_scanline&#32;&gt;=&#32;<link linkend="_tinyengine__renderer__dvi_8cpp_1aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</link>)&#32;__wfe();
 <anchor xml:id="_tinyengine__renderer__dvi_8cpp_source_1l00739"/>00739 

@@ -1,0 +1,184 @@
+\doxysection{loopback.\+c}
+\hypertarget{loopback_8c_source}{}\label{loopback_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/loopback.c@{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/loopback.c}}
+\mbox{\hyperlink{loopback_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <pico/mutex.h>}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{loopback_8h}{blockdevice/loopback.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00016}\mbox{\hyperlink{structblockdevice__loopback__config__t}{00016}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00017}\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{00017}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{path}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00018}\mbox{\hyperlink{structblockdevice__loopback__config__t_a40206e22fbb46078f37a4e2191aa2114}{00018}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice__loopback__config__t_a40206e22fbb46078f37a4e2191aa2114}{capacity}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00019}\mbox{\hyperlink{structblockdevice__loopback__config__t_aa9e4a4954196dfe2f0b9f5ae42bc9a3d}{00019}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice__loopback__config__t_aa9e4a4954196dfe2f0b9f5ae42bc9a3d}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00020}\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{00020}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00021}\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{00021}}\ \ \ \ \ mutex\_t\ \mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00022}00022\ \}\ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00024}00024\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ DEVICE\_NAME[]\ =\ \textcolor{stringliteral}{"{}loopback"{}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00026}00026\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ init(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00027}00027\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00029}00029\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00035}00035\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ =\ open(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{path}},\ O\_RDWR|O\_CREAT,\ 0644);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ ==\ -\/1\ \&\&\ errno\ ==\ EEXIST)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ =\ open(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{path}},\ O\_RDWR);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00044}00044\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00045}00045\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00049}00049\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ deinit(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00051}00051\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00062}00062\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00063}00063\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00067}00067\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_\_sync(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00068}00068\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00072}00072\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_\_read(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00074}00074\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00076}00076\ \ \ \ \ off\_t\ off\ =\ lseek(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}},\ addr,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (off\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00082}00082\ \ \ \ \ ssize\_t\ read\_size\ =\ read(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}},\ (\textcolor{keywordtype}{void}\ *)buffer,\ (\textcolor{keywordtype}{size\_t})length);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (read\_size\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\textcolor{keywordtype}{size\_t})read\_size\ <\ (\textcolor{keywordtype}{size\_t})length)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remind\ =\ length\ -\/\ read\_size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ memset((\textcolor{keywordtype}{void}\ *)buffer\ +\ read\_size,\ 0,\ remind);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00092}00092\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00096}00096\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ erase(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00097}00097\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00098}00098\ \ \ \ \ (void)addr;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00099}00099\ \ \ \ \ (void)length;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00103}00103\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ program(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00104}00104\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00105}00105\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00107}00107\ \ \ \ \ off\_t\ off\ =\ lseek(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}},\ addr,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (off\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00112}00112\ \ \ \ \ ssize\_t\ write\_size\ =\ write(config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}},\ buffer,\ (\textcolor{keywordtype}{size\_t})length);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00113}00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (write\_size\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/errno;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00118}00118\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00122}00122\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ trim(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00123}00123\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00124}00124\ \ \ \ \ (void)addr;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00125}00125\ \ \ \ \ (void)length;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00126}00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00127}00127\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00129}00129\ \textcolor{keyword}{static}\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00130}00130\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a40206e22fbb46078f37a4e2191aa2114}{capacity}};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00134}\mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{00134}}\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *\mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{blockdevice\_loopback\_create}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keywordtype}{size\_t}\ capacity,\ \textcolor{keywordtype}{size\_t}\ block\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00135}00135\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}));}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (device\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00138}00138\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00139}00139\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}));}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00140}00140\ \ \ \ \ \textcolor{keywordflow}{if}\ (config\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00145}00145\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}\ =\ init;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00146}00146\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}\ =\ deinit;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00147}00147\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}}\ =\ \_\_read;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00148}00148\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}\ =\ erase;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00149}00149\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}\ =\ program;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00150}00150\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}\ =\ trim;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00151}00151\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}}\ =\ \_\_sync;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00152}00152\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}\ =\ size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00153}00153\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00154}00154\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00155}00155\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00156}00156\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}\ =\ DEVICE\_NAME;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00157}00157\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00159}00159\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{path}}\ =\ path;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00160}00160\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a40206e22fbb46078f37a4e2191aa2114}{capacity}}\ =\ capacity;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00161}00161\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_aa9e4a4954196dfe2f0b9f5ae42bc9a3d}{block\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00162}00162\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00164}00164\ \ \ \ \ mutex\_init(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00165}00165\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ config;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00166}00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device)\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ free(config);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{return}\ device;}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00172}00172\ \}}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00174}\mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{00174}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{blockdevice\_loopback\_free}}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00175}00175\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}(device);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00176}00176\ \ \ \ \ free(device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}});}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00177}00177\ \ \ \ \ free(device);}
+\DoxyCodeLine{\Hypertarget{loopback_8c_source_l00178}00178\ \}}
+
+\end{DoxyCode}

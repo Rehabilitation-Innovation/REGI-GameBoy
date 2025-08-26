@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class__main_8cxx" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/test_program/class_main.cxx File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/test_program/class_main.cxx</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;distance_sensor.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b">starting_countdown</link> ()</para>
+</listitem>
+            <listitem><para>int <link linkend="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>class_main.cxx</secondary></indexterm>
+<indexterm><primary>class_main.cxx</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_class__main_8cxx_source_1l00012">12</link> of file <link linkend="_class__main_8cxx_source">class_main.cxx</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;stdio_init_all();
+00014 &#32;&#32;&#32;&#32;<link linkend="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b">starting_countdown</link>();
+00015 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor">DistanceSensor</link>&#32;sensor{<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>,&#32;0,&#32;0};
+00016 
+00017 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sensor.<link linkend="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a">TriggerRead</link>();
+00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(sensor.<link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link>)&#32;{
+00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_us(10);
+00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Got&#32;reading:&#32;%u\n&quot;</emphasis>,&#32;sensor.<link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">distance</link>);
+00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+00024 &#32;&#32;&#32;&#32;}
+00025 }
+</programlisting></section>
+<anchor xml:id="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b"/><section>
+    <title>starting_countdown()</title>
+<indexterm><primary>starting_countdown</primary><secondary>class_main.cxx</secondary></indexterm>
+<indexterm><primary>class_main.cxx</primary><secondary>starting_countdown</secondary></indexterm>
+<para><computeroutput>void starting_countdown ( )</computeroutput></para><para>
+Definition at line <link linkend="_class__main_8cxx_source_1l00005">5</link> of file <link linkend="_class__main_8cxx_source">class_main.cxx</link>.</para>
+<programlisting linenumbering="unnumbered">00005 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00006 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;i&#32;=&#32;5;&#32;i&#32;!=&#32;0;&#32;i--)&#32;{
+00007 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Starting&#32;in&#32;%d\n&quot;</emphasis>,&#32;i);
+00008 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+00009 &#32;&#32;&#32;&#32;}
+00010 }
+</programlisting></section>
+</section>
+</section>

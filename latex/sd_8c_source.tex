@@ -1,0 +1,1113 @@
+\doxysection{sd.\+c}
+\hypertarget{sd_8c_source}{}\label{sd_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/sd.c@{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/sd.c}}
+\mbox{\hyperlink{sd_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00001}00001\ \textcolor{comment}{/*\ Block\ device\ driver\ for\ SD\ and\ MMC\ cards\ via\ SPI}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00002}00002\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00007}00007\ \textcolor{comment}{\ *\ The\ source\ code\ was\ implemented\ with\ reference\ to\ the}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00008}00008\ \textcolor{comment}{\ *\ [ARM\ Mbed\ OS](https://github.com/ARMmbed/mbed-\/os/blob/master/storage/blockdevice/COMPONENT\_SD/source/SDBlockDevice.cpp);}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00009}00009\ \textcolor{comment}{\ *\ ARM\ Embed\ OS\ is\ licensed\ under\ the\ Apache\ 2.0\ licence.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00010}00010\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <hardware/clocks.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <pico/mutex.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <pico/stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sd_8h}{blockdevice/sd.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00021}\mbox{\hyperlink{structblockdevice__sd__config__t}{00021}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00022}\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{00022}}\ \ \ \ \ spi\_inst\_t*\ \mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00023}\mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{00023}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{mosi}};\ \textcolor{comment}{//\ PICO\_DEFAULT\_SPI\_TX\_PIN\ \ pin\ 19}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00024}\mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{00024}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{miso}};\ \textcolor{comment}{//\ PICO\_DEFAULT\_SPI\_RX\_PIN\ \ pin\ 16}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00025}\mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{00025}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{sclk}};\ \textcolor{comment}{//\ PICO\_DEFAULT\_SPI\_SCK\_PIN\ pin\ 18}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00026}\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{00026}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}};\ \ \ \textcolor{comment}{//\ PICO\_DEFAULT\_SPI\_CSN\_PIN\ pin\ 17}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00027}\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{00027}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}};\ \ \textcolor{comment}{//\ CONF\_SD\_TRX\_FREQUENCY}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00028}\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{00028}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00029}\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{00029}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00030}\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{00030}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00031}\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{00031}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00032}\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{00032}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00033}\mbox{\hyperlink{structblockdevice__sd__config__t_aad8740c5c8c25b8e830654989112fc88}{00033}}\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_aad8740c5c8c25b8e830654989112fc88}{total\_sectors}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00034}\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{00034}}\ \ \ \ \ mutex\_t\ \mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00035}00035\ \}\ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00037}00037\ \textcolor{preprocessor}{\#ifndef\ CONF\_SD\_CMD\_TIMEOUT}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00038}\mbox{\hyperlink{sd_8c_a80cf6b88b88a1391eff989ff42067487}{00038}}\ \textcolor{preprocessor}{\#define\ CONF\_SD\_CMD\_TIMEOUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5000\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00039}00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00041}00041\ \textcolor{preprocessor}{\#ifndef\ CONF\_SD\_CMD0\_IDLE\_STATE\_RETRIES}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00042}\mbox{\hyperlink{sd_8c_a98174285b120b92f2a9c1e5768a176b3}{00042}}\ \textcolor{preprocessor}{\#define\ CONF\_SD\_CMD0\_IDLE\_STATE\_RETRIES\ \ \ 5\ \ }\textcolor{comment}{//\ Number\ of\ retries\ for\ sending\ CMD0}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00043}00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00045}\mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{00045}}\ \textcolor{preprocessor}{\#define\ SD\_COMMAND\_TIMEOUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CONF\_SD\_CMD\_TIMEOUT}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00046}\mbox{\hyperlink{sd_8c_a190b6bcf9ab4d85b71e05bd20955758a}{00046}}\ \textcolor{preprocessor}{\#define\ SD\_CMD0\_GO\_IDLE\_STATE\_RETRIES\ \ \ \ \ CONF\_SD\_CMD0\_IDLE\_STATE\_RETRIES}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00047}\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{00047}}\ \textcolor{preprocessor}{\#define\ SD\_DBG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00049}\mbox{\hyperlink{sd_8c_a6379b6ca92270ced3e83ca3c1f5dc524}{00049}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_WOULD\_BLOCK\ \ \ \ \ \ \ \ -\/5001\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00050}\mbox{\hyperlink{sd_8c_adcac3a18f2010c23804be1dddf7f5ba2}{00050}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_UNSUPPORTED\ \ \ \ \ \ \ \ -\/5002\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00051}\mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{00051}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER\ \ \ \ \ \ \ \ \ \ -\/5003\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00052}\mbox{\hyperlink{sd_8c_a6e13316f0b76a30fd38db3f0d84e58d0}{00052}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_NO\_INIT\ \ \ \ \ \ \ \ \ \ \ \ -\/5004\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00053}\mbox{\hyperlink{sd_8c_aafa7734f02804b218f71f2a988111b15}{00053}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_NO\_DEVICE\ \ \ \ \ \ \ \ \ \ -\/5005\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00054}\mbox{\hyperlink{sd_8c_a2ba3557e527c48137703786c54cf271f}{00054}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_WRITE\_PROTECTED\ \ \ \ -\/5006\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00055}\mbox{\hyperlink{sd_8c_afc41dc1dffb1f500b7a3f87e3de10f5c}{00055}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_UNUSABLE\ \ \ \ \ \ \ \ \ \ \ -\/5007\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00056}\mbox{\hyperlink{sd_8c_a42fdf7470707e7b523c36bac1f15d98a}{00056}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_NO\_RESPONSE\ \ \ \ \ \ \ \ -\/5008\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00057}\mbox{\hyperlink{sd_8c_a07208e021a15e0c2b5425e3355c7c2a9}{00057}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_CRC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/5009\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00058}\mbox{\hyperlink{sd_8c_a6a546df19eddae71eb0ccf0e62913143}{00058}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_ERASE\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/5010\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00059}\mbox{\hyperlink{sd_8c_a0d74153e7cf51464b90cbc47cbc83b2e}{00059}}\ \textcolor{preprocessor}{\#define\ SD\_BLOCK\_DEVICE\_ERROR\_WRITE\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/5011\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00062}\mbox{\hyperlink{sd_8c_ae29c04ecc4f5ee4f41694ac4d8a2fdd9}{00062}}\ \textcolor{preprocessor}{\#define\ BLOCK\_SIZE\_HC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 512\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00063}\mbox{\hyperlink{sd_8c_acc071acf45c59c2a107bf01bdbd52b8a}{00063}}\ \textcolor{preprocessor}{\#define\ SPI\_CMD(x)\ (0x40\ |\ (x\ \&\ 0x3f))}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00065}00065\ \textcolor{comment}{/*\ R1\ Response\ Format\ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00066}\mbox{\hyperlink{sd_8c_a9d214c6916e6ca7f6e0ef1f52255a9a4}{00066}}\ \textcolor{preprocessor}{\#define\ R1\_NO\_RESPONSE\ \ \ \ \ \ \ \ \ \ (0xFF)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00067}\mbox{\hyperlink{sd_8c_afa1084b6c1e98accf323f9eecb228db8}{00067}}\ \textcolor{preprocessor}{\#define\ R1\_RESPONSE\_RECV\ \ \ \ \ \ \ \ (0x80)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00068}\mbox{\hyperlink{sd_8c_a7adb3673fe75b9397a1f241533e3f08a}{00068}}\ \textcolor{preprocessor}{\#define\ R1\_IDLE\_STATE\ \ \ \ \ \ \ \ \ \ \ (1\ <<\ 0)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00069}\mbox{\hyperlink{sd_8c_a4598fdd1bd123e39ca45cdcd30f2a0bb}{00069}}\ \textcolor{preprocessor}{\#define\ R1\_ERASE\_RESET\ \ \ \ \ \ \ \ \ \ (1\ <<\ 1)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00070}\mbox{\hyperlink{sd_8c_a317730607b37d51a7a470e8f33fa0e4d}{00070}}\ \textcolor{preprocessor}{\#define\ R1\_ILLEGAL\_COMMAND\ \ \ \ \ \ (1\ <<\ 2)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00071}\mbox{\hyperlink{sd_8c_ac9f596336ebcb43f5c9e314ad697a8e8}{00071}}\ \textcolor{preprocessor}{\#define\ R1\_COM\_CRC\_ERROR\ \ \ \ \ \ \ \ (1\ <<\ 3)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00072}\mbox{\hyperlink{sd_8c_a310cf4b26d5025bc4e0ac18b7dfd968a}{00072}}\ \textcolor{preprocessor}{\#define\ R1\_ERASE\_SEQUENCE\_ERROR\ (1\ <<\ 4)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00073}\mbox{\hyperlink{sd_8c_a84256fd9d0fbf84f1c8fabd17d3f7adc}{00073}}\ \textcolor{preprocessor}{\#define\ R1\_ADDRESS\_ERROR\ \ \ \ \ \ \ \ (1\ <<\ 5)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00074}\mbox{\hyperlink{sd_8c_afaf04d83e2c97907a519100efe9c8d7c}{00074}}\ \textcolor{preprocessor}{\#define\ R1\_PARAMETER\_ERROR\ \ \ \ \ \ (1\ <<\ 6)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00076}00076\ \textcolor{comment}{/*\ R3\ Response\ :\ OCR\ Register\ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00077}\mbox{\hyperlink{sd_8c_ace5b9334abefe4920fb519a5957b5cc3}{00077}}\ \textcolor{preprocessor}{\#define\ OCR\_HCS\_CCS\ \ \ \ \ \ \ \ \ \ \ \ \ (0x1\ <<\ 30)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00078}\mbox{\hyperlink{sd_8c_a34b06744e5bb1b37b90d671dff109fd2}{00078}}\ \textcolor{preprocessor}{\#define\ OCR\_LOW\_VOLTAGE\ \ \ \ \ \ \ \ \ (0x01\ <<\ 24)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00079}\mbox{\hyperlink{sd_8c_a9242e2740476a5965ace0b1276c9a24d}{00079}}\ \textcolor{preprocessor}{\#define\ OCR\_3\_3V\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1\ <<\ 20)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00081}00081\ \textcolor{comment}{/*\ R7\ response\ pattern\ for\ CMD8\ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00082}\mbox{\hyperlink{sd_8c_ac77e3b44a84e04fd34a6084e23d7a67f}{00082}}\ \textcolor{preprocessor}{\#define\ CMD8\_PATTERN\ \ \ \ \ \ \ \ \ \ \ \ \ (0xAA)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00084}00084\ \textcolor{comment}{/*\ Control\ Tokens\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00085}\mbox{\hyperlink{sd_8c_a0e561b17b7546b82dd822376f661c917}{00085}}\ \textcolor{preprocessor}{\#define\ SPI\_DATA\_RESPONSE\_MASK\ \ \ (0x1F)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00086}\mbox{\hyperlink{sd_8c_adf4c36356a3259c4686dd6e534f3c75c}{00086}}\ \textcolor{preprocessor}{\#define\ SPI\_DATA\_ACCEPTED\ \ \ \ \ \ \ \ (0x05)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00087}\mbox{\hyperlink{sd_8c_a0ab76bad7e8faa76f8bad16e8de90ed6}{00087}}\ \textcolor{preprocessor}{\#define\ SPI\_DATA\_CRC\_ERROR\ \ \ \ \ \ \ (0x0B)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00088}\mbox{\hyperlink{sd_8c_ade0c4048b2873fc3aab508f2caeac46c}{00088}}\ \textcolor{preprocessor}{\#define\ SPI\_DATA\_WRITE\_ERROR\ \ \ \ \ (0x0D)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00089}\mbox{\hyperlink{sd_8c_a16316bd35058685a310b2782003f6461}{00089}}\ \textcolor{preprocessor}{\#define\ SPI\_START\_BLOCK\ \ \ \ \ \ \ \ \ \ (0xFE)\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00090}\mbox{\hyperlink{sd_8c_adaa72ab93c9e5bdf1176098cb9c2c4a0}{00090}}\ \textcolor{preprocessor}{\#define\ SPI\_START\_BLK\_MUL\_WRITE\ \ (0xFC)\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00091}\mbox{\hyperlink{sd_8c_a0dd35214020ca96c70838c6e2d206cc6}{00091}}\ \textcolor{preprocessor}{\#define\ SPI\_STOP\_TRAN\ \ \ \ \ \ \ \ \ \ \ \ (0xFD)\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00093}\mbox{\hyperlink{sd_8c_ac75d865e276033635f3fecc5c62b727c}{00093}}\ \textcolor{preprocessor}{\#define\ SPI\_DATA\_READ\_ERROR\_MASK\ (0xF)\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00094}\mbox{\hyperlink{sd_8c_a975383e5fd06d3994775d34a2a12e340}{00094}}\ \textcolor{preprocessor}{\#define\ SPI\_READ\_ERROR\ \ \ \ \ \ \ \ \ \ \ (0x1\ <<\ 0)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00095}\mbox{\hyperlink{sd_8c_ad6333d33ce78082f55551b1cbf0e783a}{00095}}\ \textcolor{preprocessor}{\#define\ SPI\_READ\_ERROR\_CC\ \ \ \ \ \ \ \ (0x1\ <<\ 1)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00096}\mbox{\hyperlink{sd_8c_a6def03ff2e8d35d7bf4fe37ba5894d48}{00096}}\ \textcolor{preprocessor}{\#define\ SPI\_READ\_ERROR\_ECC\_C\ \ \ \ \ (0x1\ <<\ 2)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00097}\mbox{\hyperlink{sd_8c_a2243216470168aba1fd33f3363fed215}{00097}}\ \textcolor{preprocessor}{\#define\ SPI\_READ\_ERROR\_OFR\ \ \ \ \ \ \ (0x1\ <<\ 3)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00100}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74}{00100}}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74}{sdcard\_type}}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00101}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290}{00101}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290}{SDCARD\_NONE}}\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00102}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e}{00102}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e}{SDCARD\_V1}}\ =\ 1,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00103}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{00103}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{SDCARD\_V2}}\ =\ 2,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00104}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{00104}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{SDCARD\_V2HC}}\ =\ 3,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00105}\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{00105}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{CARD\_UNKNOWN}}\ =\ 4,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00106}00106\ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00108}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6f}{00108}}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6f}{cmd\_supported}}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00109}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b16dc9538b6f7288a025222e1cc8e6b}{00109}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b16dc9538b6f7288a025222e1cc8e6b}{CMD\_NOT\_SUPPORTED}}\ =\ -\/1,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00110}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63}{00110}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63}{CMD0\_GO\_IDLE\_STATE}}\ =\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00111}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa687d0215f942c29c67ed8e116ba65c42}{00111}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa687d0215f942c29c67ed8e116ba65c42}{CMD1\_SEND\_OP\_COND}}\ =\ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00112}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa2a8ad2f917bc227d95d29a0f92b62340}{00112}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa2a8ad2f917bc227d95d29a0f92b62340}{CMD6\_SWITCH\_FUNC}}\ =\ 6,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00113}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{00113}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{CMD8\_SEND\_IF\_COND}}\ =\ 8,\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00114}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5}{00114}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5}{CMD9\_SEND\_CSD}}\ =\ 9,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00115}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fab0bed31cbc5377aeafbe82d456f105b4}{00115}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fab0bed31cbc5377aeafbe82d456f105b4}{CMD10\_SEND\_CID}}\ =\ 10,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00116}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{00116}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{CMD12\_STOP\_TRANSMISSION}}\ =\ 12,\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00117}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac57a11a2b3cd582a797f5b33ecdca429}{00117}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac57a11a2b3cd582a797f5b33ecdca429}{CMD13\_SEND\_STATUS}}\ =\ 13,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00118}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e}{00118}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e}{CMD16\_SET\_BLOCKLEN}}\ =\ 16,\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00119}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f}{00119}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f}{CMD17\_READ\_SINGLE\_BLOCK}}\ =\ 17,\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00120}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c}{00120}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c}{CMD18\_READ\_MULTIPLE\_BLOCK}}\ =\ 18,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00122}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3}{00122}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3}{CMD24\_WRITE\_BLOCK}}\ =\ 24,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00123}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977}{00123}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977}{CMD25\_WRITE\_MULTIPLE\_BLOCK}}\ =\ 25,\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00125}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faf8a2ea974333f1b8b282e5fe1a78d452}{00125}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faf8a2ea974333f1b8b282e5fe1a78d452}{CMD27\_PROGRAM\_CSD}}\ =\ 27,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00126}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725}{00126}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725}{CMD32\_ERASE\_WR\_BLK\_START\_ADDR}}\ =\ 32,\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00128}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38}{00128}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38}{CMD33\_ERASE\_WR\_BLK\_END\_ADDR}}\ =\ 33,\ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00130}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64}{00130}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64}{CMD38\_ERASE}}\ =\ 38,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00131}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0}{00131}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0}{CMD55\_APP\_CMD}}\ =\ 55,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00132}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa60ed3ef8573485f4d9b7b18aace3967a}{00132}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa60ed3ef8573485f4d9b7b18aace3967a}{CMD56\_GEN\_CMD}}\ =\ 56,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00133}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98}{00133}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98}{CMD58\_READ\_OCR}}\ =\ 58,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00134}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7}{00134}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7}{CMD59\_CRC\_ON\_OFF}}\ =\ 59,\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ App\ Commands}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00136}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa7ccea821c49cb23280b5954f0b6f718}{00136}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa7ccea821c49cb23280b5954f0b6f718}{ACMD6\_SET\_BUS\_WIDTH}}\ =\ 6,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00137}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b}{00137}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b}{ACMD13\_SD\_STATUS}}\ =\ 13,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00138}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577}{00138}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577}{ACMD22\_SEND\_NUM\_WR\_BLOCKS}}\ =\ 22,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00139}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d}{00139}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d}{ACMD23\_SET\_WR\_BLK\_ERASE\_COUNT}}\ =\ 23,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00140}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4}{00140}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4}{ACMD41\_SD\_SEND\_OP\_COND}}\ =\ 41,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00141}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa025b3258a75b77a9f94815517674d989}{00141}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa025b3258a75b77a9f94815517674d989}{ACMD42\_SET\_CLR\_CARD\_DETECT}}\ =\ 42,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00142}\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0fbb6c92dd6da700caaa3829a43720a5}{00142}}\ \ \ \ \ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0fbb6c92dd6da700caaa3829a43720a5}{ACMD51\_SEND\_SCR}}\ =\ 51,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00143}00143\ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00145}\mbox{\hyperlink{sd_8c_aebdc7d8ca8e25ed8efc90bb88ef7ef5b}{00145}}\ \textcolor{preprocessor}{\#define\ PACKET\_SIZE\ \ \ 6\ \ }\textcolor{comment}{//\ SD\ Packet\ size\ CMD+ARG+CRC}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00147}00147\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ DEVICE\_NAME[]\ =\ \textcolor{stringliteral}{"{}sd"{}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00148}00148\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ block\_size\ =\ 512;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00149}00149\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ SPI\_FILL\_CHAR\ =\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00151}00151\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ CRC7\_TABLE[256]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00152}00152\ \ \ \ \ 0x00,\ 0x09,\ 0x12,\ 0x1B,\ 0x24,\ 0x2D,\ 0x36,\ 0x3F,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00153}00153\ \ \ \ \ 0x48,\ 0x41,\ 0x5A,\ 0x53,\ 0x6C,\ 0x65,\ 0x7E,\ 0x77,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00154}00154\ \ \ \ \ 0x19,\ 0x10,\ 0x0B,\ 0x02,\ 0x3D,\ 0x34,\ 0x2F,\ 0x26,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00155}00155\ \ \ \ \ 0x51,\ 0x58,\ 0x43,\ 0x4A,\ 0x75,\ 0x7C,\ 0x67,\ 0x6E,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00156}00156\ \ \ \ \ 0x32,\ 0x3B,\ 0x20,\ 0x29,\ 0x16,\ 0x1F,\ 0x04,\ 0x0D,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00157}00157\ \ \ \ \ 0x7A,\ 0x73,\ 0x68,\ 0x61,\ 0x5E,\ 0x57,\ 0x4C,\ 0x45,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00158}00158\ \ \ \ \ 0x2B,\ 0x22,\ 0x39,\ 0x30,\ 0x0F,\ 0x06,\ 0x1D,\ 0x14,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00159}00159\ \ \ \ \ 0x63,\ 0x6A,\ 0x71,\ 0x78,\ 0x47,\ 0x4E,\ 0x55,\ 0x5C,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00160}00160\ \ \ \ \ 0x64,\ 0x6D,\ 0x76,\ 0x7F,\ 0x40,\ 0x49,\ 0x52,\ 0x5B,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00161}00161\ \ \ \ \ 0x2C,\ 0x25,\ 0x3E,\ 0x37,\ 0x08,\ 0x01,\ 0x1A,\ 0x13,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00162}00162\ \ \ \ \ 0x7D,\ 0x74,\ 0x6F,\ 0x66,\ 0x59,\ 0x50,\ 0x4B,\ 0x42,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00163}00163\ \ \ \ \ 0x35,\ 0x3C,\ 0x27,\ 0x2E,\ 0x11,\ 0x18,\ 0x03,\ 0x0A,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00164}00164\ \ \ \ \ 0x56,\ 0x5F,\ 0x44,\ 0x4D,\ 0x72,\ 0x7B,\ 0x60,\ 0x69,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00165}00165\ \ \ \ \ 0x1E,\ 0x17,\ 0x0C,\ 0x05,\ 0x3A,\ 0x33,\ 0x28,\ 0x21,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00166}00166\ \ \ \ \ 0x4F,\ 0x46,\ 0x5D,\ 0x54,\ 0x6B,\ 0x62,\ 0x79,\ 0x70,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00167}00167\ \ \ \ \ 0x07,\ 0x0E,\ 0x15,\ 0x1C,\ 0x23,\ 0x2A,\ 0x31,\ 0x38,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00168}00168\ \ \ \ \ 0x41,\ 0x48,\ 0x53,\ 0x5A,\ 0x65,\ 0x6C,\ 0x77,\ 0x7E,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00169}00169\ \ \ \ \ 0x09,\ 0x00,\ 0x1B,\ 0x12,\ 0x2D,\ 0x24,\ 0x3F,\ 0x36,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00170}00170\ \ \ \ \ 0x58,\ 0x51,\ 0x4A,\ 0x43,\ 0x7C,\ 0x75,\ 0x6E,\ 0x67,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00171}00171\ \ \ \ \ 0x10,\ 0x19,\ 0x02,\ 0x0B,\ 0x34,\ 0x3D,\ 0x26,\ 0x2F,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00172}00172\ \ \ \ \ 0x73,\ 0x7A,\ 0x61,\ 0x68,\ 0x57,\ 0x5E,\ 0x45,\ 0x4C,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00173}00173\ \ \ \ \ 0x3B,\ 0x32,\ 0x29,\ 0x20,\ 0x1F,\ 0x16,\ 0x0D,\ 0x04,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00174}00174\ \ \ \ \ 0x6A,\ 0x63,\ 0x78,\ 0x71,\ 0x4E,\ 0x47,\ 0x5C,\ 0x55,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00175}00175\ \ \ \ \ 0x22,\ 0x2B,\ 0x30,\ 0x39,\ 0x06,\ 0x0F,\ 0x14,\ 0x1D,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00176}00176\ \ \ \ \ 0x25,\ 0x2C,\ 0x37,\ 0x3E,\ 0x01,\ 0x08,\ 0x13,\ 0x1A,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00177}00177\ \ \ \ \ 0x6D,\ 0x64,\ 0x7F,\ 0x76,\ 0x49,\ 0x40,\ 0x5B,\ 0x52,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00178}00178\ \ \ \ \ 0x3C,\ 0x35,\ 0x2E,\ 0x27,\ 0x18,\ 0x11,\ 0x0A,\ 0x03,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00179}00179\ \ \ \ \ 0x74,\ 0x7D,\ 0x66,\ 0x6F,\ 0x50,\ 0x59,\ 0x42,\ 0x4B,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00180}00180\ \ \ \ \ 0x17,\ 0x1E,\ 0x05,\ 0x0C,\ 0x33,\ 0x3A,\ 0x21,\ 0x28,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00181}00181\ \ \ \ \ 0x5F,\ 0x56,\ 0x4D,\ 0x44,\ 0x7B,\ 0x72,\ 0x69,\ 0x60,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00182}00182\ \ \ \ \ 0x0E,\ 0x07,\ 0x1C,\ 0x15,\ 0x2A,\ 0x23,\ 0x38,\ 0x31,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00183}00183\ \ \ \ \ 0x46,\ 0x4F,\ 0x54,\ 0x5D,\ 0x62,\ 0x6B,\ 0x70,\ 0x79}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00184}00184\ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00186}00186\ \textcolor{keyword}{static}\ uint8\_t\ \_crc7(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00187}00187\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ b\ =\ buffer;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00188}00188\ \ \ \ \ uint8\_t\ crc\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00189}00189\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ length;\ i++)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ crc\ =\ CRC7\_TABLE[(crc\ <<\ 1)\ \string^\ b[i]];}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00191}00191\ \ \ \ \ \textcolor{keywordflow}{return}\ crc;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00192}00192\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00194}00194\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint16\_t\ CRC16\_TABLE[256]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00195}00195\ \ \ \ \ 0x0000,\ 0x1021,\ 0x2042,\ 0x3063,\ 0x4084,\ 0x50A5,\ 0x60C6,\ 0x70E7,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00196}00196\ \ \ \ \ 0x8108,\ 0x9129,\ 0xA14A,\ 0xB16B,\ 0xC18C,\ 0xD1AD,\ 0xE1CE,\ 0xF1EF,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00197}00197\ \ \ \ \ 0x1231,\ 0x0210,\ 0x3273,\ 0x2252,\ 0x52B5,\ 0x4294,\ 0x72F7,\ 0x62D6,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00198}00198\ \ \ \ \ 0x9339,\ 0x8318,\ 0xB37B,\ 0xA35A,\ 0xD3BD,\ 0xC39C,\ 0xF3FF,\ 0xE3DE,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00199}00199\ \ \ \ \ 0x2462,\ 0x3443,\ 0x0420,\ 0x1401,\ 0x64E6,\ 0x74C7,\ 0x44A4,\ 0x5485,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00200}00200\ \ \ \ \ 0xA56A,\ 0xB54B,\ 0x8528,\ 0x9509,\ 0xE5EE,\ 0xF5CF,\ 0xC5AC,\ 0xD58D,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00201}00201\ \ \ \ \ 0x3653,\ 0x2672,\ 0x1611,\ 0x0630,\ 0x76D7,\ 0x66F6,\ 0x5695,\ 0x46B4,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00202}00202\ \ \ \ \ 0xB75B,\ 0xA77A,\ 0x9719,\ 0x8738,\ 0xF7DF,\ 0xE7FE,\ 0xD79D,\ 0xC7BC,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00203}00203\ \ \ \ \ 0x48C4,\ 0x58E5,\ 0x6886,\ 0x78A7,\ 0x0840,\ 0x1861,\ 0x2802,\ 0x3823,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00204}00204\ \ \ \ \ 0xC9CC,\ 0xD9ED,\ 0xE98E,\ 0xF9AF,\ 0x8948,\ 0x9969,\ 0xA90A,\ 0xB92B,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00205}00205\ \ \ \ \ 0x5AF5,\ 0x4AD4,\ 0x7AB7,\ 0x6A96,\ 0x1A71,\ 0x0A50,\ 0x3A33,\ 0x2A12,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00206}00206\ \ \ \ \ 0xDBFD,\ 0xCBDC,\ 0xFBBF,\ 0xEB9E,\ 0x9B79,\ 0x8B58,\ 0xBB3B,\ 0xAB1A,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00207}00207\ \ \ \ \ 0x6CA6,\ 0x7C87,\ 0x4CE4,\ 0x5CC5,\ 0x2C22,\ 0x3C03,\ 0x0C60,\ 0x1C41,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00208}00208\ \ \ \ \ 0xEDAE,\ 0xFD8F,\ 0xCDEC,\ 0xDDCD,\ 0xAD2A,\ 0xBD0B,\ 0x8D68,\ 0x9D49,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00209}00209\ \ \ \ \ 0x7E97,\ 0x6EB6,\ 0x5ED5,\ 0x4EF4,\ 0x3E13,\ 0x2E32,\ 0x1E51,\ 0x0E70,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00210}00210\ \ \ \ \ 0xFF9F,\ 0xEFBE,\ 0xDFDD,\ 0xCFFC,\ 0xBF1B,\ 0xAF3A,\ 0x9F59,\ 0x8F78,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00211}00211\ \ \ \ \ 0x9188,\ 0x81A9,\ 0xB1CA,\ 0xA1EB,\ 0xD10C,\ 0xC12D,\ 0xF14E,\ 0xE16F,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00212}00212\ \ \ \ \ 0x1080,\ 0x00A1,\ 0x30C2,\ 0x20E3,\ 0x5004,\ 0x4025,\ 0x7046,\ 0x6067,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00213}00213\ \ \ \ \ 0x83B9,\ 0x9398,\ 0xA3FB,\ 0xB3DA,\ 0xC33D,\ 0xD31C,\ 0xE37F,\ 0xF35E,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00214}00214\ \ \ \ \ 0x02B1,\ 0x1290,\ 0x22F3,\ 0x32D2,\ 0x4235,\ 0x5214,\ 0x6277,\ 0x7256,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00215}00215\ \ \ \ \ 0xB5EA,\ 0xA5CB,\ 0x95A8,\ 0x8589,\ 0xF56E,\ 0xE54F,\ 0xD52C,\ 0xC50D,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00216}00216\ \ \ \ \ 0x34E2,\ 0x24C3,\ 0x14A0,\ 0x0481,\ 0x7466,\ 0x6447,\ 0x5424,\ 0x4405,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00217}00217\ \ \ \ \ 0xA7DB,\ 0xB7FA,\ 0x8799,\ 0x97B8,\ 0xE75F,\ 0xF77E,\ 0xC71D,\ 0xD73C,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00218}00218\ \ \ \ \ 0x26D3,\ 0x36F2,\ 0x0691,\ 0x16B0,\ 0x6657,\ 0x7676,\ 0x4615,\ 0x5634,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00219}00219\ \ \ \ \ 0xD94C,\ 0xC96D,\ 0xF90E,\ 0xE92F,\ 0x99C8,\ 0x89E9,\ 0xB98A,\ 0xA9AB,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00220}00220\ \ \ \ \ 0x5844,\ 0x4865,\ 0x7806,\ 0x6827,\ 0x18C0,\ 0x08E1,\ 0x3882,\ 0x28A3,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00221}00221\ \ \ \ \ 0xCB7D,\ 0xDB5C,\ 0xEB3F,\ 0xFB1E,\ 0x8BF9,\ 0x9BD8,\ 0xABBB,\ 0xBB9A,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00222}00222\ \ \ \ \ 0x4A75,\ 0x5A54,\ 0x6A37,\ 0x7A16,\ 0x0AF1,\ 0x1AD0,\ 0x2AB3,\ 0x3A92,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00223}00223\ \ \ \ \ 0xFD2E,\ 0xED0F,\ 0xDD6C,\ 0xCD4D,\ 0xBDAA,\ 0xAD8B,\ 0x9DE8,\ 0x8DC9,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00224}00224\ \ \ \ \ 0x7C26,\ 0x6C07,\ 0x5C64,\ 0x4C45,\ 0x3CA2,\ 0x2C83,\ 0x1CE0,\ 0x0CC1,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00225}00225\ \ \ \ \ 0xEF1F,\ 0xFF3E,\ 0xCF5D,\ 0xDF7C,\ 0xAF9B,\ 0xBFBA,\ 0x8FD9,\ 0x9FF8,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00226}00226\ \ \ \ \ 0x6E17,\ 0x7E36,\ 0x4E55,\ 0x5E74,\ 0x2E93,\ 0x3EB2,\ 0x0ED1,\ 0x1EF0}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00227}00227\ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00229}00229\ \textcolor{keyword}{static}\ uint16\_t\ \_crc16(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00230}00230\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ data\ =\ buffer;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00231}00231\ \ \ \ \ uint16\_t\ crc\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ length;\ i++)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ crc\ =\ (crc\ <<\ 8)\ \string^\ CRC16\_TABLE[((crc\ >>\ 8)\ \string^\ data[i])\ \&\ 0x00FF];}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{return}\ crc;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00235}00235\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00237}00237\ \textcolor{keyword}{static}\ uint8\_t\ \_spi\_write(\textcolor{keywordtype}{void}*\ \_config,\ uint8\_t\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00238}00238\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00239}00239\ \ \ \ \ uint8\_t*\ buffer\ =\ (uint8\_t*)\&data;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00240}00240\ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ buffer,\ buffer,\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00241}00241\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)*buffer;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00242}00242\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00244}00244\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_spi\_wait(\textcolor{keywordtype}{void}*\ \_config,\ \textcolor{keywordtype}{size\_t}\ count)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00245}00245\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ count;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ NULL,\ \textcolor{keyword}{sizeof}(SPI\_FILL\_CHAR));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00249}00249\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00251}00251\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_spi\_init(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00252}00252\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00254}00254\ \ \ \ \ gpio\_set\_function(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{mosi}},\ GPIO\_FUNC\_SPI);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00255}00255\ \ \ \ \ gpio\_set\_function(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{miso}},\ GPIO\_FUNC\_SPI);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00256}00256\ \ \ \ \ gpio\_set\_function(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{sclk}},\ GPIO\_FUNC\_SPI);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00257}00257\ \ \ \ \ gpio\_init(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00258}00258\ \ \ \ \ gpio\_set\_dir(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}},\ GPIO\_OUT);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00259}00259\ \ \ \ \ gpio\_pull\_up(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{miso}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00260}00260\ \ \ \ \ gpio\_set\_drive\_strength(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{mosi}},\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00261}00261\ \ \ \ \ gpio\_set\_drive\_strength(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{sclk}},\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00262}00262\ \ \ \ \ spi\_init(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \mbox{\hyperlink{sd_8h_a350d0200109d5c6deb52568dddf82d82}{CONF\_SD\_INIT\_FREQUENCY}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00263}00263\ \ \ \ \ spi\_set\_format(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ 8,\ SPI\_CPOL\_0,\ SPI\_CPHA\_0,\ SPI\_MSB\_FIRST);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00265}00265\ \ \ \ \ gpio\_put(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}},\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00266}00266\ \ \ \ \ \textcolor{keywordtype}{bool}\ old\_cs\ =\ gpio\_get(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00267}00267\ \ \ \ \ \_spi\_wait(config,\ 10);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00268}00268\ \ \ \ \ gpio\_put(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}},\ old\_cs);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00269}00269\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00271}00271\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_preclock\_then\_select(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00272}00272\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00273}00273\ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ NULL,\ \textcolor{keyword}{sizeof}(SPI\_FILL\_CHAR));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00274}00274\ \ \ \ \ gpio\_put(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}},\ 0);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00275}00275\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00277}00277\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_postclock\_then\_deselect(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00278}00278\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00279}00279\ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ NULL,\ \textcolor{keyword}{sizeof}(SPI\_FILL\_CHAR));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00280}00280\ \ \ \ \ gpio\_put(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}},\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00281}00281\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00283}00283\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ debug\_if(\textcolor{keywordtype}{int}\ condition,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ format,\ ...)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{if}\ (condition)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ vprintf(format,\ args);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00289}00289\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00290}00290\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00292}00292\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \_wait\_token(\textcolor{keywordtype}{void}*\ \_config,\ uint8\_t\ token)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00293}00293\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00295}00295\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ to\_ms\_since\_boot(get\_absolute\_time());}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00296}00296\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token\ ==\ \_spi\_write(config,\ SPI\_FILL\_CHAR))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00300}00300\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (to\_ms\_since\_boot(get\_absolute\_time())\ <\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ +\ 300);\ \ \ \ \textcolor{comment}{//\ Wait\ for\ 300\ msec\ for\ start\ token}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00301}00301\ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}\_wait\_token:\ timeout\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00302}00302\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00303}00303\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00305}00305\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \_wait\_ready(\textcolor{keywordtype}{void}*\ \_config,\ uint64\_t\ timeout)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00306}00306\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00307}00307\ \ \ \ \ uint8\_t\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00308}00308\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ to\_ms\_since\_boot(get\_absolute\_time());}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00309}00309\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ \&response,\ \textcolor{keyword}{sizeof}(SPI\_FILL\_CHAR));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ ==\ 0xFF)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00314}00314\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (to\_ms\_since\_boot(get\_absolute\_time())\ <\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ +\ timeout);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00317}00317\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00319}00319\ \textcolor{keyword}{static}\ uint8\_t\ \_cmd\_spi(\textcolor{keywordtype}{void}*\ \_config,\ \textcolor{keywordtype}{int}\ cmd,\ uint32\_t\ arg)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00320}00320\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00321}00321\ \ \ \ \ uint8\_t\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00322}00322\ \ \ \ \ uint8\_t\ cmd\_packet[\mbox{\hyperlink{sd_8c_aebdc7d8ca8e25ed8efc90bb88ef7ef5b}{PACKET\_SIZE}}]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00324}00324\ \ \ \ \ \textcolor{comment}{//\ Prepare\ the\ command\ packet}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00325}00325\ \ \ \ \ cmd\_packet[0]\ =\ \mbox{\hyperlink{sd_8c_acc071acf45c59c2a107bf01bdbd52b8a}{SPI\_CMD}}(cmd);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00326}00326\ \ \ \ \ cmd\_packet[1]\ =\ (arg\ >>\ 24);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00327}00327\ \ \ \ \ cmd\_packet[2]\ =\ (arg\ >>\ 16);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00328}00328\ \ \ \ \ cmd\_packet[3]\ =\ (arg\ >>\ 8);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00329}00329\ \ \ \ \ cmd\_packet[4]\ =\ (arg\ >>\ 0);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00331}00331\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ uint8\_t\ crc\ =\ \_crc7(cmd\_packet,\ 5);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ cmd\_packet[5]\ =\ (crc\ <<\ 1)\ |\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00334}00334\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00335}00335\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63}{CMD0\_GO\_IDLE\_STATE}}:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ cmd\_packet[5]\ =\ 0x95;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{CMD8\_SEND\_IF\_COND}}:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ cmd\_packet[5]\ =\ 0x87;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00343}00343\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ cmd\_packet[5]\ =\ 0xFF;\ \ \ \ \textcolor{comment}{//\ Make\ sure\ bit\ 0-\/End\ bit\ is\ high}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00347}00347\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00349}00349\ \ \ \ \ \textcolor{comment}{//\ send\ a\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00350}00350\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{sd_8c_aebdc7d8ca8e25ed8efc90bb88ef7ef5b}{PACKET\_SIZE}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ (\textcolor{keyword}{const}\ uint8\_t*)\&cmd\_packet[i],\ NULL,\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00352}00352\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00354}00354\ \ \ \ \ \textcolor{comment}{//\ The\ received\ byte\ immediataly\ following\ CMD12\ is\ a\ stuff\ byte,}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00355}00355\ \ \ \ \ \textcolor{comment}{//\ it\ should\ be\ discarded\ before\ receive\ the\ response\ of\ the\ CMD12.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00356}00356\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{CMD12\_STOP\_TRANSMISSION}}\ ==\ cmd)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ NULL,\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00358}00358\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00360}00360\ \ \ \ \ \textcolor{comment}{//\ Loop\ for\ response:\ Response\ is\ sent\ back\ within\ command\ response\ time\ (NCR),\ 0\ to\ 8\ bytes\ for\ SDC}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00361}00361\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 0x10;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ spi\_write\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ \&SPI\_FILL\_CHAR,\ \&response,\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(response\ \&\ \mbox{\hyperlink{sd_8c_afa1084b6c1e98accf323f9eecb228db8}{R1\_RESPONSE\_RECV}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00365}00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00366}00366\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00367}00367\ \ \ \ \ \textcolor{keywordflow}{return}\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00368}00368\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00370}00370\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_cmd(\textcolor{keywordtype}{void}*\ \_config,\ \textcolor{keywordtype}{int}\ cmd,\ uint32\_t\ arg,\ \textcolor{keywordtype}{bool}\ is\_acmd,\ uint32\_t*\ resp)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00371}00371\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00372}00372\ \ \ \ \ int32\_t\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00373}00373\ \ \ \ \ uint32\_t\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00375}00375\ \ \ \ \ \_preclock\_then\_select(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00376}00376\ \ \ \ \ \textcolor{comment}{//\ No\ need\ to\ wait\ for\ card\ to\ be\ ready\ when\ sending\ the\ stop\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00377}00377\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{CMD12\_STOP\_TRANSMISSION}}\ !=\ cmd)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00378}00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{false}\ ==\ \_wait\_ready(config,\ \mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{SD\_COMMAND\_TIMEOUT}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ not\ ready\ yet\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00380}00380\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00381}00381\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00383}00383\ \ \ \ \ \textcolor{comment}{//\ Re-\/try\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00384}00384\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00385}00385\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ CMD55\ for\ APP\ command\ first}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00386}00386\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_acmd)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ response\ =\ \_cmd\_spi(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0}{CMD55\_APP\_CMD}},\ 0x0);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ card\ to\ be\ ready\ after\ CMD55}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{false}\ ==\ \_wait\_ready(config,\ \mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{SD\_COMMAND\_TIMEOUT}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ not\ ready\ yet\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00394}00394\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ command\ over\ SPI\ interface}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00395}00395\ \ \ \ \ \ \ \ \ response\ =\ \_cmd\_spi(config,\ cmd,\ arg);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00396}00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a9d214c6916e6ca7f6e0ef1f52255a9a4}{R1\_NO\_RESPONSE}}\ ==\ response)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}No\ response\ CMD:\%d\ \(\backslash\)n"{}},\ cmd);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00399}00399\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00400}00400\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00401}00401\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00403}00403\ \ \ \ \ \textcolor{comment}{//\ Pass\ the\ response\ to\ the\ command\ call\ if\ required}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00404}00404\ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ resp)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00405}00405\ \ \ \ \ \ \ \ \ *resp\ =\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00406}00406\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00408}00408\ \ \ \ \ \textcolor{comment}{//\ Process\ the\ response\ R1\ \ :\ Exit\ on\ CRC/Illegal\ command\ error/No\ response}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00409}00409\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a9d214c6916e6ca7f6e0ef1f52255a9a4}{R1\_NO\_RESPONSE}}\ ==\ response)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}No\ response\ CMD:\%d\ response:\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ cmd,\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_aafa7734f02804b218f71f2a988111b15}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_DEVICE}};\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ device}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00413}00413\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00414}00414\ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ \&\ \mbox{\hyperlink{sd_8c_ac9f596336ebcb43f5c9e314ad697a8e8}{R1\_COM\_CRC\_ERROR}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}CRC\ error\ CMD:\%d\ response\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ cmd,\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a07208e021a15e0c2b5425e3355c7c2a9}{SD\_BLOCK\_DEVICE\_ERROR\_CRC}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ CRC\ error}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00418}00418\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00419}00419\ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ \&\ \mbox{\hyperlink{sd_8c_a317730607b37d51a7a470e8f33fa0e4d}{R1\_ILLEGAL\_COMMAND}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00421}00421\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Illegal\ command\ CMD:\%d\ response\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ cmd,\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{CMD8\_SEND\_IF\_COND}}\ ==\ cmd)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Illegal\ command\ is\ for\ Ver1\ or\ not\ SD\ Card}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{CARD\_UNKNOWN}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_adcac3a18f2010c23804be1dddf7f5ba2}{SD\_BLOCK\_DEVICE\_ERROR\_UNSUPPORTED}};\ \ \ \ \ \ \textcolor{comment}{//\ Command\ not\ supported}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00426}00426\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00428}00428\ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}CMD:\%d\ \(\backslash\)t\ arg:0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\ \(\backslash\)t\ Response:0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ cmd,\ arg,\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00429}00429\ \ \ \ \ \textcolor{comment}{//\ Set\ status\ for\ other\ errors}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00430}00430\ \ \ \ \ \textcolor{keywordflow}{if}\ ((response\ \&\ \mbox{\hyperlink{sd_8c_a4598fdd1bd123e39ca45cdcd30f2a0bb}{R1\_ERASE\_RESET}})\ ||\ (response\ \&\ \mbox{\hyperlink{sd_8c_a310cf4b26d5025bc4e0ac18b7dfd968a}{R1\_ERASE\_SEQUENCE\_ERROR}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_a6a546df19eddae71eb0ccf0e62913143}{SD\_BLOCK\_DEVICE\_ERROR\_ERASE}};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erase\ error}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00432}00432\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00433}00433\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((response\ \&\ \mbox{\hyperlink{sd_8c_a84256fd9d0fbf84f1c8fabd17d3f7adc}{R1\_ADDRESS\_ERROR}})\ ||\ (response\ \&\ \mbox{\hyperlink{sd_8c_afaf04d83e2c97907a519100efe9c8d7c}{R1\_PARAMETER\_ERROR}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Misaligned\ address\ /\ invalid\ address\ block\ length}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00435}00435\ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00436}00436\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00438}00438\ \ \ \ \ \textcolor{comment}{//\ Get\ rest\ of\ the\ response\ part\ for\ other\ commands}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00439}00439\ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00440}00440\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{CMD8\_SEND\_IF\_COND}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Response\ R7}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00441}00441\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}V2-\/Version\ Card\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{SDCARD\_V2}};\ \textcolor{comment}{//\ fallthrough}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Note:\ No\ break\ here,\ need\ to\ read\ rest\ of\ the\ response}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00444}00444\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98}{CMD58\_READ\_OCR}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Response\ R3}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00445}00445\ \ \ \ \ \ \ \ \ response\ =\ (\_spi\_write(config,\ SPI\_FILL\_CHAR)\ <<\ 24);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00446}00446\ \ \ \ \ \ \ \ \ response\ |=\ (\_spi\_write(config,\ SPI\_FILL\_CHAR)\ <<\ 16);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00447}00447\ \ \ \ \ \ \ \ \ response\ |=\ (\_spi\_write(config,\ SPI\_FILL\_CHAR)\ <<\ 8);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00448}00448\ \ \ \ \ \ \ \ \ response\ |=\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}R3/R7:\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00452}00452\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{CMD12\_STOP\_TRANSMISSION}}:\ \ \ \ \ \ \ \textcolor{comment}{//\ Response\ R1b}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00453}00453\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64}{CMD38\_ERASE}}:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00454}00454\ \ \ \ \ \ \ \ \ \_wait\_ready(config,\ \mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{SD\_COMMAND\_TIMEOUT}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00457}00457\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b}{ACMD13\_SD\_STATUS}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Response\ R2}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00458}00458\ \ \ \ \ \ \ \ \ response\ =\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}R2:\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00460}00460\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00462}00462\ \ \ \ \ \textcolor{keywordflow}{default}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Response\ R1}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00463}00463\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00464}00464\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00466}00466\ \ \ \ \ \textcolor{comment}{//\ Pass\ the\ updated\ response\ to\ the\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00467}00467\ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ resp)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00468}00468\ \ \ \ \ \ \ \ \ *resp\ =\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00469}00469\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00470}00470\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00471}00471\ \ \ \ \ \textcolor{comment}{//\ Do\ not\ deselect\ card\ if\ read\ is\ in\ progress.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00472}00472\ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5}{CMD9\_SEND\_CSD}}\ ==\ cmd)\ ||\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577}{ACMD22\_SEND\_NUM\_WR\_BLOCKS}}\ ==\ cmd)\ ||}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3}{CMD24\_WRITE\_BLOCK}}\ ==\ cmd)\ ||\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977}{CMD25\_WRITE\_MULTIPLE\_BLOCK}}\ ==\ cmd)\ ||}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00474}00474\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f}{CMD17\_READ\_SINGLE\_BLOCK}}\ ==\ cmd)\ ||\ (\mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c}{CMD18\_READ\_MULTIPLE\_BLOCK}}\ ==\ cmd))}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \&\&\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ ==\ status))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00477}00477\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00478}00478\ \ \ \ \ \textcolor{comment}{//\ Deselect\ card}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00479}00479\ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00480}00480\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00481}00481\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00483}00483\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_cmd8(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00484}00484\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00485}00485\ \ \ \ \ uint32\_t\ arg\ =\ (\mbox{\hyperlink{sd_8c_ac77e3b44a84e04fd34a6084e23d7a67f}{CMD8\_PATTERN}}\ <<\ 0);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ [7:0]check\ pattern}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00486}00486\ \ \ \ \ uint32\_t\ response\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00487}00487\ \ \ \ \ int32\_t\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00489}00489\ \ \ \ \ arg\ |=\ (0x1\ <<\ 8);\ \ \textcolor{comment}{//\ 2.7-\/3.6V\ \ \ \ \ \ \ \ \ \ \ \ \ //\ [11:8]supply\ voltage(VHS)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00491}00491\ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4}{CMD8\_SEND\_IF\_COND}},\ arg,\ \textcolor{keyword}{false},\ \&response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00492}00492\ \ \ \ \ \textcolor{comment}{//\ Verify\ voltage\ and\ pattern\ for\ V2\ version\ of\ card}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00493}00493\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ ==\ status)\ \&\&\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{SDCARD\_V2}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00494}00494\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ check\ pattern\ is\ not\ matched,\ CMD8\ communication\ is\ not\ valid}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00495}00495\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((response\ \&\ 0xFFF)\ !=\ arg)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}CMD8\ Pattern\ mismatch\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\ :\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ arg,\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{CARD\_UNKNOWN}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_afc41dc1dffb1f500b7a3f87e3de10f5c}{SD\_BLOCK\_DEVICE\_ERROR\_UNUSABLE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00499}00499\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00500}00500\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00501}00501\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00502}00502\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00504}00504\ \textcolor{keyword}{static}\ uint32\_t\ \_go\_idle\_state(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00505}00505\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00506}00506\ \ \ \ \ uint32\_t\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00508}00508\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{sd_8c_a190b6bcf9ab4d85b71e05bd20955758a}{SD\_CMD0\_GO\_IDLE\_STATE\_RETRIES}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00509}00509\ \ \ \ \ \ \ \ \ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63}{CMD0\_GO\_IDLE\_STATE}},\ 0x0,\ 0,\ \&response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00510}00510\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_a7adb3673fe75b9397a1f241533e3f08a}{R1\_IDLE\_STATE}}\ ==\ response)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00512}00512\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00513}00513\ \ \ \ \ \ \ \ \ sleep\_ms(1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00514}00514\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00515}00515\ \ \ \ \ \textcolor{keywordflow}{return}\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00516}00516\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00518}00518\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ init\_card(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00519}00519\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00520}00520\ \ \ \ \ int32\_t\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00521}00521\ \ \ \ \ uint32\_t\ response,\ arg;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00523}00523\ \ \ \ \ \_spi\_init(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00524}00524\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_go\_idle\_state(config)\ !=\ \mbox{\hyperlink{sd_8c_a7adb3673fe75b9397a1f241533e3f08a}{R1\_IDLE\_STATE}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00525}00525\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}No\ disk,\ or\ could\ not\ put\ SD\ card\ in\ to\ SPI\ idle\ state\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00526}00526\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_aafa7734f02804b218f71f2a988111b15}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_DEVICE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00527}00527\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00528}00528\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00529}00529\ \ \ \ \ \textcolor{comment}{//\ Send\ CMD8,\ if\ the\ card\ rejects\ the\ command\ then\ it's\ probably\ using\ the}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00530}00530\ \ \ \ \ \textcolor{comment}{//\ legacy\ protocol,\ or\ is\ a\ MMC,\ or\ just\ flat-\/out\ broken}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00531}00531\ \ \ \ \ status\ =\ \_cmd8(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00532}00532\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ status\ \&\&\ \mbox{\hyperlink{sd_8c_adcac3a18f2010c23804be1dddf7f5ba2}{SD\_BLOCK\_DEVICE\_ERROR\_UNSUPPORTED}}\ !=\ status)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00533}00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00534}00534\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00535}00535\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00536}00536\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00537}00537\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7}{CMD59\_CRC\_ON\_OFF}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}},\ 0,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00538}00538\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00540}00540\ \ \ \ \ \textcolor{comment}{//\ Read\ OCR\ -\/\ CMD58\ Response\ contains\ OCR\ register}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00541}00541\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98}{CMD58\_READ\_OCR}},\ 0x0,\ 0x0,\ \&response)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00542}00542\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00543}00543\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00544}00544\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00545}00545\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ card\ supports\ voltage\ range:\ 3.3V}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00546}00546\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(response\ \&\ \mbox{\hyperlink{sd_8c_a9242e2740476a5965ace0b1276c9a24d}{OCR\_3\_3V}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00547}00547\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{CARD\_UNKNOWN}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00548}00548\ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_afc41dc1dffb1f500b7a3f87e3de10f5c}{SD\_BLOCK\_DEVICE\_ERROR\_UNUSABLE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00549}00549\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00550}00550\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00551}00551\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00552}00552\ \ \ \ \ \textcolor{comment}{//\ HCS\ is\ set\ 1\ for\ HC/XC\ capacity\ cards\ for\ ACMD41,\ if\ supported}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00553}00553\ \ \ \ \ arg\ =\ 0x0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00554}00554\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{SDCARD\_V2}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00555}00555\ \ \ \ \ \ \ \ \ arg\ |=\ \mbox{\hyperlink{sd_8c_ace5b9334abefe4920fb519a5957b5cc3}{OCR\_HCS\_CCS}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00556}00556\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00558}00558\ \ \ \ \ \textcolor{comment}{/*\ Idle\ state\ bit\ in\ the\ R1\ response\ of\ ACMD41\ is\ used\ by\ the\ card\ to\ inform\ the\ host}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00559}00559\ \textcolor{comment}{\ \ \ \ \ *\ if\ initialization\ of\ ACMD41\ is\ completed.\ "{}1"{}\ indicates\ that\ the\ card\ is\ still\ initializing.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00560}00560\ \textcolor{comment}{\ \ \ \ \ *\ "{}0"{}\ indicates\ completion\ of\ initialization.\ The\ host\ repeatedly\ issues\ ACMD41\ until}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00561}00561\ \textcolor{comment}{\ \ \ \ \ *\ this\ bit\ is\ set\ to\ "{}0"{}.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00562}00562\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00563}00563\ \ \ \ \ absolute\_time\_t\ timeout\ =\ make\_timeout\_time\_ms(\mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{SD\_COMMAND\_TIMEOUT}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00564}00564\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00565}00565\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4}{ACMD41\_SD\_SEND\_OP\_COND}},\ arg,\ 1,\ \&response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00566}00566\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((response\ \&\ \mbox{\hyperlink{sd_8c_a7adb3673fe75b9397a1f241533e3f08a}{R1\_IDLE\_STATE}})\ \&\&\ (0\ <\ absolute\_time\_diff\_us(get\_absolute\_time(),\ timeout)));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00568}00568\ \ \ \ \ \textcolor{comment}{//\ Initialization\ complete:\ ACMD41\ successful}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00569}00569\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ status)\ ||\ (0x00\ !=\ response))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5}{CARD\_UNKNOWN}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00571}00571\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Timeout\ waiting\ for\ card\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00572}00572\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00573}00573\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00575}00575\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09}{SDCARD\_V2}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00576}00576\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ card\ capacity\ CCS:\ CMD58}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00577}00577\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ ==\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98}{CMD58\_READ\_OCR}},\ 0x0,\ 0x0,\ \&response)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ High\ Capacity\ card}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ \&\ \mbox{\hyperlink{sd_8c_ace5b9334abefe4920fb519a5957b5cc3}{OCR\_HCS\_CCS}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{SDCARD\_V2HC}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ Initialized:\ High\ Capacity\ Card\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ Initialized:\ Standard\ Capacity\ Card:\ Version\ 2.x\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00586}00586\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00587}00587\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00588}00588\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00589}00589\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e}{SDCARD\_V1}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00590}00590\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ Initialized:\ Version\ 1.x\ Card\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00591}00591\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00592}00592\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00593}00593\ \ \ \ \ \textcolor{keywordflow}{if}\ (!config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00594}00594\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Disable\ CRC}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00595}00595\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7}{CMD59\_CRC\_ON\_OFF}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}},\ 0x0,\ \&response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00596}00596\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00597}00597\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00598}00598\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7}{CMD59\_CRC\_ON\_OFF}},\ 0,\ 0x0,\ \&response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00599}00599\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00600}00600\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00601}00601\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00603}00603\ \textcolor{keyword}{static}\ uint32\_t\ ext\_bits(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{int}\ msb,\ \textcolor{keywordtype}{int}\ lsb)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00604}00604\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00605}00605\ \ \ \ \ uint32\_t\ bits\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00606}00606\ \ \ \ \ uint32\_t\ size\ =\ 1\ +\ msb\ -\/\ lsb;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00607}00607\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ i\ =\ 0;\ i\ <\ size;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00608}00608\ \ \ \ \ \ \ \ \ uint32\_t\ position\ =\ lsb\ +\ i;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00609}00609\ \ \ \ \ \ \ \ \ uint32\_t\ \textcolor{keywordtype}{byte}\ =\ 15\ -\/\ (position\ >>\ 3);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00610}00610\ \ \ \ \ \ \ \ \ uint32\_t\ bit\ =\ position\ \&\ 0x7;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00611}00611\ \ \ \ \ \ \ \ \ uint32\_t\ value\ =\ (data[byte]\ >>\ bit)\ \&\ 1;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00612}00612\ \ \ \ \ \ \ \ \ bits\ |=\ value\ <<\ i;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00613}00613\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00614}00614\ \ \ \ \ \textcolor{keywordflow}{return}\ bits;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00615}00615\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00617}00617\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_read\_bytes(\textcolor{keywordtype}{void}*\ \_config,\ uint8\_t*\ buffer,\ uint32\_t\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00618}00618\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00619}00619\ \ \ \ \ uint16\_t\ crc;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00620}00620\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00621}00621\ \ \ \ \ \textcolor{comment}{//\ read\ until\ start\ byte\ (0xFE)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00622}00622\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{false}\ ==\ \_wait\_token(config,\ \mbox{\hyperlink{sd_8c_a16316bd35058685a310b2782003f6461}{SPI\_START\_BLOCK}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00623}00623\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Read\ timeout\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00624}00624\ \ \ \ \ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00625}00625\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a42fdf7470707e7b523c36bac1f15d98a}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_RESPONSE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00626}00626\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00627}00627\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00628}00628\ \ \ \ \ \textcolor{comment}{//\ read\ data}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00629}00629\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ i\ =\ 0;\ i\ <\ length;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00630}00630\ \ \ \ \ \ \ \ \ buffer[i]\ =\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00631}00631\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00633}00633\ \ \ \ \ \textcolor{comment}{//\ Read\ the\ CRC16\ checksum\ for\ the\ data\ block}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00634}00634\ \ \ \ \ crc\ =\ (\_spi\_write(config,\ SPI\_FILL\_CHAR)\ <<\ 8);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00635}00635\ \ \ \ \ crc\ |=\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00636}00636\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00637}00637\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ uint32\_t\ crc\_result\ =\ \_crc16(buffer,\ length);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00639}00639\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compute\ and\ verify\ checksum}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00640}00640\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (crc\_result\ !=\ crc)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00641}00641\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}\_read\_bytes:\ Invalid\ CRC\ received\ 0x\%"{}}\ PRIx16\ \textcolor{stringliteral}{"{}\ result\ of\ computation\ 0x\%"{}}\ PRIx32\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00642}00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ crc,\ crc\_result);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a07208e021a15e0c2b5425e3355c7c2a9}{SD\_BLOCK\_DEVICE\_ERROR\_CRC}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00645}00645\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00646}00646\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00647}00647\ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00648}00648\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00649}00649\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00650}00650\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00651}00651\ \textcolor{keyword}{static}\ uint64\_t\ \_sd\_sectors(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00652}00652\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00653}00653\ \ \ \ \ uint32\_t\ c\_size,\ c\_size\_mult,\ read\_bl\_len;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00654}00654\ \ \ \ \ uint32\_t\ block\_len,\ mult,\ blocknr;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00655}00655\ \ \ \ \ uint32\_t\ hc\_c\_size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00656}00656\ \ \ \ \ uint64\_t\ blocks\ =\ 0,\ capacity\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00657}00657\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00658}00658\ \ \ \ \ \textcolor{comment}{//\ CMD9,\ Response\ R2\ (R1\ byte\ +\ 16-\/byte\ block\ read)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00659}00659\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5}{CMD9\_SEND\_CSD}},\ 0x0,\ 0,\ NULL)\ !=\ 0x0)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00660}00660\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Didn't\ get\ a\ response\ from\ the\ disk\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00662}00662\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00663}00663\ \ \ \ \ uint8\_t\ csd[16];}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00664}00664\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_read\_bytes(config,\ csd,\ 16)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00665}00665\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Couldn't\ read\ csd\ response\ from\ disk\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00667}00667\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00668}00668\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00669}00669\ \ \ \ \ \textcolor{comment}{//\ csd\_structure\ :\ csd[127:126]}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00670}00670\ \ \ \ \ \textcolor{keywordtype}{int}\ csd\_structure\ =\ ext\_bits(csd,\ 127,\ 126);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00671}00671\ \ \ \ \ \textcolor{keywordflow}{switch}\ (csd\_structure)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00672}00672\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ c\_size\ =\ ext\_bits(csd,\ 73,\ 62);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ c\_size\ \ \ \ \ \ \ \ :\ csd[73:62]}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00674}00674\ \ \ \ \ \ \ \ \ c\_size\_mult\ =\ ext\_bits(csd,\ 49,\ 47);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ c\_size\_mult\ \ \ :\ csd[49:47]}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ read\_bl\_len\ =\ ext\_bits(csd,\ 83,\ 80);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ read\_bl\_len\ \ \ :\ csd[83:80]\ -\/\ the\ *maximum*\ read\ block\ length}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00676}00676\ \ \ \ \ \ \ \ \ block\_len\ =\ 1\ <<\ read\_bl\_len;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ BLOCK\_LEN\ =\ 2\string^READ\_BL\_LEN}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00677}00677\ \ \ \ \ \ \ \ \ mult\ =\ 1\ <<\ (c\_size\_mult\ +\ 2);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ MULT\ =\ 2\string^C\_SIZE\_MULT+2\ (C\_SIZE\_MULT\ <\ 8)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ blocknr\ =\ (c\_size\ +\ 1)\ *\ mult;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ BLOCKNR\ =\ (C\_SIZE+1)\ *\ MULT}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00679}00679\ \ \ \ \ \ \ \ \ capacity\ =\ (uint64\_t)blocknr\ *\ block\_len;\ \ \textcolor{comment}{//\ memory\ capacity\ =\ BLOCKNR\ *\ BLOCK\_LEN}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00680}00680\ \ \ \ \ \ \ \ \ blocks\ =\ capacity\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Standard\ Capacity:\ c\_size:\ \%"{}}\ PRIu32\ \textcolor{stringliteral}{"{}\ \(\backslash\)n"{}},\ c\_size);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00683}00683\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ERASE\_BLK\_EN\ =\ 1:\ Erase\ in\ multiple\ of\ 512\ bytes\ supported}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00684}00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ext\_bits(csd,\ 46,\ 46))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00685}00685\ \ \ \ \ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}}\ =\ \mbox{\hyperlink{sd_8c_ae29c04ecc4f5ee4f41694ac4d8a2fdd9}{BLOCK\_SIZE\_HC}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00686}00686\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00687}00687\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00688}00688\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ERASE\_BLK\_EN\ =\ 1:\ Erase\ in\ multiple\ of\ SECTOR\_SIZE\ supported}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00689}00689\ \ \ \ \ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}}\ =\ \mbox{\hyperlink{sd_8c_ae29c04ecc4f5ee4f41694ac4d8a2fdd9}{BLOCK\_SIZE\_HC}}\ *\ (ext\_bits(csd,\ 45,\ 39)\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00690}00690\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00691}00691\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00692}00692\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00693}00693\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00694}00694\ \ \ \ \ \ \ \ \ hc\_c\_size\ =\ ext\_bits(csd,\ 69,\ 48);\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ device\ size\ :\ C\_SIZE\ :\ [69:48]}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00695}00695\ \ \ \ \ \ \ \ \ blocks\ =\ (hc\_c\_size\ +\ 1)\ <<\ 10;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ block\ count\ =\ C\_SIZE+1)\ *\ 1K\ byte\ (512B\ is\ block\ size)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00696}00696\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}SDHC/SDXC\ Card:\ hc\_c\_size:\ \%"{}}\ PRIu32\ \textcolor{stringliteral}{"{}\ \(\backslash\)n"{}},\ hc\_c\_size);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00697}00697\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ERASE\_BLK\_EN\ is\ fixed\ to\ 1,\ which\ means\ host\ can\ erase\ one\ or\ multiple\ of\ 512\ bytes.}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00698}00698\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}}\ =\ \mbox{\hyperlink{sd_8c_ae29c04ecc4f5ee4f41694ac4d8a2fdd9}{BLOCK\_SIZE\_HC}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00699}00699\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00700}00700\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00701}00701\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00702}00702\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}CSD\ struct\ unsupported\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00703}00703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00704}00704\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00705}00705\ \ \ \ \ \textcolor{keywordflow}{return}\ blocks;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00706}00706\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00707}00707\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00708}00708\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_freq(\textcolor{keywordtype}{void}*\ \_config)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00709}00709\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00710}00710\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00711}00711\ \ \ \ \ \textcolor{comment}{//\ Max\ frequency\ supported\ is\ 25MHZ}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00712}00712\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}}\ <=\ 25000000)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ spi\_set\_baudrate(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00714}00714\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00715}00715\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00716}00716\ \ \ \ \ \textcolor{keywordflow}{else}\ \{\ \ \textcolor{comment}{//\ TODO:\ Switch\ function\ to\ be\ implemented\ for\ higher\ frequency}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00717}00717\ \ \ \ \ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}}\ =\ 25000000;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00718}00718\ \ \ \ \ \ \ \ \ spi\_set\_baudrate(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00719}00719\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EINVAL;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00720}00720\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00721}00721\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00722}00722\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00723}00723\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ init(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00724}00724\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00725}00725\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00726}00726\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00727}00727\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ init\_card(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00728}00728\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}}\ =\ (err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00729}00729\ \ \ \ \ \textcolor{keywordflow}{if}\ (!config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00730}00730\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Fail\ to\ initialize\ card\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00732}00732\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00733}00733\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00734}00734\ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}init\ card\ =\ \%d\(\backslash\)n"{}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00735}00735\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_aad8740c5c8c25b8e830654989112fc88}{total\_sectors}}\ =\ \_sd\_sectors(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00736}00736\ \ \ \ \ \textcolor{comment}{//\ CMD9\ failed}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00737}00737\ \ \ \ \ \textcolor{keywordflow}{if}\ (0\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_aad8740c5c8c25b8e830654989112fc88}{total\_sectors}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00738}00738\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00739}00739\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{BD\_ERROR\_DEVICE\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00740}00740\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00741}00741\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00742}00742\ \ \ \ \ \textcolor{comment}{//\ Set\ block\ length\ to\ 512\ (CMD16)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00743}00743\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e}{CMD16\_SET\_BLOCKLEN}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}},\ 0,\ NULL)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00744}00744\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Set\ \%"{}}\ PRIu32\ \textcolor{stringliteral}{"{}-\/byte\ block\ timed\ out\(\backslash\)n"{}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00745}00745\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00746}00746\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{BD\_ERROR\_DEVICE\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00747}00747\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00748}00748\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00749}00749\ \ \ \ \ \textcolor{comment}{//\ Set\ SCK\ for\ data\ transfer}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00750}00750\ \ \ \ \ err\ =\ \_freq(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00751}00751\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00752}00752\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00753}00753\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00754}00754\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00755}00755\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00756}00756\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00757}00757\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00758}00758\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00759}00759\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00760}00760\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00761}00761\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ is\_valid\_read(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00762}00762\ \ \ \ \ \textcolor{keywordflow}{return}\ (addr\ \%\ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00763}00763\ \ \ \ \ \ \ \ \ size\ \%\ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00764}00764\ \ \ \ \ \ \ \ \ addr\ +\ size\ <=\ device-\/>size(device));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00765}00765\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00767}00767\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ is\_valid\_program(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00768}00768\ \ \ \ \ \textcolor{keywordflow}{return}\ (addr\ \%\ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00769}00769\ \ \ \ \ \ \ \ \ size\ \%\ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00770}00770\ \ \ \ \ \ \ \ \ addr\ +\ size\ <=\ device-\/>size(device));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00771}00771\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00773}00773\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ deinit(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00774}00774\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00775}00775\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00776}00776\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00777}00777\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00778}00778\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ sync(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00779}00779\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00780}00780\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00781}00781\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00782}00782\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00783}00783\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_read(\textcolor{keywordtype}{void}*\ \_config,\ uint8\_t*\ buffer,\ uint32\_t\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00784}00784\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00785}00785\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00786}00786\ \ \ \ \ uint16\_t\ crc;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00787}00787\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00788}00788\ \ \ \ \ \textcolor{comment}{//\ read\ until\ start\ byte\ (0xFE)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00789}00789\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{false}\ ==\ \_wait\_token(config,\ \mbox{\hyperlink{sd_8c_a16316bd35058685a310b2782003f6461}{SPI\_START\_BLOCK}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00790}00790\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Read\ timeout\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00791}00791\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a42fdf7470707e7b523c36bac1f15d98a}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_RESPONSE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00792}00792\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00793}00793\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00794}00794\ \ \ \ \ \textcolor{comment}{//\ read\ data}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00795}00795\ \ \ \ \ spi\_read\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ 0xFF,\ buffer,\ length);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00796}00796\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00797}00797\ \ \ \ \ \textcolor{comment}{//\ Read\ the\ CRC16\ checksum\ for\ the\ data\ block}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00798}00798\ \ \ \ \ crc\ =\ (\_spi\_write(config,\ SPI\_FILL\_CHAR)\ <<\ 8);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00799}00799\ \ \ \ \ crc\ |=\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00800}00800\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00801}00801\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00802}00802\ \ \ \ \ \ \ \ \ uint16\_t\ crc\_result\ =\ \_crc16(buffer,\ length);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00803}00803\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (crc\_result\ !=\ crc)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}\_read\_bytes:\ Invalid\ CRC\ received\ 0x\%"{}}\ PRIx16\ \textcolor{stringliteral}{"{}\ result\ of\ computation\ 0x\%"{}}\ PRIx16\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ crc,\ crc\_result);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a07208e021a15e0c2b5425e3355c7c2a9}{SD\_BLOCK\_DEVICE\_ERROR\_CRC}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00807}00807\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00808}00808\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00809}00809\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00810}00810\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00811}00811\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00812}00812\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00813}00813\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ read(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \_buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00814}00814\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00815}00815\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00816}00816\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00817}00817\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_read(device,\ addr,\ size))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00818}00818\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00819}00819\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00820}00820\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00821}00821\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00822}00822\ \ \ \ \ \textcolor{keywordflow}{if}\ (!config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00823}00823\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00824}00824\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00825}00825\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00826}00826\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00827}00827\ \ \ \ \ uint8\_t*\ buffer\ =\ (uint8\_t*)\_buffer;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00828}00828\ \ \ \ \ \textcolor{keywordtype}{int}\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00829}00829\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ block\_count\ =\ size\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00831}00831\ \ \ \ \ \textcolor{comment}{//\ SDSC\ Card\ (CCS=0)\ uses\ byte\ unit\ address}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00832}00832\ \ \ \ \ \textcolor{comment}{//\ SDHC\ and\ SDXC\ Cards\ (CCS=1)\ use\ block\ unit\ address\ (512\ Bytes\ unit)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00833}00833\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{SDCARD\_V2HC}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00834}00834\ \ \ \ \ \ \ \ \ addr\ =\ addr\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00835}00835\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00836}00836\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00837}00837\ \ \ \ \ \textcolor{comment}{//\ Write\ command\ ro\ receive\ data}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00838}00838\ \ \ \ \ \textcolor{keywordflow}{if}\ (block\_count\ >\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00839}00839\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c}{CMD18\_READ\_MULTIPLE\_BLOCK}},\ addr,\ 0,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00840}00840\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00841}00841\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00842}00842\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f}{CMD17\_READ\_SINGLE\_BLOCK}},\ addr,\ 0,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00843}00843\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00844}00844\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ status)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00845}00845\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00846}00846\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00847}00847\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00848}00848\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00849}00849\ \ \ \ \ \textcolor{comment}{//\ receive\ the\ data\ :\ one\ block\ at\ a\ time}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00850}00850\ \ \ \ \ \textcolor{keywordflow}{while}\ (block\_count)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00851}00851\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (0\ !=\ \_read(config,\ buffer,\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_a42fdf7470707e7b523c36bac1f15d98a}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_RESPONSE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00854}00854\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00855}00855\ \ \ \ \ \ \ \ \ buffer\ +=\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00856}00856\ \ \ \ \ \ \ \ \ -\/-\/block\_count;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00857}00857\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00858}00858\ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00859}00859\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00860}00860\ \ \ \ \ \textcolor{comment}{//\ Send\ CMD12(0x00000000)\ to\ stop\ the\ transmission\ for\ multi-\/block\ transfer}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00861}00861\ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ >\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00862}00862\ \ \ \ \ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b}{CMD12\_STOP\_TRANSMISSION}},\ 0x0,\ 0,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00863}00863\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00864}00864\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00865}00865\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00866}00866\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00867}00867\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00868}00868\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00869}00869\ \textcolor{keyword}{static}\ uint8\_t\ \_write(\textcolor{keywordtype}{void}*\ \_config,\ \textcolor{keyword}{const}\ uint8\_t*\ buffer,\ uint8\_t\ token,\ uint32\_t\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00870}00870\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ \_config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00871}00871\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00872}00872\ \ \ \ \ uint32\_t\ crc\ =\ (\string~0);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00873}00873\ \ \ \ \ uint8\_t\ response\ =\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00875}00875\ \ \ \ \ \textcolor{comment}{//\ indicate\ start\ of\ block}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00876}00876\ \ \ \ \ \_spi\_write(config,\ token);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00877}00877\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00878}00878\ \ \ \ \ \textcolor{comment}{//\ write\ the\ data}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00879}00879\ \ \ \ \ spi\_write\_blocking(config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}},\ buffer,\ length);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00881}00881\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00882}00882\ \ \ \ \ \ \ \ \ crc\ =\ \_crc16(buffer,\ length);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00883}00883\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00884}00884\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00885}00885\ \ \ \ \ \textcolor{comment}{//\ write\ the\ checksum\ CRC-\/16}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00886}00886\ \ \ \ \ \_spi\_write(config,\ crc\ >>\ 8);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00887}00887\ \ \ \ \ \_spi\_write(config,\ crc);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00888}00888\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00889}00889\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00890}00890\ \ \ \ \ \textcolor{comment}{//\ check\ the\ response\ token}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00891}00891\ \ \ \ \ response\ =\ \_spi\_write(config,\ SPI\_FILL\_CHAR);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00892}00892\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00893}00893\ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ last\ block\ to\ be\ written}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00894}00894\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{false}\ ==\ \_wait\_ready(config,\ \mbox{\hyperlink{sd_8c_a717a8dd1956ddc8608e30d577a0efa77}{SD\_COMMAND\_TIMEOUT}}))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00895}00895\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Card\ not\ ready\ yet\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00896}00896\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00897}00897\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00898}00898\ \ \ \ \ \textcolor{keywordflow}{return}\ (response\ \&\ \mbox{\hyperlink{sd_8c_a0e561b17b7546b82dd822376f661c917}{SPI\_DATA\_RESPONSE\_MASK}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00899}00899\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00900}00900\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00901}00901\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00902}00902\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ program(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \_buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00903}00903\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00904}00904\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00905}00905\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00906}00906\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_program(device,\ addr,\ size))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00907}00907\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00908}00908\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00909}00909\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00910}00910\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00911}00911\ \ \ \ \ \textcolor{keywordflow}{if}\ (!config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00912}00912\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00913}00913\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a6e13316f0b76a30fd38db3f0d84e58d0}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_INIT}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00914}00914\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00915}00915\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00916}00916\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ buffer\ =\ (\textcolor{keyword}{const}\ uint8\_t*)\_buffer;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00917}00917\ \ \ \ \ \textcolor{keywordtype}{int}\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00918}00918\ \ \ \ \ uint8\_t\ response;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00919}00919\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00920}00920\ \ \ \ \ \textcolor{comment}{//\ Get\ block\ count}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00921}00921\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ block\_count\ =\ size\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00922}00922\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00923}00923\ \ \ \ \ \textcolor{comment}{//\ SDSC\ Card\ (CCS=0)\ uses\ byte\ unit\ address}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00924}00924\ \ \ \ \ \textcolor{comment}{//\ SDHC\ and\ SDXC\ Cards\ (CCS=1)\ use\ block\ unit\ address\ (512\ Bytes\ unit)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00925}00925\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{SDCARD\_V2HC}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00926}00926\ \ \ \ \ \ \ \ \ addr\ =\ addr\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00927}00927\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00928}00928\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00929}00929\ \ \ \ \ \textcolor{comment}{//\ Send\ command\ to\ perform\ write\ operation}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00930}00930\ \ \ \ \ \textcolor{keywordflow}{if}\ (block\_count\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00931}00931\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Single\ block\ write\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00932}00932\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3}{CMD24\_WRITE\_BLOCK}},\ addr,\ 0,\ NULL)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00933}00933\ \ \ \ \ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00934}00934\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00935}00935\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00936}00936\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00937}00937\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ data\ }}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00938}00938\ \ \ \ \ \ \ \ \ response\ =\ \_write(config,\ buffer,\ \mbox{\hyperlink{sd_8c_a16316bd35058685a310b2782003f6461}{SPI\_START\_BLOCK}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00939}00939\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00940}00940\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ CRC\ and\ general\ write\ error\ are\ communicated\ via\ response\ token}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00941}00941\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ !=\ \mbox{\hyperlink{sd_8c_adf4c36356a3259c4686dd6e534f3c75c}{SPI\_DATA\_ACCEPTED}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00942}00942\ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Single\ Block\ Write\ failed:\ 0x\%x\ \(\backslash\)n"{}},\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00943}00943\ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{sd_8c_a0d74153e7cf51464b90cbc47cbc83b2e}{SD\_BLOCK\_DEVICE\_ERROR\_WRITE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00944}00944\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00945}00945\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00946}00946\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00947}00947\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pre-\/erase\ setting\ prior\ to\ multiple\ block\ write\ operation}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00948}00948\ \ \ \ \ \ \ \ \ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d}{ACMD23\_SET\_WR\_BLK\_ERASE\_COUNT}},\ block\_count,\ 1,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00949}00949\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00950}00950\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Multiple\ block\ write\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00951}00951\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977}{CMD25\_WRITE\_MULTIPLE\_BLOCK}},\ addr,\ 0,\ NULL)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00952}00952\ \ \ \ \ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00954}00954\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00955}00955\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00956}00956\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ the\ data:\ one\ block\ at\ a\ time}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00957}00957\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00958}00958\ \ \ \ \ \ \ \ \ \ \ \ \ response\ =\ \_write(config,\ buffer,\ \mbox{\hyperlink{sd_8c_adaa72ab93c9e5bdf1176098cb9c2c4a0}{SPI\_START\_BLK\_MUL\_WRITE}},\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00959}00959\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ !=\ \mbox{\hyperlink{sd_8c_adf4c36356a3259c4686dd6e534f3c75c}{SPI\_DATA\_ACCEPTED}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00960}00960\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{sd_8c_a239e7e00cd09dfabb594162b0c450ccd}{SD\_DBG}},\ \textcolor{stringliteral}{"{}Multiple\ Block\ Write\ failed:\ 0x\%x\ \(\backslash\)n"{}},\ response);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00961}00961\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00962}00962\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00963}00963\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ +=\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00964}00964\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (-\/-\/block\_count);\ \ \ \ \ \textcolor{comment}{//\ Receive\ all\ blocks\ of\ data}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00965}00965\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00966}00966\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ In\ a\ Multiple\ Block\ write\ operation,\ the\ stop\ transmission\ will\ be\ done\ by}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00967}00967\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ sending\ 'Stop\ Tran'\ token\ instead\ of\ 'Start\ Block'\ token\ at\ the\ beginning}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00968}00968\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ of\ the\ next\ block}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00969}00969\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00970}00970\ \ \ \ \ \ \ \ \ \_spi\_write(config,\ \mbox{\hyperlink{sd_8c_a0dd35214020ca96c70838c6e2d206cc6}{SPI\_STOP\_TRAN}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00971}00971\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00972}00972\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00973}00973\ \ \ \ \ \_postclock\_then\_deselect(config);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00974}00974\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00975}00975\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00976}00976\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00977}00977\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00978}00978\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ erase(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00979}00979\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00980}00980\ \ \ \ \ (void)addr;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00981}00981\ \ \ \ \ (void)size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00982}00982\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00983}00983\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00984}00984\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00985}00985\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \_is\_valid\_trim(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00986}00986\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00987}00987\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00988}00988\ \ \ \ \ \textcolor{keywordflow}{return}\ (addr\ \%\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00989}00989\ \ \ \ \ \ \ \ \ size\ \%\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_afcffbc4cfb38671d709c492b08764f59}{erase\_size}}\ ==\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00990}00990\ \ \ \ \ \ \ \ \ addr\ +\ size\ <=\ device-\/>size(device));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00991}00991\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00992}00992\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00993}00993\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ trim(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00994}00994\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00995}00995\ \ \ \ \ mutex\_enter\_blocking(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00996}00996\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00997}00997\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_is\_valid\_trim(device,\ addr,\ size))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00998}00998\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l00999}00999\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a7204a59a7a908a0b8559c4868129f4c4}{SD\_BLOCK\_DEVICE\_ERROR\_PARAMETER}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01000}01000\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01001}01001\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01002}01002\ \ \ \ \ \textcolor{keywordflow}{if}\ (!config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4ba68242a9f77a5933812c9d46feabfe}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01003}01003\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01004}01004\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{sd_8c_a6e13316f0b76a30fd38db3f0d84e58d0}{SD\_BLOCK\_DEVICE\_ERROR\_NO\_INIT}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01005}01005\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01006}01006\ \ \ \ \ \textcolor{keywordtype}{int}\ status\ =\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01007}01007\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01008}01008\ \ \ \ \ size\ -\/=\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01009}01009\ \ \ \ \ \textcolor{comment}{//\ SDSC\ Card\ (CCS=0)\ uses\ byte\ unit\ address}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01010}01010\ \ \ \ \ \textcolor{comment}{//\ SDHC\ and\ SDXC\ Cards\ (CCS=1)\ use\ block\ unit\ address\ (512\ Bytes\ unit)}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01011}01011\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba}{SDCARD\_V2HC}}\ ==\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}})\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01012}01012\ \ \ \ \ \ \ \ \ size\ =\ size\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01013}01013\ \ \ \ \ \ \ \ \ addr\ =\ addr\ /\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01014}01014\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01015}01015\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01016}01016\ \ \ \ \ \textcolor{comment}{//\ Start\ lba\ sent\ in\ start\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01017}01017\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725}{CMD32\_ERASE\_WR\_BLK\_START\_ADDR}},\ addr,\ 0,\ NULL)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01018}01018\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01019}01019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01020}01020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01021}01021\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01022}01022\ \ \ \ \ \textcolor{comment}{//\ End\ lba\ =\ addr+size\ sent\ in\ end\ addr\ command}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01023}01023\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ !=\ (status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38}{CMD33\_ERASE\_WR\_BLK\_END\_ADDR}},\ addr\ +\ size,\ 0,\ NULL)))\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01024}01024\ \ \ \ \ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01025}01025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01026}01026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01027}01027\ \ \ \ \ status\ =\ \_cmd(config,\ \mbox{\hyperlink{sd_8c_a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64}{CMD38\_ERASE}},\ 0x0,\ 0,\ NULL);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01028}01028\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01029}01029\ \ \ \ \ mutex\_exit(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01030}01030\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01031}01031\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01032}01032\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01033}01033\ \textcolor{keyword}{static}\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01034}01034\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01035}01035\ \ \ \ \ \textcolor{keywordflow}{return}\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}}\ *\ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_aad8740c5c8c25b8e830654989112fc88}{total\_sectors}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01036}01036\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01037}01037\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01038}\mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{01038}}\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\_sd\_create}}(spi\_inst\_t*\ spi\_inst,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01039}01039\ \ \ \ \ uint8\_t\ mosi,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01040}01040\ \ \ \ \ uint8\_t\ miso,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01041}01041\ \ \ \ \ uint8\_t\ sclk,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01042}01042\ \ \ \ \ uint8\_t\ cs,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01043}01043\ \ \ \ \ uint32\_t\ hz,}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01044}01044\ \ \ \ \ \textcolor{keywordtype}{bool}\ enable\_crc)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01045}01045\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01046}01046\ \ \ \ \ \textcolor{keywordflow}{if}\ (spi\_inst\ ==\ spi0)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01047}01047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01048}01048\ \ \ \ \ \ \ \ \ assert(mosi\ ==\ 3\ ||\ mosi\ ==\ 7\ ||\ mosi\ ==\ 19\ ||\ mosi\ ==\ 23\ ||\ mosi\ ==\ 35\ ||\ mosi\ ==\ 39);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01049}01049\ \ \ \ \ \ \ \ \ assert(miso\ ==\ 0\ ||\ miso\ ==\ 4\ ||\ miso\ ==\ 16\ ||\ miso\ ==\ 20\ ||\ miso\ ==\ 32\ ||\ miso\ ==\ 36);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01050}01050\ \ \ \ \ \ \ \ \ assert(sclk\ ==\ 2\ ||\ sclk\ ==\ 6\ ||\ sclk\ ==\ 18\ ||\ sclk\ ==\ 22\ ||\ sclk\ ==\ 34\ ||\ sclk\ ==\ 38);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01051}01051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ assert(cs\ ==\ 1\ ||\ cs\ ==\ 5\ ||\ cs\ ==\ 17\ ||\ cs\ ==\ 21);}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01052}01052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01053}01053\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (spi\_inst\ ==\ spi1)}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01054}01054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01055}01055\ \ \ \ \ \ \ \ \ assert(mosi\ ==\ 11\ ||\ mosi\ ==\ 15\ ||\ mosi\ ==\ 27\ ||\ mosi\ ==\ 31\ ||\ mosi\ ==\ 43\ ||\ mosi\ ==\ 47);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01056}01056\ \ \ \ \ \ \ \ \ assert(miso\ ==\ 8\ ||\ miso\ ==\ 12\ ||\ miso\ ==\ 24\ ||\ miso\ ==\ 28\ ||\ miso\ ==\ 40\ ||\ miso\ ==\ 44);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01057}01057\ \ \ \ \ \ \ \ \ assert(sclk\ ==\ 10\ ||\ sclk\ ==\ 14\ ||\ sclk\ ==\ 26\ ||\ sclk\ ==\ 30\ ||\ sclk\ ==\ 42\ ||\ sclk\ ==\ 46);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01058}01058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ assert(cs\ ==\ 9\ ||\ cs\ ==\ 13\ ||\ cs\ ==\ 25\ ||\ cs\ ==\ 29);}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01059}01059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01060}01060\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01061}01061\ \ \ \ \ \ \ \ \ assert(spi\_inst\ ==\ spi0\ ||\ spi\_inst\ ==\ spi1);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01062}01062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01063}01063\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01064}01064\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01065}01065\ \ \ \ \ \textcolor{keywordflow}{if}\ (device\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01066}01066\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}blockdevice\_sd\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01067}01067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01068}01068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01069}01069\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}));}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01070}01070\ \ \ \ \ \textcolor{keywordflow}{if}\ (config\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01071}01071\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}blockdevice\_sd\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01072}01072\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01073}01073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01074}01074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01075}01075\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01076}01076\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}\ =\ init;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01077}01077\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}\ =\ deinit;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01078}01078\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}}\ =\ sync;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01079}01079\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}}\ =\ read;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01080}01080\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}\ =\ erase;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01081}01081\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}\ =\ program;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01082}01082\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}\ =\ trim;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01083}01083\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}\ =\ size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01084}01084\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01085}01085\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01086}01086\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ =\ block\_size;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01087}01087\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}\ =\ DEVICE\_NAME;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01088}01088\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01089}01089\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01090}01090\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}}\ =\ spi\_inst;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01091}01091\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{mosi}}\ =\ mosi;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01092}01092\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{miso}}\ =\ miso;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01093}01093\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{sclk}}\ =\ sclk;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01094}01094\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}}\ =\ cs;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01095}01095\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}}\ =\ hz;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01096}01096\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}}\ =\ enable\_crc;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01097}01097\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290}{SDCARD\_NONE}};}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01098}01098\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}}\ =\ 512;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01099}01099\ \ \ \ \ mutex\_init(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01100}01100\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ config;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01101}01101\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01102}01102\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01103}01103\ \ \ \ \ \textcolor{keywordflow}{return}\ device;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01104}01104\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01105}01105\ }
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01106}\mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{01106}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{blockdevice\_sd\_free}}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device)\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01107}01107\ \ \ \ \ free(device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}});}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01108}01108\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01109}01109\ \ \ \ \ free(device);}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01110}01110\ \ \ \ \ device\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{sd_8c_source_l01111}01111\ \}}
+
+\end{DoxyCode}

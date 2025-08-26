@@ -1,0 +1,50 @@
+\doxysection{app1.\+c}
+\hypertarget{app1_8c_source}{}\label{app1_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app1.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app1.c}}
+\mbox{\hyperlink{app1_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00002}00002\ \textcolor{comment}{/\ Open\ or\ create\ a\ file\ in\ append\ mode}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00003}00003\ \textcolor{comment}{/\ (This\ function\ was\ sperseded\ by\ FA\_OPEN\_APPEND\ flag\ at\ FatFs\ R0.12a)}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00004}00004\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00006}\mbox{\hyperlink{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}{00006}}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ \mbox{\hyperlink{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}{open\_append}}\ (}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00007}00007\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l}{FIL}}*\ fp,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ [OUT]\ File\ object\ to\ create\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path\ \ \ \ \textcolor{comment}{/*\ [IN]\ \ File\ name\ to\ be\ opened\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00009}00009\ )}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00011}00011\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00013}00013\ \ \ \ \ \textcolor{comment}{/*\ Opens\ an\ existing\ file.\ If\ not\ exist,\ creates\ a\ new\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00014}00014\ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_aefdef7126128d99d0b3bd82c28e54d80}{f\_open}}(fp,\ path,\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}}\ |\ \mbox{\hyperlink{ff_8h_a17b01553029920ac0468912b4bcb16c7}{FA\_OPEN\_ALWAYS}});}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ ==\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Seek\ to\ end\ of\ the\ file\ to\ append\ data\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(fp,\ \mbox{\hyperlink{ff_8h_a26f33722c5bf1aa3cd6f0290a83eb2bc}{f\_size}}(fp));}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(fp);}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00025}\mbox{\hyperlink{app1_8c_a840291bc02cba5474a4cb46a9b9566fe}{00025}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{app1_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}}\ (\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}}\ fs;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00029}00029\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l}{FIL}}\ fil;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00031}00031\ \ \ \ \ \textcolor{comment}{/*\ Open\ or\ create\ a\ log\ file\ and\ ready\ to\ append\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(\&fs,\ \textcolor{stringliteral}{"{}"{}},\ 0);}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00033}00033\ \ \ \ \ fr\ =\ \mbox{\hyperlink{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}{open\_append}}(\&fil,\ \textcolor{stringliteral}{"{}logfile.txt"{}});}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00036}00036\ \ \ \ \ \textcolor{comment}{/*\ Append\ a\ line\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{ff_8h_a4ce26253177c167df849e76f69b5c66c}{f\_printf}}(\&fil,\ \textcolor{stringliteral}{"{}\%02u/\%02u/\%u,\ \%2u:\%02u\(\backslash\)n"{}},\ Mday,\ Mon,\ Year,\ Hour,\ Min);}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00039}00039\ \ \ \ \ \textcolor{comment}{/*\ Close\ the\ file\ */}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(\&fil);}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{app1_8c_source_l00044}00044\ }
+
+\end{DoxyCode}

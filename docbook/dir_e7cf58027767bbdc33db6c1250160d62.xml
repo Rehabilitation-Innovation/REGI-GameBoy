@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_e7cf58027767bbdc33db6c1250160d62" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/usb_logger Directory Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c">main.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_tusb__config_8h">tusb_config.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_usb__descriptors_8c">usb_descriptors.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_usb__msc_8c">usb_msc.c</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<section xml:id="_README.md_1autotoc_md13">
+<title>Export sensor logs to the host PC in two file systems</title>
+<para>This demonstration is an example of a safe method for exporting sensor logs stored in the Pico on-board flash to a host PC in USB Mass storage class.</para>
+
+<para>Format the on-board flash memory in two separate file systems, one for internal operation and one for export.</para>
+
+<para><itemizedlist>
+<listitem>
+<para>For internal operation: littlefs</para>
+</listitem><listitem>
+<para>For export: FAT</para>
+</listitem></itemizedlist>
+</para>
+
+<para>When a USB connection is detected, the sensor log is copied from littlefs to FAT before the MSC operation starts. Battery power is required to operate with the USB disconnected, but in this demonstration, the bootcell button is substituted as a &apos;USB dis-connected state&apos; while it is pressed.</para>
+
+<para>In this example it is one-way for export only, but it is also possible to import files from FAT to littlefs when the USB is disconnected. </para>
+</section>
+</section>
+</section>

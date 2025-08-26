@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structfs__file__t" xml:lang="en-US">
+<title>fs_file_t Struct Reference</title>
+<indexterm><primary>fs_file_t</primary></indexterm>
+<para>
+
+<para>file object </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;filesystem.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_structfs__file__t_1a78f9cd31a38e479f111c45efee9b9c54">fd</link></para>
+</listitem>
+            <listitem><para>void * <link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>file object </para>
+
+
+
+<para>Files operated on by file system objects are represented by <link linkend="_structfs__file__t">fs_file_t</link> objects </para>
+<para>
+Definition at line <link linkend="_filesystem_8h_source_1l00045">45</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18"/><section>
+    <title>context</title>
+<indexterm><primary>context</primary><secondary>fs_file_t</secondary></indexterm>
+<indexterm><primary>fs_file_t</primary><secondary>context</secondary></indexterm>
+<para><computeroutput>void* fs_file_t::context</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00047">47</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfs__file__t_1a78f9cd31a38e479f111c45efee9b9c54"/><section>
+    <title>fd</title>
+<indexterm><primary>fd</primary><secondary>fs_file_t</secondary></indexterm>
+<indexterm><primary>fs_file_t</primary><secondary>fd</secondary></indexterm>
+<para><computeroutput>int fs_file_t::fd</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00046">46</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/include/filesystem/<link linkend="_filesystem_8h">filesystem.h</link></section>
+</section>

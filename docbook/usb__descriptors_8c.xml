@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_usb__descriptors_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/usb_logger/usb_descriptors.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger/usb_descriptors.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;tusb.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f">_PID_MAP</link>(itf,  n)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a989c980e0b99f803f7ce0ca224cdb733">USB_PID</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a3398c7225386f04c72fd9025fcb44734">USB_VID</link>&#160;&#160;&#160;0xCafe</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1ae790349d8541544653e087fda6c3dcf1">USB_BCD</link>&#160;&#160;&#160;0x0200</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a1954b234c7f10ee7bc2aae113fdfd9c4">EPNUM_CDC_NOTIF</link>&#160;&#160;&#160;0x81</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1aa28ada903072dee41c869b03522dc5b9">EPNUM_CDC_OUT</link>&#160;&#160;&#160;0x02</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1aeeb12a4af5853f54202fa79a4af790db">EPNUM_CDC_IN</link>&#160;&#160;&#160;0x82</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a0c27f9fc321172575a315b83d1fb75d4">EPNUM_MSC_OUT</link>&#160;&#160;&#160;0x05</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a8300bc4e12e83ce01cfcdf45e050069e">EPNUM_MSC_IN</link>&#160;&#160;&#160;0x85</para>
+</listitem>
+            <listitem><para>#define <link linkend="_usb__descriptors_8c_1a76e2168140a8a6693bf0588641c8252a">CONFIG_TOTAL_LEN</link>&#160;&#160;&#160;(TUD_CONFIG_DESC_LEN + TUD_CDC_DESC_LEN + TUD_MSC_DESC_LEN)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum { <link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a417a1b5f14108f730ac4ba859fb2c198">ITF_NUM_CDC</link> = 0
+, <link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955afeba5ae5caa5e06004f48aee0bcde1d8">ITF_NUM_CDC_DATA</link>
+, <link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a934bb58dcdee9c977f336670b5b9d9a2">ITF_NUM_MSC</link>
+, <link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a936a2a3258df7c0ac994897782e04bed">ITF_NUM_TOTAL</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>uint8_t const * <link linkend="_usb__descriptors_8c_1a1f453b8b047af5e8a9c9a2ebd8a09259">tud_descriptor_device_cb</link> (void)</para>
+</listitem>
+            <listitem><para>uint8_t const * <link linkend="_usb__descriptors_8c_1ab8ee9fe0bc8bf4d317c4e7c7fa52194e">tud_descriptor_configuration_cb</link> (uint8_t index)</para>
+</listitem>
+            <listitem><para>uint16_t const * <link linkend="_usb__descriptors_8c_1a1876e368b150921b252b6f3b0a2cbdc7">tud_descriptor_string_cb</link> (uint8_t index, uint16_t langid)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>tusb_desc_device_t const <link linkend="_usb__descriptors_8c_1ae4653a41146db1badedb5a6126e6b6b7">desc_device</link></para>
+</listitem>
+            <listitem><para>uint8_t const <link linkend="_usb__descriptors_8c_1a34140533069ca5f678f63e383bc90279">desc_fs_configuration</link> []</para>
+</listitem>
+            <listitem><para>char const  * <link linkend="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49">string_desc_arr</link> []</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f"/><section>
+    <title>_PID_MAP</title>
+<indexterm><primary>_PID_MAP</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>_PID_MAP</secondary></indexterm>
+<para><computeroutput>#define _PID_MAP( itf,  n)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(&#32;(CFG_TUD_##itf)&#32;&lt;&lt;&#32;(n)&#32;)
+</programlisting><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00009">9</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1a76e2168140a8a6693bf0588641c8252a"/><section>
+    <title>CONFIG_TOTAL_LEN</title>
+<indexterm><primary>CONFIG_TOTAL_LEN</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>CONFIG_TOTAL_LEN</secondary></indexterm>
+<para><computeroutput>#define CONFIG_TOTAL_LEN&#160;&#160;&#160;(TUD_CONFIG_DESC_LEN + TUD_CDC_DESC_LEN + TUD_MSC_DESC_LEN)</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00115">115</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1aeeb12a4af5853f54202fa79a4af790db"/><section>
+    <title>EPNUM_CDC_IN</title>
+<indexterm><primary>EPNUM_CDC_IN</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>EPNUM_CDC_IN</secondary></indexterm>
+<para><computeroutput>#define EPNUM_CDC_IN&#160;&#160;&#160;0x82</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00068">68</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1a1954b234c7f10ee7bc2aae113fdfd9c4"/><section>
+    <title>EPNUM_CDC_NOTIF</title>
+<indexterm><primary>EPNUM_CDC_NOTIF</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>EPNUM_CDC_NOTIF</secondary></indexterm>
+<para><computeroutput>#define EPNUM_CDC_NOTIF&#160;&#160;&#160;0x81</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00066">66</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1aa28ada903072dee41c869b03522dc5b9"/><section>
+    <title>EPNUM_CDC_OUT</title>
+<indexterm><primary>EPNUM_CDC_OUT</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>EPNUM_CDC_OUT</secondary></indexterm>
+<para><computeroutput>#define EPNUM_CDC_OUT&#160;&#160;&#160;0x02</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00067">67</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1a8300bc4e12e83ce01cfcdf45e050069e"/><section>
+    <title>EPNUM_MSC_IN</title>
+<indexterm><primary>EPNUM_MSC_IN</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>EPNUM_MSC_IN</secondary></indexterm>
+<para><computeroutput>#define EPNUM_MSC_IN&#160;&#160;&#160;0x85</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00071">71</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1a0c27f9fc321172575a315b83d1fb75d4"/><section>
+    <title>EPNUM_MSC_OUT</title>
+<indexterm><primary>EPNUM_MSC_OUT</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>EPNUM_MSC_OUT</secondary></indexterm>
+<para><computeroutput>#define EPNUM_MSC_OUT&#160;&#160;&#160;0x05</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00070">70</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1ae790349d8541544653e087fda6c3dcf1"/><section>
+    <title>USB_BCD</title>
+<indexterm><primary>USB_BCD</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>USB_BCD</secondary></indexterm>
+<para><computeroutput>#define USB_BCD&#160;&#160;&#160;0x0200</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00014">14</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+<anchor xml:id="_usb__descriptors_8c_1a989c980e0b99f803f7ce0ca224cdb733"/><section>
+    <title>USB_PID</title>
+<indexterm><primary>USB_PID</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>USB_PID</secondary></indexterm>
+<para><computeroutput>#define USB_PID</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(0x4000&#32;|&#32;<link linkend="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f">_PID_MAP</link>(CDC,&#32;0)&#32;|&#32;<link linkend="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f">_PID_MAP</link>(MSC,&#32;1)&#32;|&#32;<link linkend="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f">_PID_MAP</link>(HID,&#32;2)&#32;|&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_PID_MAP(MIDI,&#32;3)&#32;|&#32;<link linkend="_usb__descriptors_8c_1aa6eee64ef847fafb5261d9c5df05ad2f">_PID_MAP</link>(VENDOR,&#32;4)&#32;)
+</programlisting><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00010">10</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00010 <emphasis role="preprocessor">#define&#32;USB_PID&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(0x4000&#32;|&#32;_PID_MAP(CDC,&#32;0)&#32;|&#32;_PID_MAP(MSC,&#32;1)&#32;|&#32;_PID_MAP(HID,&#32;2)&#32;|&#32;\&#x240D;</emphasis>
+00011 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_PID_MAP(MIDI,&#32;3)&#32;|&#32;_PID_MAP(VENDOR,&#32;4)&#32;)&#x240D;</emphasis>
+</programlisting></section>
+<anchor xml:id="_usb__descriptors_8c_1a3398c7225386f04c72fd9025fcb44734"/><section>
+    <title>USB_VID</title>
+<indexterm><primary>USB_VID</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>USB_VID</secondary></indexterm>
+<para><computeroutput>#define USB_VID&#160;&#160;&#160;0xCafe</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00013">13</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955"/><section>
+    <title>anonymous enum</title>
+<para><computeroutput>anonymous enum</computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>ITF_NUM_CDC</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>ITF_NUM_CDC</secondary></indexterm>
+<anchor xml:id="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a417a1b5f14108f730ac4ba859fb2c198"/>ITF_NUM_CDC</entry><entry></entry></row><row><entry><indexterm><primary>ITF_NUM_CDC_DATA</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>ITF_NUM_CDC_DATA</secondary></indexterm>
+<anchor xml:id="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955afeba5ae5caa5e06004f48aee0bcde1d8"/>ITF_NUM_CDC_DATA</entry><entry></entry></row><row><entry><indexterm><primary>ITF_NUM_MSC</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>ITF_NUM_MSC</secondary></indexterm>
+<anchor xml:id="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a934bb58dcdee9c977f336670b5b9d9a2"/>ITF_NUM_MSC</entry><entry></entry></row><row><entry><indexterm><primary>ITF_NUM_TOTAL</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>ITF_NUM_TOTAL</secondary></indexterm>
+<anchor xml:id="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a936a2a3258df7c0ac994897782e04bed"/>ITF_NUM_TOTAL</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00055">55</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00056 {
+00057 &#32;&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a417a1b5f14108f730ac4ba859fb2c198">ITF_NUM_CDC</link>&#32;=&#32;0,
+00058 &#32;&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955afeba5ae5caa5e06004f48aee0bcde1d8">ITF_NUM_CDC_DATA</link>,
+00059 &#32;&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a934bb58dcdee9c977f336670b5b9d9a2">ITF_NUM_MSC</link>,
+00060 &#32;&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a936a2a3258df7c0ac994897782e04bed">ITF_NUM_TOTAL</link>
+00061 };
+</programlisting></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_usb__descriptors_8c_1ab8ee9fe0bc8bf4d317c4e7c7fa52194e"/><section>
+    <title>tud_descriptor_configuration_cb()</title>
+<indexterm><primary>tud_descriptor_configuration_cb</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>tud_descriptor_configuration_cb</secondary></indexterm>
+<para><computeroutput>uint8_t const  * tud_descriptor_configuration_cb (uint8_t index)</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00198">198</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00199 {
+00200 &#32;&#32;(void)&#32;index;&#32;<emphasis role="comment">//&#32;for&#32;multiple&#32;configurations</emphasis>
+00201 
+00202 <emphasis role="preprocessor">#if&#32;TUD_OPT_HIGH_SPEED&#x240D;</emphasis>
+00203 &#32;&#32;<emphasis role="comment">//&#32;Although&#32;we&#32;are&#32;highspeed,&#32;host&#32;may&#32;be&#32;fullspeed.</emphasis>
+00204 &#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(tud_speed_get()&#32;==&#32;TUSB_SPEED_HIGH)&#32;?&#32;&#32;desc_hs_configuration&#32;:&#32;<link linkend="_usb__descriptors_8c_1a34140533069ca5f678f63e383bc90279">desc_fs_configuration</link>;
+00205 <emphasis role="preprocessor">#else&#x240D;</emphasis>
+00206 &#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_usb__descriptors_8c_1a34140533069ca5f678f63e383bc90279">desc_fs_configuration</link>;
+00207 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00208 }
+</programlisting></section>
+<anchor xml:id="_usb__descriptors_8c_1a1f453b8b047af5e8a9c9a2ebd8a09259"/><section>
+    <title>tud_descriptor_device_cb()</title>
+<indexterm><primary>tud_descriptor_device_cb</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>tud_descriptor_device_cb</secondary></indexterm>
+<para><computeroutput>uint8_t const  * tud_descriptor_device_cb (void )</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00046">46</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00047 {
+00048 &#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(uint8_t&#32;<emphasis role="keyword">const</emphasis>&#32;*)&#32;&amp;<link linkend="_usb__descriptors_8c_1ae4653a41146db1badedb5a6126e6b6b7">desc_device</link>;
+00049 }
+</programlisting></section>
+<anchor xml:id="_usb__descriptors_8c_1a1876e368b150921b252b6f3b0a2cbdc7"/><section>
+    <title>tud_descriptor_string_cb()</title>
+<indexterm><primary>tud_descriptor_string_cb</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>tud_descriptor_string_cb</secondary></indexterm>
+<para><computeroutput>uint16_t const  * tud_descriptor_string_cb (uint8_t index, uint16_t langid)</computeroutput></para><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00229">229</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00230 {
+00231 &#32;&#32;(void)&#32;langid;
+00232 
+00233 &#32;&#32;uint8_t&#32;chr_count;
+00234 
+00235 &#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(&#32;index&#32;==&#32;0)
+00236 &#32;&#32;{
+00237 &#32;&#32;&#32;&#32;memcpy(&amp;_desc_str[1],&#32;<link linkend="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49">string_desc_arr</link>[0],&#32;2);
+00238 &#32;&#32;&#32;&#32;chr_count&#32;=&#32;1;
+00239 &#32;&#32;}<emphasis role="keywordflow">else</emphasis>
+00240 &#32;&#32;{
+00241 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Note:&#32;the&#32;0xEE&#32;index&#32;string&#32;is&#32;a&#32;Microsoft&#32;OS&#32;1.0&#32;Descriptors.</emphasis>
+00242 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/microsoft-defined-usb-descriptors</emphasis>
+00243 
+00244 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(&#32;!(index&#32;&lt;&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49">string_desc_arr</link>)/<emphasis role="keyword">sizeof</emphasis>(<link linkend="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49">string_desc_arr</link>[0]))&#32;)&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00245 
+00246 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>*&#32;str&#32;=&#32;<link linkend="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49">string_desc_arr</link>[index];
+00247 
+00248 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Cap&#32;at&#32;max&#32;char</emphasis>
+00249 &#32;&#32;&#32;&#32;chr_count&#32;=&#32;(uint8_t)&#32;strlen(str);
+00250 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(&#32;chr_count&#32;&gt;&#32;31&#32;)&#32;chr_count&#32;=&#32;31;
+00251 
+00252 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Convert&#32;ASCII&#32;string&#32;into&#32;UTF-16</emphasis>
+00253 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>(uint8_t&#32;i=0;&#32;i&lt;chr_count;&#32;i++)
+00254 &#32;&#32;&#32;&#32;{
+00255 &#32;&#32;&#32;&#32;&#32;&#32;_desc_str[1+i]&#32;=&#32;str[i];
+00256 &#32;&#32;&#32;&#32;}
+00257 &#32;&#32;}
+00258 
+00259 &#32;&#32;<emphasis role="comment">//&#32;first&#32;byte&#32;is&#32;length&#32;(including&#32;header),&#32;second&#32;byte&#32;is&#32;string&#32;type</emphasis>
+00260 &#32;&#32;_desc_str[0]&#32;=&#32;(uint16_t)&#32;((TUSB_DESC_STRING&#32;&lt;&lt;&#32;8&#32;)&#32;|&#32;(2*chr_count&#32;+&#32;2));
+00261 
+00262 &#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_desc_str;
+00263 }
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_usb__descriptors_8c_1ae4653a41146db1badedb5a6126e6b6b7"/><section>
+    <title>desc_device</title>
+<indexterm><primary>desc_device</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>desc_device</secondary></indexterm>
+<para><computeroutput>tusb_desc_device_t const desc_device</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting linenumbering="unnumbered">=
+{
+&#32;&#32;.bLength&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<emphasis role="keyword">sizeof</emphasis>(tusb_desc_device_t),
+&#32;&#32;.bDescriptorType&#32;&#32;&#32;&#32;=&#32;TUSB_DESC_DEVICE,
+&#32;&#32;.bcdUSB&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1ae790349d8541544653e087fda6c3dcf1">USB_BCD</link>,
+
+&#32;&#32;
+&#32;&#32;
+&#32;&#32;.bDeviceClass&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;TUSB_CLASS_MISC,
+&#32;&#32;.bDeviceSubClass&#32;&#32;&#32;&#32;=&#32;MISC_SUBCLASS_COMMON,
+&#32;&#32;.bDeviceProtocol&#32;&#32;&#32;&#32;=&#32;MISC_PROTOCOL_IAD,
+
+&#32;&#32;.bMaxPacketSize0&#32;&#32;&#32;&#32;=&#32;<link linkend="_tusb__config_8h_1a9b99a70dc9fc74ecc23108ab18bbebe4">CFG_TUD_ENDPOINT0_SIZE</link>,
+
+&#32;&#32;.idVendor&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1a3398c7225386f04c72fd9025fcb44734">USB_VID</link>,
+&#32;&#32;.idProduct&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1a989c980e0b99f803f7ce0ca224cdb733">USB_PID</link>,
+&#32;&#32;.bcdDevice&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x0100,
+
+&#32;&#32;.iManufacturer&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x01,
+&#32;&#32;.iProduct&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x02,
+&#32;&#32;.iSerialNumber&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x03,
+
+&#32;&#32;.bNumConfigurations&#32;=&#32;0x01
+}
+</programlisting><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00019">19</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00020 {
+00021 &#32;&#32;.bLength&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<emphasis role="keyword">sizeof</emphasis>(tusb_desc_device_t),
+00022 &#32;&#32;.bDescriptorType&#32;&#32;&#32;&#32;=&#32;TUSB_DESC_DEVICE,
+00023 &#32;&#32;.bcdUSB&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1ae790349d8541544653e087fda6c3dcf1">USB_BCD</link>,
+00024 
+00025 &#32;&#32;<emphasis role="comment">//&#32;Use&#32;Interface&#32;Association&#32;Descriptor&#32;(IAD)&#32;for&#32;CDC</emphasis>
+00026 &#32;&#32;<emphasis role="comment">//&#32;As&#32;required&#32;by&#32;USB&#32;Specs&#32;IAD&apos;s&#32;subclass&#32;must&#32;be&#32;common&#32;class&#32;(2)&#32;and&#32;protocol&#32;must&#32;be&#32;IAD&#32;(1)</emphasis>
+00027 &#32;&#32;.bDeviceClass&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;TUSB_CLASS_MISC,
+00028 &#32;&#32;.bDeviceSubClass&#32;&#32;&#32;&#32;=&#32;MISC_SUBCLASS_COMMON,
+00029 &#32;&#32;.bDeviceProtocol&#32;&#32;&#32;&#32;=&#32;MISC_PROTOCOL_IAD,
+00030 
+00031 &#32;&#32;.bMaxPacketSize0&#32;&#32;&#32;&#32;=&#32;<link linkend="_tusb__config_8h_1a9b99a70dc9fc74ecc23108ab18bbebe4">CFG_TUD_ENDPOINT0_SIZE</link>,
+00032 
+00033 &#32;&#32;.idVendor&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1a3398c7225386f04c72fd9025fcb44734">USB_VID</link>,
+00034 &#32;&#32;.idProduct&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;<link linkend="_usb__descriptors_8c_1a989c980e0b99f803f7ce0ca224cdb733">USB_PID</link>,
+00035 &#32;&#32;.bcdDevice&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x0100,
+00036 
+00037 &#32;&#32;.iManufacturer&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x01,
+00038 &#32;&#32;.iProduct&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x02,
+00039 &#32;&#32;.iSerialNumber&#32;&#32;&#32;&#32;&#32;&#32;=&#32;0x03,
+00040 
+00041 &#32;&#32;.bNumConfigurations&#32;=&#32;0x01
+00042 };
+</programlisting></section>
+<anchor xml:id="_usb__descriptors_8c_1a34140533069ca5f678f63e383bc90279"/><section>
+    <title>desc_fs_configuration</title>
+<indexterm><primary>desc_fs_configuration</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>desc_fs_configuration</secondary></indexterm>
+<para><computeroutput>uint8_t const desc_fs_configuration[]</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting linenumbering="unnumbered">=
+{
+&#32;&#32;
+&#32;&#32;TUD_CONFIG_DESCRIPTOR(1,&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a936a2a3258df7c0ac994897782e04bed">ITF_NUM_TOTAL</link>,&#32;0,&#32;<link linkend="_usb__descriptors_8c_1a76e2168140a8a6693bf0588641c8252a">CONFIG_TOTAL_LEN</link>,&#32;0x00,&#32;100),
+
+&#32;&#32;
+&#32;&#32;TUD_CDC_DESCRIPTOR(<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a417a1b5f14108f730ac4ba859fb2c198">ITF_NUM_CDC</link>,&#32;4,&#32;<link linkend="_usb__descriptors_8c_1a1954b234c7f10ee7bc2aae113fdfd9c4">EPNUM_CDC_NOTIF</link>,&#32;8,&#32;<link linkend="_usb__descriptors_8c_1aa28ada903072dee41c869b03522dc5b9">EPNUM_CDC_OUT</link>,&#32;<link linkend="_usb__descriptors_8c_1aeeb12a4af5853f54202fa79a4af790db">EPNUM_CDC_IN</link>,&#32;64),
+
+&#32;&#32;
+&#32;&#32;TUD_MSC_DESCRIPTOR(<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a934bb58dcdee9c977f336670b5b9d9a2">ITF_NUM_MSC</link>,&#32;5,&#32;<link linkend="_usb__descriptors_8c_1a0c27f9fc321172575a315b83d1fb75d4">EPNUM_MSC_OUT</link>,&#32;<link linkend="_usb__descriptors_8c_1a8300bc4e12e83ce01cfcdf45e050069e">EPNUM_MSC_IN</link>,&#32;64),
+}
+</programlisting><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00118">118</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00119 {
+00120 &#32;&#32;<emphasis role="comment">//&#32;Config&#32;number,&#32;interface&#32;count,&#32;string&#32;index,&#32;total&#32;length,&#32;attribute,&#32;power&#32;in&#32;mA</emphasis>
+00121 &#32;&#32;TUD_CONFIG_DESCRIPTOR(1,&#32;<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a936a2a3258df7c0ac994897782e04bed">ITF_NUM_TOTAL</link>,&#32;0,&#32;<link linkend="_usb__descriptors_8c_1a76e2168140a8a6693bf0588641c8252a">CONFIG_TOTAL_LEN</link>,&#32;0x00,&#32;100),
+00122 
+00123 &#32;&#32;<emphasis role="comment">//&#32;Interface&#32;number,&#32;string&#32;index,&#32;EP&#32;notification&#32;address&#32;and&#32;size,&#32;EP&#32;data&#32;address&#32;(out,&#32;in)&#32;and&#32;size.</emphasis>
+00124 &#32;&#32;TUD_CDC_DESCRIPTOR(<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a417a1b5f14108f730ac4ba859fb2c198">ITF_NUM_CDC</link>,&#32;4,&#32;<link linkend="_usb__descriptors_8c_1a1954b234c7f10ee7bc2aae113fdfd9c4">EPNUM_CDC_NOTIF</link>,&#32;8,&#32;<link linkend="_usb__descriptors_8c_1aa28ada903072dee41c869b03522dc5b9">EPNUM_CDC_OUT</link>,&#32;<link linkend="_usb__descriptors_8c_1aeeb12a4af5853f54202fa79a4af790db">EPNUM_CDC_IN</link>,&#32;64),
+00125 
+00126 &#32;&#32;<emphasis role="comment">//&#32;Interface&#32;number,&#32;string&#32;index,&#32;EP&#32;Out&#32;&amp;&#32;EP&#32;In&#32;address,&#32;EP&#32;size</emphasis>
+00127 &#32;&#32;TUD_MSC_DESCRIPTOR(<link linkend="_usb__descriptors_8c_1af4a412e54eeb0a09ac3489d4a3db2955a934bb58dcdee9c977f336670b5b9d9a2">ITF_NUM_MSC</link>,&#32;5,&#32;<link linkend="_usb__descriptors_8c_1a0c27f9fc321172575a315b83d1fb75d4">EPNUM_MSC_OUT</link>,&#32;<link linkend="_usb__descriptors_8c_1a8300bc4e12e83ce01cfcdf45e050069e">EPNUM_MSC_IN</link>,&#32;64),
+00128 };
+</programlisting></section>
+<anchor xml:id="_usb__descriptors_8c_1a2f3128b5953024e2d3e923d556777a49"/><section>
+    <title>string_desc_arr</title>
+<indexterm><primary>string_desc_arr</primary><secondary>usb_descriptors.c</secondary></indexterm>
+<indexterm><primary>usb_descriptors.c</primary><secondary>string_desc_arr</secondary></indexterm>
+<para><computeroutput>char const* string_desc_arr[]</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting linenumbering="unnumbered">=
+{
+&#32;&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>[])&#32;{&#32;0x09,&#32;0x04&#32;},&#32;
+&#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+&#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;Device&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+&#32;&#32;<emphasis role="stringliteral">&quot;123456789012&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+&#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;CDC&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+&#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;MSC&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+}
+</programlisting><para>
+Definition at line <link linkend="_usb__descriptors_8c_source_1l00215">215</link> of file <link linkend="_usb__descriptors_8c_source">usb_descriptors.c</link>.</para>
+<programlisting linenumbering="unnumbered">00216 {
+00217 &#32;&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>[])&#32;{&#32;0x09,&#32;0x04&#32;},&#32;<emphasis role="comment">//&#32;0:&#32;is&#32;supported&#32;language&#32;is&#32;English&#32;(0x0409)</emphasis>
+00218 &#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;1:&#32;Manufacturer</emphasis>
+00219 &#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;Device&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;2:&#32;Product</emphasis>
+00220 &#32;&#32;<emphasis role="stringliteral">&quot;123456789012&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;3:&#32;Serials,&#32;should&#32;use&#32;chip&#32;ID</emphasis>
+00221 &#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;CDC&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;4:&#32;CDC&#32;Interface</emphasis>
+00222 &#32;&#32;<emphasis role="stringliteral">&quot;TinyUSB&#32;MSC&quot;</emphasis>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;5:&#32;MSC&#32;Interface</emphasis>
+00223 };
+</programlisting></section>
+</section>
+</section>

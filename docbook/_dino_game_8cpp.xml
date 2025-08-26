@@ -2,7 +2,16 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__dino_game_8cpp" xml:lang="en-US">
 <title>src/scenes/DinoGame.cpp File Reference</title>
 <indexterm><primary>src/scenes/DinoGame.cpp</primary></indexterm>
-<programlisting linenumbering="unnumbered">#include &quot;DinoGame.h&quot;<?linebreak?>#include &lt;cstdlib&gt;<?linebreak?>#include &lt;format&gt;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;SnakeGame.h&quot;<?linebreak?>#include &quot;cute_c2.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?>#include &quot;cactus_sprite.h&quot;<?linebreak?>#include &quot;dino_running.h&quot;<?linebreak?>#include &quot;dino_sprite.h&quot;<?linebreak?>#include &quot;TinyEngineUI.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/interp.h&quot;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;hardware/pio.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;ws2812.pio.h&quot;<?linebreak?>#include &quot;hardware/adc.h&quot;<?linebreak?>#include &quot;pico/time.h&quot;<?linebreak?>#include &quot;hardware/watchdog.h&quot;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &quot;DinoGame.h&quot;<?linebreak?>#include &lt;cstdlib&gt;<?linebreak?>#include &lt;format&gt;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;SnakeGame.h&quot;<?linebreak?>#include &quot;cute_c2.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?>#include &quot;cactus_sprite.h&quot;<?linebreak?>#include &quot;dino_running.h&quot;<?linebreak?>#include &quot;dino_sprite.h&quot;<?linebreak?>#include &quot;TinyEngineUI.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/interp.h&quot;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;hardware/pio.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;ws2812.pio.h&quot;<?linebreak?>#include &quot;hardware/adc.h&quot;<?linebreak?>#include &quot;pico/time.h&quot;<?linebreak?>#include &quot;hardware/watchdog.h&quot;<?linebreak?></programlisting>Include dependency graph for DinoGame.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_dino_game_8cpp__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Macros    </title>
         <itemizedlist>
             <listitem><para>#define <link linkend="__dino_game_8cpp_1a493b9b7cc0c4de9e5d832a5b9c8fe0f0">IS_RGBW</link>&#160;&#160;&#160;true</para>
@@ -375,7 +384,7 @@ Definition at line <link linkend="__dino_game_8cpp_source_1l00171">171</link> of
 <para><informaltable frame='bottom'><tgroup cols='1'><colspec align='center'/><tbody><row><entry align='center'>
 </entry></row></tbody></tgroup></informaltable>
  Score: Jumps: </para>
-<section xml:id="__dino_game_8cpp_1autotoc_md1">
+<section xml:id="__dino_game_8cpp_1autotoc_md5">
 <title>Time: Missed Jumps:</title></section>
 </section>
 <anchor xml:id="__dino_game_8cpp_1a81a7db0840e434f7c42887f2a04611ee"/><section>

@@ -1,0 +1,18 @@
+\chapter{Limitations of pico-\/vfs }
+\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n}{}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n}\index{Limitations of pico-\/vfs@{Limitations of pico-\/vfs}}
+\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md14}%
+\Hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md14}%
+
+
+When using pico-\/vfs, there are several limitations and behavior specifics that users should be aware of. These limitations are particularly important when performing multicore operations.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md15}{}\doxysection{\texorpdfstring{File System Limitations}{File System Limitations}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md15}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Multiple Open Instances}}\+: The current implementations of littlefs and Fat\+Fs do not support opening the same file multiple times simultaneously\mbox{[}\texorpdfstring{$^\wedge$}{\string^}1\mbox{]}\mbox{[}\texorpdfstring{$^\wedge$}{\string^}2\mbox{]}. This limitation can affect scenarios where multiple accesses to the same file are required concurrently.
+\item {\bfseries{Access to on-\/board flash from {\ttfamily core1}}}\+: When operating file systems using the onboard flash block device on {\ttfamily core1}, it is necessary to run the operations from RAM\mbox{[}\texorpdfstring{$^\wedge$}{\string^}3\mbox{]}.
+\item {\bfseries{Access on-\/board flash in Free\+RTOS}}\+: To access the flash device, the firmware must be stored in RAM or run with {\ttfamily \#define config\+NUMBER\+\_\+\+OF\+\_\+\+CORES 1}.
+\item {\bfseries{Memory maped IO}}\+: {\ttfamily mmap} system call not supported.
+\item {\bfseries{Max File Size for FAT}}\+: The maximum single file size of a FAT file system depends on the capacity of the storage medium. Check the size of the SD card used and the type of FAT (FAT16/32/\+Ex\+Fat) automatically assigned.
+\end{DoxyEnumerate}
+
+We recommend reviewing these limitations before designing systems that heavily rely on multicore operations or require high file access availability.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md16}{}\doxysection{\texorpdfstring{References}{References}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n_autotoc_md16}
+\mbox{[}\texorpdfstring{$^\wedge$}{\string^}1\mbox{]}\+: \href{https://github.com/littlefs-project/littlefs/issues/483}{\texttt{littlefs Issue\#483}} \mbox{[}\texorpdfstring{$^\wedge$}{\string^}2\mbox{]}\+: \href{http://elm-chan.org/fsw/ff/doc/appnote.html\#dup}{\texttt{Fat\+Fs Module Application Note}} \mbox{[}\texorpdfstring{$^\wedge$}{\string^}3\mbox{]}\+: \href{https://forums.raspberrypi.com/viewtopic.php?t=311709}{\texttt{Raspberry Pi Pico Forum}} 

@@ -1,0 +1,72 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\+\_\+tests/stubs/hardware/pio\+\_\+stubs.cpp File Reference}
+\hypertarget{pio__stubs_8cpp}{}\label{pio__stubs_8cpp}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/stubs/hardware/pio\_stubs.cpp@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/stubs/hardware/pio\_stubs.cpp}}
+{\ttfamily \#include "{}pio.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{pio__stubs_8cpp_a3571e3c7c6e645e92b8d438203a911b9}{pio\+\_\+add\+\_\+program}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, const \mbox{\hyperlink{structpio__program__t}{pio\+\_\+program\+\_\+t}} \texorpdfstring{$\ast$}{*}program)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{pio__stubs_8cpp_a70a47a122f289106c36bcacc76add2bb}{pio\+\_\+sm\+\_\+get}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})
+\item 
+bool \mbox{\hyperlink{pio__stubs_8cpp_a028cdc4974a8af6f8a295741cb695d7b}{pio\+\_\+interrupt\+\_\+get}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{pio__stubs_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pio__stubs_8cpp_a3571e3c7c6e645e92b8d438203a911b9}\index{pio\_stubs.cpp@{pio\_stubs.cpp}!pio\_add\_program@{pio\_add\_program}}
+\index{pio\_add\_program@{pio\_add\_program}!pio\_stubs.cpp@{pio\_stubs.cpp}}
+\doxysubsubsection{\texorpdfstring{pio\_add\_program()}{pio\_add\_program()}}
+{\footnotesize\ttfamily \label{pio__stubs_8cpp_a3571e3c7c6e645e92b8d438203a911b9} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} pio\+\_\+add\+\_\+program (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{const \mbox{\hyperlink{structpio__program__t}{pio\+\_\+program\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{program}{}\end{DoxyParamCaption})}
+
+Simulates adding a program to the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} Using an ID means that each time a program is loaded, it will have a different result which can be used to verify that it is distinct from a separate program that was loaded \begin{DoxyReturn}{Returns}
+ID representing the offset into memory for a given program 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ simulated\_offset\ =\ 0;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{return}\ simulated\_offset++;}
+\DoxyCodeLine{00013\ \};}
+
+\end{DoxyCode}
+\Hypertarget{pio__stubs_8cpp_a028cdc4974a8af6f8a295741cb695d7b}\index{pio\_stubs.cpp@{pio\_stubs.cpp}!pio\_interrupt\_get@{pio\_interrupt\_get}}
+\index{pio\_interrupt\_get@{pio\_interrupt\_get}!pio\_stubs.cpp@{pio\_stubs.cpp}}
+\doxysubsubsection{\texorpdfstring{pio\_interrupt\_get()}{pio\_interrupt\_get()}}
+{\footnotesize\ttfamily \label{pio__stubs_8cpp_a028cdc4974a8af6f8a295741cb695d7b} 
+bool pio\+\_\+interrupt\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pio__stubs_8cpp_a70a47a122f289106c36bcacc76add2bb}\index{pio\_stubs.cpp@{pio\_stubs.cpp}!pio\_sm\_get@{pio\_sm\_get}}
+\index{pio\_sm\_get@{pio\_sm\_get}!pio\_stubs.cpp@{pio\_stubs.cpp}}
+\doxysubsubsection{\texorpdfstring{pio\_sm\_get()}{pio\_sm\_get()}}
+{\footnotesize\ttfamily \label{pio__stubs_8cpp_a70a47a122f289106c36bcacc76add2bb} 
+uint32\+\_\+t pio\+\_\+sm\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ 0xDEADBEEF;}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}

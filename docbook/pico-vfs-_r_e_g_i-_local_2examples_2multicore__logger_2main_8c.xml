@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/multicore_logger/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/multicore_logger/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;math.h&gt;<?linebreak?>#include &lt;pico/multicore.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;pico/time.h&gt;<?linebreak?>#include &lt;pico/util/queue.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structsensor__data__t">sensor_data_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a678ae58402d3a72ca43f90e63c6b61ca">SAMPLING_RATE_HZ</link>&#160;&#160;&#160;1000</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>queue_t <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d">sensor_queue</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a678ae58402d3a72ca43f90e63c6b61ca"/><section>
+    <title>SAMPLING_RATE_HZ</title>
+<indexterm><primary>SAMPLING_RATE_HZ</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>SAMPLING_RATE_HZ</secondary></indexterm>
+<para><computeroutput>#define SAMPLING_RATE_HZ&#160;&#160;&#160;1000</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_1l00023">23</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_1l00091">91</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00092 &#32;&#32;&#32;&#32;stdio_init_all();
+00093 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>())&#32;{
+00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SD&#32;card&#32;device&#32;not&#32;found\n&quot;</emphasis>);
+00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+00096 &#32;&#32;&#32;&#32;}
+00097 
+00098 &#32;&#32;&#32;&#32;queue_init(&amp;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d">sensor_queue</link>,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structsensor__data__t">sensor_data_t</link>),&#32;1024);
+00099 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/sd/sensor_data.csv&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+00100 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fp&#32;==&#32;NULL)&#32;{
+00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fopen&#32;failed:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00102 &#32;&#32;&#32;&#32;}
+00103 &#32;&#32;&#32;&#32;setvbuf(fp,&#32;write_buffer,&#32;_IOFBF,&#32;<emphasis role="keyword">sizeof</emphasis>(write_buffer));
+00104 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Time,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MagX,MagY,Magz\n&quot;</emphasis>);
+00105 
+00106 &#32;&#32;&#32;&#32;multicore_reset_core1();
+00107 &#32;&#32;&#32;&#32;sleep_ms(100);
+00108 &#32;&#32;&#32;&#32;multicore_launch_core1(produce_sensor_data_task);
+00109 
+00110 &#32;&#32;&#32;&#32;<link linkend="_structsensor__data__t">sensor_data_t</link>&#32;entry&#32;=&#32;{0};
+00111 &#32;&#32;&#32;&#32;absolute_time_t&#32;last_checkpoint&#32;=&#32;get_absolute_time();
+00112 &#32;&#32;&#32;&#32;uint32_t&#32;n&#32;=&#32;0;
+00113 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)&#32;{
+00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;queue_remove_blocking(&amp;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d">sensor_queue</link>,&#32;&amp;entry);
+00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f\n&quot;</emphasis>,
+00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">double</emphasis>)entry.<link linkend="_structsensor__data__t_1a317681c3b45202a0ad429582c26a3d67">timestamp</link>&#32;/&#32;1000&#32;/&#32;1000,
+00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;entry.<link linkend="_structsensor__data__t_1a248f154dac0f2c9bff4ba9d7f4dba970">accel_x</link>,&#32;entry.<link linkend="_structsensor__data__t_1a2c667e86c78184338501c9e8a7084ffa">accel_y</link>,&#32;entry.<link linkend="_structsensor__data__t_1a1611c6d4224825afe216052a6d92bc90">accel_z</link>,
+00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;entry.<link linkend="_structsensor__data__t_1a7c9c3c482f40abe3c661b1ff8f17aea7">gyro_x</link>,&#32;entry.<link linkend="_structsensor__data__t_1acf35d0f785e8ea17be52eb6db09d926b">gyro_y</link>,&#32;entry.<link linkend="_structsensor__data__t_1a7c9c3c482f40abe3c661b1ff8f17aea7">gyro_x</link>,
+00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;entry.<link linkend="_structsensor__data__t_1a24eea7c67c329879a83f2d6abd0e3270">mag_x</link>,&#32;entry.<link linkend="_structsensor__data__t_1aec0b388a1ef17f0a0b435f31882a154a">mag_y</link>,&#32;entry.<link linkend="_structsensor__data__t_1a5acd8af8c47db2b4ef47f1531b87bc72">mag_z</link>);
+00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;n&#32;+=&#32;1;
+00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absolute_time_t&#32;now&#32;=&#32;get_absolute_time();
+00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;int64_t&#32;duration&#32;=&#32;absolute_time_diff_us(last_checkpoint,&#32;now);
+00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(duration&#32;&gt;=&#32;1000000)&#32;{
+00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Store&#32;%lu&#32;samples/sec,&#32;Remaining&#32;queue&#32;%u\n&quot;</emphasis>,
+00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;n,&#32;queue_get_level(&amp;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d">sensor_queue</link>));
+00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;n&#32;=&#32;0;
+00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;last_checkpoint&#32;=&#32;now;
+00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00129 &#32;&#32;&#32;&#32;}
+00130 
+00131 &#32;&#32;&#32;&#32;fclose(fp);
+00132 &#32;&#32;&#32;&#32;queue_free(&amp;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d">sensor_queue</link>);
+00133 
+00134 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+00136 }
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_1a3c4ae488ab07f78a56116146dc0d322d"/><section>
+    <title>sensor_queue</title>
+<indexterm><primary>sensor_queue</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>sensor_queue</secondary></indexterm>
+<para><computeroutput>queue_t sensor_queue</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_1l00039">39</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+</section>

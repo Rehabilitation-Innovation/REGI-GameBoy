@@ -1,0 +1,39 @@
+\doxysection{fs\+\_\+init\+\_\+fat.\+c}
+\hypertarget{fs__init__fat_8c_source}{}\label{fs__init__fat_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/fs\_init\_fat.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/fs\_init\_fat.c}}
+\mbox{\hyperlink{fs__init__fat_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <hardware/flash.h>}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{flash_8h}{blockdevice/flash.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fat_8h}{filesystem/fat.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00013}\mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{00013}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00014}00014\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{PICO\_FLASH\_SIZE\_BYTES}}\ -\/\ \mbox{\hyperlink{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}{PICO\_FS\_DEFAULT\_SIZE}},\ 0);}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00017}00017\ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_init\ FAT\ on\ onboard\ flash\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}format\ /\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fs,\ device);}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_format\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_mount\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fs__init__fat_8c_source_l00033}00033\ \}}
+
+\end{DoxyCode}

@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('globals_vars.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -153,6 +140,11 @@ $(function() {
 
 <h3 class="doxsection"><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>info&#160;:&#160;<a class="el" href="_game_scene_8cpp.html#ab5b03fe4e6a8a45e275a46ef2b76a73e">GameScene.cpp</a></li>
+<li>info_arch&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a59647e99d304ed33b15cb284c27ed391">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a59647e99d304ed33b15cb284c27ed391">CMakeCXXCompilerId.cpp</a></li>
+<li>info_compiler&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a4b0efeb7a5d59313986b3a0390f050f6">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a4b0efeb7a5d59313986b3a0390f050f6">CMakeCXXCompilerId.cpp</a></li>
+<li>info_language_extensions_default&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a0f46a8a39e09d9b803c4766904fd7e99">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a0f46a8a39e09d9b803c4766904fd7e99">CMakeCXXCompilerId.cpp</a></li>
+<li>info_language_standard_default&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a4607cccf070750927b458473ca82c090">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a4607cccf070750927b458473ca82c090">CMakeCXXCompilerId.cpp</a></li>
+<li>info_platform&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a2321403dee54ee23f0c2fa849c60f7d4">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a2321403dee54ee23f0c2fa849c60f7d4">CMakeCXXCompilerId.cpp</a></li>
 <li>input&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a01094266c5c789fd93672e74f7f04a00">DinoGame.cpp</a></li>
 </ul>
 

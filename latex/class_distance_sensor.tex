@@ -1,0 +1,316 @@
+\doxysection{Distance\+Sensor Class Reference}
+\hypertarget{class_distance_sensor}{}\label{class_distance_sensor}\index{DistanceSensor@{DistanceSensor}}
+
+
+{\ttfamily \#include $<$distance\+\_\+sensor.\+h$>$}
+
+Inheritance diagram for Distance\+Sensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_distance_sensor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{Distance\+Sensor}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} trigger\+\_\+gpio)
+\item 
+void \mbox{\hyperlink{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}{Trigger\+Read}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distance_sensor_a495a45dfe6d75a99126fac0e9edc7572}{Get\+Mapped\+Sensor}} (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}{distance}} = 0
+\item 
+volatile bool \mbox{\hyperlink{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}{is\+\_\+sensing}} = false
+\item 
+\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}
+\item 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_distance_sensor_ac6680c1265d7514097937d587d509bca}{\+\_\+\+Initialize\+Sensor\+For\+Gpio}} (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} gpio, \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}, \mbox{\hyperlink{pio_8h_a8478ee26cc144e947ccd75b0169059a6}{irq\+\_\+handler\+\_\+t}} handler)
+\item 
+static bool \mbox{\hyperlink{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5}{\+\_\+\+Is\+Program\+Loaded}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\item 
+static \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a579d6f646f9a93ad2e0446917271d742}{\+\_\+\+Load\+Sensor\+Program}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{\+\_\+sensor\+\_\+map}} \mbox{[}2\mbox{]}\mbox{[}4\mbox{]} = \{\}
+\item 
+static \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{\+\_\+\+Pio\+Offsets}} \mbox{[}2\mbox{]} = \{ \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}}, \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for using an HC-\/\+SR04 distance sensor. Has not been tested with other sensors 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00008}{8}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_distance_sensor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}\index{DistanceSensor@{DistanceSensor}!DistanceSensor@{DistanceSensor}}
+\index{DistanceSensor@{DistanceSensor}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{DistanceSensor()}{DistanceSensor()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f} 
+Distance\+Sensor\+::\+Distance\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{trigger\+\_\+gpio}{}\end{DoxyParamCaption})}
+
+Initializes the sensor. \begin{DoxyNote}{Note}
+Due to the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} implementation, the echo pin must be connected to trigger\+\_\+gpio + 1. If you connect the trigger pin to GPIO 5, then GPIO 6 must be the echo pin. 
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em trigger\+\_\+gpio} & GPIO connected to the trigger pin \\
+\hline
+\mbox{\texttt{in}}  & {\em pio} & \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} block to use, Either pio0 or pio1 \\
+\hline
+\mbox{\texttt{in}}  & {\em sm} & The state machine to use, 0 to 3 \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00064}{64}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}),\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}(\mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ program\ and\ set\ up\ the\ IRQ\ handler\ to\ save\ the}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ distance\ reading\ to\ this-\/>distance.}}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{DistanceSensor::\_sensor\_map}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}\ ==\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}\ ?\ 0\ :\ 1][\mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}]\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor_ac6680c1265d7514097937d587d509bca}{\_InitializeSensorForGpio}}(trigger\_gpio,\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}},\ \_SensorIrq);}
+\DoxyCodeLine{00069\ \ \ \ \ printf(\textcolor{stringliteral}{"{}IRQ\ initialized\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ sleep\_ms(1000);}}
+\DoxyCodeLine{00071\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_distance_sensor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_distance_sensor_ac6680c1265d7514097937d587d509bca}\index{DistanceSensor@{DistanceSensor}!\_InitializeSensorForGpio@{\_InitializeSensorForGpio}}
+\index{\_InitializeSensorForGpio@{\_InitializeSensorForGpio}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{\_InitializeSensorForGpio()}{\_InitializeSensorForGpio()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_ac6680c1265d7514097937d587d509bca} 
+void Distance\+Sensor\+::\+\_\+\+Initialize\+Sensor\+For\+Gpio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{gpio}{, }\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{, }\item[{\mbox{\hyperlink{pio_8h_a8478ee26cc144e947ccd75b0169059a6}{irq\+\_\+handler\+\_\+t}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Initializes the distance program to run on the given gpio pin 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em trigger\+\_\+gpio} & GPIO connected to the trigger pin \\
+\hline
+\mbox{\texttt{in}}  & {\em pio} & \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} block to use, Either pio0 or pio1 \\
+\hline
+\mbox{\texttt{in}}  & {\em sm} & The state machine to use, 0 to 3 \\
+\hline
+\mbox{\texttt{in}}  & {\em handler} & Function to execute when distance is sampled \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00073}{73}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Load\ the\ program\ and\ get\ the\ offset}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ Note\ this\ is\ safe\ to\ call\ even\ if\ the\ sensor\ was\ already\ loaded,\ it\ will\ not\ reload\ it.}}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ offset\ =\ \mbox{\hyperlink{class_distance_sensor_a579d6f646f9a93ad2e0446917271d742}{\_LoadSensorProgram}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}});}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ program\ in\ the\ PIO}}
+\DoxyCodeLine{00078\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Initializing\ program\ on\ pio\ \%d,\ sm\ \%d,\ offset\ \%d,\ gpio\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}\ ==\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}\ ?\ 0\ :\ 1,\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}},\ offset,\ gpio);}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_abb2fe088e1320015022ea8a3ee4ff969}{distance\_sensor\_program\_init}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}},\ offset,\ gpio,\ handler);}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5}\index{DistanceSensor@{DistanceSensor}!\_IsProgramLoaded@{\_IsProgramLoaded}}
+\index{\_IsProgramLoaded@{\_IsProgramLoaded}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{\_IsProgramLoaded()}{\_IsProgramLoaded()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5} 
+bool Distance\+Sensor\+::\+\_\+\+Is\+Program\+Loaded (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Checks if the sensor program is already loaded in the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} \begin{DoxyNote}{Note}
+This checks the \+\_\+is\+\_\+loaded\+\_\+in\+\_\+pio mapping 
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pio} & \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} memory to check\\
+\hline
+\end{DoxyParams}
+Checks if \+\_\+\+Pio\+Memory has the pio offset saved in it 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00098}{98}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ offset\ from\ the\ offset\ array}}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ offset\ =\ \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{DistanceSensor::\_PioOffsets}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}\ ==\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}\ ?\ 0\ :\ 1];}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{return}\ offset\ !=\ \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\_OFFSET\_UNSET}};}
+\DoxyCodeLine{00102\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_distance_sensor_a579d6f646f9a93ad2e0446917271d742}\index{DistanceSensor@{DistanceSensor}!\_LoadSensorProgram@{\_LoadSensorProgram}}
+\index{\_LoadSensorProgram@{\_LoadSensorProgram}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{\_LoadSensorProgram()}{\_LoadSensorProgram()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a579d6f646f9a93ad2e0446917271d742} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} Distance\+Sensor\+::\+\_\+\+Load\+Sensor\+Program (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Loads the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} program into memory if it\textquotesingle{}s not already loaded 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pio} & \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} block to use, Either pio0 or pio1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Program offset 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00082}{82}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ If\ the\ program\ hasn't\ already\ been\ loaded\ in\ memory,\ then\ load\ it.}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ if\ (!DistanceSensor::\_IsProgramLoaded(pio))\ \{}}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ offset\ =\ \mbox{\hyperlink{pio_8h_a3571e3c7c6e645e92b8d438203a911b9}{pio\_add\_program}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \&\mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_af4ad3f5ae38c4079373b4a387d68612c}{distance\_sensor\_program}});}
+\DoxyCodeLine{00086\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Loaded\ pio\ program\ to\ offset\ 0x\%08X\(\backslash\)n"{}},\ offset);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ Cache\ the\ offset\ so\ we\ don't\ need\ to\ reload\ it.}}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{DistanceSensor::\_PioOffsets}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}\ ==\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}\ ?\ 0\ :\ 1]\ =\ offset;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ offset\ in\ memory\ for\ the\ program}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{DistanceSensor::\_PioOffsets}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}\ ==\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}\ ?\ 0\ :\ 1];}
+\DoxyCodeLine{00093\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_distance_sensor_a495a45dfe6d75a99126fac0e9edc7572}\index{DistanceSensor@{DistanceSensor}!GetMappedSensor@{GetMappedSensor}}
+\index{GetMappedSensor@{GetMappedSensor}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{GetMappedSensor()}{GetMappedSensor()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a495a45dfe6d75a99126fac0e9edc7572} 
+\mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} Distance\+Sensor\+::\+Get\+Mapped\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the distance sensor mapped to the given state machine 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pio} & 0 or 1 \\
+\hline
+\mbox{\texttt{in}}  & {\em sm} & 0 to 4 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NULL or \doxylink{class_distance_sensor}{Distance\+Sensor} pointer 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00104}{104}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{\_sensor\_map}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}][\mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}];}
+\DoxyCodeLine{00106\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}\index{DistanceSensor@{DistanceSensor}!TriggerRead@{TriggerRead}}
+\index{TriggerRead@{TriggerRead}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{TriggerRead()}{TriggerRead()}}
+{\footnotesize\ttfamily \label{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a} 
+void Distance\+Sensor\+::\+Trigger\+Read (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Trigger a sensor read 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8cpp_source_l00108}{108}} of file \mbox{\hyperlink{distance__sensor_8cpp_source}{distance\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{pio_8h_a9878b5628ef662af86683649f5a7f753}{pio\_sm\_put}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}},\ 0xFFFFFFFF);}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}{is\_sensing}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00111\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_distance_sensor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}\index{DistanceSensor@{DistanceSensor}!\_PioOffsets@{\_PioOffsets}}
+\index{\_PioOffsets@{\_PioOffsets}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{\_PioOffsets}{\_PioOffsets}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} Distance\+Sensor\+::\+\_\+\+Pio\+Offsets = \{ \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}}, \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}} \}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Offset into \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} memory for the sensor program Cached here so we don\textquotesingle{}t waste space in \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} memory by reloading it. 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00036}{36}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+\Hypertarget{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}\index{DistanceSensor@{DistanceSensor}!\_sensor\_map@{\_sensor\_map}}
+\index{\_sensor\_map@{\_sensor\_map}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{\_sensor\_map}{\_sensor\_map}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f} 
+\mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} Distance\+Sensor\+::\+\_\+sensor\+\_\+map = \{\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+My solution to the "{}\+C++ IRQ problem"{} The problem is that an IRQ needs to be a plain C function, so I can\textquotesingle{}t have a function that modifies the running instance of the \doxylink{class_distance_sensor}{Distance\+Sensor} that triggered the request. There\textquotesingle{}s no way for the IRQ to know which sensor sent the request.
+
+But I can store the instance of the distance sensor in a map, so the sensor running on \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} 0, state machine 1 will map to \+\_\+sensor\+\_\+map\mbox{[}0\mbox{]}\mbox{[}1\mbox{]}. Thus the ISR can access the sensor instance to provide a reading
+
+Instance of map that stores the memory address of the loaded pio program 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00035}{35}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+\Hypertarget{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}\index{DistanceSensor@{DistanceSensor}!distance@{distance}}
+\index{distance@{distance}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c} 
+uint32\+\_\+t Distance\+Sensor\+::distance = 0}
+
+Last distance reading 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00037}{37}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+\Hypertarget{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}\index{DistanceSensor@{DistanceSensor}!is\_sensing@{is\_sensing}}
+\index{is\_sensing@{is\_sensing}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{is\_sensing}{is\_sensing}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f} 
+volatile bool Distance\+Sensor\+::is\+\_\+sensing = false}
+
+
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00039}{39}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+\Hypertarget{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}\index{DistanceSensor@{DistanceSensor}!pio@{pio}}
+\index{pio@{pio}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{pio}{pio}}
+{\footnotesize\ttfamily \label{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138} 
+\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} Distance\+Sensor\+::pio}
+
+\doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} bound to this sensor 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00044}{44}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+\Hypertarget{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}\index{DistanceSensor@{DistanceSensor}!sm@{sm}}
+\index{sm@{sm}!DistanceSensor@{DistanceSensor}}
+\doxysubsubsection{\texorpdfstring{sm}{sm}}
+{\footnotesize\ttfamily \label{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} Distance\+Sensor\+::sm}
+
+State machine this sensor is running on 
+
+Definition at line \mbox{\hyperlink{distance__sensor_8h_source_l00049}{49}} of file \mbox{\hyperlink{distance__sensor_8h_source}{distance\+\_\+sensor.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/include/\mbox{\hyperlink{distance__sensor_8h}{distance\+\_\+sensor.\+h}}\item 
+lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/src/\mbox{\hyperlink{distance__sensor_8cpp}{distance\+\_\+sensor.\+cpp}}\end{DoxyCompactItemize}

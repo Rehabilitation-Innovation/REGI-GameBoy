@@ -1,0 +1,52 @@
+\doxysection{blockdevice }
+\hypertarget{group__blockdevice}{}\label{group__blockdevice}\index{blockdevice@{blockdevice}}
+
+
+Block device abstraction layer for storage media.  
+
+
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__blockdevice__flash}{blockdevice\+\_\+flash}}
+\begin{DoxyCompactList}\small\item\em Raspberry Pi Pico on-\/board flash memory block device. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__blockdevice__heap}{blockdevice\+\_\+heap}}
+\begin{DoxyCompactList}\small\item\em Heap memory block device. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__blockdevice__loopback}{blockdevice\+\_\+loopback}}
+\begin{DoxyCompactList}\small\item\em Loopback disk image file block device. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__blockdevice__sd}{blockdevice\+\_\+sd}}
+\begin{DoxyCompactList}\small\item\em SPI-\/connected SD/\+MMC card block device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structblockdevice}{blockdevice}}
+\begin{DoxyCompactList}\small\item\em block device abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em block device abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Block device abstraction layer for storage media. 
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__blockdevice_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}\index{blockdevice@{blockdevice}!blockdevice\_t@{blockdevice\_t}}
+\index{blockdevice\_t@{blockdevice\_t}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{blockdevice\_t}{blockdevice\_t}}
+{\footnotesize\ttfamily \label{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4} 
+typedef struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}}}
+
+
+
+block device abstract object 
+
+All block device objects implement \doxylink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t} \input{group__blockdevice__flash}
+\input{group__blockdevice__heap}
+\input{group__blockdevice__loopback}
+\input{group__blockdevice__sd}

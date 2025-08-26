@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_fs__init__heap_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/fs_inits/fs_init_heap.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/fs_inits/fs_init_heap.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;hardware/flash.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>&#160;&#160;&#160;(128 * 1024)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link> (void)</para>
+
+<para>Enable predefined file systems. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae"/><section>
+    <title>HEAP_STORAGE_SIZE</title>
+<indexterm><primary>HEAP_STORAGE_SIZE</primary><secondary>fs_init_heap.c</secondary></indexterm>
+<indexterm><primary>fs_init_heap.c</primary><secondary>HEAP_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HEAP_STORAGE_SIZE&#160;&#160;&#160;(128 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_fs__init__heap_8c_source_1l00015">15</link> of file <link linkend="_fs__init__heap_8c_source">fs_init_heap.c</link>.</para>
+</section>
+</section>
+</section>

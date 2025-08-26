@@ -1,0 +1,701 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_fat_8c_source" xml:lang="en-US">
+<title>fat.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/fat.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_fat_8c_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_fat_8c_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_fat_8c_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_fat_8c_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_fat_8c_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_fat_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;stdlib.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&lt;time.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&lt;unistd.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&lt;pico/mutex.h&gt;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_blockdevice_8h">blockdevice/blockdevice.h</link>&quot;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_fat_8h">filesystem/fat.h</link>&quot;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00015"/>00015 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_ff_8h">ff.h</link>&quot;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_diskio_8h">diskio.h</link>&quot;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00017"/>00017 
+<anchor xml:id="_fat_8c_source_1l00018"/>00018 
+<anchor xml:id="_fat_8c_source_1l00019"/><link linkend="_structfat__file__t">00019</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_fat_8c_source_1l00020"/><link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">00020</link> &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l">FIL</link>&#32;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>;
+<anchor xml:id="_fat_8c_source_1l00021"/>00021 }&#32;<link linkend="_structfat__file__t">fat_file_t</link>;
+<anchor xml:id="_fat_8c_source_1l00022"/>00022 
+<anchor xml:id="_fat_8c_source_1l00023"/><link linkend="_structfilesystem__fat__context__t">00023</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_fat_8c_source_1l00024"/><link linkend="_structfilesystem__fat__context__t_1ae411384365b516cdd396691a05d15be0">00024</link> &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s">FATFS</link>&#32;<link linkend="_structfilesystem__fat__context__t_1ae411384365b516cdd396691a05d15be0">fatfs</link>;
+<anchor xml:id="_fat_8c_source_1l00025"/><link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">00025</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>;
+<anchor xml:id="_fat_8c_source_1l00026"/><link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">00026</link> &#32;&#32;&#32;&#32;mutex_t&#32;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>;
+<anchor xml:id="_fat_8c_source_1l00027"/><link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">00027</link> &#32;&#32;&#32;&#32;mutex_t&#32;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>;
+<anchor xml:id="_fat_8c_source_1l00028"/>00028 }&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>;
+<anchor xml:id="_fat_8c_source_1l00029"/>00029 
+<anchor xml:id="_fat_8c_source_1l00030"/>00030 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;FILESYSTEM_NAME[]&#32;=&#32;<emphasis role="stringliteral">&quot;FAT&quot;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00031"/>00031 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*_ffs[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>]&#32;=&#32;{0};
+<anchor xml:id="_fat_8c_source_1l00032"/>00032 
+<anchor xml:id="_fat_8c_source_1l00033"/>00033 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;fat_error_remap(<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res)&#32;{
+<anchor xml:id="_fat_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(res)&#32;{
+<anchor xml:id="_fat_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(0)&#32;Succeeded</emphasis>
+<anchor xml:id="_fat_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca97dee4a6b485dc8f91f37486092dfe34">FR_DISK_ERR</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(1)&#32;A&#32;hard&#32;error&#32;occurred&#32;in&#32;the&#32;low&#32;level&#32;disk&#32;I/O&#32;layer</emphasis>
+<anchor xml:id="_fat_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EIO;
+<anchor xml:id="_fat_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44cab6c9903af6e9bffbb7a288705f4a6a76">FR_INT_ERR</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(2)&#32;Assertion&#32;failed</emphasis>
+<anchor xml:id="_fat_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+<anchor xml:id="_fat_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44cac9894bed3e8632ede8d2712235fa8e45">FR_NOT_READY</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(3)&#32;The&#32;physical&#32;drive&#32;cannot&#32;work</emphasis>
+<anchor xml:id="_fat_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EIO;
+<anchor xml:id="_fat_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca97da8f98fc2e66d8fa7847f9ebb19b8c">FR_NO_FILE</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(4)&#32;Could&#32;not&#32;find&#32;the&#32;file</emphasis>
+<anchor xml:id="_fat_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOENT;
+<anchor xml:id="_fat_8c_source_1l00045"/>00045 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44cae4529c8cc8b59783d6efc9ba4f574532">FR_NO_PATH</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(5)&#32;Could&#32;not&#32;find&#32;the&#32;path</emphasis>
+<anchor xml:id="_fat_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOTDIR;
+<anchor xml:id="_fat_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca83e45a4b579558c57192c0a391b9bb45">FR_INVALID_NAME</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(6)&#32;The&#32;path&#32;name&#32;format&#32;is&#32;invalid</emphasis>
+<anchor xml:id="_fat_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EINVAL;
+<anchor xml:id="_fat_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca897e9f2dd7629a80f48af242d8bc1a3d">FR_DENIED</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(7)&#32;Access&#32;denied&#32;due&#32;to&#32;prohibited&#32;access&#32;or&#32;directory&#32;full</emphasis>
+<anchor xml:id="_fat_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EACCES;
+<anchor xml:id="_fat_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca0d8f024d256df76e84782b95018a2450">FR_EXIST</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(8)&#32;Access&#32;denied&#32;due&#32;to&#32;prohibited&#32;access</emphasis>
+<anchor xml:id="_fat_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EEXIST;
+<anchor xml:id="_fat_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca3dec4eba481cdf5e99d7cd6009e6dcf8">FR_INVALID_OBJECT</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(9)&#32;The&#32;file/directory&#32;object&#32;is&#32;invalid</emphasis>
+<anchor xml:id="_fat_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EBADF;
+<anchor xml:id="_fat_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44cac3afbb423b1d4497229416812aff383b">FR_WRITE_PROTECTED</link>:&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(10)&#32;The&#32;physical&#32;drive&#32;is&#32;write&#32;protected</emphasis>
+<anchor xml:id="_fat_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EACCES;
+<anchor xml:id="_fat_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca487844af77de15f6932a3b41ef3a2d65">FR_INVALID_DRIVE</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(11)&#32;The&#32;logical&#32;drive&#32;number&#32;is&#32;invalid</emphasis>
+<anchor xml:id="_fat_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENODEV;
+<anchor xml:id="_fat_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44cafc56605c68aaffab4a428339a8bd600d">FR_NOT_ENABLED</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(12)&#32;The&#32;volume&#32;has&#32;no&#32;work&#32;area</emphasis>
+<anchor xml:id="_fat_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENODEV;
+<anchor xml:id="_fat_8c_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca086154b5fee763f28c49fd0e2c1cb463">FR_NO_FILESYSTEM</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(13)&#32;There&#32;is&#32;no&#32;valid&#32;FAT&#32;volume</emphasis>
+<anchor xml:id="_fat_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EINVAL;
+<anchor xml:id="_fat_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca4b02760f758f5b1a89f445244fe9fbca">FR_MKFS_ABORTED</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(14)&#32;The&#32;f_mkfs()&#32;aborted&#32;due&#32;to&#32;any&#32;problem</emphasis>
+<anchor xml:id="_fat_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EIO;
+<anchor xml:id="_fat_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca3f8ca7e51af8b129d14328de7243c5d4">FR_TIMEOUT</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(15)&#32;Could&#32;not&#32;get&#32;a&#32;grant&#32;to&#32;access&#32;the&#32;volume&#32;within&#32;defined&#32;period</emphasis>
+<anchor xml:id="_fat_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ETIMEDOUT;
+<anchor xml:id="_fat_8c_source_1l00067"/>00067 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca7db5afaaa2af591bd4a208b2967075d7">FR_LOCKED</link>:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(16)&#32;The&#32;operation&#32;is&#32;rejected&#32;according&#32;to&#32;the&#32;file&#32;sharing&#32;policy</emphasis>
+<anchor xml:id="_fat_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EBUSY;
+<anchor xml:id="_fat_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44caf56a76a86602cbdeb2c4f3d00cfad21c">FR_NOT_ENOUGH_CORE</link>:&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(17)&#32;LFN&#32;working&#32;buffer&#32;could&#32;not&#32;be&#32;allocated</emphasis>
+<anchor xml:id="_fat_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_fat_8c_source_1l00071"/>00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca50dd3c3c274ccebb2cfbddde9d065bb9">FR_TOO_MANY_OPEN_FILES</link>:&#32;&#32;<emphasis role="comment">//&#32;(18)&#32;Number&#32;of&#32;open&#32;files&#32;&gt;&#32;FF_FS_LOCK</emphasis>
+<anchor xml:id="_fat_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENFILE;
+<anchor xml:id="_fat_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca3b89faeceab64db277d0fcdeaaa315d6">FR_INVALID_PARAMETER</link>:&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(19)&#32;Given&#32;parameter&#32;is&#32;invalid</emphasis>
+<anchor xml:id="_fat_8c_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EINVAL;
+<anchor xml:id="_fat_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_fat_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-res;
+<anchor xml:id="_fat_8c_source_1l00077"/>00077 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00078"/>00078 }
+<anchor xml:id="_fat_8c_source_1l00079"/>00079 
+<anchor xml:id="_fat_8c_source_1l00080"/>00080 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">inline</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;debug_if(<emphasis role="keywordtype">int</emphasis>&#32;condition,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_fat_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(condition)&#32;{
+<anchor xml:id="_fat_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_fat_8c_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_fat_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;vprintf(format,&#32;args);
+<anchor xml:id="_fat_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_fat_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00087"/>00087 }
+<anchor xml:id="_fat_8c_source_1l00088"/>00088 
+<anchor xml:id="_fat_8c_source_1l00089"/><link linkend="_fat_8c_1a09cdaa6f36fa409bdf002727bff98eb1">00089</link> <link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>&#32;<link linkend="_fat_8c_1a09cdaa6f36fa409bdf002727bff98eb1">disk_initialize</link>(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv)&#32;{
+<anchor xml:id="_fat_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_initialize&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+<anchor xml:id="_fat_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>)_ffs[pdrv]-&gt;init(_ffs[pdrv]);
+<anchor xml:id="_fat_8c_source_1l00092"/>00092 }
+<anchor xml:id="_fat_8c_source_1l00093"/>00093 
+<anchor xml:id="_fat_8c_source_1l00094"/>00094 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;disk_get_sector_size(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv)&#32;{
+<anchor xml:id="_fat_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;sector_size&#32;=&#32;_ffs[(int)pdrv]-&gt;erase_size;
+<anchor xml:id="_fat_8c_source_1l00096"/>00096 
+<anchor xml:id="_fat_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;ssize&#32;=&#32;sector_size;
+<anchor xml:id="_fat_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ssize&#32;&lt;&#32;512)&#32;{
+<anchor xml:id="_fat_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize&#32;=&#32;512;
+<anchor xml:id="_fat_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00102"/>00102 }
+<anchor xml:id="_fat_8c_source_1l00103"/>00103 
+<anchor xml:id="_fat_8c_source_1l00104"/>00104 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;disk_get_sector_count(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv)&#32;{
+<anchor xml:id="_fat_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;scount&#32;=&#32;(_ffs[(int)pdrv]-&gt;size(_ffs[(<emphasis role="keywordtype">int</emphasis>)pdrv]))&#32;/&#32;disk_get_sector_size(pdrv);
+<anchor xml:id="_fat_8c_source_1l00106"/>00106 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;scount;
+<anchor xml:id="_fat_8c_source_1l00107"/>00107 }
+<anchor xml:id="_fat_8c_source_1l00108"/>00108 
+<anchor xml:id="_fat_8c_source_1l00109"/><link linkend="_fat_8c_1a8348ac5ee6d709420c02e45c111f4793">00109</link> <link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>&#32;<link linkend="_fat_8c_1a8348ac5ee6d709420c02e45c111f4793">disk_status</link>(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv)&#32;{
+<anchor xml:id="_fat_8c_source_1l00110"/>00110 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_status&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+<anchor xml:id="_fat_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00112"/>00112 }
+<anchor xml:id="_fat_8c_source_1l00113"/>00113 
+<anchor xml:id="_fat_8c_source_1l00114"/><link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">00114</link> <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv,&#32;<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;*buff,&#32;<link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link>&#32;sector,&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;count)&#32;{
+<anchor xml:id="_fat_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+<anchor xml:id="_fat_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[(int)pdrv]-&gt;read(_ffs[(<emphasis role="keywordtype">int</emphasis>)pdrv],&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*)buff,&#32;addr,&#32;size);
+<anchor xml:id="_fat_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00120"/>00120 }
+<anchor xml:id="_fat_8c_source_1l00121"/>00121 
+<anchor xml:id="_fat_8c_source_1l00122"/><link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">00122</link> <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv,&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;*buff,&#32;<link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link>&#32;sector,&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;count)&#32;{
+<anchor xml:id="_fat_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_write&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+<anchor xml:id="_fat_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+<anchor xml:id="_fat_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00126"/>00126 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00127"/>00127 
+<anchor xml:id="_fat_8c_source_1l00128"/>00128 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;erase(_ffs[pdrv],&#32;addr,&#32;size);
+<anchor xml:id="_fat_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+<anchor xml:id="_fat_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00132"/>00132 
+<anchor xml:id="_fat_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;err&#32;=&#32;_ffs[pdrv]-&gt;program(_ffs[pdrv],&#32;buff,&#32;addr,&#32;size);
+<anchor xml:id="_fat_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+<anchor xml:id="_fat_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00137"/>00137 
+<anchor xml:id="_fat_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00139"/>00139 }
+<anchor xml:id="_fat_8c_source_1l00140"/>00140 
+<anchor xml:id="_fat_8c_source_1l00141"/><link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">00141</link> <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;pdrv,&#32;<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;cmd,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buff)&#32;{
+<anchor xml:id="_fat_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_ioctl(%d)\n&quot;</emphasis>,&#32;cmd);
+<anchor xml:id="_fat_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(cmd)&#32;{
+<anchor xml:id="_fat_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>:
+<anchor xml:id="_fat_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+<anchor xml:id="_fat_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_fat_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde">GET_SECTOR_COUNT</link>:
+<anchor xml:id="_fat_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+<anchor xml:id="_fat_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_fat_8c_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_count(pdrv);
+<anchor xml:id="_fat_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>:
+<anchor xml:id="_fat_8c_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+<anchor xml:id="_fat_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_fat_8c_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_size(pdrv);
+<anchor xml:id="_fat_8c_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500">GET_BLOCK_SIZE</link>:
+<anchor xml:id="_fat_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;1;&#32;<emphasis role="comment">//&#32;default&#32;when&#32;not&#32;known</emphasis>
+<anchor xml:id="_fat_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00167"/>00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1af09fd84bea8d4e889e272471f44d60d6">CTRL_TRIM</link>:
+<anchor xml:id="_fat_8c_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+<anchor xml:id="_fat_8c_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_fat_8c_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*sectors&#32;=&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff;
+<anchor xml:id="_fat_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+<anchor xml:id="_fat_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sectors[0]&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)(sectors[1]&#32;-&#32;sectors[0]&#32;+&#32;1)&#32;*&#32;ssize;
+<anchor xml:id="_fat_8c_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;trim(_ffs[pdrv],&#32;addr,&#32;size);
+<anchor xml:id="_fat_8c_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+<anchor xml:id="_fat_8c_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00178"/>00178 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00179"/>00179 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+<anchor xml:id="_fat_8c_source_1l00180"/>00180 }
+<anchor xml:id="_fat_8c_source_1l00181"/>00181 
+<anchor xml:id="_fat_8c_source_1l00182"/><link linkend="_fat_8c_1af58b536abfd30f77213f4ecaf2ac52f5">00182</link> <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;<link linkend="_fat_8c_1af58b536abfd30f77213f4ecaf2ac52f5">get_fattime</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00183"/>00183 &#32;&#32;&#32;&#32;time_t&#32;rawtime;
+<anchor xml:id="_fat_8c_source_1l00184"/>00184 &#32;&#32;&#32;&#32;time(&amp;rawtime);
+<anchor xml:id="_fat_8c_source_1l00185"/>00185 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*ptm&#32;=&#32;localtime(&amp;rawtime);
+<anchor xml:id="_fat_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_year&#32;-&#32;80)&#32;&lt;&lt;&#32;25
+<anchor xml:id="_fat_8c_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_mon&#32;+&#32;1)&#32;&lt;&lt;&#32;21
+<anchor xml:id="_fat_8c_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_mday)&#32;&lt;&lt;&#32;16
+<anchor xml:id="_fat_8c_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_hour)&#32;&lt;&lt;&#32;11
+<anchor xml:id="_fat_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_min)&#32;&lt;&lt;&#32;5
+<anchor xml:id="_fat_8c_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_sec&#32;/&#32;2);
+<anchor xml:id="_fat_8c_source_1l00192"/>00192 }
+<anchor xml:id="_fat_8c_source_1l00193"/>00193 
+<anchor xml:id="_fat_8c_source_1l00194"/>00194 
+<anchor xml:id="_fat_8c_source_1l00195"/>00195 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;mount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;pending)&#32;{
+<anchor xml:id="_fat_8c_source_1l00196"/>00196 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00198"/>00198 
+<anchor xml:id="_fat_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;_fsid[3]&#32;=&#32;{0};
+<anchor xml:id="_fat_8c_source_1l00200"/>00200 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>;&#32;i++)&#32;{
+<anchor xml:id="_fat_8c_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[i]&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>&#32;=&#32;i;
+<anchor xml:id="_fat_8c_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_ffs[i]&#32;=&#32;device;
+<anchor xml:id="_fat_8c_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_fsid[0]&#32;=&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>&#32;+&#32;i;
+<anchor xml:id="_fat_8c_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_fsid[1]&#32;=&#32;<emphasis role="charliteral">&apos;:&apos;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00206"/>00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_fsid[2]&#32;=&#32;<emphasis role="charliteral">&apos;\0&apos;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1ae411384365b516cdd396691a05d15be0">fatfs</link>,&#32;_fsid,&#32;!pending);
+<anchor xml:id="_fat_8c_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00211"/>00211 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00212"/>00212 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00213"/>00213 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_fat_8c_source_1l00214"/>00214 }
+<anchor xml:id="_fat_8c_source_1l00215"/>00215 
+<anchor xml:id="_fat_8c_source_1l00216"/>00216 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;unmount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_fat_8c_source_1l00217"/>00217 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00218"/>00218 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00219"/>00219 
+<anchor xml:id="_fat_8c_source_1l00220"/>00220 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;_fsid[3]&#32;=&#32;<emphasis role="stringliteral">&quot;0:&quot;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00221"/>00221 &#32;&#32;&#32;&#32;_fsid[0]&#32;=&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>&#32;+&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>;
+<anchor xml:id="_fat_8c_source_1l00222"/>00222 
+<anchor xml:id="_fat_8c_source_1l00223"/>00223 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(NULL,&#32;_fsid,&#32;0);
+<anchor xml:id="_fat_8c_source_1l00224"/>00224 &#32;&#32;&#32;&#32;_ffs[context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>]&#32;=&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00225"/>00225 
+<anchor xml:id="_fat_8c_source_1l00226"/>00226 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00227"/>00227 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00228"/>00228 }
+<anchor xml:id="_fat_8c_source_1l00229"/>00229 
+<anchor xml:id="_fat_8c_source_1l00230"/>00230 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;format(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_fat_8c_source_1l00231"/>00231 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00232"/>00232 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00233"/>00233 
+<anchor xml:id="_fat_8c_source_1l00234"/>00234 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_fat_8c_source_1l00236"/>00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_fat_8c_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00240"/>00240 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00241"/>00241 
+<anchor xml:id="_fat_8c_source_1l00242"/>00242 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;erase&#32;first&#32;handful&#32;of&#32;blocks</emphasis>
+<anchor xml:id="_fat_8c_source_1l00243"/>00243 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;header&#32;=&#32;2&#32;*&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>;
+<anchor xml:id="_fat_8c_source_1l00244"/>00244 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;0,&#32;header);
+<anchor xml:id="_fat_8c_source_1l00245"/>00245 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_fat_8c_source_1l00248"/>00248 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00249"/>00249 
+<anchor xml:id="_fat_8c_source_1l00250"/>00250 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;program_size&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>;
+<anchor xml:id="_fat_8c_source_1l00251"/>00251 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer&#32;=&#32;malloc(program_size);
+<anchor xml:id="_fat_8c_source_1l00252"/>00252 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!buffer)&#32;{
+<anchor xml:id="_fat_8c_source_1l00253"/>00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_fat_8c_source_1l00255"/>00255 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00256"/>00256 &#32;&#32;&#32;&#32;memset(buffer,&#32;0xFF,&#32;program_size);
+<anchor xml:id="_fat_8c_source_1l00257"/>00257 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;header;&#32;i&#32;+=&#32;program_size)&#32;{
+<anchor xml:id="_fat_8c_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>(device,&#32;buffer,&#32;i,&#32;program_size);
+<anchor xml:id="_fat_8c_source_1l00259"/>00259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00260"/>00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(buffer);
+<anchor xml:id="_fat_8c_source_1l00261"/>00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_fat_8c_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00264"/>00264 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00265"/>00265 &#32;&#32;&#32;&#32;free(buffer);
+<anchor xml:id="_fat_8c_source_1l00266"/>00266 
+<anchor xml:id="_fat_8c_source_1l00267"/>00267 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;trim&#32;entire&#32;device&#32;to&#32;indicate&#32;it&#32;is&#32;unneeded</emphasis>
+<anchor xml:id="_fat_8c_source_1l00268"/>00268 &#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>(device,&#32;0,&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device));
+<anchor xml:id="_fat_8c_source_1l00269"/>00269 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_fat_8c_source_1l00272"/>00272 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00273"/>00273 
+<anchor xml:id="_fat_8c_source_1l00274"/>00274 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>(fs,&#32;device,&#32;<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="_fat_8c_source_1l00275"/>00275 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00276"/>00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00277"/>00277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_fat_8c_source_1l00278"/>00278 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00279"/>00279 
+<anchor xml:id="_fat_8c_source_1l00280"/>00280 &#32;&#32;&#32;&#32;<link linkend="_struct_m_k_f_s___p_a_r_m">MKFS_PARM</link>&#32;opt;
+<anchor xml:id="_fat_8c_source_1l00281"/>00281 &#32;&#32;&#32;&#32;opt.<link linkend="_struct_m_k_f_s___p_a_r_m_1a54cb609ecff9f1586f3628b00aeb8f23">fmt</link>&#32;=&#32;(<link linkend="_ff_8h_1a701ab2eee8c2d9b5b445aadc8f14df4d">FM_ANY</link>&#32;|&#32;<link linkend="_ff_8h_1a3b3d16ac135fe57669fc8a93dfa0c0a5">FM_SFD</link>);
+<anchor xml:id="_fat_8c_source_1l00282"/>00282 &#32;&#32;&#32;&#32;opt.<link linkend="_struct_m_k_f_s___p_a_r_m_1a0ff8e4728bddfe0636c50367af399e25">n_fat</link>&#32;=&#32;0;
+<anchor xml:id="_fat_8c_source_1l00283"/>00283 &#32;&#32;&#32;&#32;opt.<link linkend="_struct_m_k_f_s___p_a_r_m_1af244e017c4cb2c821e5e819fff7db710">align</link>&#32;=&#32;0U;
+<anchor xml:id="_fat_8c_source_1l00284"/>00284 &#32;&#32;&#32;&#32;opt.<link linkend="_struct_m_k_f_s___p_a_r_m_1a2b8a26b614381e0c2e0ff26f138feea6">n_root</link>&#32;=&#32;0U;
+<anchor xml:id="_fat_8c_source_1l00285"/>00285 &#32;&#32;&#32;&#32;opt.<link linkend="_struct_m_k_f_s___p_a_r_m_1adb29b0af8e486fc53d8b629c3e49d567">au_size</link>&#32;=&#32;0;&#32;<emphasis role="comment">//&#32;(DWORD)cluster_size;</emphasis>
+<anchor xml:id="_fat_8c_source_1l00286"/>00286 
+<anchor xml:id="_fat_8c_source_1l00287"/>00287 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;<emphasis role="keywordtype">id</emphasis>[3]&#32;=&#32;<emphasis role="stringliteral">&quot;0:&quot;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00288"/>00288 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">id</emphasis>[0]&#32;=&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>&#32;+&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>;
+<anchor xml:id="_fat_8c_source_1l00289"/>00289 
+<anchor xml:id="_fat_8c_source_1l00290"/>00290 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a983f0614033bd7cf587eb56d3054a91c">f_mkfs</link>((<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a03bdb8ce5895c7e261aadc2529637546">TCHAR</link>&#32;*)<emphasis role="keywordtype">id</emphasis>,&#32;&amp;opt,&#32;NULL,&#32;<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>);
+<anchor xml:id="_fat_8c_source_1l00291"/>00291 
+<anchor xml:id="_fat_8c_source_1l00292"/>00292 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00293"/>00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>(fs);
+<anchor xml:id="_fat_8c_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00296"/>00296 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00297"/>00297 
+<anchor xml:id="_fat_8c_source_1l00298"/>00298 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>(fs);
+<anchor xml:id="_fat_8c_source_1l00299"/>00299 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_fat_8c_source_1l00300"/>00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00301"/>00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+<anchor xml:id="_fat_8c_source_1l00302"/>00302 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00303"/>00303 
+<anchor xml:id="_fat_8c_source_1l00304"/>00304 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00305"/>00305 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00306"/>00306 }
+<anchor xml:id="_fat_8c_source_1l00307"/>00307 
+<anchor xml:id="_fat_8c_source_1l00308"/>00308 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*fat_path_prefix(<emphasis role="keywordtype">char</emphasis>&#32;*dist,&#32;<emphasis role="keywordtype">int</emphasis>&#32;<emphasis role="keywordtype">id</emphasis>,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_fat_8c_source_1l00309"/>00309 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<emphasis role="keywordtype">id</emphasis>&#32;==&#32;0)&#32;{
+<anchor xml:id="_fat_8c_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(dist,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*)dist;
+<anchor xml:id="_fat_8c_source_1l00312"/>00312 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00313"/>00313 
+<anchor xml:id="_fat_8c_source_1l00314"/>00314 &#32;&#32;&#32;&#32;dist[0]&#32;=&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>&#32;+&#32;id;
+<anchor xml:id="_fat_8c_source_1l00315"/>00315 &#32;&#32;&#32;&#32;dist[1]&#32;=&#32;<emphasis role="charliteral">&apos;:&apos;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00316"/>00316 &#32;&#32;&#32;&#32;strcpy(dist&#32;+&#32;strlen(<emphasis role="stringliteral">&quot;0:&quot;</emphasis>),&#32;path);
+<anchor xml:id="_fat_8c_source_1l00317"/>00317 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*)dist;
+<anchor xml:id="_fat_8c_source_1l00318"/>00318 }
+<anchor xml:id="_fat_8c_source_1l00319"/>00319 
+<anchor xml:id="_fat_8c_source_1l00320"/>00320 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_remove(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_fat_8c_source_1l00321"/>00321 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00322"/>00322 
+<anchor xml:id="_fat_8c_source_1l00323"/>00323 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00324"/>00324 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00325"/>00325 
+<anchor xml:id="_fat_8c_source_1l00326"/>00326 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00327"/>00327 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a2858167fcd0bced48e9be434b3895efe">f_unlink</link>(fpath);
+<anchor xml:id="_fat_8c_source_1l00328"/>00328 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00329"/>00329 
+<anchor xml:id="_fat_8c_source_1l00330"/>00330 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00331"/>00331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_unlink()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00332"/>00332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;==&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca897e9f2dd7629a80f48af242d8bc1a3d">FR_DENIED</link>)
+<anchor xml:id="_fat_8c_source_1l00333"/>00333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOTEMPTY;
+<anchor xml:id="_fat_8c_source_1l00334"/>00334 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00335"/>00335 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00336"/>00336 }
+<anchor xml:id="_fat_8c_source_1l00337"/>00337 
+<anchor xml:id="_fat_8c_source_1l00338"/>00338 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_rename(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*oldpath,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*newpath)&#32;{
+<anchor xml:id="_fat_8c_source_1l00339"/>00339 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00340"/>00340 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;oldfpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00341"/>00341 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;newfpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00342"/>00342 &#32;&#32;&#32;&#32;fat_path_prefix(oldfpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;oldpath);
+<anchor xml:id="_fat_8c_source_1l00343"/>00343 &#32;&#32;&#32;&#32;fat_path_prefix(newfpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;newpath);
+<anchor xml:id="_fat_8c_source_1l00344"/>00344 
+<anchor xml:id="_fat_8c_source_1l00345"/>00345 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00346"/>00346 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1aa775b9b024acfeb3a66523cab497d142">f_rename</link>(oldfpath,&#32;newfpath);
+<anchor xml:id="_fat_8c_source_1l00347"/>00347 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00348"/>00348 
+<anchor xml:id="_fat_8c_source_1l00349"/>00349 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00350"/>00350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_rename()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00351"/>00351 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00352"/>00352 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00353"/>00353 }
+<anchor xml:id="_fat_8c_source_1l00354"/>00354 
+<anchor xml:id="_fat_8c_source_1l00355"/>00355 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_mkdir(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;mode_t&#32;mode)&#32;{
+<anchor xml:id="_fat_8c_source_1l00356"/>00356 &#32;&#32;&#32;&#32;(void)mode;
+<anchor xml:id="_fat_8c_source_1l00357"/>00357 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00358"/>00358 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00359"/>00359 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00360"/>00360 
+<anchor xml:id="_fat_8c_source_1l00361"/>00361 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00362"/>00362 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a4b4d38db58e89c526cfcf53200d719d0">f_mkdir</link>(fpath);
+<anchor xml:id="_fat_8c_source_1l00363"/>00363 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00364"/>00364 
+<anchor xml:id="_fat_8c_source_1l00365"/>00365 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00366"/>00366 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_mkdir()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00367"/>00367 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00368"/>00368 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00369"/>00369 }
+<anchor xml:id="_fat_8c_source_1l00370"/>00370 
+<anchor xml:id="_fat_8c_source_1l00371"/>00371 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_rmdir(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_fat_8c_source_1l00372"/>00372 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00373"/>00373 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00374"/>00374 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00375"/>00375 
+<anchor xml:id="_fat_8c_source_1l00376"/>00376 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00377"/>00377 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a2858167fcd0bced48e9be434b3895efe">f_unlink</link>(fpath);
+<anchor xml:id="_fat_8c_source_1l00378"/>00378 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00379"/>00379 
+<anchor xml:id="_fat_8c_source_1l00380"/>00380 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00381"/>00381 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_unlink()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00382"/>00382 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00383"/>00383 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00384"/>00384 }
+<anchor xml:id="_fat_8c_source_1l00385"/>00385 
+<anchor xml:id="_fat_8c_source_1l00386"/>00386 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_stat(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;<emphasis role="keyword">struct</emphasis>&#32;stat&#32;*st)&#32;{
+<anchor xml:id="_fat_8c_source_1l00387"/>00387 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00388"/>00388 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00389"/>00389 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00390"/>00390 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l_i_n_f_o">FILINFO</link>&#32;f&#32;=&#32;{0};
+<anchor xml:id="_fat_8c_source_1l00391"/>00391 
+<anchor xml:id="_fat_8c_source_1l00392"/>00392 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00393"/>00393 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1abe1f60daab5c7d11170c334fb832c798">f_stat</link>(fpath,&#32;&amp;f);
+<anchor xml:id="_fat_8c_source_1l00394"/>00394 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00395"/>00395 
+<anchor xml:id="_fat_8c_source_1l00396"/>00396 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00397"/>00397 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00398"/>00398 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00399"/>00399 &#32;&#32;&#32;&#32;st-&gt;st_size&#32;=&#32;f.<link linkend="_struct_f_i_l_i_n_f_o_1a9e5b78ed7190f73de3ebcbdfbd6d1844">fsize</link>;
+<anchor xml:id="_fat_8c_source_1l00400"/>00400 &#32;&#32;&#32;&#32;st-&gt;st_mode&#32;=&#32;0;
+<anchor xml:id="_fat_8c_source_1l00401"/>00401 &#32;&#32;&#32;&#32;st-&gt;st_mode&#32;|=&#32;(f.<link linkend="_struct_f_i_l_i_n_f_o_1a838d542585831b085537b363f18205c0">fattrib</link>&#32;&amp;&#32;<link linkend="_ff_8h_1a3a9db44e978ed6c13b641e092d4cd7d3">AM_DIR</link>)&#32;?&#32;S_IFDIR&#32;:&#32;S_IFREG;
+<anchor xml:id="_fat_8c_source_1l00402"/>00402 &#32;&#32;&#32;&#32;st-&gt;st_mode&#32;|=&#32;(f.<link linkend="_struct_f_i_l_i_n_f_o_1a838d542585831b085537b363f18205c0">fattrib</link>&#32;&amp;&#32;<link linkend="_ff_8h_1add6d85d1e7a02b4f6188783ef91a5f1e">AM_RDO</link>)&#32;?
+<anchor xml:id="_fat_8c_source_1l00403"/>00403 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(S_IRUSR&#32;|&#32;S_IXUSR&#32;|&#32;S_IRGRP&#32;|&#32;S_IXGRP&#32;|&#32;S_IROTH&#32;|&#32;S_IXOTH)&#32;:
+<anchor xml:id="_fat_8c_source_1l00404"/>00404 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(S_IRWXU&#32;|&#32;S_IRWXG&#32;|&#32;S_IRWXO);
+<anchor xml:id="_fat_8c_source_1l00405"/>00405 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00406"/>00406 }
+<anchor xml:id="_fat_8c_source_1l00407"/>00407 
+<anchor xml:id="_fat_8c_source_1l00408"/>00408 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_open(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;<emphasis role="keywordtype">int</emphasis>&#32;flags)&#32;{
+<anchor xml:id="_fat_8c_source_1l00409"/>00409 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;open_mode;
+<anchor xml:id="_fat_8c_source_1l00410"/>00410 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(flags&#32;&amp;&#32;O_RDWR)
+<anchor xml:id="_fat_8c_source_1l00411"/>00411 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;=&#32;<link linkend="_ff_8h_1a1f4f3530ff03abbd979b072536e72290">FA_READ</link>&#32;|&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>;
+<anchor xml:id="_fat_8c_source_1l00412"/>00412 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(flags&#32;&amp;&#32;O_WRONLY)
+<anchor xml:id="_fat_8c_source_1l00413"/>00413 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;=&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>;
+<anchor xml:id="_fat_8c_source_1l00414"/>00414 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="_fat_8c_source_1l00415"/>00415 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;=&#32;<link linkend="_ff_8h_1a1f4f3530ff03abbd979b072536e72290">FA_READ</link>;
+<anchor xml:id="_fat_8c_source_1l00416"/>00416 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(flags&#32;&amp;&#32;O_CREAT)&#32;{
+<anchor xml:id="_fat_8c_source_1l00417"/>00417 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(flags&#32;&amp;&#32;O_TRUNC)
+<anchor xml:id="_fat_8c_source_1l00418"/>00418 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;|=&#32;<link linkend="_ff_8h_1afba4546b131dea4b24727fa20a80e29f">FA_CREATE_ALWAYS</link>;
+<anchor xml:id="_fat_8c_source_1l00419"/>00419 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="_fat_8c_source_1l00420"/>00420 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;|=&#32;<link linkend="_ff_8h_1a17b01553029920ac0468912b4bcb16c7">FA_OPEN_ALWAYS</link>;
+<anchor xml:id="_fat_8c_source_1l00421"/>00421 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00422"/>00422 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(flags&#32;&amp;&#32;O_APPEND)
+<anchor xml:id="_fat_8c_source_1l00423"/>00423 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;open_mode&#32;|=&#32;<link linkend="_ff_8h_1a90f135b2ae90fba5080f6bd2b6c57b8a">FA_OPEN_APPEND</link>;
+<anchor xml:id="_fat_8c_source_1l00424"/>00424 
+<anchor xml:id="_fat_8c_source_1l00425"/>00425 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00426"/>00426 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00427"/>00427 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00428"/>00428 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structfat__file__t">fat_file_t</link>));
+<anchor xml:id="_fat_8c_source_1l00429"/>00429 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fat_file&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00430"/>00430 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;file_open:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_fat_8c_source_1l00431"/>00431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_fat_8c_source_1l00432"/>00432 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00433"/>00433 
+<anchor xml:id="_fat_8c_source_1l00434"/>00434 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00435"/>00435 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1aefdef7126128d99d0b3bd82c28e54d80">f_open</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>,&#32;fpath,&#32;open_mode);
+<anchor xml:id="_fat_8c_source_1l00436"/>00436 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00437"/>00437 
+<anchor xml:id="_fat_8c_source_1l00438"/>00438 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00439"/>00439 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_open(&apos;w&apos;)&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00440"/>00440 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00441"/>00441 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00442"/>00442 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00443"/>00443 }
+<anchor xml:id="_fat_8c_source_1l00444"/>00444 
+<anchor xml:id="_fat_8c_source_1l00445"/>00445 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_close(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_fat_8c_source_1l00446"/>00446 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00447"/>00447 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00448"/>00448 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00449"/>00449 
+<anchor xml:id="_fat_8c_source_1l00450"/>00450 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00451"/>00451 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00452"/>00452 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00453"/>00453 
+<anchor xml:id="_fat_8c_source_1l00454"/>00454 &#32;&#32;&#32;&#32;free(file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>);
+<anchor xml:id="_fat_8c_source_1l00455"/>00455 &#32;&#32;&#32;&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>&#32;=&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00456"/>00456 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00457"/>00457 }
+<anchor xml:id="_fat_8c_source_1l00458"/>00458 
+<anchor xml:id="_fat_8c_source_1l00459"/>00459 <emphasis role="keyword">static</emphasis>&#32;ssize_t&#32;file_write(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size)&#32;{
+<anchor xml:id="_fat_8c_source_1l00460"/>00460 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00461"/>00461 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00462"/>00462 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00463"/>00463 
+<anchor xml:id="_fat_8c_source_1l00464"/>00464 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;n;
+<anchor xml:id="_fat_8c_source_1l00465"/>00465 
+<anchor xml:id="_fat_8c_source_1l00466"/>00466 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00467"/>00467 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1ae6a4dfae8a9e308bdb2283a37ef680f2">f_write</link>(&amp;(fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>),&#32;buffer,&#32;size,&#32;&amp;n);
+<anchor xml:id="_fat_8c_source_1l00468"/>00468 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00469"/>00469 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00470"/>00470 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_write()&#32;failed:&#32;%d&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00471"/>00471 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00472"/>00472 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00473"/>00473 &#32;&#32;&#32;&#32;res&#32;=&#32;<link linkend="_ff_8c_1ad69c7246b122ba56a134939ee0eaf847">f_sync</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00474"/>00474 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00475"/>00475 
+<anchor xml:id="_fat_8c_source_1l00476"/>00476 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00477"/>00477 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_write()&#32;failed:&#32;%d&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00478"/>00478 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00479"/>00479 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00480"/>00480 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;n;
+<anchor xml:id="_fat_8c_source_1l00481"/>00481 }
+<anchor xml:id="_fat_8c_source_1l00482"/>00482 
+<anchor xml:id="_fat_8c_source_1l00483"/>00483 <emphasis role="keyword">static</emphasis>&#32;ssize_t&#32;file_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size)&#32;{
+<anchor xml:id="_fat_8c_source_1l00484"/>00484 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00485"/>00485 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00486"/>00486 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00487"/>00487 
+<anchor xml:id="_fat_8c_source_1l00488"/>00488 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;n;
+<anchor xml:id="_fat_8c_source_1l00489"/>00489 
+<anchor xml:id="_fat_8c_source_1l00490"/>00490 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00491"/>00491 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1ac4c3dcb6869ca252888eebabe39727b3">f_read</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>,&#32;buffer,&#32;size,&#32;&amp;n);
+<anchor xml:id="_fat_8c_source_1l00492"/>00492 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00493"/>00493 
+<anchor xml:id="_fat_8c_source_1l00494"/>00494 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00495"/>00495 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_read()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00496"/>00496 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00497"/>00497 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00498"/>00498 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;n;
+<anchor xml:id="_fat_8c_source_1l00499"/>00499 }
+<anchor xml:id="_fat_8c_source_1l00500"/>00500 
+<anchor xml:id="_fat_8c_source_1l00501"/>00501 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_sync(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_fat_8c_source_1l00502"/>00502 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00503"/>00503 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00504"/>00504 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00505"/>00505 
+<anchor xml:id="_fat_8c_source_1l00506"/>00506 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00507"/>00507 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1ad69c7246b122ba56a134939ee0eaf847">f_sync</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00508"/>00508 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00509"/>00509 
+<anchor xml:id="_fat_8c_source_1l00510"/>00510 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00511"/>00511 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_sync()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00512"/>00512 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00513"/>00513 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00514"/>00514 }
+<anchor xml:id="_fat_8c_source_1l00515"/>00515 
+<anchor xml:id="_fat_8c_source_1l00516"/>00516 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_seek(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;off_t&#32;offset,&#32;<emphasis role="keywordtype">int</emphasis>&#32;whence)&#32;{
+<anchor xml:id="_fat_8c_source_1l00517"/>00517 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00518"/>00518 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00519"/>00519 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00520"/>00520 
+<anchor xml:id="_fat_8c_source_1l00521"/>00521 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00522"/>00522 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(whence&#32;==&#32;SEEK_END)
+<anchor xml:id="_fat_8c_source_1l00523"/>00523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;offset&#32;+=&#32;<link linkend="_ff_8h_1a26f33722c5bf1aa3cd6f0290a83eb2bc">f_size</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00524"/>00524 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(whence&#32;==&#32;SEEK_CUR)
+<anchor xml:id="_fat_8c_source_1l00525"/>00525 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;offset&#32;+=&#32;<link linkend="_ff_8h_1a5e1daca7ce13cdc277e42185f7f9124f">f_tell</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00526"/>00526 
+<anchor xml:id="_fat_8c_source_1l00527"/>00527 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;res&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>,&#32;offset);
+<anchor xml:id="_fat_8c_source_1l00528"/>00528 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00529"/>00529 
+<anchor xml:id="_fat_8c_source_1l00530"/>00530 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00531"/>00531 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;lseek&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00532"/>00532 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00533"/>00533 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00534"/>00534 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(off_t)fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>.<link linkend="_struct_f_i_l_1a088b03ab2e02f82e10e17bdd938190a6">fptr</link>;
+<anchor xml:id="_fat_8c_source_1l00535"/>00535 }
+<anchor xml:id="_fat_8c_source_1l00536"/>00536 
+<anchor xml:id="_fat_8c_source_1l00537"/>00537 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_tell(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_fat_8c_source_1l00538"/>00538 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00539"/>00539 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00540"/>00540 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00541"/>00541 
+<anchor xml:id="_fat_8c_source_1l00542"/>00542 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00543"/>00543 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;<link linkend="_ff_8h_1a5e1daca7ce13cdc277e42185f7f9124f">f_tell</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00544"/>00544 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00545"/>00545 
+<anchor xml:id="_fat_8c_source_1l00546"/>00546 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+<anchor xml:id="_fat_8c_source_1l00547"/>00547 }
+<anchor xml:id="_fat_8c_source_1l00548"/>00548 
+<anchor xml:id="_fat_8c_source_1l00549"/>00549 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_size(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_fat_8c_source_1l00550"/>00550 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00551"/>00551 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00552"/>00552 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00553"/>00553 
+<anchor xml:id="_fat_8c_source_1l00554"/>00554 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00555"/>00555 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;<link linkend="_ff_8h_1a26f33722c5bf1aa3cd6f0290a83eb2bc">f_size</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00556"/>00556 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00557"/>00557 
+<anchor xml:id="_fat_8c_source_1l00558"/>00558 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+<anchor xml:id="_fat_8c_source_1l00559"/>00559 }
+<anchor xml:id="_fat_8c_source_1l00560"/>00560 
+<anchor xml:id="_fat_8c_source_1l00561"/>00561 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_truncate(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;off_t&#32;length)&#32;{
+<anchor xml:id="_fat_8c_source_1l00562"/>00562 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00563"/>00563 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00564"/>00564 &#32;&#32;&#32;&#32;<link linkend="_structfat__file__t">fat_file_t</link>&#32;*fat_file&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_fat_8c_source_1l00565"/>00565 
+<anchor xml:id="_fat_8c_source_1l00566"/>00566 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00567"/>00567 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a3fc0992ad7436250b6b1a0592214b7f2">FSIZE_t</link>&#32;old_offset&#32;=&#32;<link linkend="_ff_8h_1a5e1daca7ce13cdc277e42185f7f9124f">f_tell</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00568"/>00568 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>,&#32;length);
+<anchor xml:id="_fat_8c_source_1l00569"/>00569 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res)&#32;{
+<anchor xml:id="_fat_8c_source_1l00570"/>00570 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00571"/>00571 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00572"/>00572 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00573"/>00573 &#32;&#32;&#32;&#32;res&#32;=&#32;<link linkend="_ff_8c_1a691a27b40c348f7c84b42e911636f38a">f_truncate</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>);
+<anchor xml:id="_fat_8c_source_1l00574"/>00574 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res)&#32;{
+<anchor xml:id="_fat_8c_source_1l00575"/>00575 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00576"/>00576 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00577"/>00577 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00578"/>00578 &#32;&#32;&#32;&#32;res&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(&amp;fat_file-&gt;<link linkend="_structfat__file__t_1a8b512ef8f01fefc36c6ff4e8b1ff0d05">file</link>,&#32;old_offset);
+<anchor xml:id="_fat_8c_source_1l00579"/>00579 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00580"/>00580 
+<anchor xml:id="_fat_8c_source_1l00581"/>00581 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res)&#32;{
+<anchor xml:id="_fat_8c_source_1l00582"/>00582 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00583"/>00583 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00584"/>00584 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00585"/>00585 }
+<anchor xml:id="_fat_8c_source_1l00586"/>00586 
+<anchor xml:id="_fat_8c_source_1l00587"/>00587 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_open(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_fat_8c_source_1l00588"/>00588 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00589"/>00589 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;fpath[<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>];
+<anchor xml:id="_fat_8c_source_1l00590"/>00590 &#32;&#32;&#32;&#32;fat_path_prefix(fpath,&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>,&#32;path);
+<anchor xml:id="_fat_8c_source_1l00591"/>00591 
+<anchor xml:id="_fat_8c_source_1l00592"/>00592 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>&#32;*dh&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>));
+<anchor xml:id="_fat_8c_source_1l00593"/>00593 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dh&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00594"/>00594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;dir_open:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_fat_8c_source_1l00595"/>00595 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_fat_8c_source_1l00596"/>00596 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00597"/>00597 
+<anchor xml:id="_fat_8c_source_1l00598"/>00598 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00599"/>00599 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1a0d5b386636ec82d4c1e912d5902aa0e0">f_opendir</link>(dh,&#32;fpath);
+<anchor xml:id="_fat_8c_source_1l00600"/>00600 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00601"/>00601 
+<anchor xml:id="_fat_8c_source_1l00602"/>00602 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00603"/>00603 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;f_opendir()&#32;failed:&#32;%d\n&quot;</emphasis>,&#32;res);
+<anchor xml:id="_fat_8c_source_1l00604"/>00604 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(dh);
+<anchor xml:id="_fat_8c_source_1l00605"/>00605 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00606"/>00606 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00607"/>00607 &#32;&#32;&#32;&#32;dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>&#32;=&#32;dh;
+<anchor xml:id="_fat_8c_source_1l00608"/>00608 &#32;&#32;&#32;&#32;dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>&#32;=&#32;-1;
+<anchor xml:id="_fat_8c_source_1l00609"/>00609 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00610"/>00610 }
+<anchor xml:id="_fat_8c_source_1l00611"/>00611 
+<anchor xml:id="_fat_8c_source_1l00612"/>00612 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_close(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir)&#32;{
+<anchor xml:id="_fat_8c_source_1l00613"/>00613 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00614"/>00614 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00615"/>00615 
+<anchor xml:id="_fat_8c_source_1l00616"/>00616 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>&#32;*dh&#32;=&#32;(<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>&#32;*)dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>;
+<anchor xml:id="_fat_8c_source_1l00617"/>00617 
+<anchor xml:id="_fat_8c_source_1l00618"/>00618 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00619"/>00619 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1aba2c2f47f12fd4875bd6a62fa58fa1a9">f_closedir</link>(dh);
+<anchor xml:id="_fat_8c_source_1l00620"/>00620 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00621"/>00621 
+<anchor xml:id="_fat_8c_source_1l00622"/>00622 &#32;&#32;&#32;&#32;free(dh);
+<anchor xml:id="_fat_8c_source_1l00623"/>00623 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00624"/>00624 }
+<anchor xml:id="_fat_8c_source_1l00625"/>00625 
+<anchor xml:id="_fat_8c_source_1l00626"/>00626 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir,&#32;<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structdirent">dirent</link>&#32;*ent)&#32;{
+<anchor xml:id="_fat_8c_source_1l00627"/>00627 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_fat_8c_source_1l00628"/>00628 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_fat_8c_source_1l00629"/>00629 
+<anchor xml:id="_fat_8c_source_1l00630"/>00630 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>&#32;*dh&#32;=&#32;(<link linkend="_struct_f_a_t_f_s___d_i_r">FATFS_DIR</link>&#32;*)dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>;
+<anchor xml:id="_fat_8c_source_1l00631"/>00631 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l_i_n_f_o">FILINFO</link>&#32;finfo&#32;=&#32;{0};
+<anchor xml:id="_fat_8c_source_1l00632"/>00632 
+<anchor xml:id="_fat_8c_source_1l00633"/>00633 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00634"/>00634 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;res&#32;=&#32;<link linkend="_ff_8c_1ab8b2c70a95ca61f4f516c56fda7f82ab">f_readdir</link>(dh,&#32;&amp;finfo);
+<anchor xml:id="_fat_8c_source_1l00635"/>00635 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00636"/>00636 
+<anchor xml:id="_fat_8c_source_1l00637"/>00637 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_fat_8c_source_1l00638"/>00638 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fat_error_remap(res);
+<anchor xml:id="_fat_8c_source_1l00639"/>00639 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(finfo.<link linkend="_struct_f_i_l_i_n_f_o_1ac06b247cfb3b708c76413c436e52fa7e">fname</link>[0]&#32;==&#32;0)&#32;{
+<anchor xml:id="_fat_8c_source_1l00640"/>00640 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOENT;
+<anchor xml:id="_fat_8c_source_1l00641"/>00641 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00642"/>00642 &#32;&#32;&#32;&#32;ent-&gt;d_type&#32;=&#32;(finfo.<link linkend="_struct_f_i_l_i_n_f_o_1a838d542585831b085537b363f18205c0">fattrib</link>&#32;&amp;&#32;<link linkend="_ff_8h_1a3a9db44e978ed6c13b641e092d4cd7d3">AM_DIR</link>)&#32;?&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94">DT_DIR</link>&#32;:&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc">DT_REG</link>;
+<anchor xml:id="_fat_8c_source_1l00643"/>00643 &#32;&#32;&#32;&#32;strncpy(ent-&gt;d_name,&#32;finfo.<link linkend="_struct_f_i_l_i_n_f_o_1ac06b247cfb3b708c76413c436e52fa7e">fname</link>,&#32;<link linkend="_ffconf_8h_1a7d29ac29d2d2db71cc7d045ea38fa927">FF_LFN_BUF</link>);
+<anchor xml:id="_fat_8c_source_1l00644"/>00644 &#32;&#32;&#32;&#32;ent-&gt;d_name[<link linkend="_ffconf_8h_1a7d29ac29d2d2db71cc7d045ea38fa927">FF_LFN_BUF</link>]&#32;=&#32;<emphasis role="charliteral">&apos;\0&apos;</emphasis>;
+<anchor xml:id="_fat_8c_source_1l00645"/>00645 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_fat_8c_source_1l00646"/>00646 }
+<anchor xml:id="_fat_8c_source_1l00647"/>00647 
+<anchor xml:id="_fat_8c_source_1l00648"/>00648 
+<anchor xml:id="_fat_8c_source_1l00649"/><link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">00649</link> <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>()&#32;{
+<anchor xml:id="_fat_8c_source_1l00650"/>00650 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>));
+<anchor xml:id="_fat_8c_source_1l00651"/>00651 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00652"/>00652 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;filesystem_fat_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_fat_8c_source_1l00653"/>00653 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00654"/>00654 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00655"/>00655 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225">type</link>&#32;=&#32;<link linkend="_filesystem_8h_1ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92">FILESYSTEM_TYPE_FAT</link>;
+<anchor xml:id="_fat_8c_source_1l00656"/>00656 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>&#32;=&#32;FILESYSTEM_NAME;
+<anchor xml:id="_fat_8c_source_1l00657"/>00657 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>&#32;=&#32;mount;
+<anchor xml:id="_fat_8c_source_1l00658"/>00658 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>&#32;=&#32;unmount;
+<anchor xml:id="_fat_8c_source_1l00659"/>00659 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>&#32;=&#32;format;
+<anchor xml:id="_fat_8c_source_1l00660"/>00660 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link>&#32;=&#32;file_remove;
+<anchor xml:id="_fat_8c_source_1l00661"/>00661 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link>&#32;=&#32;file_rename;
+<anchor xml:id="_fat_8c_source_1l00662"/>00662 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>&#32;=&#32;file_mkdir;
+<anchor xml:id="_fat_8c_source_1l00663"/>00663 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a396727009601ff7cd9505b724dc744f3">rmdir</link>&#32;=&#32;file_rmdir;
+<anchor xml:id="_fat_8c_source_1l00664"/>00664 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>&#32;=&#32;file_stat;
+<anchor xml:id="_fat_8c_source_1l00665"/>00665 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>&#32;=&#32;file_open;
+<anchor xml:id="_fat_8c_source_1l00666"/>00666 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>&#32;=&#32;file_close;
+<anchor xml:id="_fat_8c_source_1l00667"/>00667 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>&#32;=&#32;file_write;
+<anchor xml:id="_fat_8c_source_1l00668"/>00668 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>&#32;=&#32;file_read;
+<anchor xml:id="_fat_8c_source_1l00669"/>00669 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a6e562ac4ed1ead2c1654c5c9312b2394">file_sync</link>&#32;=&#32;file_sync;
+<anchor xml:id="_fat_8c_source_1l00670"/>00670 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>&#32;=&#32;file_seek;
+<anchor xml:id="_fat_8c_source_1l00671"/>00671 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>&#32;=&#32;file_tell;
+<anchor xml:id="_fat_8c_source_1l00672"/>00672 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab8ed19dbc2c21c95682aec0418f09e72">file_size</link>&#32;=&#32;file_size;
+<anchor xml:id="_fat_8c_source_1l00673"/>00673 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3">file_truncate</link>&#32;=&#32;file_truncate;
+<anchor xml:id="_fat_8c_source_1l00674"/>00674 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>&#32;=&#32;dir_open;
+<anchor xml:id="_fat_8c_source_1l00675"/>00675 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link>&#32;=&#32;dir_close;
+<anchor xml:id="_fat_8c_source_1l00676"/>00676 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>&#32;=&#32;dir_read;
+<anchor xml:id="_fat_8c_source_1l00677"/>00677 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>&#32;*context&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link>));
+<anchor xml:id="_fat_8c_source_1l00678"/>00678 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(context&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_fat_8c_source_1l00679"/>00679 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;filesystem_fat_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_fat_8c_source_1l00680"/>00680 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(fs);
+<anchor xml:id="_fat_8c_source_1l00681"/>00681 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00682"/>00682 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_fat_8c_source_1l00683"/>00683 &#32;&#32;&#32;&#32;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link>&#32;=&#32;-1;
+<anchor xml:id="_fat_8c_source_1l00684"/>00684 &#32;&#32;&#32;&#32;mutex_init(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link>);
+<anchor xml:id="_fat_8c_source_1l00685"/>00685 &#32;&#32;&#32;&#32;mutex_init(&amp;context-&gt;<link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link>);
+<anchor xml:id="_fat_8c_source_1l00686"/>00686 
+<anchor xml:id="_fat_8c_source_1l00687"/>00687 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>&#32;=&#32;context;
+<anchor xml:id="_fat_8c_source_1l00688"/>00688 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fs;
+<anchor xml:id="_fat_8c_source_1l00689"/>00689 }
+<anchor xml:id="_fat_8c_source_1l00690"/>00690 
+<anchor xml:id="_fat_8c_source_1l00691"/><link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">00691</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_fat_8c_source_1l00692"/>00692 &#32;&#32;&#32;&#32;free(fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>);
+<anchor xml:id="_fat_8c_source_1l00693"/>00693 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>&#32;=&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00694"/>00694 &#32;&#32;&#32;&#32;free(fs);
+<anchor xml:id="_fat_8c_source_1l00695"/>00695 &#32;&#32;&#32;&#32;fs&#32;=&#32;NULL;
+<anchor xml:id="_fat_8c_source_1l00696"/>00696 }
+</programlisting></section>

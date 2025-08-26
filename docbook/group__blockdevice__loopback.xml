@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__blockdevice__loopback" xml:lang="en-US">
+<title>
+<para>blockdevice_loopback </para>
+</title>
+<indexterm><primary>blockdevice_loopback</primary></indexterm>
+<para>
+
+<para>Loopback disk image file block device. </para>
+ 
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link> (const char *path, size_t capacity, size_t block_size)</para>
+
+<para>Create loopback block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the loopback device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Loopback disk image file block device. </para>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d"/><section>
+    <title>blockdevice_loopback_create()</title>
+<indexterm><primary>blockdevice_loopback_create</primary><secondary>blockdevice_loopback</secondary></indexterm>
+<indexterm><primary>blockdevice_loopback</primary><secondary>blockdevice_loopback_create</secondary></indexterm>
+<para><computeroutput><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * blockdevice_loopback_create (const char * path, size_t capacity, size_t block_size)</computeroutput></para><para>
+
+<para>Create loopback block device. </para>
+</para>
+
+<para>Create a loopback device object that uses a disk image file. Specify the file path allocated to the block device, as well as the maximum size capacity and block size block_size.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry>
+<para>Disk image file path. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>capacity</entry><entry>
+<para>Maximum device size bytes. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>block_size</entry><entry>
+<para>Block size byte. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>Block device object. Returnes NULL in case of failure. </para>
+</formalpara>
+
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>NULL</entry><entry>
+<para>Failed to create block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_loopback_8c_source_1l00134">134</link> of file <link linkend="_loopback_8c_source">loopback.c</link>.</para>
+<programlisting linenumbering="unnumbered">00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00135 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>));
+00136 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(device&#32;==&#32;NULL)&#32;{
+00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00138 &#32;&#32;&#32;&#32;}
+00139 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__loopback__config__t">blockdevice_loopback_config_t</link>&#32;*config&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structblockdevice__loopback__config__t">blockdevice_loopback_config_t</link>));
+00140 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(config&#32;==&#32;NULL)&#32;{
+00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(device);
+00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00143 &#32;&#32;&#32;&#32;}
+00144 
+00145 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>&#32;=&#32;init;
+00146 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>&#32;=&#32;deinit;
+00147 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>&#32;=&#32;__read;
+00148 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>&#32;=&#32;erase;
+00149 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>&#32;=&#32;program;
+00150 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>&#32;=&#32;trim;
+00151 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>&#32;=&#32;__sync;
+00152 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>&#32;=&#32;size;
+00153 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>&#32;=&#32;block_size;
+00154 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>&#32;=&#32;block_size;
+00155 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>&#32;=&#32;block_size;
+00156 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>&#32;=&#32;DEVICE_NAME;
+00157 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+00158 
+00159 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__loopback__config__t_1a90074ebd562c400e629e17fa2e53e7ef">path</link>&#32;=&#32;path;
+00160 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__loopback__config__t_1a40206e22fbb46078f37a4e2191aa2114">capacity</link>&#32;=&#32;capacity;
+00161 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__loopback__config__t_1aa9e4a4954196dfe2f0b9f5ae42bc9a3d">block_size</link>&#32;=&#32;block_size;
+00162 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__loopback__config__t_1a5ddcc0d29726ccc7883b82ba3325f808">fildes</link>&#32;=&#32;-1;
+00163 
+00164 &#32;&#32;&#32;&#32;mutex_init(&amp;config-&gt;<link linkend="_structblockdevice__loopback__config__t_1a837cd0853ecfaaae022d0a384835fecb">_mutex</link>);
+00165 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;=&#32;config;
+00166 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device)&#32;!=&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>)&#32;{
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(config);
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(device);
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00170 &#32;&#32;&#32;&#32;}
+00171 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device;
+00172 }
+</programlisting></section>
+<anchor xml:id="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15"/><section>
+    <title>blockdevice_loopback_free()</title>
+<indexterm><primary>blockdevice_loopback_free</primary><secondary>blockdevice_loopback</secondary></indexterm>
+<indexterm><primary>blockdevice_loopback</primary><secondary>blockdevice_loopback_free</secondary></indexterm>
+<para><computeroutput>void blockdevice_loopback_free (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * device)</computeroutput></para><para>
+
+<para>Release the loopback device. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>device</entry><entry>
+<para>Block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_loopback_8c_source_1l00174">174</link> of file <link linkend="_loopback_8c_source">loopback.c</link>.</para>
+<programlisting linenumbering="unnumbered">00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00175 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>(device);
+00176 &#32;&#32;&#32;&#32;free(device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>);
+00177 &#32;&#32;&#32;&#32;free(device);
+00178 }
+</programlisting></section>
+</section>
+</section>

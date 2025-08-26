@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tusb__config_8h_source" xml:lang="en-US">
+<title>tusb_config.h</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger/tusb_config.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tusb__config_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#ifndef&#32;_TUSB_CONFIG_H_</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#define&#32;_TUSB_CONFIG_H_</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00003"/>00003 
+<anchor xml:id="_tusb__config_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00005"/>00005 &#32;<emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_tusb__config_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00007"/>00007 
+<anchor xml:id="_tusb__config_8h_source_1l00008"/>00008 <emphasis role="comment">//--------------------------------------------------------------------+</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00009"/>00009 <emphasis role="comment">//&#32;Board&#32;Specific&#32;Configuration</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00010"/>00010 <emphasis role="comment">//--------------------------------------------------------------------+</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00011"/>00011 
+<anchor xml:id="_tusb__config_8h_source_1l00012"/>00012 <emphasis role="comment">//&#32;RHPort&#32;number&#32;used&#32;for&#32;device&#32;can&#32;be&#32;defined&#32;by&#32;board.mk,&#32;default&#32;to&#32;port&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#ifndef&#32;BOARD_TUD_RHPORT</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00014"/><link linkend="_tusb__config_8h_1a850f6280c7dc9aead785f6bedaaa0fb9">00014</link> <emphasis role="preprocessor">#define&#32;BOARD_TUD_RHPORT&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00016"/>00016 
+<anchor xml:id="_tusb__config_8h_source_1l00017"/>00017 <emphasis role="comment">//&#32;RHPort&#32;max&#32;operational&#32;speed&#32;can&#32;defined&#32;by&#32;board.mk</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00018"/>00018 <emphasis role="preprocessor">#ifndef&#32;BOARD_TUD_MAX_SPEED</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00019"/><link linkend="_tusb__config_8h_1a1d0d7228d7d9fc274b2280cd8e007003">00019</link> <emphasis role="preprocessor">#define&#32;BOARD_TUD_MAX_SPEED&#32;&#32;&#32;OPT_MODE_DEFAULT_SPEED</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00020"/>00020 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00021"/>00021 
+<anchor xml:id="_tusb__config_8h_source_1l00022"/>00022 <emphasis role="comment">//--------------------------------------------------------------------</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00023"/>00023 <emphasis role="comment">//&#32;Common&#32;Configuration</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00024"/>00024 <emphasis role="comment">//--------------------------------------------------------------------</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00025"/>00025 
+<anchor xml:id="_tusb__config_8h_source_1l00026"/>00026 <emphasis role="comment">//&#32;defined&#32;by&#32;compiler&#32;flags&#32;for&#32;flexibility</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00027"/>00027 <emphasis role="preprocessor">#ifndef&#32;CFG_TUSB_MCU</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00028"/>00028 <emphasis role="preprocessor">#error&#32;CFG_TUSB_MCU&#32;must&#32;be&#32;defined</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00029"/>00029 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00030"/>00030 
+<anchor xml:id="_tusb__config_8h_source_1l00031"/>00031 <emphasis role="preprocessor">#ifndef&#32;CFG_TUSB_OS</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00032"/><link linkend="_tusb__config_8h_1a3d27955bb9aee39c43cb3756ffb372c1">00032</link> <emphasis role="preprocessor">#define&#32;CFG_TUSB_OS&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;OPT_OS_NONE</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00033"/>00033 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00034"/>00034 
+<anchor xml:id="_tusb__config_8h_source_1l00035"/>00035 <emphasis role="preprocessor">#ifndef&#32;CFG_TUSB_DEBUG</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00036"/><link linkend="_tusb__config_8h_1a4c102f40f3ecdd15c3c64b3e903e8385">00036</link> <emphasis role="preprocessor">#define&#32;CFG_TUSB_DEBUG&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00037"/>00037 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00038"/>00038 
+<anchor xml:id="_tusb__config_8h_source_1l00039"/>00039 <emphasis role="comment">//&#32;Enable&#32;Device&#32;stack</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00040"/><link linkend="_tusb__config_8h_1a49885f91dd20d11d4f692a931ee57667">00040</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_ENABLED&#32;&#32;&#32;&#32;&#32;&#32;&#32;1</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00041"/>00041 
+<anchor xml:id="_tusb__config_8h_source_1l00042"/>00042 <emphasis role="comment">//&#32;Default&#32;is&#32;max&#32;speed&#32;that&#32;hardware&#32;controller&#32;could&#32;support&#32;with&#32;on-chip&#32;PHY</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00043"/><link linkend="_tusb__config_8h_1aa37f3ad3cbb642d9d14ee056dd3e3ca8">00043</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_MAX_SPEED&#32;&#32;&#32;&#32;&#32;BOARD_TUD_MAX_SPEED</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00044"/>00044 
+<anchor xml:id="_tusb__config_8h_source_1l00045"/>00045 <emphasis role="comment">/*&#32;USB&#32;DMA&#32;on&#32;some&#32;MCUs&#32;can&#32;only&#32;access&#32;a&#32;specific&#32;SRAM&#32;region&#32;with&#32;restriction&#32;on&#32;alignment.</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00046"/>00046 <emphasis role="comment">&#32;*&#32;Tinyusb&#32;use&#32;follows&#32;macros&#32;to&#32;declare&#32;transferring&#32;memory&#32;so&#32;that&#32;they&#32;can&#32;be&#32;put</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00047"/>00047 <emphasis role="comment">&#32;*&#32;into&#32;those&#32;specific&#32;section.</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00048"/>00048 <emphasis role="comment">&#32;*&#32;e.g</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00049"/>00049 <emphasis role="comment">&#32;*&#32;-&#32;CFG_TUSB_MEM&#32;SECTION&#32;:&#32;__attribute__&#32;((&#32;section(&quot;.usb_ram&quot;)&#32;))</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00050"/>00050 <emphasis role="comment">&#32;*&#32;-&#32;CFG_TUSB_MEM_ALIGN&#32;&#32;&#32;:&#32;__attribute__&#32;((aligned(4)))</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00051"/>00051 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00052"/>00052 <emphasis role="preprocessor">#ifndef&#32;CFG_TUSB_MEM_SECTION</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00053"/><link linkend="_tusb__config_8h_1a360b21fa11ef498d9c4dc49428ab780f">00053</link> <emphasis role="preprocessor">#define&#32;CFG_TUSB_MEM_SECTION</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00054"/>00054 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00055"/>00055 
+<anchor xml:id="_tusb__config_8h_source_1l00056"/>00056 <emphasis role="preprocessor">#ifndef&#32;CFG_TUSB_MEM_ALIGN</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00057"/><link linkend="_tusb__config_8h_1ae46ca7dc14babee346d8af7aa8db403e">00057</link> <emphasis role="preprocessor">#define&#32;CFG_TUSB_MEM_ALIGN&#32;&#32;&#32;&#32;__attribute__&#32;((aligned(4)))</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00058"/>00058 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00059"/>00059 
+<anchor xml:id="_tusb__config_8h_source_1l00060"/>00060 <emphasis role="comment">//--------------------------------------------------------------------</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00061"/>00061 <emphasis role="comment">//&#32;DEVICE&#32;CONFIGURATION</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00062"/>00062 <emphasis role="comment">//--------------------------------------------------------------------</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00063"/>00063 
+<anchor xml:id="_tusb__config_8h_source_1l00064"/>00064 <emphasis role="preprocessor">#ifndef&#32;CFG_TUD_ENDPOINT0_SIZE</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00065"/><link linkend="_tusb__config_8h_1a9b99a70dc9fc74ecc23108ab18bbebe4">00065</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_ENDPOINT0_SIZE&#32;&#32;&#32;&#32;64</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00066"/>00066 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00067"/>00067 
+<anchor xml:id="_tusb__config_8h_source_1l00068"/>00068 <emphasis role="comment">//-------------&#32;CLASS&#32;-------------//</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00069"/><link linkend="_tusb__config_8h_1a7df8fc8e36e96c632d18c5e6a283cbad">00069</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_CDC&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00070"/><link linkend="_tusb__config_8h_1a159e8998f430441201fe575035576de3">00070</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_MSC&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;1</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00071"/><link linkend="_tusb__config_8h_1a59ed1f17152d738c0f50edf02565cd20">00071</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_HID&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00072"/><link linkend="_tusb__config_8h_1aa407aa4b24ddb98c5c8c27d533ec0e9a">00072</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_MIDI&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00073"/><link linkend="_tusb__config_8h_1a5332fe14c3199537455edc6faaa0ef9b">00073</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_VENDOR&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00074"/>00074 
+<anchor xml:id="_tusb__config_8h_source_1l00075"/>00075 <emphasis role="comment">//&#32;CDC&#32;FIFO&#32;size&#32;of&#32;TX&#32;and&#32;RX</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00076"/><link linkend="_tusb__config_8h_1a0be811273fed0a24763e4a22700e2b1d">00076</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_CDC_RX_BUFSIZE&#32;&#32;&#32;(TUD_OPT_HIGH_SPEED&#32;?&#32;512&#32;:&#32;64)</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00077"/><link linkend="_tusb__config_8h_1a1583fbe8a2453ca3a5986bd6633390c4">00077</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_CDC_TX_BUFSIZE&#32;&#32;&#32;(TUD_OPT_HIGH_SPEED&#32;?&#32;512&#32;:&#32;64)</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00078"/>00078 
+<anchor xml:id="_tusb__config_8h_source_1l00079"/>00079 <emphasis role="comment">//&#32;CDC&#32;Endpoint&#32;transfer&#32;buffer&#32;size,&#32;more&#32;is&#32;faster</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00080"/><link linkend="_tusb__config_8h_1a9484fcfe46fd923c94d7fdd93af1179b">00080</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_CDC_EP_BUFSIZE&#32;&#32;&#32;(TUD_OPT_HIGH_SPEED&#32;?&#32;512&#32;:&#32;64)</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00081"/>00081 
+<anchor xml:id="_tusb__config_8h_source_1l00082"/>00082 <emphasis role="comment">//&#32;MSC&#32;Buffer&#32;size&#32;of&#32;Device&#32;Mass&#32;storage</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00083"/><link linkend="_tusb__config_8h_1ae152a02e8ae360a620dd3200dbc5f3c3">00083</link> <emphasis role="preprocessor">#define&#32;CFG_TUD_MSC_EP_BUFSIZE&#32;&#32;&#32;4096</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00084"/>00084 
+<anchor xml:id="_tusb__config_8h_source_1l00085"/>00085 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00086"/>00086 &#32;}
+<anchor xml:id="_tusb__config_8h_source_1l00087"/>00087 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_tusb__config_8h_source_1l00088"/>00088 
+<anchor xml:id="_tusb__config_8h_source_1l00089"/>00089 <emphasis role="preprocessor">#endif&#32;</emphasis><emphasis role="comment">/*&#32;_TUSB_CONFIG_H_&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+</programlisting></section>

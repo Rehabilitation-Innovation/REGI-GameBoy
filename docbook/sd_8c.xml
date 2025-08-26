@@ -1,0 +1,703 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_sd_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/blockdevice/sd.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/blockdevice/sd.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;inttypes.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &quot;blockdevice/sd.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice__sd__config__t">blockdevice_sd_config_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_sd_8c_1a80cf6b88b88a1391eff989ff42067487">CONF_SD_CMD_TIMEOUT</link>&#160;&#160;&#160;5000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a98174285b120b92f2a9c1e5768a176b3">CONF_SD_CMD0_IDLE_STATE_RETRIES</link>&#160;&#160;&#160;5</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a717a8dd1956ddc8608e30d577a0efa77">SD_COMMAND_TIMEOUT</link>&#160;&#160;&#160;<link linkend="_sd_8c_1a80cf6b88b88a1391eff989ff42067487">CONF_SD_CMD_TIMEOUT</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a190b6bcf9ab4d85b71e05bd20955758a">SD_CMD0_GO_IDLE_STATE_RETRIES</link>&#160;&#160;&#160;<link linkend="_sd_8c_1a98174285b120b92f2a9c1e5768a176b3">CONF_SD_CMD0_IDLE_STATE_RETRIES</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a239e7e00cd09dfabb594162b0c450ccd">SD_DBG</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a6379b6ca92270ced3e83ca3c1f5dc524">SD_BLOCK_DEVICE_ERROR_WOULD_BLOCK</link>&#160;&#160;&#160;-5001</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1adcac3a18f2010c23804be1dddf7f5ba2">SD_BLOCK_DEVICE_ERROR_UNSUPPORTED</link>&#160;&#160;&#160;-5002</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a7204a59a7a908a0b8559c4868129f4c4">SD_BLOCK_DEVICE_ERROR_PARAMETER</link>&#160;&#160;&#160;-5003</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a6e13316f0b76a30fd38db3f0d84e58d0">SD_BLOCK_DEVICE_ERROR_NO_INIT</link>&#160;&#160;&#160;-5004</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1aafa7734f02804b218f71f2a988111b15">SD_BLOCK_DEVICE_ERROR_NO_DEVICE</link>&#160;&#160;&#160;-5005</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a2ba3557e527c48137703786c54cf271f">SD_BLOCK_DEVICE_ERROR_WRITE_PROTECTED</link>&#160;&#160;&#160;-5006</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1afc41dc1dffb1f500b7a3f87e3de10f5c">SD_BLOCK_DEVICE_ERROR_UNUSABLE</link>&#160;&#160;&#160;-5007</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a42fdf7470707e7b523c36bac1f15d98a">SD_BLOCK_DEVICE_ERROR_NO_RESPONSE</link>&#160;&#160;&#160;-5008</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a07208e021a15e0c2b5425e3355c7c2a9">SD_BLOCK_DEVICE_ERROR_CRC</link>&#160;&#160;&#160;-5009</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a6a546df19eddae71eb0ccf0e62913143">SD_BLOCK_DEVICE_ERROR_ERASE</link>&#160;&#160;&#160;-5010</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a0d74153e7cf51464b90cbc47cbc83b2e">SD_BLOCK_DEVICE_ERROR_WRITE</link>&#160;&#160;&#160;-5011</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ae29c04ecc4f5ee4f41694ac4d8a2fdd9">BLOCK_SIZE_HC</link>&#160;&#160;&#160;512</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1acc071acf45c59c2a107bf01bdbd52b8a">SPI_CMD</link>(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a9d214c6916e6ca7f6e0ef1f52255a9a4">R1_NO_RESPONSE</link>&#160;&#160;&#160;(0xFF)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1afa1084b6c1e98accf323f9eecb228db8">R1_RESPONSE_RECV</link>&#160;&#160;&#160;(0x80)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a7adb3673fe75b9397a1f241533e3f08a">R1_IDLE_STATE</link>&#160;&#160;&#160;(1 &lt;&lt; 0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a4598fdd1bd123e39ca45cdcd30f2a0bb">R1_ERASE_RESET</link>&#160;&#160;&#160;(1 &lt;&lt; 1)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a317730607b37d51a7a470e8f33fa0e4d">R1_ILLEGAL_COMMAND</link>&#160;&#160;&#160;(1 &lt;&lt; 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ac9f596336ebcb43f5c9e314ad697a8e8">R1_COM_CRC_ERROR</link>&#160;&#160;&#160;(1 &lt;&lt; 3)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a310cf4b26d5025bc4e0ac18b7dfd968a">R1_ERASE_SEQUENCE_ERROR</link>&#160;&#160;&#160;(1 &lt;&lt; 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a84256fd9d0fbf84f1c8fabd17d3f7adc">R1_ADDRESS_ERROR</link>&#160;&#160;&#160;(1 &lt;&lt; 5)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1afaf04d83e2c97907a519100efe9c8d7c">R1_PARAMETER_ERROR</link>&#160;&#160;&#160;(1 &lt;&lt; 6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ace5b9334abefe4920fb519a5957b5cc3">OCR_HCS_CCS</link>&#160;&#160;&#160;(0x1 &lt;&lt; 30)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a34b06744e5bb1b37b90d671dff109fd2">OCR_LOW_VOLTAGE</link>&#160;&#160;&#160;(0x01 &lt;&lt; 24)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a9242e2740476a5965ace0b1276c9a24d">OCR_3_3V</link>&#160;&#160;&#160;(0x1 &lt;&lt; 20)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ac77e3b44a84e04fd34a6084e23d7a67f">CMD8_PATTERN</link>&#160;&#160;&#160;(0xAA)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a0e561b17b7546b82dd822376f661c917">SPI_DATA_RESPONSE_MASK</link>&#160;&#160;&#160;(0x1F)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1adf4c36356a3259c4686dd6e534f3c75c">SPI_DATA_ACCEPTED</link>&#160;&#160;&#160;(0x05)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a0ab76bad7e8faa76f8bad16e8de90ed6">SPI_DATA_CRC_ERROR</link>&#160;&#160;&#160;(0x0B)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ade0c4048b2873fc3aab508f2caeac46c">SPI_DATA_WRITE_ERROR</link>&#160;&#160;&#160;(0x0D)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a16316bd35058685a310b2782003f6461">SPI_START_BLOCK</link>&#160;&#160;&#160;(0xFE)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1adaa72ab93c9e5bdf1176098cb9c2c4a0">SPI_START_BLK_MUL_WRITE</link>&#160;&#160;&#160;(0xFC)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a0dd35214020ca96c70838c6e2d206cc6">SPI_STOP_TRAN</link>&#160;&#160;&#160;(0xFD)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ac75d865e276033635f3fecc5c62b727c">SPI_DATA_READ_ERROR_MASK</link>&#160;&#160;&#160;(0xF)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a975383e5fd06d3994775d34a2a12e340">SPI_READ_ERROR</link>&#160;&#160;&#160;(0x1 &lt;&lt; 0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1ad6333d33ce78082f55551b1cbf0e783a">SPI_READ_ERROR_CC</link>&#160;&#160;&#160;(0x1 &lt;&lt; 1)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a6def03ff2e8d35d7bf4fe37ba5894d48">SPI_READ_ERROR_ECC_C</link>&#160;&#160;&#160;(0x1 &lt;&lt; 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1a2243216470168aba1fd33f3363fed215">SPI_READ_ERROR_OFR</link>&#160;&#160;&#160;(0x1 &lt;&lt; 3)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_sd_8c_1aebdc7d8ca8e25ed8efc90bb88ef7ef5b">PACKET_SIZE</link>&#160;&#160;&#160;6</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74">sdcard_type</link> { <?linebreak?><link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290">SDCARD_NONE</link> = 0
+, <link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e">SDCARD_V1</link> = 1
+, <link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09">SDCARD_V2</link> = 2
+, <link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba">SDCARD_V2HC</link> = 3
+, <?linebreak?><link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5">CARD_UNKNOWN</link> = 4
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6f">cmd_supported</link> { <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b16dc9538b6f7288a025222e1cc8e6b">CMD_NOT_SUPPORTED</link> = -1
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63">CMD0_GO_IDLE_STATE</link> = 0
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa687d0215f942c29c67ed8e116ba65c42">CMD1_SEND_OP_COND</link> = 1
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa2a8ad2f917bc227d95d29a0f92b62340">CMD6_SWITCH_FUNC</link> = 6
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4">CMD8_SEND_IF_COND</link> = 8
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5">CMD9_SEND_CSD</link> = 9
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fab0bed31cbc5377aeafbe82d456f105b4">CMD10_SEND_CID</link> = 10
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b">CMD12_STOP_TRANSMISSION</link> = 12
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac57a11a2b3cd582a797f5b33ecdca429">CMD13_SEND_STATUS</link> = 13
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e">CMD16_SET_BLOCKLEN</link> = 16
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f">CMD17_READ_SINGLE_BLOCK</link> = 17
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c">CMD18_READ_MULTIPLE_BLOCK</link> = 18
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3">CMD24_WRITE_BLOCK</link> = 24
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977">CMD25_WRITE_MULTIPLE_BLOCK</link> = 25
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faf8a2ea974333f1b8b282e5fe1a78d452">CMD27_PROGRAM_CSD</link> = 27
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725">CMD32_ERASE_WR_BLK_START_ADDR</link> = 32
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38">CMD33_ERASE_WR_BLK_END_ADDR</link> = 33
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64">CMD38_ERASE</link> = 38
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0">CMD55_APP_CMD</link> = 55
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa60ed3ef8573485f4d9b7b18aace3967a">CMD56_GEN_CMD</link> = 56
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98">CMD58_READ_OCR</link> = 58
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7">CMD59_CRC_ON_OFF</link> = 59
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa7ccea821c49cb23280b5954f0b6f718">ACMD6_SET_BUS_WIDTH</link> = 6
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b">ACMD13_SD_STATUS</link> = 13
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577">ACMD22_SEND_NUM_WR_BLOCKS</link> = 22
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d">ACMD23_SET_WR_BLK_ERASE_COUNT</link> = 23
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4">ACMD41_SD_SEND_OP_COND</link> = 41
+, <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa025b3258a75b77a9f94815517674d989">ACMD42_SET_CLR_CARD_DETECT</link> = 42
+, <?linebreak?><link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0fbb6c92dd6da700caaa3829a43720a5">ACMD51_SEND_SCR</link> = 51
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link> (spi_inst_t *spi_inst, uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t cs, uint32_t hz, bool enable_crc)</para>
+
+<para>Create SD card block device with SPI. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the SD card device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_sd_8c_1ae29c04ecc4f5ee4f41694ac4d8a2fdd9"/><section>
+    <title>BLOCK_SIZE_HC</title>
+<indexterm><primary>BLOCK_SIZE_HC</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>BLOCK_SIZE_HC</secondary></indexterm>
+<para><computeroutput>#define BLOCK_SIZE_HC&#160;&#160;&#160;512</computeroutput></para>
+<para>Block size supported for SD card is 512 bytes </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00062">62</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ac77e3b44a84e04fd34a6084e23d7a67f"/><section>
+    <title>CMD8_PATTERN</title>
+<indexterm><primary>CMD8_PATTERN</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD8_PATTERN</secondary></indexterm>
+<para><computeroutput>#define CMD8_PATTERN&#160;&#160;&#160;(0xAA)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00082">82</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a98174285b120b92f2a9c1e5768a176b3"/><section>
+    <title>CONF_SD_CMD0_IDLE_STATE_RETRIES</title>
+<indexterm><primary>CONF_SD_CMD0_IDLE_STATE_RETRIES</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CONF_SD_CMD0_IDLE_STATE_RETRIES</secondary></indexterm>
+<para><computeroutput>#define CONF_SD_CMD0_IDLE_STATE_RETRIES&#160;&#160;&#160;5</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00042">42</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a80cf6b88b88a1391eff989ff42067487"/><section>
+    <title>CONF_SD_CMD_TIMEOUT</title>
+<indexterm><primary>CONF_SD_CMD_TIMEOUT</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CONF_SD_CMD_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define CONF_SD_CMD_TIMEOUT&#160;&#160;&#160;5000</computeroutput></para>
+<para>Timeout in ms for response </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00038">38</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a9242e2740476a5965ace0b1276c9a24d"/><section>
+    <title>OCR_3_3V</title>
+<indexterm><primary>OCR_3_3V</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>OCR_3_3V</secondary></indexterm>
+<para><computeroutput>#define OCR_3_3V&#160;&#160;&#160;(0x1 &lt;&lt; 20)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00079">79</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ace5b9334abefe4920fb519a5957b5cc3"/><section>
+    <title>OCR_HCS_CCS</title>
+<indexterm><primary>OCR_HCS_CCS</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>OCR_HCS_CCS</secondary></indexterm>
+<para><computeroutput>#define OCR_HCS_CCS&#160;&#160;&#160;(0x1 &lt;&lt; 30)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00077">77</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a34b06744e5bb1b37b90d671dff109fd2"/><section>
+    <title>OCR_LOW_VOLTAGE</title>
+<indexterm><primary>OCR_LOW_VOLTAGE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>OCR_LOW_VOLTAGE</secondary></indexterm>
+<para><computeroutput>#define OCR_LOW_VOLTAGE&#160;&#160;&#160;(0x01 &lt;&lt; 24)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00078">78</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1aebdc7d8ca8e25ed8efc90bb88ef7ef5b"/><section>
+    <title>PACKET_SIZE</title>
+<indexterm><primary>PACKET_SIZE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>PACKET_SIZE</secondary></indexterm>
+<para><computeroutput>#define PACKET_SIZE&#160;&#160;&#160;6</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00145">145</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a84256fd9d0fbf84f1c8fabd17d3f7adc"/><section>
+    <title>R1_ADDRESS_ERROR</title>
+<indexterm><primary>R1_ADDRESS_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_ADDRESS_ERROR</secondary></indexterm>
+<para><computeroutput>#define R1_ADDRESS_ERROR&#160;&#160;&#160;(1 &lt;&lt; 5)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00073">73</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ac9f596336ebcb43f5c9e314ad697a8e8"/><section>
+    <title>R1_COM_CRC_ERROR</title>
+<indexterm><primary>R1_COM_CRC_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_COM_CRC_ERROR</secondary></indexterm>
+<para><computeroutput>#define R1_COM_CRC_ERROR&#160;&#160;&#160;(1 &lt;&lt; 3)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00071">71</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a4598fdd1bd123e39ca45cdcd30f2a0bb"/><section>
+    <title>R1_ERASE_RESET</title>
+<indexterm><primary>R1_ERASE_RESET</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_ERASE_RESET</secondary></indexterm>
+<para><computeroutput>#define R1_ERASE_RESET&#160;&#160;&#160;(1 &lt;&lt; 1)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00069">69</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a310cf4b26d5025bc4e0ac18b7dfd968a"/><section>
+    <title>R1_ERASE_SEQUENCE_ERROR</title>
+<indexterm><primary>R1_ERASE_SEQUENCE_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_ERASE_SEQUENCE_ERROR</secondary></indexterm>
+<para><computeroutput>#define R1_ERASE_SEQUENCE_ERROR&#160;&#160;&#160;(1 &lt;&lt; 4)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00072">72</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a7adb3673fe75b9397a1f241533e3f08a"/><section>
+    <title>R1_IDLE_STATE</title>
+<indexterm><primary>R1_IDLE_STATE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_IDLE_STATE</secondary></indexterm>
+<para><computeroutput>#define R1_IDLE_STATE&#160;&#160;&#160;(1 &lt;&lt; 0)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00068">68</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a317730607b37d51a7a470e8f33fa0e4d"/><section>
+    <title>R1_ILLEGAL_COMMAND</title>
+<indexterm><primary>R1_ILLEGAL_COMMAND</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_ILLEGAL_COMMAND</secondary></indexterm>
+<para><computeroutput>#define R1_ILLEGAL_COMMAND&#160;&#160;&#160;(1 &lt;&lt; 2)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00070">70</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a9d214c6916e6ca7f6e0ef1f52255a9a4"/><section>
+    <title>R1_NO_RESPONSE</title>
+<indexterm><primary>R1_NO_RESPONSE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_NO_RESPONSE</secondary></indexterm>
+<para><computeroutput>#define R1_NO_RESPONSE&#160;&#160;&#160;(0xFF)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00066">66</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1afaf04d83e2c97907a519100efe9c8d7c"/><section>
+    <title>R1_PARAMETER_ERROR</title>
+<indexterm><primary>R1_PARAMETER_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_PARAMETER_ERROR</secondary></indexterm>
+<para><computeroutput>#define R1_PARAMETER_ERROR&#160;&#160;&#160;(1 &lt;&lt; 6)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00074">74</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1afa1084b6c1e98accf323f9eecb228db8"/><section>
+    <title>R1_RESPONSE_RECV</title>
+<indexterm><primary>R1_RESPONSE_RECV</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>R1_RESPONSE_RECV</secondary></indexterm>
+<para><computeroutput>#define R1_RESPONSE_RECV&#160;&#160;&#160;(0x80)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00067">67</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a07208e021a15e0c2b5425e3355c7c2a9"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_CRC</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_CRC</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_CRC</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_CRC&#160;&#160;&#160;-5009</computeroutput></para>
+<para>CRC error </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00057">57</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a6a546df19eddae71eb0ccf0e62913143"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_ERASE</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_ERASE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_ERASE</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_ERASE&#160;&#160;&#160;-5010</computeroutput></para>
+<para>Erase error: reset/sequence </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00058">58</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1aafa7734f02804b218f71f2a988111b15"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_NO_DEVICE</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_NO_DEVICE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_NO_DEVICE</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_NO_DEVICE&#160;&#160;&#160;-5005</computeroutput></para>
+<para>device is missing or not connected </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00053">53</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a6e13316f0b76a30fd38db3f0d84e58d0"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_NO_INIT</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_NO_INIT</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_NO_INIT</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_NO_INIT&#160;&#160;&#160;-5004</computeroutput></para>
+<para>uninitialized </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00052">52</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a42fdf7470707e7b523c36bac1f15d98a"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_NO_RESPONSE</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_NO_RESPONSE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_NO_RESPONSE</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_NO_RESPONSE&#160;&#160;&#160;-5008</computeroutput></para>
+<para>No response from device </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00056">56</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a7204a59a7a908a0b8559c4868129f4c4"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_PARAMETER</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_PARAMETER</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_PARAMETER</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_PARAMETER&#160;&#160;&#160;-5003</computeroutput></para>
+<para>invalid parameter </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00051">51</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1adcac3a18f2010c23804be1dddf7f5ba2"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_UNSUPPORTED</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_UNSUPPORTED</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_UNSUPPORTED</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_UNSUPPORTED&#160;&#160;&#160;-5002</computeroutput></para>
+<para>unsupported operation </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00050">50</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1afc41dc1dffb1f500b7a3f87e3de10f5c"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_UNUSABLE</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_UNUSABLE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_UNUSABLE</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_UNUSABLE&#160;&#160;&#160;-5007</computeroutput></para>
+<para>unusable card </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00055">55</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a6379b6ca92270ced3e83ca3c1f5dc524"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_WOULD_BLOCK</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_WOULD_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_WOULD_BLOCK</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_WOULD_BLOCK&#160;&#160;&#160;-5001</computeroutput></para>
+<para>operation would block </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00049">49</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a0d74153e7cf51464b90cbc47cbc83b2e"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_WRITE</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_WRITE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_WRITE</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_WRITE&#160;&#160;&#160;-5011</computeroutput></para>
+<para>SPI Write error: !SPI_DATA_ACCEPTED </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00059">59</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a2ba3557e527c48137703786c54cf271f"/><section>
+    <title>SD_BLOCK_DEVICE_ERROR_WRITE_PROTECTED</title>
+<indexterm><primary>SD_BLOCK_DEVICE_ERROR_WRITE_PROTECTED</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_BLOCK_DEVICE_ERROR_WRITE_PROTECTED</secondary></indexterm>
+<para><computeroutput>#define SD_BLOCK_DEVICE_ERROR_WRITE_PROTECTED&#160;&#160;&#160;-5006</computeroutput></para>
+<para>write protected </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00054">54</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a190b6bcf9ab4d85b71e05bd20955758a"/><section>
+    <title>SD_CMD0_GO_IDLE_STATE_RETRIES</title>
+<indexterm><primary>SD_CMD0_GO_IDLE_STATE_RETRIES</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_CMD0_GO_IDLE_STATE_RETRIES</secondary></indexterm>
+<para><computeroutput>#define SD_CMD0_GO_IDLE_STATE_RETRIES&#160;&#160;&#160;<link linkend="_sd_8c_1a98174285b120b92f2a9c1e5768a176b3">CONF_SD_CMD0_IDLE_STATE_RETRIES</link></computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00046">46</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a717a8dd1956ddc8608e30d577a0efa77"/><section>
+    <title>SD_COMMAND_TIMEOUT</title>
+<indexterm><primary>SD_COMMAND_TIMEOUT</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_COMMAND_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define SD_COMMAND_TIMEOUT&#160;&#160;&#160;<link linkend="_sd_8c_1a80cf6b88b88a1391eff989ff42067487">CONF_SD_CMD_TIMEOUT</link></computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00045">45</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a239e7e00cd09dfabb594162b0c450ccd"/><section>
+    <title>SD_DBG</title>
+<indexterm><primary>SD_DBG</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SD_DBG</secondary></indexterm>
+<para><computeroutput>#define SD_DBG&#160;&#160;&#160;0</computeroutput></para>
+<para>1 - Enable debugging </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00047">47</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1acc071acf45c59c2a107bf01bdbd52b8a"/><section>
+    <title>SPI_CMD</title>
+<indexterm><primary>SPI_CMD</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_CMD</secondary></indexterm>
+<para><computeroutput>#define SPI_CMD( <link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(0x40&#32;|&#32;(<link linkend="__dino_game_8cpp_1aae8a40a17c0be29c1f06ca6b4f9e2235">x</link>&#32;&amp;&#32;0x3f))
+</programlisting><para>
+Definition at line <link linkend="_sd_8c_source_1l00063">63</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1adf4c36356a3259c4686dd6e534f3c75c"/><section>
+    <title>SPI_DATA_ACCEPTED</title>
+<indexterm><primary>SPI_DATA_ACCEPTED</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_DATA_ACCEPTED</secondary></indexterm>
+<para><computeroutput>#define SPI_DATA_ACCEPTED&#160;&#160;&#160;(0x05)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00086">86</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a0ab76bad7e8faa76f8bad16e8de90ed6"/><section>
+    <title>SPI_DATA_CRC_ERROR</title>
+<indexterm><primary>SPI_DATA_CRC_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_DATA_CRC_ERROR</secondary></indexterm>
+<para><computeroutput>#define SPI_DATA_CRC_ERROR&#160;&#160;&#160;(0x0B)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00087">87</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ac75d865e276033635f3fecc5c62b727c"/><section>
+    <title>SPI_DATA_READ_ERROR_MASK</title>
+<indexterm><primary>SPI_DATA_READ_ERROR_MASK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_DATA_READ_ERROR_MASK</secondary></indexterm>
+<para><computeroutput>#define SPI_DATA_READ_ERROR_MASK&#160;&#160;&#160;(0xF)</computeroutput></para>
+<para>Data Error Token: 4 LSB bits </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00093">93</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a0e561b17b7546b82dd822376f661c917"/><section>
+    <title>SPI_DATA_RESPONSE_MASK</title>
+<indexterm><primary>SPI_DATA_RESPONSE_MASK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_DATA_RESPONSE_MASK</secondary></indexterm>
+<para><computeroutput>#define SPI_DATA_RESPONSE_MASK&#160;&#160;&#160;(0x1F)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00085">85</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ade0c4048b2873fc3aab508f2caeac46c"/><section>
+    <title>SPI_DATA_WRITE_ERROR</title>
+<indexterm><primary>SPI_DATA_WRITE_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_DATA_WRITE_ERROR</secondary></indexterm>
+<para><computeroutput>#define SPI_DATA_WRITE_ERROR&#160;&#160;&#160;(0x0D)</computeroutput></para><para>
+Definition at line <link linkend="_sd_8c_source_1l00088">88</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a975383e5fd06d3994775d34a2a12e340"/><section>
+    <title>SPI_READ_ERROR</title>
+<indexterm><primary>SPI_READ_ERROR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_READ_ERROR</secondary></indexterm>
+<para><computeroutput>#define SPI_READ_ERROR&#160;&#160;&#160;(0x1 &lt;&lt; 0)</computeroutput></para>
+<para>Error </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00094">94</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1ad6333d33ce78082f55551b1cbf0e783a"/><section>
+    <title>SPI_READ_ERROR_CC</title>
+<indexterm><primary>SPI_READ_ERROR_CC</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_READ_ERROR_CC</secondary></indexterm>
+<para><computeroutput>#define SPI_READ_ERROR_CC&#160;&#160;&#160;(0x1 &lt;&lt; 1)</computeroutput></para>
+<para>CC Error </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00095">95</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a6def03ff2e8d35d7bf4fe37ba5894d48"/><section>
+    <title>SPI_READ_ERROR_ECC_C</title>
+<indexterm><primary>SPI_READ_ERROR_ECC_C</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_READ_ERROR_ECC_C</secondary></indexterm>
+<para><computeroutput>#define SPI_READ_ERROR_ECC_C&#160;&#160;&#160;(0x1 &lt;&lt; 2)</computeroutput></para>
+<para>Card ECC failed </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00096">96</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a2243216470168aba1fd33f3363fed215"/><section>
+    <title>SPI_READ_ERROR_OFR</title>
+<indexterm><primary>SPI_READ_ERROR_OFR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_READ_ERROR_OFR</secondary></indexterm>
+<para><computeroutput>#define SPI_READ_ERROR_OFR&#160;&#160;&#160;(0x1 &lt;&lt; 3)</computeroutput></para>
+<para>Out of Range </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00097">97</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1adaa72ab93c9e5bdf1176098cb9c2c4a0"/><section>
+    <title>SPI_START_BLK_MUL_WRITE</title>
+<indexterm><primary>SPI_START_BLK_MUL_WRITE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_START_BLK_MUL_WRITE</secondary></indexterm>
+<para><computeroutput>#define SPI_START_BLK_MUL_WRITE&#160;&#160;&#160;(0xFC)</computeroutput></para>
+<para>Start Multi-block write </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00090">90</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a16316bd35058685a310b2782003f6461"/><section>
+    <title>SPI_START_BLOCK</title>
+<indexterm><primary>SPI_START_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_START_BLOCK</secondary></indexterm>
+<para><computeroutput>#define SPI_START_BLOCK&#160;&#160;&#160;(0xFE)</computeroutput></para>
+<para>For Single Block Read/Write and Multiple Block Read </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00089">89</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+<anchor xml:id="_sd_8c_1a0dd35214020ca96c70838c6e2d206cc6"/><section>
+    <title>SPI_STOP_TRAN</title>
+<indexterm><primary>SPI_STOP_TRAN</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SPI_STOP_TRAN</secondary></indexterm>
+<para><computeroutput>#define SPI_STOP_TRAN&#160;&#160;&#160;(0xFD)</computeroutput></para>
+<para>Stop Multi-block write </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00091">91</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6f"/><section>
+    <title>cmd_supported</title>
+<indexterm><primary>cmd_supported</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>cmd_supported</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6f">cmd_supported</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>CMD_NOT_SUPPORTED</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD_NOT_SUPPORTED</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b16dc9538b6f7288a025222e1cc8e6b"/>CMD_NOT_SUPPORTED</entry><entry>
+<para>Command not supported error </para>
+</entry></row><row><entry><indexterm><primary>CMD0_GO_IDLE_STATE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD0_GO_IDLE_STATE</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63"/>CMD0_GO_IDLE_STATE</entry><entry>
+<para>Resets the SD Memory Card </para>
+</entry></row><row><entry><indexterm><primary>CMD1_SEND_OP_COND</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD1_SEND_OP_COND</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa687d0215f942c29c67ed8e116ba65c42"/>CMD1_SEND_OP_COND</entry><entry>
+<para>Sends host capacity support </para>
+</entry></row><row><entry><indexterm><primary>CMD6_SWITCH_FUNC</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD6_SWITCH_FUNC</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa2a8ad2f917bc227d95d29a0f92b62340"/>CMD6_SWITCH_FUNC</entry><entry>
+<para>Check and Switches card function </para>
+</entry></row><row><entry><indexterm><primary>CMD8_SEND_IF_COND</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD8_SEND_IF_COND</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4"/>CMD8_SEND_IF_COND</entry><entry>
+<para>Supply voltage info </para>
+</entry></row><row><entry><indexterm><primary>CMD9_SEND_CSD</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD9_SEND_CSD</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5"/>CMD9_SEND_CSD</entry><entry>
+<para>Provides Card Specific data </para>
+</entry></row><row><entry><indexterm><primary>CMD10_SEND_CID</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD10_SEND_CID</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fab0bed31cbc5377aeafbe82d456f105b4"/>CMD10_SEND_CID</entry><entry>
+<para>Provides Card Identification </para>
+</entry></row><row><entry><indexterm><primary>CMD12_STOP_TRANSMISSION</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD12_STOP_TRANSMISSION</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b"/>CMD12_STOP_TRANSMISSION</entry><entry>
+<para>Forces the card to stop transmission </para>
+</entry></row><row><entry><indexterm><primary>CMD13_SEND_STATUS</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD13_SEND_STATUS</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac57a11a2b3cd582a797f5b33ecdca429"/>CMD13_SEND_STATUS</entry><entry>
+<para>Card responds with status </para>
+</entry></row><row><entry><indexterm><primary>CMD16_SET_BLOCKLEN</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD16_SET_BLOCKLEN</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e"/>CMD16_SET_BLOCKLEN</entry><entry>
+<para>Length for SC card is set </para>
+</entry></row><row><entry><indexterm><primary>CMD17_READ_SINGLE_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD17_READ_SINGLE_BLOCK</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f"/>CMD17_READ_SINGLE_BLOCK</entry><entry>
+<para>Read single block of data </para>
+</entry></row><row><entry><indexterm><primary>CMD18_READ_MULTIPLE_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD18_READ_MULTIPLE_BLOCK</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c"/>CMD18_READ_MULTIPLE_BLOCK</entry><entry>
+<para>Card transfers data blocks to host until interrupted by a STOP_TRANSMISSION command </para>
+</entry></row><row><entry><indexterm><primary>CMD24_WRITE_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD24_WRITE_BLOCK</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3"/>CMD24_WRITE_BLOCK</entry><entry>
+<para>Write single block of data </para>
+</entry></row><row><entry><indexterm><primary>CMD25_WRITE_MULTIPLE_BLOCK</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD25_WRITE_MULTIPLE_BLOCK</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977"/>CMD25_WRITE_MULTIPLE_BLOCK</entry><entry>
+<para>Continuously writes blocks of data until &apos;Stop Tran&apos; token is sent </para>
+</entry></row><row><entry><indexterm><primary>CMD27_PROGRAM_CSD</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD27_PROGRAM_CSD</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faf8a2ea974333f1b8b282e5fe1a78d452"/>CMD27_PROGRAM_CSD</entry><entry>
+<para>Programming bits of CSD </para>
+</entry></row><row><entry><indexterm><primary>CMD32_ERASE_WR_BLK_START_ADDR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD32_ERASE_WR_BLK_START_ADDR</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725"/>CMD32_ERASE_WR_BLK_START_ADDR</entry><entry>
+<para>Sets the address of the first write block to be erased. </para>
+</entry></row><row><entry><indexterm><primary>CMD33_ERASE_WR_BLK_END_ADDR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD33_ERASE_WR_BLK_END_ADDR</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38"/>CMD33_ERASE_WR_BLK_END_ADDR</entry><entry>
+<para>Sets the address of the last write block of the continuous range to be erased. </para>
+</entry></row><row><entry><indexterm><primary>CMD38_ERASE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD38_ERASE</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64"/>CMD38_ERASE</entry><entry>
+<para>Erases all previously selected write blocks </para>
+</entry></row><row><entry><indexterm><primary>CMD55_APP_CMD</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD55_APP_CMD</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0"/>CMD55_APP_CMD</entry><entry>
+<para>Extend to Applications specific commands </para>
+</entry></row><row><entry><indexterm><primary>CMD56_GEN_CMD</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD56_GEN_CMD</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa60ed3ef8573485f4d9b7b18aace3967a"/>CMD56_GEN_CMD</entry><entry>
+<para>General Purpose Command </para>
+</entry></row><row><entry><indexterm><primary>CMD58_READ_OCR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD58_READ_OCR</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98"/>CMD58_READ_OCR</entry><entry>
+<para>Read OCR register of card </para>
+</entry></row><row><entry><indexterm><primary>CMD59_CRC_ON_OFF</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CMD59_CRC_ON_OFF</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7"/>CMD59_CRC_ON_OFF</entry><entry>
+<para>Turns the CRC option on or off </para>
+</entry></row><row><entry><indexterm><primary>ACMD6_SET_BUS_WIDTH</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD6_SET_BUS_WIDTH</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa7ccea821c49cb23280b5954f0b6f718"/>ACMD6_SET_BUS_WIDTH</entry><entry></entry></row><row><entry><indexterm><primary>ACMD13_SD_STATUS</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD13_SD_STATUS</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b"/>ACMD13_SD_STATUS</entry><entry></entry></row><row><entry><indexterm><primary>ACMD22_SEND_NUM_WR_BLOCKS</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD22_SEND_NUM_WR_BLOCKS</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577"/>ACMD22_SEND_NUM_WR_BLOCKS</entry><entry></entry></row><row><entry><indexterm><primary>ACMD23_SET_WR_BLK_ERASE_COUNT</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD23_SET_WR_BLK_ERASE_COUNT</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d"/>ACMD23_SET_WR_BLK_ERASE_COUNT</entry><entry></entry></row><row><entry><indexterm><primary>ACMD41_SD_SEND_OP_COND</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD41_SD_SEND_OP_COND</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4"/>ACMD41_SD_SEND_OP_COND</entry><entry></entry></row><row><entry><indexterm><primary>ACMD42_SET_CLR_CARD_DETECT</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD42_SET_CLR_CARD_DETECT</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa025b3258a75b77a9f94815517674d989"/>ACMD42_SET_CLR_CARD_DETECT</entry><entry></entry></row><row><entry><indexterm><primary>ACMD51_SEND_SCR</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>ACMD51_SEND_SCR</secondary></indexterm>
+<anchor xml:id="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0fbb6c92dd6da700caaa3829a43720a5"/>ACMD51_SEND_SCR</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00108">108</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+<programlisting linenumbering="unnumbered">00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00109 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b16dc9538b6f7288a025222e1cc8e6b">CMD_NOT_SUPPORTED</link>&#32;=&#32;-1,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00110 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac0d49d0be913ea0759b60172648bca63">CMD0_GO_IDLE_STATE</link>&#32;=&#32;0,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00111 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa687d0215f942c29c67ed8e116ba65c42">CMD1_SEND_OP_COND</link>&#32;=&#32;1,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00112 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa2a8ad2f917bc227d95d29a0f92b62340">CMD6_SWITCH_FUNC</link>&#32;=&#32;6,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00113 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa6b423cd241fe20485d3f14f0fb9926f4">CMD8_SEND_IF_COND</link>&#32;=&#32;8,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00114 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac94c340b43f6e72a115bf05aee14a0c5">CMD9_SEND_CSD</link>&#32;=&#32;9,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00115 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fab0bed31cbc5377aeafbe82d456f105b4">CMD10_SEND_CID</link>&#32;=&#32;10,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00116 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa50a1b06fbfbfac3e88777e375713194b">CMD12_STOP_TRANSMISSION</link>&#32;=&#32;12,&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00117 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fac57a11a2b3cd582a797f5b33ecdca429">CMD13_SEND_STATUS</link>&#32;=&#32;13,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00118 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa69b3ca3db78b1f657a5958a36dab2d1e">CMD16_SET_BLOCKLEN</link>&#32;=&#32;16,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00119 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa8ea642c880b96150fe8d7387b3c869f">CMD17_READ_SINGLE_BLOCK</link>&#32;=&#32;17,&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00120 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0425449a99e80e959b0376b9facbf86c">CMD18_READ_MULTIPLE_BLOCK</link>&#32;=&#32;18,&#32;&#32;&#32;&#32;&#32;
+00122 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6facaf0335a4dc52fec2cd69fa926c240d3">CMD24_WRITE_BLOCK</link>&#32;=&#32;24,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00123 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafaaf5657d5198f338bb555db8dbe0977">CMD25_WRITE_MULTIPLE_BLOCK</link>&#32;=&#32;25,&#32;&#32;&#32;&#32;
+00125 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faf8a2ea974333f1b8b282e5fe1a78d452">CMD27_PROGRAM_CSD</link>&#32;=&#32;27,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00126 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa42493da8336966eedb155f9fd5078725">CMD32_ERASE_WR_BLK_START_ADDR</link>&#32;=&#32;32,&#32;
+00128 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab58521e43613f07685f8c125e53cc38">CMD33_ERASE_WR_BLK_END_ADDR</link>&#32;=&#32;33,&#32;&#32;&#32;
+00130 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa179ed73c43cdbb988f56eeea98a0c64">CMD38_ERASE</link>&#32;=&#32;38,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00131 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fafe267879cd620c14cf8909eef99fd1c0">CMD55_APP_CMD</link>&#32;=&#32;55,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00132 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa60ed3ef8573485f4d9b7b18aace3967a">CMD56_GEN_CMD</link>&#32;=&#32;56,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00133 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faab2940925eb3b338f558bdd9012d2c98">CMD58_READ_OCR</link>&#32;=&#32;58,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00134 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa82dd3da0189cad047996069a968cb3b7">CMD59_CRC_ON_OFF</link>&#32;=&#32;59,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+00135 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;App&#32;Commands</emphasis>
+00136 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6faa7ccea821c49cb23280b5954f0b6f718">ACMD6_SET_BUS_WIDTH</link>&#32;=&#32;6,
+00137 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fad00bb3f3cccda27fc142424dcbfef81b">ACMD13_SD_STATUS</link>&#32;=&#32;13,
+00138 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa33335afba15c34e82ff7d9bf267ad577">ACMD22_SEND_NUM_WR_BLOCKS</link>&#32;=&#32;22,
+00139 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa176498dc1b43efc905fc638ace570d5d">ACMD23_SET_WR_BLK_ERASE_COUNT</link>&#32;=&#32;23,
+00140 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fabd6a8e1e93a30cdb68240a81ac8925f4">ACMD41_SD_SEND_OP_COND</link>&#32;=&#32;41,
+00141 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa025b3258a75b77a9f94815517674d989">ACMD42_SET_CLR_CARD_DETECT</link>&#32;=&#32;42,
+00142 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1a8c427e20c393ae6b71ec013e243a9f6fa0fbb6c92dd6da700caaa3829a43720a5">ACMD51_SEND_SCR</link>&#32;=&#32;51,
+00143 };
+</programlisting></section>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74"/><section>
+    <title>sdcard_type</title>
+<indexterm><primary>sdcard_type</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>sdcard_type</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74">sdcard_type</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>SDCARD_NONE</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SDCARD_NONE</secondary></indexterm>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290"/>SDCARD_NONE</entry><entry></entry></row><row><entry><indexterm><primary>SDCARD_V1</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SDCARD_V1</secondary></indexterm>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e"/>SDCARD_V1</entry><entry></entry></row><row><entry><indexterm><primary>SDCARD_V2</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SDCARD_V2</secondary></indexterm>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09"/>SDCARD_V2</entry><entry></entry></row><row><entry><indexterm><primary>SDCARD_V2HC</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>SDCARD_V2HC</secondary></indexterm>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba"/>SDCARD_V2HC</entry><entry></entry></row><row><entry><indexterm><primary>CARD_UNKNOWN</primary><secondary>sd.c</secondary></indexterm>
+<indexterm><primary>sd.c</primary><secondary>CARD_UNKNOWN</secondary></indexterm>
+<anchor xml:id="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5"/>CARD_UNKNOWN</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l00100">100</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+<programlisting linenumbering="unnumbered">00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00101 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290">SDCARD_NONE</link>&#32;=&#32;0,
+00102 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a4eb0b19753b7d178f928445d207de38e">SDCARD_V1</link>&#32;=&#32;1,
+00103 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a3850bb2d294863ab82502f429fd30c09">SDCARD_V2</link>&#32;=&#32;2,
+00104 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a7ada6417d63a99e3745b744c2d8c0dba">SDCARD_V2HC</link>&#32;=&#32;3,
+00105 &#32;&#32;&#32;&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a531e2d8187a657aeb5677e80000fc6f5">CARD_UNKNOWN</link>&#32;=&#32;4,
+00106 };
+</programlisting></section>
+</section>
+</section>

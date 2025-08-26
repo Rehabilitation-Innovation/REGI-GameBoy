@@ -1,0 +1,30 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/usb\+\_\+logger Directory Reference}
+\hypertarget{dir_e7cf58027767bbdc33db6c1250160d62}{}\label{dir_e7cf58027767bbdc33db6c1250160d62}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger Directory Reference@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger Directory Reference}}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c}{main.\+c}}
+\item 
+file \mbox{\hyperlink{tusb__config_8h}{tusb\+\_\+config.\+h}}
+\item 
+file \mbox{\hyperlink{usb__descriptors_8c}{usb\+\_\+descriptors.\+c}}
+\item 
+file \mbox{\hyperlink{usb__msc_8c}{usb\+\_\+msc.\+c}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md13}{}\doxysubsection{\texorpdfstring{Export sensor logs to the host PC in two file systems}{Export sensor logs to the host PC in two file systems}}\label{README.md_autotoc_md13}
+This demonstration is an example of a safe method for exporting sensor logs stored in the Pico on-\/board flash to a host PC in USB Mass storage class.
+
+Format the on-\/board flash memory in two separate file systems, one for internal operation and one for export.
+
+
+\begin{DoxyItemize}
+\item For internal operation\+: littlefs
+\item For export\+: FAT
+\end{DoxyItemize}
+
+When a USB connection is detected, the sensor log is copied from littlefs to FAT before the MSC operation starts. Battery power is required to operate with the USB disconnected, but in this demonstration, the bootcell button is substituted as a \textquotesingle{}USB dis-\/connected state\textquotesingle{} while it is pressed.
+
+In this example it is one-\/way for export only, but it is also possible to import files from FAT to littlefs when the USB is disconnected. 

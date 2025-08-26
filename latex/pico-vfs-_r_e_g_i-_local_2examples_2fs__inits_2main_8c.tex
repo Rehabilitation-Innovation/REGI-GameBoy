@@ -1,0 +1,101 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/fs\+\_\+inits/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/main.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/main.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/clocks.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{BENCHMARK\+\_\+\+SIZE}}~(0.\+6 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a259e80f4d6fca169b3e2e5b82dd316d1}{BENCHMARK\+\_\+\+SIZE\+\_\+\+SMALL}}~(256 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_abcbfd1e47b0212e084d9a16e323844c7}{BENCHMARK\+\_\+\+SIZE\+\_\+\+TINY}}~(100 \texorpdfstring{$\ast$}{*} 1024)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a39dba520911d1902db3bdc3f0280df2f}\index{main.c@{main.c}!BENCHMARK\_SIZE@{BENCHMARK\_SIZE}}
+\index{BENCHMARK\_SIZE@{BENCHMARK\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BENCHMARK\_SIZE}{BENCHMARK\_SIZE}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a39dba520911d1902db3bdc3f0280df2f} 
+\#define BENCHMARK\+\_\+\+SIZE~(0.\+6 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_l00018}{18}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a259e80f4d6fca169b3e2e5b82dd316d1}\index{main.c@{main.c}!BENCHMARK\_SIZE\_SMALL@{BENCHMARK\_SIZE\_SMALL}}
+\index{BENCHMARK\_SIZE\_SMALL@{BENCHMARK\_SIZE\_SMALL}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BENCHMARK\_SIZE\_SMALL}{BENCHMARK\_SIZE\_SMALL}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a259e80f4d6fca169b3e2e5b82dd316d1} 
+\#define BENCHMARK\+\_\+\+SIZE\+\_\+\+SMALL~(256 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_l00019}{19}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_abcbfd1e47b0212e084d9a16e323844c7}\index{main.c@{main.c}!BENCHMARK\_SIZE\_TINY@{BENCHMARK\_SIZE\_TINY}}
+\index{BENCHMARK\_SIZE\_TINY@{BENCHMARK\_SIZE\_TINY}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BENCHMARK\_SIZE\_TINY}{BENCHMARK\_SIZE\_TINY}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_abcbfd1e47b0212e084d9a16e323844c7} 
+\#define BENCHMARK\+\_\+\+SIZE\+\_\+\+TINY~(100 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_l00020}{20}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{main.c@{main.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_l00017}{17}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_l00135}{135}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00136\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}();}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ benchmark\_write();}
+\DoxyCodeLine{00140\ \ \ \ \ benchmark\_read();}
+\DoxyCodeLine{00141\ \}}
+
+\end{DoxyCode}

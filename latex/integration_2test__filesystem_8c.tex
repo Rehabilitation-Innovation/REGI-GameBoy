@@ -1,0 +1,164 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/integration/test\+\_\+filesystem.c File Reference}
+\hypertarget{integration_2test__filesystem_8c}{}\label{integration_2test__filesystem_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_filesystem.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_filesystem.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{integration_2test__filesystem_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{integration_2test__filesystem_8c_ae38550b2008b82c08588d2340f196914}{FLASH\+\_\+\+START\+\_\+\+AT}}~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{integration_2test__filesystem_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\+\_\+\+LENGTH\+\_\+\+ALL}}~0
+\item 
+\#define \mbox{\hyperlink{integration_2test__filesystem_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE}}~500
+\item 
+\#define \mbox{\hyperlink{integration_2test__filesystem_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE}}~16
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{integration_2test__filesystem_8c_af735a8051c1fced4d3ccfa7bfc207a2e}{test\+\_\+filesystem}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{integration_2test__filesystem_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{integration_2test__filesystem_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_filesystem.c@{test\_filesystem.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00009}{9}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+\Hypertarget{integration_2test__filesystem_8c_a1f06fce82ce957c8dd28c5e07da29d97}\index{test\_filesystem.c@{test\_filesystem.c}!FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}}
+\index{FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_LENGTH\_ALL}{FLASH\_LENGTH\_ALL}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_a1f06fce82ce957c8dd28c5e07da29d97} 
+\#define FLASH\+\_\+\+LENGTH\+\_\+\+ALL~0}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00011}{11}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+\Hypertarget{integration_2test__filesystem_8c_ae38550b2008b82c08588d2340f196914}\index{test\_filesystem.c@{test\_filesystem.c}!FLASH\_START\_AT@{FLASH\_START\_AT}}
+\index{FLASH\_START\_AT@{FLASH\_START\_AT}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_START\_AT}{FLASH\_START\_AT}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_ae38550b2008b82c08588d2340f196914} 
+\#define FLASH\+\_\+\+START\+\_\+\+AT~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00010}{10}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+\Hypertarget{integration_2test__filesystem_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}\index{test\_filesystem.c@{test\_filesystem.c}!LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}}
+\index{LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_BLOCK\_CYCLE}{LITTLEFS\_BLOCK\_CYCLE}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d} 
+\#define LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE~500}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00012}{12}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+\Hypertarget{integration_2test__filesystem_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}\index{test\_filesystem.c@{test\_filesystem.c}!LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}}
+\index{LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_LOOKAHEAD\_SIZE}{LITTLEFS\_LOOKAHEAD\_SIZE}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_a73694eeb2680f0f6e6fa72fcd0ad458d} 
+\#define LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE~16}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00013}{13}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{integration_2test__filesystem_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{integration_2test__filesystem_8c_af735a8051c1fced4d3ccfa7bfc207a2e}\index{test\_filesystem.c@{test\_filesystem.c}!test\_filesystem@{test\_filesystem}}
+\index{test\_filesystem@{test\_filesystem}!test\_filesystem.c@{test\_filesystem.c}}
+\doxysubsubsection{\texorpdfstring{test\_filesystem()}{test\_filesystem()}}
+{\footnotesize\ttfamily \label{integration_2test__filesystem_8c_af735a8051c1fced4d3ccfa7bfc207a2e} 
+void test\+\_\+filesystem (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__filesystem_8c_source_l00359}{359}} of file \mbox{\hyperlink{integration_2test__filesystem_8c_source}{test\+\_\+filesystem.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00360\ \ \ \ \ printf(\textcolor{stringliteral}{"{}File\ system\ FAT:\(\backslash\)n"{}});}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *flash\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914}{FLASH\_START\_AT}},\ \mbox{\hyperlink{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\_LENGTH\_ALL}});}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ assert(flash\ !=\ NULL);}
+\DoxyCodeLine{00365\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{00366\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{00367\ \ \ \ \ setup(flash);}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ test\_api\_format(fat,\ flash);}
+\DoxyCodeLine{00370\ \ \ \ \ test\_api\_mount(fat,\ flash);}
+\DoxyCodeLine{00371\ \ \ \ \ test\_api\_file\_open\_close(fat);}
+\DoxyCodeLine{00372\ \ \ \ \ test\_api\_file\_write\_read(fat);}
+\DoxyCodeLine{00373\ \ \ \ \ test\_api\_file\_seek(fat);}
+\DoxyCodeLine{00374\ \ \ \ \ test\_api\_file\_tell(fat);}
+\DoxyCodeLine{00375\ \ \ \ \ test\_api\_file\_size(fat);}
+\DoxyCodeLine{00376\ \ \ \ \ test\_api\_file\_truncate(fat);}
+\DoxyCodeLine{00377\ \ \ \ \ test\_api\_dir\_open(fat);}
+\DoxyCodeLine{00378\ \ \ \ \ test\_api\_dir\_read(fat);}
+\DoxyCodeLine{00379\ \ \ \ \ test\_api\_remove(fat);}
+\DoxyCodeLine{00380\ \ \ \ \ test\_api\_rename(fat);}
+\DoxyCodeLine{00381\ \ \ \ \ test\_api\_stat(fat);}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \ \ test\_api\_unmount(fat);}
+\DoxyCodeLine{00384\ \ \ \ \ cleanup(flash);}
+\DoxyCodeLine{00385\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__flash_ga8d9d318677d2c372535f4c775c5a22c9}{blockdevice\_flash\_free}}(flash);}
+\DoxyCodeLine{00386\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ printf(\textcolor{stringliteral}{"{}File\ system\ littlefs:\(\backslash\)n"{}});}
+\DoxyCodeLine{00390\ \ \ \ \ flash\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914}{FLASH\_START\_AT}},\ \mbox{\hyperlink{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\_LENGTH\_ALL}});}
+\DoxyCodeLine{00391\ \ \ \ \ assert(flash\ !=\ NULL);}
+\DoxyCodeLine{00392\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{00394\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{00395\ \ \ \ \ setup(flash);}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ test\_api\_format(lfs,\ flash);}
+\DoxyCodeLine{00398\ \ \ \ \ test\_api\_mount(lfs,\ flash);}
+\DoxyCodeLine{00399\ \ \ \ \ test\_api\_file\_open\_close(lfs);}
+\DoxyCodeLine{00400\ \ \ \ \ test\_api\_file\_write\_read(lfs);}
+\DoxyCodeLine{00401\ \ \ \ \ test\_api\_file\_seek(lfs);}
+\DoxyCodeLine{00402\ \ \ \ \ test\_api\_file\_tell(lfs);}
+\DoxyCodeLine{00403\ \ \ \ \ test\_api\_file\_size(lfs);}
+\DoxyCodeLine{00404\ \ \ \ \ test\_api\_file\_truncate(lfs);}
+\DoxyCodeLine{00405\ \ \ \ \ test\_api\_dir\_open(lfs);}
+\DoxyCodeLine{00406\ \ \ \ \ test\_api\_dir\_read(lfs);}
+\DoxyCodeLine{00407\ \ \ \ \ test\_api\_remove(lfs);}
+\DoxyCodeLine{00408\ \ \ \ \ test\_api\_rename(lfs);}
+\DoxyCodeLine{00409\ \ \ \ \ test\_api\_stat(lfs);}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ test\_api\_unmount(lfs);}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \ \ \ \ cleanup(flash);}
+\DoxyCodeLine{00414\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__flash_ga8d9d318677d2c372535f4c775c5a22c9}{blockdevice\_flash\_free}}(flash);}
+\DoxyCodeLine{00415\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{00416\ \}}
+
+\end{DoxyCode}

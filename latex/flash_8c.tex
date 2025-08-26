@@ -1,0 +1,80 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/src/blockdevice/flash.c File Reference}
+\hypertarget{flash_8c}{}\label{flash_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/flash.c@{lib/pico-\/vfs-\/REGI-\/Local/src/blockdevice/flash.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/flash.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/regs/addressmap.\+h$>$}\newline
+{\ttfamily \#include $<$pico/flash.\+h$>$}\newline
+{\ttfamily \#include $<$pico/mutex.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structblockdevice__flash__config__t}{blockdevice\+\_\+flash\+\_\+config\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct__safe__flash__update__param__t}{\+\_\+safe\+\_\+flash\+\_\+update\+\_\+param\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{flash_8c_a13b5ee4f9cca276550c7a9702f1a7434}{FLASH\+\_\+\+SAFE\+\_\+\+EXECUTE\+\_\+\+TIMEOUT}}~10 \texorpdfstring{$\ast$}{*} 1000
+\item 
+\#define \mbox{\hyperlink{flash_8c_a74d8a383b2d6b1927a56219027d8b74a}{FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+TIMEOUT}}~-\/4001
+\item 
+\#define \mbox{\hyperlink{flash_8c_a7ab3fcc54522204dbf732217a7844d4c}{FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+NOT\+\_\+\+PERMITTED}}~-\/4002
+\item 
+\#define \mbox{\hyperlink{flash_8c_ae99d723a78efffd6dc630edf5221b724}{FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+INSUFFICIENT\+\_\+\+RESOURCES}}~-\/4003
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\+\_\+flash\+\_\+create}} (uint32\+\_\+t start, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Create Raspberry Pi Pico On-\/board Flash block device. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__blockdevice__flash_ga8d9d318677d2c372535f4c775c5a22c9}{blockdevice\+\_\+flash\+\_\+free}} (\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Release the flash memory device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{flash_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{flash_8c_ae99d723a78efffd6dc630edf5221b724}\index{flash.c@{flash.c}!FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES@{FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES}}
+\index{FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES@{FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES}!flash.c@{flash.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES}{FLASH\_BLOCK\_DEVICE\_ERROR\_INSUFFICIENT\_RESOURCES}}
+{\footnotesize\ttfamily \label{flash_8c_ae99d723a78efffd6dc630edf5221b724} 
+\#define FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+INSUFFICIENT\+\_\+\+RESOURCES~-\/4003}
+
+method fails due to dynamic resource exhaustion 
+
+Definition at line \mbox{\hyperlink{flash_8c_source_l00019}{19}} of file \mbox{\hyperlink{flash_8c_source}{flash.\+c}}.
+
+\Hypertarget{flash_8c_a7ab3fcc54522204dbf732217a7844d4c}\index{flash.c@{flash.c}!FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED@{FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED}}
+\index{FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED@{FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED}!flash.c@{flash.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED}{FLASH\_BLOCK\_DEVICE\_ERROR\_NOT\_PERMITTED}}
+{\footnotesize\ttfamily \label{flash_8c_a7ab3fcc54522204dbf732217a7844d4c} 
+\#define FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+NOT\+\_\+\+PERMITTED~-\/4002}
+
+safe execution is not possible 
+
+Definition at line \mbox{\hyperlink{flash_8c_source_l00018}{18}} of file \mbox{\hyperlink{flash_8c_source}{flash.\+c}}.
+
+\Hypertarget{flash_8c_a74d8a383b2d6b1927a56219027d8b74a}\index{flash.c@{flash.c}!FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT@{FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT}}
+\index{FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT@{FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT}!flash.c@{flash.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT}{FLASH\_BLOCK\_DEVICE\_ERROR\_TIMEOUT}}
+{\footnotesize\ttfamily \label{flash_8c_a74d8a383b2d6b1927a56219027d8b74a} 
+\#define FLASH\+\_\+\+BLOCK\+\_\+\+DEVICE\+\_\+\+ERROR\+\_\+\+TIMEOUT~-\/4001}
+
+operation timeout 
+
+Definition at line \mbox{\hyperlink{flash_8c_source_l00017}{17}} of file \mbox{\hyperlink{flash_8c_source}{flash.\+c}}.
+
+\Hypertarget{flash_8c_a13b5ee4f9cca276550c7a9702f1a7434}\index{flash.c@{flash.c}!FLASH\_SAFE\_EXECUTE\_TIMEOUT@{FLASH\_SAFE\_EXECUTE\_TIMEOUT}}
+\index{FLASH\_SAFE\_EXECUTE\_TIMEOUT@{FLASH\_SAFE\_EXECUTE\_TIMEOUT}!flash.c@{flash.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_SAFE\_EXECUTE\_TIMEOUT}{FLASH\_SAFE\_EXECUTE\_TIMEOUT}}
+{\footnotesize\ttfamily \label{flash_8c_a13b5ee4f9cca276550c7a9702f1a7434} 
+\#define FLASH\+\_\+\+SAFE\+\_\+\+EXECUTE\+\_\+\+TIMEOUT~10 \texorpdfstring{$\ast$}{*} 1000}
+
+
+
+Definition at line \mbox{\hyperlink{flash_8c_source_l00015}{15}} of file \mbox{\hyperlink{flash_8c_source}{flash.\+c}}.
+

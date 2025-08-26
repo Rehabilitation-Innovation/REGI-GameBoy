@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_heap_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/blockdevice/heap.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/blockdevice/heap.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdint.h&gt;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link> (size_t size)</para>
+
+<para>Create RAM heap memory block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the heap memory device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

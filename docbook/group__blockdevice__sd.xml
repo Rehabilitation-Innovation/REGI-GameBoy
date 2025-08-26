@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__blockdevice__sd" xml:lang="en-US">
+<title>
+<para>blockdevice_sd </para>
+</title>
+<indexterm><primary>blockdevice_sd</primary></indexterm>
+<para>
+
+<para>SPI-connected SD/MMC card block device. </para>
+ 
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link> (spi_inst_t *spi_inst, uint8_t mosi, uint8_t miso, uint8_t sckl, uint8_t cs, uint32_t hz, bool enable_crc)</para>
+
+<para>Create SD card block device with SPI. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the SD card device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>SPI-connected SD/MMC card block device. </para>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8"/><section>
+    <title>blockdevice_sd_create()</title>
+<indexterm><primary>blockdevice_sd_create</primary><secondary>blockdevice_sd</secondary></indexterm>
+<indexterm><primary>blockdevice_sd</primary><secondary>blockdevice_sd_create</secondary></indexterm>
+<para><computeroutput><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * blockdevice_sd_create (spi_inst_t * spi_inst, uint8_t mosi, uint8_t miso, uint8_t sckl, uint8_t cs, uint32_t hz, bool enable_crc)</computeroutput></para><para>
+
+<para>Create SD card block device with SPI. </para>
+</para>
+
+<para>Create a block device object for an SPI-connected SD or MMC card.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>spi_inst</entry><entry>
+<para>SPI instance, as defined in the pico-sdk hardware_spi library </para>
+</entry>
+                            </row>
+                            <row>
+<entry>mosi</entry><entry>
+<para>SPI Master Out Slave In(TX) pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>miso</entry><entry>
+<para>SPI Master In Slave Out(RX) pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>sckl</entry><entry>
+<para>SPI clock pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>cs</entry><entry>
+<para>SPI Chip select pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>hz</entry><entry>
+<para>SPI clock frequency (Hz) </para>
+</entry>
+                            </row>
+                            <row>
+<entry>enable_crc</entry><entry>
+<para>Boolean value to enable CRC on read/write </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>Block device object. Returnes NULL in case of failure. </para>
+</formalpara>
+
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>NULL</entry><entry>
+<para>Failed to create block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l01038">1038</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+<programlisting linenumbering="unnumbered">01045 {
+01046 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(spi_inst&#32;==&#32;spi0)
+01047 &#32;&#32;&#32;&#32;{
+01048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(mosi&#32;==&#32;3&#32;||&#32;mosi&#32;==&#32;7&#32;||&#32;mosi&#32;==&#32;19&#32;||&#32;mosi&#32;==&#32;23&#32;||&#32;mosi&#32;==&#32;35&#32;||&#32;mosi&#32;==&#32;39);
+01049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(miso&#32;==&#32;0&#32;||&#32;miso&#32;==&#32;4&#32;||&#32;miso&#32;==&#32;16&#32;||&#32;miso&#32;==&#32;20&#32;||&#32;miso&#32;==&#32;32&#32;||&#32;miso&#32;==&#32;36);
+01050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(sclk&#32;==&#32;2&#32;||&#32;sclk&#32;==&#32;6&#32;||&#32;sclk&#32;==&#32;18&#32;||&#32;sclk&#32;==&#32;22&#32;||&#32;sclk&#32;==&#32;34&#32;||&#32;sclk&#32;==&#32;38);
+01051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;assert(cs&#32;==&#32;1&#32;||&#32;cs&#32;==&#32;5&#32;||&#32;cs&#32;==&#32;17&#32;||&#32;cs&#32;==&#32;21);</emphasis>
+01052 &#32;&#32;&#32;&#32;}
+01053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(spi_inst&#32;==&#32;spi1)
+01054 &#32;&#32;&#32;&#32;{
+01055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(mosi&#32;==&#32;11&#32;||&#32;mosi&#32;==&#32;15&#32;||&#32;mosi&#32;==&#32;27&#32;||&#32;mosi&#32;==&#32;31&#32;||&#32;mosi&#32;==&#32;43&#32;||&#32;mosi&#32;==&#32;47);
+01056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(miso&#32;==&#32;8&#32;||&#32;miso&#32;==&#32;12&#32;||&#32;miso&#32;==&#32;24&#32;||&#32;miso&#32;==&#32;28&#32;||&#32;miso&#32;==&#32;40&#32;||&#32;miso&#32;==&#32;44);
+01057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(sclk&#32;==&#32;10&#32;||&#32;sclk&#32;==&#32;14&#32;||&#32;sclk&#32;==&#32;26&#32;||&#32;sclk&#32;==&#32;30&#32;||&#32;sclk&#32;==&#32;42&#32;||&#32;sclk&#32;==&#32;46);
+01058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;assert(cs&#32;==&#32;9&#32;||&#32;cs&#32;==&#32;13&#32;||&#32;cs&#32;==&#32;25&#32;||&#32;cs&#32;==&#32;29);</emphasis>
+01059 &#32;&#32;&#32;&#32;}
+01060 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+01061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(spi_inst&#32;==&#32;spi0&#32;||&#32;spi_inst&#32;==&#32;spi1);
+01062 &#32;&#32;&#32;&#32;}
+01063 
+01064 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>*&#32;device&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>));
+01065 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(device&#32;==&#32;NULL)&#32;{
+01066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;blockdevice_sd_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+01067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+01068 &#32;&#32;&#32;&#32;}
+01069 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__sd__config__t">blockdevice_sd_config_t</link>*&#32;config&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structblockdevice__sd__config__t">blockdevice_sd_config_t</link>));
+01070 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(config&#32;==&#32;NULL)&#32;{
+01071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;blockdevice_sd_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+01072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(device);
+01073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+01074 &#32;&#32;&#32;&#32;}
+01075 
+01076 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>&#32;=&#32;init;
+01077 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>&#32;=&#32;deinit;
+01078 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>&#32;=&#32;sync;
+01079 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>&#32;=&#32;read;
+01080 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>&#32;=&#32;erase;
+01081 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>&#32;=&#32;program;
+01082 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>&#32;=&#32;trim;
+01083 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>&#32;=&#32;size;
+01084 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>&#32;=&#32;block_size;
+01085 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>&#32;=&#32;block_size;
+01086 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>&#32;=&#32;block_size;
+01087 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>&#32;=&#32;DEVICE_NAME;
+01088 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+01089 
+01090 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1ae7c06405b4676b1bd54189279f74c4ec">spi_inst</link>&#32;=&#32;spi_inst;
+01091 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1a4b1f87d959d02dd32e88faeb7bf11412">mosi</link>&#32;=&#32;mosi;
+01092 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1ae8df6ecd310556e45f8e9d10b29b8512">miso</link>&#32;=&#32;miso;
+01093 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1a83bc8190d58c50dc4696e347f6d8b601">sclk</link>&#32;=&#32;sclk;
+01094 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1af0a9de7d996bcd6711ab7244e2db17d6">cs</link>&#32;=&#32;cs;
+01095 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1af7854657ebfe51492086bc83e74d15a8">hz</link>&#32;=&#32;hz;
+01096 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1ae7d08bfdf6ccc6ec15fef0f38c155794">enable_crc</link>&#32;=&#32;enable_crc;
+01097 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1a9de2e52cb964416fe7c8565304e60f86">card_type</link>&#32;=&#32;<link linkend="_sd_8c_1ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290">SDCARD_NONE</link>;
+01098 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__sd__config__t_1a7de1f8b1fe1eac89938593472e1e77c7">block_size</link>&#32;=&#32;512;
+01099 &#32;&#32;&#32;&#32;mutex_init(&amp;config-&gt;<link linkend="_structblockdevice__sd__config__t_1a067f7b4829219e283143546a90b876da">_mutex</link>);
+01100 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;=&#32;config;
+01101 
+01102 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+01103 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device;
+01104 }
+</programlisting></section>
+<anchor xml:id="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9"/><section>
+    <title>blockdevice_sd_free()</title>
+<indexterm><primary>blockdevice_sd_free</primary><secondary>blockdevice_sd</secondary></indexterm>
+<indexterm><primary>blockdevice_sd</primary><secondary>blockdevice_sd_free</secondary></indexterm>
+<para><computeroutput>void blockdevice_sd_free (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * device)</computeroutput></para><para>
+
+<para>Release the SD card device. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>device</entry><entry>
+<para>Block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_sd_8c_source_1l01106">1106</link> of file <link linkend="_sd_8c_source">sd.c</link>.</para>
+<programlisting linenumbering="unnumbered">01106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+01107 &#32;&#32;&#32;&#32;free(device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>);
+01108 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;=&#32;NULL;
+01109 &#32;&#32;&#32;&#32;free(device);
+01110 &#32;&#32;&#32;&#32;device&#32;=&#32;NULL;
+01111 }
+</programlisting></section>
+</section>
+</section>

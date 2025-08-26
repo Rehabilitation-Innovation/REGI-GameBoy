@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ffunicode_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/source/ffunicode.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/source/ffunicode.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;ff.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ffunicode_8c_1a373853218ab4794caaeb75972e228e2e">MERGE2</link>(a,  b)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8">CVTBL</link>(tbl,  cp)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> <link linkend="_ffunicode_8c_1a72914966e82f8df3504a3659834f2abe">ff_uni2oem</link> (<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> uni, <link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> cp)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> <link linkend="_ffunicode_8c_1a52f09f31c84747cc135c90282509961a">ff_oem2uni</link> (<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> oem, <link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> cp)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_ffunicode_8c_1acb0bf9acde41b603662ab45811cbc806">ff_wtoupper</link> (<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> uni)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8"/><section>
+    <title>CVTBL</title>
+<indexterm><primary>CVTBL</primary><secondary>ffunicode.c</secondary></indexterm>
+<indexterm><primary>ffunicode.c</primary><secondary>CVTBL</secondary></indexterm>
+<para><computeroutput>#define CVTBL( tbl,  cp)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered"><link linkend="_ffunicode_8c_1a373853218ab4794caaeb75972e228e2e">MERGE2</link>(tbl,&#32;cp)
+</programlisting><para>
+Definition at line <link linkend="_ffunicode_8c_source_1l00031">31</link> of file <link linkend="_ffunicode_8c_source">ffunicode.c</link>.</para>
+</section>
+<anchor xml:id="_ffunicode_8c_1a373853218ab4794caaeb75972e228e2e"/><section>
+    <title>MERGE2</title>
+<indexterm><primary>MERGE2</primary><secondary>ffunicode.c</secondary></indexterm>
+<indexterm><primary>ffunicode.c</primary><secondary>MERGE2</secondary></indexterm>
+<para><computeroutput>#define MERGE2( a,  b)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">a&#32;##&#32;b
+</programlisting><para>
+Definition at line <link linkend="_ffunicode_8c_source_1l00030">30</link> of file <link linkend="_ffunicode_8c_source">ffunicode.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_ffunicode_8c_1a52f09f31c84747cc135c90282509961a"/><section>
+    <title>ff_oem2uni()</title>
+<indexterm><primary>ff_oem2uni</primary><secondary>ffunicode.c</secondary></indexterm>
+<indexterm><primary>ffunicode.c</primary><secondary>ff_oem2uni</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> ff_oem2uni (<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> oem, <link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> cp)</computeroutput></para><para>
+Definition at line <link linkend="_ffunicode_8c_source_1l15311">15311</link> of file <link linkend="_ffunicode_8c_source">ffunicode.c</link>.</para>
+<programlisting linenumbering="unnumbered">15315 {
+15316 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>*&#32;p;
+15317 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>&#32;c&#32;=&#32;0;
+15318 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;i&#32;=&#32;0,&#32;n,&#32;li,&#32;hi;
+15319 
+15320 
+15321 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(oem&#32;&lt;&#32;0x80)&#32;{&#32;&#32;&#32;<emphasis role="comment">/*&#32;ASCII?&#32;*/</emphasis>
+15322 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;oem;
+15323 
+15324 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Extended&#32;char&#32;*/</emphasis>
+15325 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cp&#32;==&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>)&#32;{&#32;&#32;&#32;<emphasis role="comment">/*&#32;Is&#32;it&#32;valid&#32;code&#32;page?&#32;*/</emphasis>
+15326 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;p&#32;=&#32;<link linkend="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8">CVTBL</link>(oem2uni,&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>);
+15327 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hi&#32;=&#32;<emphasis role="keyword">sizeof</emphasis>&#32;<link linkend="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8">CVTBL</link>(oem2uni,&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>)&#32;/&#32;4&#32;-&#32;1;
+15328 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;li&#32;=&#32;0;
+15329 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;16;&#32;n;&#32;n--)&#32;{
+15330 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;i&#32;=&#32;li&#32;+&#32;(hi&#32;-&#32;li)&#32;/&#32;2;
+15331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(oem&#32;==&#32;p[i&#32;*&#32;2])&#32;<emphasis role="keywordflow">break</emphasis>;
+15332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(oem&#32;&gt;&#32;p[i&#32;*&#32;2])&#32;{
+15333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;li&#32;=&#32;i;
+15334 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+15335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hi&#32;=&#32;i;
+15336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;!=&#32;0)&#32;c&#32;=&#32;p[i&#32;*&#32;2&#32;+&#32;1];
+15339 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15340 &#32;&#32;&#32;&#32;}
+15341 
+15342 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;
+15343 }
+</programlisting></section>
+<anchor xml:id="_ffunicode_8c_1a72914966e82f8df3504a3659834f2abe"/><section>
+    <title>ff_uni2oem()</title>
+<indexterm><primary>ff_uni2oem</primary><secondary>ffunicode.c</secondary></indexterm>
+<indexterm><primary>ffunicode.c</primary><secondary>ff_uni2oem</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link> ff_uni2oem (<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> uni, <link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> cp)</computeroutput></para><para>
+Definition at line <link linkend="_ffunicode_8c_source_1l15275">15275</link> of file <link linkend="_ffunicode_8c_source">ffunicode.c</link>.</para>
+<programlisting linenumbering="unnumbered">15279 {
+15280 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>*&#32;p;
+15281 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>&#32;c&#32;=&#32;0,&#32;uc;
+15282 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;i&#32;=&#32;0,&#32;n,&#32;li,&#32;hi;
+15283 
+15284 
+15285 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uni&#32;&lt;&#32;0x80)&#32;{&#32;&#32;&#32;<emphasis role="comment">/*&#32;ASCII?&#32;*/</emphasis>
+15286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;(<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>)uni;
+15287 
+15288 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Non-ASCII&#32;*/</emphasis>
+15289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uni&#32;&lt;&#32;0x10000&#32;&amp;&amp;&#32;cp&#32;==&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>)&#32;{&#32;&#32;<emphasis role="comment">/*&#32;Is&#32;it&#32;in&#32;BMP&#32;and&#32;valid&#32;code&#32;page?&#32;*/</emphasis>
+15290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uc&#32;=&#32;(<link linkend="_ff_8h_1a0bb095da65fbe52192dd9e3e643c7568">WCHAR</link>)uni;
+15291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;p&#32;=&#32;<link linkend="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8">CVTBL</link>(uni2oem,&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>);
+15292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hi&#32;=&#32;<emphasis role="keyword">sizeof</emphasis>&#32;<link linkend="_ffunicode_8c_1afcbf86dfddc068d1df5155276ffc8ef8">CVTBL</link>(uni2oem,&#32;<link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>)&#32;/&#32;4&#32;-&#32;1;
+15293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;li&#32;=&#32;0;
+15294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;16;&#32;n;&#32;n--)&#32;{
+15295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;i&#32;=&#32;li&#32;+&#32;(hi&#32;-&#32;li)&#32;/&#32;2;
+15296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uc&#32;==&#32;p[i&#32;*&#32;2])&#32;<emphasis role="keywordflow">break</emphasis>;
+15297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uc&#32;&gt;&#32;p[i&#32;*&#32;2])&#32;{
+15298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;li&#32;=&#32;i;
+15299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+15300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hi&#32;=&#32;i;
+15301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;!=&#32;0)&#32;c&#32;=&#32;p[i&#32;*&#32;2&#32;+&#32;1];
+15304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15305 &#32;&#32;&#32;&#32;}
+15306 
+15307 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;c;
+15308 }
+</programlisting></section>
+<anchor xml:id="_ffunicode_8c_1acb0bf9acde41b603662ab45811cbc806"/><section>
+    <title>ff_wtoupper()</title>
+<indexterm><primary>ff_wtoupper</primary><secondary>ffunicode.c</secondary></indexterm>
+<indexterm><primary>ffunicode.c</primary><secondary>ff_wtoupper</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> ff_wtoupper (<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> uni)</computeroutput></para><para>
+Definition at line <link linkend="_ffunicode_8c_source_1l15464">15464</link> of file <link linkend="_ffunicode_8c_source">ffunicode.c</link>.</para>
+<programlisting linenumbering="unnumbered">15467 {
+15468 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>*&#32;p;
+15469 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;uc,&#32;bc,&#32;nc,&#32;cmd;
+15470 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;cvt1[]&#32;=&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Compressed&#32;up&#32;conversion&#32;table&#32;for&#32;U+0000&#32;-&#32;U+0FFF&#32;*/</emphasis>
+15471 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Basic&#32;Latin&#32;*/</emphasis>
+15472 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0061,0x031A,
+15473 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Latin-1&#32;Supplement&#32;*/</emphasis>
+15474 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x00E0,0x0317,
+15475 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x00F8,0x0307,
+15476 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x00FF,0x0001,0x0178,
+15477 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Latin&#32;Extended-A&#32;*/</emphasis>
+15478 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0100,0x0130,
+15479 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0132,0x0106,
+15480 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0139,0x0110,
+15481 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x014A,0x012E,
+15482 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0179,0x0106,
+15483 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Latin&#32;Extended-B&#32;*/</emphasis>
+15484 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0180,0x004D,0x0243,0x0181,0x0182,0x0182,0x0184,0x0184,0x0186,0x0187,0x0187,0x0189,0x018A,0x018B,0x018B,0x018D,0x018E,0x018F,0x0190,0x0191,0x0191,0x0193,0x0194,0x01F6,0x0196,0x0197,0x0198,0x0198,0x023D,0x019B,0x019C,0x019D,0x0220,0x019F,0x01A0,0x01A0,0x01A2,0x01A2,0x01A4,0x01A4,0x01A6,0x01A7,0x01A7,0x01A9,0x01AA,0x01AB,0x01AC,0x01AC,0x01AE,0x01AF,0x01AF,0x01B1,0x01B2,0x01B3,0x01B3,0x01B5,0x01B5,0x01B7,0x01B8,0x01B8,0x01BA,0x01BB,0x01BC,0x01BC,0x01BE,0x01F7,0x01C0,0x01C1,0x01C2,0x01C3,0x01C4,0x01C5,0x01C4,0x01C7,0x01C8,0x01C7,0x01CA,0x01CB,0x01CA,
+15485 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x01CD,0x0110,
+15486 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x01DD,0x0001,0x018E,
+15487 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x01DE,0x0112,
+15488 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x01F3,0x0003,0x01F1,0x01F4,0x01F4,
+15489 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x01F8,0x0128,
+15490 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0222,0x0112,
+15491 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x023A,0x0009,0x2C65,0x023B,0x023B,0x023D,0x2C66,0x023F,0x0240,0x0241,0x0241,
+15492 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0246,0x010A,
+15493 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;IPA&#32;Extensions&#32;*/</emphasis>
+15494 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0253,0x0040,0x0181,0x0186,0x0255,0x0189,0x018A,0x0258,0x018F,0x025A,0x0190,0x025C,0x025D,0x025E,0x025F,0x0193,0x0261,0x0262,0x0194,0x0264,0x0265,0x0266,0x0267,0x0197,0x0196,0x026A,0x2C62,0x026C,0x026D,0x026E,0x019C,0x0270,0x0271,0x019D,0x0273,0x0274,0x019F,0x0276,0x0277,0x0278,0x0279,0x027A,0x027B,0x027C,0x2C64,0x027E,0x027F,0x01A6,0x0281,0x0282,0x01A9,0x0284,0x0285,0x0286,0x0287,0x01AE,0x0244,0x01B1,0x01B2,0x0245,0x028D,0x028E,0x028F,0x0290,0x0291,0x01B7,
+15495 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Greek,&#32;Coptic&#32;*/</emphasis>
+15496 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x037B,0x0003,0x03FD,0x03FE,0x03FF,
+15497 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03AC,0x0004,0x0386,0x0388,0x0389,0x038A,
+15498 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03B1,0x0311,
+15499 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03C2,0x0002,0x03A3,0x03A3,
+15500 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03C4,0x0308,
+15501 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03CC,0x0003,0x038C,0x038E,0x038F,
+15502 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03D8,0x0118,
+15503 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x03F2,0x000A,0x03F9,0x03F3,0x03F4,0x03F5,0x03F6,0x03F7,0x03F7,0x03F9,0x03FA,0x03FA,
+15504 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Cyrillic&#32;*/</emphasis>
+15505 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0430,0x0320,
+15506 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0450,0x0710,
+15507 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0460,0x0122,
+15508 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x048A,0x0136,
+15509 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x04C1,0x010E,
+15510 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x04CF,0x0001,0x04C0,
+15511 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x04D0,0x0144,
+15512 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Armenian&#32;*/</emphasis>
+15513 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0561,0x0426,
+15514 
+15515 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0000&#32;&#32;<emphasis role="comment">/*&#32;EOT&#32;*/</emphasis>
+15516 &#32;&#32;&#32;&#32;};
+15517 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;cvt2[]&#32;=&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Compressed&#32;up&#32;conversion&#32;table&#32;for&#32;U+1000&#32;-&#32;U+FFFF&#32;*/</emphasis>
+15518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Phonetic&#32;Extensions&#32;*/</emphasis>
+15519 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1D7D,0x0001,0x2C63,
+15520 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Latin&#32;Extended&#32;Additional&#32;*/</emphasis>
+15521 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1E00,0x0196,
+15522 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1EA0,0x015A,
+15523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Greek&#32;Extended&#32;*/</emphasis>
+15524 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F00,0x0608,
+15525 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F10,0x0606,
+15526 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F20,0x0608,
+15527 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F30,0x0608,
+15528 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F40,0x0606,
+15529 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F51,0x0007,0x1F59,0x1F52,0x1F5B,0x1F54,0x1F5D,0x1F56,0x1F5F,
+15530 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F60,0x0608,
+15531 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F70,0x000E,0x1FBA,0x1FBB,0x1FC8,0x1FC9,0x1FCA,0x1FCB,0x1FDA,0x1FDB,0x1FF8,0x1FF9,0x1FEA,0x1FEB,0x1FFA,0x1FFB,
+15532 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F80,0x0608,
+15533 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1F90,0x0608,
+15534 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FA0,0x0608,
+15535 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FB0,0x0004,0x1FB8,0x1FB9,0x1FB2,0x1FBC,
+15536 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FCC,0x0001,0x1FC3,
+15537 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FD0,0x0602,
+15538 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FE0,0x0602,
+15539 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FE5,0x0001,0x1FEC,
+15540 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x1FF3,0x0001,0x1FFC,
+15541 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Letterlike&#32;Symbols&#32;*/</emphasis>
+15542 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x214E,0x0001,0x2132,
+15543 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Number&#32;forms&#32;*/</emphasis>
+15544 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2170,0x0210,
+15545 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2184,0x0001,0x2183,
+15546 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Enclosed&#32;Alphanumerics&#32;*/</emphasis>
+15547 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x24D0,0x051A,
+15548 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2C30,0x042F,
+15549 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Latin&#32;Extended-C&#32;*/</emphasis>
+15550 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2C60,0x0102,
+15551 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2C67,0x0106,&#32;0x2C75,0x0102,
+15552 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Coptic&#32;*/</emphasis>
+15553 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2C80,0x0164,
+15554 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Georgian&#32;Supplement&#32;*/</emphasis>
+15555 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x2D00,0x0826,
+15556 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Full-width&#32;*/</emphasis>
+15557 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0xFF41,0x031A,
+15558 
+15559 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0x0000&#32;&#32;<emphasis role="comment">/*&#32;EOT&#32;*/</emphasis>
+15560 &#32;&#32;&#32;&#32;};
+15561 
+15562 
+15563 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uni&#32;&lt;&#32;0x10000)&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Is&#32;it&#32;in&#32;BMP?&#32;*/</emphasis>
+15564 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uc&#32;=&#32;(<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>)uni;
+15565 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;p&#32;=&#32;uc&#32;&lt;&#32;0x1000&#32;?&#32;cvt1&#32;:&#32;cvt2;
+15566 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(;;)&#32;{
+15567 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;bc&#32;=&#32;*p++;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Get&#32;the&#32;block&#32;base&#32;*/</emphasis>
+15568 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(bc&#32;==&#32;0&#32;||&#32;uc&#32;&lt;&#32;bc)&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Not&#32;matched?&#32;*/</emphasis>
+15569 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nc&#32;=&#32;*p++;&#32;cmd&#32;=&#32;nc&#32;&gt;&gt;&#32;8;&#32;nc&#32;&amp;=&#32;0xFF;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Get&#32;processing&#32;command&#32;and&#32;block&#32;size&#32;*/</emphasis>
+15570 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(uc&#32;&lt;&#32;bc&#32;+&#32;nc)&#32;{&#32;<emphasis role="comment">/*&#32;In&#32;the&#32;block?&#32;*/</emphasis>
+15571 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(cmd)&#32;{
+15572 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;0:&#32;uc&#32;=&#32;p[uc&#32;-&#32;bc];&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Table&#32;conversion&#32;*/</emphasis>
+15573 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;1:&#32;uc&#32;-=&#32;(uc&#32;-&#32;bc)&#32;&amp;&#32;1;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;<emphasis role="comment">/*&#32;Case&#32;pairs&#32;*/</emphasis>
+15574 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;2:&#32;uc&#32;-=&#32;16;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-16&#32;*/</emphasis>
+15575 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;3:&#32;uc&#32;-=&#32;32;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-32&#32;*/</emphasis>
+15576 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;4:&#32;uc&#32;-=&#32;48;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-48&#32;*/</emphasis>
+15577 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5:&#32;uc&#32;-=&#32;26;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-26&#32;*/</emphasis>
+15578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;6:&#32;uc&#32;+=&#32;8;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;+8&#32;*/</emphasis>
+15579 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;7:&#32;uc&#32;-=&#32;80;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-80&#32;*/</emphasis>
+15580 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;8:&#32;uc&#32;-=&#32;0x1C60;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Shift&#32;-0x1C60&#32;*/</emphasis>
+15581 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15582 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+15583 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15584 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cmd&#32;==&#32;0)&#32;p&#32;+=&#32;nc;&#32;&#32;<emphasis role="comment">/*&#32;Skip&#32;table&#32;if&#32;needed&#32;*/</emphasis>
+15585 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+15586 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uni&#32;=&#32;uc;
+15587 &#32;&#32;&#32;&#32;}
+15588 
+15589 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;uni;
+15590 }
+</programlisting></section>
+</section>
+</section>

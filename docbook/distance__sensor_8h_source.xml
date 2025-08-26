@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_distance__sensor_8h_source" xml:lang="en-US">
+<title>distance_sensor.h</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/include/distance_sensor.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_distance__sensor_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_distance__sensor_8h_source_1l00002"/>00002 
+<anchor xml:id="_distance__sensor_8h_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_pio_8h">hardware/pio.h</link>&quot;</emphasis>
+<anchor xml:id="_distance__sensor_8h_source_1l00004"/>00004 
+<anchor xml:id="_distance__sensor_8h_source_1l00008"/><link linkend="_class_distance_sensor">00008</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>&#32;{
+<anchor xml:id="_distance__sensor_8h_source_1l00009"/>00009 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_distance__sensor_8h_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;trigger_gpio);
+<anchor xml:id="_distance__sensor_8h_source_1l00020"/>00020 
+<anchor xml:id="_distance__sensor_8h_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>*&#32;<link linkend="_class_distance_sensor_1a495a45dfe6d75a99126fac0e9edc7572">GetMappedSensor</link>(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>);
+<anchor xml:id="_distance__sensor_8h_source_1l00028"/>00028 
+<anchor xml:id="_distance__sensor_8h_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a">TriggerRead</link>();
+<anchor xml:id="_distance__sensor_8h_source_1l00033"/>00033 
+<anchor xml:id="_distance__sensor_8h_source_1l00037"/><link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">00037</link> &#32;&#32;&#32;&#32;uint32_t&#32;<link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">distance</link>&#32;=&#32;0;
+<anchor xml:id="_distance__sensor_8h_source_1l00038"/>00038 
+<anchor xml:id="_distance__sensor_8h_source_1l00039"/><link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">00039</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">volatile</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_distance__sensor_8h_source_1l00040"/>00040 
+<anchor xml:id="_distance__sensor_8h_source_1l00044"/><link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">00044</link> &#32;&#32;&#32;&#32;<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>;
+<anchor xml:id="_distance__sensor_8h_source_1l00045"/>00045 
+<anchor xml:id="_distance__sensor_8h_source_1l00049"/><link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">00049</link> &#32;&#32;&#32;&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>;
+<anchor xml:id="_distance__sensor_8h_source_1l00050"/>00050 
+<anchor xml:id="_distance__sensor_8h_source_1l00051"/>00051 <emphasis role="keyword">protected</emphasis>:
+<anchor xml:id="_distance__sensor_8h_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>*&#32;<link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link>[2][4];
+<anchor xml:id="_distance__sensor_8h_source_1l00065"/>00065 
+<anchor xml:id="_distance__sensor_8h_source_1l00070"/>00070 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">_PioOffsets</link>[2];
+<anchor xml:id="_distance__sensor_8h_source_1l00071"/>00071 
+<anchor xml:id="_distance__sensor_8h_source_1l00079"/>00079 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_distance_sensor_1ac6680c1265d7514097937d587d509bca">_InitializeSensorForGpio</link>(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;gpio,&#32;<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;<link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link>&#32;handler);
+<anchor xml:id="_distance__sensor_8h_source_1l00080"/>00080 
+<anchor xml:id="_distance__sensor_8h_source_1l00086"/>00086 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5">_IsProgramLoaded</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>);
+<anchor xml:id="_distance__sensor_8h_source_1l00087"/>00087 
+<anchor xml:id="_distance__sensor_8h_source_1l00093"/>00093 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1a579d6f646f9a93ad2e0446917271d742">_LoadSensorProgram</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>);
+<anchor xml:id="_distance__sensor_8h_source_1l00094"/>00094 };
+</programlisting></section>

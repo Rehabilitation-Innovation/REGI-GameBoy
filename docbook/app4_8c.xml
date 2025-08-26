@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app4_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app4.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app4.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;ff.h&quot;<?linebreak?>#include &quot;diskio.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_app4_8c_1ae2f7ddd95f2ba7877bb21a96348b7530">test_diskio</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> ncyc, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> *buff, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff)</para>
+</listitem>
+            <listitem><para>int <link linkend="_app4_8c_1a0ddf1224851353fc92bfbff6f499fa97">main</link> (int argc, char *argv[])</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app4_8c_1a0ddf1224851353fc92bfbff6f499fa97"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>app4.c</secondary></indexterm>
+<indexterm><primary>app4.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char * argv[])</computeroutput></para><para>
+Definition at line <link linkend="_app4_8c_source_1l00299">299</link> of file <link linkend="_app4_8c_source">app4.c</link>.</para>
+<programlisting linenumbering="unnumbered">00300 {
+00301 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;rc;
+00302 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;buff[<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>];&#32;&#32;<emphasis role="comment">/*&#32;Working&#32;buffer&#32;(4&#32;sector&#32;in&#32;size)&#32;*/</emphasis>
+00303 
+00304 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Check&#32;function/compatibility&#32;of&#32;the&#32;physical&#32;drive&#32;#0&#32;*/</emphasis>
+00305 &#32;&#32;&#32;&#32;rc&#32;=&#32;<link linkend="_app4_8c_1ae2f7ddd95f2ba7877bb21a96348b7530">test_diskio</link>(0,&#32;3,&#32;buff,&#32;<emphasis role="keyword">sizeof</emphasis>&#32;buff);
+00306 
+00307 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(rc)&#32;{
+00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Sorry&#32;the&#32;function/compatibility&#32;test&#32;failed.&#32;(rc=%d)\nFatFs&#32;will&#32;not&#32;work&#32;with&#32;this&#32;disk&#32;driver.\n&quot;</emphasis>,&#32;rc);
+00309 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Congratulations!&#32;The&#32;disk&#32;driver&#32;works&#32;well.\n&quot;</emphasis>);
+00311 &#32;&#32;&#32;&#32;}
+00312 
+00313 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;rc;
+00314 }
+</programlisting></section>
+<anchor xml:id="_app4_8c_1ae2f7ddd95f2ba7877bb21a96348b7530"/><section>
+    <title>test_diskio()</title>
+<indexterm><primary>test_diskio</primary><secondary>app4.c</secondary></indexterm>
+<indexterm><primary>app4.c</primary><secondary>test_diskio</secondary></indexterm>
+<para><computeroutput>int test_diskio (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> ncyc, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> * buff, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff)</computeroutput></para><para>
+Definition at line <link linkend="_app4_8c_source_1l00036">36</link> of file <link linkend="_app4_8c_source">app4.c</link>.</para>
+<programlisting linenumbering="unnumbered">00042 {
+00043 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;n,&#32;cc,&#32;ns;
+00044 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;sz_drv,&#32;lba,&#32;lba2,&#32;sz_eblk,&#32;pns&#32;=&#32;1;
+00045 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;sz_sect;
+00046 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>&#32;*pbuff&#32;=&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>*)buff;
+00047 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>&#32;ds;
+00048 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;dr;
+00049 
+00050 
+00051 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;test_diskio(%u,&#32;%u,&#32;0x%08X,&#32;0x%08X)\n&quot;</emphasis>,&#32;pdrv,&#32;ncyc,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)buff,&#32;sz_buff);
+00052 
+00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sz_buff&#32;&lt;&#32;<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>&#32;+&#32;8)&#32;{
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Insufficient&#32;work&#32;area&#32;to&#32;run&#32;the&#32;program.\n&quot;</emphasis>);
+00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00056 &#32;&#32;&#32;&#32;}
+00057 
+00058 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(cc&#32;=&#32;1;&#32;cc&#32;&lt;=&#32;ncyc;&#32;cc++)&#32;{
+00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Test&#32;cycle&#32;%u&#32;of&#32;%u&#32;start&#32;****\n&quot;</emphasis>,&#32;cc,&#32;ncyc);
+00060 
+00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_initalize(%u)&quot;</emphasis>,&#32;pdrv);
+00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ds&#32;=&#32;<link linkend="_fat_8c_1a09cdaa6f36fa409bdf002727bff98eb1">disk_initialize</link>(pdrv);
+00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ds&#32;&amp;&#32;<link linkend="_diskio_8h_1abd6503c70d862b979a3f7080a59e9acd">STA_NOINIT</link>)&#32;{
+00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;2;
+00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00069 
+00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Get&#32;drive&#32;size&#32;****\n&quot;</emphasis>);
+00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;GET_SECTOR_COUNT,&#32;0x%08X)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)&amp;sz_drv);
+00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sz_drv&#32;=&#32;0;
+00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde">GET_SECTOR_COUNT</link>,&#32;&amp;sz_drv);
+00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;3;
+00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sz_drv&#32;&lt;&#32;128)&#32;{
+00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Failed:&#32;Insufficient&#32;drive&#32;size&#32;to&#32;test.\n&quot;</emphasis>);
+00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;4;
+00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Number&#32;of&#32;sectors&#32;on&#32;the&#32;drive&#32;%u&#32;is&#32;%lu.\n&quot;</emphasis>,&#32;pdrv,&#32;sz_drv);
+00085 
+00086 <emphasis role="preprocessor">#if&#32;FF_MAX_SS&#32;!=&#32;FF_MIN_SS&#x240D;</emphasis>
+00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Get&#32;sector&#32;size&#32;****\n&quot;</emphasis>);
+00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;GET_SECTOR_SIZE,&#32;0x%X)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)&amp;sz_sect);
+00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sz_sect&#32;=&#32;0;
+00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>,&#32;&amp;sz_sect);
+00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;5;
+00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Size&#32;of&#32;sector&#32;is&#32;%u&#32;bytes.\n&quot;</emphasis>,&#32;sz_sect);
+00098 <emphasis role="preprocessor">#else&#x240D;</emphasis>
+00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sz_sect&#32;=&#32;<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>;
+00100 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00101 
+00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Get&#32;block&#32;size&#32;****\n&quot;</emphasis>);
+00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;GET_BLOCK_SIZE,&#32;0x%X)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)&amp;sz_eblk);
+00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sz_eblk&#32;=&#32;0;
+00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500">GET_BLOCK_SIZE</link>,&#32;&amp;sz_eblk);
+00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>&#32;||&#32;sz_eblk&#32;&gt;=&#32;2)&#32;{
+00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Size&#32;of&#32;the&#32;erase&#32;block&#32;is&#32;%lu&#32;sectors.\n&quot;</emphasis>,&#32;sz_eblk);
+00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Size&#32;of&#32;the&#32;erase&#32;block&#32;is&#32;unknown.\n&quot;</emphasis>);
+00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00116 
+00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Single&#32;sector&#32;write&#32;test&#32;*/</emphasis>
+00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Single&#32;sector&#32;write&#32;test&#32;****\n&quot;</emphasis>);
+00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lba&#32;=&#32;0;
+00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;sz_sect;&#32;n++)&#32;pbuff[n]&#32;=&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);
+00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_write(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba);
+00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;pbuff,&#32;lba,&#32;1);
+00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;6;
+00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;CTRL_SYNC,&#32;NULL)&quot;</emphasis>,&#32;pdrv);
+00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>,&#32;0);
+00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;7;
+00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pbuff,&#32;0,&#32;sz_sect);
+00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_read(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba);
+00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;pbuff,&#32;lba,&#32;1);
+00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;8;
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;sz_sect&#32;&amp;&amp;&#32;pbuff[n]&#32;==&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);&#32;n++)&#32;;
+00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;==&#32;sz_sect)&#32;{
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;matched.\n&quot;</emphasis>);
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;differs&#32;from&#32;the&#32;data&#32;written.\n&quot;</emphasis>);
+00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;10;
+00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pns++;
+00154 
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Multiple&#32;sector&#32;write&#32;test&#32;****\n&quot;</emphasis>);
+00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lba&#32;=&#32;5;&#32;ns&#32;=&#32;sz_buff&#32;/&#32;sz_sect;
+00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ns&#32;&gt;&#32;4)&#32;ns&#32;=&#32;4;
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ns&#32;&gt;&#32;1)&#32;{
+00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;ns);&#32;n++)&#32;pbuff[n]&#32;=&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);
+00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_write(%u,&#32;0x%X,&#32;%lu,&#32;%u)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba,&#32;ns);
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;pbuff,&#32;lba,&#32;ns);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;11;
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;CTRL_SYNC,&#32;NULL)&quot;</emphasis>,&#32;pdrv);
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>,&#32;0);
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;12;
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pbuff,&#32;0,&#32;sz_sect&#32;*&#32;ns);
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_read(%u,&#32;0x%X,&#32;%lu,&#32;%u)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba,&#32;ns);
+00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;pbuff,&#32;lba,&#32;ns);
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;13;
+00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;ns)&#32;&amp;&amp;&#32;pbuff[n]&#32;==&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);&#32;n++)&#32;;
+00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;==&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;ns))&#32;{
+00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;matched.\n&quot;</emphasis>);
+00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;differs&#32;from&#32;the&#32;data&#32;written.\n&quot;</emphasis>);
+00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;14;
+00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Test&#32;skipped.\n&quot;</emphasis>);
+00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pns++;
+00196 
+00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Single&#32;sector&#32;write&#32;test&#32;(unaligned&#32;buffer&#32;address)&#32;****\n&quot;</emphasis>);
+00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lba&#32;=&#32;5;
+00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;sz_sect;&#32;n++)&#32;pbuff[n+3]&#32;=&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);
+00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_write(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(pbuff+3),&#32;lba);
+00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;pbuff+3,&#32;lba,&#32;1);
+00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;15;
+00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;CTRL_SYNC,&#32;NULL)&quot;</emphasis>,&#32;pdrv);
+00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>,&#32;0);
+00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;16;
+00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pbuff+5,&#32;0,&#32;sz_sect);
+00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_read(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(pbuff+5),&#32;lba);
+00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;pbuff+5,&#32;lba,&#32;1);
+00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;17;
+00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;sz_sect&#32;&amp;&amp;&#32;pbuff[n+5]&#32;==&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);&#32;n++)&#32;;
+00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;==&#32;sz_sect)&#32;{
+00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;matched.\n&quot;</emphasis>);
+00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;differs&#32;from&#32;the&#32;data&#32;written.\n&quot;</emphasis>);
+00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;18;
+00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pns++;
+00233 
+00234 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;4GB&#32;barrier&#32;test&#32;****\n&quot;</emphasis>);
+00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sz_drv&#32;&gt;=&#32;128&#32;+&#32;0x80000000&#32;/&#32;(sz_sect&#32;/&#32;2))&#32;{
+00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lba&#32;=&#32;6;&#32;lba2&#32;=&#32;lba&#32;+&#32;0x80000000&#32;/&#32;(sz_sect&#32;/&#32;2);
+00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;n&#32;&lt;&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;2);&#32;n++)&#32;pbuff[n]&#32;=&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0);
+00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_write(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba);
+00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;pbuff,&#32;lba,&#32;1);
+00240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;19;
+00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_write(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(pbuff+sz_sect),&#32;lba2);
+00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;pbuff+sz_sect,&#32;lba2,&#32;1);
+00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00252 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;20;
+00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_ioctl(%u,&#32;CTRL_SYNC,&#32;NULL)&quot;</emphasis>,&#32;pdrv);
+00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>,&#32;0);
+00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;21;
+00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(pbuff,&#32;0,&#32;sz_sect&#32;*&#32;2);
+00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_read(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)pbuff,&#32;lba);
+00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;pbuff,&#32;lba,&#32;1);
+00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;22;
+00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;disk_read(%u,&#32;0x%X,&#32;%lu,&#32;1)&quot;</emphasis>,&#32;pdrv,&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(pbuff+sz_sect),&#32;lba2);
+00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;pbuff+sz_sect,&#32;lba2,&#32;1);
+00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dr&#32;==&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;ok.\n&quot;</emphasis>);
+00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;failed.\n&quot;</emphasis>);
+00277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;23;
+00278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(n&#32;=&#32;0,&#32;pn(pns);&#32;pbuff[n]&#32;==&#32;(<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>)pn(0)&#32;&amp;&amp;&#32;n&#32;&lt;&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;2);&#32;n++)&#32;;
+00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(n&#32;==&#32;(<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>)(sz_sect&#32;*&#32;2))&#32;{
+00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;matched.\n&quot;</emphasis>);
+00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Read&#32;data&#32;differs&#32;from&#32;the&#32;data&#32;written.\n&quot;</emphasis>);
+00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;24;
+00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;Test&#32;skipped.\n&quot;</emphasis>);
+00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pns++;
+00290 
+00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;****&#32;Test&#32;cycle&#32;%u&#32;of&#32;%u&#32;completed&#32;****\n\n&quot;</emphasis>,&#32;cc,&#32;ncyc);
+00292 &#32;&#32;&#32;&#32;}
+00293 
+00294 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00295 }
+</programlisting></section>
+</section>
+</section>

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app2_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app2.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app2.c</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> <link linkend="_app2_8c_1a246fe870ae7876feb9840f35c36f0969">delete_node</link> (<link linkend="_ff_8h_1a03bdb8ce5895c7e261aadc2529637546">TCHAR</link> *path, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff, <link linkend="_struct_f_i_l_i_n_f_o">FILINFO</link> *fno)</para>
+</listitem>
+            <listitem><para>int <link linkend="_app2_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app2_8c_1a246fe870ae7876feb9840f35c36f0969"/><section>
+    <title>delete_node()</title>
+<indexterm><primary>delete_node</primary><secondary>app2.c</secondary></indexterm>
+<indexterm><primary>app2.c</primary><secondary>delete_node</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> delete_node (<link linkend="_ff_8h_1a03bdb8ce5895c7e261aadc2529637546">TCHAR</link> * path, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff, <link linkend="_struct_f_i_l_i_n_f_o">FILINFO</link> * fno)</computeroutput></para><para>
+Definition at line <link linkend="_app2_8c_source_1l00009">9</link> of file <link linkend="_app2_8c_source">app2.c</link>.</para>
+<programlisting linenumbering="unnumbered">00014 {
+00015 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;i,&#32;j;
+00016 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00017 &#32;&#32;&#32;&#32;<link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link>&#32;dir;
+00018 
+00019 
+00020 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a0d5b386636ec82d4c1e912d5902aa0e0">f_opendir</link>(&amp;dir,&#32;path);&#32;<emphasis role="comment">/*&#32;Open&#32;the&#32;sub-directory&#32;to&#32;make&#32;it&#32;empty&#32;*/</emphasis>
+00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00022 
+00023 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(i&#32;=&#32;0;&#32;path[i];&#32;i++)&#32;;&#32;<emphasis role="comment">/*&#32;Get&#32;current&#32;path&#32;length&#32;*/</emphasis>
+00024 &#32;&#32;&#32;&#32;path[i++]&#32;=&#32;<link linkend="_ff_8h_1ae936e4c15227768f7da4e0951def89c8">_T</link>(<emphasis role="charliteral">&apos;/&apos;</emphasis>);
+00025 
+00026 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(;;)&#32;{
+00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1ab8b2c70a95ca61f4f516c56fda7f82ab">f_readdir</link>(&amp;dir,&#32;fno);&#32;&#32;<emphasis role="comment">/*&#32;Get&#32;a&#32;directory&#32;item&#32;*/</emphasis>
+00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>&#32;||&#32;!fno-&gt;<link linkend="_struct_f_i_l_i_n_f_o_1ac06b247cfb3b708c76413c436e52fa7e">fname</link>[0])&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;<emphasis role="comment">/*&#32;End&#32;of&#32;directory?&#32;*/</emphasis>
+00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;j&#32;=&#32;0;
+00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Make&#32;a&#32;path&#32;name&#32;*/</emphasis>
+00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(i&#32;+&#32;j&#32;&gt;=&#32;sz_buff)&#32;{&#32;<emphasis role="comment">/*&#32;Buffer&#32;over&#32;flow?&#32;*/</emphasis>
+00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;100;&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Fails&#32;with&#32;100&#32;when&#32;buffer&#32;overflow&#32;*/</emphasis>
+00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;path[i&#32;+&#32;j]&#32;=&#32;fno-&gt;<link linkend="_struct_f_i_l_i_n_f_o_1ac06b247cfb3b708c76413c436e52fa7e">fname</link>[j];
+00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(fno-&gt;<link linkend="_struct_f_i_l_i_n_f_o_1ac06b247cfb3b708c76413c436e52fa7e">fname</link>[j++]);
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fno-&gt;<link linkend="_struct_f_i_l_i_n_f_o_1a838d542585831b085537b363f18205c0">fattrib</link>&#32;&amp;&#32;<link linkend="_ff_8h_1a3a9db44e978ed6c13b641e092d4cd7d3">AM_DIR</link>)&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Item&#32;is&#32;a&#32;sub-directory&#32;*/</emphasis>
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_app2_8c_1a246fe870ae7876feb9840f35c36f0969">delete_node</link>(path,&#32;sz_buff,&#32;fno);
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Item&#32;is&#32;a&#32;file&#32;*/</emphasis>
+00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a2858167fcd0bced48e9be434b3895efe">f_unlink</link>(path);
+00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">break</emphasis>;
+00042 &#32;&#32;&#32;&#32;}
+00043 
+00044 &#32;&#32;&#32;&#32;path[--i]&#32;=&#32;0;&#32;&#32;<emphasis role="comment">/*&#32;Restore&#32;the&#32;path&#32;name&#32;*/</emphasis>
+00045 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1aba2c2f47f12fd4875bd6a62fa58fa1a9">f_closedir</link>(&amp;dir);
+00046 
+00047 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;==&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a2858167fcd0bced48e9be434b3895efe">f_unlink</link>(path);&#32;&#32;<emphasis role="comment">/*&#32;Delete&#32;the&#32;empty&#32;sub-directory&#32;*/</emphasis>
+00048 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00049 }
+</programlisting></section>
+<anchor xml:id="_app2_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>app2.c</secondary></indexterm>
+<indexterm><primary>app2.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_app2_8c_source_1l00054">54</link> of file <link linkend="_app2_8c_source">app2.c</link>.</para>
+<programlisting linenumbering="unnumbered">00055 {
+00056 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00057 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s">FATFS</link>&#32;fs;
+00058 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a03bdb8ce5895c7e261aadc2529637546">TCHAR</link>&#32;buff[256];
+00059 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l_i_n_f_o">FILINFO</link>&#32;fno;
+00060 
+00061 
+00062 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(&amp;fs,&#32;<link linkend="_ff_8h_1ae936e4c15227768f7da4e0951def89c8">_T</link>(<emphasis role="stringliteral">&quot;5:&quot;</emphasis>),&#32;0);
+00063 
+00064 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Directory&#32;to&#32;be&#32;deleted&#32;*/</emphasis>
+00065 &#32;&#32;&#32;&#32;_tcscpy(buff,&#32;<link linkend="_ff_8h_1ae936e4c15227768f7da4e0951def89c8">_T</link>(<emphasis role="stringliteral">&quot;5:dir&quot;</emphasis>));
+00066 
+00067 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Delete&#32;the&#32;directory&#32;*/</emphasis>
+00068 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_app2_8c_1a246fe870ae7876feb9840f35c36f0969">delete_node</link>(buff,&#32;<emphasis role="keyword">sizeof</emphasis>&#32;buff&#32;/&#32;<emphasis role="keyword">sizeof</emphasis>&#32;buff[0],&#32;&amp;fno);
+00069 
+00070 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Check&#32;the&#32;result&#32;*/</emphasis>
+00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr)&#32;{
+00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_tprintf(<link linkend="_ff_8h_1ae936e4c15227768f7da4e0951def89c8">_T</link>(<emphasis role="stringliteral">&quot;Failed&#32;to&#32;delete&#32;the&#32;directory.&#32;(%u)\n&quot;</emphasis>),&#32;fr);
+00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00074 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_tprintf(<link linkend="_ff_8h_1ae936e4c15227768f7da4e0951def89c8">_T</link>(<emphasis role="stringliteral">&quot;The&#32;directory&#32;and&#32;the&#32;contents&#32;have&#32;successfully&#32;been&#32;deleted.\n&quot;</emphasis>),&#32;buff);
+00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00077 &#32;&#32;&#32;&#32;}
+00078 }
+</programlisting></section>
+</section>
+</section>

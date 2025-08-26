@@ -1,0 +1,48 @@
+\doxysection{blockdevice.\+h}
+\hypertarget{blockdevice_8h_source}{}\label{blockdevice_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/blockdevice.h@{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/blockdevice.h}}
+\mbox{\hyperlink{blockdevice_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00006}00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00012}00012\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00013}00013\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00020}\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{00020}}\ \textcolor{keyword}{typedef}\ uint64\_t\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00022}\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb}{00022}}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb}{bd\_error}}\ \{}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00023}\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{00023}}\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00024}\mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{00024}}\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{BD\_ERROR\_DEVICE\_ERROR}}\ \ \ \ \ \ \ =\ -\/4001,\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00025}00025\ \};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00032}\mbox{\hyperlink{structblockdevice}{00032}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ \{}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00033}\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{00033}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device);}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00034}\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{00034}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device);}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00035}\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{00035}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device);}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00036}\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{00036}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}});}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00037}\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{00037}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}});}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00038}\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{00038}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}});}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00039}\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{00039}}\ \ \ \ \ int\ (*\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr,\ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}});}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00040}\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{00040}}\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ (*\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structblockdevice}{blockdevice}}\ *device);}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00041}\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{00041}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00042}\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{00042}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00043}\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{00043}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00044}\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{00044}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00045}\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{00045}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00046}\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{00046}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00047}\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{00047}}\ \}\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}};}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00049}00049\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{blockdevice_8h_source_l00051}00051\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,67 @@
+\doxysection{app6.\+c}
+\hypertarget{app6_8c_source}{}\label{app6_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app6.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app6.c}}
+\mbox{\hyperlink{app6_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00002}00002\ \textcolor{comment}{/*\ Raw\ Read/Write\ Throughput\ Checker\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00003}00003\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <systimer.h>}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{diskio_8h}{diskio.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ff_8h}{ff.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00011}\mbox{\hyperlink{app6_8c_aefaa12616ed0724e96f62e899fe19864}{00011}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{app6_8c_aefaa12616ed0724e96f62e899fe19864}{test\_raw\_speed}}\ (}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00012}00012\ \ \ \ \ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \ \ \ \ \ \textcolor{comment}{/*\ Physical\ drive\ number\ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00013}00013\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ lba,\ \ \ \ \ \ \textcolor{comment}{/*\ Start\ LBA\ for\ read/write\ test\ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00014}00014\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ len,\ \ \ \ \ \ \textcolor{comment}{/*\ Number\ of\ bytes\ to\ read/write\ (must\ be\ multiple\ of\ sz\_buff)\ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{void}*\ buff,\ \ \ \ \ \textcolor{comment}{/*\ Read/write\ buffer\ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00016}00016\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ sz\_buff\ \ \ \ \textcolor{comment}{/*\ Size\ of\ read/write\ buffer\ (must\ be\ multiple\ of\ FF\_MAX\_SS)\ */}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00017}00017\ )}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ ss;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ofs,\ tmr;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00023}00023\ \textcolor{preprocessor}{\#if\ FF\_MIN\_SS\ !=\ FF\_MAX\_SS}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{GET\_SECTOR\_SIZE}},\ \&ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_ioctl()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00028}00028\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00029}00029\ \ \ \ \ ss\ =\ \mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}};}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00030}00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00032}00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ raw\ write\ test\ at\ sector\ \%lu\ in\ \%u\ bytes\ of\ data\ chunks..."{}},\ lba,\ sz\_buff);}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00033}00033\ \ \ \ \ tmr\ =\ systimer();}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (ofs\ =\ 0;\ ofs\ <\ len\ /\ ss;\ ofs\ +=\ sz\_buff\ /\ ss)\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ buff,\ lba\ +\ ofs,\ sz\_buff\ /\ ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_write()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_ioctl()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00044}00044\ \ \ \ \ tmr\ =\ systimer()\ -\/\ tmr;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00045}00045\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%lu\ bytes\ written\ and\ it\ took\ \%lu\ timer\ ticks.\(\backslash\)n"{}},\ len,\ tmr);}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00047}00047\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ raw\ read\ test\ at\ sector\ \%lu\ in\ \%u\ bytes\ of\ data\ chunks..."{}},\ lba,\ sz\_buff);}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00048}00048\ \ \ \ \ tmr\ =\ systimer();}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{for}\ (ofs\ =\ 0;\ ofs\ <\ len\ /\ ss;\ ofs\ +=\ sz\_buff\ /\ ss)\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ buff,\ lba\ +\ ofs,\ sz\_buff\ /\ ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_read()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00055}00055\ \ \ \ \ tmr\ =\ systimer()\ -\/\ tmr;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00056}00056\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%lu\ bytes\ read\ and\ it\ took\ \%lu\ timer\ ticks.\(\backslash\)n"{}},\ len,\ tmr);}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00058}00058\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Test\ completed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{app6_8c_source_l00061}00061\ }
+
+\end{DoxyCode}

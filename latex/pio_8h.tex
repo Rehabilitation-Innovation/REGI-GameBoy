@@ -1,0 +1,176 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\+\_\+tests/stubs/hardware/pio.h File Reference}
+\hypertarget{pio_8h}{}\label{pio_8h}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/stubs/hardware/pio.h@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/stubs/hardware/pio.h}}
+{\ttfamily \#include "{}pico.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpio__program__t}{pio\+\_\+program\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}}~0
+\item 
+\#define \mbox{\hyperlink{pio_8h_a923a261ba19804c404900228e99c9522}{pio1}}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pio_8h_a8478ee26cc144e947ccd75b0169059a6}{irq\+\_\+handler\+\_\+t}}) (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{pio_8h_a3571e3c7c6e645e92b8d438203a911b9}{pio\+\_\+add\+\_\+program}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, const \mbox{\hyperlink{structpio__program__t}{pio\+\_\+program\+\_\+t}} \texorpdfstring{$\ast$}{*}program)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{pio_8h_a70a47a122f289106c36bcacc76add2bb}{pio\+\_\+sm\+\_\+get}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})
+\item 
+void \mbox{\hyperlink{pio_8h_a779dafaea13810f3e3785c310d2e8fc2}{test\+\_\+set\+\_\+irq\+\_\+pending}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})
+\item 
+bool \mbox{\hyperlink{pio_8h_a028cdc4974a8af6f8a295741cb695d7b}{pio\+\_\+interrupt\+\_\+get}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})
+\item 
+void \mbox{\hyperlink{pio_8h_a9878b5628ef662af86683649f5a7f753}{pio\+\_\+sm\+\_\+put}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}, uint32\+\_\+t data)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pio_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}\index{pio.h@{pio.h}!pio0@{pio0}}
+\index{pio0@{pio0}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio0}{pio0}}
+{\footnotesize\ttfamily \label{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11} 
+\#define pio0~0}
+
+
+
+Definition at line \mbox{\hyperlink{pio_8h_source_l00010}{10}} of file \mbox{\hyperlink{pio_8h_source}{pio.\+h}}.
+
+\Hypertarget{pio_8h_a923a261ba19804c404900228e99c9522}\index{pio.h@{pio.h}!pio1@{pio1}}
+\index{pio1@{pio1}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio1}{pio1}}
+{\footnotesize\ttfamily \label{pio_8h_a923a261ba19804c404900228e99c9522} 
+\#define pio1~0}
+
+
+
+Definition at line \mbox{\hyperlink{pio_8h_source_l00011}{11}} of file \mbox{\hyperlink{pio_8h_source}{pio.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{pio_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{pio_8h_a8478ee26cc144e947ccd75b0169059a6}\index{pio.h@{pio.h}!irq\_handler\_t@{irq\_handler\_t}}
+\index{irq\_handler\_t@{irq\_handler\_t}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{irq\_handler\_t}{irq\_handler\_t}}
+{\footnotesize\ttfamily \label{pio_8h_a8478ee26cc144e947ccd75b0169059a6} 
+typedef void(\texorpdfstring{$\ast$}{*} irq\+\_\+handler\+\_\+t) (void)}
+
+Interrupt request handler function type 
+
+Definition at line \mbox{\hyperlink{pio_8h_source_l00016}{16}} of file \mbox{\hyperlink{pio_8h_source}{pio.\+h}}.
+
+\Hypertarget{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}\index{pio.h@{pio.h}!PIO@{PIO}}
+\index{PIO@{PIO}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{PIO}{PIO}}
+{\footnotesize\ttfamily \label{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da} 
+typedef \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}
+
+Stub header 
+
+Definition at line \mbox{\hyperlink{pio_8h_source_l00008}{8}} of file \mbox{\hyperlink{pio_8h_source}{pio.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pio_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pio_8h_a3571e3c7c6e645e92b8d438203a911b9}\index{pio.h@{pio.h}!pio\_add\_program@{pio\_add\_program}}
+\index{pio\_add\_program@{pio\_add\_program}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio\_add\_program()}{pio\_add\_program()}}
+{\footnotesize\ttfamily \label{pio_8h_a3571e3c7c6e645e92b8d438203a911b9} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} pio\+\_\+add\+\_\+program (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{const \mbox{\hyperlink{structpio__program__t}{pio\+\_\+program\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{program}{}\end{DoxyParamCaption})}
+
+Simulates adding a program to the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} Using an ID means that each time a program is loaded, it will have a different result which can be used to verify that it is distinct from a separate program that was loaded \begin{DoxyReturn}{Returns}
+ID representing the offset into memory for a given program 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ simulated\_offset\ =\ 0;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{return}\ simulated\_offset++;}
+\DoxyCodeLine{00013\ \};}
+
+\end{DoxyCode}
+\Hypertarget{pio_8h_a028cdc4974a8af6f8a295741cb695d7b}\index{pio.h@{pio.h}!pio\_interrupt\_get@{pio\_interrupt\_get}}
+\index{pio\_interrupt\_get@{pio\_interrupt\_get}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio\_interrupt\_get()}{pio\_interrupt\_get()}}
+{\footnotesize\ttfamily \label{pio_8h_a028cdc4974a8af6f8a295741cb695d7b} 
+bool pio\+\_\+interrupt\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pio_8h_a70a47a122f289106c36bcacc76add2bb}\index{pio.h@{pio.h}!pio\_sm\_get@{pio\_sm\_get}}
+\index{pio\_sm\_get@{pio\_sm\_get}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio\_sm\_get()}{pio\_sm\_get()}}
+{\footnotesize\ttfamily \label{pio_8h_a70a47a122f289106c36bcacc76add2bb} 
+uint32\+\_\+t pio\+\_\+sm\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pio__stubs_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{pio__stubs_8cpp_source}{pio\+\_\+stubs.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ 0xDEADBEEF;}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pio_8h_a9878b5628ef662af86683649f5a7f753}\index{pio.h@{pio.h}!pio\_sm\_put@{pio\_sm\_put}}
+\index{pio\_sm\_put@{pio\_sm\_put}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{pio\_sm\_put()}{pio\_sm\_put()}}
+{\footnotesize\ttfamily \label{pio_8h_a9878b5628ef662af86683649f5a7f753} 
+void pio\+\_\+sm\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{, }\item[{uint32\+\_\+t}]{data}{}\end{DoxyParamCaption})}
+
+MIT License
+
+Copyright (c) 2022 Daniel Garcia-\/\+Briseno
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. Simulate triggering the IRQ when the test calls pio\+\_\+sm\+\_\+put 
+
+Definition at line \mbox{\hyperlink{test__sensor_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{test__sensor_8cpp_source}{test\+\_\+sensor.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ }
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pio_8h_a779dafaea13810f3e3785c310d2e8fc2}\index{pio.h@{pio.h}!test\_set\_irq\_pending@{test\_set\_irq\_pending}}
+\index{test\_set\_irq\_pending@{test\_set\_irq\_pending}!pio.h@{pio.h}}
+\doxysubsubsection{\texorpdfstring{test\_set\_irq\_pending()}{test\_set\_irq\_pending()}}
+{\footnotesize\ttfamily \label{pio_8h_a779dafaea13810f3e3785c310d2e8fc2} 
+void test\+\_\+set\+\_\+irq\+\_\+pending (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})}
+

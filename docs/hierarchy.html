@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: Class Hierarchy</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('hierarchy.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -107,7 +94,9 @@ $(function() {
   <div class="headertitle"><div class="title">Class Hierarchy</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">This inheritance list is sorted roughly, but not completely, alphabetically:</div><div class="directory">
+<div class="textblock">
+<p><a href="inherits.html">Go to the graphical class hierarchy</a></p>
+This inheritance list is sorted roughly, but not completely, alphabetically:</div><div class="directory">
 <div class="levels">[detail level <span onclick="javascript:dynsection.toggleLevel(1);">1</span><span onclick="javascript:dynsection.toggleLevel(2);">2</span><span onclick="javascript:dynsection.toggleLevel(3);">3</span>]</div><table class="directory">
 <tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structc2_a_a_b_b.html" target="_self">c2AABB</a></td><td class="desc"></td></tr>
 <tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structc2_capsule.html" target="_self">c2Capsule</a></td><td class="desc"></td></tr>
@@ -145,8 +134,9 @@ $(function() {
 <tr id="row_25_0_2_" class="odd"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_tiny_engine_u_i_text_box.html" target="_self">TinyEngineUITextBox</a></td><td class="desc"></td></tr>
 <tr id="row_26_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_26_" class="arrow" onclick="dynsection.toggleFolder('26_')"><span class="arrowhead opened"></span></span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_tiny_engine_renderer_i.html" target="_self">TinyEngineRendererI</a></td><td class="desc"></td></tr>
 <tr id="row_26_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_tiny_engine_renderer_d_v_i.html" target="_self">TinyEngineRendererDVI</a></td><td class="desc"></td></tr>
-<tr id="row_27_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structtonegenerator__t.html" target="_self">tonegenerator_t</a></td><td class="desc">Represents a tone generator </td></tr>
-<tr id="row_28_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structvec2.html" target="_self">vec2</a></td><td class="desc"></td></tr>
+<tr id="row_26_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_tiny_engine_renderer_d_v_i.html" target="_self">TinyEngineRendererDVI</a></td><td class="desc"></td></tr>
+<tr id="row_27_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structtonegenerator__t.html" target="_self">tonegenerator_t</a></td><td class="desc">Represents a tone generator </td></tr>
+<tr id="row_28_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structvec2.html" target="_self">vec2</a></td><td class="desc"></td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

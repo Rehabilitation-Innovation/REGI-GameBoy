@@ -1,0 +1,226 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/usb\+\_\+logger/tusb\+\_\+config.h File Reference}
+\hypertarget{tusb__config_8h}{}\label{tusb__config_8h}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/tusb\_config.h@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/tusb\_config.h}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a850f6280c7dc9aead785f6bedaaa0fb9}{BOARD\+\_\+\+TUD\+\_\+\+RHPORT}}~0
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003}{BOARD\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED}}~OPT\+\_\+\+MODE\+\_\+\+DEFAULT\+\_\+\+SPEED
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a3d27955bb9aee39c43cb3756ffb372c1}{CFG\+\_\+\+TUSB\+\_\+\+OS}}~OPT\+\_\+\+OS\+\_\+\+NONE
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a4c102f40f3ecdd15c3c64b3e903e8385}{CFG\+\_\+\+TUSB\+\_\+\+DEBUG}}~0
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a49885f91dd20d11d4f692a931ee57667}{CFG\+\_\+\+TUD\+\_\+\+ENABLED}}~1
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_aa37f3ad3cbb642d9d14ee056dd3e3ca8}{CFG\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED}}~\mbox{\hyperlink{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003}{BOARD\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED}}
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a360b21fa11ef498d9c4dc49428ab780f}{CFG\+\_\+\+TUSB\+\_\+\+MEM\+\_\+\+SECTION}}
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_ae46ca7dc14babee346d8af7aa8db403e}{CFG\+\_\+\+TUSB\+\_\+\+MEM\+\_\+\+ALIGN}}~\mbox{\hyperlink{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((aligned(4)))
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a9b99a70dc9fc74ecc23108ab18bbebe4}{CFG\+\_\+\+TUD\+\_\+\+ENDPOINT0\+\_\+\+SIZE}}~64
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a7df8fc8e36e96c632d18c5e6a283cbad}{CFG\+\_\+\+TUD\+\_\+\+CDC}}~1
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a159e8998f430441201fe575035576de3}{CFG\+\_\+\+TUD\+\_\+\+MSC}}~1
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a59ed1f17152d738c0f50edf02565cd20}{CFG\+\_\+\+TUD\+\_\+\+HID}}~0
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_aa407aa4b24ddb98c5c8c27d533ec0e9a}{CFG\+\_\+\+TUD\+\_\+\+MIDI}}~0
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a5332fe14c3199537455edc6faaa0ef9b}{CFG\+\_\+\+TUD\+\_\+\+VENDOR}}~0
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a0be811273fed0a24763e4a22700e2b1d}{CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+RX\+\_\+\+BUFSIZE}}~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a1583fbe8a2453ca3a5986bd6633390c4}{CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+TX\+\_\+\+BUFSIZE}}~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_a9484fcfe46fd923c94d7fdd93af1179b}{CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+EP\+\_\+\+BUFSIZE}}~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)
+\item 
+\#define \mbox{\hyperlink{tusb__config_8h_ae152a02e8ae360a620dd3200dbc5f3c3}{CFG\+\_\+\+TUD\+\_\+\+MSC\+\_\+\+EP\+\_\+\+BUFSIZE}}~4096
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tusb__config_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003}\index{tusb\_config.h@{tusb\_config.h}!BOARD\_TUD\_MAX\_SPEED@{BOARD\_TUD\_MAX\_SPEED}}
+\index{BOARD\_TUD\_MAX\_SPEED@{BOARD\_TUD\_MAX\_SPEED}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{BOARD\_TUD\_MAX\_SPEED}{BOARD\_TUD\_MAX\_SPEED}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003} 
+\#define BOARD\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED~OPT\+\_\+\+MODE\+\_\+\+DEFAULT\+\_\+\+SPEED}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00019}{19}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a850f6280c7dc9aead785f6bedaaa0fb9}\index{tusb\_config.h@{tusb\_config.h}!BOARD\_TUD\_RHPORT@{BOARD\_TUD\_RHPORT}}
+\index{BOARD\_TUD\_RHPORT@{BOARD\_TUD\_RHPORT}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{BOARD\_TUD\_RHPORT}{BOARD\_TUD\_RHPORT}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a850f6280c7dc9aead785f6bedaaa0fb9} 
+\#define BOARD\+\_\+\+TUD\+\_\+\+RHPORT~0}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00014}{14}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a7df8fc8e36e96c632d18c5e6a283cbad}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_CDC@{CFG\_TUD\_CDC}}
+\index{CFG\_TUD\_CDC@{CFG\_TUD\_CDC}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_CDC}{CFG\_TUD\_CDC}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a7df8fc8e36e96c632d18c5e6a283cbad} 
+\#define CFG\+\_\+\+TUD\+\_\+\+CDC~1}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00069}{69}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a9484fcfe46fd923c94d7fdd93af1179b}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_CDC\_EP\_BUFSIZE@{CFG\_TUD\_CDC\_EP\_BUFSIZE}}
+\index{CFG\_TUD\_CDC\_EP\_BUFSIZE@{CFG\_TUD\_CDC\_EP\_BUFSIZE}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_CDC\_EP\_BUFSIZE}{CFG\_TUD\_CDC\_EP\_BUFSIZE}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a9484fcfe46fd923c94d7fdd93af1179b} 
+\#define CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+EP\+\_\+\+BUFSIZE~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00080}{80}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a0be811273fed0a24763e4a22700e2b1d}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_CDC\_RX\_BUFSIZE@{CFG\_TUD\_CDC\_RX\_BUFSIZE}}
+\index{CFG\_TUD\_CDC\_RX\_BUFSIZE@{CFG\_TUD\_CDC\_RX\_BUFSIZE}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_CDC\_RX\_BUFSIZE}{CFG\_TUD\_CDC\_RX\_BUFSIZE}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a0be811273fed0a24763e4a22700e2b1d} 
+\#define CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+RX\+\_\+\+BUFSIZE~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00076}{76}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a1583fbe8a2453ca3a5986bd6633390c4}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_CDC\_TX\_BUFSIZE@{CFG\_TUD\_CDC\_TX\_BUFSIZE}}
+\index{CFG\_TUD\_CDC\_TX\_BUFSIZE@{CFG\_TUD\_CDC\_TX\_BUFSIZE}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_CDC\_TX\_BUFSIZE}{CFG\_TUD\_CDC\_TX\_BUFSIZE}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a1583fbe8a2453ca3a5986bd6633390c4} 
+\#define CFG\+\_\+\+TUD\+\_\+\+CDC\+\_\+\+TX\+\_\+\+BUFSIZE~(TUD\+\_\+\+OPT\+\_\+\+HIGH\+\_\+\+SPEED ? 512 \+: 64)}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00077}{77}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a49885f91dd20d11d4f692a931ee57667}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_ENABLED@{CFG\_TUD\_ENABLED}}
+\index{CFG\_TUD\_ENABLED@{CFG\_TUD\_ENABLED}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_ENABLED}{CFG\_TUD\_ENABLED}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a49885f91dd20d11d4f692a931ee57667} 
+\#define CFG\+\_\+\+TUD\+\_\+\+ENABLED~1}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00040}{40}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a9b99a70dc9fc74ecc23108ab18bbebe4}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_ENDPOINT0\_SIZE@{CFG\_TUD\_ENDPOINT0\_SIZE}}
+\index{CFG\_TUD\_ENDPOINT0\_SIZE@{CFG\_TUD\_ENDPOINT0\_SIZE}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_ENDPOINT0\_SIZE}{CFG\_TUD\_ENDPOINT0\_SIZE}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a9b99a70dc9fc74ecc23108ab18bbebe4} 
+\#define CFG\+\_\+\+TUD\+\_\+\+ENDPOINT0\+\_\+\+SIZE~64}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00065}{65}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a59ed1f17152d738c0f50edf02565cd20}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_HID@{CFG\_TUD\_HID}}
+\index{CFG\_TUD\_HID@{CFG\_TUD\_HID}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_HID}{CFG\_TUD\_HID}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a59ed1f17152d738c0f50edf02565cd20} 
+\#define CFG\+\_\+\+TUD\+\_\+\+HID~0}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00071}{71}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_aa37f3ad3cbb642d9d14ee056dd3e3ca8}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_MAX\_SPEED@{CFG\_TUD\_MAX\_SPEED}}
+\index{CFG\_TUD\_MAX\_SPEED@{CFG\_TUD\_MAX\_SPEED}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_MAX\_SPEED}{CFG\_TUD\_MAX\_SPEED}}
+{\footnotesize\ttfamily \label{tusb__config_8h_aa37f3ad3cbb642d9d14ee056dd3e3ca8} 
+\#define CFG\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED~\mbox{\hyperlink{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003}{BOARD\+\_\+\+TUD\+\_\+\+MAX\+\_\+\+SPEED}}}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00043}{43}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_aa407aa4b24ddb98c5c8c27d533ec0e9a}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_MIDI@{CFG\_TUD\_MIDI}}
+\index{CFG\_TUD\_MIDI@{CFG\_TUD\_MIDI}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_MIDI}{CFG\_TUD\_MIDI}}
+{\footnotesize\ttfamily \label{tusb__config_8h_aa407aa4b24ddb98c5c8c27d533ec0e9a} 
+\#define CFG\+\_\+\+TUD\+\_\+\+MIDI~0}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00072}{72}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a159e8998f430441201fe575035576de3}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_MSC@{CFG\_TUD\_MSC}}
+\index{CFG\_TUD\_MSC@{CFG\_TUD\_MSC}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_MSC}{CFG\_TUD\_MSC}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a159e8998f430441201fe575035576de3} 
+\#define CFG\+\_\+\+TUD\+\_\+\+MSC~1}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00070}{70}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_ae152a02e8ae360a620dd3200dbc5f3c3}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_MSC\_EP\_BUFSIZE@{CFG\_TUD\_MSC\_EP\_BUFSIZE}}
+\index{CFG\_TUD\_MSC\_EP\_BUFSIZE@{CFG\_TUD\_MSC\_EP\_BUFSIZE}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_MSC\_EP\_BUFSIZE}{CFG\_TUD\_MSC\_EP\_BUFSIZE}}
+{\footnotesize\ttfamily \label{tusb__config_8h_ae152a02e8ae360a620dd3200dbc5f3c3} 
+\#define CFG\+\_\+\+TUD\+\_\+\+MSC\+\_\+\+EP\+\_\+\+BUFSIZE~4096}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00083}{83}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a5332fe14c3199537455edc6faaa0ef9b}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUD\_VENDOR@{CFG\_TUD\_VENDOR}}
+\index{CFG\_TUD\_VENDOR@{CFG\_TUD\_VENDOR}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUD\_VENDOR}{CFG\_TUD\_VENDOR}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a5332fe14c3199537455edc6faaa0ef9b} 
+\#define CFG\+\_\+\+TUD\+\_\+\+VENDOR~0}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00073}{73}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a4c102f40f3ecdd15c3c64b3e903e8385}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUSB\_DEBUG@{CFG\_TUSB\_DEBUG}}
+\index{CFG\_TUSB\_DEBUG@{CFG\_TUSB\_DEBUG}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUSB\_DEBUG}{CFG\_TUSB\_DEBUG}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a4c102f40f3ecdd15c3c64b3e903e8385} 
+\#define CFG\+\_\+\+TUSB\+\_\+\+DEBUG~0}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00036}{36}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_ae46ca7dc14babee346d8af7aa8db403e}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUSB\_MEM\_ALIGN@{CFG\_TUSB\_MEM\_ALIGN}}
+\index{CFG\_TUSB\_MEM\_ALIGN@{CFG\_TUSB\_MEM\_ALIGN}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUSB\_MEM\_ALIGN}{CFG\_TUSB\_MEM\_ALIGN}}
+{\footnotesize\ttfamily \label{tusb__config_8h_ae46ca7dc14babee346d8af7aa8db403e} 
+\#define CFG\+\_\+\+TUSB\+\_\+\+MEM\+\_\+\+ALIGN~\mbox{\hyperlink{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((aligned(4)))}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00057}{57}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a360b21fa11ef498d9c4dc49428ab780f}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUSB\_MEM\_SECTION@{CFG\_TUSB\_MEM\_SECTION}}
+\index{CFG\_TUSB\_MEM\_SECTION@{CFG\_TUSB\_MEM\_SECTION}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUSB\_MEM\_SECTION}{CFG\_TUSB\_MEM\_SECTION}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a360b21fa11ef498d9c4dc49428ab780f} 
+\#define CFG\+\_\+\+TUSB\+\_\+\+MEM\+\_\+\+SECTION}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00053}{53}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+
+\Hypertarget{tusb__config_8h_a3d27955bb9aee39c43cb3756ffb372c1}\index{tusb\_config.h@{tusb\_config.h}!CFG\_TUSB\_OS@{CFG\_TUSB\_OS}}
+\index{CFG\_TUSB\_OS@{CFG\_TUSB\_OS}!tusb\_config.h@{tusb\_config.h}}
+\doxysubsubsection{\texorpdfstring{CFG\_TUSB\_OS}{CFG\_TUSB\_OS}}
+{\footnotesize\ttfamily \label{tusb__config_8h_a3d27955bb9aee39c43cb3756ffb372c1} 
+\#define CFG\+\_\+\+TUSB\+\_\+\+OS~OPT\+\_\+\+OS\+\_\+\+NONE}
+
+
+
+Definition at line \mbox{\hyperlink{tusb__config_8h_source_l00032}{32}} of file \mbox{\hyperlink{tusb__config_8h_source}{tusb\+\_\+config.\+h}}.
+

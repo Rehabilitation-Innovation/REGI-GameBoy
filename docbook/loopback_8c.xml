@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_loopback_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/blockdevice/loopback.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/blockdevice/loopback.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;fcntl.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;unistd.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice__loopback__config__t">blockdevice_loopback_config_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link> (const char *path, size_t capacity, size_t block_size)</para>
+
+<para>Create loopback block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the loopback device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

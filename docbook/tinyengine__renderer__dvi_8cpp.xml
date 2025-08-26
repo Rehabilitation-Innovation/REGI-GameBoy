@@ -2,7 +2,16 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__renderer__dvi_8cpp" xml:lang="en-US">
 <title>src/tinyengine_renderer_dvi.cpp File Reference</title>
 <indexterm><primary>src/tinyengine_renderer_dvi.cpp</primary></indexterm>
-<programlisting linenumbering="unnumbered">#include &quot;tinyengine_renderer_dvi.h&quot;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &quot;memory.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;main.h&quot;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &quot;tinyengine_renderer_dvi.h&quot;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &quot;memory.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;main.h&quot;<?linebreak?></programlisting>Include dependency graph for tinyengine_renderer_dvi.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="tinyengine__renderer__dvi_8cpp__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Macros    </title>
         <itemizedlist>
             <listitem><para>#define <link linkend="_tinyengine__renderer__dvi_8cpp_1a7661ace794f2e28a1f301afab4c09738">AURORA_1X_HEIGHT</link>&#160;&#160;&#160;1</para>

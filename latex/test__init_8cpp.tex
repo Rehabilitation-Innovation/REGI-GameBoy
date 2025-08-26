@@ -1,0 +1,86 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\+\_\+tests/tests/test\+\_\+init.cpp File Reference}
+\hypertarget{test__init_8cpp}{}\label{test__init_8cpp}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_init.cpp@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_init.cpp}}
+{\ttfamily \#include "{}distance\+\_\+sensor.\+h"{}}\newline
+{\ttfamily \#include "{}test\+\_\+harness.\+h"{}}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}{test\+\_\+\+Is\+Program\+Loaded\+\_\+\+At\+First}} ()
+\item 
+int \mbox{\hyperlink{test__init_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_test_harness}{Test\+Harness}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{test__init_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{test__init_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{test\_init.cpp@{test\_init.cpp}!main@{main}}
+\index{main@{main}!test\_init.cpp@{test\_init.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{test__init_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__init_8cpp_source_l00080}{80}} of file \mbox{\hyperlink{test__init_8cpp_source}{test\+\_\+init.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}{test\_IsProgramLoaded\_AtFirst}}();}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00083\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}\index{test\_init.cpp@{test\_init.cpp}!test\_IsProgramLoaded\_AtFirst@{test\_IsProgramLoaded\_AtFirst}}
+\index{test\_IsProgramLoaded\_AtFirst@{test\_IsProgramLoaded\_AtFirst}!test\_init.cpp@{test\_init.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_IsProgramLoaded\_AtFirst()}{test\_IsProgramLoaded\_AtFirst()}}
+{\footnotesize\ttfamily \label{test__init_8cpp_a077ff69d63e952252eae95bebc60f572} 
+void test\+\_\+\+Is\+Program\+Loaded\+\_\+\+At\+First (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Load programs into pico\textquotesingle{}s memory and test that the addresses are cached correctly Tests that in the beginning, the programs are not loaded into pico memory 
+
+Definition at line \mbox{\hyperlink{test__init_8cpp_source_l00060}{60}} of file \mbox{\hyperlink{test__init_8cpp_source}{test\+\_\+init.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Assert\ that\ at\ the\ start\ of\ the\ program}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ each\ distance\ sensor\ is\ not\ loaded}}
+\DoxyCodeLine{00063\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Checking\ that\ programs\ are\ not\ loaded\ in\ memory:\ "{}});}
+\DoxyCodeLine{00064\ \ \ \ \ assert(\mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}}-\/>IsLoaded(0)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00065\ \ \ \ \ assert(\mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}}-\/>IsLoaded(1)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00066\ \ \ \ \ puts(\textcolor{stringliteral}{"{}Success."{}});}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{test__init_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}\index{test\_init.cpp@{test\_init.cpp}!test@{test}}
+\index{test@{test}!test\_init.cpp@{test\_init.cpp}}
+\doxysubsubsection{\texorpdfstring{test}{test}}
+{\footnotesize\ttfamily \label{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d} 
+\mbox{\hyperlink{class_test_harness}{Test\+Harness}}\texorpdfstring{$\ast$}{*} test}
+
+MIT License
+
+Copyright (c) 2022 Daniel Garcia-\/\+Briseno
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition at line \mbox{\hyperlink{test__init_8cpp_source_l00030}{30}} of file \mbox{\hyperlink{test__init_8cpp_source}{test\+\_\+init.\+cpp}}.
+

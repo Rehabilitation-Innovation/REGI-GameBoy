@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ffsystem_8c_source" xml:lang="en-US">
+<title>ffsystem.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/source/ffsystem.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_ffsystem_8c_source_1l00001"/>00001 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00002"/>00002 <emphasis role="comment">/*&#32;A&#32;Sample&#32;Code&#32;of&#32;User&#32;Provided&#32;OS&#32;Dependent&#32;Functions&#32;for&#32;FatFs&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00003"/>00003 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00004"/>00004 
+<anchor xml:id="_ffsystem_8c_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_ff_8h">ff.h</link>&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00006"/>00006 
+<anchor xml:id="_ffsystem_8c_source_1l00007"/>00007 
+<anchor xml:id="_ffsystem_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#if&#32;FF_USE_LFN&#32;==&#32;3&#32;</emphasis><emphasis role="comment">/*&#32;Use&#32;dynamic&#32;memory&#32;allocation&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00009"/>00009 
+<anchor xml:id="_ffsystem_8c_source_1l00010"/>00010 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00011"/>00011 <emphasis role="comment">/*&#32;Allocate/Free&#32;a&#32;Memory&#32;Block&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00012"/>00012 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00013"/>00013 
+<anchor xml:id="_ffsystem_8c_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&lt;stdlib.h&gt;</emphasis>&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;with&#32;POSIX&#32;API&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00015"/>00015 
+<anchor xml:id="_ffsystem_8c_source_1l00016"/>00016 
+<anchor xml:id="_ffsystem_8c_source_1l00017"/><link linkend="_ffsystem_8c_1ae63913186246b80cfce42dbab9e8bcab">00017</link> <emphasis role="keywordtype">void</emphasis>*&#32;<link linkend="_ffsystem_8c_1ae63913186246b80cfce42dbab9e8bcab">ff_memalloc</link>&#32;(&#32;<emphasis role="comment">/*&#32;Returns&#32;pointer&#32;to&#32;the&#32;allocated&#32;memory&#32;block&#32;(null&#32;if&#32;not&#32;enough&#32;core)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link>&#32;msize&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Number&#32;of&#32;bytes&#32;to&#32;allocate&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00019"/>00019 )
+<anchor xml:id="_ffsystem_8c_source_1l00020"/>00020 {
+<anchor xml:id="_ffsystem_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;malloc((<emphasis role="keywordtype">size_t</emphasis>)msize);&#32;&#32;&#32;<emphasis role="comment">/*&#32;Allocate&#32;a&#32;new&#32;memory&#32;block&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00022"/>00022 }
+<anchor xml:id="_ffsystem_8c_source_1l00023"/>00023 
+<anchor xml:id="_ffsystem_8c_source_1l00024"/>00024 
+<anchor xml:id="_ffsystem_8c_source_1l00025"/><link linkend="_ffsystem_8c_1ab85fd090c8b8b17846ccc1e8cda16a9b">00025</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_ffsystem_8c_1ab85fd090c8b8b17846ccc1e8cda16a9b">ff_memfree</link>&#32;(
+<anchor xml:id="_ffsystem_8c_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>*&#32;mblock&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Pointer&#32;to&#32;the&#32;memory&#32;block&#32;to&#32;free&#32;(no&#32;effect&#32;if&#32;null)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00027"/>00027 )
+<anchor xml:id="_ffsystem_8c_source_1l00028"/>00028 {
+<anchor xml:id="_ffsystem_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;free(mblock);&#32;&#32;&#32;<emphasis role="comment">/*&#32;Free&#32;the&#32;memory&#32;block&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00030"/>00030 }
+<anchor xml:id="_ffsystem_8c_source_1l00031"/>00031 
+<anchor xml:id="_ffsystem_8c_source_1l00032"/>00032 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00033"/>00033 
+<anchor xml:id="_ffsystem_8c_source_1l00034"/>00034 
+<anchor xml:id="_ffsystem_8c_source_1l00035"/>00035 
+<anchor xml:id="_ffsystem_8c_source_1l00036"/>00036 
+<anchor xml:id="_ffsystem_8c_source_1l00037"/>00037 <emphasis role="preprocessor">#if&#32;FF_FS_REENTRANT&#32;</emphasis><emphasis role="comment">/*&#32;Mutal&#32;exclusion&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00038"/>00038 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00039"/>00039 <emphasis role="comment">/*&#32;Definitions&#32;of&#32;Mutex&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00040"/>00040 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00041"/>00041 
+<anchor xml:id="_ffsystem_8c_source_1l00042"/>00042 <emphasis role="preprocessor">#define&#32;OS_TYPE&#32;0&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;0:Win32,&#32;1:uITRON4.0,&#32;2:uC/OS-II,&#32;3:FreeRTOS,&#32;4:CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00043"/>00043 
+<anchor xml:id="_ffsystem_8c_source_1l00044"/>00044 
+<anchor xml:id="_ffsystem_8c_source_1l00045"/>00045 <emphasis role="preprocessor">#if&#32;&#32;&#32;OS_TYPE&#32;==&#32;0&#32;&#32;</emphasis><emphasis role="comment">/*&#32;Win32&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00046"/>00046 <emphasis role="preprocessor">#include&#32;&lt;windows.h&gt;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00047"/>00047 <emphasis role="keyword">static</emphasis>&#32;HANDLE&#32;Mutex[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#32;+&#32;1];&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Table&#32;of&#32;mutex&#32;handle&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00048"/>00048 
+<anchor xml:id="_ffsystem_8c_source_1l00049"/>00049 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;1&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uITRON&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00050"/>00050 <emphasis role="preprocessor">#include&#32;&quot;itron.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00051"/>00051 <emphasis role="preprocessor">#include&#32;&quot;kernel.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00052"/>00052 <emphasis role="keyword">static</emphasis>&#32;mtxid&#32;Mutex[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#32;+&#32;1];&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Table&#32;of&#32;mutex&#32;ID&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00053"/>00053 
+<anchor xml:id="_ffsystem_8c_source_1l00054"/>00054 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;2&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uc/OS-II&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00055"/>00055 <emphasis role="preprocessor">#include&#32;&quot;includes.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00056"/>00056 <emphasis role="keyword">static</emphasis>&#32;OS_EVENT&#32;*Mutex[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#32;+&#32;1];&#32;<emphasis role="comment">/*&#32;Table&#32;of&#32;mutex&#32;pinter&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00057"/>00057 
+<anchor xml:id="_ffsystem_8c_source_1l00058"/>00058 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;3&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FreeRTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00059"/>00059 <emphasis role="preprocessor">#include&#32;&quot;FreeRTOS.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00060"/>00060 <emphasis role="preprocessor">#include&#32;&quot;semphr.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00061"/>00061 <emphasis role="keyword">static</emphasis>&#32;SemaphoreHandle_t&#32;Mutex[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#32;+&#32;1];&#32;<emphasis role="comment">/*&#32;Table&#32;of&#32;mutex&#32;handle&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00062"/>00062 
+<anchor xml:id="_ffsystem_8c_source_1l00063"/>00063 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;4&#32;&#32;</emphasis><emphasis role="comment">/*&#32;CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00064"/>00064 <emphasis role="preprocessor">#include&#32;&quot;cmsis_os.h&quot;</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00065"/>00065 <emphasis role="keyword">static</emphasis>&#32;osMutexId&#32;Mutex[<link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#32;+&#32;1];&#32;<emphasis role="comment">/*&#32;Table&#32;of&#32;mutex&#32;ID&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00066"/>00066 
+<anchor xml:id="_ffsystem_8c_source_1l00067"/>00067 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00068"/>00068 
+<anchor xml:id="_ffsystem_8c_source_1l00069"/>00069 
+<anchor xml:id="_ffsystem_8c_source_1l00070"/>00070 
+<anchor xml:id="_ffsystem_8c_source_1l00071"/>00071 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00072"/>00072 <emphasis role="comment">/*&#32;Create&#32;a&#32;Mutex&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00073"/>00073 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00074"/>00074 <emphasis role="comment">/*&#32;This&#32;function&#32;is&#32;called&#32;in&#32;f_mount&#32;function&#32;to&#32;create&#32;a&#32;new&#32;mutex</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00075"/>00075 <emphasis role="comment">/&#32;&#32;or&#32;semaphore&#32;for&#32;the&#32;volume.&#32;When&#32;a&#32;0&#32;is&#32;returned,&#32;the&#32;f_mount&#32;function</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00076"/>00076 <emphasis role="comment">/&#32;&#32;fails&#32;with&#32;FR_INT_ERR.</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00077"/>00077 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00078"/>00078 
+<anchor xml:id="_ffsystem_8c_source_1l00079"/>00079 <emphasis role="keywordtype">int</emphasis>&#32;ff_mutex_create&#32;(&#32;&#32;&#32;<emphasis role="comment">/*&#32;Returns&#32;1:Function&#32;succeeded&#32;or&#32;0:Could&#32;not&#32;create&#32;the&#32;mutex&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;vol&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Mutex&#32;ID:&#32;Volume&#32;mutex&#32;(0&#32;to&#32;FF_VOLUMES&#32;-&#32;1)&#32;or&#32;system&#32;mutex&#32;(FF_VOLUMES)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00081"/>00081 )
+<anchor xml:id="_ffsystem_8c_source_1l00082"/>00082 {
+<anchor xml:id="_ffsystem_8c_source_1l00083"/>00083 <emphasis role="preprocessor">#if&#32;OS_TYPE&#32;==&#32;0&#32;&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;Win32&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;Mutex[vol]&#32;=&#32;CreateMutex(NULL,&#32;FALSE,&#32;NULL);
+<anchor xml:id="_ffsystem_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(Mutex[vol]&#32;!=&#32;INVALID_HANDLE_VALUE);
+<anchor xml:id="_ffsystem_8c_source_1l00086"/>00086 
+<anchor xml:id="_ffsystem_8c_source_1l00087"/>00087 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;1&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uITRON&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00088"/>00088 &#32;&#32;&#32;&#32;T_CMTX&#32;cmtx&#32;=&#32;{TA_TPRI,1};
+<anchor xml:id="_ffsystem_8c_source_1l00089"/>00089 
+<anchor xml:id="_ffsystem_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;Mutex[vol]&#32;=&#32;acre_mtx(&amp;cmtx);
+<anchor xml:id="_ffsystem_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(Mutex[vol]&#32;&gt;&#32;0);
+<anchor xml:id="_ffsystem_8c_source_1l00092"/>00092 
+<anchor xml:id="_ffsystem_8c_source_1l00093"/>00093 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;2&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uC/OS-II&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;OS_ERR&#32;err;
+<anchor xml:id="_ffsystem_8c_source_1l00095"/>00095 
+<anchor xml:id="_ffsystem_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;Mutex[vol]&#32;=&#32;OSMutexCreate(0,&#32;&amp;err);
+<anchor xml:id="_ffsystem_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(err&#32;==&#32;OS_NO_ERR);
+<anchor xml:id="_ffsystem_8c_source_1l00098"/>00098 
+<anchor xml:id="_ffsystem_8c_source_1l00099"/>00099 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;3&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FreeRTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;Mutex[vol]&#32;=&#32;xSemaphoreCreateMutex();
+<anchor xml:id="_ffsystem_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(Mutex[vol]&#32;!=&#32;NULL);
+<anchor xml:id="_ffsystem_8c_source_1l00102"/>00102 
+<anchor xml:id="_ffsystem_8c_source_1l00103"/>00103 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;4&#32;&#32;</emphasis><emphasis role="comment">/*&#32;CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;osMutexDef(cmsis_os_mutex);
+<anchor xml:id="_ffsystem_8c_source_1l00105"/>00105 
+<anchor xml:id="_ffsystem_8c_source_1l00106"/>00106 &#32;&#32;&#32;&#32;Mutex[vol]&#32;=&#32;osMutexCreate(osMutex(cmsis_os_mutex));
+<anchor xml:id="_ffsystem_8c_source_1l00107"/>00107 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(Mutex[vol]&#32;!=&#32;NULL);
+<anchor xml:id="_ffsystem_8c_source_1l00108"/>00108 
+<anchor xml:id="_ffsystem_8c_source_1l00109"/>00109 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00110"/>00110 }
+<anchor xml:id="_ffsystem_8c_source_1l00111"/>00111 
+<anchor xml:id="_ffsystem_8c_source_1l00112"/>00112 
+<anchor xml:id="_ffsystem_8c_source_1l00113"/>00113 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00114"/>00114 <emphasis role="comment">/*&#32;Delete&#32;a&#32;Mutex&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00115"/>00115 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00116"/>00116 <emphasis role="comment">/*&#32;This&#32;function&#32;is&#32;called&#32;in&#32;f_mount&#32;function&#32;to&#32;delete&#32;a&#32;mutex&#32;or</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00117"/>00117 <emphasis role="comment">/&#32;&#32;semaphore&#32;of&#32;the&#32;volume&#32;created&#32;with&#32;ff_mutex_create&#32;function.</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00118"/>00118 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00119"/>00119 
+<anchor xml:id="_ffsystem_8c_source_1l00120"/>00120 <emphasis role="keywordtype">void</emphasis>&#32;ff_mutex_delete&#32;(&#32;&#32;<emphasis role="comment">/*&#32;Returns&#32;1:Function&#32;succeeded&#32;or&#32;0:Could&#32;not&#32;delete&#32;due&#32;to&#32;an&#32;error&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;vol&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Mutex&#32;ID:&#32;Volume&#32;mutex&#32;(0&#32;to&#32;FF_VOLUMES&#32;-&#32;1)&#32;or&#32;system&#32;mutex&#32;(FF_VOLUMES)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00122"/>00122 )
+<anchor xml:id="_ffsystem_8c_source_1l00123"/>00123 {
+<anchor xml:id="_ffsystem_8c_source_1l00124"/>00124 <emphasis role="preprocessor">#if&#32;OS_TYPE&#32;==&#32;0&#32;&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;Win32&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;CloseHandle(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00126"/>00126 
+<anchor xml:id="_ffsystem_8c_source_1l00127"/>00127 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;1&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uITRON&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00128"/>00128 &#32;&#32;&#32;&#32;del_mtx(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00129"/>00129 
+<anchor xml:id="_ffsystem_8c_source_1l00130"/>00130 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;2&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uC/OS-II&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;OS_ERR&#32;err;
+<anchor xml:id="_ffsystem_8c_source_1l00132"/>00132 
+<anchor xml:id="_ffsystem_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;OSMutexDel(Mutex[vol],&#32;OS_DEL_ALWAYS,&#32;&amp;err);
+<anchor xml:id="_ffsystem_8c_source_1l00134"/>00134 
+<anchor xml:id="_ffsystem_8c_source_1l00135"/>00135 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;3&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FreeRTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;vSemaphoreDelete(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00137"/>00137 
+<anchor xml:id="_ffsystem_8c_source_1l00138"/>00138 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;4&#32;&#32;</emphasis><emphasis role="comment">/*&#32;CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;osMutexDelete(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00140"/>00140 
+<anchor xml:id="_ffsystem_8c_source_1l00141"/>00141 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00142"/>00142 }
+<anchor xml:id="_ffsystem_8c_source_1l00143"/>00143 
+<anchor xml:id="_ffsystem_8c_source_1l00144"/>00144 
+<anchor xml:id="_ffsystem_8c_source_1l00145"/>00145 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00146"/>00146 <emphasis role="comment">/*&#32;Request&#32;a&#32;Grant&#32;to&#32;Access&#32;the&#32;Volume&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00147"/>00147 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00148"/>00148 <emphasis role="comment">/*&#32;This&#32;function&#32;is&#32;called&#32;on&#32;enter&#32;file&#32;functions&#32;to&#32;lock&#32;the&#32;volume.</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00149"/>00149 <emphasis role="comment">/&#32;&#32;When&#32;a&#32;0&#32;is&#32;returned,&#32;the&#32;file&#32;function&#32;fails&#32;with&#32;FR_TIMEOUT.</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00150"/>00150 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00151"/>00151 
+<anchor xml:id="_ffsystem_8c_source_1l00152"/>00152 <emphasis role="keywordtype">int</emphasis>&#32;ff_mutex_take&#32;(&#32;<emphasis role="comment">/*&#32;Returns&#32;1:Succeeded&#32;or&#32;0:Timeout&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;vol&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Mutex&#32;ID:&#32;Volume&#32;mutex&#32;(0&#32;to&#32;FF_VOLUMES&#32;-&#32;1)&#32;or&#32;system&#32;mutex&#32;(FF_VOLUMES)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00154"/>00154 )
+<anchor xml:id="_ffsystem_8c_source_1l00155"/>00155 {
+<anchor xml:id="_ffsystem_8c_source_1l00156"/>00156 <emphasis role="preprocessor">#if&#32;OS_TYPE&#32;==&#32;0&#32;&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;Win32&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(WaitForSingleObject(Mutex[vol],&#32;<link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>)&#32;==&#32;WAIT_OBJECT_0);
+<anchor xml:id="_ffsystem_8c_source_1l00158"/>00158 
+<anchor xml:id="_ffsystem_8c_source_1l00159"/>00159 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;1&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uITRON&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(tloc_mtx(Mutex[vol],&#32;<link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>)&#32;==&#32;E_OK);
+<anchor xml:id="_ffsystem_8c_source_1l00161"/>00161 
+<anchor xml:id="_ffsystem_8c_source_1l00162"/>00162 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;2&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uC/OS-II&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;OS_ERR&#32;err;
+<anchor xml:id="_ffsystem_8c_source_1l00164"/>00164 
+<anchor xml:id="_ffsystem_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;OSMutexPend(Mutex[vol],&#32;<link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>,&#32;&amp;err));
+<anchor xml:id="_ffsystem_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(err&#32;==&#32;OS_NO_ERR);
+<anchor xml:id="_ffsystem_8c_source_1l00167"/>00167 
+<anchor xml:id="_ffsystem_8c_source_1l00168"/>00168 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;3&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FreeRTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00169"/>00169 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(xSemaphoreTake(Mutex[vol],&#32;<link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>)&#32;==&#32;pdTRUE);
+<anchor xml:id="_ffsystem_8c_source_1l00170"/>00170 
+<anchor xml:id="_ffsystem_8c_source_1l00171"/>00171 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;4&#32;&#32;</emphasis><emphasis role="comment">/*&#32;CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>)(osMutexWait(Mutex[vol],&#32;<link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>)&#32;==&#32;osOK);
+<anchor xml:id="_ffsystem_8c_source_1l00173"/>00173 
+<anchor xml:id="_ffsystem_8c_source_1l00174"/>00174 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00175"/>00175 }
+<anchor xml:id="_ffsystem_8c_source_1l00176"/>00176 
+<anchor xml:id="_ffsystem_8c_source_1l00177"/>00177 
+<anchor xml:id="_ffsystem_8c_source_1l00178"/>00178 
+<anchor xml:id="_ffsystem_8c_source_1l00179"/>00179 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00180"/>00180 <emphasis role="comment">/*&#32;Release&#32;a&#32;Grant&#32;to&#32;Access&#32;the&#32;Volume&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00181"/>00181 <emphasis role="comment">/*------------------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00182"/>00182 <emphasis role="comment">/*&#32;This&#32;function&#32;is&#32;called&#32;on&#32;leave&#32;file&#32;functions&#32;to&#32;unlock&#32;the&#32;volume.</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00183"/>00183 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00184"/>00184 
+<anchor xml:id="_ffsystem_8c_source_1l00185"/>00185 <emphasis role="keywordtype">void</emphasis>&#32;ff_mutex_give&#32;(
+<anchor xml:id="_ffsystem_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;vol&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Mutex&#32;ID:&#32;Volume&#32;mutex&#32;(0&#32;to&#32;FF_VOLUMES&#32;-&#32;1)&#32;or&#32;system&#32;mutex&#32;(FF_VOLUMES)&#32;*/</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00187"/>00187 )
+<anchor xml:id="_ffsystem_8c_source_1l00188"/>00188 {
+<anchor xml:id="_ffsystem_8c_source_1l00189"/>00189 <emphasis role="preprocessor">#if&#32;OS_TYPE&#32;==&#32;0&#32;&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;Win32&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;ReleaseMutex(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00191"/>00191 
+<anchor xml:id="_ffsystem_8c_source_1l00192"/>00192 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;1&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uITRON&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00193"/>00193 &#32;&#32;&#32;&#32;unl_mtx(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00194"/>00194 
+<anchor xml:id="_ffsystem_8c_source_1l00195"/>00195 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;2&#32;&#32;</emphasis><emphasis role="comment">/*&#32;uC/OS-II&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00196"/>00196 &#32;&#32;&#32;&#32;OSMutexPost(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00197"/>00197 
+<anchor xml:id="_ffsystem_8c_source_1l00198"/>00198 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;3&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FreeRTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;xSemaphoreGive(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00200"/>00200 
+<anchor xml:id="_ffsystem_8c_source_1l00201"/>00201 <emphasis role="preprocessor">#elif&#32;OS_TYPE&#32;==&#32;4&#32;&#32;</emphasis><emphasis role="comment">/*&#32;CMSIS-RTOS&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00202"/>00202 &#32;&#32;&#32;&#32;osMutexRelease(Mutex[vol]);
+<anchor xml:id="_ffsystem_8c_source_1l00203"/>00203 
+<anchor xml:id="_ffsystem_8c_source_1l00204"/>00204 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00205"/>00205 }
+<anchor xml:id="_ffsystem_8c_source_1l00206"/>00206 
+<anchor xml:id="_ffsystem_8c_source_1l00207"/>00207 <emphasis role="preprocessor">#endif&#32;&#32;</emphasis><emphasis role="comment">/*&#32;FF_FS_REENTRANT&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_ffsystem_8c_source_1l00208"/>00208 
+</programlisting></section>

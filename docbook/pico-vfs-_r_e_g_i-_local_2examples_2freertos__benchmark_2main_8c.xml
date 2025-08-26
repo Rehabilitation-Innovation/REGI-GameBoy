@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/freertos_benchmark/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/freertos_benchmark/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;FreeRTOS.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;portable.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;task.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>&#160;&#160;&#160;(0.4 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</link>&#160;&#160;&#160;(1024 * 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a971cd965dab655264ce4cd15e73dc53e">CORE_ACCESSING_FLASH</link>&#160;&#160;&#160;1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1aaa272c4db60772f8acbadc763ca691db">benchmark_task</link> (void *p)</para>
+</listitem>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f"/><section>
+    <title>BENCHMARK_SIZE</title>
+<indexterm><primary>BENCHMARK_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BENCHMARK_SIZE</secondary></indexterm>
+<para><computeroutput>#define BENCHMARK_SIZE&#160;&#160;&#160;(0.4 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_1l00015">15</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7"/><section>
+    <title>BUFFER_SIZE</title>
+<indexterm><primary>BUFFER_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BUFFER_SIZE</secondary></indexterm>
+<para><computeroutput>#define BUFFER_SIZE&#160;&#160;&#160;(1024 * 2)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_1l00016">16</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a971cd965dab655264ce4cd15e73dc53e"/><section>
+    <title>CORE_ACCESSING_FLASH</title>
+<indexterm><primary>CORE_ACCESSING_FLASH</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>CORE_ACCESSING_FLASH</secondary></indexterm>
+<para><computeroutput>#define CORE_ACCESSING_FLASH&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_1l00017">17</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1aaa272c4db60772f8acbadc763ca691db"/><section>
+    <title>benchmark_task()</title>
+<indexterm><primary>benchmark_task</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>benchmark_task</secondary></indexterm>
+<para><computeroutput>void benchmark_task (void * p)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_1l00030">30</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00031 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path&#32;=&#32;p;
+00032 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;start&#32;benchmark&#32;%s&#32;on&#32;core%d\n&quot;</emphasis>,&#32;path,&#32;get_core_num());
+00033 
+00034 &#32;&#32;&#32;&#32;absolute_time_t&#32;start_at&#32;=&#32;get_absolute_time();
+00035 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;open(path,&#32;O_WRONLY|O_CREAT);
+00036 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fd&#32;==&#32;-1)&#32;{
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;open&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00039 &#32;&#32;&#32;&#32;}
+00040 
+00041 &#32;&#32;&#32;&#32;uint32_t&#32;counter&#32;=&#32;0;
+00042 &#32;&#32;&#32;&#32;xor_rand(&amp;counter);
+00043 &#32;&#32;&#32;&#32;uint8_t&#32;buffer[<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</link>]&#32;=&#32;{0};
+00044 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;remind&#32;=&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>;
+00045 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(remind&#32;&gt;&#32;0)&#32;{
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;chunk&#32;=&#32;remind&#32;%&#32;<emphasis role="keyword">sizeof</emphasis>(buffer)&#32;?&#32;remind&#32;%&#32;<emphasis role="keyword">sizeof</emphasis>(buffer)&#32;:&#32;<emphasis role="keyword">sizeof</emphasis>(buffer);
+00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint32_t&#32;*b&#32;=&#32;(uint32_t&#32;*)buffer;
+00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;(chunk&#32;/&#32;<emphasis role="keyword">sizeof</emphasis>(uint32_t));&#32;j++)&#32;{
+00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;b[j]&#32;=&#32;xor_rand_32bit(&amp;counter);
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00051 
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;write_size&#32;=&#32;write(fd,&#32;buffer,&#32;chunk);
+00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(write_size&#32;==&#32;-1)&#32;{
+00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;write&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remind&#32;=&#32;remind&#32;-&#32;write_size;
+00058 &#32;&#32;&#32;&#32;}
+00059 
+00060 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;close(fd);
+00061 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;close&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00064 &#32;&#32;&#32;&#32;}
+00065 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;duration&#32;=&#32;(double)absolute_time_diff_us(start_at,&#32;get_absolute_time())&#32;/&#32;1000&#32;/&#32;1000;
+00066 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Write&#32;%s:&#32;%.1f&#32;KB/s\n&quot;</emphasis>,&#32;path,&#32;(<emphasis role="keywordtype">double</emphasis>)(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>)&#32;/&#32;duration&#32;/&#32;1024);
+00067 
+00068 
+00069 &#32;&#32;&#32;&#32;start_at&#32;=&#32;get_absolute_time();
+00070 &#32;&#32;&#32;&#32;fd&#32;=&#32;open(path,&#32;O_RDONLY);
+00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fd&#32;==&#32;-1)&#32;{
+00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;open&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00074 &#32;&#32;&#32;&#32;}
+00075 
+00076 &#32;&#32;&#32;&#32;counter&#32;=&#32;0;
+00077 &#32;&#32;&#32;&#32;xor_rand(&amp;counter);
+00078 &#32;&#32;&#32;&#32;remind&#32;=&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>;
+00079 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(remind&#32;&gt;&#32;0)&#32;{
+00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;chunk&#32;=&#32;remind&#32;%&#32;<emphasis role="keyword">sizeof</emphasis>(buffer)&#32;?&#32;remind&#32;%&#32;<emphasis role="keyword">sizeof</emphasis>(buffer)&#32;:&#32;<emphasis role="keyword">sizeof</emphasis>(buffer);
+00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;read_size&#32;=&#32;read(fd,&#32;buffer,&#32;chunk);
+00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(read_size&#32;==&#32;-1)&#32;{
+00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;read&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint32_t&#32;*b&#32;=&#32;(uint32_t&#32;*)buffer;
+00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;j&#32;=&#32;0;&#32;j&#32;&lt;&#32;chunk&#32;/&#32;<emphasis role="keyword">sizeof</emphasis>(uint32_t);&#32;j++)&#32;{
+00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">volatile</emphasis>&#32;uint32_t&#32;v&#32;=&#32;xor_rand_32bit(&amp;counter);
+00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(b[j]&#32;!=&#32;v)&#32;{
+00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;data&#32;mismatch\n&quot;</emphasis>);
+00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00094 
+00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remind&#32;=&#32;remind&#32;-&#32;read_size;
+00096 &#32;&#32;&#32;&#32;}
+00097 
+00098 &#32;&#32;&#32;&#32;err&#32;=&#32;close(fd);
+00099 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;close&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+00102 &#32;&#32;&#32;&#32;}
+00103 &#32;&#32;&#32;&#32;duration&#32;=&#32;(double)absolute_time_diff_us(start_at,&#32;get_absolute_time())&#32;/&#32;1000&#32;/&#32;1000;
+00104 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Read&#32;%s:&#32;%.1f&#32;KB/s\n&quot;</emphasis>,&#32;path,&#32;(<emphasis role="keywordtype">double</emphasis>)(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>)&#32;/&#32;duration&#32;/&#32;1024);
+00105 
+00106 
+00107 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;;
+00109 &#32;&#32;&#32;&#32;}
+00110 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_1l00112">112</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00113 &#32;&#32;&#32;&#32;stdio_init_all();
+00114 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>();
+00115 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;FreeRTOS&#32;benchmark\n&quot;</emphasis>);
+00116 
+00117 &#32;&#32;&#32;&#32;xTaskCreate(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1aaa272c4db60772f8acbadc763ca691db">benchmark_task</link>,&#32;<emphasis role="stringliteral">&quot;SD&#32;Card&quot;</emphasis>,&#32;1024*1,&#32;<emphasis role="stringliteral">&quot;/sd/benchmark&quot;</emphasis>,&#32;1,&#32;NULL);
+00118 
+00119 &#32;&#32;&#32;&#32;TaskHandle_t&#32;task_handle;
+00120 &#32;&#32;&#32;&#32;xTaskCreate(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1aaa272c4db60772f8acbadc763ca691db">benchmark_task</link>,&#32;<emphasis role="stringliteral">&quot;flash&quot;</emphasis>,&#32;1024*1,&#32;<emphasis role="stringliteral">&quot;/flash/benchmark&quot;</emphasis>,&#32;1,&#32;&amp;(task_handle));
+00121 &#32;&#32;&#32;&#32;vTaskCoreAffinitySet(task_handle,&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_1a971cd965dab655264ce4cd15e73dc53e">CORE_ACCESSING_FLASH</link>);
+00122 
+00123 &#32;&#32;&#32;&#32;vTaskStartScheduler();
+00124 
+00125 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)
+00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;;
+00127 }
+</programlisting></section>
+</section>
+</section>

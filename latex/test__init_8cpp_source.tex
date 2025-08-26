@@ -1,0 +1,60 @@
+\doxysection{test\+\_\+init.\+cpp}
+\hypertarget{test__init_8cpp_source}{}\label{test__init_8cpp_source}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_init.cpp@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_init.cpp}}
+\mbox{\hyperlink{test__init_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{distance__sensor_8h}{distance\_sensor.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{test__harness_8h}{test\_harness.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00030}\mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{00030}}\ \mbox{\hyperlink{class_test_harness}{TestHarness}}*\ \mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}};}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00036}00036\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00037}00037\ \textcolor{comment}{void\ test\_LoadPrograms()\ \{}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00038}00038\ \textcolor{comment}{\ \ \ \ //\ Load\ on\ pio0.}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00039}00039\ \textcolor{comment}{\ \ \ \ printf("{}Testing\ that\ programs\ are\ loaded\ in\ memory."{});}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00040}00040\ \textcolor{comment}{\ \ \ \ //\ Verify\ that\ the\ program\ is\ loaded\ after\ calling\ load\ program}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00041}00041\ \textcolor{comment}{\ \ \ \ assert(test-\/>IsLoaded(0)\ ==\ false);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00042}00042\ \textcolor{comment}{\ \ \ \ test-\/>LoadProgram(0);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00043}00043\ \textcolor{comment}{\ \ \ \ assert(test-\/>IsLoaded(0)\ ==\ true);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00044}00044\ \textcolor{comment}{\ \ \ \ //\ Verify\ the\ program\ is\ loaded\ to\ the\ expected\ test\ address.}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00045}00045\ \textcolor{comment}{\ \ \ \ assert(test-\/>GetOffset(0)\ ==\ 0);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00046}00046\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00047}00047\ \textcolor{comment}{\ \ \ \ //\ Verify\ that\ the\ program\ is\ loaded\ after\ calling\ load\ program}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00048}00048\ \textcolor{comment}{\ \ \ \ assert(test-\/>IsLoaded(1)\ ==\ false);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00049}00049\ \textcolor{comment}{\ \ \ \ test-\/>LoadProgram(1);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00050}00050\ \textcolor{comment}{\ \ \ \ assert(test-\/>IsLoaded(1)\ ==\ true);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00051}00051\ \textcolor{comment}{\ \ \ \ //\ Verify\ the\ program\ is\ loaded\ to\ the\ expected\ test\ address.}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00052}00052\ \textcolor{comment}{\ \ \ \ assert(test-\/>GetOffset(1)\ ==\ 1);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00053}00053\ \textcolor{comment}{\ \ \ \ puts("{}\ Success"{});}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00054}00054\ \textcolor{comment}{\}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00055}00055\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00060}\mbox{\hyperlink{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}{00060}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}{test\_IsProgramLoaded\_AtFirst}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{comment}{//\ Assert\ that\ at\ the\ start\ of\ the\ program}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ each\ distance\ sensor\ is\ not\ loaded}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00063}00063\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Checking\ that\ programs\ are\ not\ loaded\ in\ memory:\ "{}});}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00064}00064\ \ \ \ \ assert(\mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}}-\/>IsLoaded(0)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00065}00065\ \ \ \ \ assert(\mbox{\hyperlink{test__init_8cpp_a1638348297533c6be6ceb4d2ba46bb2d}{test}}-\/>IsLoaded(1)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00066}00066\ \ \ \ \ puts(\textcolor{stringliteral}{"{}Success."{}});}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00069}00069\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00070}00070\ \textcolor{comment}{void\ test\_SensorMapEmptyAtStart()\ \{}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00071}00071\ \textcolor{comment}{\ \ \ \ for\ (uint\ pio\ =\ 0;\ pio\ <\ 2;\ pio++)\ \{}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (uint\ sm\ =\ 0;\ sm\ <\ 4;\ sm++)\ \{}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00073}00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ assert(test-\/>GetMappedSensor(pio,\ sm)\ ==\ 0);}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00074}00074\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00075}00075\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00076}00076\ \textcolor{comment}{\}}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00077}00077\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00080}\mbox{\hyperlink{test__init_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00080}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{test__init_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{test__init_8cpp_a077ff69d63e952252eae95bebc60f572}{test\_IsProgramLoaded\_AtFirst}}();}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{test__init_8cpp_source_l00083}00083\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,95 @@
+\doxysection{tusb\+\_\+config.\+h}
+\hypertarget{tusb__config_8h_source}{}\label{tusb__config_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/tusb\_config.h@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/tusb\_config.h}}
+\mbox{\hyperlink{tusb__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ \_TUSB\_CONFIG\_H\_}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ \_TUSB\_CONFIG\_H\_}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00004}00004\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00005}00005\ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00006}00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00008}00008\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00009}00009\ \textcolor{comment}{//\ Board\ Specific\ Configuration}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00010}00010\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00012}00012\ \textcolor{comment}{//\ RHPort\ number\ used\ for\ device\ can\ be\ defined\ by\ board.mk,\ default\ to\ port\ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00013}00013\ \textcolor{preprocessor}{\#ifndef\ BOARD\_TUD\_RHPORT}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00014}\mbox{\hyperlink{tusb__config_8h_a850f6280c7dc9aead785f6bedaaa0fb9}{00014}}\ \textcolor{preprocessor}{\#define\ BOARD\_TUD\_RHPORT\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00015}00015\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00017}00017\ \textcolor{comment}{//\ RHPort\ max\ operational\ speed\ can\ defined\ by\ board.mk}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00018}00018\ \textcolor{preprocessor}{\#ifndef\ BOARD\_TUD\_MAX\_SPEED}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00019}\mbox{\hyperlink{tusb__config_8h_a1d0d7228d7d9fc274b2280cd8e007003}{00019}}\ \textcolor{preprocessor}{\#define\ BOARD\_TUD\_MAX\_SPEED\ \ \ OPT\_MODE\_DEFAULT\_SPEED}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00020}00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00022}00022\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00023}00023\ \textcolor{comment}{//\ Common\ Configuration}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00024}00024\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00026}00026\ \textcolor{comment}{//\ defined\ by\ compiler\ flags\ for\ flexibility}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUSB\_MCU}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00028}00028\ \textcolor{preprocessor}{\#error\ CFG\_TUSB\_MCU\ must\ be\ defined}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00031}00031\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUSB\_OS}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00032}\mbox{\hyperlink{tusb__config_8h_a3d27955bb9aee39c43cb3756ffb372c1}{00032}}\ \textcolor{preprocessor}{\#define\ CFG\_TUSB\_OS\ \ \ \ \ \ \ \ \ \ \ OPT\_OS\_NONE}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00033}00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00035}00035\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUSB\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00036}\mbox{\hyperlink{tusb__config_8h_a4c102f40f3ecdd15c3c64b3e903e8385}{00036}}\ \textcolor{preprocessor}{\#define\ CFG\_TUSB\_DEBUG\ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00037}00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00039}00039\ \textcolor{comment}{//\ Enable\ Device\ stack}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00040}\mbox{\hyperlink{tusb__config_8h_a49885f91dd20d11d4f692a931ee57667}{00040}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_ENABLED\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00042}00042\ \textcolor{comment}{//\ Default\ is\ max\ speed\ that\ hardware\ controller\ could\ support\ with\ on-\/chip\ PHY}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00043}\mbox{\hyperlink{tusb__config_8h_aa37f3ad3cbb642d9d14ee056dd3e3ca8}{00043}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_MAX\_SPEED\ \ \ \ \ BOARD\_TUD\_MAX\_SPEED}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00045}00045\ \textcolor{comment}{/*\ USB\ DMA\ on\ some\ MCUs\ can\ only\ access\ a\ specific\ SRAM\ region\ with\ restriction\ on\ alignment.}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00046}00046\ \textcolor{comment}{\ *\ Tinyusb\ use\ follows\ macros\ to\ declare\ transferring\ memory\ so\ that\ they\ can\ be\ put}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00047}00047\ \textcolor{comment}{\ *\ into\ those\ specific\ section.}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00048}00048\ \textcolor{comment}{\ *\ e.g}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00049}00049\ \textcolor{comment}{\ *\ -\/\ CFG\_TUSB\_MEM\ SECTION\ :\ \_\_attribute\_\_\ ((\ section("{}.usb\_ram"{})\ ))}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00050}00050\ \textcolor{comment}{\ *\ -\/\ CFG\_TUSB\_MEM\_ALIGN\ \ \ :\ \_\_attribute\_\_\ ((aligned(4)))}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00051}00051\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00052}00052\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUSB\_MEM\_SECTION}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00053}\mbox{\hyperlink{tusb__config_8h_a360b21fa11ef498d9c4dc49428ab780f}{00053}}\ \textcolor{preprocessor}{\#define\ CFG\_TUSB\_MEM\_SECTION}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00054}00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00056}00056\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUSB\_MEM\_ALIGN}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00057}\mbox{\hyperlink{tusb__config_8h_ae46ca7dc14babee346d8af7aa8db403e}{00057}}\ \textcolor{preprocessor}{\#define\ CFG\_TUSB\_MEM\_ALIGN\ \ \ \ \_\_attribute\_\_\ ((aligned(4)))}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00060}00060\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00061}00061\ \textcolor{comment}{//\ DEVICE\ CONFIGURATION}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00062}00062\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00064}00064\ \textcolor{preprocessor}{\#ifndef\ CFG\_TUD\_ENDPOINT0\_SIZE}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00065}\mbox{\hyperlink{tusb__config_8h_a9b99a70dc9fc74ecc23108ab18bbebe4}{00065}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_ENDPOINT0\_SIZE\ \ \ \ 64}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00066}00066\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00068}00068\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ CLASS\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00069}\mbox{\hyperlink{tusb__config_8h_a7df8fc8e36e96c632d18c5e6a283cbad}{00069}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_CDC\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00070}\mbox{\hyperlink{tusb__config_8h_a159e8998f430441201fe575035576de3}{00070}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_MSC\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00071}\mbox{\hyperlink{tusb__config_8h_a59ed1f17152d738c0f50edf02565cd20}{00071}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_HID\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00072}\mbox{\hyperlink{tusb__config_8h_aa407aa4b24ddb98c5c8c27d533ec0e9a}{00072}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_MIDI\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00073}\mbox{\hyperlink{tusb__config_8h_a5332fe14c3199537455edc6faaa0ef9b}{00073}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_VENDOR\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00075}00075\ \textcolor{comment}{//\ CDC\ FIFO\ size\ of\ TX\ and\ RX}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00076}\mbox{\hyperlink{tusb__config_8h_a0be811273fed0a24763e4a22700e2b1d}{00076}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_CDC\_RX\_BUFSIZE\ \ \ (TUD\_OPT\_HIGH\_SPEED\ ?\ 512\ :\ 64)}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00077}\mbox{\hyperlink{tusb__config_8h_a1583fbe8a2453ca3a5986bd6633390c4}{00077}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_CDC\_TX\_BUFSIZE\ \ \ (TUD\_OPT\_HIGH\_SPEED\ ?\ 512\ :\ 64)}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00079}00079\ \textcolor{comment}{//\ CDC\ Endpoint\ transfer\ buffer\ size,\ more\ is\ faster}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00080}\mbox{\hyperlink{tusb__config_8h_a9484fcfe46fd923c94d7fdd93af1179b}{00080}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_CDC\_EP\_BUFSIZE\ \ \ (TUD\_OPT\_HIGH\_SPEED\ ?\ 512\ :\ 64)}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00082}00082\ \textcolor{comment}{//\ MSC\ Buffer\ size\ of\ Device\ Mass\ storage}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00083}\mbox{\hyperlink{tusb__config_8h_ae152a02e8ae360a620dd3200dbc5f3c3}{00083}}\ \textcolor{preprocessor}{\#define\ CFG\_TUD\_MSC\_EP\_BUFSIZE\ \ \ 4096}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00085}00085\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00086}00086\ \ \}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00087}00087\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{tusb__config_8h_source_l00089}00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_TUSB\_CONFIG\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,702 @@
+\doxysection{fat.\+c}
+\hypertarget{fat_8c_source}{}\label{fat_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fat.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fat.c}}
+\mbox{\hyperlink{fat_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <pico/mutex.h>}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{blockdevice_8h}{blockdevice/blockdevice.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fat_8h}{filesystem/fat.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ff_8h}{ff.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{diskio_8h}{diskio.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00019}\mbox{\hyperlink{structfat__file__t}{00019}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00020}\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{00020}}\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l}{FIL}}\ \mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00021}00021\ \}\ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00023}\mbox{\hyperlink{structfilesystem__fat__context__t}{00023}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00024}\mbox{\hyperlink{structfilesystem__fat__context__t_ae411384365b516cdd396691a05d15be0}{00024}}\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}}\ \mbox{\hyperlink{structfilesystem__fat__context__t_ae411384365b516cdd396691a05d15be0}{fatfs}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00025}\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{00025}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00026}\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{00026}}\ \ \ \ \ mutex\_t\ \mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00027}\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{00027}}\ \ \ \ \ mutex\_t\ \mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00028}00028\ \}\ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00030}00030\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ FILESYSTEM\_NAME[]\ =\ \textcolor{stringliteral}{"{}FAT"{}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00031}00031\ \textcolor{keyword}{static}\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *\_ffs[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00033}00033\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ fat\_error\_remap(\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{switch}\ (res)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (0)\ Succeeded}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca97dee4a6b485dc8f91f37486092dfe34}{FR\_DISK\_ERR}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (1)\ A\ hard\ error\ occurred\ in\ the\ low\ level\ disk\ I/O\ layer}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EIO;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44cab6c9903af6e9bffbb7a288705f4a6a76}{FR\_INT\_ERR}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (2)\ Assertion\ failed}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44cac9894bed3e8632ede8d2712235fa8e45}{FR\_NOT\_READY}}:\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (3)\ The\ physical\ drive\ cannot\ work}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EIO;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca97da8f98fc2e66d8fa7847f9ebb19b8c}{FR\_NO\_FILE}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (4)\ Could\ not\ find\ the\ file}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOENT;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44cae4529c8cc8b59783d6efc9ba4f574532}{FR\_NO\_PATH}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (5)\ Could\ not\ find\ the\ path}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOTDIR;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca83e45a4b579558c57192c0a391b9bb45}{FR\_INVALID\_NAME}}:\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (6)\ The\ path\ name\ format\ is\ invalid}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EINVAL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca897e9f2dd7629a80f48af242d8bc1a3d}{FR\_DENIED}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (7)\ Access\ denied\ due\ to\ prohibited\ access\ or\ directory\ full}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EACCES;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca0d8f024d256df76e84782b95018a2450}{FR\_EXIST}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (8)\ Access\ denied\ due\ to\ prohibited\ access}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EEXIST;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca3dec4eba481cdf5e99d7cd6009e6dcf8}{FR\_INVALID\_OBJECT}}:\ \ \ \ \ \ \ \textcolor{comment}{//\ (9)\ The\ file/directory\ object\ is\ invalid}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EBADF;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44cac3afbb423b1d4497229416812aff383b}{FR\_WRITE\_PROTECTED}}:\ \ \ \ \ \ \textcolor{comment}{//\ (10)\ The\ physical\ drive\ is\ write\ protected}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EACCES;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca487844af77de15f6932a3b41ef3a2d65}{FR\_INVALID\_DRIVE}}:\ \ \ \ \ \ \ \ \textcolor{comment}{//\ (11)\ The\ logical\ drive\ number\ is\ invalid}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENODEV;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44cafc56605c68aaffab4a428339a8bd600d}{FR\_NOT\_ENABLED}}:\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (12)\ The\ volume\ has\ no\ work\ area}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENODEV;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca086154b5fee763f28c49fd0e2c1cb463}{FR\_NO\_FILESYSTEM}}:\ \ \ \ \ \ \ \ \textcolor{comment}{//\ (13)\ There\ is\ no\ valid\ FAT\ volume}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EINVAL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca4b02760f758f5b1a89f445244fe9fbca}{FR\_MKFS\_ABORTED}}:\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (14)\ The\ f\_mkfs()\ aborted\ due\ to\ any\ problem}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EIO;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca3f8ca7e51af8b129d14328de7243c5d4}{FR\_TIMEOUT}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (15)\ Could\ not\ get\ a\ grant\ to\ access\ the\ volume\ within\ defined\ period}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ETIMEDOUT;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca7db5afaaa2af591bd4a208b2967075d7}{FR\_LOCKED}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (16)\ The\ operation\ is\ rejected\ according\ to\ the\ file\ sharing\ policy}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EBUSY;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44caf56a76a86602cbdeb2c4f3d00cfad21c}{FR\_NOT\_ENOUGH\_CORE}}:\ \ \ \ \ \ \textcolor{comment}{//\ (17)\ LFN\ working\ buffer\ could\ not\ be\ allocated}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOMEM;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca50dd3c3c274ccebb2cfbddde9d065bb9}{FR\_TOO\_MANY\_OPEN\_FILES}}:\ \ \textcolor{comment}{//\ (18)\ Number\ of\ open\ files\ >\ FF\_FS\_LOCK}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENFILE;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca3b89faeceab64db277d0fcdeaaa315d6}{FR\_INVALID\_PARAMETER}}:\ \ \ \ \textcolor{comment}{//\ (19)\ Given\ parameter\ is\ invalid}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/EINVAL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/res;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00080}00080\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ debug\_if(\textcolor{keywordtype}{int}\ condition,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *format,\ ...)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (condition)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ vprintf(format,\ args);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00089}\mbox{\hyperlink{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1}{00089}}\ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ \mbox{\hyperlink{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1}{disk\_initialize}}(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00090}00090\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_initialize\ on\ pdrv\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}})\_ffs[pdrv]-\/>init(\_ffs[pdrv]);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00092}00092\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00094}00094\ \textcolor{keyword}{static}\ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ disk\_get\_sector\_size(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ sector\_size\ =\ \_ffs[(int)pdrv]-\/>erase\_size;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00097}00097\ \ \ \ \ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ ssize\ =\ sector\_size;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{if}\ (ssize\ <\ 512)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ ssize\ =\ 512;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{return}\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00104}00104\ \textcolor{keyword}{static}\ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ disk\_get\_sector\_count(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00105}00105\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ scount\ =\ (\_ffs[(int)pdrv]-\/>size(\_ffs[(\textcolor{keywordtype}{int})pdrv]))\ /\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{return}\ scount;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00107}00107\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00109}\mbox{\hyperlink{fat_8c_a8348ac5ee6d709420c02e45c111f4793}{00109}}\ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ \mbox{\hyperlink{fat_8c_a8348ac5ee6d709420c02e45c111f4793}{disk\_status}}(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00110}00110\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_status\ on\ pdrv\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00112}00112\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00114}\mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{00114}}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ *buff,\ \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\_t}}\ sector,\ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ count)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00116}00116\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sector\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ count\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[(int)pdrv]-\/>read(\_ffs[(\textcolor{keywordtype}{int})pdrv],\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *)buff,\ addr,\ size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{return}\ err\ ?\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}}\ :\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00122}\mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{00122}}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ *buff,\ \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\_t}}\ sector,\ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ count)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00123}00123\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_write\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00124}00124\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00125}00125\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sector\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00126}00126\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ count\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[pdrv]-\/>erase(\_ffs[pdrv],\ addr,\ size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00133}00133\ \ \ \ \ err\ =\ \_ffs[pdrv]-\/>program(\_ffs[pdrv],\ buff,\ addr,\ size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00141}\mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{00141}}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ cmd,\ \textcolor{keywordtype}{void}\ *buff)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00142}00142\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_ioctl(\%d)\(\backslash\)n"{}},\ cmd);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_a570216006f6a8fc4e1698b1bbb2d1dde}{GET\_SECTOR\_COUNT}}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff)\ =\ disk\_get\_sector\_count(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{GET\_SECTOR\_SIZE}}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ *)buff)\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_aec3bb4dfe075d0ba2f3b07b300a95500}{GET\_BLOCK\_SIZE}}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff)\ =\ 1;\ \textcolor{comment}{//\ default\ when\ not\ known}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00167}00167\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_af09fd84bea8d4e889e272471f44d60d6}{CTRL\_TRIM}}:}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *sectors\ =\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sectors[0]\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})(sectors[1]\ -\/\ sectors[0]\ +\ 1)\ *\ ssize;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[pdrv]-\/>trim(\_ffs[pdrv],\ addr,\ size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err\ ?\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}}\ :\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00178}00178\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00179}00179\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00180}00180\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00182}\mbox{\hyperlink{fat_8c_af58b536abfd30f77213f4ecaf2ac52f5}{00182}}\ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ \mbox{\hyperlink{fat_8c_af58b536abfd30f77213f4ecaf2ac52f5}{get\_fattime}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00183}00183\ \ \ \ \ time\_t\ rawtime;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00184}00184\ \ \ \ \ time(\&rawtime);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00185}00185\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *ptm\ =\ localtime(\&rawtime);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00186}00186\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_year\ -\/\ 80)\ <<\ 25}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_mon\ +\ 1)\ <<\ 21}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_mday)\ <<\ 16}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_hour)\ <<\ 11}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_min)\ <<\ 5}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_sec\ /\ 2);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00192}00192\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00195}00195\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ mount(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device,\ \textcolor{keywordtype}{bool}\ pending)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00196}00196\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00197}00197\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00199}00199\ \ \ \ \ \textcolor{keywordtype}{char}\ \_fsid[3]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[i]\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}}\ =\ i;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \_ffs[i]\ =\ device;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \_fsid[0]\ =\ \textcolor{charliteral}{'0'}\ +\ i;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \_fsid[1]\ =\ \textcolor{charliteral}{':'};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \_fsid[2]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_ae411384365b516cdd396691a05d15be0}{fatfs}},\ \_fsid,\ !pending);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00212}00212\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOMEM;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00214}00214\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00216}00216\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ unmount(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00217}00217\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00218}00218\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00220}00220\ \ \ \ \ \textcolor{keywordtype}{char}\ \_fsid[3]\ =\ \textcolor{stringliteral}{"{}0:"{}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00221}00221\ \ \ \ \ \_fsid[0]\ =\ \textcolor{charliteral}{'0'}\ +\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00223}00223\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(NULL,\ \_fsid,\ 0);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00224}00224\ \ \ \ \ \_ffs[context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}}]\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00226}00226\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00227}00227\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00228}00228\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00230}00230\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ format(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00231}00231\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00232}00232\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00240}00240\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00242}00242\ \ \ \ \ \textcolor{comment}{//\ erase\ first\ handful\ of\ blocks}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00243}00243\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ header\ =\ 2\ *\ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00244}00244\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}(device,\ 0,\ header);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00245}00245\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ program\_size\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00251}00251\ \ \ \ \ \textcolor{keywordtype}{void}\ *buffer\ =\ malloc(program\_size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (!buffer)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00253}00253\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOMEM;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00255}00255\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00256}00256\ \ \ \ \ memset(buffer,\ 0xFF,\ program\_size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ header;\ i\ +=\ program\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}(device,\ buffer,\ i,\ program\_size);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ free(buffer);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00264}00264\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00265}00265\ \ \ \ \ free(buffer);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00267}00267\ \ \ \ \ \textcolor{comment}{//\ trim\ entire\ device\ to\ indicate\ it\ is\ unneeded}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00268}00268\ \ \ \ \ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}(device,\ 0,\ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}(device));}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00272}00272\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00274}00274\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}(fs,\ device,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00275}00275\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00278}00278\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00280}00280\ \ \ \ \ \mbox{\hyperlink{struct_m_k_f_s___p_a_r_m}{MKFS\_PARM}}\ opt;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00281}00281\ \ \ \ \ opt.\mbox{\hyperlink{struct_m_k_f_s___p_a_r_m_a54cb609ecff9f1586f3628b00aeb8f23}{fmt}}\ =\ (\mbox{\hyperlink{ff_8h_a701ab2eee8c2d9b5b445aadc8f14df4d}{FM\_ANY}}\ |\ \mbox{\hyperlink{ff_8h_a3b3d16ac135fe57669fc8a93dfa0c0a5}{FM\_SFD}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00282}00282\ \ \ \ \ opt.\mbox{\hyperlink{struct_m_k_f_s___p_a_r_m_a0ff8e4728bddfe0636c50367af399e25}{n\_fat}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00283}00283\ \ \ \ \ opt.\mbox{\hyperlink{struct_m_k_f_s___p_a_r_m_af244e017c4cb2c821e5e819fff7db710}{align}}\ =\ 0U;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00284}00284\ \ \ \ \ opt.\mbox{\hyperlink{struct_m_k_f_s___p_a_r_m_a2b8a26b614381e0c2e0ff26f138feea6}{n\_root}}\ =\ 0U;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00285}00285\ \ \ \ \ opt.\mbox{\hyperlink{struct_m_k_f_s___p_a_r_m_adb29b0af8e486fc53d8b629c3e49d567}{au\_size}}\ =\ 0;\ \textcolor{comment}{//\ (DWORD)cluster\_size;}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00287}00287\ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keywordtype}{id}[3]\ =\ \textcolor{stringliteral}{"{}0:"{}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00288}00288\ \ \ \ \ \textcolor{keywordtype}{id}[0]\ =\ \textcolor{charliteral}{'0'}\ +\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00290}00290\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a983f0614033bd7cf587eb56d3054a91c}{f\_mkfs}}((\textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a03bdb8ce5895c7e261aadc2529637546}{TCHAR}}\ *)\textcolor{keywordtype}{id},\ \&opt,\ NULL,\ \mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00292}00292\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00296}00296\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00298}00298\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00299}00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00302}00302\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00304}00304\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00305}00305\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00306}00306\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00308}00308\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fat\_path\_prefix(\textcolor{keywordtype}{char}\ *dist,\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00309}00309\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{id}\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ strcpy(dist,\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *)dist;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00314}00314\ \ \ \ \ dist[0]\ =\ \textcolor{charliteral}{'0'}\ +\ id;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00315}00315\ \ \ \ \ dist[1]\ =\ \textcolor{charliteral}{':'};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00316}00316\ \ \ \ \ strcpy(dist\ +\ strlen(\textcolor{stringliteral}{"{}0:"{}}),\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *)dist;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00318}00318\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00320}00320\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_remove(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00321}00321\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00323}00323\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00324}00324\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00326}00326\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00327}00327\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a2858167fcd0bced48e9be434b3895efe}{f\_unlink}}(fpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00328}00328\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00330}00330\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00331}00331\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_unlink()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ ==\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca897e9f2dd7629a80f48af242d8bc1a3d}{FR\_DENIED}})}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOTEMPTY;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00334}00334\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00335}00335\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00336}00336\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00338}00338\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_rename(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *oldpath,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *newpath)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00339}00339\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00340}00340\ \ \ \ \ \textcolor{keywordtype}{char}\ oldfpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00341}00341\ \ \ \ \ \textcolor{keywordtype}{char}\ newfpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00342}00342\ \ \ \ \ fat\_path\_prefix(oldfpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ oldpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00343}00343\ \ \ \ \ fat\_path\_prefix(newfpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ newpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00345}00345\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00346}00346\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_aa775b9b024acfeb3a66523cab497d142}{f\_rename}}(oldfpath,\ newfpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00347}00347\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00349}00349\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_rename()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00351}00351\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00352}00352\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00353}00353\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00355}00355\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_mkdir(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ mode\_t\ mode)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00356}00356\ \ \ \ \ (void)mode;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00357}00357\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00358}00358\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00359}00359\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00361}00361\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00362}00362\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a4b4d38db58e89c526cfcf53200d719d0}{f\_mkdir}}(fpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00363}00363\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00365}00365\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00366}00366\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_mkdir()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00367}00367\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00368}00368\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00369}00369\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00371}00371\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_rmdir(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00372}00372\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00373}00373\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00374}00374\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00376}00376\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00377}00377\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a2858167fcd0bced48e9be434b3895efe}{f\_unlink}}(fpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00378}00378\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00380}00380\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00381}00381\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_unlink()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00382}00382\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00383}00383\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00384}00384\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00386}00386\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_stat(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keyword}{struct}\ stat\ *st)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00387}00387\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00388}00388\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00389}00389\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00390}00390\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l_i_n_f_o}{FILINFO}}\ f\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00392}00392\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00393}00393\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_abe1f60daab5c7d11170c334fb832c798}{f\_stat}}(fpath,\ \&f);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00394}00394\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00396}00396\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00398}00398\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00399}00399\ \ \ \ \ st-\/>st\_size\ =\ f.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_a9e5b78ed7190f73de3ebcbdfbd6d1844}{fsize}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00400}00400\ \ \ \ \ st-\/>st\_mode\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00401}00401\ \ \ \ \ st-\/>st\_mode\ |=\ (f.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_a838d542585831b085537b363f18205c0}{fattrib}}\ \&\ \mbox{\hyperlink{ff_8h_a3a9db44e978ed6c13b641e092d4cd7d3}{AM\_DIR}})\ ?\ S\_IFDIR\ :\ S\_IFREG;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00402}00402\ \ \ \ \ st-\/>st\_mode\ |=\ (f.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_a838d542585831b085537b363f18205c0}{fattrib}}\ \&\ \mbox{\hyperlink{ff_8h_add6d85d1e7a02b4f6188783ef91a5f1e}{AM\_RDO}})\ ?}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (S\_IRUSR\ |\ S\_IXUSR\ |\ S\_IRGRP\ |\ S\_IXGRP\ |\ S\_IROTH\ |\ S\_IXOTH)\ :}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (S\_IRWXU\ |\ S\_IRWXG\ |\ S\_IRWXO);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00405}00405\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00406}00406\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00408}00408\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_open(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keywordtype}{int}\ flags)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00409}00409\ \ \ \ \ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ open\_mode;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00410}00410\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ O\_RDWR)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ open\_mode\ =\ \mbox{\hyperlink{ff_8h_a1f4f3530ff03abbd979b072536e72290}{FA\_READ}}\ |\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00412}00412\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (flags\ \&\ O\_WRONLY)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00413}00413\ \ \ \ \ \ \ \ \ open\_mode\ =\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00414}00414\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ open\_mode\ =\ \mbox{\hyperlink{ff_8h_a1f4f3530ff03abbd979b072536e72290}{FA\_READ}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00416}00416\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ O\_CREAT)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ O\_TRUNC)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ open\_mode\ |=\ \mbox{\hyperlink{ff_8h_afba4546b131dea4b24727fa20a80e29f}{FA\_CREATE\_ALWAYS}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ open\_mode\ |=\ \mbox{\hyperlink{ff_8h_a17b01553029920ac0468912b4bcb16c7}{FA\_OPEN\_ALWAYS}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00421}00421\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ O\_APPEND)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00423}00423\ \ \ \ \ \ \ \ \ open\_mode\ |=\ \mbox{\hyperlink{ff_8h_a90f135b2ae90fba5080f6bd2b6c57b8a}{FA\_OPEN\_APPEND}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00425}00425\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00426}00426\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00427}00427\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00428}00428\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}}\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}));}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00429}00429\ \ \ \ \ \textcolor{keywordflow}{if}\ (fat\_file\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00430}00430\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}file\_open:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOMEM;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00432}00432\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00434}00434\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00435}00435\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_aefdef7126128d99d0b3bd82c28e54d80}{f\_open}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}},\ fpath,\ open\_mode);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00436}00436\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00438}00438\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_open('w')\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00441}00441\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00442}00442\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00443}00443\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00445}00445\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_close(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00446}00446\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00447}00447\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00448}00448\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00450}00450\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00451}00451\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00452}00452\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00454}00454\ \ \ \ \ free(file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00455}00455\ \ \ \ \ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00456}00456\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00457}00457\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00459}00459\ \textcolor{keyword}{static}\ ssize\_t\ file\_write(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00460}00460\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00461}00461\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00462}00462\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00464}00464\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ n;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00466}00466\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00467}00467\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_ae6a4dfae8a9e308bdb2283a37ef680f2}{f\_write}}(\&(fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}}),\ buffer,\ size,\ \&n);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00468}00468\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00469}00469\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00470}00470\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_write()\ failed:\ \%d"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00471}00471\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00472}00472\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00473}00473\ \ \ \ \ res\ =\ \mbox{\hyperlink{ff_8c_ad69c7246b122ba56a134939ee0eaf847}{f\_sync}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00474}00474\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00476}00476\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00477}00477\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_write()\ failed:\ \%d"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00478}00478\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00479}00479\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00480}00480\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00481}00481\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00483}00483\ \textcolor{keyword}{static}\ ssize\_t\ file\_read(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file,\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00484}00484\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00485}00485\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00486}00486\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00488}00488\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ n;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00490}00490\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00491}00491\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_ac4c3dcb6869ca252888eebabe39727b3}{f\_read}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}},\ buffer,\ size,\ \&n);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00492}00492\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00494}00494\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00495}00495\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_read()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00496}00496\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00497}00497\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00498}00498\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00499}00499\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00501}00501\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_sync(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00502}00502\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00503}00503\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00504}00504\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00506}00506\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00507}00507\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_ad69c7246b122ba56a134939ee0eaf847}{f\_sync}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00508}00508\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00510}00510\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00511}00511\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_sync()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00512}00512\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00513}00513\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00514}00514\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00516}00516\ \textcolor{keyword}{static}\ off\_t\ file\_seek(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file,\ off\_t\ offset,\ \textcolor{keywordtype}{int}\ whence)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00517}00517\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00518}00518\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00519}00519\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00521}00521\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (whence\ ==\ SEEK\_END)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00523}00523\ \ \ \ \ \ \ \ \ offset\ +=\ \mbox{\hyperlink{ff_8h_a26f33722c5bf1aa3cd6f0290a83eb2bc}{f\_size}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00524}00524\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (whence\ ==\ SEEK\_CUR)}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00525}00525\ \ \ \ \ \ \ \ \ offset\ +=\ \mbox{\hyperlink{ff_8h_a5e1daca7ce13cdc277e42185f7f9124f}{f\_tell}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00527}00527\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ res\ =\ \mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}},\ offset);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00528}00528\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00530}00530\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00531}00531\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}lseek\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00532}00532\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00533}00533\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00534}00534\ \ \ \ \ \textcolor{keywordflow}{return}\ (off\_t)fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}}.\mbox{\hyperlink{struct_f_i_l_a088b03ab2e02f82e10e17bdd938190a6}{fptr}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00535}00535\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00536}00536\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00537}00537\ \textcolor{keyword}{static}\ off\_t\ file\_tell(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00538}00538\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00539}00539\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00540}00540\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00541}00541\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00542}00542\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00543}00543\ \ \ \ \ off\_t\ res\ =\ \mbox{\hyperlink{ff_8h_a5e1daca7ce13cdc277e42185f7f9124f}{f\_tell}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00544}00544\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00546}00546\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00547}00547\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00549}00549\ \textcolor{keyword}{static}\ off\_t\ file\_size(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00550}00550\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00551}00551\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00552}00552\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00554}00554\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00555}00555\ \ \ \ \ off\_t\ res\ =\ \mbox{\hyperlink{ff_8h_a26f33722c5bf1aa3cd6f0290a83eb2bc}{f\_size}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00556}00556\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00558}00558\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00559}00559\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00561}00561\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ file\_truncate(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file,\ off\_t\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00562}00562\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00563}00563\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00564}00564\ \ \ \ \ \mbox{\hyperlink{structfat__file__t}{fat\_file\_t}}\ *fat\_file\ =\ file-\/>\mbox{\hyperlink{structfs__file__t_a82c87724ca8d8a7e351eb9be4c973e18}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00565}00565\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00566}00566\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00567}00567\ \ \ \ \ \mbox{\hyperlink{ff_8h_a3fc0992ad7436250b6b1a0592214b7f2}{FSIZE\_t}}\ old\_offset\ =\ \mbox{\hyperlink{ff_8h_a5e1daca7ce13cdc277e42185f7f9124f}{f\_tell}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00568}00568\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}},\ length);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00569}00569\ \ \ \ \ \textcolor{keywordflow}{if}\ (res)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00571}00571\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00572}00572\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00573}00573\ \ \ \ \ res\ =\ \mbox{\hyperlink{ff_8c_a691a27b40c348f7c84b42e911636f38a}{f\_truncate}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00574}00574\ \ \ \ \ \textcolor{keywordflow}{if}\ (res)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00575}00575\ \ \ \ \ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00576}00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00577}00577\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00578}00578\ \ \ \ \ res\ =\ \mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(\&fat\_file-\/>\mbox{\hyperlink{structfat__file__t_a8b512ef8f01fefc36c6ff4e8b1ff0d05}{file}},\ old\_offset);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00579}00579\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00580}00580\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00581}00581\ \ \ \ \ \textcolor{keywordflow}{if}\ (res)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00582}00582\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00583}00583\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00584}00584\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00585}00585\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00587}00587\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ dir\_open(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *dir,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00588}00588\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00589}00589\ \ \ \ \ \textcolor{keywordtype}{char}\ fpath[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00590}00590\ \ \ \ \ fat\_path\_prefix(fpath,\ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}},\ path);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00592}00592\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}\ *dh\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}));}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00593}00593\ \ \ \ \ \textcolor{keywordflow}{if}\ (dh\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00594}00594\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}dir\_open:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00595}00595\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOMEM;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00596}00596\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00597}00597\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00598}00598\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00599}00599\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_a0d5b386636ec82d4c1e912d5902aa0e0}{f\_opendir}}(dh,\ fpath);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00600}00600\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00601}00601\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00602}00602\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00603}00603\ \ \ \ \ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}f\_opendir()\ failed:\ \%d\(\backslash\)n"{}},\ res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00604}00604\ \ \ \ \ \ \ \ \ free(dh);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00605}00605\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00606}00606\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00607}00607\ \ \ \ \ dir-\/>\mbox{\hyperlink{structfs__dir__t_a32edef7806545ae549974da528041edf}{context}}\ =\ dh;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00608}00608\ \ \ \ \ dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00609}00609\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00610}00610\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00612}00612\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ dir\_close(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *dir)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00613}00613\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00614}00614\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00615}00615\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00616}00616\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}\ *dh\ =\ (\mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}\ *)dir-\/>\mbox{\hyperlink{structfs__dir__t_a32edef7806545ae549974da528041edf}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00617}00617\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00618}00618\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00619}00619\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_aba2c2f47f12fd4875bd6a62fa58fa1a9}{f\_closedir}}(dh);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00620}00620\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00622}00622\ \ \ \ \ free(dh);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00623}00623\ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00624}00624\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00625}00625\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00626}00626\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ dir\_read(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *dir,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structdirent}{dirent}}\ *ent)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00627}00627\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00628}00628\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00629}00629\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00630}00630\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}\ *dh\ =\ (\mbox{\hyperlink{struct_f_a_t_f_s___d_i_r}{FATFS\_DIR}}\ *)dir-\/>\mbox{\hyperlink{structfs__dir__t_a32edef7806545ae549974da528041edf}{context}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00631}00631\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l_i_n_f_o}{FILINFO}}\ finfo\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00633}00633\ \ \ \ \ mutex\_enter\_blocking(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00634}00634\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ res\ =\ \mbox{\hyperlink{ff_8c_ab8b2c70a95ca61f4f516c56fda7f82ab}{f\_readdir}}(dh,\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00635}00635\ \ \ \ \ mutex\_exit(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00636}00636\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00637}00637\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fat\_error\_remap(res);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00639}00639\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (finfo.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_ac06b247cfb3b708c76413c436e52fa7e}{fname}}[0]\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00640}00640\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/ENOENT;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00641}00641\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00642}00642\ \ \ \ \ ent-\/>d\_type\ =\ (finfo.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_a838d542585831b085537b363f18205c0}{fattrib}}\ \&\ \mbox{\hyperlink{ff_8h_a3a9db44e978ed6c13b641e092d4cd7d3}{AM\_DIR}})\ ?\ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}{DT\_DIR}}\ :\ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc}{DT\_REG}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00643}00643\ \ \ \ \ strncpy(ent-\/>d\_name,\ finfo.\mbox{\hyperlink{struct_f_i_l_i_n_f_o_ac06b247cfb3b708c76413c436e52fa7e}{fname}},\ \mbox{\hyperlink{ffconf_8h_a7d29ac29d2d2db71cc7d045ea38fa927}{FF\_LFN\_BUF}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00644}00644\ \ \ \ \ ent-\/>d\_name[\mbox{\hyperlink{ffconf_8h_a7d29ac29d2d2db71cc7d045ea38fa927}{FF\_LFN\_BUF}}]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00645}00645\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00646}00646\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00648}00648\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00649}\mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{00649}}\ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *\mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}()\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00650}00650\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}));}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00651}00651\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00652}00652\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}filesystem\_fat\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00653}00653\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00654}00654\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00655}00655\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a4ba3d1ab6d89005e297c86eb8bafd225}{type}}\ =\ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}{FILESYSTEM\_TYPE\_FAT}};}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00656}00656\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a72ec4af591f1c4d4538ea3baaf5fb8db}{name}}\ =\ FILESYSTEM\_NAME;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00657}00657\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}\ =\ mount;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00658}00658\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}\ =\ unmount;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00659}00659\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}\ =\ format;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00660}00660\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a168c6ebc947bcef4dd441c4846199663}{remove}}\ =\ file\_remove;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00661}00661\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a1642d2b8278ee2e0e28e67e3c871e7af}{rename}}\ =\ file\_rename;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00662}00662\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a9f586df0f698f0472b033f406de87de3}{mkdir}}\ =\ file\_mkdir;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00663}00663\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a396727009601ff7cd9505b724dc744f3}{rmdir}}\ =\ file\_rmdir;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00664}00664\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_ab5f68a612c88a96e638d2035a7ec59fd}{stat}}\ =\ file\_stat;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00665}00665\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a28f1a1f90cf5c05660e20b20e55cf1c7}{file\_open}}\ =\ file\_open;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00666}00666\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_ab649defbea72289a00b64b6eabdd1b4d}{file\_close}}\ =\ file\_close;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00667}00667\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_aa101ba0e335b6b94b615cd27edbef29f}{file\_write}}\ =\ file\_write;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00668}00668\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_afa641bc200d34300f3306a7f2b1c0794}{file\_read}}\ =\ file\_read;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00669}00669\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a6e562ac4ed1ead2c1654c5c9312b2394}{file\_sync}}\ =\ file\_sync;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00670}00670\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}\ =\ file\_seek;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00671}00671\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_acdf7fe4f2c1ef87fc1f2894cf473d271}{file\_tell}}\ =\ file\_tell;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00672}00672\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_ab8ed19dbc2c21c95682aec0418f09e72}{file\_size}}\ =\ file\_size;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00673}00673\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a1318c5761c315dc5354e5154aae7d0f3}{file\_truncate}}\ =\ file\_truncate;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00674}00674\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a85af88c13c623c820eca217dd81c2a2a}{dir\_open}}\ =\ dir\_open;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00675}00675\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a537d71bf313451145ca593fe2a63d728}{dir\_close}}\ =\ dir\_close;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00676}00676\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_a36cd5c106f4d8a95cdf1ee4a73052001}{dir\_read}}\ =\ dir\_read;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00677}00677\ \ \ \ \ \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}\ *context\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\_fat\_context\_t}}));}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00678}00678\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00679}00679\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}filesystem\_fat\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00680}00680\ \ \ \ \ \ \ \ \ free(fs);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00682}00682\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00683}00683\ \ \ \ \ context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a3c9acdc4934b517d4d2b55f31ffd4f2f}{id}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00684}00684\ \ \ \ \ mutex\_init(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a7028c243cac191667ed940f855a787d2}{\_mutex}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00685}00685\ \ \ \ \ mutex\_init(\&context-\/>\mbox{\hyperlink{structfilesystem__fat__context__t_a40ba9b3bd43dd8f91c1bb1bdd2a99e9f}{\_mutex\_format}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00686}00686\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00687}00687\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}}\ =\ context;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00688}00688\ \ \ \ \ \textcolor{keywordflow}{return}\ fs;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00689}00689\ \}}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00691}\mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{00691}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs)\ \{}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00692}00692\ \ \ \ \ free(fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}});}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00693}00693\ \ \ \ \ fs-\/>\mbox{\hyperlink{structfilesystem_aac656c97403627be0598d9f5b45f4b46}{context}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00694}00694\ \ \ \ \ free(fs);}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00695}00695\ \ \ \ \ fs\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{fat_8c_source_l00696}00696\ \}}
+
+\end{DoxyCode}

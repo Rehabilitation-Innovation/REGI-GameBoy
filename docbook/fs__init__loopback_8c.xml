@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_fs__init__loopback_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/fs_inits/fs_init_loopback.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/fs_inits/fs_init_loopback.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;hardware/flash.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_fs__init__loopback_8c_1ad75b221c9c4393a019b98aeecb27d6db">LOOPBACK_FILE_SIZE</link>&#160;&#160;&#160;(640 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_fs__init__loopback_8c_1ab8c390e6f53017179ae00255cd27fd11">LOOPBACK_BLOCK_SIZE</link>&#160;&#160;&#160;512</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link> (void)</para>
+
+<para>Enable predefined file systems. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97"/><section>
+    <title>FLASH_LENGTH_ALL</title>
+<indexterm><primary>FLASH_LENGTH_ALL</primary><secondary>fs_init_loopback.c</secondary></indexterm>
+<indexterm><primary>fs_init_loopback.c</primary><secondary>FLASH_LENGTH_ALL</secondary></indexterm>
+<para><computeroutput>#define FLASH_LENGTH_ALL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_fs__init__loopback_8c_source_1l00015">15</link> of file <link linkend="_fs__init__loopback_8c_source">fs_init_loopback.c</link>.</para>
+</section>
+<anchor xml:id="_fs__init__loopback_8c_1ab8c390e6f53017179ae00255cd27fd11"/><section>
+    <title>LOOPBACK_BLOCK_SIZE</title>
+<indexterm><primary>LOOPBACK_BLOCK_SIZE</primary><secondary>fs_init_loopback.c</secondary></indexterm>
+<indexterm><primary>fs_init_loopback.c</primary><secondary>LOOPBACK_BLOCK_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_BLOCK_SIZE&#160;&#160;&#160;512</computeroutput></para><para>
+Definition at line <link linkend="_fs__init__loopback_8c_source_1l00017">17</link> of file <link linkend="_fs__init__loopback_8c_source">fs_init_loopback.c</link>.</para>
+</section>
+<anchor xml:id="_fs__init__loopback_8c_1ad75b221c9c4393a019b98aeecb27d6db"/><section>
+    <title>LOOPBACK_FILE_SIZE</title>
+<indexterm><primary>LOOPBACK_FILE_SIZE</primary><secondary>fs_init_loopback.c</secondary></indexterm>
+<indexterm><primary>fs_init_loopback.c</primary><secondary>LOOPBACK_FILE_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_FILE_SIZE&#160;&#160;&#160;(640 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_fs__init__loopback_8c_source_1l00016">16</link> of file <link linkend="_fs__init__loopback_8c_source">fs_init_loopback.c</link>.</para>
+</section>
+</section>
+</section>

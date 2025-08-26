@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jumps_3a_0',['Time: Missed Jumps:',['../_dino_game_8cpp.html#autotoc_md1',1,'']]]
+  ['and_20layout_3a_0',['Repository and Layout:',['../index.html#autotoc_md2',1,'']]]
 ];

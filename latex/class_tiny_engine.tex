@@ -4,6 +4,15 @@
 
 {\ttfamily \#include $<$tinyengine.\+h$>$}
 
+
+
+Collaboration diagram for Tiny\+Engine\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{class_tiny_engine__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -211,7 +220,7 @@ Definition at line \mbox{\hyperlink{tinyengine_8cpp_source_l00154}{154}} of file
 \DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ a\ RX\ interrupt}}
 \DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ We\ need\ to\ set\ up\ the\ handler\ first}}
 \DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ Select\ correct\ interrupt\ for\ the\ UART\ we\ are\ using}}
-\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ UART\_IRQ\ =\ \mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}}\ ==\ uart0\ ?\ UART0\_IRQ\ :\ UART1\_IRQ;}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ UART\_IRQ\ =\ \mbox{\hyperlink{tinyengine_8cpp_a1de69c73f829a03f46f5e7690da7e79a}{UART\_ID}}\ ==\ uart0\ ?\ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_a876b9495995a81dff786f07a1975c3b8a504e54f28a2e2928bd6a1604ee0a24fb}{UART0\_IRQ}}\ :\ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_a876b9495995a81dff786f07a1975c3b8a1062848ec5bc51fcdd58a95d40fc266b}{UART1\_IRQ}};}
 \DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{//\ And\ set\ up\ and\ enable\ the\ interrupt\ handlers}}
 \DoxyCodeLine{00163\ \ \ \ \ irq\_set\_exclusive\_handler(UART\_IRQ,\ \mbox{\hyperlink{tinyengine_8cpp_ad7fec5b2b07b712822dc8182d1796c22}{on\_uart\_rx}});}
 \DoxyCodeLine{00164\ \ \ \ \ irq\_set\_enabled(UART\_IRQ,\ \textcolor{keyword}{true});}

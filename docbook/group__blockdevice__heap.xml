@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__blockdevice__heap" xml:lang="en-US">
+<title>
+<para>blockdevice_heap </para>
+</title>
+<indexterm><primary>blockdevice_heap</primary></indexterm>
+<para>
+
+<para>Heap memory block device. </para>
+ 
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link> (size_t size)</para>
+
+<para>Create RAM heap memory block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the heap memory device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Heap memory block device. </para>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f"/><section>
+    <title>blockdevice_heap_create()</title>
+<indexterm><primary>blockdevice_heap_create</primary><secondary>blockdevice_heap</secondary></indexterm>
+<indexterm><primary>blockdevice_heap</primary><secondary>blockdevice_heap_create</secondary></indexterm>
+<para><computeroutput><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * blockdevice_heap_create (size_t size)</computeroutput></para><para>
+
+<para>Create RAM heap memory block device. </para>
+</para>
+
+<para>Create a block device object that uses RAM heap memory. The size of heap memory allocated to the block device is specified by size.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>size</entry><entry>
+<para>Size in bytes to be allocated to the block device. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>Block device object. Returnes NULL in case of failure. </para>
+</formalpara>
+
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>NULL</entry><entry>
+<para>Failed to create block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_heap_8c_source_1l00118">118</link> of file <link linkend="_heap_8c_source">heap.c</link>.</para>
+<programlisting linenumbering="unnumbered">00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00119 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>));
+00120 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(device&#32;==&#32;NULL)&#32;{
+00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00122 &#32;&#32;&#32;&#32;}
+00123 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__heap__config__t">blockdevice_heap_config_t</link>&#32;*config&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structblockdevice__heap__config__t">blockdevice_heap_config_t</link>));
+00124 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(config&#32;==&#32;NULL)&#32;{
+00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(device);
+00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00127 &#32;&#32;&#32;&#32;}
+00128 
+00129 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>&#32;=&#32;init;
+00130 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>&#32;=&#32;deinit;
+00131 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>&#32;=&#32;read;
+00132 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>&#32;=&#32;erase;
+00133 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>&#32;=&#32;program;
+00134 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>&#32;=&#32;trim;
+00135 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>&#32;=&#32;sync;
+00136 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>&#32;=&#32;size;
+00137 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>&#32;=&#32;<link linkend="_heap_8c_1adec7dde74afae904fe3e92031e8e0528">PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</link>;
+00138 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>&#32;=&#32;<link linkend="_heap_8c_1adec7dde74afae904fe3e92031e8e0528">PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</link>;
+00139 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>&#32;=&#32;<link linkend="_heap_8c_1adec7dde74afae904fe3e92031e8e0528">PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</link>;
+00140 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>&#32;=&#32;DEVICE_NAME;
+00141 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+00142 
+00143 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__heap__config__t_1a2b40e507aea7e8bead5af0f57743ded2">size</link>&#32;=&#32;length;
+00144 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__heap__config__t_1a6e738b8be364561c6def99dde8ed808f">heap</link>&#32;=&#32;NULL;
+00145 &#32;&#32;&#32;&#32;mutex_init(&amp;config-&gt;<link linkend="_structblockdevice__heap__config__t_1a50c07f8849843d2c268963e50553901d">_mutex</link>);
+00146 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;=&#32;config;
+00147 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+00148 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device;
+00149 }
+</programlisting></section>
+<anchor xml:id="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84"/><section>
+    <title>blockdevice_heap_free()</title>
+<indexterm><primary>blockdevice_heap_free</primary><secondary>blockdevice_heap</secondary></indexterm>
+<indexterm><primary>blockdevice_heap</primary><secondary>blockdevice_heap_free</secondary></indexterm>
+<para><computeroutput>void blockdevice_heap_free (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * device)</computeroutput></para><para>
+
+<para>Release the heap memory device. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>device</entry><entry>
+<para>Block device object. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_heap_8c_source_1l00151">151</link> of file <link linkend="_heap_8c_source">heap.c</link>.</para>
+<programlisting linenumbering="unnumbered">00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00152 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>(device);
+00153 &#32;&#32;&#32;&#32;free(device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>);
+00154 &#32;&#32;&#32;&#32;free(device);
+00155 }
+</programlisting></section>
+</section>
+</section>

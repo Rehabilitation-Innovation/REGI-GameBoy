@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ffconf_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/filesystem/ChaN/ffconf.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/filesystem/ChaN/ffconf.h</primary></indexterm>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a275a34cd0d8f3b9b04ee91df269136e3">FFCONF_DEF</link>&#160;&#160;&#160;80286	/* Revision ID */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ac932d228331b07248a3faa6f5904a49d">FF_FS_READONLY</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a33ce7fb406e1c861aa717fc8f4864e58">FF_FS_MINIMIZE</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1aa52eeffe3cb0583877e219481dd8dbdc">FF_USE_FIND</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429">FF_USE_MKFS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ac34dea7a30cf68a1f171af88fa37518a">FF_USE_FASTSEEK</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a9629a453509390e34097b3268dcaac19">FF_USE_EXPAND</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1af22e3a349a7d2c4618fe89a8311ca8d6">FF_USE_CHMOD</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a46c839d4e87f5873f44166c7b5bf7592">FF_USE_LABEL</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1abb96514dcc1016a49be66162e596a9d0">FF_USE_FORWARD</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a9870e2a5b84ce00fc47e0fd89b337495">FF_USE_STRFUNC</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a7d8e68a5699cf1ceb7ed4fdfba8e2ca0">FF_PRINT_LLI</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a81c59406fe9df657bfb6d75e409da207">FF_PRINT_FLOAT</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a6ecc215308b4ead043b2e4e513ea203e">FF_STRF_ENCODE</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a56bf522419025961acdfaf6388f40402">FF_CODE_PAGE</link>&#160;&#160;&#160;932</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ab7f7a23eae4a1de30c8198ed980f9784">FF_USE_LFN</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1adf88cd7c56034e4b94a6f2b3b83f95bf">FF_MAX_LFN</link>&#160;&#160;&#160;255</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a95aeacb103bd1c4e03b3e154e450c534">FF_LFN_UNICODE</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a7d29ac29d2d2db71cc7d045ea38fa927">FF_LFN_BUF</link>&#160;&#160;&#160;255</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ac19c6abcf1fc6e2bbf204003462cfedb">FF_SFN_BUF</link>&#160;&#160;&#160;12</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1af0d4b41a010f1a611bc6fb9e42357350">FF_FS_RPATH</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a986797546decbe8f8277802df67b3253">PICO_VFS_MAX_FAT_VOLUME</link>&#160;&#160;&#160;4</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c">FF_VOLUMES</link>&#160;&#160;&#160;<link linkend="_ffconf_8h_1a986797546decbe8f8277802df67b3253">PICO_VFS_MAX_FAT_VOLUME</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a056575130662da5bc7ac26a5b1d25838">FF_STR_VOLUME_ID</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1adf45484c0fd7a2ffe8b56f83019317d0">FF_VOLUME_STRS</link>&#160;&#160;&#160;&quot;RAM&quot;,&quot;NAND&quot;,&quot;CF&quot;,&quot;SD&quot;,&quot;SD2&quot;,&quot;USB&quot;,&quot;USB2&quot;,&quot;USB3&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a6f07d18b72c37af9fb5deda0e8a13131">FF_MULTI_PARTITION</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a5c25535bf118c111157fe72fff3cbea5">FF_MIN_SS</link>&#160;&#160;&#160;512</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>&#160;&#160;&#160;4096</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ab92e95c077afccc4d6f847cbf766e1cd">FF_LBA64</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a1f3a98483912d219d3688edfa5717949">FF_MIN_GPT</link>&#160;&#160;&#160;0x10000000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a263c9f484beef1e88f2de0a96d8dad9b">FF_USE_TRIM</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a618a0c0a1db7d420dee23ee81379c387">FF_FS_TINY</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a4374b721b8019acc9761fdd8b829ccd0">FF_FS_EXFAT</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a764a01264ff363b3217dee1f4a099c8b">PICO_VFS_NO_RTC</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ad9c1285af8f3963c253b0351558ad40d">FF_FS_NORTC</link>&#160;&#160;&#160;<link linkend="_ffconf_8h_1a764a01264ff363b3217dee1f4a099c8b">PICO_VFS_NO_RTC</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1acc2167f3af4dd4f6ec84a57a82f923dd">FF_NORTC_MON</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a1726418a7d765c3ae4da9c43d2349151">FF_NORTC_MDAY</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1aa23a9857382e458421fb87ef11ff9c63">FF_NORTC_YEAR</link>&#160;&#160;&#160;2022</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a660f7a4d681d9006004a8178f29f3c00">FF_FS_NOFSINFO</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1ab76cc3251ebd18a5c33f9f18656317f3">FF_FS_LOCK</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a42c81182eb3a8e31a4129f711ee44666">FF_FS_REENTRANT</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71">FF_FS_TIMEOUT</link>&#160;&#160;&#160;1000</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ffconf_8h_1a56bf522419025961acdfaf6388f40402"/><section>
+    <title>FF_CODE_PAGE</title>
+<indexterm><primary>FF_CODE_PAGE</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_CODE_PAGE</secondary></indexterm>
+<para><computeroutput>#define FF_CODE_PAGE&#160;&#160;&#160;932</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00087">87</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a4374b721b8019acc9761fdd8b829ccd0"/><section>
+    <title>FF_FS_EXFAT</title>
+<indexterm><primary>FF_FS_EXFAT</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_EXFAT</secondary></indexterm>
+<para><computeroutput>#define FF_FS_EXFAT&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00238">238</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ab76cc3251ebd18a5c33f9f18656317f3"/><section>
+    <title>FF_FS_LOCK</title>
+<indexterm><primary>FF_FS_LOCK</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_LOCK</secondary></indexterm>
+<para><computeroutput>#define FF_FS_LOCK&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00273">273</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a33ce7fb406e1c861aa717fc8f4864e58"/><section>
+    <title>FF_FS_MINIMIZE</title>
+<indexterm><primary>FF_FS_MINIMIZE</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_MINIMIZE</secondary></indexterm>
+<para><computeroutput>#define FF_FS_MINIMIZE&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00018">18</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a660f7a4d681d9006004a8178f29f3c00"/><section>
+    <title>FF_FS_NOFSINFO</title>
+<indexterm><primary>FF_FS_NOFSINFO</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_NOFSINFO</secondary></indexterm>
+<para><computeroutput>#define FF_FS_NOFSINFO&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00261">261</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ad9c1285af8f3963c253b0351558ad40d"/><section>
+    <title>FF_FS_NORTC</title>
+<indexterm><primary>FF_FS_NORTC</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_NORTC</secondary></indexterm>
+<para><computeroutput>#define FF_FS_NORTC&#160;&#160;&#160;<link linkend="_ffconf_8h_1a764a01264ff363b3217dee1f4a099c8b">PICO_VFS_NO_RTC</link></computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00247">247</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ac932d228331b07248a3faa6f5904a49d"/><section>
+    <title>FF_FS_READONLY</title>
+<indexterm><primary>FF_FS_READONLY</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_READONLY</secondary></indexterm>
+<para><computeroutput>#define FF_FS_READONLY&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00011">11</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a42c81182eb3a8e31a4129f711ee44666"/><section>
+    <title>FF_FS_REENTRANT</title>
+<indexterm><primary>FF_FS_REENTRANT</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_REENTRANT</secondary></indexterm>
+<para><computeroutput>#define FF_FS_REENTRANT&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00285">285</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1af0d4b41a010f1a611bc6fb9e42357350"/><section>
+    <title>FF_FS_RPATH</title>
+<indexterm><primary>FF_FS_RPATH</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_RPATH</secondary></indexterm>
+<para><computeroutput>#define FF_FS_RPATH&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00156">156</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a0f4ab16049c9d59da5ee3f503c425b71"/><section>
+    <title>FF_FS_TIMEOUT</title>
+<indexterm><primary>FF_FS_TIMEOUT</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define FF_FS_TIMEOUT&#160;&#160;&#160;1000</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00286">286</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a618a0c0a1db7d420dee23ee81379c387"/><section>
+    <title>FF_FS_TINY</title>
+<indexterm><primary>FF_FS_TINY</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_FS_TINY</secondary></indexterm>
+<para><computeroutput>#define FF_FS_TINY&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00231">231</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ab92e95c077afccc4d6f847cbf766e1cd"/><section>
+    <title>FF_LBA64</title>
+<indexterm><primary>FF_LBA64</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_LBA64</secondary></indexterm>
+<para><computeroutput>#define FF_LBA64&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00210">210</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a7d29ac29d2d2db71cc7d045ea38fa927"/><section>
+    <title>FF_LFN_BUF</title>
+<indexterm><primary>FF_LFN_BUF</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_LFN_BUF</secondary></indexterm>
+<para><computeroutput>#define FF_LFN_BUF&#160;&#160;&#160;255</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00148">148</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a95aeacb103bd1c4e03b3e154e450c534"/><section>
+    <title>FF_LFN_UNICODE</title>
+<indexterm><primary>FF_LFN_UNICODE</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_LFN_UNICODE</secondary></indexterm>
+<para><computeroutput>#define FF_LFN_UNICODE&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00136">136</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1adf88cd7c56034e4b94a6f2b3b83f95bf"/><section>
+    <title>FF_MAX_LFN</title>
+<indexterm><primary>FF_MAX_LFN</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_MAX_LFN</secondary></indexterm>
+<para><computeroutput>#define FF_MAX_LFN&#160;&#160;&#160;255</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00117">117</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc"/><section>
+    <title>FF_MAX_SS</title>
+<indexterm><primary>FF_MAX_SS</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_MAX_SS</secondary></indexterm>
+<para><computeroutput>#define FF_MAX_SS&#160;&#160;&#160;4096</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00201">201</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a1f3a98483912d219d3688edfa5717949"/><section>
+    <title>FF_MIN_GPT</title>
+<indexterm><primary>FF_MIN_GPT</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_MIN_GPT</secondary></indexterm>
+<para><computeroutput>#define FF_MIN_GPT&#160;&#160;&#160;0x10000000</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00215">215</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a5c25535bf118c111157fe72fff3cbea5"/><section>
+    <title>FF_MIN_SS</title>
+<indexterm><primary>FF_MIN_SS</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_MIN_SS</secondary></indexterm>
+<para><computeroutput>#define FF_MIN_SS&#160;&#160;&#160;512</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00200">200</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a6f07d18b72c37af9fb5deda0e8a13131"/><section>
+    <title>FF_MULTI_PARTITION</title>
+<indexterm><primary>FF_MULTI_PARTITION</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_MULTI_PARTITION</secondary></indexterm>
+<para><computeroutput>#define FF_MULTI_PARTITION&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00191">191</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a1726418a7d765c3ae4da9c43d2349151"/><section>
+    <title>FF_NORTC_MDAY</title>
+<indexterm><primary>FF_NORTC_MDAY</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_NORTC_MDAY</secondary></indexterm>
+<para><computeroutput>#define FF_NORTC_MDAY&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00249">249</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1acc2167f3af4dd4f6ec84a57a82f923dd"/><section>
+    <title>FF_NORTC_MON</title>
+<indexterm><primary>FF_NORTC_MON</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_NORTC_MON</secondary></indexterm>
+<para><computeroutput>#define FF_NORTC_MON&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00248">248</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1aa23a9857382e458421fb87ef11ff9c63"/><section>
+    <title>FF_NORTC_YEAR</title>
+<indexterm><primary>FF_NORTC_YEAR</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_NORTC_YEAR</secondary></indexterm>
+<para><computeroutput>#define FF_NORTC_YEAR&#160;&#160;&#160;2022</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00250">250</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a81c59406fe9df657bfb6d75e409da207"/><section>
+    <title>FF_PRINT_FLOAT</title>
+<indexterm><primary>FF_PRINT_FLOAT</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_PRINT_FLOAT</secondary></indexterm>
+<para><computeroutput>#define FF_PRINT_FLOAT&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00061">61</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a7d8e68a5699cf1ceb7ed4fdfba8e2ca0"/><section>
+    <title>FF_PRINT_LLI</title>
+<indexterm><primary>FF_PRINT_LLI</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_PRINT_LLI</secondary></indexterm>
+<para><computeroutput>#define FF_PRINT_LLI&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00060">60</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ac19c6abcf1fc6e2bbf204003462cfedb"/><section>
+    <title>FF_SFN_BUF</title>
+<indexterm><primary>FF_SFN_BUF</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_SFN_BUF</secondary></indexterm>
+<para><computeroutput>#define FF_SFN_BUF&#160;&#160;&#160;12</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00149">149</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a056575130662da5bc7ac26a5b1d25838"/><section>
+    <title>FF_STR_VOLUME_ID</title>
+<indexterm><primary>FF_STR_VOLUME_ID</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_STR_VOLUME_ID</secondary></indexterm>
+<para><computeroutput>#define FF_STR_VOLUME_ID&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00177">177</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a6ecc215308b4ead043b2e4e513ea203e"/><section>
+    <title>FF_STRF_ENCODE</title>
+<indexterm><primary>FF_STRF_ENCODE</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_STRF_ENCODE</secondary></indexterm>
+<para><computeroutput>#define FF_STRF_ENCODE&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00062">62</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1af22e3a349a7d2c4618fe89a8311ca8d6"/><section>
+    <title>FF_USE_CHMOD</title>
+<indexterm><primary>FF_USE_CHMOD</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_CHMOD</secondary></indexterm>
+<para><computeroutput>#define FF_USE_CHMOD&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00045">45</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a9629a453509390e34097b3268dcaac19"/><section>
+    <title>FF_USE_EXPAND</title>
+<indexterm><primary>FF_USE_EXPAND</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_EXPAND</secondary></indexterm>
+<para><computeroutput>#define FF_USE_EXPAND&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00041">41</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ac34dea7a30cf68a1f171af88fa37518a"/><section>
+    <title>FF_USE_FASTSEEK</title>
+<indexterm><primary>FF_USE_FASTSEEK</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_FASTSEEK</secondary></indexterm>
+<para><computeroutput>#define FF_USE_FASTSEEK&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00037">37</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1aa52eeffe3cb0583877e219481dd8dbdc"/><section>
+    <title>FF_USE_FIND</title>
+<indexterm><primary>FF_USE_FIND</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_FIND</secondary></indexterm>
+<para><computeroutput>#define FF_USE_FIND&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00028">28</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1abb96514dcc1016a49be66162e596a9d0"/><section>
+    <title>FF_USE_FORWARD</title>
+<indexterm><primary>FF_USE_FORWARD</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_FORWARD</secondary></indexterm>
+<para><computeroutput>#define FF_USE_FORWARD&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00055">55</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a46c839d4e87f5873f44166c7b5bf7592"/><section>
+    <title>FF_USE_LABEL</title>
+<indexterm><primary>FF_USE_LABEL</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_LABEL</secondary></indexterm>
+<para><computeroutput>#define FF_USE_LABEL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00050">50</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ab7f7a23eae4a1de30c8198ed980f9784"/><section>
+    <title>FF_USE_LFN</title>
+<indexterm><primary>FF_USE_LFN</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_LFN</secondary></indexterm>
+<para><computeroutput>#define FF_USE_LFN&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00116">116</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429"/><section>
+    <title>FF_USE_MKFS</title>
+<indexterm><primary>FF_USE_MKFS</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_MKFS</secondary></indexterm>
+<para><computeroutput>#define FF_USE_MKFS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00033">33</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a9870e2a5b84ce00fc47e0fd89b337495"/><section>
+    <title>FF_USE_STRFUNC</title>
+<indexterm><primary>FF_USE_STRFUNC</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_STRFUNC</secondary></indexterm>
+<para><computeroutput>#define FF_USE_STRFUNC&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00059">59</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a263c9f484beef1e88f2de0a96d8dad9b"/><section>
+    <title>FF_USE_TRIM</title>
+<indexterm><primary>FF_USE_TRIM</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_USE_TRIM</secondary></indexterm>
+<para><computeroutput>#define FF_USE_TRIM&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00220">220</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1adf45484c0fd7a2ffe8b56f83019317d0"/><section>
+    <title>FF_VOLUME_STRS</title>
+<indexterm><primary>FF_VOLUME_STRS</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_VOLUME_STRS</secondary></indexterm>
+<para><computeroutput>#define FF_VOLUME_STRS&#160;&#160;&#160;&quot;RAM&quot;,&quot;NAND&quot;,&quot;CF&quot;,&quot;SD&quot;,&quot;SD2&quot;,&quot;USB&quot;,&quot;USB2&quot;,&quot;USB3&quot;</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00178">178</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a2343dca8b59f249f6a88574fda8ac31c"/><section>
+    <title>FF_VOLUMES</title>
+<indexterm><primary>FF_VOLUMES</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FF_VOLUMES</secondary></indexterm>
+<para><computeroutput>#define FF_VOLUMES&#160;&#160;&#160;<link linkend="_ffconf_8h_1a986797546decbe8f8277802df67b3253">PICO_VFS_MAX_FAT_VOLUME</link></computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00173">173</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a275a34cd0d8f3b9b04ee91df269136e3"/><section>
+    <title>FFCONF_DEF</title>
+<indexterm><primary>FFCONF_DEF</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>FFCONF_DEF</secondary></indexterm>
+<para><computeroutput>#define FFCONF_DEF&#160;&#160;&#160;80286	/* Revision ID */</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00005">5</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a986797546decbe8f8277802df67b3253"/><section>
+    <title>PICO_VFS_MAX_FAT_VOLUME</title>
+<indexterm><primary>PICO_VFS_MAX_FAT_VOLUME</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>PICO_VFS_MAX_FAT_VOLUME</secondary></indexterm>
+<para><computeroutput>#define PICO_VFS_MAX_FAT_VOLUME&#160;&#160;&#160;4</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00170">170</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+<anchor xml:id="_ffconf_8h_1a764a01264ff363b3217dee1f4a099c8b"/><section>
+    <title>PICO_VFS_NO_RTC</title>
+<indexterm><primary>PICO_VFS_NO_RTC</primary><secondary>ffconf.h</secondary></indexterm>
+<indexterm><primary>ffconf.h</primary><secondary>PICO_VFS_NO_RTC</secondary></indexterm>
+<para><computeroutput>#define PICO_VFS_NO_RTC&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_ffconf_8h_source_1l00245">245</link> of file <link linkend="_ffconf_8h_source">ffconf.h</link>.</para>
+</section>
+</section>
+</section>

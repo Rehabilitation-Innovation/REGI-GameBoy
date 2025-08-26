@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/large_file/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/large_file/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;blockdevice/sd.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &lt;inttypes.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</link>&#160;&#160;&#160;(1024 * 64)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a60c86b9f8c5c91a868063fa37c36e4cd">HUGE_FILE_SIZE</link>&#160;&#160;&#160;(1U * 1024U * 1024U * 1024U)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link> (void)</para>
+
+<para>Enable predefined file systems. </para>
+</listitem>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a6b20d41d6252e9871430c242cb1a56e7"/><section>
+    <title>BUFFER_SIZE</title>
+<indexterm><primary>BUFFER_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BUFFER_SIZE</secondary></indexterm>
+<para><computeroutput>#define BUFFER_SIZE&#160;&#160;&#160;(1024 * 64)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_1l00015">15</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_1l00014">14</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a60c86b9f8c5c91a868063fa37c36e4cd"/><section>
+    <title>HUGE_FILE_SIZE</title>
+<indexterm><primary>HUGE_FILE_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>HUGE_FILE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HUGE_FILE_SIZE&#160;&#160;&#160;(1U * 1024U * 1024U * 1024U)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_1l00016">16</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_1l00155">155</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00156 &#32;&#32;&#32;&#32;stdio_init_all();
+00157 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>();
+00158 
+00159 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;10GB&#32;write/read&#32;test:\n&quot;</emphasis>);
+00160 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;1;&#32;i&#32;&lt;=&#32;10;&#32;i++)&#32;{
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;huge_file_write(i);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;huge_file_read(i);
+00163 &#32;&#32;&#32;&#32;}
+00164 
+00165 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;All&#32;tests&#32;ok\n&quot;</emphasis>));
+00166 
+00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+00169 }
+</programlisting></section>
+</section>
+</section>

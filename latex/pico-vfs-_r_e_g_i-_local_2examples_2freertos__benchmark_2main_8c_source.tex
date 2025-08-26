@@ -1,0 +1,133 @@
+\doxysection{main.\+c}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source}{}\label{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/freertos\_benchmark/main.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/freertos\_benchmark/main.c}}
+\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <FreeRTOS.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <pico/stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <portable.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <task.h>}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00015}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{00015}}\ \textcolor{preprocessor}{\#define\ BENCHMARK\_SIZE\ \ \ \ \ \ \ (0.4\ *\ 1024\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00016}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_a6b20d41d6252e9871430c242cb1a56e7}{00016}}\ \textcolor{preprocessor}{\#define\ BUFFER\_SIZE\ \ \ \ \ \ \ \ \ \ (1024\ *\ 2)}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00017}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_a971cd965dab655264ce4cd15e73dc53e}{00017}}\ \textcolor{preprocessor}{\#define\ CORE\_ACCESSING\_FLASH\ 1\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ core0}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00019}00019\ \textcolor{keyword}{static}\ uint32\_t\ xor\_rand(uint32\_t\ *seed)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00020}00020\ \ \ \ \ *seed\ \string^=\ *seed\ <<\ 13;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00021}00021\ \ \ \ \ *seed\ \string^=\ *seed\ >>\ 17;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00022}00022\ \ \ \ \ *seed\ \string^=\ *seed\ <<\ 5;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{return}\ *seed;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00026}00026\ \textcolor{keyword}{static}\ uint32\_t\ xor\_rand\_32bit(uint32\_t\ *seed)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{return}\ xor\_rand(seed);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00030}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_aaa272c4db60772f8acbadc763ca691db}{00030}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_aaa272c4db60772f8acbadc763ca691db}{benchmark\_task}}(\textcolor{keywordtype}{void}\ *p)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path\ =\ p;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00032}00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}start\ benchmark\ \%s\ on\ core\%d\(\backslash\)n"{}},\ path,\ get\_core\_num());}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00034}00034\ \ \ \ \ absolute\_time\_t\ start\_at\ =\ get\_absolute\_time();}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(path,\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}open\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00041}00041\ \ \ \ \ uint32\_t\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00042}00042\ \ \ \ \ xor\_rand(\&counter);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00043}00043\ \ \ \ \ uint8\_t\ buffer[\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remind\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{BENCHMARK\_SIZE}};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{while}\ (remind\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ chunk\ =\ remind\ \%\ \textcolor{keyword}{sizeof}(buffer)\ ?\ remind\ \%\ \textcolor{keyword}{sizeof}(buffer)\ :\ \textcolor{keyword}{sizeof}(buffer);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ uint32\_t\ *b\ =\ (uint32\_t\ *)buffer;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ (chunk\ /\ \textcolor{keyword}{sizeof}(uint32\_t));\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ b[j]\ =\ xor\_rand\_32bit(\&counter);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ ssize\_t\ write\_size\ =\ write(fd,\ buffer,\ chunk);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (write\_size\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}write\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ remind\ =\ remind\ -\/\ write\_size;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}close\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{double}\ duration\ =\ (double)absolute\_time\_diff\_us(start\_at,\ get\_absolute\_time())\ /\ 1000\ /\ 1000;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00066}00066\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Write\ \%s:\ \%.1f\ KB/s\(\backslash\)n"{}},\ path,\ (\textcolor{keywordtype}{double})(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{BENCHMARK\_SIZE}})\ /\ duration\ /\ 1024);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00069}00069\ \ \ \ \ start\_at\ =\ get\_absolute\_time();}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00070}00070\ \ \ \ \ fd\ =\ open(path,\ O\_RDONLY);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}open\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00076}00076\ \ \ \ \ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00077}00077\ \ \ \ \ xor\_rand(\&counter);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00078}00078\ \ \ \ \ remind\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{BENCHMARK\_SIZE}};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{while}\ (remind\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ chunk\ =\ remind\ \%\ \textcolor{keyword}{sizeof}(buffer)\ ?\ remind\ \%\ \textcolor{keyword}{sizeof}(buffer)\ :\ \textcolor{keyword}{sizeof}(buffer);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ ssize\_t\ read\_size\ =\ read(fd,\ buffer,\ chunk);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (read\_size\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}read\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ uint32\_t\ *b\ =\ (uint32\_t\ *)buffer;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ chunk\ /\ \textcolor{keyword}{sizeof}(uint32\_t);\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ v\ =\ xor\_rand\_32bit(\&counter);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b[j]\ !=\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}data\ mismatch\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ remind\ =\ remind\ -\/\ read\_size;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00098}00098\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}close\ error:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00103}00103\ \ \ \ \ duration\ =\ (double)absolute\_time\_diff\_us(start\_at,\ get\_absolute\_time())\ /\ 1000\ /\ 1000;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00104}00104\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Read\ \%s:\ \%.1f\ KB/s\(\backslash\)n"{}},\ path,\ (\textcolor{keywordtype}{double})(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a39dba520911d1902db3bdc3f0280df2f}{BENCHMARK\_SIZE}})\ /\ duration\ /\ 1024);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00108}00108\ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00110}00110\ \}}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00112}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{00112}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00113}00113\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00114}00114\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}();}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00115}00115\ \ \ \ \ printf(\textcolor{stringliteral}{"{}FreeRTOS\ benchmark\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00117}00117\ \ \ \ \ xTaskCreate(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_aaa272c4db60772f8acbadc763ca691db}{benchmark\_task}},\ \textcolor{stringliteral}{"{}SD\ Card"{}},\ 1024*1,\ \textcolor{stringliteral}{"{}/sd/benchmark"{}},\ 1,\ NULL);}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00119}00119\ \ \ \ \ TaskHandle\_t\ task\_handle;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00120}00120\ \ \ \ \ xTaskCreate(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_aaa272c4db60772f8acbadc763ca691db}{benchmark\_task}},\ \textcolor{stringliteral}{"{}flash"{}},\ 1024*1,\ \textcolor{stringliteral}{"{}/flash/benchmark"{}},\ 1,\ \&(task\_handle));}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00121}00121\ \ \ \ \ vTaskCoreAffinitySet(task\_handle,\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_a971cd965dab655264ce4cd15e73dc53e}{CORE\_ACCESSING\_FLASH}});}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00123}00123\ \ \ \ \ vTaskStartScheduler();}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2freertos__benchmark_2main_8c_source_l00127}00127\ \}}
+
+\end{DoxyCode}

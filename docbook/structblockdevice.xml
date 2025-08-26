@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structblockdevice" xml:lang="en-US">
+<title>blockdevice Struct Reference</title>
+<indexterm><primary>blockdevice</primary></indexterm>
+<para>
+
+<para>block device abstract object </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;blockdevice.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>int(* <link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device, const void *buffer, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device, const void *buffer, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>(* <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link> )(struct <link linkend="_structblockdevice">blockdevice</link> *device)</para>
+</listitem>
+            <listitem><para>size_t <link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link></para>
+</listitem>
+            <listitem><para>size_t <link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link></para>
+</listitem>
+            <listitem><para>size_t <link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link></para>
+</listitem>
+            <listitem><para>const char * <link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link></para>
+</listitem>
+            <listitem><para>void * <link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>block device abstract object </para>
+
+
+
+<para>All block device objects implement <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> </para>
+<para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00032">32</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0"/><section>
+    <title>config</title>
+<indexterm><primary>config</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>config</secondary></indexterm>
+<para><computeroutput>void* blockdevice::config</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00045">45</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3"/><section>
+    <title>deinit</title>
+<indexterm><primary>deinit</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>deinit</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::deinit) (struct <link linkend="_structblockdevice">blockdevice</link> *device)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00034">34</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196"/><section>
+    <title>erase</title>
+<indexterm><primary>erase</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>erase</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::erase) (struct <link linkend="_structblockdevice">blockdevice</link> *device, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00038">38</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3"/><section>
+    <title>erase_size</title>
+<indexterm><primary>erase_size</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>erase_size</secondary></indexterm>
+<para><computeroutput>size_t blockdevice::erase_size</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00042">42</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35"/><section>
+    <title>init</title>
+<indexterm><primary>init</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::init) (struct <link linkend="_structblockdevice">blockdevice</link> *device)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00033">33</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0"/><section>
+    <title>is_initialized</title>
+<indexterm><primary>is_initialized</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>is_initialized</secondary></indexterm>
+<para><computeroutput>bool blockdevice::is_initialized</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00046">46</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d"/><section>
+    <title>name</title>
+<indexterm><primary>name</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>const char* blockdevice::name</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00044">44</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822"/><section>
+    <title>program</title>
+<indexterm><primary>program</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>program</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::program) (struct <link linkend="_structblockdevice">blockdevice</link> *device, const void *buffer, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00037">37</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98"/><section>
+    <title>program_size</title>
+<indexterm><primary>program_size</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>program_size</secondary></indexterm>
+<para><computeroutput>size_t blockdevice::program_size</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00043">43</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1ae4801dd67b1481ac013520098523988e"/><section>
+    <title>read</title>
+<indexterm><primary>read</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>read</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::read) (struct <link linkend="_structblockdevice">blockdevice</link> *device, const void *buffer, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00036">36</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d"/><section>
+    <title>read_size</title>
+<indexterm><primary>read_size</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>read_size</secondary></indexterm>
+<para><computeroutput>size_t blockdevice::read_size</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00041">41</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1abba40bbe04d3a88d270634a788249477"/><section>
+    <title>size</title>
+<indexterm><primary>size</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>size</secondary></indexterm>
+<para><computeroutput><link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>(* blockdevice::size) (struct <link linkend="_structblockdevice">blockdevice</link> *device)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00040">40</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee"/><section>
+    <title>sync</title>
+<indexterm><primary>sync</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>sync</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::sync) (struct <link linkend="_structblockdevice">blockdevice</link> *device)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00035">35</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<anchor xml:id="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf"/><section>
+    <title>trim</title>
+<indexterm><primary>trim</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>trim</secondary></indexterm>
+<para><computeroutput>int(* blockdevice::trim) (struct <link linkend="_structblockdevice">blockdevice</link> *device, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> addr, <link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link> <link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>)</computeroutput></para><para>
+Definition at line <link linkend="_blockdevice_8h_source_1l00039">39</link> of file <link linkend="_blockdevice_8h_source">blockdevice.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/include/blockdevice/<link linkend="_blockdevice_8h">blockdevice.h</link></section>
+</section>

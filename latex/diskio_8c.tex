@@ -1,0 +1,288 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/source/diskio.c File Reference}
+\hypertarget{diskio_8c}{}\label{diskio_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/diskio.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/diskio.c}}
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+{\ttfamily \#include "{}diskio.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\+\_\+\+RAM}}~0 /\texorpdfstring{$\ast$}{*} Example\+: Map Ramdisk to physical drive 0 \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\+\_\+\+MMC}}~1 /\texorpdfstring{$\ast$}{*} Example\+: Map MMC/SD card to physical drive 1 \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\+\_\+\+USB}}~2 /\texorpdfstring{$\ast$}{*} Example\+: Map USB MSD to physical drive 2 \texorpdfstring{$\ast$}{*}/
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} \mbox{\hyperlink{diskio_8c_a8348ac5ee6d709420c02e45c111f4793}{disk\+\_\+status}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv)
+\item 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} \mbox{\hyperlink{diskio_8c_a09cdaa6f36fa409bdf002727bff98eb1}{disk\+\_\+initialize}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{diskio_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\+\_\+read}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}} sector, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} count)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{diskio_8c_ac24448955ef914f54a499df1fb45689d}{disk\+\_\+write}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, const \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}} sector, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} count)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{diskio_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\+\_\+ioctl}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} cmd, void \texorpdfstring{$\ast$}{*}buff)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{diskio_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{diskio_8c_afb573038812261a67140d1c63f57dd3e}\index{diskio.c@{diskio.c}!DEV\_MMC@{DEV\_MMC}}
+\index{DEV\_MMC@{DEV\_MMC}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{DEV\_MMC}{DEV\_MMC}}
+{\footnotesize\ttfamily \label{diskio_8c_afb573038812261a67140d1c63f57dd3e} 
+\#define DEV\+\_\+\+MMC~1 /\texorpdfstring{$\ast$}{*} Example\+: Map MMC/SD card to physical drive 1 \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00015}{15}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+\Hypertarget{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}\index{diskio.c@{diskio.c}!DEV\_RAM@{DEV\_RAM}}
+\index{DEV\_RAM@{DEV\_RAM}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{DEV\_RAM}{DEV\_RAM}}
+{\footnotesize\ttfamily \label{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628} 
+\#define DEV\+\_\+\+RAM~0 /\texorpdfstring{$\ast$}{*} Example\+: Map Ramdisk to physical drive 0 \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00014}{14}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+\Hypertarget{diskio_8c_a2e6996059106c1996a24d883954c43cd}\index{diskio.c@{diskio.c}!DEV\_USB@{DEV\_USB}}
+\index{DEV\_USB@{DEV\_USB}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{DEV\_USB}{DEV\_USB}}
+{\footnotesize\ttfamily \label{diskio_8c_a2e6996059106c1996a24d883954c43cd} 
+\#define DEV\+\_\+\+USB~2 /\texorpdfstring{$\ast$}{*} Example\+: Map USB MSD to physical drive 2 \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00016}{16}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{diskio_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{diskio_8c_a09cdaa6f36fa409bdf002727bff98eb1}\index{diskio.c@{diskio.c}!disk\_initialize@{disk\_initialize}}
+\index{disk\_initialize@{disk\_initialize}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{disk\_initialize()}{disk\_initialize()}}
+{\footnotesize\ttfamily \label{diskio_8c_a09cdaa6f36fa409bdf002727bff98eb1} 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} disk\+\_\+initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00061}{61}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ stat;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{int}\ result;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pdrv)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\_RAM}}\ :}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ result\ =\ RAM\_disk\_initialize();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\_MMC}}\ :}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ result\ =\ MMC\_disk\_initialize();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\_USB}}\ :}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ result\ =\ USB\_disk\_initialize();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_abd6503c70d862b979a3f7080a59e9acd}{STA\_NOINIT}};}
+\DoxyCodeLine{00091\ \}}
+
+\end{DoxyCode}
+\Hypertarget{diskio_8c_ab00fa450a811dbdabe3c655c1a36fab4}\index{diskio.c@{diskio.c}!disk\_ioctl@{disk\_ioctl}}
+\index{disk\_ioctl@{disk\_ioctl}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{disk\_ioctl()}{disk\_ioctl()}}
+{\footnotesize\ttfamily \label{diskio_8c_ab00fa450a811dbdabe3c655c1a36fab4} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+ioctl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{cmd}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buff}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00198}{198}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00203\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ res;}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{int}\ result;}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pdrv)\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\_RAM}}\ :}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ of\ the\ command\ for\ the\ RAM\ drive}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\_MMC}}\ :}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ of\ the\ command\ for\ the\ MMC/SD\ card}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\_USB}}\ :}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ of\ the\ command\ the\ USB\ drive}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00225\ \ \ \ \ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00228\ \}}
+
+\end{DoxyCode}
+\Hypertarget{diskio_8c_a0711b1d03b833e9d73b3be1a6397f461}\index{diskio.c@{diskio.c}!disk\_read@{disk\_read}}
+\index{disk\_read@{disk\_read}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{disk\_read()}{disk\_read()}}
+{\footnotesize\ttfamily \label{diskio_8c_a0711b1d03b833e9d73b3be1a6397f461} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}}}]{sector}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00099}{99}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00105\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ res;}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{int}\ result;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pdrv)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\_RAM}}\ :}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ result\ =\ RAM\_disk\_read(buff,\ sector,\ count);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\_MMC}}\ :}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ result\ =\ MMC\_disk\_read(buff,\ sector,\ count);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\_USB}}\ :}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ result\ =\ USB\_disk\_read(buff,\ sector,\ count);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00139\ \}}
+
+\end{DoxyCode}
+\Hypertarget{diskio_8c_a8348ac5ee6d709420c02e45c111f4793}\index{diskio.c@{diskio.c}!disk\_status@{disk\_status}}
+\index{disk\_status@{disk\_status}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{disk\_status()}{disk\_status()}}
+{\footnotesize\ttfamily \label{diskio_8c_a8348ac5ee6d709420c02e45c111f4793} 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} disk\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00023}{23}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ stat;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ result;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pdrv)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\_RAM}}\ :}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ result\ =\ RAM\_disk\_status();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\_MMC}}\ :}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ result\ =\ MMC\_disk\_status();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\_USB}}\ :}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ result\ =\ USB\_disk\_status();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stat;}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_abd6503c70d862b979a3f7080a59e9acd}{STA\_NOINIT}};}
+\DoxyCodeLine{00053\ \}}
+
+\end{DoxyCode}
+\Hypertarget{diskio_8c_ac24448955ef914f54a499df1fb45689d}\index{diskio.c@{diskio.c}!disk\_write@{disk\_write}}
+\index{disk\_write@{disk\_write}!diskio.c@{diskio.c}}
+\doxysubsubsection{\texorpdfstring{disk\_write()}{disk\_write()}}
+{\footnotesize\ttfamily \label{diskio_8c_ac24448955ef914f54a499df1fb45689d} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{const \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}}}]{sector}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{diskio_8c_source_l00149}{149}} of file \mbox{\hyperlink{diskio_8c_source}{diskio.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ res;}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{int}\ result;}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pdrv)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a76fb0c5f09176e9b4a8d773e525fe628}{DEV\_RAM}}\ :}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ result\ =\ RAM\_disk\_write(buff,\ sector,\ count);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_afb573038812261a67140d1c63f57dd3e}{DEV\_MMC}}\ :}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ result\ =\ MMC\_disk\_write(buff,\ sector,\ count);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8c_a2e6996059106c1996a24d883954c43cd}{DEV\_USB}}\ :}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ arguments\ here}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ result\ =\ USB\_disk\_write(buff,\ sector,\ count);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ translate\ the\ reslut\ code\ here}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00189\ \}}
+
+\end{DoxyCode}

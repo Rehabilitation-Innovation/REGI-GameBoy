@@ -1,0 +1,110 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/host/test\+\_\+blockdevice.c File Reference}
+\hypertarget{host_2test__blockdevice_8c}{}\label{host_2test__blockdevice_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/host/test\_blockdevice.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/host/test\_blockdevice.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/heap.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{host_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\+\_\+\+STORAGE\+\_\+\+SIZE}}~(64 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{host_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}{LOOPBACK\+\_\+\+STORAGE\+\_\+\+SIZE}}~1024
+\item 
+\#define \mbox{\hyperlink{host_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11}{LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE}}~512
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{host_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}{test\+\_\+blockdevice}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{host_2test__blockdevice_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_blockdevice.c@{test\_blockdevice.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{host_2test__blockdevice_8c_source_l00008}{8}} of file \mbox{\hyperlink{host_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{host_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}\index{test\_blockdevice.c@{test\_blockdevice.c}!HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}}
+\index{HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{HEAP\_STORAGE\_SIZE}{HEAP\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{host_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae} 
+\#define HEAP\+\_\+\+STORAGE\+\_\+\+SIZE~(64 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{host_2test__blockdevice_8c_source_l00009}{9}} of file \mbox{\hyperlink{host_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{host_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11}\index{test\_blockdevice.c@{test\_blockdevice.c}!LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}}
+\index{LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_BLOCK\_SIZE}{LOOPBACK\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \label{host_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11} 
+\#define LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE~512}
+
+
+
+Definition at line \mbox{\hyperlink{host_2test__blockdevice_8c_source_l00011}{11}} of file \mbox{\hyperlink{host_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{host_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}\index{test\_blockdevice.c@{test\_blockdevice.c}!LOOPBACK\_STORAGE\_SIZE@{LOOPBACK\_STORAGE\_SIZE}}
+\index{LOOPBACK\_STORAGE\_SIZE@{LOOPBACK\_STORAGE\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_STORAGE\_SIZE}{LOOPBACK\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{host_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4} 
+\#define LOOPBACK\+\_\+\+STORAGE\+\_\+\+SIZE~1024}
+
+
+
+Definition at line \mbox{\hyperlink{host_2test__blockdevice_8c_source_l00010}{10}} of file \mbox{\hyperlink{host_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{host_2test__blockdevice_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{host_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}\index{test\_blockdevice.c@{test\_blockdevice.c}!test\_blockdevice@{test\_blockdevice}}
+\index{test\_blockdevice@{test\_blockdevice}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{test\_blockdevice()}{test\_blockdevice()}}
+{\footnotesize\ttfamily \label{host_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6} 
+void test\+\_\+blockdevice (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{host_2test__blockdevice_8c_source_l00139}{139}} of file \mbox{\hyperlink{host_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ Heap\ memory:\(\backslash\)n"{}});}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00142\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00143\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ test\_api\_init(heap);}
+\DoxyCodeLine{00146\ \ \ \ \ test\_api\_erase\_program\_read(heap);}
+\DoxyCodeLine{00147\ \ \ \ \ test\_api\_trim(heap);}
+\DoxyCodeLine{00148\ \ \ \ \ test\_api\_sync(heap);}
+\DoxyCodeLine{00149\ \ \ \ \ test\_api\_size(heap);}
+\DoxyCodeLine{00150\ \ \ \ \ test\_api\_attribute(heap);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00154\ \}}
+
+\end{DoxyCode}

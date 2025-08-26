@@ -1,0 +1,816 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/test\+\_\+standard.c File Reference}
+\hypertarget{test__standard_8c}{}\label{test__standard_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_standard.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_standard.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$wchar.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/heap.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{test__standard_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\+\_\+\+STORAGE\+\_\+\+SIZE}}~(128 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{test__standard_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE}}~500
+\item 
+\#define \mbox{\hyperlink{test__standard_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE}}~16
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__standard_8c_a3f1e3a1e92719c977ba5c770a5ba9e0c}{test\+\_\+remove}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_adc51af22a8ada57efbc3181ef68e9641}{test\+\_\+rename}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ab538e4b167eb4d7afcdcb787139043b0}{test\+\_\+rewind}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a2c3ad47e27f2f5b7faef1b166d42e27b}{test\+\_\+setbuf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_aea730026673818d647b9131ba3c4611e}{test\+\_\+setvbuf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a989c49685fb7c6f781d6f17cf2e2bdd7}{test\+\_\+fprintf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_aa77be1b41c24fb892ee5a84c4b43bb85}{test\+\_\+fscanf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ad0767e68998cd2d0a4580b4e665173e4}{test\+\_\+fwprintf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_abbc013f8a99493a073666b2322bf6c95}{test\+\_\+fwscanf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a534f2453f80273e67167271ef3b73b94}{test\+\_\+tmpfile}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ac63aa1a607494e187c8dfccf50300d72}{test\+\_\+tmpnam}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ac28e570801f42ebf376f34e57ebab630}{test\+\_\+ungetc}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a06b0ce5e9064644d94a478cf56270e6a}{test\+\_\+ungetwc}} (void)
+\item 
+int \mbox{\hyperlink{test__standard_8c_ad0d9f637977ba7dc073049a1e937a32a}{\+\_\+test\+\_\+vfprintf}} (FILE \texorpdfstring{$\ast$}{*}fp, const char \texorpdfstring{$\ast$}{*}format,...)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ace180f5d1e8a9f00c162e4371c9ece9b}{test\+\_\+vfprintf}} (void)
+\item 
+int \mbox{\hyperlink{test__standard_8c_a273e209c9162f768d8dc867f34c5d934}{\+\_\+test\+\_\+vfscanf}} (FILE \texorpdfstring{$\ast$}{*}fp, const char \texorpdfstring{$\ast$}{*}format,...)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a6ef2ab3300dad6febf40abdefbbfe5ca}{test\+\_\+vfscanf}} (void)
+\item 
+int \mbox{\hyperlink{test__standard_8c_ac3795d88f0f9f696f096bd2db0067d6c}{\+\_\+test\+\_\+vfwscanf}} (FILE \texorpdfstring{$\ast$}{*}fp, const wchar\+\_\+t \texorpdfstring{$\ast$}{*}format,...)
+\item 
+void \mbox{\hyperlink{test__standard_8c_aac55667f213bea843fc65ef35a65c135}{test\+\_\+vfwscanf}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_a9eb7b08d8b095f5a1fea041c1bc13e96}{test\+\_\+standard\+\_\+file\+\_\+api}} (void)
+\item 
+void \mbox{\hyperlink{test__standard_8c_ab711b6669c9731b7099653fa536722ae}{test\+\_\+standard}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{test__standard_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_standard.c@{test\_standard.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00012}{12}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+\Hypertarget{test__standard_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}\index{test\_standard.c@{test\_standard.c}!HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}}
+\index{HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{HEAP\_STORAGE\_SIZE}{HEAP\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{test__standard_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae} 
+\#define HEAP\+\_\+\+STORAGE\+\_\+\+SIZE~(128 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00013}{13}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+\Hypertarget{test__standard_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}\index{test\_standard.c@{test\_standard.c}!LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}}
+\index{LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_BLOCK\_CYCLE}{LITTLEFS\_BLOCK\_CYCLE}}
+{\footnotesize\ttfamily \label{test__standard_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d} 
+\#define LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE~500}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00014}{14}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+\Hypertarget{test__standard_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}\index{test\_standard.c@{test\_standard.c}!LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}}
+\index{LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_LOOKAHEAD\_SIZE}{LITTLEFS\_LOOKAHEAD\_SIZE}}
+{\footnotesize\ttfamily \label{test__standard_8c_a73694eeb2680f0f6e6fa72fcd0ad458d} 
+\#define LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE~16}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00015}{15}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{test__standard_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{test__standard_8c_ad0d9f637977ba7dc073049a1e937a32a}\index{test\_standard.c@{test\_standard.c}!\_test\_vfprintf@{\_test\_vfprintf}}
+\index{\_test\_vfprintf@{\_test\_vfprintf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{\_test\_vfprintf()}{\_test\_vfprintf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ad0d9f637977ba7dc073049a1e937a32a} 
+int \+\_\+test\+\_\+vfprintf (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00858}{858}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00859\ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{00860\ \ \ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{00861\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ vfprintf(fp,\ format,\ args);}
+\DoxyCodeLine{00862\ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{00863\ \ \ \ \ \textcolor{keywordflow}{return}\ size;}
+\DoxyCodeLine{00864\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a273e209c9162f768d8dc867f34c5d934}\index{test\_standard.c@{test\_standard.c}!\_test\_vfscanf@{\_test\_vfscanf}}
+\index{\_test\_vfscanf@{\_test\_vfscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{\_test\_vfscanf()}{\_test\_vfscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a273e209c9162f768d8dc867f34c5d934} 
+int \+\_\+test\+\_\+vfscanf (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00886}{886}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00887\ \ \ \ \ va\_list\ list;}
+\DoxyCodeLine{00888\ \ \ \ \ va\_start(list,\ format);}
+\DoxyCodeLine{00889\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ vfscanf(fp,\ format,\ list);}
+\DoxyCodeLine{00890\ \ \ \ \ va\_end(list);}
+\DoxyCodeLine{00891\ \ \ \ \ \textcolor{keywordflow}{return}\ size;}
+\DoxyCodeLine{00892\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ac3795d88f0f9f696f096bd2db0067d6c}\index{test\_standard.c@{test\_standard.c}!\_test\_vfwscanf@{\_test\_vfwscanf}}
+\index{\_test\_vfwscanf@{\_test\_vfwscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{\_test\_vfwscanf()}{\_test\_vfwscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ac3795d88f0f9f696f096bd2db0067d6c} 
+int \+\_\+test\+\_\+vfwscanf (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{const wchar\+\_\+t \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00913}{913}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00914\ \ \ \ \ va\_list\ list;}
+\DoxyCodeLine{00915\ \ \ \ \ va\_start(list,\ format);}
+\DoxyCodeLine{00916\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ vfwscanf(fp,\ format,\ list);}
+\DoxyCodeLine{00917\ \ \ \ \ va\_end(list);}
+\DoxyCodeLine{00918\ \ \ \ \ \textcolor{keywordflow}{return}\ size;}
+\DoxyCodeLine{00919\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a989c49685fb7c6f781d6f17cf2e2bdd7}\index{test\_standard.c@{test\_standard.c}!test\_fprintf@{test\_fprintf}}
+\index{test\_fprintf@{test\_fprintf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_fprintf()}{test\_fprintf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a989c49685fb7c6f781d6f17cf2e2bdd7} 
+void test\+\_\+fprintf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00724}{724}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00725\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fprintf"{}});}
+\DoxyCodeLine{00726\ }
+\DoxyCodeLine{00727\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/fprintf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00728\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}\%s"{}},\ \textcolor{stringliteral}{"{}Hello\ World"{}});}
+\DoxyCodeLine{00729\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00730\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[512];}
+\DoxyCodeLine{00731\ \ \ \ \ fgets(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ fp);}
+\DoxyCodeLine{00732\ \ \ \ \ assert(strcmp(buffer,\ \textcolor{stringliteral}{"{}Hello\ World"{}})\ ==\ 0);}
+\DoxyCodeLine{00733\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00734\ }
+\DoxyCodeLine{00735\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00736\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_aa77be1b41c24fb892ee5a84c4b43bb85}\index{test\_standard.c@{test\_standard.c}!test\_fscanf@{test\_fscanf}}
+\index{test\_fscanf@{test\_fscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_fscanf()}{test\_fscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_aa77be1b41c24fb892ee5a84c4b43bb85} 
+void test\+\_\+fscanf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00738}{738}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00739\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fscanf"{}});}
+\DoxyCodeLine{00740\ }
+\DoxyCodeLine{00741\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/fscanf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00742\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}\%s"{}},\ \textcolor{stringliteral}{"{}123,abc,0.987\(\backslash\)n"{}});}
+\DoxyCodeLine{00743\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00744\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_value\ =\ 0;}
+\DoxyCodeLine{00745\ \ \ \ \ \textcolor{keywordtype}{char}\ strings[512];}
+\DoxyCodeLine{00746\ \ \ \ \ \textcolor{keywordtype}{float}\ float\_value\ =\ 0.0;}
+\DoxyCodeLine{00747\ }
+\DoxyCodeLine{00748\ \ \ \ \ \textcolor{keywordtype}{int}\ assigned\ =\ fscanf(fp,\ \textcolor{stringliteral}{"{}\%d,\%[\string^,],\%f\(\backslash\)n"{}},\ \&int\_value,\ strings,\ \&float\_value);}
+\DoxyCodeLine{00749\ \ \ \ \ assert(assigned\ ==\ 3);}
+\DoxyCodeLine{00750\ \ \ \ \ assert(int\_value\ ==\ 123);}
+\DoxyCodeLine{00751\ \ \ \ \ assert(strcmp(strings,\ \textcolor{stringliteral}{"{}abc"{}})\ ==\ 0);}
+\DoxyCodeLine{00752\ \ \ \ \ assert(float\_value\ <\ 1.0);}
+\DoxyCodeLine{00753\ }
+\DoxyCodeLine{00754\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00755\ }
+\DoxyCodeLine{00756\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00757\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ad0767e68998cd2d0a4580b4e665173e4}\index{test\_standard.c@{test\_standard.c}!test\_fwprintf@{test\_fwprintf}}
+\index{test\_fwprintf@{test\_fwprintf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_fwprintf()}{test\_fwprintf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ad0767e68998cd2d0a4580b4e665173e4} 
+void test\+\_\+fwprintf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00759}{759}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00760\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fwprintf"{}});}
+\DoxyCodeLine{00761\ }
+\DoxyCodeLine{00762\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/fwprintf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00763\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ fwprintf(fp,\ L\textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}});}
+\DoxyCodeLine{00764\ \ \ \ \ assert(size\ ==\ 12);}
+\DoxyCodeLine{00765\ }
+\DoxyCodeLine{00766\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00767\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00768\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ buffer[512];}
+\DoxyCodeLine{00769\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *line\ =\ fgetws(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ fp);}
+\DoxyCodeLine{00770\ \ \ \ \ assert(wcscmp(line,\ L\textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}})\ ==\ 0);}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00773\ }
+\DoxyCodeLine{00774\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00775\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_abbc013f8a99493a073666b2322bf6c95}\index{test\_standard.c@{test\_standard.c}!test\_fwscanf@{test\_fwscanf}}
+\index{test\_fwscanf@{test\_fwscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_fwscanf()}{test\_fwscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_abbc013f8a99493a073666b2322bf6c95} 
+void test\+\_\+fwscanf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00777}{777}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00778\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fwscanf"{}});}
+\DoxyCodeLine{00779\ }
+\DoxyCodeLine{00780\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/fwscanf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00781\ \ \ \ \ fwprintf(fp,\ L\textcolor{stringliteral}{"{}123,abc,0.987\(\backslash\)n"{}});}
+\DoxyCodeLine{00782\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00783\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_value\ =\ 0;}
+\DoxyCodeLine{00784\ \ \ \ \ \textcolor{keywordtype}{char}\ strings[512];}
+\DoxyCodeLine{00785\ \ \ \ \ \textcolor{keywordtype}{float}\ float\_value\ =\ 0.0;}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00787\ \ \ \ \ \textcolor{keywordtype}{int}\ assigned\ =\ fwscanf(fp,\ L\textcolor{stringliteral}{"{}\%d,\%[\string^,],\%f\(\backslash\)n"{}},\ \&int\_value,\ strings,\ \&float\_value);}
+\DoxyCodeLine{00788\ \ \ \ \ assert(assigned\ ==\ 3);}
+\DoxyCodeLine{00789\ \ \ \ \ assert(int\_value\ ==\ 123);}
+\DoxyCodeLine{00790\ \ \ \ \ assert(strcmp(strings,\ \textcolor{stringliteral}{"{}abc"{}})\ ==\ 0);}
+\DoxyCodeLine{00791\ \ \ \ \ assert(float\_value\ <\ 1.0);}
+\DoxyCodeLine{00792\ }
+\DoxyCodeLine{00793\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00795\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00796\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a3f1e3a1e92719c977ba5c770a5ba9e0c}\index{test\_standard.c@{test\_standard.c}!test\_remove@{test\_remove}}
+\index{test\_remove@{test\_remove}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_remove()}{test\_remove()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a3f1e3a1e92719c977ba5c770a5ba9e0c} 
+void test\+\_\+remove (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00598}{598}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00599\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}remove"{}});}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/remove"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00602\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00603\ }
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ remove(\textcolor{stringliteral}{"{}/remove"{}});}
+\DoxyCodeLine{00605\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00606\ }
+\DoxyCodeLine{00607\ \ \ \ \ err\ =\ remove(\textcolor{stringliteral}{"{}/not-\/exists"{}});}
+\DoxyCodeLine{00608\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{00609\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{00610\ }
+\DoxyCodeLine{00611\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00612\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_adc51af22a8ada57efbc3181ef68e9641}\index{test\_standard.c@{test\_standard.c}!test\_rename@{test\_rename}}
+\index{test\_rename@{test\_rename}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_rename()}{test\_rename()}}
+{\footnotesize\ttfamily \label{test__standard_8c_adc51af22a8ada57efbc3181ef68e9641} 
+void test\+\_\+rename (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00614}{614}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00615\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}rename"{}});}
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00617\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/rename"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00618\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}}(\textcolor{stringliteral}{"{}/rename"{}},\ \textcolor{stringliteral}{"{}/renamed"{}});}
+\DoxyCodeLine{00621\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}}(\textcolor{stringliteral}{"{}/not-\/exists"{}},\ \textcolor{stringliteral}{"{}/renamed"{}});}
+\DoxyCodeLine{00624\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{00625\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{00626\ }
+\DoxyCodeLine{00627\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00628\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ab538e4b167eb4d7afcdcb787139043b0}\index{test\_standard.c@{test\_standard.c}!test\_rewind@{test\_rewind}}
+\index{test\_rewind@{test\_rewind}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_rewind()}{test\_rewind()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ab538e4b167eb4d7afcdcb787139043b0} 
+void test\+\_\+rewind (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00630}{630}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00631\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}rewind"{}});}
+\DoxyCodeLine{00632\ }
+\DoxyCodeLine{00633\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/rewind"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00634\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Hello\ World"{}});}
+\DoxyCodeLine{00635\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00636\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[512];}
+\DoxyCodeLine{00637\ \ \ \ \ fgets(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ fp);}
+\DoxyCodeLine{00638\ \ \ \ \ assert(strcmp(buffer,\ \textcolor{stringliteral}{"{}Hello\ World"{}})\ ==\ 0);}
+\DoxyCodeLine{00639\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00642\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a2c3ad47e27f2f5b7faef1b166d42e27b}\index{test\_standard.c@{test\_standard.c}!test\_setbuf@{test\_setbuf}}
+\index{test\_setbuf@{test\_setbuf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_setbuf()}{test\_setbuf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a2c3ad47e27f2f5b7faef1b166d42e27b} 
+void test\+\_\+setbuf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00644}{644}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00645\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}setbuf"{}});}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[BUFSIZ]\ =\ \{0\};}
+\DoxyCodeLine{00648\ }
+\DoxyCodeLine{00649\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/setbuf"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00650\ \ \ \ \ setbuf(fp,\ buffer);}
+\DoxyCodeLine{00651\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}});}
+\DoxyCodeLine{00652\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00653\ \ \ \ \ assert(strcmp(buffer,\ \textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}})\ ==\ 0);}
+\DoxyCodeLine{00654\ }
+\DoxyCodeLine{00655\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00656\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_aea730026673818d647b9131ba3c4611e}\index{test\_standard.c@{test\_standard.c}!test\_setvbuf@{test\_setvbuf}}
+\index{test\_setvbuf@{test\_setvbuf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_setvbuf()}{test\_setvbuf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_aea730026673818d647b9131ba3c4611e} 
+void test\+\_\+setvbuf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00658}{658}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00659\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}setvbuf"{}});}
+\DoxyCodeLine{00660\ }
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[BUFSIZ];}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00663\ \ \ \ \ \textcolor{comment}{//\ Do\ not\ use\ a\ buffer}}
+\DoxyCodeLine{00664\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/setvbuf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00665\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ fileno(fp);}
+\DoxyCodeLine{00666\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ setvbuf(fp,\ NULL,\ \_IONBF,\ 0);}
+\DoxyCodeLine{00667\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00668\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Hello\ World"{}});}
+\DoxyCodeLine{00669\ \ \ \ \ \textcolor{keywordtype}{char}\ read\_buffer[512]\ =\ \{0\};}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00672\ \ \ \ \ ssize\_t\ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00673\ \ \ \ \ assert(size\ ==\ strlen(\textcolor{stringliteral}{"{}Hello\ World"{}}));}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00675\ \ \ \ \ close(fd);}
+\DoxyCodeLine{00676\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00677\ }
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{comment}{//\ use\ full\ output\ buffering}}
+\DoxyCodeLine{00679\ \ \ \ \ fp\ =\ fopen(\textcolor{stringliteral}{"{}/setvbuf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00680\ \ \ \ \ fd\ =\ fileno(fp);}
+\DoxyCodeLine{00681\ \ \ \ \ err\ =\ setvbuf(fp,\ buffer,\ \_IOFBF,\ 5);}
+\DoxyCodeLine{00682\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00683\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}He"{}});}
+\DoxyCodeLine{00684\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00685\ \ \ \ \ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00686\ \ \ \ \ assert(size\ ==\ 0);}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00688\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}llo\ W"{}});}
+\DoxyCodeLine{00689\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00690\ \ \ \ \ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00691\ \ \ \ \ assert(size\ ==\ strlen(\textcolor{stringliteral}{"{}Hello"{}}));}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00693\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00694\ }
+\DoxyCodeLine{00695\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00696\ \ \ \ \ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00697\ \ \ \ \ assert(size\ ==\ strlen(\textcolor{stringliteral}{"{}Hello\ W"{}}));}
+\DoxyCodeLine{00698\ }
+\DoxyCodeLine{00699\ \ \ \ \ close(fd);}
+\DoxyCodeLine{00700\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00701\ }
+\DoxyCodeLine{00702\ \ \ \ \ \textcolor{comment}{//\ use\ line\ buffering}}
+\DoxyCodeLine{00703\ \ \ \ \ fp\ =\ fopen(\textcolor{stringliteral}{"{}/setvbuf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00704\ \ \ \ \ fd\ =\ fileno(fp);}
+\DoxyCodeLine{00705\ \ \ \ \ err\ =\ setvbuf(fp,\ buffer,\ \_IOLBF,\ 128);}
+\DoxyCodeLine{00706\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00707\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{00708\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00709\ \ \ \ \ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00710\ \ \ \ \ assert(size\ ==\ 0);}
+\DoxyCodeLine{00711\ }
+\DoxyCodeLine{00712\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}\ World\(\backslash\)n"{}});}
+\DoxyCodeLine{00713\ }
+\DoxyCodeLine{00714\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{00715\ \ \ \ \ size\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{00716\ \ \ \ \ assert(size\ ==\ strlen(\textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}}));}
+\DoxyCodeLine{00717\ }
+\DoxyCodeLine{00718\ \ \ \ \ close(fd);}
+\DoxyCodeLine{00719\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00721\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00722\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ab711b6669c9731b7099653fa536722ae}\index{test\_standard.c@{test\_standard.c}!test\_standard@{test\_standard}}
+\index{test\_standard@{test\_standard}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_standard()}{test\_standard()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ab711b6669c9731b7099653fa536722ae} 
+void test\+\_\+standard (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00991}{991}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00992\ \ \ \ \ printf(\textcolor{stringliteral}{"{}POSIX\ and\ C\ standard\ file\ API(littlefs):\(\backslash\)n"{}});}
+\DoxyCodeLine{00993\ }
+\DoxyCodeLine{00994\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00995\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{00996\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{00997\ }
+\DoxyCodeLine{00998\ \ \ \ \ setup(lfs,\ heap);}
+\DoxyCodeLine{00999\ }
+\DoxyCodeLine{01000\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a9eb7b08d8b095f5a1fea041c1bc13e96}{test\_standard\_file\_api}}();}
+\DoxyCodeLine{01001\ }
+\DoxyCodeLine{01002\ \ \ \ \ cleanup(lfs,\ heap);}
+\DoxyCodeLine{01003\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{01004\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{01005\ }
+\DoxyCodeLine{01006\ }
+\DoxyCodeLine{01007\ \ \ \ \ printf(\textcolor{stringliteral}{"{}POSIX\ and\ C\ standard\ file\ API(FAT):\(\backslash\)n"{}});}
+\DoxyCodeLine{01008\ }
+\DoxyCodeLine{01009\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{01010\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{01011\ \ \ \ \ setup(fat,\ heap);}
+\DoxyCodeLine{01012\ }
+\DoxyCodeLine{01013\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a9eb7b08d8b095f5a1fea041c1bc13e96}{test\_standard\_file\_api}}();}
+\DoxyCodeLine{01014\ }
+\DoxyCodeLine{01015\ \ \ \ \ cleanup(fat,\ heap);}
+\DoxyCodeLine{01016\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{01017\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{01018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a9eb7b08d8b095f5a1fea041c1bc13e96}\index{test\_standard.c@{test\_standard.c}!test\_standard\_file\_api@{test\_standard\_file\_api}}
+\index{test\_standard\_file\_api@{test\_standard\_file\_api}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_standard\_file\_api()}{test\_standard\_file\_api()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a9eb7b08d8b095f5a1fea041c1bc13e96} 
+void test\+\_\+standard\+\_\+file\+\_\+api (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00941}{941}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00942\ \ \ \ \ test\_clearerr();}
+\DoxyCodeLine{00943\ \ \ \ \ test\_fflush();}
+\DoxyCodeLine{00944\ \ \ \ \ test\_fgetc();}
+\DoxyCodeLine{00945\ \ \ \ \ test\_fgetpos();}
+\DoxyCodeLine{00946\ \ \ \ \ test\_fgets();}
+\DoxyCodeLine{00947\ \ \ \ \ test\_fgetwc();}
+\DoxyCodeLine{00948\ \ \ \ \ test\_fgetws();}
+\DoxyCodeLine{00949\ \ \ \ \ test\_fileno();}
+\DoxyCodeLine{00950\ \ \ \ \ test\_fmemopen();}
+\DoxyCodeLine{00951\ \ \ \ \ test\_fopen();}
+\DoxyCodeLine{00952\ \ \ \ \ test\_fputc();}
+\DoxyCodeLine{00953\ \ \ \ \ test\_fputs();}
+\DoxyCodeLine{00954\ \ \ \ \ test\_fputwc();}
+\DoxyCodeLine{00955\ \ \ \ \ test\_fputws();}
+\DoxyCodeLine{00956\ \ \ \ \ test\_fread();}
+\DoxyCodeLine{00957\ \ \ \ \ test\_freopen();}
+\DoxyCodeLine{00958\ \ \ \ \ test\_fseek();}
+\DoxyCodeLine{00959\ \ \ \ \ test\_fsetpos();}
+\DoxyCodeLine{00960\ \ \ \ \ test\_ftell();}
+\DoxyCodeLine{00961\ \ \ \ \ test\_fwide();}
+\DoxyCodeLine{00962\ \ \ \ \ test\_fwrite();}
+\DoxyCodeLine{00963\ \ \ \ \ test\_getc();}
+\DoxyCodeLine{00964\ \ \ \ \ \textcolor{comment}{//test\_getdelim();\ \ //\ not\ support}}
+\DoxyCodeLine{00965\ \ \ \ \ \textcolor{comment}{//test\_getline();\ \ //\ not\ support}}
+\DoxyCodeLine{00966\ \ \ \ \ test\_getw();}
+\DoxyCodeLine{00967\ \ \ \ \ \textcolor{comment}{//test\_mktemp();\ \ //\ NOTE:\ \`{}mktemp'\ is\ dangerous;\ use\ \`{}mkstemp'\ instead}}
+\DoxyCodeLine{00968\ \ \ \ \ test\_mkstemp();}
+\DoxyCodeLine{00969\ \ \ \ \ test\_open\_memstream();}
+\DoxyCodeLine{00970\ \ \ \ \ test\_perror();}
+\DoxyCodeLine{00971\ \ \ \ \ test\_putc();}
+\DoxyCodeLine{00972\ \ \ \ \ \textcolor{comment}{//test\_putc\_unlocked();}}
+\DoxyCodeLine{00973\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a3f1e3a1e92719c977ba5c770a5ba9e0c}{test\_remove}}();}
+\DoxyCodeLine{00974\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_adc51af22a8ada57efbc3181ef68e9641}{test\_rename}}();}
+\DoxyCodeLine{00975\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_ab538e4b167eb4d7afcdcb787139043b0}{test\_rewind}}();}
+\DoxyCodeLine{00976\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a2c3ad47e27f2f5b7faef1b166d42e27b}{test\_setbuf}}();}
+\DoxyCodeLine{00977\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_aea730026673818d647b9131ba3c4611e}{test\_setvbuf}}();}
+\DoxyCodeLine{00978\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a989c49685fb7c6f781d6f17cf2e2bdd7}{test\_fprintf}}();}
+\DoxyCodeLine{00979\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_aa77be1b41c24fb892ee5a84c4b43bb85}{test\_fscanf}}();}
+\DoxyCodeLine{00980\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_ad0767e68998cd2d0a4580b4e665173e4}{test\_fwprintf}}();}
+\DoxyCodeLine{00981\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_abbc013f8a99493a073666b2322bf6c95}{test\_fwscanf}}();}
+\DoxyCodeLine{00982\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a534f2453f80273e67167271ef3b73b94}{test\_tmpfile}}();}
+\DoxyCodeLine{00983\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_ac63aa1a607494e187c8dfccf50300d72}{test\_tmpnam}}();}
+\DoxyCodeLine{00984\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_ac28e570801f42ebf376f34e57ebab630}{test\_ungetc}}();}
+\DoxyCodeLine{00985\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a06b0ce5e9064644d94a478cf56270e6a}{test\_ungetwc}}();}
+\DoxyCodeLine{00986\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_ace180f5d1e8a9f00c162e4371c9ece9b}{test\_vfprintf}}();}
+\DoxyCodeLine{00987\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_a6ef2ab3300dad6febf40abdefbbfe5ca}{test\_vfscanf}}();}
+\DoxyCodeLine{00988\ \ \ \ \ \mbox{\hyperlink{integration_2test__standard_8c_aac55667f213bea843fc65ef35a65c135}{test\_vfwscanf}}();}
+\DoxyCodeLine{00989\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a534f2453f80273e67167271ef3b73b94}\index{test\_standard.c@{test\_standard.c}!test\_tmpfile@{test\_tmpfile}}
+\index{test\_tmpfile@{test\_tmpfile}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_tmpfile()}{test\_tmpfile()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a534f2453f80273e67167271ef3b73b94} 
+void test\+\_\+tmpfile (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00798}{798}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00799\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}tmpfile"{}});}
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ \ \ \ \ FILE\ *fp\ =\ tmpfile();}
+\DoxyCodeLine{00802\ \ \ \ \ assert(fp\ ==\ NULL);}
+\DoxyCodeLine{00803\ }
+\DoxyCodeLine{00804\ \ \ \ \ printf(\textcolor{stringliteral}{"{}not\ support\(\backslash\)n"{}});\ \textcolor{comment}{//\ tmpfile\ also\ requires\ the\ \ global\ pointr\ environ}}
+\DoxyCodeLine{00805\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ac63aa1a607494e187c8dfccf50300d72}\index{test\_standard.c@{test\_standard.c}!test\_tmpnam@{test\_tmpnam}}
+\index{test\_tmpnam@{test\_tmpnam}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_tmpnam()}{test\_tmpnam()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ac63aa1a607494e187c8dfccf50300d72} 
+void test\+\_\+tmpnam (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00807}{807}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00808\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}tmpnam"{}});}
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00810\ \ \ \ \ \textcolor{keywordtype}{char}\ *path\ =\ tmpnam(\textcolor{stringliteral}{"{}prefix"{}});}
+\DoxyCodeLine{00811\ \ \ \ \ assert(path\ !=\ NULL);}
+\DoxyCodeLine{00812\ \ \ \ \ assert(strcmp(path,\ \textcolor{stringliteral}{"{}prefix"{}})\ ==\ 0);\ \textcolor{comment}{//\ unintended\ behavior}}
+\DoxyCodeLine{00813\ }
+\DoxyCodeLine{00814\ \ \ \ \ printf(\textcolor{stringliteral}{"{}not\ support\(\backslash\)n"{}});\ \textcolor{comment}{//\ The\ global\ pointer\ environ\ is\ also\ required}}
+\DoxyCodeLine{00815\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ac28e570801f42ebf376f34e57ebab630}\index{test\_standard.c@{test\_standard.c}!test\_ungetc@{test\_ungetc}}
+\index{test\_ungetc@{test\_ungetc}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_ungetc()}{test\_ungetc()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ac28e570801f42ebf376f34e57ebab630} 
+void test\+\_\+ungetc (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00817}{817}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00818\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}ungetc"{}});}
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00820\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/ungetc"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00821\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}12345"{}});}
+\DoxyCodeLine{00822\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00823\ }
+\DoxyCodeLine{00824\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00825\ \ \ \ \ assert(fgetc(fp)\ ==\ \textcolor{charliteral}{'1'});}
+\DoxyCodeLine{00826\ \ \ \ \ assert(fgetc(fp)\ ==\ \textcolor{charliteral}{'2'});}
+\DoxyCodeLine{00827\ \ \ \ \ assert(fgetc(fp)\ ==\ \textcolor{charliteral}{'3'});}
+\DoxyCodeLine{00828\ \ \ \ \ ungetc(\textcolor{charliteral}{'3'},\ fp);}
+\DoxyCodeLine{00829\ \ \ \ \ assert(fgetc(fp)\ ==\ \textcolor{charliteral}{'3'});}
+\DoxyCodeLine{00830\ \ \ \ \ assert(fgetc(fp)\ ==\ \textcolor{charliteral}{'4'});}
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00832\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00833\ }
+\DoxyCodeLine{00834\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00835\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a06b0ce5e9064644d94a478cf56270e6a}\index{test\_standard.c@{test\_standard.c}!test\_ungetwc@{test\_ungetwc}}
+\index{test\_ungetwc@{test\_ungetwc}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_ungetwc()}{test\_ungetwc()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a06b0ce5e9064644d94a478cf56270e6a} 
+void test\+\_\+ungetwc (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00838}{838}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00839\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}ungetwc"{}});}
+\DoxyCodeLine{00840\ }
+\DoxyCodeLine{00841\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/ungetc"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00842\ \ \ \ \ fwprintf(fp,\ L\textcolor{stringliteral}{"{}12345"{}});}
+\DoxyCodeLine{00843\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00846\ \ \ \ \ assert(fgetwc(fp)\ ==\ L\textcolor{charliteral}{'1'});}
+\DoxyCodeLine{00847\ \ \ \ \ assert(fgetwc(fp)\ ==\ L\textcolor{charliteral}{'2'});}
+\DoxyCodeLine{00848\ \ \ \ \ assert(fgetwc(fp)\ ==\ L\textcolor{charliteral}{'3'});}
+\DoxyCodeLine{00849\ \ \ \ \ ungetwc(L\textcolor{charliteral}{'3'},\ fp);}
+\DoxyCodeLine{00850\ \ \ \ \ assert(fgetwc(fp)\ ==\ L\textcolor{charliteral}{'3'});}
+\DoxyCodeLine{00851\ \ \ \ \ assert(fgetwc(fp)\ ==\ L\textcolor{charliteral}{'4'});}
+\DoxyCodeLine{00852\ }
+\DoxyCodeLine{00853\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00854\ }
+\DoxyCodeLine{00855\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00856\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_ace180f5d1e8a9f00c162e4371c9ece9b}\index{test\_standard.c@{test\_standard.c}!test\_vfprintf@{test\_vfprintf}}
+\index{test\_vfprintf@{test\_vfprintf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_vfprintf()}{test\_vfprintf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_ace180f5d1e8a9f00c162e4371c9ece9b} 
+void test\+\_\+vfprintf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00866}{866}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00867\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}vfprintf"{}});}
+\DoxyCodeLine{00868\ }
+\DoxyCodeLine{00869\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/vfprintf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00870\ }
+\DoxyCodeLine{00871\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ \mbox{\hyperlink{integration_2test__standard_8c_ad0d9f637977ba7dc073049a1e937a32a}{\_test\_vfprintf}}(fp,\ \textcolor{stringliteral}{"{}\%s\ \%s\(\backslash\)n"{}},\ \textcolor{stringliteral}{"{}Hello"{}},\ \textcolor{stringliteral}{"{}World"{}});}
+\DoxyCodeLine{00872\ \ \ \ \ assert(size\ ==\ 12);}
+\DoxyCodeLine{00873\ }
+\DoxyCodeLine{00874\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00875\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00876\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[512];}
+\DoxyCodeLine{00877\ \ \ \ \ fgets(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ fp);}
+\DoxyCodeLine{00878\ \ \ \ \ assert(strcmp(buffer,\ \textcolor{stringliteral}{"{}Hello\ World\(\backslash\)n"{}})\ ==\ 0);}
+\DoxyCodeLine{00879\ }
+\DoxyCodeLine{00880\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00881\ }
+\DoxyCodeLine{00882\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00883\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_a6ef2ab3300dad6febf40abdefbbfe5ca}\index{test\_standard.c@{test\_standard.c}!test\_vfscanf@{test\_vfscanf}}
+\index{test\_vfscanf@{test\_vfscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_vfscanf()}{test\_vfscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_a6ef2ab3300dad6febf40abdefbbfe5ca} 
+void test\+\_\+vfscanf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00894}{894}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00895\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}vfscnaf"{}});}
+\DoxyCodeLine{00896\ }
+\DoxyCodeLine{00897\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/vfscanf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00898\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}123,ABC\(\backslash\)n"{}});}
+\DoxyCodeLine{00899\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00900\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00902\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_value\ =\ 0;}
+\DoxyCodeLine{00903\ \ \ \ \ \textcolor{keywordtype}{char}\ char\_value[512];}
+\DoxyCodeLine{00904\ \ \ \ \ \textcolor{keywordtype}{int}\ number\ =\ \mbox{\hyperlink{integration_2test__standard_8c_a273e209c9162f768d8dc867f34c5d934}{\_test\_vfscanf}}(fp,\ \textcolor{stringliteral}{"{}\%d,\%s\(\backslash\)n"{}},\ \&int\_value,\ char\_value);}
+\DoxyCodeLine{00905\ \ \ \ \ assert(number\ ==\ 2);}
+\DoxyCodeLine{00906\ \ \ \ \ assert(int\_value\ ==\ 123);}
+\DoxyCodeLine{00907\ \ \ \ \ assert(strcmp(char\_value,\ \textcolor{stringliteral}{"{}ABC"{}})\ ==\ 0);}
+\DoxyCodeLine{00908\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00911\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__standard_8c_aac55667f213bea843fc65ef35a65c135}\index{test\_standard.c@{test\_standard.c}!test\_vfwscanf@{test\_vfwscanf}}
+\index{test\_vfwscanf@{test\_vfwscanf}!test\_standard.c@{test\_standard.c}}
+\doxysubsubsection{\texorpdfstring{test\_vfwscanf()}{test\_vfwscanf()}}
+{\footnotesize\ttfamily \label{test__standard_8c_aac55667f213bea843fc65ef35a65c135} 
+void test\+\_\+vfwscanf (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__standard_8c_source_l00921}{921}} of file \mbox{\hyperlink{test__standard_8c_source}{test\+\_\+standard.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00922\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}vfwscnaf"{}});}
+\DoxyCodeLine{00923\ }
+\DoxyCodeLine{00924\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/vfwscanf"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00925\ \ \ \ \ fwprintf(fp,\ L\textcolor{stringliteral}{"{}123,ABC"{}});}
+\DoxyCodeLine{00926\ \ \ \ \ fflush(fp);}
+\DoxyCodeLine{00927\ \ \ \ \ rewind(fp);}
+\DoxyCodeLine{00928\ }
+\DoxyCodeLine{00929\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_value\ =\ 0;}
+\DoxyCodeLine{00930\ \ \ \ \ \textcolor{keywordtype}{char}\ wchar\_value[512]\ =\ \{0\};}
+\DoxyCodeLine{00931\ \ \ \ \ \textcolor{keywordtype}{int}\ number\ =\ \mbox{\hyperlink{integration_2test__standard_8c_ac3795d88f0f9f696f096bd2db0067d6c}{\_test\_vfwscanf}}(fp,\ L\textcolor{stringliteral}{"{}\%d,\%s"{}},\ \&int\_value,\ wchar\_value);}
+\DoxyCodeLine{00932\ \ \ \ \ assert(number\ ==\ 2);}
+\DoxyCodeLine{00933\ \ \ \ \ assert(int\_value\ ==\ 123);}
+\DoxyCodeLine{00934\ \ \ \ \ assert(strcmp(wchar\_value,\ \textcolor{stringliteral}{"{}ABC"{}})\ ==\ 0);}
+\DoxyCodeLine{00935\ }
+\DoxyCodeLine{00936\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00937\ }
+\DoxyCodeLine{00938\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__standard_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00939\ \}}
+
+\end{DoxyCode}

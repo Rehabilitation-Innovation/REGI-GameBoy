@@ -2,7 +2,16 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_main_8cpp" xml:lang="en-US">
 <title>src/main.cpp File Reference</title>
 <indexterm><primary>src/main.cpp</primary></indexterm>
-<programlisting linenumbering="unnumbered">#include &quot;main.h&quot;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;game.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &quot;hardware/exception.h&quot;<?linebreak?>#include &quot;distance_sensor.h&quot;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &quot;main.h&quot;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;game.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &quot;hardware/exception.h&quot;<?linebreak?>#include &quot;distance_sensor.h&quot;<?linebreak?></programlisting>Include dependency graph for main.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="main_8cpp__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Functions    </title>
         <itemizedlist>
             <listitem><para>void <link linkend="_main_8cpp_1a3f30a40dd935bbd0bbe480669e726f7f">measure_freqs</link> (void)</para>

@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_diskio_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/source/diskio.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/source/diskio.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;ff.h&quot;<?linebreak?>#include &quot;diskio.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#160;&#160;&#160;0	/* Example: Map Ramdisk to physical drive 0 */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#160;&#160;&#160;1	/* Example: Map MMC/SD card to physical drive 1 */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#160;&#160;&#160;2	/* Example: Map USB MSD to physical drive 2 */</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_diskio_8c_1a8348ac5ee6d709420c02e45c111f4793">disk_status</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_diskio_8c_1a09cdaa6f36fa409bdf002727bff98eb1">disk_initialize</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void *buff)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_diskio_8c_1afb573038812261a67140d1c63f57dd3e"/><section>
+    <title>DEV_MMC</title>
+<indexterm><primary>DEV_MMC</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>DEV_MMC</secondary></indexterm>
+<para><computeroutput>#define DEV_MMC&#160;&#160;&#160;1	/* Example: Map MMC/SD card to physical drive 1 */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00015">15</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+</section>
+<anchor xml:id="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628"/><section>
+    <title>DEV_RAM</title>
+<indexterm><primary>DEV_RAM</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>DEV_RAM</secondary></indexterm>
+<para><computeroutput>#define DEV_RAM&#160;&#160;&#160;0	/* Example: Map Ramdisk to physical drive 0 */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00014">14</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+</section>
+<anchor xml:id="_diskio_8c_1a2e6996059106c1996a24d883954c43cd"/><section>
+    <title>DEV_USB</title>
+<indexterm><primary>DEV_USB</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>DEV_USB</secondary></indexterm>
+<para><computeroutput>#define DEV_USB&#160;&#160;&#160;2	/* Example: Map USB MSD to physical drive 2 */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00016">16</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_diskio_8c_1a09cdaa6f36fa409bdf002727bff98eb1"/><section>
+    <title>disk_initialize()</title>
+<indexterm><primary>disk_initialize</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>disk_initialize</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_initialize (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00061">61</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+<programlisting linenumbering="unnumbered">00064 {
+00065 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>&#32;stat;
+00066 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result;
+00067 
+00068 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(pdrv)&#32;{
+00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#32;:
+00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;RAM_disk_initialize();
+00071 
+00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00073 
+00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00075 
+00076 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#32;:
+00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;MMC_disk_initialize();
+00078 
+00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00080 
+00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00082 
+00083 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#32;:
+00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;USB_disk_initialize();
+00085 
+00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00087 
+00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00089 &#32;&#32;&#32;&#32;}
+00090 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1abd6503c70d862b979a3f7080a59e9acd">STA_NOINIT</link>;
+00091 }
+</programlisting></section>
+<anchor xml:id="_diskio_8c_1ab00fa450a811dbdabe3c655c1a36fab4"/><section>
+    <title>disk_ioctl()</title>
+<indexterm><primary>disk_ioctl</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>disk_ioctl</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_ioctl (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void * buff)</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00198">198</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+<programlisting linenumbering="unnumbered">00203 {
+00204 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;res;
+00205 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result;
+00206 
+00207 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(pdrv)&#32;{
+00208 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#32;:
+00209 
+00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Process&#32;of&#32;the&#32;command&#32;for&#32;the&#32;RAM&#32;drive</emphasis>
+00211 
+00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00213 
+00214 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#32;:
+00215 
+00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Process&#32;of&#32;the&#32;command&#32;for&#32;the&#32;MMC/SD&#32;card</emphasis>
+00217 
+00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00219 
+00220 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#32;:
+00221 
+00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Process&#32;of&#32;the&#32;command&#32;the&#32;USB&#32;drive</emphasis>
+00223 
+00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00225 &#32;&#32;&#32;&#32;}
+00226 
+00227 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00228 }
+</programlisting></section>
+<anchor xml:id="_diskio_8c_1a0711b1d03b833e9d73b3be1a6397f461"/><section>
+    <title>disk_read()</title>
+<indexterm><primary>disk_read</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>disk_read</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_read (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00099">99</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+<programlisting linenumbering="unnumbered">00105 {
+00106 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;res;
+00107 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result;
+00108 
+00109 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(pdrv)&#32;{
+00110 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#32;:
+00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00112 
+00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;RAM_disk_read(buff,&#32;sector,&#32;count);
+00114 
+00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00116 
+00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00118 
+00119 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#32;:
+00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00121 
+00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;MMC_disk_read(buff,&#32;sector,&#32;count);
+00123 
+00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00125 
+00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00127 
+00128 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#32;:
+00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00130 
+00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;USB_disk_read(buff,&#32;sector,&#32;count);
+00132 
+00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00134 
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00136 &#32;&#32;&#32;&#32;}
+00137 
+00138 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00139 }
+</programlisting></section>
+<anchor xml:id="_diskio_8c_1a8348ac5ee6d709420c02e45c111f4793"/><section>
+    <title>disk_status()</title>
+<indexterm><primary>disk_status</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>disk_status</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_status (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00023">23</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+<programlisting linenumbering="unnumbered">00026 {
+00027 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>&#32;stat;
+00028 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result;
+00029 
+00030 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(pdrv)&#32;{
+00031 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#32;:
+00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;RAM_disk_status();
+00033 
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00035 
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00037 
+00038 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#32;:
+00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;MMC_disk_status();
+00040 
+00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00042 
+00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00044 
+00045 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#32;:
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;USB_disk_status();
+00047 
+00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00049 
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;stat;
+00051 &#32;&#32;&#32;&#32;}
+00052 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1abd6503c70d862b979a3f7080a59e9acd">STA_NOINIT</link>;
+00053 }
+</programlisting></section>
+<anchor xml:id="_diskio_8c_1ac24448955ef914f54a499df1fb45689d"/><section>
+    <title>disk_write()</title>
+<indexterm><primary>disk_write</primary><secondary>diskio.c</secondary></indexterm>
+<indexterm><primary>diskio.c</primary><secondary>disk_write</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_write (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8c_source_1l00149">149</link> of file <link linkend="_diskio_8c_source">diskio.c</link>.</para>
+<programlisting linenumbering="unnumbered">00155 {
+00156 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;res;
+00157 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result;
+00158 
+00159 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(pdrv)&#32;{
+00160 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a76fb0c5f09176e9b4a8d773e525fe628">DEV_RAM</link>&#32;:
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00162 
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;RAM_disk_write(buff,&#32;sector,&#32;count);
+00164 
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00166 
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00168 
+00169 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1afb573038812261a67140d1c63f57dd3e">DEV_MMC</link>&#32;:
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00171 
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;MMC_disk_write(buff,&#32;sector,&#32;count);
+00173 
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00175 
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00177 
+00178 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8c_1a2e6996059106c1996a24d883954c43cd">DEV_USB</link>&#32;:
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;arguments&#32;here</emphasis>
+00180 
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result&#32;=&#32;USB_disk_write(buff,&#32;sector,&#32;count);
+00182 
+00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;translate&#32;the&#32;reslut&#32;code&#32;here</emphasis>
+00184 
+00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+00186 &#32;&#32;&#32;&#32;}
+00187 
+00188 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00189 }
+</programlisting></section>
+</section>
+</section>

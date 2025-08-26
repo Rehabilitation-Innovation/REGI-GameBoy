@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_flash_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/blockdevice/flash.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/blockdevice/flash.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdint.h&gt;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link> (uint32_t start, size_t length)</para>
+
+<para>Create Raspberry Pi Pico On-board Flash block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the flash memory device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

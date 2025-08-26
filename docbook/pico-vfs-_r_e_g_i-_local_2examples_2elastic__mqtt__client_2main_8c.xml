@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;errno.h&gt;<?linebreak?>#include &lt;hardware/adc.h&gt;<?linebreak?>#include &lt;hardware/rtc.h&gt;<?linebreak?>#include &lt;lwip/altcp_tls.h&gt;<?linebreak?>#include &lt;lwip/apps/mqtt.h&gt;<?linebreak?>#include &lt;lwip/dns.h&gt;<?linebreak?>#include &lt;pico/cyw43_arch.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a977bd2592e99309a86e7034189e9e62d">MQTT_SERVER</link>&#160;&#160;&#160;&quot;io.adafruit.com&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a400d28e1af2bcd57bf651dc23290a6d3">MQTT_TOPIC</link>&#160;&#160;&#160;(MQTT_USER &quot;/feeds/temperature&quot;)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a2d8fa924dae44177190a2942c82202a9">MQTT_QOS_AT_LEAST_ONCE</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a53323d173803daadacf3c9e70aa88592">LOCAL_QUEUE_PATH</link>&#160;&#160;&#160;&quot;/temperature.txt&quot;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1ae31164e5a07f30e3f5d8074609d05b17">ntp_sync</link> (void)</para>
+</listitem>
+            <listitem><para>const char * <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1acbbd6c89dfe56e52af9064c81fbbb635">get_timestamp</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a53323d173803daadacf3c9e70aa88592"/><section>
+    <title>LOCAL_QUEUE_PATH</title>
+<indexterm><primary>LOCAL_QUEUE_PATH</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>LOCAL_QUEUE_PATH</secondary></indexterm>
+<para><computeroutput>#define LOCAL_QUEUE_PATH&#160;&#160;&#160;&quot;/temperature.txt&quot;</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_1l00019">19</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a2d8fa924dae44177190a2942c82202a9"/><section>
+    <title>MQTT_QOS_AT_LEAST_ONCE</title>
+<indexterm><primary>MQTT_QOS_AT_LEAST_ONCE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>MQTT_QOS_AT_LEAST_ONCE</secondary></indexterm>
+<para><computeroutput>#define MQTT_QOS_AT_LEAST_ONCE&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_1l00018">18</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a977bd2592e99309a86e7034189e9e62d"/><section>
+    <title>MQTT_SERVER</title>
+<indexterm><primary>MQTT_SERVER</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>MQTT_SERVER</secondary></indexterm>
+<para><computeroutput>#define MQTT_SERVER&#160;&#160;&#160;&quot;io.adafruit.com&quot;</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_1l00016">16</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a400d28e1af2bcd57bf651dc23290a6d3"/><section>
+    <title>MQTT_TOPIC</title>
+<indexterm><primary>MQTT_TOPIC</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>MQTT_TOPIC</secondary></indexterm>
+<para><computeroutput>#define MQTT_TOPIC&#160;&#160;&#160;(MQTT_USER &quot;/feeds/temperature&quot;)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_1l00017">17</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1acbbd6c89dfe56e52af9064c81fbbb635"/><section>
+    <title>get_timestamp()</title>
+<indexterm><primary>get_timestamp</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>get_timestamp</secondary></indexterm>
+<para><computeroutput>const char * get_timestamp (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_ntp__sync_8c_source_1l00046">46</link> of file <link linkend="_ntp__sync_8c_source">ntp_sync.c</link>.</para>
+<programlisting linenumbering="unnumbered">00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00047 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[30];
+00048 &#32;&#32;&#32;&#32;time_t&#32;now&#32;=&#32;time(NULL);
+00049 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>&#32;=&#32;gmtime(&amp;now);
+00050 &#32;&#32;&#32;&#32;strftime(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;<emphasis role="stringliteral">&quot;%Y-%m-%d&#32;%H:%M:%S&quot;</emphasis>,&#32;<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>);
+00051 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;buffer;
+00052 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_1l00152">152</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00153 &#32;&#32;&#32;&#32;stdio_init_all();
+00154 &#32;&#32;&#32;&#32;rtc_init();
+00155 &#32;&#32;&#32;&#32;adc_init();
+00156 &#32;&#32;&#32;&#32;adc_set_temp_sensor_enabled(<emphasis role="keyword">true</emphasis>);
+00157 &#32;&#32;&#32;&#32;adc_select_input(4);
+00158 
+00159 &#32;&#32;&#32;&#32;ip_addr_t&#32;mqtt_server_addr&#32;=&#32;{0};
+00160 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!network_init(&amp;mqtt_server_addr))&#32;{
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;network_init&#32;failed\n&quot;</emphasis>);
+00162 &#32;&#32;&#32;&#32;}
+00163 &#32;&#32;&#32;&#32;mqtt_client_t&#32;*client&#32;=&#32;mqtt_client_new();
+00164 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)&#32;{
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;sensor_value&#32;=&#32;read_sensor_data();
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*timestamp&#32;=&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1acbbd6c89dfe56e52af9064c81fbbb635">get_timestamp</link>();
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mantain_network_connection(client,&#32;&amp;mqtt_server_addr))&#32;{
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Normal&#32;operation</emphasis>
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;publish_message_from_file(client);
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;publish_message(client,&#32;sensor_value,&#32;timestamp);
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Network&#32;outage&#32;operation</emphasis>
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;save_data_to_file(sensor_value,&#32;timestamp);
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(10&#32;*&#32;1000);
+00176 &#32;&#32;&#32;&#32;}
+00177 
+00178 &#32;&#32;&#32;&#32;mqtt_client_free(client);
+00179 &#32;&#32;&#32;&#32;cyw43_arch_deinit();
+00180 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00181 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1ae31164e5a07f30e3f5d8074609d05b17"/><section>
+    <title>ntp_sync()</title>
+<indexterm><primary>ntp_sync</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>ntp_sync</secondary></indexterm>
+<para><computeroutput>bool ntp_sync (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_ntp__sync_8c_source_1l00014">14</link> of file <link linkend="_ntp__sync_8c_source">ntp_sync.c</link>.</para>
+<programlisting linenumbering="unnumbered">00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00015 &#32;&#32;&#32;&#32;sntp_setoperatingmode(SNTP_OPMODE_POLL);
+00016 &#32;&#32;&#32;&#32;sntp_setservername(0,&#32;<link linkend="_ntp__sync_8c_1a751e3f85cd240e89d390d18996089cd0">NTP_SERVER</link>);
+00017 &#32;&#32;&#32;&#32;sntp_init();
+00018 
+00019 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;20;&#32;i++)&#32;{
+00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sntp_getreachability(0))&#32;{
+00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+00024 &#32;&#32;&#32;&#32;}
+00025 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00026 }
+</programlisting></section>
+</section>
+</section>

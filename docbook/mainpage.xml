@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_mainpage" xml:lang="en-US">
+<title>
+<para>TinyEngine </para>
+</title>
+<indexterm><primary>TinyEngine</primary></indexterm>
+
+<para><anchor xml:id="_index_1md__r_e_a_d_m_e"/></para>
+
+<para>Introducing <link linkend="_class_tiny_engine">TinyEngine</link>, this is a basic and small game engine for rendering 2D graphics to a framebuffer. The main use of this engine is currently on the RehabTendo at the Glenrose Rehabilitation Hospital. I created this as part of my Coop work term project, it uses a custom PCB fabricated to integrate different control methods for rehabilitation excersises.</para>
+
+<para>Here is a prototype PCB and the first revision of the case design.</para>
+
+<para></para>
+
+<para></para>
+<section xml:id="_index_1autotoc_md1">
+<title>Features:</title>
+<para><itemizedlist>
+<listitem>
+<para>Rechargable single cell battery support. With power path management and smart charging with safety timer.</para>
+</listitem><listitem>
+<para>RP2350 dual core MCU with DVI output over HDMI and parrallel FPC connector for ILI or simalar parallel screens.</para>
+</listitem><listitem>
+<para>Dual 8 Ohm speaker output with 5W max output power each.</para>
+</listitem><listitem>
+<para>32 GB SD card game and asset storage</para>
+</listitem><listitem>
+<para>Custom Bootloader with abilitty to load multiple games.</para>
+</listitem><listitem>
+<para>5V boost converter to power external controllers an peripherals from oboard battery.</para>
+</listitem><listitem>
+<para>4x WS2812B RGB LEDs chained from single PIO output</para>
+</listitem><listitem>
+<para>16MB flash storage.</para>
+</listitem><listitem>
+<para>2nd QSPI expansion for PSRAM or more flash.</para>
+</listitem><listitem>
+<para>Dedicated mute and ON OFF switches with dedicated out of box reset switch.</para>
+</listitem><listitem>
+<para>Many exposed headers for lots of different control methods.</para>
+</listitem><listitem>
+<para>Dedicated debug LEDs.</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_index_1autotoc_md2">
+<title>Repository and Layout:</title>
+<para>The repository is structured to represent a conventional C++ program. src and inc folders have segragated headers and sources. Lib has all of the external libraries used.</para>
+</section>
+<section xml:id="_index_1autotoc_md3">
+<title>How to build:</title>
+<para>This source is a static library and requires a sub project dependency to be ran. For Further guidence please view Confluence guides on compilation and flashing. </para>
+</section>
+</chapter>

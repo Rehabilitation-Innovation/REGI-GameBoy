@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e" xml:lang="en-US">
+<title>
+<para>Example of pico-vfs library </para>
+</title>
+<indexterm><primary>Example of pico-vfs library</primary></indexterm>
+
+<para><anchor xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_1autotoc_md10"/></para>
+
+<para><informaltable frame="all">
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<thead>
+      <row  class='markdownTableHead'>
+<entry>
+<para>App  </para>
+</entry><entry>
+<para>Description  </para>
+</entry></row>
+</thead><tbody>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><link xlink:href="examples/hello">hello</link>  </para>
+</entry><entry>
+<para>Hello filesystem world.  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><link xlink:href="examples/fs_inits">fs_inits</link>  </para>
+</entry><entry>
+<para>Examples of file system layout combinations.  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><link xlink:href="examples/multicore_logger">multicore_logger</link>  </para>
+</entry><entry>
+<para>Multi-core logger that saves 1kHz sampling data to an SD card  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><link xlink:href="examples/elastic_mqtt_client">elastic_mqtt_client</link>  </para>
+</entry><entry>
+<para>Implements an MQTT client with a local queue to handle network disconnections seamlessly.  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><link xlink:href="examples/usb_logger">usb_logger</link>  </para>
+</entry><entry>
+<para>Data logger that mounts littlefs and FAT on flash memory and shares it with a PC via USB mass storage class.  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><link xlink:href="examples/benchmark">benchmark</link>  </para>
+</entry><entry>
+<para>Data transfer tests with different block devices and different file system combinations.  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_1autotoc_md11">
+<title>Building sample code</title>
+<para>The <link xlink:href="https://github.com/raspberrypi/pico-sdk">pico-sdk</link> build environment is required to build the demonstration, see <link xlink:href="https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf">Getting started with Raspberry Pi Pico</link> to prepare the toolchain for your platform. This project contains a <emphasis>git submodule</emphasis>. When cloning, the <computeroutput>--recursive</computeroutput> option must be given or a separate <computeroutput>git submodule update</computeroutput> must be performed.</para>
+
+<para>Firmware can be built from the <emphasis>CMake</emphasis> build directory of <emphasis>pico-vfs</emphasis>.</para>
+
+<para><literallayout><computeroutput>mkdir&#32;build;&#32;cd&#32;build/
+PICO_SDK_PATH=/path/to/pico-sdk&#32;cmake&#32;..
+make&#32;hello&#32;fs_init_example&#32;multicore_logger&#32;usb_logger&#32;benchmark
+</computeroutput></literallayout></para>
+
+<para>The <computeroutput>elastic_mqtt_client</computeroutput> uses Wi-Fi, so <computeroutput>PICO_BOARD=pico_w</computeroutput> needs to be specified. Furthermore, <computeroutput>WIFI_SSID</computeroutput>, <computeroutput>WIFI_PASSWORD</computeroutput>, <computeroutput>MQTT_USER</computeroutput> and <computeroutput>MQTT_PASSWORD</computeroutput> must be specified in the environment variables when running cmake. This example uses <link xlink:href="https://io.adafruit.com/">Adafruit IO</link>&apos;s MQTT server.</para>
+
+<para><literallayout><computeroutput>PICO_SDK_PATH=/path/to/pico-sdk&#32;WIFI_SSID=SSID&#32;WIFI_PASSWORD=PASSWORD&#32;MQTT_USER=USER&#32;MQTT_PASSWORD=PASSWORD&#32;cmake&#32;..&#32;-DPICO_BOARD=pico_w
+make&#32;elastic_mqtt_client
+</computeroutput></literallayout></para>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_1autotoc_md12">
+<title>Circuit Diagram</title>
+<para>If an SD card is to be used, a separate circuit must be connected via SPI. As an example, the schematic using the <link xlink:href="https://www.adafruit.com/product/254">Adafruit MicroSD card breakout board+</link> is as follows</para>
+
+<para></para>
+
+<para>The spi and pin used in the block device argument can be customised. The following pins are used in the demonstration.</para>
+
+<para><informaltable frame="all">
+    <tgroup cols="4" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+      <colspec colname='c4'/>
+<thead>
+      <row  class='markdownTableHead'>
+<entry>
+<para>Pin  </para>
+</entry><entry>
+<para>PCB pin  </para>
+</entry><entry>
+<para>Usage  </para>
+</entry><entry>
+<para>description  </para>
+</entry></row>
+</thead><tbody>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para>GP18  </para>
+</entry><entry>
+<para>24  </para>
+</entry><entry>
+<para>SPI0 SCK  </para>
+</entry><entry>
+<para>SPI clock  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para>GP19  </para>
+</entry><entry>
+<para>25  </para>
+</entry><entry>
+<para>SPI0 TX  </para>
+</entry><entry>
+<para>SPI Master Out Slave In  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para>GP16  </para>
+</entry><entry>
+<para>21  </para>
+</entry><entry>
+<para>SPI0 RX  </para>
+</entry><entry>
+<para>SPI Master In Slave Out  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para>GP17  </para>
+</entry><entry>
+<para>22  </para>
+</entry><entry>
+<para>SPI0 CSn  </para>
+</entry><entry>
+<para>SPI Chip select  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+</section>
+</section>
+</section>

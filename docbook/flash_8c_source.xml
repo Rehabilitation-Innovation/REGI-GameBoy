@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_flash_8c_source" xml:lang="en-US">
+<title>flash.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/blockdevice/flash.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_flash_8c_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_flash_8c_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_flash_8c_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_flash_8c_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_flash_8c_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_flash_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;assert.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;hardware/flash.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;hardware/regs/addressmap.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;pico/flash.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&lt;pico/mutex.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_flash_8h">blockdevice/flash.h</link>&quot;</emphasis>
+<anchor xml:id="_flash_8c_source_1l00014"/>00014 
+<anchor xml:id="_flash_8c_source_1l00015"/><link linkend="_flash_8c_1a13b5ee4f9cca276550c7a9702f1a7434">00015</link> <emphasis role="preprocessor">#define&#32;FLASH_SAFE_EXECUTE_TIMEOUT&#32;&#32;&#32;10&#32;*&#32;1000</emphasis>
+<anchor xml:id="_flash_8c_source_1l00016"/>00016 
+<anchor xml:id="_flash_8c_source_1l00017"/><link linkend="_flash_8c_1a74d8a383b2d6b1927a56219027d8b74a">00017</link> <emphasis role="preprocessor">#define&#32;FLASH_BLOCK_DEVICE_ERROR_TIMEOUT&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;-4001&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_flash_8c_source_1l00018"/><link linkend="_flash_8c_1a7ab3fcc54522204dbf732217a7844d4c">00018</link> <emphasis role="preprocessor">#define&#32;FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;-4002&#32;&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_flash_8c_source_1l00019"/><link linkend="_flash_8c_1ae99d723a78efffd6dc630edf5221b724">00019</link> <emphasis role="preprocessor">#define&#32;FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES&#32;-4003&#32;</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_flash_8c_source_1l00020"/>00020 
+<anchor xml:id="_flash_8c_source_1l00021"/><link linkend="_structblockdevice__flash__config__t">00021</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_flash_8c_source_1l00022"/><link linkend="_structblockdevice__flash__config__t_1afe08d636949a8df67ac13538ce5c52b0">00022</link> &#32;&#32;&#32;&#32;uint32_t&#32;<link linkend="_structblockdevice__flash__config__t_1afe08d636949a8df67ac13538ce5c52b0">start</link>;
+<anchor xml:id="_flash_8c_source_1l00023"/><link linkend="_structblockdevice__flash__config__t_1a0476083842643a0772e611d8d56abade">00023</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;<link linkend="_structblockdevice__flash__config__t_1a0476083842643a0772e611d8d56abade">length</link>;
+<anchor xml:id="_flash_8c_source_1l00024"/><link linkend="_structblockdevice__flash__config__t_1a20c0f3240342a6919c8c389d8d5b1dfa">00024</link> &#32;&#32;&#32;&#32;mutex_t&#32;<link linkend="_structblockdevice__flash__config__t_1a20c0f3240342a6919c8c389d8d5b1dfa">_mutex</link>;
+<anchor xml:id="_flash_8c_source_1l00025"/>00025 }&#32;<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>;
+<anchor xml:id="_flash_8c_source_1l00026"/>00026 
+<anchor xml:id="_flash_8c_source_1l00027"/><link linkend="_struct__safe__flash__update__param__t">00027</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_flash_8c_source_1l00028"/><link linkend="_struct__safe__flash__update__param__t_1a59b61d3bf8be9fb6b65e965f57cdc576">00028</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_struct__safe__flash__update__param__t_1a59b61d3bf8be9fb6b65e965f57cdc576">is_erase</link>;
+<anchor xml:id="_flash_8c_source_1l00029"/><link linkend="_struct__safe__flash__update__param__t_1af392d12135f7b655218a28bcb2644f17">00029</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;<link linkend="_struct__safe__flash__update__param__t_1af392d12135f7b655218a28bcb2644f17">addr</link>;
+<anchor xml:id="_flash_8c_source_1l00030"/><link linkend="_struct__safe__flash__update__param__t_1a403ea02d452a7befdbe576c9ad121dd6">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;<link linkend="_struct__safe__flash__update__param__t_1a403ea02d452a7befdbe576c9ad121dd6">size</link>;
+<anchor xml:id="_flash_8c_source_1l00031"/><link linkend="_struct__safe__flash__update__param__t_1af0041594b43af689489d69722e9ba595">00031</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;*<link linkend="_struct__safe__flash__update__param__t_1af0041594b43af689489d69722e9ba595">buffer</link>;
+<anchor xml:id="_flash_8c_source_1l00032"/>00032 }&#32;<link linkend="_struct__safe__flash__update__param__t">_safe_flash_update_param_t</link>;
+<anchor xml:id="_flash_8c_source_1l00033"/>00033 
+<anchor xml:id="_flash_8c_source_1l00034"/>00034 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;DEVICE_NAME[]&#32;=&#32;<emphasis role="stringliteral">&quot;flash&quot;</emphasis>;
+<anchor xml:id="_flash_8c_source_1l00035"/>00035 
+<anchor xml:id="_flash_8c_source_1l00036"/>00036 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_error_remap(<emphasis role="keywordtype">int</emphasis>&#32;err)&#32;{
+<anchor xml:id="_flash_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_flash_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;PICO_OK:
+<anchor xml:id="_flash_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>;
+<anchor xml:id="_flash_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;PICO_ERROR_TIMEOUT:
+<anchor xml:id="_flash_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_flash_8c_1a74d8a383b2d6b1927a56219027d8b74a">FLASH_BLOCK_DEVICE_ERROR_TIMEOUT</link>;
+<anchor xml:id="_flash_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;PICO_ERROR_NOT_PERMITTED:
+<anchor xml:id="_flash_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_flash_8c_1a7ab3fcc54522204dbf732217a7844d4c">FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED</link>;
+<anchor xml:id="_flash_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;PICO_ERROR_INSUFFICIENT_RESOURCES:
+<anchor xml:id="_flash_8c_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_flash_8c_1ae99d723a78efffd6dc630edf5221b724">FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES</link>;
+<anchor xml:id="_flash_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_flash_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_flash_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_flash_8c_source_1l00049"/>00049 }
+<anchor xml:id="_flash_8c_source_1l00050"/>00050 
+<anchor xml:id="_flash_8c_source_1l00051"/>00051 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;flash_target_offset(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>&#32;*config&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>;
+<anchor xml:id="_flash_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;config-&gt;<link linkend="_structblockdevice__flash__config__t_1afe08d636949a8df67ac13538ce5c52b0">start</link>;
+<anchor xml:id="_flash_8c_source_1l00054"/>00054 }
+<anchor xml:id="_flash_8c_source_1l00055"/>00055 
+<anchor xml:id="_flash_8c_source_1l00056"/>00056 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;init(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_flash_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>;
+<anchor xml:id="_flash_8c_source_1l00059"/>00059 }
+<anchor xml:id="_flash_8c_source_1l00060"/>00060 
+<anchor xml:id="_flash_8c_source_1l00061"/>00061 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;deinit(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_flash_8c_source_1l00063"/>00063 
+<anchor xml:id="_flash_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_flash_8c_source_1l00065"/>00065 }
+<anchor xml:id="_flash_8c_source_1l00066"/>00066 
+<anchor xml:id="_flash_8c_source_1l00067"/>00067 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;sync(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;(void)device;
+<anchor xml:id="_flash_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_flash_8c_source_1l00070"/>00070 }
+<anchor xml:id="_flash_8c_source_1l00071"/>00071 
+<anchor xml:id="_flash_8c_source_1l00072"/>00072 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;read(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size)&#32;{
+<anchor xml:id="_flash_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>&#32;*config&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>;
+<anchor xml:id="_flash_8c_source_1l00074"/>00074 
+<anchor xml:id="_flash_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;config-&gt;<link linkend="_structblockdevice__flash__config__t_1a20c0f3240342a6919c8c389d8d5b1dfa">_mutex</link>);
+<anchor xml:id="_flash_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;*flash_contents&#32;=&#32;(<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;*)(XIP_BASE&#32;+&#32;flash_target_offset(device)&#32;+&#32;(<emphasis role="keywordtype">size_t</emphasis>)addr);
+<anchor xml:id="_flash_8c_source_1l00077"/>00077 &#32;&#32;&#32;&#32;memcpy((uint8_t&#32;*)buffer,&#32;flash_contents,&#32;(<emphasis role="keywordtype">size_t</emphasis>)size);
+<anchor xml:id="_flash_8c_source_1l00078"/>00078 &#32;&#32;&#32;&#32;mutex_exit(&amp;config-&gt;<link linkend="_structblockdevice__flash__config__t_1a20c0f3240342a6919c8c389d8d5b1dfa">_mutex</link>);
+<anchor xml:id="_flash_8c_source_1l00079"/>00079 
+<anchor xml:id="_flash_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>;
+<anchor xml:id="_flash_8c_source_1l00081"/>00081 }
+<anchor xml:id="_flash_8c_source_1l00082"/>00082 
+<anchor xml:id="_flash_8c_source_1l00083"/>00083 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;_safe_flash_update(<emphasis role="keywordtype">void</emphasis>&#32;*param)&#32;{
+<anchor xml:id="_flash_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_struct__safe__flash__update__param__t">_safe_flash_update_param_t</link>&#32;*args&#32;=&#32;param;
+<anchor xml:id="_flash_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(args-&gt;<link linkend="_struct__safe__flash__update__param__t_1a59b61d3bf8be9fb6b65e965f57cdc576">is_erase</link>)&#32;{
+<anchor xml:id="_flash_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;flash_range_erase(args-&gt;<link linkend="_struct__safe__flash__update__param__t_1af392d12135f7b655218a28bcb2644f17">addr</link>,&#32;args-&gt;<link linkend="_struct__safe__flash__update__param__t_1a403ea02d452a7befdbe576c9ad121dd6">size</link>);
+<anchor xml:id="_flash_8c_source_1l00087"/>00087 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_flash_8c_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;flash_range_program(args-&gt;<link linkend="_struct__safe__flash__update__param__t_1af392d12135f7b655218a28bcb2644f17">addr</link>,&#32;(<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;*)args-&gt;<link linkend="_struct__safe__flash__update__param__t_1af0041594b43af689489d69722e9ba595">buffer</link>,&#32;args-&gt;<link linkend="_struct__safe__flash__update__param__t_1a403ea02d452a7befdbe576c9ad121dd6">size</link>);
+<anchor xml:id="_flash_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_flash_8c_source_1l00090"/>00090 }
+<anchor xml:id="_flash_8c_source_1l00091"/>00091 
+<anchor xml:id="_flash_8c_source_1l00092"/>00092 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;erase(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size)&#32;{
+<anchor xml:id="_flash_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;<link linkend="_struct__safe__flash__update__param__t">_safe_flash_update_param_t</link>&#32;param&#32;=&#32;{
+<anchor xml:id="_flash_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.is_erase&#32;=&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="_flash_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.addr&#32;=&#32;flash_target_offset(device)&#32;+&#32;addr,
+<anchor xml:id="_flash_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.size&#32;=&#32;(size_t)size,
+<anchor xml:id="_flash_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_flash_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;flash_safe_execute(_safe_flash_update,&#32;&amp;param,&#32;<link linkend="_flash_8c_1a13b5ee4f9cca276550c7a9702f1a7434">FLASH_SAFE_EXECUTE_TIMEOUT</link>);
+<anchor xml:id="_flash_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_flash_8c_source_1l00100"/>00100 }
+<anchor xml:id="_flash_8c_source_1l00101"/>00101 
+<anchor xml:id="_flash_8c_source_1l00102"/>00102 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;program(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size)&#32;{
+<anchor xml:id="_flash_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<link linkend="_struct__safe__flash__update__param__t">_safe_flash_update_param_t</link>&#32;param&#32;=&#32;{
+<anchor xml:id="_flash_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.is_erase&#32;=&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="_flash_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.addr&#32;=&#32;flash_target_offset(device)&#32;+&#32;addr,
+<anchor xml:id="_flash_8c_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.buffer&#32;=&#32;(<emphasis role="keywordtype">void</emphasis>&#32;*)buffer,
+<anchor xml:id="_flash_8c_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.size&#32;=&#32;(<emphasis role="keywordtype">size_t</emphasis>)size,
+<anchor xml:id="_flash_8c_source_1l00108"/>00108 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_flash_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;flash_safe_execute(_safe_flash_update,&#32;&amp;param,&#32;<link linkend="_flash_8c_1a13b5ee4f9cca276550c7a9702f1a7434">FLASH_SAFE_EXECUTE_TIMEOUT</link>);
+<anchor xml:id="_flash_8c_source_1l00110"/>00110 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_flash_8c_source_1l00111"/>00111 }
+<anchor xml:id="_flash_8c_source_1l00112"/>00112 
+<anchor xml:id="_flash_8c_source_1l00113"/>00113 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;trim(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr,&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size)&#32;{
+<anchor xml:id="_flash_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;(void)device;
+<anchor xml:id="_flash_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;(void)addr;
+<anchor xml:id="_flash_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;(void)size;
+<anchor xml:id="_flash_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>;
+<anchor xml:id="_flash_8c_source_1l00118"/>00118 }
+<anchor xml:id="_flash_8c_source_1l00119"/>00119 
+<anchor xml:id="_flash_8c_source_1l00120"/>00120 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>&#32;*config&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>;
+<anchor xml:id="_flash_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)config-&gt;<link linkend="_structblockdevice__flash__config__t_1a0476083842643a0772e611d8d56abade">length</link>;
+<anchor xml:id="_flash_8c_source_1l00123"/>00123 }
+<anchor xml:id="_flash_8c_source_1l00124"/>00124 
+<anchor xml:id="_flash_8c_source_1l00125"/><link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">00125</link> <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(uint32_t&#32;start,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length)&#32;{
+<anchor xml:id="_flash_8c_source_1l00126"/>00126 &#32;&#32;&#32;&#32;assert(start&#32;%&#32;FLASH_SECTOR_SIZE&#32;==&#32;0);
+<anchor xml:id="_flash_8c_source_1l00127"/>00127 &#32;&#32;&#32;&#32;assert(length&#32;%&#32;FLASH_SECTOR_SIZE&#32;==&#32;0);
+<anchor xml:id="_flash_8c_source_1l00128"/>00128 
+<anchor xml:id="_flash_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>));
+<anchor xml:id="_flash_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(device&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_flash_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;blockdevice_flash_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_flash_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_flash_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_flash_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>&#32;*config&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link>));
+<anchor xml:id="_flash_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(config&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_flash_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;blockdevice_flash_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_flash_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(device);
+<anchor xml:id="_flash_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_flash_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_flash_8c_source_1l00140"/>00140 
+<anchor xml:id="_flash_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>&#32;=&#32;init;
+<anchor xml:id="_flash_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>&#32;=&#32;deinit;
+<anchor xml:id="_flash_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>&#32;=&#32;read;
+<anchor xml:id="_flash_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>&#32;=&#32;erase;
+<anchor xml:id="_flash_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>&#32;=&#32;program;
+<anchor xml:id="_flash_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>&#32;=&#32;trim;
+<anchor xml:id="_flash_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>&#32;=&#32;sync;
+<anchor xml:id="_flash_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>&#32;=&#32;size;
+<anchor xml:id="_flash_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>&#32;=&#32;1;
+<anchor xml:id="_flash_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>&#32;=&#32;FLASH_SECTOR_SIZE;&#32;&#32;<emphasis role="comment">//&#32;4096&#32;byte</emphasis>
+<anchor xml:id="_flash_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>&#32;=&#32;FLASH_PAGE_SIZE;&#32;&#32;<emphasis role="comment">//&#32;256&#32;byte</emphasis>
+<anchor xml:id="_flash_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>&#32;=&#32;DEVICE_NAME;
+<anchor xml:id="_flash_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_flash_8c_source_1l00154"/>00154 
+<anchor xml:id="_flash_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__flash__config__t_1afe08d636949a8df67ac13538ce5c52b0">start</link>&#32;=&#32;start;
+<anchor xml:id="_flash_8c_source_1l00156"/>00156 &#32;&#32;&#32;&#32;config-&gt;<link linkend="_structblockdevice__flash__config__t_1a0476083842643a0772e611d8d56abade">length</link>&#32;=&#32;length&#32;&gt;&#32;0&#32;?&#32;length&#32;:&#32;(<link linkend="_regi__rev1_8h_1a7ad5a8273ffcd10db868c3c3e03d5bf0">PICO_FLASH_SIZE_BYTES</link>&#32;-&#32;start);
+<anchor xml:id="_flash_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;mutex_init(&amp;config-&gt;<link linkend="_structblockdevice__flash__config__t_1a20c0f3240342a6919c8c389d8d5b1dfa">_mutex</link>);
+<anchor xml:id="_flash_8c_source_1l00158"/>00158 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;=&#32;config;
+<anchor xml:id="_flash_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_flash_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device;
+<anchor xml:id="_flash_8c_source_1l00161"/>00161 }
+<anchor xml:id="_flash_8c_source_1l00162"/>00162 
+<anchor xml:id="_flash_8c_source_1l00163"/><link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">00163</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_flash_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;free(device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>);
+<anchor xml:id="_flash_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;free(device);
+<anchor xml:id="_flash_8c_source_1l00166"/>00166 }
+</programlisting></section>

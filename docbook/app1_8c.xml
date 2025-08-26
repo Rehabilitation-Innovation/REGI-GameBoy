@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app1_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app1.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app1.c</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> <link linkend="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c">open_append</link> (<link linkend="_struct_f_i_l">FIL</link> *fp, const char *path)</para>
+</listitem>
+            <listitem><para>int <link linkend="_app1_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app1_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>app1.c</secondary></indexterm>
+<indexterm><primary>app1.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_app1_8c_source_1l00025">25</link> of file <link linkend="_app1_8c_source">app1.c</link>.</para>
+<programlisting linenumbering="unnumbered">00026 {
+00027 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00028 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s">FATFS</link>&#32;fs;
+00029 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l">FIL</link>&#32;fil;
+00030 
+00031 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Open&#32;or&#32;create&#32;a&#32;log&#32;file&#32;and&#32;ready&#32;to&#32;append&#32;*/</emphasis>
+00032 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(&amp;fs,&#32;<emphasis role="stringliteral">&quot;&quot;</emphasis>,&#32;0);
+00033 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c">open_append</link>(&amp;fil,&#32;<emphasis role="stringliteral">&quot;logfile.txt&quot;</emphasis>);
+00034 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00035 
+00036 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Append&#32;a&#32;line&#32;*/</emphasis>
+00037 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a4ce26253177c167df849e76f69b5c66c">f_printf</link>(&amp;fil,&#32;<emphasis role="stringliteral">&quot;%02u/%02u/%u,&#32;%2u:%02u\n&quot;</emphasis>,&#32;Mday,&#32;Mon,&#32;Year,&#32;Hour,&#32;Min);
+00038 
+00039 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Close&#32;the&#32;file&#32;*/</emphasis>
+00040 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(&amp;fil);
+00041 
+00042 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00043 }
+</programlisting></section>
+<anchor xml:id="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c"/><section>
+    <title>open_append()</title>
+<indexterm><primary>open_append</primary><secondary>app1.c</secondary></indexterm>
+<indexterm><primary>app1.c</primary><secondary>open_append</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> open_append (<link linkend="_struct_f_i_l">FIL</link> * fp, const char * path)</computeroutput></para><para>
+Definition at line <link linkend="_app1_8c_source_1l00006">6</link> of file <link linkend="_app1_8c_source">app1.c</link>.</para>
+<programlisting linenumbering="unnumbered">00010 {
+00011 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00012 
+00013 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Opens&#32;an&#32;existing&#32;file.&#32;If&#32;not&#32;exist,&#32;creates&#32;a&#32;new&#32;file.&#32;*/</emphasis>
+00014 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1aefdef7126128d99d0b3bd82c28e54d80">f_open</link>(fp,&#32;path,&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>&#32;|&#32;<link linkend="_ff_8h_1a17b01553029920ac0468912b4bcb16c7">FA_OPEN_ALWAYS</link>);
+00015 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;==&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Seek&#32;to&#32;end&#32;of&#32;the&#32;file&#32;to&#32;append&#32;data&#32;*/</emphasis>
+00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(fp,&#32;<link linkend="_ff_8h_1a26f33722c5bf1aa3cd6f0290a83eb2bc">f_size</link>(fp));
+00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)
+00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(fp);
+00020 &#32;&#32;&#32;&#32;}
+00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00022 }
+</programlisting></section>
+</section>
+</section>

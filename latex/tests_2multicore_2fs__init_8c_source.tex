@@ -1,0 +1,44 @@
+\doxysection{fs\+\_\+init.\+c}
+\hypertarget{tests_2multicore_2fs__init_8c_source}{}\label{tests_2multicore_2fs__init_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/multicore/fs\_init.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/multicore/fs\_init.c}}
+\mbox{\hyperlink{tests_2multicore_2fs__init_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <hardware/clocks.h>}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <hardware/flash.h>}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{flash_8h}{blockdevice/flash.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sd_8h}{blockdevice/sd.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fat_8h}{filesystem/fat.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{littlefs_8h}{filesystem/littlefs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00009}\mbox{\hyperlink{tests_2multicore_2fs__init_8c_a1f06fce82ce957c8dd28c5e07da29d97}{00009}}\ \textcolor{preprocessor}{\#define\ FLASH\_LENGTH\_ALL\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00011}\mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{00011}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00012}00012\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *flash\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{PICO\_FLASH\_SIZE\_BYTES}}\ -\/\ \mbox{\hyperlink{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}{PICO\_FS\_DEFAULT\_SIZE}},}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\_LENGTH\_ALL}});}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00014}00014\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *sd\ =\ \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\_sd\_create}}(spi0,}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_acd12af431f3d8c3752815d58f998c0ac}{PICO\_DEFAULT\_SPI\_TX\_PIN}},}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_ab7eaa7dddacd975821969189da644cdb}{PICO\_DEFAULT\_SPI\_RX\_PIN}},}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_adad46d9962adcf584b003bb52ef8e33e}{PICO\_DEFAULT\_SPI\_SCK\_PIN}},}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_a1f76bedc8bb59acb457e1943dda8431d}{PICO\_DEFAULT\_SPI\_CSN\_PIN}},}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 24\ *\ MHZ,}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00021}00021\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *littlefs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(500,\ 16);}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(littlefs,\ flash);}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00027}00027\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/flash"{}},\ littlefs,\ flash);}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fat,\ sd);}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00034}00034\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/sd"{}},\ fat,\ sd);}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tests_2multicore_2fs__init_8c_source_l00038}00038\ \}}
+
+\end{DoxyCode}

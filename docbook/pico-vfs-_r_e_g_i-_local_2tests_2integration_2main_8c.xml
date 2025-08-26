@@ -1,0 +1,414 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/integration/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/integration/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">test_blockdevice</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1af735a8051c1fced4d3ccfa7bfc207a2e">test_filesystem</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb">test_vfs</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1ab711b6669c9731b7099653fa536722ae">test_standard</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1aa39763d4cd60a15a1e2ba5a310e8401e">test_copy_between_different_filesystems</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_source_1l00004">4</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_source_1l00012">12</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;stdio_init_all();
+00014 
+00015 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Start&#32;all&#32;tests\n&quot;</emphasis>);
+00016 
+00017 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2host_2main_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">test_blockdevice</link>();
+00018 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2host_2main_8c_1af735a8051c1fced4d3ccfa7bfc207a2e">test_filesystem</link>();
+00019 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb">test_vfs</link>();
+00020 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1ab711b6669c9731b7099653fa536722ae">test_standard</link>();
+00021 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1aa39763d4cd60a15a1e2ba5a310e8401e">test_copy_between_different_filesystems</link>();
+00022 
+00023 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;All&#32;tests&#32;are&#32;ok\n&quot;</emphasis>));
+00024 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+00026 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6"/><section>
+    <title>test_blockdevice()</title>
+<indexterm><primary>test_blockdevice</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>test_blockdevice</secondary></indexterm>
+<para><computeroutput>void test_blockdevice (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_host_2test__blockdevice_8c_source_1l00139">139</link> of file <link linkend="_host_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+<programlisting linenumbering="unnumbered">00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00140 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Heap&#32;memory:\n&quot;</emphasis>);
+00141 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00142 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00143 &#32;&#32;&#32;&#32;setup(heap);
+00144 
+00145 &#32;&#32;&#32;&#32;test_api_init(heap);
+00146 &#32;&#32;&#32;&#32;test_api_erase_program_read(heap);
+00147 &#32;&#32;&#32;&#32;test_api_trim(heap);
+00148 &#32;&#32;&#32;&#32;test_api_sync(heap);
+00149 &#32;&#32;&#32;&#32;test_api_size(heap);
+00150 &#32;&#32;&#32;&#32;test_api_attribute(heap);
+00151 
+00152 &#32;&#32;&#32;&#32;cleanup(heap);
+00153 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00154 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1aa39763d4cd60a15a1e2ba5a310e8401e"/><section>
+    <title>test_copy_between_different_filesystems()</title>
+<indexterm><primary>test_copy_between_different_filesystems</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>test_copy_between_different_filesystems</secondary></indexterm>
+<para><computeroutput>void test_copy_between_different_filesystems (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__copy__between__different__filesystems_8c_source_1l00137">137</link> of file <link linkend="_integration_2test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+<programlisting linenumbering="unnumbered">00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00138 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Copy&#32;between&#32;different&#32;file&#32;system:\n&quot;</emphasis>);
+00139 
+00140 &#32;&#32;&#32;&#32;init_filesystem_combination();
+00141 
+00142 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a7edd94b16025f39d4aca113469771df9">NUM_COMBINATION</link>;&#32;i++)&#32;{
+00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structcombination__map">combination_map</link>&#32;setting&#32;=&#32;combination[i];
+00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;from&#32;%s(%s)&#32;to&#32;%s(%s)&quot;</emphasis>,
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>,
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>);
+00147 
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>);
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1&#32;&amp;&amp;&#32;errno&#32;==&#32;5005)&#32;{
+00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>);
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1&#32;&amp;&amp;&#32;errno&#32;==&#32;5005)&#32;{
+00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00160 
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/a&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/b&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>);
+00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00165 
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_write(<emphasis role="stringliteral">&quot;/a/source&quot;</emphasis>);
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_copy(<emphasis role="stringliteral">&quot;/a/source&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/b/dist&quot;</emphasis>);
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_read(<emphasis role="stringliteral">&quot;/b/dist&quot;</emphasis>);
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00172 
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;from&#32;%s(%s)&#32;to&#32;%s(%s)&quot;</emphasis>,
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>,
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>),
+00176 
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_write(<emphasis role="stringliteral">&quot;/b/source&quot;</emphasis>);
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_copy(<emphasis role="stringliteral">&quot;/b/source&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/a/dist&quot;</emphasis>);
+00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_read(<emphasis role="stringliteral">&quot;/a/dist&quot;</emphasis>);
+00182 
+00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/a&quot;</emphasis>);
+00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/b&quot;</emphasis>);
+00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00187 
+00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00189 &#32;&#32;&#32;&#32;}
+00190 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1af735a8051c1fced4d3ccfa7bfc207a2e"/><section>
+    <title>test_filesystem()</title>
+<indexterm><primary>test_filesystem</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>test_filesystem</secondary></indexterm>
+<para><computeroutput>void test_filesystem (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_host_2test__filesystem_8c_source_1l00358">358</link> of file <link linkend="_host_2test__filesystem_8c_source">test_filesystem.c</link>.</para>
+<programlisting linenumbering="unnumbered">00358 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00359 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;File&#32;system&#32;FAT:\n&quot;</emphasis>);
+00360 
+00361 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00362 
+00363 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00364 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00365 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00366 &#32;&#32;&#32;&#32;setup(heap);
+00367 
+00368 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;heap);
+00369 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;heap);
+00370 &#32;&#32;&#32;&#32;test_api_file_open_close(fat);
+00371 &#32;&#32;&#32;&#32;test_api_file_write_read(fat);
+00372 &#32;&#32;&#32;&#32;test_api_file_seek(fat);
+00373 &#32;&#32;&#32;&#32;test_api_file_tell(fat);
+00374 &#32;&#32;&#32;&#32;test_api_file_size(fat);
+00375 &#32;&#32;&#32;&#32;test_api_file_truncate(fat);
+00376 &#32;&#32;&#32;&#32;test_api_dir_open(fat);
+00377 &#32;&#32;&#32;&#32;test_api_dir_read(fat);
+00378 &#32;&#32;&#32;&#32;test_api_remove(fat);
+00379 &#32;&#32;&#32;&#32;test_api_rename(fat);
+00380 &#32;&#32;&#32;&#32;test_api_stat(fat);
+00381 
+00382 &#32;&#32;&#32;&#32;test_api_unmount(fat);
+00383 &#32;&#32;&#32;&#32;cleanup(heap);
+00384 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00385 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00386 
+00387 
+00388 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;File&#32;system&#32;littlefs:\n&quot;</emphasis>);
+00389 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00390 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00391 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00392 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00393 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00394 &#32;&#32;&#32;&#32;setup(heap);
+00395 
+00396 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;heap);
+00397 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;heap);
+00398 &#32;&#32;&#32;&#32;test_api_file_open_close(lfs);
+00399 &#32;&#32;&#32;&#32;test_api_file_write_read(lfs);
+00400 &#32;&#32;&#32;&#32;test_api_file_seek(lfs);
+00401 &#32;&#32;&#32;&#32;test_api_file_tell(lfs);
+00402 &#32;&#32;&#32;&#32;test_api_file_size(lfs);
+00403 &#32;&#32;&#32;&#32;test_api_file_truncate(lfs);
+00404 &#32;&#32;&#32;&#32;test_api_dir_open(lfs);
+00405 &#32;&#32;&#32;&#32;test_api_dir_read(lfs);
+00406 &#32;&#32;&#32;&#32;test_api_remove(lfs);
+00407 &#32;&#32;&#32;&#32;test_api_rename(lfs);
+00408 &#32;&#32;&#32;&#32;test_api_stat(lfs);
+00409 
+00410 &#32;&#32;&#32;&#32;test_api_unmount(lfs);
+00411 
+00412 &#32;&#32;&#32;&#32;cleanup(heap);
+00413 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00414 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00415 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1ab711b6669c9731b7099653fa536722ae"/><section>
+    <title>test_standard()</title>
+<indexterm><primary>test_standard</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>test_standard</secondary></indexterm>
+<para><computeroutput>void test_standard (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00980">980</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00980 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00981 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(littlefs):\n&quot;</emphasis>);
+00982 
+00983 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00984 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00985 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00986 
+00987 &#32;&#32;&#32;&#32;setup(lfs,&#32;flash);
+00988 
+00989 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+00990 
+00991 &#32;&#32;&#32;&#32;cleanup(lfs,&#32;flash);
+00992 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00993 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00994 
+00995 
+00996 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(FAT):\n&quot;</emphasis>);
+00997 
+00998 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00999 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+01000 &#32;&#32;&#32;&#32;setup(fat,&#32;flash);
+01001 
+01002 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+01003 
+01004 &#32;&#32;&#32;&#32;cleanup(fat,&#32;flash);
+01005 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+01006 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+01007 }
+</programlisting></section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2integration_2main_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb"/><section>
+    <title>test_vfs()</title>
+<indexterm><primary>test_vfs</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>test_vfs</secondary></indexterm>
+<para><computeroutput>void test_vfs (void )<computeroutput>[extern]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00518">518</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00519 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;FAT:\n&quot;</emphasis>);
+00520 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00521 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00522 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00523 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00524 &#32;&#32;&#32;&#32;setup(flash);
+00525 
+00526 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;flash);
+00527 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;flash);
+00528 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00529 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00530 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00531 &#32;&#32;&#32;&#32;test_api_file_seek();
+00532 &#32;&#32;&#32;&#32;test_api_file_tell();
+00533 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00534 &#32;&#32;&#32;&#32;test_api_stat();
+00535 &#32;&#32;&#32;&#32;test_api_remove();
+00536 &#32;&#32;&#32;&#32;test_api_rename();
+00537 &#32;&#32;&#32;&#32;test_api_mkdir();
+00538 &#32;&#32;&#32;&#32;test_api_dir_open();
+00539 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00540 &#32;&#32;&#32;&#32;test_api_dir_read();
+00541 &#32;&#32;&#32;&#32;test_api_reformat();
+00542 &#32;&#32;&#32;&#32;test_api_unmount();
+00543 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;flash);
+00544 
+00545 &#32;&#32;&#32;&#32;cleanup(flash);
+00546 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00547 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00548 
+00549 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs:\n&quot;</emphasis>);
+00550 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00551 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00552 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00553 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00554 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00555 &#32;&#32;&#32;&#32;setup(flash);
+00556 
+00557 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;flash);
+00558 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;flash);
+00559 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00560 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00561 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00562 &#32;&#32;&#32;&#32;test_api_file_seek();
+00563 &#32;&#32;&#32;&#32;test_api_file_tell();
+00564 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00565 &#32;&#32;&#32;&#32;test_api_stat();
+00566 &#32;&#32;&#32;&#32;test_api_remove();
+00567 &#32;&#32;&#32;&#32;test_api_rename();
+00568 &#32;&#32;&#32;&#32;test_api_mkdir();
+00569 &#32;&#32;&#32;&#32;test_api_dir_open();
+00570 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00571 &#32;&#32;&#32;&#32;test_api_dir_read();
+00572 &#32;&#32;&#32;&#32;test_api_reformat();
+00573 &#32;&#32;&#32;&#32;test_api_unmount();
+00574 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;flash);
+00575 
+00576 &#32;&#32;&#32;&#32;cleanup(flash);
+00577 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00578 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00579 
+00580 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs&#32;on&#32;the&#32;Heap:\n&quot;</emphasis>);
+00581 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_integration_2test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593">BLOCKDEVICE_HEAP_SIZE</link>);
+00582 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00583 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00584 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00585 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00586 &#32;&#32;&#32;&#32;setup(heap);
+00587 
+00588 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;heap);
+00589 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;heap);
+00590 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00591 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00592 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00593 &#32;&#32;&#32;&#32;test_api_file_seek();
+00594 &#32;&#32;&#32;&#32;test_api_file_tell();
+00595 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00596 &#32;&#32;&#32;&#32;test_api_stat();
+00597 &#32;&#32;&#32;&#32;test_api_remove();
+00598 &#32;&#32;&#32;&#32;test_api_rename();
+00599 &#32;&#32;&#32;&#32;test_api_mkdir();
+00600 &#32;&#32;&#32;&#32;test_api_dir_open();
+00601 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00602 &#32;&#32;&#32;&#32;test_api_dir_read();
+00603 &#32;&#32;&#32;&#32;test_api_reformat();
+00604 &#32;&#32;&#32;&#32;test_api_unmount();
+00605 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;heap);
+00606 
+00607 &#32;&#32;&#32;&#32;cleanup(heap);
+00608 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00609 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00610 
+00611 
+00612 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;loopback&#32;FAT&#32;on&#32;littlefs:\n&quot;</emphasis>);
+00613 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00614 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00615 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00616 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00617 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00618 &#32;&#32;&#32;&#32;setup(flash);
+00619 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(lfs,&#32;flash);
+00620 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00621 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/flash&quot;</emphasis>,&#32;lfs,&#32;flash);
+00622 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00623 
+00624 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*loopback&#32;=&#32;<link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link>(<emphasis role="stringliteral">&quot;/flash/loopback.dmg&quot;</emphasis>,&#32;64&#32;*&#32;1024,&#32;512);
+00625 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00626 &#32;&#32;&#32;&#32;assert(loopback&#32;!=&#32;NULL);
+00627 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00628 
+00629 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;loopback);
+00630 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;loopback);
+00631 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00632 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00633 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00634 &#32;&#32;&#32;&#32;test_api_file_seek();
+00635 &#32;&#32;&#32;&#32;test_api_file_tell();
+00636 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00637 &#32;&#32;&#32;&#32;test_api_stat();
+00638 &#32;&#32;&#32;&#32;test_api_remove();
+00639 &#32;&#32;&#32;&#32;test_api_rename();
+00640 &#32;&#32;&#32;&#32;test_api_mkdir();
+00641 &#32;&#32;&#32;&#32;test_api_dir_open();
+00642 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00643 &#32;&#32;&#32;&#32;test_api_dir_read();
+00644 &#32;&#32;&#32;&#32;test_api_reformat();
+00645 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;loopback);
+00646 
+00647 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00648 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link>(loopback);
+00649 
+00650 &#32;&#32;&#32;&#32;test_loopback_file();
+00651 
+00652 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/flash&quot;</emphasis>);
+00653 &#32;&#32;&#32;&#32;cleanup(flash);
+00654 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00655 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00656 
+00657 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;not&#32;connected&#32;SD&#32;card&#32;error&#32;handling:\n&quot;</emphasis>);
+00658 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*sd&#32;=&#32;<link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link>(spi1,&#32;&#32;<emphasis role="comment">//&#32;SPI1&#32;without&#32;connection</emphasis>
+00659 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1a275e53ae2306013323ba05fad39168ab">PICO_SPI1_TX_PIN</link>,
+00660 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240">PICO_SPI1_RX_PIN</link>,
+00661 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a">PICO_SPI1_SCK_PIN</link>,
+00662 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1abb61793f045373400bf402e12a351d74">PICO_SPI1_CSN_PIN</link>,
+00663 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;10&#32;*&#32;MHZ,
+00664 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+00665 &#32;&#32;&#32;&#32;assert(sd&#32;!=&#32;NULL);
+00666 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00667 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00668 &#32;&#32;&#32;&#32;setup(sd);
+00669 
+00670 &#32;&#32;&#32;&#32;test_api_format_error(fat,&#32;sd);
+00671 &#32;&#32;&#32;&#32;test_api_mount_error(fat,&#32;sd);
+00672 
+00673 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00674 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link>(sd);
+00675 }
+</programlisting></section>
+</section>
+</section>

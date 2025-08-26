@@ -5,6 +5,15 @@
 <para>
 <computeroutput>#include &lt;tinyengine.h&gt;</computeroutput>
 </para>
+Collaboration diagram for TinyEngine:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_tiny_engine__coll__graph.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
@@ -154,7 +163,7 @@ Definition at line <link linkend="_tinyengine_8cpp_source_1l00154">154</link> of
 00158 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Set&#32;up&#32;a&#32;RX&#32;interrupt</emphasis>
 00159 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;We&#32;need&#32;to&#32;set&#32;up&#32;the&#32;handler&#32;first</emphasis>
 00160 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Select&#32;correct&#32;interrupt&#32;for&#32;the&#32;UART&#32;we&#32;are&#32;using</emphasis>
-00161 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;UART_IRQ&#32;=&#32;<link linkend="_tinyengine_8cpp_1a1de69c73f829a03f46f5e7690da7e79a">UART_ID</link>&#32;==&#32;uart0&#32;?&#32;UART0_IRQ&#32;:&#32;UART1_IRQ;
+00161 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;UART_IRQ&#32;=&#32;<link linkend="_tinyengine_8cpp_1a1de69c73f829a03f46f5e7690da7e79a">UART_ID</link>&#32;==&#32;uart0&#32;?&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_1a876b9495995a81dff786f07a1975c3b8a504e54f28a2e2928bd6a1604ee0a24fb">UART0_IRQ</link>&#32;:&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_1a876b9495995a81dff786f07a1975c3b8a1062848ec5bc51fcdd58a95d40fc266b">UART1_IRQ</link>;
 00162 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;And&#32;set&#32;up&#32;and&#32;enable&#32;the&#32;interrupt&#32;handlers</emphasis>
 00163 &#32;&#32;&#32;&#32;irq_set_exclusive_handler(UART_IRQ,&#32;<link linkend="_tinyengine_8cpp_1ad7fec5b2b07b712822dc8182d1796c22">on_uart_rx</link>);
 00164 &#32;&#32;&#32;&#32;irq_set_enabled(UART_IRQ,&#32;<emphasis role="keyword">true</emphasis>);

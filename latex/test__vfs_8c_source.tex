@@ -1,0 +1,669 @@
+\doxysection{test\+\_\+vfs.\+c}
+\hypertarget{test__vfs_8c_source}{}\label{test__vfs_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_vfs.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_vfs.c}}
+\mbox{\hyperlink{test__vfs_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{dirent_8h}{dirent.h}}>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{heap_8h}{blockdevice/heap.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{loopback_8h}{blockdevice/loopback.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fat_8h}{filesystem/fat.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{littlefs_8h}{filesystem/littlefs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00015}\mbox{\hyperlink{test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{00015}}\ \textcolor{preprocessor}{\#define\ COLOR\_GREEN(format)\ \ \ \ \ \ ("{}\(\backslash\)e[32m"{}\ format\ "{}\(\backslash\)e[0m"{})}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00016}\mbox{\hyperlink{test__vfs_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{00016}}\ \textcolor{preprocessor}{\#define\ HEAP\_STORAGE\_SIZE\ \ \ \ \ \ \ \ (128\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00017}\mbox{\hyperlink{test__vfs_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{00017}}\ \textcolor{preprocessor}{\#define\ LITTLEFS\_BLOCK\_CYCLE\ \ \ \ \ 500}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00018}\mbox{\hyperlink{test__vfs_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{00018}}\ \textcolor{preprocessor}{\#define\ LITTLEFS\_LOOKAHEAD\_SIZE\ \ 16}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00019}\mbox{\hyperlink{test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}{00019}}\ \textcolor{preprocessor}{\#define\ MIN\_FILENO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00020}\mbox{\hyperlink{test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593}{00020}}\ \textcolor{preprocessor}{\#define\ BLOCKDEVICE\_HEAP\_SIZE\ \ \ \ (64\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00022}\mbox{\hyperlink{test__vfs_8c_a275e53ae2306013323ba05fad39168ab}{00022}}\ \textcolor{preprocessor}{\#define\ PICO\_SPI1\_TX\_PIN\ \ \ 15}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00023}\mbox{\hyperlink{test__vfs_8c_a5ba4c4aa36b4d4b343838d39ed4db240}{00023}}\ \textcolor{preprocessor}{\#define\ PICO\_SPI1\_RX\_PIN\ \ \ 12}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00024}\mbox{\hyperlink{test__vfs_8c_ab6e7784fe43df808a9103f9041af196a}{00024}}\ \textcolor{preprocessor}{\#define\ PICO\_SPI1\_SCK\_PIN\ \ 19}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00025}\mbox{\hyperlink{test__vfs_8c_abb61793f045373400bf402e12a351d74}{00025}}\ \textcolor{preprocessor}{\#define\ PICO\_SPI1\_CSN\_PIN\ \ 17}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00027}00027\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_printf(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *format,\ ...)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00028}00028\ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00029}00029\ \ \ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ vprintf(format,\ args);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00031}00031\ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00033}00033\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 50\ -\/\ (size\_t)n;\ i++)}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}."{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00038}00038\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ setup(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00039}00039\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00042}00042\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ cleanup(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ length\ =\ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}(device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ Deinit\ is\ performed\ when\ unmounting,\ so\ re-\/init\ is\ required.}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00045}00045\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00046}00046\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}(device,\ 0,\ length);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00049}00049\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_format(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00050}00050\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_format"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fs,\ device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00053}00053\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00055}00055\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00058}00058\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_mount(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00059}00059\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_mount"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00062}00062\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00064}00064\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00067}00067\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_format\_error(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00068}00068\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_format\ error"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fs,\ device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00071}00071\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00072}00072\ \ \ \ \ assert(errno\ ==\ 5005);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00074}00074\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00077}00077\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_mount\_error(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00078}00078\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_mount\ error"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00081}00081\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00082}00082\ \ \ \ \ assert(errno\ ==\ 5005);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00084}00084\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00087}00087\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_open\_close()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00088}00088\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}open,close"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_RDONLY);\ \ \textcolor{comment}{//\ non-\/existing\ file}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00091}00091\ \ \ \ \ assert(fd\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00092}00092\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00094}00094\ \ \ \ \ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00095}00095\ \ \ \ \ assert(fd\ >=\ \mbox{\hyperlink{integration_2test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}{MIN\_FILENO}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00098}00098\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00100}00100\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00103}00103\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_open\_many()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00104}00104\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}open\ many\ files"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00106}00106\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00107}00107\ \ \ \ \ assert(fd\ >=\ \mbox{\hyperlink{integration_2test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}{MIN\_FILENO}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00109}00109\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00110}00110\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordtype}{int}\ fd1\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00113}00113\ \ \ \ \ assert(fd1\ >=\ \mbox{\hyperlink{integration_2test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}{MIN\_FILENO}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00114}00114\ \ \ \ \ \textcolor{keywordtype}{int}\ fd2\ =\ open(\textcolor{stringliteral}{"{}/file2"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00115}00115\ \ \ \ \ assert(fd2\ ==\ fd1\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00116}00116\ \ \ \ \ \textcolor{keywordtype}{int}\ fd3\ =\ open(\textcolor{stringliteral}{"{}/file3"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00117}00117\ \ \ \ \ assert(fd3\ ==\ fd1\ +\ 2);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordtype}{int}\ fd4\ =\ open(\textcolor{stringliteral}{"{}/file4"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00119}00119\ \ \ \ \ assert(fd4\ ==\ fd1\ +\ 3);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00120}00120\ \ \ \ \ \textcolor{keywordtype}{int}\ fd5\ =\ open(\textcolor{stringliteral}{"{}/file5"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00121}00121\ \ \ \ \ assert(fd5\ ==\ fd1\ +\ 4);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00123}00123\ \ \ \ \ err\ =\ close(fd5);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00124}00124\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00125}00125\ \ \ \ \ err\ =\ close(fd4);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00126}00126\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00127}00127\ \ \ \ \ err\ =\ close(fd3);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00128}00128\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00129}00129\ \ \ \ \ err\ =\ close(fd2);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00130}00130\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00131}00131\ \ \ \ \ err\ =\ close(fd1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00132}00132\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00134}00134\ \ \ \ \ \textcolor{keywordtype}{int}\ fd6\ =\ open(\textcolor{stringliteral}{"{}/file6"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00135}00135\ \ \ \ \ assert(fd6\ ==\ fd1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00136}00136\ \ \ \ \ err\ =\ close(fd6);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00137}00137\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00139}00139\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00143}00143\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_write\_read()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00144}00144\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}write,read"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00146}00146\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00147}00147\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[512]\ =\ \textcolor{stringliteral}{"{}Hello\ World!"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00150}00150\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00151}00151\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00153}00153\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00154}00154\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00156}00156\ \ \ \ \ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_RDONLY);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00157}00157\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00158}00158\ \ \ \ \ \textcolor{keywordtype}{char}\ read\_buffer[512]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00159}00159\ \ \ \ \ ssize\_t\ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00160}00160\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})read\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00161}00161\ \ \ \ \ assert(strcmp(read\_buffer,\ write\_buffer)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00163}00163\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00164}00164\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00166}00166\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00167}00167\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00169}00169\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_seek()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00170}00170\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}lseek"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00172}00172\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_RDWR|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00173}00173\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00175}00175\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[]\ =\ \textcolor{stringliteral}{"{}123456789ABCDEF"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00176}00176\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00177}00177\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00179}00179\ \ \ \ \ off\_t\ offset\ =\ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00180}00180\ \ \ \ \ assert(offset\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordtype}{char}\ read\_buffer[512]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00183}00183\ \ \ \ \ ssize\_t\ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00184}00184\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})read\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00185}00185\ \ \ \ \ assert(strcmp(write\_buffer,\ read\_buffer)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00187}00187\ \ \ \ \ offset\ =\ lseek(fd,\ 9,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00188}00188\ \ \ \ \ assert(offset\ ==\ 9);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00189}00189\ \ \ \ \ memset(read\_buffer,\ 0,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00190}00190\ \ \ \ \ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00191}00191\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})read\_length\ ==\ strlen(write\_buffer)\ -\/\ 9);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00192}00192\ \ \ \ \ assert(strcmp(\textcolor{stringliteral}{"{}ABCDEF"{}},\ read\_buffer)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00194}00194\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00195}00195\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00197}00197\ \ \ \ \ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_RDWR|O\_APPEND);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00198}00198\ \ \ \ \ \textcolor{keywordtype}{char}\ append\_buffer[]\ =\ \textcolor{stringliteral}{"{}APPEND"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00199}00199\ \ \ \ \ memset(read\_buffer,\ 0,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00200}00200\ \ \ \ \ write\_length\ =\ write(fd,\ append\_buffer,\ strlen(append\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00201}00201\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(append\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00202}00202\ \ \ \ \ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00203}00203\ \ \ \ \ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00204}00204\ \ \ \ \ assert(strcmp(read\_buffer,\ \textcolor{stringliteral}{"{}123456789ABCDEFAPPEND"{}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00205}00205\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00206}00206\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00208}00208\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00211}00211\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_tell()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00212}00212\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}ftell"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00214}00214\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/file"{}},\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00215}00215\ \ \ \ \ assert(fp\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00217}00217\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_data[]\ =\ \textcolor{stringliteral}{"{}123456789ABCDEF"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00218}00218\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ write\_length\ =\ fwrite(write\_data,\ 1,\ strlen(write\_data),\ fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00219}00219\ \ \ \ \ assert(write\_length\ ==\ strlen(write\_data));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00221}00221\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fflush(fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00222}00222\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{long}\ pos\ =\ ftell(fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00225}00225\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})pos\ ==\ strlen(write\_data));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00227}00227\ \ \ \ \ err\ =\ fseek(fp,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00228}00228\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00230}00230\ \ \ \ \ pos\ =\ ftell(fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00231}00231\ \ \ \ \ assert(pos\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00233}00233\ \ \ \ \ err\ =\ fseek(fp,\ 0,\ SEEK\_END);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00234}00234\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00235}00235\ \ \ \ \ pos\ =\ ftell(fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00236}00236\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})pos\ ==\ strlen(write\_data));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00238}00238\ \ \ \ \ err\ =\ fclose(fp);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00239}00239\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00241}00241\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00242}00242\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00244}00244\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_file\_truncate()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00245}00245\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}ftruncate"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_RDWR|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00248}00248\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[]\ =\ \textcolor{stringliteral}{"{}123456789ABCDEF"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00251}00251\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00252}00252\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00254}00254\ \ \ \ \ off\_t\ offset\ =\ lseek(fd,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00255}00255\ \ \ \ \ assert(offset\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00257}00257\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b}{ftruncate}}(fd,\ 9);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00258}00258\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00260}00260\ \ \ \ \ \textcolor{keywordtype}{char}\ read\_buffer[512]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00261}00261\ \ \ \ \ ssize\_t\ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00262}00262\ \ \ \ \ assert(read\_length\ ==\ 9);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00263}00263\ \ \ \ \ assert(strcmp(read\_buffer,\ \textcolor{stringliteral}{"{}123456789"{}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00265}00265\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00266}00266\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00268}00268\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00269}00269\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00271}00271\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_mkdir()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00272}00272\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}mkdir,rmdir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00274}00274\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir-\/create"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00275}00275\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00277}00277\ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00278}00278\ \ \ \ \ err\ =\ stat(\textcolor{stringliteral}{"{}/dir-\/create"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00279}00279\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00280}00280\ \ \ \ \ assert(finfo.st\_mode\ \&\ S\_IFDIR);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00282}00282\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce}{rmdir}}(\textcolor{stringliteral}{"{}/dir-\/create"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00283}00283\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00285}00285\ \ \ \ \ err\ =\ stat(\textcolor{stringliteral}{"{}/dir-\/create"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00286}00286\ \ \ \ \ assert(err\ ==\ -\/1\ \&\&\ errno\ ==\ ENOENT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00288}00288\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00289}00289\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00291}00291\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_dir\_open()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00292}00292\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}opendir,closedir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00294}00294\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir-\/non-\/exists"{}});\ \ \textcolor{comment}{//\ non-\/exists\ directory}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00295}00295\ \ \ \ \ assert(dir\ ==\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00296}00296\ \ \ \ \ assert((errno\ ==\ ENOTDIR)\ ||\ (errno\ ==\ ENOENT));\ \ \textcolor{comment}{//\ NOTE:\ FAT\ returns\ ENOTDIR,\ littlefs\ returns\ ENOENT}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00298}00298\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00299}00299\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00301}00301\ \ \ \ \ dir\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00302}00302\ \ \ \ \ assert(dir\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00304}00304\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00305}00305\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00307}00307\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00308}00308\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00310}00310\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_dir\_open\_many()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00311}00311\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}opendir\ many\ dir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00313}00313\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir1"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00314}00314\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00315}00315\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir2"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00316}00316\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00317}00317\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir3"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00318}00318\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00319}00319\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir4"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00320}00320\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00321}00321\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir5"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00322}00322\ \ \ \ \ assert((err\ ==\ 0)\ ||\ (err\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00324}00324\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir1\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir1"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00325}00325\ \ \ \ \ assert(dir1\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00326}00326\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir2\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir2"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00327}00327\ \ \ \ \ assert(dir2\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00328}00328\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir3\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir3"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00329}00329\ \ \ \ \ assert(dir3\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00330}00330\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir4\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir4"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00331}00331\ \ \ \ \ assert(dir4\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00332}00332\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir5\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir5"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00333}00333\ \ \ \ \ assert(dir5\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00335}00335\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir5);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00336}00336\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00337}00337\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir4);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00338}00338\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00339}00339\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir3);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00340}00340\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00341}00341\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir2);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00342}00342\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00343}00343\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00344}00344\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00345}00345\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00346}00346\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00348}00348\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_dir\_read()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00349}00349\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}readdir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00351}00351\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00352}00352\ \ \ \ \ assert(err\ ==\ 0\ ||\ (err\ ==\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00354}00354\ \ \ \ \ \textcolor{comment}{//\ add\ regular\ file}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00355}00355\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/dir/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00356}00356\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00357}00357\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00358}00358\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00360}00360\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir\ =\ \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{stringliteral}{"{}/dir"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00361}00361\ \ \ \ \ assert(dir\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00363}00363\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirent}{dirent}}\ *ent\ =\ \mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}}(dir);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00364}00364\ \ \ \ \ assert(ent\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00365}00365\ \ \ \ \ \textcolor{keywordflow}{if}\ (ent-\/>\mbox{\hyperlink{structdirent_a948760e3b7f607213a19f85e7af15a32}{d\_type}}\ ==\ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}{DT\_DIR}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ not\ FAT\ file\ system}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00367}00367\ \ \ \ \ \ \ \ \ assert(strcmp(ent-\/>\mbox{\hyperlink{structdirent_a8cb13e39a90c43e6b180ff4f1614e4da}{d\_name}},\ \textcolor{stringliteral}{"{}."{}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00369}00369\ \ \ \ \ \ \ \ \ ent\ =\ \mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}}(dir);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00370}00370\ \ \ \ \ \ \ \ \ assert(ent\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00371}00371\ \ \ \ \ \ \ \ \ assert(ent-\/>\mbox{\hyperlink{structdirent_a948760e3b7f607213a19f85e7af15a32}{d\_type}}\ ==\ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}{DT\_DIR}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ assert(strcmp(ent-\/>\mbox{\hyperlink{structdirent_a8cb13e39a90c43e6b180ff4f1614e4da}{d\_name}},\ \textcolor{stringliteral}{"{}.."{}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00373}00373\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ ent\ =\ \mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}}(dir);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00375}00375\ \ \ \ \ \ \ \ \ assert(ent\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00376}00376\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00377}00377\ \ \ \ \ assert(ent-\/>\mbox{\hyperlink{structdirent_a948760e3b7f607213a19f85e7af15a32}{d\_type}}\ ==\ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc}{DT\_REG}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00378}00378\ \ \ \ \ assert(strcmp(ent-\/>\mbox{\hyperlink{structdirent_a8cb13e39a90c43e6b180ff4f1614e4da}{d\_name}},\ \textcolor{stringliteral}{"{}file"{}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00380}00380\ \ \ \ \ ent\ =\ \mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}}(dir);\ \ \textcolor{comment}{//\ Reach\ the\ end\ of\ the\ directory}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00381}00381\ \ \ \ \ assert(ent\ ==\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00382}00382\ \ \ \ \ assert(errno\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00384}00384\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(dir);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00385}00385\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00387}00387\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00388}00388\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00390}00390\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_remove()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00391}00391\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}unlink"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00393}00393\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ unlink(\textcolor{stringliteral}{"{}/not-\/exists"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00394}00394\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00395}00395\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00397}00397\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00398}00398\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00399}00399\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00400}00400\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00402}00402\ \ \ \ \ err\ =\ unlink(\textcolor{stringliteral}{"{}/file"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00403}00403\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00405}00405\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00406}00406\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00408}00408\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_rename()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00409}00409\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}rename"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00411}00411\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}}(\textcolor{stringliteral}{"{}/not-\/exists"{}},\ \textcolor{stringliteral}{"{}/renamed"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00412}00412\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00413}00413\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00414}00414\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00415}00415\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00416}00416\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00417}00417\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[512]\ =\ \textcolor{stringliteral}{"{}Hello\ World!"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00418}00418\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00419}00419\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00421}00421\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00422}00422\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00424}00424\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}}(\textcolor{stringliteral}{"{}/file"{}},\ \textcolor{stringliteral}{"{}/renamed"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00425}00425\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00427}00427\ \ \ \ \ fd\ =\ open(\textcolor{stringliteral}{"{}/renamed"{}},\ O\_RDONLY);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00428}00428\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00429}00429\ \ \ \ \ \textcolor{keywordtype}{char}\ read\_buffer[512]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00430}00430\ \ \ \ \ ssize\_t\ read\_length\ =\ read(fd,\ read\_buffer,\ \textcolor{keyword}{sizeof}(read\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00431}00431\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})read\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00432}00432\ \ \ \ \ assert(strcmp(read\_buffer,\ write\_buffer)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00434}00434\ \ \ \ \ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00435}00435\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00437}00437\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00438}00438\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00440}00440\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_stat()\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00441}00441\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}lstat"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00443}00443\ \ \ \ \ \textcolor{comment}{//\ regular\ file}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00444}00444\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00445}00445\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00446}00446\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[512]\ =\ \textcolor{stringliteral}{"{}Hello\ World!"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00447}00447\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00448}00448\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00450}00450\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00451}00451\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00453}00453\ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00454}00454\ \ \ \ \ err\ =\ stat(\textcolor{stringliteral}{"{}/file"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00455}00455\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00456}00456\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})finfo.st\_size\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00457}00457\ \ \ \ \ assert(finfo.st\_mode\ \&\ S\_IFREG);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00459}00459\ \ \ \ \ \textcolor{comment}{//\ directory}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00460}00460\ \ \ \ \ err\ =\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{stringliteral}{"{}/dir"{}},\ 0777);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00461}00461\ \ \ \ \ assert(err\ ==\ 0\ ||\ (err\ ==\ -\/1\ \&\&\ errno\ ==\ EEXIST));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00462}00462\ \ \ \ \ err\ =\ stat(\textcolor{stringliteral}{"{}/dir"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00463}00463\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00464}00464\ \ \ \ \ assert(finfo.st\_mode\ \&\ S\_IFDIR);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00466}00466\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00467}00467\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00469}00469\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_reformat(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00470}00470\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_reformat"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00472}00472\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ open(\textcolor{stringliteral}{"{}/file"{}},\ O\_WRONLY|O\_CREAT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00473}00473\ \ \ \ \ assert(fd\ !=\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00474}00474\ \ \ \ \ \textcolor{keywordtype}{char}\ write\_buffer[512]\ =\ \textcolor{stringliteral}{"{}Hello\ World!"{}};}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00475}00475\ \ \ \ \ ssize\_t\ write\_length\ =\ write(fd,\ write\_buffer,\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00476}00476\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})write\_length\ ==\ strlen(write\_buffer));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00477}00477\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ close(fd);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00478}00478\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00480}00480\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{fs\_reformat}}(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00481}00481\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00483}00483\ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00484}00484\ \ \ \ \ err\ =\ stat(\textcolor{stringliteral}{"{}/file"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00485}00485\ \ \ \ \ assert(err\ ==\ -\/1);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00486}00486\ \ \ \ \ assert(errno\ ==\ ENOENT);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00488}00488\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00489}00489\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00491}00491\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_unmount(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00492}00492\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_unmount"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00494}00494\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00495}00495\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00497}00497\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00498}00498\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00500}00500\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_mount\_unmount\_repeat(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00501}00501\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}fs\_mount,fs\_unmount\ repeat"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00503}00503\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 20;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00504}00504\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00505}00505\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00506}00506\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00507}00507\ \ \ \ \ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00508}00508\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00510}00510\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00511}00511\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00512}00512\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00513}00513\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_loopback\_file(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00514}00514\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}loopback\ image\ file"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00516}00516\ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo;}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00517}00517\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ stat(\textcolor{stringliteral}{"{}/heap/loopback.dmg"{}},\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00518}00518\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00519}00519\ \ \ \ \ assert(finfo.st\_mode\ \&\ S\_IFREG);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00520}00520\ \ \ \ \ assert((\textcolor{keywordtype}{size\_t})finfo.st\_size\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00522}00522\ \ \ \ \ printf(\mbox{\hyperlink{integration_2test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00523}00523\ \}}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00525}\mbox{\hyperlink{test__vfs_8c_a6b6e3fca2ed024f4d0fa99c0b09542fb}{00525}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{integration_2test__vfs_8c_a6b6e3fca2ed024f4d0fa99c0b09542fb}{test\_vfs}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00526}00526\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ FAT:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00527}00527\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00528}00528\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00529}00529\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00530}00530\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00531}00531\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00533}00533\ \ \ \ \ test\_api\_format(fat,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00534}00534\ \ \ \ \ test\_api\_mount(fat,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00535}00535\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00536}00536\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00537}00537\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00538}00538\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00539}00539\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00540}00540\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00541}00541\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00542}00542\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00543}00543\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00544}00544\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00545}00545\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00546}00546\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00547}00547\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00548}00548\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00549}00549\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00550}00550\ \ \ \ \ test\_api\_mount\_unmount\_repeat(fat,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00551}00551\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00552}00552\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00553}00553\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00554}00554\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00555}00555\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00556}00556\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ littlefs:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00557}00557\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00558}00558\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00559}00559\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00561}00561\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00562}00562\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00563}00563\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00564}00564\ \ \ \ \ test\_api\_format(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00565}00565\ \ \ \ \ test\_api\_mount(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00566}00566\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00567}00567\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00568}00568\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00569}00569\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00570}00570\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00571}00571\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00572}00572\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00573}00573\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00574}00574\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00575}00575\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00576}00576\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00577}00577\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00578}00578\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00579}00579\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00580}00580\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00581}00581\ \ \ \ \ test\_api\_mount\_unmount\_repeat(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00583}00583\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00584}00584\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00585}00585\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00587}00587\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ littlefs\ on\ the\ Heap:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00588}00588\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{integration_2test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593}{BLOCKDEVICE\_HEAP\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00589}00589\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00590}00590\ \ \ \ \ lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00592}00592\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00593}00593\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00595}00595\ \ \ \ \ test\_api\_format(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00596}00596\ \ \ \ \ test\_api\_mount(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00597}00597\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00598}00598\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00599}00599\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00600}00600\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00601}00601\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00602}00602\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00603}00603\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00604}00604\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00605}00605\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00606}00606\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00607}00607\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00608}00608\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00609}00609\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00610}00610\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00611}00611\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00612}00612\ \ \ \ \ test\_api\_mount\_unmount\_repeat(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00613}00613\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00614}00614\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00615}00615\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00616}00616\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00617}00617\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00619}00619\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ loopback\ FAT\ on\ littlefs:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00620}00620\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00621}00621\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00622}00622\ \ \ \ \ lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00624}00624\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00625}00625\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00626}00626\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00627}00627\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00628}00628\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/heap"{}},\ lfs,\ heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00629}00629\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00630}00630\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00631}00631\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *loopback\ =\ \mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{blockdevice\_loopback\_create}}(\textcolor{stringliteral}{"{}/heap/loopback.dmg"{}},\ 64\ *\ 1024,\ 512);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00632}00632\ \ \ \ \ fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00633}00633\ \ \ \ \ assert(loopback\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00634}00634\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00635}00635\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00636}00636\ \ \ \ \ test\_api\_format(fat,\ loopback);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00637}00637\ \ \ \ \ test\_api\_mount(fat,\ loopback);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00638}00638\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00639}00639\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00640}00640\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00641}00641\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00642}00642\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00643}00643\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00644}00644\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00645}00645\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00646}00646\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00647}00647\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00648}00648\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00649}00649\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00650}00650\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00651}00651\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00652}00652\ \ \ \ \ test\_api\_mount\_unmount\_repeat(fat,\ loopback);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00654}00654\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00655}00655\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{blockdevice\_loopback\_free}}(loopback);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00656}00656\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00657}00657\ \ \ \ \ test\_loopback\_file();}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00659}00659\ \ \ \ \ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/heap"{}});}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00660}00660\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00661}00661\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00662}00662\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{\Hypertarget{test__vfs_8c_source_l00663}00663\ \}}
+
+\end{DoxyCode}

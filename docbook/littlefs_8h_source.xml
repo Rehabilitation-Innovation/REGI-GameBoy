@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_littlefs_8h_source" xml:lang="en-US">
+<title>littlefs.h</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/filesystem/littlefs.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_littlefs_8h_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00007"/>00007 
+<anchor xml:id="_littlefs_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00013"/>00013 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_littlefs_8h_source_1l00014"/>00014 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00015"/>00015 
+<anchor xml:id="_littlefs_8h_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&quot;lfs.h&quot;</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_filesystem_8h">filesystem/filesystem.h</link>&quot;</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00018"/>00018 
+<anchor xml:id="_littlefs_8h_source_1l00019"/><link linkend="_littlefs_8h_1a593f0e4fc31a657878ad00b6db24bda4">00019</link> <emphasis role="preprocessor">#define&#32;LFS_DBG&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00020"/>00020 
+<anchor xml:id="_littlefs_8h_source_1l00029"/>00029 <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(uint32_t&#32;block_cycles,&#32;lfs_size_t&#32;lookahead_size);
+<anchor xml:id="_littlefs_8h_source_1l00030"/>00030 
+<anchor xml:id="_littlefs_8h_source_1l00036"/>00036 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs);
+<anchor xml:id="_littlefs_8h_source_1l00037"/>00037 
+<anchor xml:id="_littlefs_8h_source_1l00038"/>00038 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_littlefs_8h_source_1l00039"/>00039 }
+<anchor xml:id="_littlefs_8h_source_1l00040"/>00040 <emphasis role="preprocessor">#endif</emphasis>
+</programlisting></section>

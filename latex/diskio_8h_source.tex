@@ -1,0 +1,83 @@
+\doxysection{diskio.\+h}
+\hypertarget{diskio_8h_source}{}\label{diskio_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/diskio.h@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/diskio.h}}
+\mbox{\hyperlink{diskio_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00002}00002\ \textcolor{comment}{/\ \ Low\ level\ disk\ interface\ modlue\ include\ file\ \ \ (C)ChaN,\ 2019\ \ \ \ \ \ \ \ \ \ /}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00003}00003\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00005}00005\ \textcolor{preprocessor}{\#ifndef\ \_DISKIO\_DEFINED}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00006}00006\ \textcolor{preprocessor}{\#define\ \_DISKIO\_DEFINED}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00009}00009\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00010}00010\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00012}00012\ \textcolor{comment}{/*\ Status\ of\ Disk\ Functions\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00013}\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{00013}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ \ \ \ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}};}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00015}00015\ \textcolor{comment}{/*\ Results\ of\ Disk\ Functions\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00016}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{00016}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00017}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{00017}}\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}}\ =\ 0,\ \ \ \ \ \ \ \textcolor{comment}{/*\ 0:\ Successful\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00018}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba78011f5557679ec178fb40bd21e89840}{00018}}\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba78011f5557679ec178fb40bd21e89840}{RES\_ERROR}},\ \ \ \ \ \textcolor{comment}{/*\ 1:\ R/W\ Error\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00019}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba442a6d4393dc404827067bc4e981b322}{00019}}\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba442a6d4393dc404827067bc4e981b322}{RES\_WRPRT}},\ \ \ \ \ \textcolor{comment}{/*\ 2:\ Write\ Protected\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00020}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{00020}}\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}},\ \ \ \ \ \ \ \textcolor{comment}{/*\ 3:\ Not\ Ready\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00021}\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{00021}}\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}}\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 4:\ Invalid\ Parameter\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00022}00022\ \}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}};}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00025}00025\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00026}00026\ \textcolor{comment}{/*\ Prototypes\ for\ disk\ control\ functions\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00029}00029\ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ \mbox{\hyperlink{diskio_8h_a09cdaa6f36fa409bdf002727bff98eb1}{disk\_initialize}}\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv);}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00030}00030\ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ \mbox{\hyperlink{diskio_8h_a8348ac5ee6d709420c02e45c111f4793}{disk\_status}}\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv);}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00031}00031\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{diskio_8h_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}*\ buff,\ \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\_t}}\ sector,\ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ count);}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00032}00032\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{diskio_8h_ac24448955ef914f54a499df1fb45689d}{disk\_write}}\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}*\ buff,\ \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\_t}}\ sector,\ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ count);}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00033}00033\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ \mbox{\hyperlink{diskio_8h_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ pdrv,\ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ cmd,\ \textcolor{keywordtype}{void}*\ buff);}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00036}00036\ \textcolor{comment}{/*\ Disk\ Status\ Bits\ (DSTATUS)\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00038}\mbox{\hyperlink{diskio_8h_abd6503c70d862b979a3f7080a59e9acd}{00038}}\ \textcolor{preprocessor}{\#define\ STA\_NOINIT\ \ \ \ \ \ 0x01\ \ \ \ }\textcolor{comment}{/*\ Drive\ not\ initialized\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00039}\mbox{\hyperlink{diskio_8h_aec625080763d6cf487e550a6c9a2dd19}{00039}}\ \textcolor{preprocessor}{\#define\ STA\_NODISK\ \ \ \ \ \ 0x02\ \ \ \ }\textcolor{comment}{/*\ No\ medium\ in\ the\ drive\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00040}\mbox{\hyperlink{diskio_8h_a9ec6dc5f6620a33fabe388d3a111ca8c}{00040}}\ \textcolor{preprocessor}{\#define\ STA\_PROTECT\ \ \ \ \ 0x04\ \ \ \ }\textcolor{comment}{/*\ Write\ protected\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00043}00043\ \textcolor{comment}{/*\ Command\ code\ for\ disk\_ioctrl\ fucntion\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00045}00045\ \textcolor{comment}{/*\ Generic\ command\ (Used\ by\ FatFs)\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00046}\mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{00046}}\ \textcolor{preprocessor}{\#define\ CTRL\_SYNC\ \ \ \ \ \ \ \ \ \ \ 0\ \ \ }\textcolor{comment}{/*\ Complete\ pending\ write\ process\ (needed\ at\ FF\_FS\_READONLY\ ==\ 0)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00047}\mbox{\hyperlink{diskio_8h_a570216006f6a8fc4e1698b1bbb2d1dde}{00047}}\ \textcolor{preprocessor}{\#define\ GET\_SECTOR\_COUNT\ \ \ \ 1\ \ \ }\textcolor{comment}{/*\ Get\ media\ size\ (needed\ at\ FF\_USE\_MKFS\ ==\ 1)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00048}\mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{00048}}\ \textcolor{preprocessor}{\#define\ GET\_SECTOR\_SIZE\ \ \ \ \ 2\ \ \ }\textcolor{comment}{/*\ Get\ sector\ size\ (needed\ at\ FF\_MAX\_SS\ !=\ FF\_MIN\_SS)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00049}\mbox{\hyperlink{diskio_8h_aec3bb4dfe075d0ba2f3b07b300a95500}{00049}}\ \textcolor{preprocessor}{\#define\ GET\_BLOCK\_SIZE\ \ \ \ \ \ 3\ \ \ }\textcolor{comment}{/*\ Get\ erase\ block\ size\ (needed\ at\ FF\_USE\_MKFS\ ==\ 1)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00050}\mbox{\hyperlink{diskio_8h_af09fd84bea8d4e889e272471f44d60d6}{00050}}\ \textcolor{preprocessor}{\#define\ CTRL\_TRIM\ \ \ \ \ \ \ \ \ \ \ 4\ \ \ }\textcolor{comment}{/*\ Inform\ device\ that\ the\ data\ on\ the\ block\ of\ sectors\ is\ no\ longer\ used\ (needed\ at\ FF\_USE\_TRIM\ ==\ 1)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00052}00052\ \textcolor{comment}{/*\ Generic\ command\ (Not\ used\ by\ FatFs)\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00053}\mbox{\hyperlink{diskio_8h_a345531a07462afbd999f414708e3b65b}{00053}}\ \textcolor{preprocessor}{\#define\ CTRL\_POWER\ \ \ \ \ \ \ \ \ \ 5\ \ \ }\textcolor{comment}{/*\ Get/Set\ power\ status\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00054}\mbox{\hyperlink{diskio_8h_af40e5cf3000553a978ff6e30dae70858}{00054}}\ \textcolor{preprocessor}{\#define\ CTRL\_LOCK\ \ \ \ \ \ \ \ \ \ \ 6\ \ \ }\textcolor{comment}{/*\ Lock/Unlock\ media\ removal\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00055}\mbox{\hyperlink{diskio_8h_a5e40e16d2d7ce196858950f070b9ec03}{00055}}\ \textcolor{preprocessor}{\#define\ CTRL\_EJECT\ \ \ \ \ \ \ \ \ \ 7\ \ \ }\textcolor{comment}{/*\ Eject\ media\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00056}\mbox{\hyperlink{diskio_8h_add07021167069f5914211a2f8830fabb}{00056}}\ \textcolor{preprocessor}{\#define\ CTRL\_FORMAT\ \ \ \ \ \ \ \ \ 8\ \ \ }\textcolor{comment}{/*\ Create\ physical\ format\ on\ the\ media\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00058}00058\ \textcolor{comment}{/*\ MMC/SDC\ specific\ ioctl\ command\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00059}\mbox{\hyperlink{diskio_8h_aba3a81a9a47c7d1bf3ac7749bc72dcfd}{00059}}\ \textcolor{preprocessor}{\#define\ MMC\_GET\_TYPE\ \ \ \ \ \ \ \ 10\ \ }\textcolor{comment}{/*\ Get\ card\ type\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00060}\mbox{\hyperlink{diskio_8h_ae3b858b81287929f7c7bea3b7aec3087}{00060}}\ \textcolor{preprocessor}{\#define\ MMC\_GET\_CSD\ \ \ \ \ \ \ \ \ 11\ \ }\textcolor{comment}{/*\ Get\ CSD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00061}\mbox{\hyperlink{diskio_8h_a17ad303dd18b19a4c90ab30a8a1c14c4}{00061}}\ \textcolor{preprocessor}{\#define\ MMC\_GET\_CID\ \ \ \ \ \ \ \ \ 12\ \ }\textcolor{comment}{/*\ Get\ CID\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00062}\mbox{\hyperlink{diskio_8h_aff118ba6bd7a9fe7699cee049cff5d6c}{00062}}\ \textcolor{preprocessor}{\#define\ MMC\_GET\_OCR\ \ \ \ \ \ \ \ \ 13\ \ }\textcolor{comment}{/*\ Get\ OCR\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00063}\mbox{\hyperlink{diskio_8h_a5cc43c8449b872e16ea5ab42592f793e}{00063}}\ \textcolor{preprocessor}{\#define\ MMC\_GET\_SDSTAT\ \ \ \ \ \ 14\ \ }\textcolor{comment}{/*\ Get\ SD\ status\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00064}\mbox{\hyperlink{diskio_8h_a9eb2d8ccc0b89299bc442396811f8723}{00064}}\ \textcolor{preprocessor}{\#define\ ISDIO\_READ\ \ \ \ \ \ \ \ \ \ 55\ \ }\textcolor{comment}{/*\ Read\ data\ form\ SD\ iSDIO\ register\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00065}\mbox{\hyperlink{diskio_8h_a9637dcd58e0f1f301edf0cccff9e3507}{00065}}\ \textcolor{preprocessor}{\#define\ ISDIO\_WRITE\ \ \ \ \ \ \ \ \ 56\ \ }\textcolor{comment}{/*\ Write\ data\ to\ SD\ iSDIO\ register\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00066}\mbox{\hyperlink{diskio_8h_aa79f4043470c49016d80558773e740a5}{00066}}\ \textcolor{preprocessor}{\#define\ ISDIO\_MRITE\ \ \ \ \ \ \ \ \ 57\ \ }\textcolor{comment}{/*\ Masked\ write\ data\ to\ SD\ iSDIO\ register\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00068}00068\ \textcolor{comment}{/*\ ATA/CF\ specific\ ioctl\ command\ */}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00069}\mbox{\hyperlink{diskio_8h_a23f5fff3341e98825ea1f7367fd09f1a}{00069}}\ \textcolor{preprocessor}{\#define\ ATA\_GET\_REV\ \ \ \ \ \ \ \ \ 20\ \ }\textcolor{comment}{/*\ Get\ F/W\ revision\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00070}\mbox{\hyperlink{diskio_8h_a31f556ab98ab80c39058b38d9283865d}{00070}}\ \textcolor{preprocessor}{\#define\ ATA\_GET\_MODEL\ \ \ \ \ \ \ 21\ \ }\textcolor{comment}{/*\ Get\ model\ name\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00071}\mbox{\hyperlink{diskio_8h_a469c4f989757ee1ee404134fea3c74ba}{00071}}\ \textcolor{preprocessor}{\#define\ ATA\_GET\_SN\ \ \ \ \ \ \ \ \ \ 22\ \ }\textcolor{comment}{/*\ Get\ serial\ number\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00073}00073\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00075}00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{diskio_8h_source_l00077}00077\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__vfs_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/test_vfs.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/test_vfs.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;sys/stat.h&gt;<?linebreak?>#include &lt;dirent.h&gt;<?linebreak?>#include &lt;unistd.h&gt;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>&#160;&#160;&#160;(128 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>&#160;&#160;&#160;500</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>&#160;&#160;&#160;16</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a59003aa54417ee248f1b9efafcf493b0">MIN_FILENO</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593">BLOCKDEVICE_HEAP_SIZE</link>&#160;&#160;&#160;(64 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a275e53ae2306013323ba05fad39168ab">PICO_SPI1_TX_PIN</link>&#160;&#160;&#160;15</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240">PICO_SPI1_RX_PIN</link>&#160;&#160;&#160;12</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a">PICO_SPI1_SCK_PIN</link>&#160;&#160;&#160;19</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__vfs_8c_1abb61793f045373400bf402e12a351d74">PICO_SPI1_CSN_PIN</link>&#160;&#160;&#160;17</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_test__vfs_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb">test_vfs</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593"/><section>
+    <title>BLOCKDEVICE_HEAP_SIZE</title>
+<indexterm><primary>BLOCKDEVICE_HEAP_SIZE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>BLOCKDEVICE_HEAP_SIZE</secondary></indexterm>
+<para><computeroutput>#define BLOCKDEVICE_HEAP_SIZE&#160;&#160;&#160;(64 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00020">20</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00015">15</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae"/><section>
+    <title>HEAP_STORAGE_SIZE</title>
+<indexterm><primary>HEAP_STORAGE_SIZE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>HEAP_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HEAP_STORAGE_SIZE&#160;&#160;&#160;(128 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00016">16</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d"/><section>
+    <title>LITTLEFS_BLOCK_CYCLE</title>
+<indexterm><primary>LITTLEFS_BLOCK_CYCLE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>LITTLEFS_BLOCK_CYCLE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_BLOCK_CYCLE&#160;&#160;&#160;500</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00017">17</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d"/><section>
+    <title>LITTLEFS_LOOKAHEAD_SIZE</title>
+<indexterm><primary>LITTLEFS_LOOKAHEAD_SIZE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>LITTLEFS_LOOKAHEAD_SIZE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_LOOKAHEAD_SIZE&#160;&#160;&#160;16</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00018">18</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a59003aa54417ee248f1b9efafcf493b0"/><section>
+    <title>MIN_FILENO</title>
+<indexterm><primary>MIN_FILENO</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>MIN_FILENO</secondary></indexterm>
+<para><computeroutput>#define MIN_FILENO&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00019">19</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1abb61793f045373400bf402e12a351d74"/><section>
+    <title>PICO_SPI1_CSN_PIN</title>
+<indexterm><primary>PICO_SPI1_CSN_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_CSN_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_CSN_PIN&#160;&#160;&#160;17</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00025">25</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240"/><section>
+    <title>PICO_SPI1_RX_PIN</title>
+<indexterm><primary>PICO_SPI1_RX_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_RX_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_RX_PIN&#160;&#160;&#160;12</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00023">23</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a"/><section>
+    <title>PICO_SPI1_SCK_PIN</title>
+<indexterm><primary>PICO_SPI1_SCK_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_SCK_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_SCK_PIN&#160;&#160;&#160;19</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00024">24</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_test__vfs_8c_1a275e53ae2306013323ba05fad39168ab"/><section>
+    <title>PICO_SPI1_TX_PIN</title>
+<indexterm><primary>PICO_SPI1_TX_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_TX_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_TX_PIN&#160;&#160;&#160;15</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00022">22</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_test__vfs_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb"/><section>
+    <title>test_vfs()</title>
+<indexterm><primary>test_vfs</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>test_vfs</secondary></indexterm>
+<para><computeroutput>void test_vfs (void )</computeroutput></para><para>
+Definition at line <link linkend="_test__vfs_8c_source_1l00525">525</link> of file <link linkend="_test__vfs_8c_source">test_vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00525 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00526 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;FAT:\n&quot;</emphasis>);
+00527 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00528 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00529 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00530 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00531 &#32;&#32;&#32;&#32;setup(heap);
+00532 
+00533 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;heap);
+00534 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;heap);
+00535 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00536 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00537 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00538 &#32;&#32;&#32;&#32;test_api_file_seek();
+00539 &#32;&#32;&#32;&#32;test_api_file_tell();
+00540 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00541 &#32;&#32;&#32;&#32;test_api_stat();
+00542 &#32;&#32;&#32;&#32;test_api_remove();
+00543 &#32;&#32;&#32;&#32;test_api_rename();
+00544 &#32;&#32;&#32;&#32;test_api_mkdir();
+00545 &#32;&#32;&#32;&#32;test_api_dir_open();
+00546 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00547 &#32;&#32;&#32;&#32;test_api_dir_read();
+00548 &#32;&#32;&#32;&#32;test_api_reformat();
+00549 &#32;&#32;&#32;&#32;test_api_unmount();
+00550 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;heap);
+00551 
+00552 &#32;&#32;&#32;&#32;cleanup(heap);
+00553 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00554 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00555 
+00556 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs:\n&quot;</emphasis>);
+00557 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00558 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00559 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00560 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00561 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00562 &#32;&#32;&#32;&#32;setup(heap);
+00563 
+00564 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;heap);
+00565 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;heap);
+00566 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00567 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00568 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00569 &#32;&#32;&#32;&#32;test_api_file_seek();
+00570 &#32;&#32;&#32;&#32;test_api_file_tell();
+00571 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00572 &#32;&#32;&#32;&#32;test_api_stat();
+00573 &#32;&#32;&#32;&#32;test_api_remove();
+00574 &#32;&#32;&#32;&#32;test_api_rename();
+00575 &#32;&#32;&#32;&#32;test_api_mkdir();
+00576 &#32;&#32;&#32;&#32;test_api_dir_open();
+00577 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00578 &#32;&#32;&#32;&#32;test_api_dir_read();
+00579 &#32;&#32;&#32;&#32;test_api_reformat();
+00580 &#32;&#32;&#32;&#32;test_api_unmount();
+00581 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;heap);
+00582 
+00583 &#32;&#32;&#32;&#32;cleanup(heap);
+00584 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00585 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00586 
+00587 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs&#32;on&#32;the&#32;Heap:\n&quot;</emphasis>);
+00588 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_integration_2test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593">BLOCKDEVICE_HEAP_SIZE</link>);
+00589 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00590 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00591 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00592 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00593 &#32;&#32;&#32;&#32;setup(heap);
+00594 
+00595 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;heap);
+00596 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;heap);
+00597 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00598 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00599 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00600 &#32;&#32;&#32;&#32;test_api_file_seek();
+00601 &#32;&#32;&#32;&#32;test_api_file_tell();
+00602 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00603 &#32;&#32;&#32;&#32;test_api_stat();
+00604 &#32;&#32;&#32;&#32;test_api_remove();
+00605 &#32;&#32;&#32;&#32;test_api_rename();
+00606 &#32;&#32;&#32;&#32;test_api_mkdir();
+00607 &#32;&#32;&#32;&#32;test_api_dir_open();
+00608 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00609 &#32;&#32;&#32;&#32;test_api_dir_read();
+00610 &#32;&#32;&#32;&#32;test_api_reformat();
+00611 &#32;&#32;&#32;&#32;test_api_unmount();
+00612 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;heap);
+00613 
+00614 &#32;&#32;&#32;&#32;cleanup(heap);
+00615 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00616 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00617 
+00618 
+00619 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;loopback&#32;FAT&#32;on&#32;littlefs:\n&quot;</emphasis>);
+00620 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00621 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00622 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00623 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00624 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00625 &#32;&#32;&#32;&#32;setup(heap);
+00626 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(lfs,&#32;heap);
+00627 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00628 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/heap&quot;</emphasis>,&#32;lfs,&#32;heap);
+00629 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00630 
+00631 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*loopback&#32;=&#32;<link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link>(<emphasis role="stringliteral">&quot;/heap/loopback.dmg&quot;</emphasis>,&#32;64&#32;*&#32;1024,&#32;512);
+00632 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00633 &#32;&#32;&#32;&#32;assert(loopback&#32;!=&#32;NULL);
+00634 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00635 
+00636 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;loopback);
+00637 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;loopback);
+00638 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00639 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00640 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00641 &#32;&#32;&#32;&#32;test_api_file_seek();
+00642 &#32;&#32;&#32;&#32;test_api_file_tell();
+00643 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00644 &#32;&#32;&#32;&#32;test_api_stat();
+00645 &#32;&#32;&#32;&#32;test_api_remove();
+00646 &#32;&#32;&#32;&#32;test_api_rename();
+00647 &#32;&#32;&#32;&#32;test_api_mkdir();
+00648 &#32;&#32;&#32;&#32;test_api_dir_open();
+00649 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00650 &#32;&#32;&#32;&#32;test_api_dir_read();
+00651 &#32;&#32;&#32;&#32;test_api_reformat();
+00652 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;loopback);
+00653 
+00654 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00655 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link>(loopback);
+00656 
+00657 &#32;&#32;&#32;&#32;test_loopback_file();
+00658 
+00659 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/heap&quot;</emphasis>);
+00660 &#32;&#32;&#32;&#32;cleanup(heap);
+00661 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00662 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00663 }
+</programlisting></section>
+</section>
+</section>

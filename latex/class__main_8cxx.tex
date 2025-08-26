@@ -1,0 +1,65 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\+\_\+program/class\+\_\+main.cxx File Reference}
+\hypertarget{class__main_8cxx}{}\label{class__main_8cxx}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/class\_main.cxx@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/class\_main.cxx}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}distance\+\_\+sensor.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}{starting\+\_\+countdown}} ()
+\item 
+int \mbox{\hyperlink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class__main_8cxx_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{class\_main.cxx@{class\_main.cxx}!main@{main}}
+\index{main@{main}!class\_main.cxx@{class\_main.cxx}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{class__main_8cxx_source_l00012}{12}} of file \mbox{\hyperlink{class__main_8cxx_source}{class\+\_\+main.\+cxx}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}{starting\_countdown}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}\ sensor\{\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0,\ 0\};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ sensor.\mbox{\hyperlink{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}{TriggerRead}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (sensor.\mbox{\hyperlink{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}{is\_sensing}})\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_us(10);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Got\ reading:\ \%u\(\backslash\)n"{}},\ sensor.\mbox{\hyperlink{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}{distance}});}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}\index{class\_main.cxx@{class\_main.cxx}!starting\_countdown@{starting\_countdown}}
+\index{starting\_countdown@{starting\_countdown}!class\_main.cxx@{class\_main.cxx}}
+\doxysubsubsection{\texorpdfstring{starting\_countdown()}{starting\_countdown()}}
+{\footnotesize\ttfamily \label{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b} 
+void starting\+\_\+countdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{class__main_8cxx_source_l00005}{5}} of file \mbox{\hyperlink{class__main_8cxx_source}{class\+\_\+main.\+cxx}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ i\ =\ 5;\ i\ !=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ in\ \%d\(\backslash\)n"{}},\ i);}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{00009\ \ \ \ \ \}}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}

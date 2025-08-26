@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_ce75412898f8b9522fadb50a93042d25" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests Directory Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Directories    </title>
+        <itemizedlist>
+            <listitem><para>directory <link linkend="_dir_140285b3917bf71a5dac3f1e0a5d589a">host</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_c48a5208279df4c13418e930ed4af3b9">integration</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_9fb03d1d3f783df13f5633e5588a878d">large_file</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_0b5c47b80cc2db1d8e454fc0b1fd91ec">multicore</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2main_8c">main.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_test__blockdevice_8c">test_blockdevice.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_test__copy__between__different__filesystems_8c">test_copy_between_different_filesystems.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_test__filesystem_8c">test_filesystem.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_test__standard_8c">test_standard.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_test__vfs_8c">test_vfs.c</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<section xml:id="_README.md_1autotoc_md30">
+<title>Tests</title>
+<para>The project has four tests:</para>
+
+<para><orderedlist>
+<listitem>
+<para>unit tests <computeroutput>unittests</computeroutput> using heap memory</para>
+</listitem><listitem>
+<para>integration tests <computeroutput>integrate</computeroutput> using Raspberry Pi Pico hardware</para>
+</listitem><listitem>
+<para>multi-core tests <computeroutput>multicore</computeroutput></para>
+</listitem><listitem>
+<para>unit tests <computeroutput>host</computeroutput> on the host</para>
+</listitem></orderedlist>
+</para>
+
+<para><literallayout><computeroutput>cd&#32;build
+make&#32;unittests&#32;integration&#32;multicore
+make&#32;run_unittests
+make&#32;run_integration
+make&#32;run_multicore
+</computeroutput></literallayout></para>
+
+<para><literallayout><computeroutput>cd&#32;build
+cmake&#32;-DPICO_PLATFORM=host
+make&#32;host
+./tests/host/host
+</computeroutput></literallayout> </para>
+</section>
+</section>
+</section>

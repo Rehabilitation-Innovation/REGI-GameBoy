@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class__main_8cxx_source" xml:lang="en-US">
+<title>class_main.cxx</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/test_program/class_main.cxx</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_class__main_8cxx_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_class__main_8cxx_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;pico/stdlib.h&quot;</emphasis>
+<anchor xml:id="_class__main_8cxx_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_distance__sensor_8h">distance_sensor.h</link>&quot;</emphasis>
+<anchor xml:id="_class__main_8cxx_source_1l00004"/>00004 
+<anchor xml:id="_class__main_8cxx_source_1l00005"/><link linkend="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b">00005</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b">starting_countdown</link>()&#32;{
+<anchor xml:id="_class__main_8cxx_source_1l00006"/>00006 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;i&#32;=&#32;5;&#32;i&#32;!=&#32;0;&#32;i--)&#32;{
+<anchor xml:id="_class__main_8cxx_source_1l00007"/>00007 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Starting&#32;in&#32;%d\n&quot;</emphasis>,&#32;i);
+<anchor xml:id="_class__main_8cxx_source_1l00008"/>00008 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+<anchor xml:id="_class__main_8cxx_source_1l00009"/>00009 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_class__main_8cxx_source_1l00010"/>00010 }
+<anchor xml:id="_class__main_8cxx_source_1l00011"/>00011 
+<anchor xml:id="_class__main_8cxx_source_1l00012"/><link linkend="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4">00012</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link>()&#32;{
+<anchor xml:id="_class__main_8cxx_source_1l00013"/>00013 &#32;&#32;&#32;&#32;stdio_init_all();
+<anchor xml:id="_class__main_8cxx_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<link linkend="_class__main_8cxx_1a9664e3fc84c826bdfcb652ad23d1a86b">starting_countdown</link>();
+<anchor xml:id="_class__main_8cxx_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor">DistanceSensor</link>&#32;sensor{<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>,&#32;0,&#32;0};
+<anchor xml:id="_class__main_8cxx_source_1l00016"/>00016 
+<anchor xml:id="_class__main_8cxx_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+<anchor xml:id="_class__main_8cxx_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sensor.<link linkend="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a">TriggerRead</link>();
+<anchor xml:id="_class__main_8cxx_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(sensor.<link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link>)&#32;{
+<anchor xml:id="_class__main_8cxx_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_us(10);
+<anchor xml:id="_class__main_8cxx_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_class__main_8cxx_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Got&#32;reading:&#32;%u\n&quot;</emphasis>,&#32;sensor.<link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">distance</link>);
+<anchor xml:id="_class__main_8cxx_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+<anchor xml:id="_class__main_8cxx_source_1l00024"/>00024 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_class__main_8cxx_source_1l00025"/>00025 }
+</programlisting></section>

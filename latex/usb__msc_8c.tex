@@ -1,0 +1,383 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/usb\+\_\+logger/usb\+\_\+msc.c File Reference}
+\hypertarget{usb__msc_8c}{}\label{usb__msc_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/usb\_msc.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/usb\_msc.c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$bsp/board.\+h$>$}\newline
+{\ttfamily \#include $<$tusb.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e}{ANSI\+\_\+\+CYAN}}~"{}\textbackslash{}e\mbox{[}36m"{}
+\item 
+\#define \mbox{\hyperlink{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8}{ANSI\+\_\+\+MAGENTA}}~"{}\textbackslash{}e\mbox{[}35m"{}
+\item 
+\#define \mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{ANSI\+\_\+\+CLEAR}}~"{}\textbackslash{}e\mbox{[}0m"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{usb__msc_8c_a8dc878b9ad15bf25195a23232c151089}{usb\+\_\+connection\+\_\+status}} (void)
+\item 
+void \mbox{\hyperlink{usb__msc_8c_a13e2fb6e00b5192eef1a15d98f916448}{tud\+\_\+mount\+\_\+cb}} (void)
+\item 
+void \mbox{\hyperlink{usb__msc_8c_a84ceba8c41ca46959876fc7cbc0e0071}{tud\+\_\+suspend\+\_\+cb}} (bool remote\+\_\+wakeup\+\_\+en)
+\item 
+void \mbox{\hyperlink{usb__msc_8c_ae2aefd1e5c3d470f440cd8f07dce9991}{tud\+\_\+msc\+\_\+inquiry\+\_\+cb}} (uint8\+\_\+t lun, uint8\+\_\+t vendor\+\_\+id\mbox{[}8\mbox{]}, uint8\+\_\+t product\+\_\+id\mbox{[}16\mbox{]}, uint8\+\_\+t product\+\_\+rev\mbox{[}4\mbox{]})
+\item 
+bool \mbox{\hyperlink{usb__msc_8c_abbb293c273679cadfae2b360ccd5e437}{tud\+\_\+msc\+\_\+test\+\_\+unit\+\_\+ready\+\_\+cb}} (uint8\+\_\+t lun)
+\item 
+void \mbox{\hyperlink{usb__msc_8c_ac721126f20ec8c7358cc89ba971f6065}{tud\+\_\+msc\+\_\+capacity\+\_\+cb}} (uint8\+\_\+t lun, uint32\+\_\+t \texorpdfstring{$\ast$}{*}block\+\_\+count, uint16\+\_\+t \texorpdfstring{$\ast$}{*}block\+\_\+size)
+\item 
+bool \mbox{\hyperlink{usb__msc_8c_ac5112ed309407dee0e18a97ca415929c}{tud\+\_\+msc\+\_\+start\+\_\+stop\+\_\+cb}} (uint8\+\_\+t lun, uint8\+\_\+t power\+\_\+condition, bool start, bool load\+\_\+eject)
+\item 
+int32\+\_\+t \mbox{\hyperlink{usb__msc_8c_a148e0153ce23f6ffd6305fb0e0fc4dfd}{tud\+\_\+msc\+\_\+read10\+\_\+cb}} (uint8\+\_\+t lun, uint32\+\_\+t lba, uint32\+\_\+t offset, void \texorpdfstring{$\ast$}{*}buffer, uint32\+\_\+t bufsize)
+\item 
+bool \mbox{\hyperlink{usb__msc_8c_a47fd17807a02c00f4f45880d7f0ad0fa}{tud\+\_\+msc\+\_\+is\+\_\+writable\+\_\+cb}} (uint8\+\_\+t lun)
+\item 
+int32\+\_\+t \mbox{\hyperlink{usb__msc_8c_a375a5cc4f5760603edf955765eca41a8}{tud\+\_\+msc\+\_\+write10\+\_\+cb}} (uint8\+\_\+t lun, uint32\+\_\+t lba, uint32\+\_\+t offset, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, uint32\+\_\+t bufsize)
+\item 
+int32\+\_\+t \mbox{\hyperlink{usb__msc_8c_a8f5dcb9aacaba9e9932f2c941d4639e3}{tud\+\_\+msc\+\_\+scsi\+\_\+cb}} (uint8\+\_\+t lun, uint8\+\_\+t const scsi\+\_\+cmd\mbox{[}16\mbox{]}, void \texorpdfstring{$\ast$}{*}buffer, uint16\+\_\+t bufsize)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{usb__msc_8c_afb4b5379673d98e6bdf98584c040c1db}{filesystem\+\_\+is\+\_\+exported}}
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{usb__msc_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{usb__msc_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}\index{usb\_msc.c@{usb\_msc.c}!ANSI\_CLEAR@{ANSI\_CLEAR}}
+\index{ANSI\_CLEAR@{ANSI\_CLEAR}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CLEAR}{ANSI\_CLEAR}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b} 
+\#define ANSI\+\_\+\+CLEAR~"{}\textbackslash{}e\mbox{[}0m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00014}{14}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+\Hypertarget{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e}\index{usb\_msc.c@{usb\_msc.c}!ANSI\_CYAN@{ANSI\_CYAN}}
+\index{ANSI\_CYAN@{ANSI\_CYAN}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CYAN}{ANSI\_CYAN}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e} 
+\#define ANSI\+\_\+\+CYAN~"{}\textbackslash{}e\mbox{[}36m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00012}{12}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+\Hypertarget{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8}\index{usb\_msc.c@{usb\_msc.c}!ANSI\_MAGENTA@{ANSI\_MAGENTA}}
+\index{ANSI\_MAGENTA@{ANSI\_MAGENTA}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{ANSI\_MAGENTA}{ANSI\_MAGENTA}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8} 
+\#define ANSI\+\_\+\+MAGENTA~"{}\textbackslash{}e\mbox{[}35m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00013}{13}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{usb__msc_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{usb__msc_8c_a13e2fb6e00b5192eef1a15d98f916448}\index{usb\_msc.c@{usb\_msc.c}!tud\_mount\_cb@{tud\_mount\_cb}}
+\index{tud\_mount\_cb@{tud\_mount\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_mount\_cb()}{tud\_mount\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a13e2fb6e00b5192eef1a15d98f916448} 
+void tud\+\_\+mount\+\_\+cb (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00027}{27}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)e[45mmount\(\backslash\)e[0m\(\backslash\)n"{}});}
+\DoxyCodeLine{00029\ \ \ \ \ usb\_connected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_ac721126f20ec8c7358cc89ba971f6065}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_capacity\_cb@{tud\_msc\_capacity\_cb}}
+\index{tud\_msc\_capacity\_cb@{tud\_msc\_capacity\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_capacity\_cb()}{tud\_msc\_capacity\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_ac721126f20ec8c7358cc89ba971f6065} 
+void tud\+\_\+msc\+\_\+capacity\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{block\+\_\+count}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{block\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00066}{66}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{00068\ \ \ \ \ *block\_count\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>size(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}})\ /\ \ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{00069\ \ \ \ \ *block\_size\ \ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{00070\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_ae2aefd1e5c3d470f440cd8f07dce9991}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_inquiry\_cb@{tud\_msc\_inquiry\_cb}}
+\index{tud\_msc\_inquiry\_cb@{tud\_msc\_inquiry\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_inquiry\_cb()}{tud\_msc\_inquiry\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_ae2aefd1e5c3d470f440cd8f07dce9991} 
+void tud\+\_\+msc\+\_\+inquiry\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint8\+\_\+t}]{vendor\+\_\+id}{\mbox{[}8\mbox{]}, }\item[{uint8\+\_\+t}]{product\+\_\+id}{\mbox{[}16\mbox{]}, }\item[{uint8\+\_\+t}]{product\+\_\+rev}{\mbox{[}4\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00039}{39}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ vid[]\ =\ \textcolor{stringliteral}{"{}TinyUSB"{}};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ pid[]\ =\ \textcolor{stringliteral}{"{}Mass\ Storage"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ rev[]\ =\ \textcolor{stringliteral}{"{}1.0"{}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ memcpy(vendor\_id\ \ ,\ vid,\ strlen(vid));}
+\DoxyCodeLine{00047\ \ \ \ \ memcpy(product\_id\ ,\ pid,\ strlen(pid));}
+\DoxyCodeLine{00048\ \ \ \ \ memcpy(product\_rev,\ rev,\ strlen(rev));}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a47fd17807a02c00f4f45880d7f0ad0fa}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_is\_writable\_cb@{tud\_msc\_is\_writable\_cb}}
+\index{tud\_msc\_is\_writable\_cb@{tud\_msc\_is\_writable\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_is\_writable\_cb()}{tud\_msc\_is\_writable\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a47fd17807a02c00f4f45880d7f0ad0fa} 
+bool tud\+\_\+msc\+\_\+is\+\_\+writable\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00098}{98}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00101\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a148e0153ce23f6ffd6305fb0e0fc4dfd}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_read10\_cb@{tud\_msc\_read10\_cb}}
+\index{tud\_msc\_read10\_cb@{tud\_msc\_read10\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_read10\_cb()}{tud\_msc\_read10\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a148e0153ce23f6ffd6305fb0e0fc4dfd} 
+int32\+\_\+t tud\+\_\+msc\+\_\+read10\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint32\+\_\+t}]{lba}{, }\item[{uint32\+\_\+t}]{offset}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{uint32\+\_\+t}]{bufsize}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00086}{86}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{00088\ \ \ \ \ (void)offset;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ printf(\mbox{\hyperlink{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e}{ANSI\_CYAN}}\ \textcolor{stringliteral}{"{}USB\ read\#\%lu\ size=\%lu\(\backslash\)n"{}}\ \mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{ANSI\_CLEAR}},\ lba,\ bufsize);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>read(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ buffer,\ lba\ *\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size,\ bufsize);}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}read\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)\ bufsize;}
+\DoxyCodeLine{00096\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a8f5dcb9aacaba9e9932f2c941d4639e3}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_scsi\_cb@{tud\_msc\_scsi\_cb}}
+\index{tud\_msc\_scsi\_cb@{tud\_msc\_scsi\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_scsi\_cb()}{tud\_msc\_scsi\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a8f5dcb9aacaba9e9932f2c941d4639e3} 
+int32\+\_\+t tud\+\_\+msc\+\_\+scsi\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint8\+\_\+t const}]{scsi\+\_\+cmd}{\mbox{[}16\mbox{]}, }\item[{void \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{uint16\+\_\+t}]{bufsize}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00122}{122}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{const}\ *response\ =\ NULL;}
+\DoxyCodeLine{00126\ \ \ \ \ int32\_t\ resplen\ =\ 0;}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{bool}\ in\_xfer\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{switch}\ (scsi\_cmd[0])\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_ILLEGAL\_REQUEST,\ 0x20,\ 0x00);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ resplen\ =\ -\/1;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (resplen\ >\ bufsize)}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ resplen\ =\ bufsize;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ \&\&\ (resplen\ >\ 0))\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(in\_xfer)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ memcpy(buffer,\ response,\ (\textcolor{keywordtype}{size\_t})resplen);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ ;\ \textcolor{comment}{//\ SCSI\ output}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)resplen;}
+\DoxyCodeLine{00148\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_ac5112ed309407dee0e18a97ca415929c}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_start\_stop\_cb@{tud\_msc\_start\_stop\_cb}}
+\index{tud\_msc\_start\_stop\_cb@{tud\_msc\_start\_stop\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_start\_stop\_cb()}{tud\_msc\_start\_stop\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_ac5112ed309407dee0e18a97ca415929c} 
+bool tud\+\_\+msc\+\_\+start\+\_\+stop\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint8\+\_\+t}]{power\+\_\+condition}{, }\item[{bool}]{start}{, }\item[{bool}]{load\+\_\+eject}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00072}{72}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{00074\ \ \ \ \ (void)\ power\_condition;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ load\_eject\ )\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ load\ disk\ storage}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ unload\ disk\ storage}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ ejected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00084\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_abbb293c273679cadfae2b360ccd5e437}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_test\_unit\_ready\_cb@{tud\_msc\_test\_unit\_ready\_cb}}
+\index{tud\_msc\_test\_unit\_ready\_cb@{tud\_msc\_test\_unit\_ready\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_test\_unit\_ready\_cb()}{tud\_msc\_test\_unit\_ready\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_abbb293c273679cadfae2b360ccd5e437} 
+bool tud\+\_\+msc\+\_\+test\+\_\+unit\+\_\+ready\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00051}{51}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db}{filesystem\_is\_exported}})\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_NOT\_READY,\ 0x3a,\ 0x00);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (ejected)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_NOT\_READY,\ 0x3a,\ 0x00);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00064\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a375a5cc4f5760603edf955765eca41a8}\index{usb\_msc.c@{usb\_msc.c}!tud\_msc\_write10\_cb@{tud\_msc\_write10\_cb}}
+\index{tud\_msc\_write10\_cb@{tud\_msc\_write10\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_msc\_write10\_cb()}{tud\_msc\_write10\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a375a5cc4f5760603edf955765eca41a8} 
+int32\+\_\+t tud\+\_\+msc\+\_\+write10\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{lun}{, }\item[{uint32\+\_\+t}]{lba}{, }\item[{uint32\+\_\+t}]{offset}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{uint32\+\_\+t}]{bufsize}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00103}{103}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{00105\ \ \ \ \ (void)offset;}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ printf(\mbox{\hyperlink{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8}{ANSI\_MAGENTA}}\ \textcolor{stringliteral}{"{}USB\ write\#\%lu\ bufsize=\%lu\(\backslash\)n"{}}\ \mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{ANSI\_CLEAR}},\ lba,\ bufsize);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ uint32\_t\ block\_size\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ lba\ *\ block\_size,\ bufsize);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}erase\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>program(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ buffer,\ lba\ *\ block\_size,\ bufsize);}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}program\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)bufsize;}
+\DoxyCodeLine{00120\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a84ceba8c41ca46959876fc7cbc0e0071}\index{usb\_msc.c@{usb\_msc.c}!tud\_suspend\_cb@{tud\_suspend\_cb}}
+\index{tud\_suspend\_cb@{tud\_suspend\_cb}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{tud\_suspend\_cb()}{tud\_suspend\_cb()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a84ceba8c41ca46959876fc7cbc0e0071} 
+void tud\+\_\+suspend\+\_\+cb (\begin{DoxyParamCaption}\item[{bool}]{remote\+\_\+wakeup\+\_\+en}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00032}{32}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ (void)remote\_wakeup\_en;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)e[45msuspend\(\backslash\)e[0m\(\backslash\)n"{}});}
+\DoxyCodeLine{00036\ \ \ \ \ usb\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+\Hypertarget{usb__msc_8c_a8dc878b9ad15bf25195a23232c151089}\index{usb\_msc.c@{usb\_msc.c}!usb\_connection\_status@{usb\_connection\_status}}
+\index{usb\_connection\_status@{usb\_connection\_status}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{usb\_connection\_status()}{usb\_connection\_status()}}
+{\footnotesize\ttfamily \label{usb__msc_8c_a8dc878b9ad15bf25195a23232c151089} 
+bool usb\+\_\+connection\+\_\+status (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{usb__msc_8c_source_l00023}{23}} of file \mbox{\hyperlink{usb__msc_8c_source}{usb\+\_\+msc.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ usb\_connected;}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{usb__msc_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{usb__msc_8c_afb4b5379673d98e6bdf98584c040c1db}\index{usb\_msc.c@{usb\_msc.c}!filesystem\_is\_exported@{filesystem\_is\_exported}}
+\index{filesystem\_is\_exported@{filesystem\_is\_exported}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{filesystem\_is\_exported}{filesystem\_is\_exported}}
+{\footnotesize\ttfamily \label{usb__msc_8c_afb4b5379673d98e6bdf98584c040c1db} 
+bool filesystem\+\_\+is\+\_\+exported\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00023}{23}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{usb__msc_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}\index{usb\_msc.c@{usb\_msc.c}!flash2@{flash2}}
+\index{flash2@{flash2}!usb\_msc.c@{usb\_msc.c}}
+\doxysubsubsection{\texorpdfstring{flash2}{flash2}}
+{\footnotesize\ttfamily \label{usb__msc_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4} 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}}\texorpdfstring{$\ast$}{*} flash2\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00026}{26}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+

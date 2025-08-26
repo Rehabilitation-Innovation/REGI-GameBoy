@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pio_8h" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/hardware/pio.h File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/hardware/pio.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;pico.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structpio__program__t">pio_program_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pio_8h_1a923a261ba19804c404900228e99c9522">pio1</link>&#160;&#160;&#160;0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link></para>
+</listitem>
+            <listitem><para>typedef void(* <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link>) (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_pio_8h_1a3571e3c7c6e645e92b8d438203a911b9">pio_add_program</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, const <link linkend="_structpio__program__t">pio_program_t</link> *program)</para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_pio_8h_1a70a47a122f289106c36bcacc76add2bb">pio_sm_get</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pio_8h_1a779dafaea13810f3e3785c310d2e8fc2">test_set_irq_pending</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_pio_8h_1a028cdc4974a8af6f8a295741cb695d7b">pio_interrupt_get</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_pio_8h_1a9878b5628ef662af86683649f5a7f753">pio_sm_put</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>, uint32_t data)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11"/><section>
+    <title>pio0</title>
+<indexterm><primary>pio0</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio0</secondary></indexterm>
+<para><computeroutput>#define pio0&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_pio_8h_source_1l00010">10</link> of file <link linkend="_pio_8h_source">pio.h</link>.</para>
+</section>
+<anchor xml:id="_pio_8h_1a923a261ba19804c404900228e99c9522"/><section>
+    <title>pio1</title>
+<indexterm><primary>pio1</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio1</secondary></indexterm>
+<para><computeroutput>#define pio1&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_pio_8h_source_1l00011">11</link> of file <link linkend="_pio_8h_source">pio.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6"/><section>
+    <title>irq_handler_t</title>
+<indexterm><primary>irq_handler_t</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>irq_handler_t</secondary></indexterm>
+<para><computeroutput>typedef void(* irq_handler_t) (void)</computeroutput></para>
+<para>Interrupt request handler function type </para>
+<para>
+Definition at line <link linkend="_pio_8h_source_1l00016">16</link> of file <link linkend="_pio_8h_source">pio.h</link>.</para>
+</section>
+<anchor xml:id="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da"/><section>
+    <title>PIO</title>
+<indexterm><primary>PIO</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>PIO</secondary></indexterm>
+<para><computeroutput>typedef <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link></computeroutput></para>
+<para>Stub header </para>
+<para>
+Definition at line <link linkend="_pio_8h_source_1l00008">8</link> of file <link linkend="_pio_8h_source">pio.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pio_8h_1a3571e3c7c6e645e92b8d438203a911b9"/><section>
+    <title>pio_add_program()</title>
+<indexterm><primary>pio_add_program</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio_add_program</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> pio_add_program (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, const <link linkend="_structpio__program__t">pio_program_t</link> * program)</computeroutput></para>
+<para>Simulates adding a program to the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> Using an ID means that each time a program is loaded, it will have a different result which can be used to verify that it is distinct from a separate program that was loaded <formalpara><title>Returns</title>
+
+<para>ID representing the offset into memory for a given program </para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00010">10</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00010 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00011 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;simulated_offset&#32;=&#32;0;
+00012 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;simulated_offset++;
+00013 };
+</programlisting></section>
+<anchor xml:id="_pio_8h_1a028cdc4974a8af6f8a295741cb695d7b"/><section>
+    <title>pio_interrupt_get()</title>
+<indexterm><primary>pio_interrupt_get</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio_interrupt_get</secondary></indexterm>
+<para><computeroutput>bool pio_interrupt_get (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para><para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00019">19</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00020 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+00021 }
+</programlisting></section>
+<anchor xml:id="_pio_8h_1a70a47a122f289106c36bcacc76add2bb"/><section>
+    <title>pio_sm_get()</title>
+<indexterm><primary>pio_sm_get</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio_sm_get</secondary></indexterm>
+<para><computeroutput>uint32_t pio_sm_get (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para><para>
+Definition at line <link linkend="_pio__stubs_8cpp_source_1l00015">15</link> of file <link linkend="_pio__stubs_8cpp_source">pio_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00016 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0xDEADBEEF;
+00017 }
+</programlisting></section>
+<anchor xml:id="_pio_8h_1a9878b5628ef662af86683649f5a7f753"/><section>
+    <title>pio_sm_put()</title>
+<indexterm><primary>pio_sm_put</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>pio_sm_put</secondary></indexterm>
+<para><computeroutput>void pio_sm_put (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm, uint32_t data)</computeroutput></para>
+<para>MIT License</para>
+
+<para>Copyright (c) 2022 Daniel Garcia-Briseno</para>
+
+<para>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. Simulate triggering the IRQ when the test calls pio_sm_put </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00033">33</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00034 &#32;&#32;&#32;&#32;
+00035 }
+</programlisting></section>
+<anchor xml:id="_pio_8h_1a779dafaea13810f3e3785c310d2e8fc2"/><section>
+    <title>test_set_irq_pending()</title>
+<indexterm><primary>test_set_irq_pending</primary><secondary>pio.h</secondary></indexterm>
+<indexterm><primary>pio.h</primary><secondary>test_set_irq_pending</secondary></indexterm>
+<para><computeroutput>void test_set_irq_pending (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para></section>
+</section>
+</section>

@@ -1,15 +1,11 @@
 var searchData=
 [
-  ['max_5fapp_5fsize_0',['MAX_APP_SIZE',['../main_8h.html#a5f38c1d2cbe1f9d2de789ebfe570c7a4',1,'main.h']]],
-  ['missing_5fpixel_1',['MISSING_PIXEL',['../tinyengine__renderer__dvi_8cpp.html#a5a7d5f58641084dc650bcb8fc233e801',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fh_5factive_5fpixels_2',['MODE_H_ACTIVE_PIXELS',['../tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fh_5fback_5fporch_3',['MODE_H_BACK_PORCH',['../tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fh_5ffront_5fporch_4',['MODE_H_FRONT_PORCH',['../tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fh_5fsync_5fpolarity_5',['MODE_H_SYNC_POLARITY',['../tinyengine__renderer__dvi_8cpp.html#a8893119a4dc31b3e7feb7394975dc77c',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fh_5fsync_5fwidth_6',['MODE_H_SYNC_WIDTH',['../tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fv_5factive_5flines_7',['MODE_V_ACTIVE_LINES',['../tinyengine__renderer__dvi_8cpp.html#a989ecfb618e13a471b7ad44cd9fda4fa',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fv_5fback_5fporch_8',['MODE_V_BACK_PORCH',['../tinyengine__renderer__dvi_8cpp.html#ae572b39c10ef4635a552fe095e0ad34e',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fv_5ffront_5fporch_9',['MODE_V_FRONT_PORCH',['../tinyengine__renderer__dvi_8cpp.html#aeed8bd1fd1aca755891e0a08d3cd8fcb',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fv_5fsync_5fpolarity_10',['MODE_V_SYNC_POLARITY',['../tinyengine__renderer__dvi_8cpp.html#a105a38aad5ee400e8be07492b10cbb35',1,'tinyengine_renderer_dvi.cpp']]],
-  ['mode_5fv_5fsync_5fwidth_11',['MODE_V_SYNC_WIDTH',['../tinyengine__renderer__dvi_8cpp.html#a12e2ff5f3949e456139ab32153e276df',1,'tinyengine_renderer_dvi.cpp']]]
+  ['lcd_5fbklt_0',['LCD_BKLT',['../main_8h.html#ac11ca0a9c85c11fa485e298e51b34f6d',1,'main.h']]],
+  ['lcd_5fcs_1',['LCD_CS',['../main_8h.html#a71d24cab0e16b054de228f29139f1b79',1,'main.h']]],
+  ['lcd_5fdc_2',['LCD_DC',['../main_8h.html#a1dc6c4886242abf4447d0da651125d5d',1,'main.h']]],
+  ['lcd_5frst_3',['LCD_RST',['../main_8h.html#aec0f0ab242f1b58b1d017bc9ab4b898b',1,'main.h']]],
+  ['lcd_5fspi_5fclk_4',['LCD_SPI_CLK',['../main_8h.html#abd0f8f7ae98d5dbab30526b81bab60cc',1,'main.h']]],
+  ['lcd_5fspi_5fmiso_5',['LCD_SPI_MISO',['../main_8h.html#aee4041b31de29e29989d71f8be204a8b',1,'main.h']]],
+  ['lcd_5fspi_5fmosi_6',['LCD_SPI_MOSI',['../main_8h.html#a1c77990623e208f9e5ed95088cd09c48',1,'main.h']]],
+  ['lcd_5fspi_5fport_7',['LCD_SPI_PORT',['../main_8h.html#a627c51d5a15e65cf65f1f33821905c09',1,'main.h']]]
 ];

@@ -39,6 +39,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "TinyEngineRendererI", "class_tiny_engine_renderer_i.html", [
+      [ "TinyEngineRendererDVI", "class_tiny_engine_renderer_d_v_i.html", null ],
       [ "TinyEngineRendererDVI", "class_tiny_engine_renderer_d_v_i.html", null ]
     ] ],
     [ "tonegenerator_t", "structtonegenerator__t.html", null ],

@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d" xml:lang="en-US">
+<title>
+<para>Supported stdio.h standard file API </para>
+</title>
+<indexterm><primary>Supported stdio.h standard file API</primary></indexterm>
+
+<para><anchor xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d_1autotoc_md27"/></para>
+
+<para>pico-vfs provides low-level file IO &quot;system calls&quot;, allowing many of the file manipulation APIs of stdio.h to be used.</para>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d_1autotoc_md28">
+<title>System call</title>
+<para><informaltable frame="all">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+<thead>
+      <row  class='markdownTableHead'>
+<entry>
+<para>System call  </para>
+</entry><entry>
+<para>Availability  </para>
+</entry><entry>
+<para>Standard  </para>
+</entry></row>
+</thead><tbody>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>close</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1988 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fstat</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1988 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>lseek</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1988 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>open</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>Version 6 AT&amp;T UNIX  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>read</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1990 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>stat</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1988 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>unlink</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>POSIX.1-2008  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>write</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1990 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d_1autotoc_md29">
+<title>Input and Output(stdio.h)</title>
+<para>Note that many functions from stdio.h are available, but some do not behave as expected. Among the input/output functions that have been tested to work, those related to POSIX and the C standard are as follows:</para>
+
+<para><informaltable frame="all">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+<thead>
+      <row  class='markdownTableHead'>
+<entry>
+<para>Function  </para>
+</entry><entry>
+<para>Availability  </para>
+</entry><entry>
+<para>Standard  </para>
+</entry></row>
+</thead><tbody>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>clearerr</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fflush</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;) and Single UNIX Specification (&quot;SUSv3&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fgetc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fgetpos</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fgets</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fgetwc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fgetws</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-2001 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fileno</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fmemopen</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-2008 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fopen</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fprintf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ANSI X3.159-1989 (&quot;ANSI C89&quot;) and ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fputc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fputs</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fputwc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fputws</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-2001 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fread</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>freopen</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fscanf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fseek</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fsetpos</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>ftell</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fwide</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fwprintf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>fwrite</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>fwscanf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>getc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>getw</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>mkstemp</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-2008 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>open_memstream</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-2008 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>perror</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>putc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>remove</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;) and X/Open Portability Guide Issue 4, Version 2 (&quot;XPG4.2&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>rename</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>IEEE Std 1003.1-1988 (&quot;POSIX.1&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>rewind</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>setbuf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>setvbuf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>tmpfile</computeroutput>  </para>
+</entry><entry>
+<para>:x:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>tmpnam</computeroutput>  </para>
+</entry><entry>
+<para>:x:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>ungetc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1990 (&quot;ISO C90&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>ungetwc</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>vfprintf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ANSI X3.159-1989 (&quot;ANSI C89&quot;) and ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowEven'>
+<entry>
+<para><computeroutput>vfscanf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+      <row  class='markdownTableRowOdd'>
+<entry>
+<para><computeroutput>vfwscanf</computeroutput>  </para>
+</entry><entry>
+<para>:white_check_mark:  </para>
+</entry><entry>
+<para>ISO/IEC 9899:1999 (&quot;ISO C99&quot;)  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+
+<para>For more information see the <link xlink:href="https://sourceware.org/newlib/libc.html#Stdio">Newlib documentation</link>. </para>
+</section>
+</section>

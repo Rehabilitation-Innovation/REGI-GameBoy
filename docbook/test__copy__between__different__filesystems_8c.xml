@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__copy__between__different__filesystems_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/test_copy_between_different_filesystems.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/test_copy_between_different_filesystems.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structcombination__map">combination_map</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__copy__between__different__filesystems_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>&#160;&#160;&#160;(64 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__copy__between__different__filesystems_8c_1a7edd94b16025f39d4aca113469771df9">NUM_COMBINATION</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>&#160;&#160;&#160;16 * 1024;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_test__copy__between__different__filesystems_8c_1aa39763d4cd60a15a1e2ba5a310e8401e">test_copy_between_different_filesystems</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_copy_between_different_filesystems.c</secondary></indexterm>
+<indexterm><primary>test_copy_between_different_filesystems.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_test__copy__between__different__filesystems_8c_source_1l00013">13</link> of file <link linkend="_test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+</section>
+<anchor xml:id="_test__copy__between__different__filesystems_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae"/><section>
+    <title>HEAP_STORAGE_SIZE</title>
+<indexterm><primary>HEAP_STORAGE_SIZE</primary><secondary>test_copy_between_different_filesystems.c</secondary></indexterm>
+<indexterm><primary>test_copy_between_different_filesystems.c</primary><secondary>HEAP_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HEAP_STORAGE_SIZE&#160;&#160;&#160;(64 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_test__copy__between__different__filesystems_8c_source_1l00014">14</link> of file <link linkend="_test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+</section>
+<anchor xml:id="_test__copy__between__different__filesystems_8c_1a7edd94b16025f39d4aca113469771df9"/><section>
+    <title>NUM_COMBINATION</title>
+<indexterm><primary>NUM_COMBINATION</primary><secondary>test_copy_between_different_filesystems.c</secondary></indexterm>
+<indexterm><primary>test_copy_between_different_filesystems.c</primary><secondary>NUM_COMBINATION</secondary></indexterm>
+<para><computeroutput>#define NUM_COMBINATION&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_test__copy__between__different__filesystems_8c_source_1l00023">23</link> of file <link linkend="_test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+</section>
+<anchor xml:id="_test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f"/><section>
+    <title>TEST_FILE_SIZE</title>
+<indexterm><primary>TEST_FILE_SIZE</primary><secondary>test_copy_between_different_filesystems.c</secondary></indexterm>
+<indexterm><primary>test_copy_between_different_filesystems.c</primary><secondary>TEST_FILE_SIZE</secondary></indexterm>
+<para><computeroutput>#define TEST_FILE_SIZE&#160;&#160;&#160;16 * 1024;</computeroutput></para><para>
+Definition at line <link linkend="_test__copy__between__different__filesystems_8c_source_1l00046">46</link> of file <link linkend="_test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_test__copy__between__different__filesystems_8c_1aa39763d4cd60a15a1e2ba5a310e8401e"/><section>
+    <title>test_copy_between_different_filesystems()</title>
+<indexterm><primary>test_copy_between_different_filesystems</primary><secondary>test_copy_between_different_filesystems.c</secondary></indexterm>
+<indexterm><primary>test_copy_between_different_filesystems.c</primary><secondary>test_copy_between_different_filesystems</secondary></indexterm>
+<para><computeroutput>void test_copy_between_different_filesystems (void )</computeroutput></para><para>
+Definition at line <link linkend="_test__copy__between__different__filesystems_8c_source_1l00121">121</link> of file <link linkend="_test__copy__between__different__filesystems_8c_source">test_copy_between_different_filesystems.c</link>.</para>
+<programlisting linenumbering="unnumbered">00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00122 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Copy&#32;between&#32;different&#32;file&#32;system:\n&quot;</emphasis>);
+00123 
+00124 &#32;&#32;&#32;&#32;init_filesystem_combination();
+00125 
+00126 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a7edd94b16025f39d4aca113469771df9">NUM_COMBINATION</link>;&#32;i++)&#32;{
+00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structcombination__map">combination_map</link>&#32;setting&#32;=&#32;combination[i];
+00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;from&#32;%s(%s)&#32;to&#32;%s(%s)&quot;</emphasis>,
+00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>,
+00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>);
+00131 
+00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>);
+00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1&#32;&amp;&amp;&#32;errno&#32;==&#32;5005)&#32;{
+00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>);
+00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1&#32;&amp;&amp;&#32;errno&#32;==&#32;5005)&#32;{
+00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00144 
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/a&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>);
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/b&quot;</emphasis>,&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>);
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00149 
+00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_write(<emphasis role="stringliteral">&quot;/a/source&quot;</emphasis>);
+00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_copy(<emphasis role="stringliteral">&quot;/a/source&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/b/dist&quot;</emphasis>);
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_read(<emphasis role="stringliteral">&quot;/b/dist&quot;</emphasis>);
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00156 
+00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;from&#32;%s(%s)&#32;to&#32;%s(%s)&quot;</emphasis>,
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1ae263a6eb20a69d12ebd27eb4c318dc3e">filesystem2</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a15072b685b35279e1ba685eef6770079">device2</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>,
+00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setting.<link linkend="_structcombination__map_1afbc8923aa5672188de0e81b9f1bad0d9">filesystem1</link>-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>,&#32;setting.<link linkend="_structcombination__map_1a5d011206898e96c1bf4928d4bcaedf3e">device1</link>-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>),
+00160 
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_write(<emphasis role="stringliteral">&quot;/b/source&quot;</emphasis>);
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_copy(<emphasis role="stringliteral">&quot;/b/source&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/a/dist&quot;</emphasis>);
+00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;srand(i);
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_read(<emphasis role="stringliteral">&quot;/a/dist&quot;</emphasis>);
+00166 
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/a&quot;</emphasis>);
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/b&quot;</emphasis>);
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00171 
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__copy__between__different__filesystems_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00173 &#32;&#32;&#32;&#32;}
+00174 }
+</programlisting></section>
+</section>
+</section>

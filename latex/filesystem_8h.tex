@@ -1,0 +1,117 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/include/filesystem/filesystem.h File Reference}
+\hypertarget{filesystem_8h}{}\label{filesystem_8h}\index{lib/pico-\/vfs-\/REGI-\/Local/include/filesystem/filesystem.h@{lib/pico-\/vfs-\/REGI-\/Local/include/filesystem/filesystem.h}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/blockdevice.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structdirent}{dirent}}
+\item 
+struct \mbox{\hyperlink{structfs__file__t}{fs\+\_\+file\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em file object \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfs__dir__t}{fs\+\_\+dir\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em directory object \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfilesystem}{filesystem}}
+\begin{DoxyCompactList}\small\item\em file system abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\+\_\+\+MAX}}~256
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structfilesystem}{filesystem}} \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em file system abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}{FILESYSTEM\+\_\+\+TYPE\+\_\+\+FAT}}
+, \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a598d9642db3e841af8699b0b240f0d36}{FILESYSTEM\+\_\+\+TYPE\+\_\+\+LITTLEFS}}
+ \}
+\item 
+enum \{ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74aeed6ea354e53d7846af370fa5ac314f9}{DT\+\_\+\+UNKNOWN}} = 0
+, \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}{DT\+\_\+\+DIR}} = 4
+, \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc}{DT\+\_\+\+REG}} = 8
+ \}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{filesystem_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}\index{filesystem.h@{filesystem.h}!PATH\_MAX@{PATH\_MAX}}
+\index{PATH\_MAX@{PATH\_MAX}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{PATH\_MAX}{PATH\_MAX}}
+{\footnotesize\ttfamily \label{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166} 
+\#define PATH\+\_\+\+MAX~256}
+
+
+
+Definition at line \mbox{\hyperlink{filesystem_8h_source_l00022}{22}} of file \mbox{\hyperlink{filesystem_8h_source}{filesystem.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{filesystem_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74} 
+anonymous enum}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DT\_UNKNOWN@{DT\_UNKNOWN}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!DT\_UNKNOWN@{DT\_UNKNOWN}}}\Hypertarget{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74aeed6ea354e53d7846af370fa5ac314f9}\label{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74aeed6ea354e53d7846af370fa5ac314f9} 
+DT\+\_\+\+UNKNOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DT\_DIR@{DT\_DIR}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!DT\_DIR@{DT\_DIR}}}\Hypertarget{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}\label{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94} 
+DT\+\_\+\+DIR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DT\_REG@{DT\_REG}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!DT\_REG@{DT\_REG}}}\Hypertarget{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc}\label{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc} 
+DT\+\_\+\+REG&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{filesystem_8h_source_l00029}{29}} of file \mbox{\hyperlink{filesystem_8h_source}{filesystem.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74aeed6ea354e53d7846af370fa5ac314f9}{DT\_UNKNOWN}}\ =\ 0,}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94}{DT\_DIR}}\ \ \ \ \ =\ 4,}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{filesystem_8h_a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc}{DT\_REG}}\ \ \ \ \ =\ 8,}
+\DoxyCodeLine{00033\ \};}
+
+\end{DoxyCode}
+\Hypertarget{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804} 
+anonymous enum}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILESYSTEM\_TYPE\_FAT@{FILESYSTEM\_TYPE\_FAT}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!FILESYSTEM\_TYPE\_FAT@{FILESYSTEM\_TYPE\_FAT}}}\Hypertarget{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}\label{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92} 
+FILESYSTEM\+\_\+\+TYPE\+\_\+\+FAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILESYSTEM\_TYPE\_LITTLEFS@{FILESYSTEM\_TYPE\_LITTLEFS}!filesystem.h@{filesystem.h}}\index{filesystem.h@{filesystem.h}!FILESYSTEM\_TYPE\_LITTLEFS@{FILESYSTEM\_TYPE\_LITTLEFS}}}\Hypertarget{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a598d9642db3e841af8699b0b240f0d36}\label{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a598d9642db3e841af8699b0b240f0d36} 
+FILESYSTEM\+\_\+\+TYPE\+\_\+\+LITTLEFS&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{filesystem_8h_source_l00024}{24}} of file \mbox{\hyperlink{filesystem_8h_source}{filesystem.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}{FILESYSTEM\_TYPE\_FAT}},}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a598d9642db3e841af8699b0b240f0d36}{FILESYSTEM\_TYPE\_LITTLEFS}},}
+\DoxyCodeLine{00027\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,95 @@
+\doxysection{regi\+\_\+rev1.\+h}
+\hypertarget{regi__rev1_8h_source}{}\label{regi__rev1_8h_source}\index{boards/regi\_rev1.h@{boards/regi\_rev1.h}}
+\mbox{\hyperlink{regi__rev1_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2020\ Raspberry\ Pi\ (Trading)\ Ltd.}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00007}00007\ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00008}00008\ \ \textcolor{comment}{//\ NOTE:\ THIS\ HEADER\ IS\ ALSO\ INCLUDED\ BY\ ASSEMBLER\ SO}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00009}00009\ \ \textcolor{comment}{//\ \ \ \ \ \ \ SHOULD\ ONLY\ CONSIST\ OF\ PREPROCESSOR\ DIRECTIVES}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00010}00010\ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00012}00012\ \textcolor{preprocessor}{\#ifndef\ \_REGI\_REV\_1\_H}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00013}00013\ \textcolor{preprocessor}{\#define\ \_REGI\_REV\_1\_H}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00015}\mbox{\hyperlink{regi__rev1_8h_a84cada78bd4360891c500026949abd61}{00015}}\ \mbox{\hyperlink{regi__rev1_8h_a84cada78bd4360891c500026949abd61}{pico\_board\_cmake\_set}}(PICO\_PLATFORM,\ rp2350)}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00017}00017\ \textcolor{comment}{//\ For\ board\ detection}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00018}00018\ \textcolor{preprocessor}{\#define\ REGI}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00020}00020\ \textcolor{comment}{//\ -\/-\/-\/\ RP2350\ VARIANT\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00021}00021\ \textcolor{preprocessor}{\#define\ PICO\_RP2350A\ 0}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00023}00023\ \textcolor{comment}{//\ -\/-\/-\/\ UART\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00024}00024\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_UART}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00025}00025\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_UART\ 0}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00026}00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_UART\_TX\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00028}00028\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_UART\_TX\_PIN\ 0}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00030}00030\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_UART\_RX\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00031}00031\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_UART\_RX\_PIN\ 1}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00032}00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00034}00034\ \textcolor{comment}{//\ no\ PICO\_DEFAULT\_WS2812\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00036}00036\ \textcolor{comment}{//\ -\/-\/-\/\ I2C\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00037}00037\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_I2C}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00038}00038\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_I2C\ 1}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00039}00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00040}00040\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_I2C\_SDA\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00041}00041\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_I2C\_SDA\_PIN\ 6}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00042}00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00043}00043\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_I2C\_SCL\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00044}00044\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_I2C\_SCL\_PIN\ 7}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00045}00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00047}00047\ \textcolor{comment}{//\ -\/-\/-\/\ SPI\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00048}00048\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_SPI}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00049}00049\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_SPI\ 0}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00050}00050\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00051}00051\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_SPI\_SCK\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00052}00052\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_SPI\_SCK\_PIN\ 18}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00053}00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00054}00054\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_SPI\_TX\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00055}00055\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_SPI\_TX\_PIN\ 19}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00057}00057\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_SPI\_RX\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00058}00058\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_SPI\_RX\_PIN\ 16}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00059}00059\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00060}00060\ \textcolor{preprocessor}{\#ifndef\ PICO\_DEFAULT\_SPI\_CSN\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00061}00061\ \textcolor{preprocessor}{\#define\ PICO\_DEFAULT\_SPI\_CSN\_PIN\ 17}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00062}00062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00064}00064\ \textcolor{comment}{//\ -\/-\/-\/\ ADC\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00065}00065\ \textcolor{preprocessor}{\#ifndef\ WAVESHARE\_BAT\_ADC\_PIN}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00066}00066\ \textcolor{preprocessor}{\#define\ WAVESHARE\_BAT\_ADC\_PIN\ 29}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00067}00067\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00069}00069\ \textcolor{comment}{//\ -\/-\/-\/\ FLASH\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00071}00071\ \textcolor{preprocessor}{\#define\ PICO\_BOOT\_STAGE2\_CHOOSE\_W25Q080\ 1}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00073}00073\ \textcolor{preprocessor}{\#ifndef\ PICO\_FLASH\_SPI\_CLKDIV}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00074}00074\ \textcolor{preprocessor}{\#define\ PICO\_FLASH\_SPI\_CLKDIV\ 2}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00075}00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00077}00077\ pico\_board\_cmake\_set\_default(\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{PICO\_FLASH\_SIZE\_BYTES}},\ (16\ *\ 1024\ *\ 1024))}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00078}00078\ \textcolor{preprocessor}{\#ifndef\ PICO\_FLASH\_SIZE\_BYTES}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00079}\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{00079}}\ \textcolor{preprocessor}{\#define\ PICO\_FLASH\_SIZE\_BYTES\ (16\ *\ 1024\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00080}00080\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00081}00081\ \textcolor{comment}{//\ Drive\ high\ to\ force\ power\ supply\ into\ PWM\ mode\ (lower\ ripple\ on\ 3V3\ at\ light\ loads)}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00082}\mbox{\hyperlink{regi__rev1_8h_a11ebfeefe195a36f1bc2174c8dd928a1}{00082}}\ \textcolor{preprocessor}{\#define\ PICO\_SMPS\_MODE\_PIN\ 47}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00084}00084\ pico\_board\_cmake\_set\_default(\mbox{\hyperlink{regi__rev1_8h_ae0fd438812696e3d1a23842f755daf74}{PICO\_RP2350\_A2\_SUPPORTED}},\ 1)}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00085}00085\ \textcolor{preprocessor}{\#ifndef\ PICO\_RP2350\_A2\_SUPPORTED}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00086}00086\ \textcolor{preprocessor}{\#define\ PICO\_RP2350\_A2\_SUPPORTED\ 1}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00087}00087\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{regi__rev1_8h_source_l00089}00089\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

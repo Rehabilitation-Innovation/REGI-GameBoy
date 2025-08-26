@@ -1,0 +1,125 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/multicore\+\_\+logger/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/multicore\_logger/main.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/multicore\_logger/main.c}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$pico/multicore.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pico/time.\+h$>$}\newline
+{\ttfamily \#include $<$pico/util/queue.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsensor__data__t}{sensor\+\_\+data\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a678ae58402d3a72ca43f90e63c6b61ca}{SAMPLING\+\_\+\+RATE\+\_\+\+HZ}}~1000
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+queue\+\_\+t \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}{sensor\+\_\+queue}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a678ae58402d3a72ca43f90e63c6b61ca}\index{main.c@{main.c}!SAMPLING\_RATE\_HZ@{SAMPLING\_RATE\_HZ}}
+\index{SAMPLING\_RATE\_HZ@{SAMPLING\_RATE\_HZ}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SAMPLING\_RATE\_HZ}{SAMPLING\_RATE\_HZ}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a678ae58402d3a72ca43f90e63c6b61ca} 
+\#define SAMPLING\+\_\+\+RATE\+\_\+\+HZ~1000}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_l00023}{23}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_l00091}{91}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}())\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SD\ card\ device\ not\ found\(\backslash\)n"{}});}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ queue\_init(\&\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}{sensor\_queue}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structsensor__data__t}{sensor\_data\_t}}),\ 1024);}
+\DoxyCodeLine{00099\ \ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}/sd/sensor\_data.csv"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{if}\ (fp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fopen\ failed:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ setvbuf(fp,\ write\_buffer,\ \_IOFBF,\ \textcolor{keyword}{sizeof}(write\_buffer));}
+\DoxyCodeLine{00104\ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Time,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MagX,MagY,Magz\(\backslash\)n"{}});}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ multicore\_reset\_core1();}
+\DoxyCodeLine{00107\ \ \ \ \ sleep\_ms(100);}
+\DoxyCodeLine{00108\ \ \ \ \ multicore\_launch\_core1(produce\_sensor\_data\_task);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{structsensor__data__t}{sensor\_data\_t}}\ entry\ =\ \{0\};}
+\DoxyCodeLine{00111\ \ \ \ \ absolute\_time\_t\ last\_checkpoint\ =\ get\_absolute\_time();}
+\DoxyCodeLine{00112\ \ \ \ \ uint32\_t\ n\ =\ 0;}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ queue\_remove\_blocking(\&\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}{sensor\_queue}},\ \&entry);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}\%.6f,\%.6f,\%.6f,\%.6f,\%.6f,\%.6f,\%.6f,\%.6f,\%.6f,\%.6f\(\backslash\)n"{}},}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{double})entry.\mbox{\hyperlink{structsensor__data__t_a317681c3b45202a0ad429582c26a3d67}{timestamp}}\ /\ 1000\ /\ 1000,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry.\mbox{\hyperlink{structsensor__data__t_a248f154dac0f2c9bff4ba9d7f4dba970}{accel\_x}},\ entry.\mbox{\hyperlink{structsensor__data__t_a2c667e86c78184338501c9e8a7084ffa}{accel\_y}},\ entry.\mbox{\hyperlink{structsensor__data__t_a1611c6d4224825afe216052a6d92bc90}{accel\_z}},}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry.\mbox{\hyperlink{structsensor__data__t_a7c9c3c482f40abe3c661b1ff8f17aea7}{gyro\_x}},\ entry.\mbox{\hyperlink{structsensor__data__t_acf35d0f785e8ea17be52eb6db09d926b}{gyro\_y}},\ entry.\mbox{\hyperlink{structsensor__data__t_a7c9c3c482f40abe3c661b1ff8f17aea7}{gyro\_x}},}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry.\mbox{\hyperlink{structsensor__data__t_a24eea7c67c329879a83f2d6abd0e3270}{mag\_x}},\ entry.\mbox{\hyperlink{structsensor__data__t_aec0b388a1ef17f0a0b435f31882a154a}{mag\_y}},\ entry.\mbox{\hyperlink{structsensor__data__t_a5acd8af8c47db2b4ef47f1531b87bc72}{mag\_z}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ n\ +=\ 1;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ absolute\_time\_t\ now\ =\ get\_absolute\_time();}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ int64\_t\ duration\ =\ absolute\_time\_diff\_us(last\_checkpoint,\ now);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (duration\ >=\ 1000000)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Store\ \%lu\ samples/sec,\ Remaining\ queue\ \%u\(\backslash\)n"{}},}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n,\ queue\_get\_level(\&\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}{sensor\_queue}}));}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ n\ =\ 0;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ last\_checkpoint\ =\ now;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ fclose(fp);}
+\DoxyCodeLine{00132\ \ \ \ \ queue\_free(\&\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}{sensor\_queue}});}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ tight\_loop\_contents();}
+\DoxyCodeLine{00136\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d}\index{main.c@{main.c}!sensor\_queue@{sensor\_queue}}
+\index{sensor\_queue@{sensor\_queue}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{sensor\_queue}{sensor\_queue}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_a3c4ae488ab07f78a56116146dc0d322d} 
+queue\+\_\+t sensor\+\_\+queue}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source_l00039}{39}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2multicore__logger_2main_8c_source}{main.\+c}}.
+

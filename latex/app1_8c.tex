@@ -1,0 +1,73 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/documents/res/app1.c File Reference}
+\hypertarget{app1_8c}{}\label{app1_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app1.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app1.c}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} \mbox{\hyperlink{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}{open\+\_\+append}} (\mbox{\hyperlink{struct_f_i_l}{FIL}} \texorpdfstring{$\ast$}{*}fp, const char \texorpdfstring{$\ast$}{*}path)
+\item 
+int \mbox{\hyperlink{app1_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{app1_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app1_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{app1.c@{app1.c}!main@{main}}
+\index{main@{main}!app1.c@{app1.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{app1_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app1_8c_source_l00025}{25}} of file \mbox{\hyperlink{app1_8c_source}{app1.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}}\ fs;}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l}{FIL}}\ fil;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{/*\ Open\ or\ create\ a\ log\ file\ and\ ready\ to\ append\ */}}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(\&fs,\ \textcolor{stringliteral}{"{}"{}},\ 0);}
+\DoxyCodeLine{00033\ \ \ \ \ fr\ =\ \mbox{\hyperlink{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}{open\_append}}(\&fil,\ \textcolor{stringliteral}{"{}logfile.txt"{}});}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{/*\ Append\ a\ line\ */}}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{ff_8h_a4ce26253177c167df849e76f69b5c66c}{f\_printf}}(\&fil,\ \textcolor{stringliteral}{"{}\%02u/\%02u/\%u,\ \%2u:\%02u\(\backslash\)n"{}},\ Mday,\ Mon,\ Year,\ Hour,\ Min);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{/*\ Close\ the\ file\ */}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(\&fil);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}
+\Hypertarget{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c}\index{app1.c@{app1.c}!open\_append@{open\_append}}
+\index{open\_append@{open\_append}!app1.c@{app1.c}}
+\doxysubsubsection{\texorpdfstring{open\_append()}{open\_append()}}
+{\footnotesize\ttfamily \label{app1_8c_a1fce2c571e1e933acc7a1cbfb9173e3c} 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} open\+\_\+append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_i_l}{FIL}} \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app1_8c_source_l00006}{6}} of file \mbox{\hyperlink{app1_8c_source}{app1.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{/*\ Opens\ an\ existing\ file.\ If\ not\ exist,\ creates\ a\ new\ file.\ */}}
+\DoxyCodeLine{00014\ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_aefdef7126128d99d0b3bd82c28e54d80}{f\_open}}(fp,\ path,\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}}\ |\ \mbox{\hyperlink{ff_8h_a17b01553029920ac0468912b4bcb16c7}{FA\_OPEN\_ALWAYS}});}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ ==\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Seek\ to\ end\ of\ the\ file\ to\ append\ data\ */}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(fp,\ \mbox{\hyperlink{ff_8h_a26f33722c5bf1aa3cd6f0290a83eb2bc}{f\_size}}(fp));}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(fp);}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}

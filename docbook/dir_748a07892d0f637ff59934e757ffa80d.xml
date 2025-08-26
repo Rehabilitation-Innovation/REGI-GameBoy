@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_748a07892d0f637ff59934e757ffa80d" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local Directory Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Directories    </title>
+        <itemizedlist>
+            <listitem><para>directory <link linkend="_dir_02b9f7d16b5a0a906d8ae81113054da2">examples</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_d93ed572feb50e9f4407bb2d5849148d">include</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_5584aeaa170479e31351d33e5b059ea9">src</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_ce75412898f8b9522fadb50a93042d25">tests</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_cc3ce6136ef4316272ed36e8d3434f7b">vendor</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<section xml:id="_README.md_1autotoc_md17">
+<title>Thin virtual file system for Raspberry Pi Pico</title>
+<para>Designed specifically for the Raspberry Pi Pico, <computeroutput>pico-vfs</computeroutput> is a virtual file system that allows users to efficiently and easily utilize different storage media such as onboard flash memory and SD cards using familiar POSIX and C standard file APIs. It streamlines file operations in embedded projects, providing a flexible and scalable file system.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md18">
+<title>Key Features</title>
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">POSIX and C Standard File API Support</emphasis>: Users can perform basic POSIX file operations such as <computeroutput>open</computeroutput>, <computeroutput>read</computeroutput>, <computeroutput>write</computeroutput>, along with higher-level file functions like <computeroutput>fopen</computeroutput>, <computeroutput>fread</computeroutput>, <computeroutput>fwrite</computeroutput> enabling file operations in embedded projects with familiar APIs.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Virtual File System</emphasis>: Multiple different file systems can be mounted into a single namespace, allowing programs to operate without needing to consider differences in storage media and file systems.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Pre-configured File System</emphasis>: To reduce the time and complexity of initial setup, default file system configurations are included. Additionally, an <computeroutput>AUTO_INIT</computeroutput> feature is available to automatically initialize the file system before the execution of <computeroutput><link linkend="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4">main()</link></computeroutput>.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Modular Design</emphasis>: pico-vfs adopts a multi-layer architecture, allowing components such as the block device abstraction layer and the file system abstraction layer to be freely exchanged and added.</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_README.md_1autotoc_md19">
+<title>Examples of Use Cases</title>
+<para>pico-vfs unlocks various applications for the Raspberry Pi Pico. Here&apos;s how it can be used:</para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">Basic File Usage in Embedded Environments</emphasis>: Manage configuration settings and record debug information using familiar POSIX-compliant file APIs.</para>
+</listitem><listitem>
+<para><emphasis role="bold">Elastic MQTT Client</emphasis>: Implements an MQTT client with a local queue to handle network disconnections seamlessly. <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e">View Sample Code</link></para>
+</listitem><listitem>
+<para><emphasis role="bold">Complex UNIX Application Porting</emphasis>: Port SQLite3 to the Pico using pico-vfs, enabling complex data management tasks on the device. <link xlink:href="https://github.com/oyama/pico-sqlite">Visit pico-sqlite Project</link></para>
+</listitem></itemizedlist>
+</para>
+
+<para>These are just a few examples. Utilize the flexibility and capabilities of pico-vfs to develop custom solutions tailored to your projects.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md20">
+<title>Modular Design Architecture</title>
+<para><literallayout><computeroutput>+---------------------------------+
+|&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Application&#32;Code&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|
++---------------------------------+
+|&#32;&#32;&#32;&#32;&#32;&#32;&#32;Virtual&#32;File&#32;System&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;&lt;&lt;&lt;&#32;POSIX&#32;File&#32;API&#32;Layer
++---------------------------------+
+|&#32;&#32;&#32;&#32;&#32;littlefs&#32;&#32;&#32;&#32;|&#32;&#32;&#32;&#32;&#32;&#32;FAT&#32;&#32;&#32;&#32;&#32;&#32;|&#32;&lt;&lt;&lt;&#32;File&#32;System&#32;Layer
++---------------------------------+
+|&#32;&#32;&#32;Flash&#32;Memory&#32;&#32;|&#32;&#32;&#32;&#32;SD&#32;Card&#32;&#32;&#32;&#32;|&#32;&lt;&lt;&lt;&#32;Block&#32;Device&#32;Layer
++---------------------------------+
+|&#32;&#32;&#32;&#32;&#32;&#32;Physical&#32;Storage&#32;Media&#32;&#32;&#32;&#32;&#32;|
+|&#32;&#32;&#32;&#32;&#32;&#32;(Flash,&#32;SD&#32;card,&#32;Heap)&#32;&#32;&#32;&#32;&#32;|
++---------------------------------+
+</computeroutput></literallayout></para>
+
+<para>pico-vfs employs an architecture designed to achieve efficient and flexible data management. The combination of file systems and block devices is not restricted, allowing for free reconfiguration:</para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">Block Device Layer</emphasis>: Abstracts differences in physical storage media such as SD cards and flash memory into a consistent interface, enabling developers to easily add or replace storage media.</para>
+</listitem><listitem>
+<para><emphasis role="bold">File System Layer</emphasis>: Integrates different file systems such as littlefs and FAT seamlessly, providing transparent data access to applications.</para>
+</listitem><listitem>
+<para><emphasis role="bold">POSIX File API Layer</emphasis>: Through the above layers, it offers a standard file API compliant with POSIX, used in desktop and server environments. This allows for immediate implementation of file operations like opening, reading, writing, and closing without the need for additional learning costs.</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_README.md_1autotoc_md21">
+<title>Setup and Configuration</title>
+<para>To add pico-vfs to your project, first place the pico-vfs source in your project directory using the following commands:</para>
+
+<para><literallayout><computeroutput>git&#32;clone&#32;https://github.com/oyama/pico-vfs.git
+cd&#32;pico-vfs
+git&#32;submodule&#32;update&#32;--init
+</computeroutput></literallayout></para>
+
+<para>Next, add the following lines to your project&apos;s <computeroutput>CMakeLists.txt</computeroutput> to include pico-vfs in the build process:</para>
+
+<para><literallayout><computeroutput>&#32;.txt
+add_subdirectory(pico-vfs)
+</computeroutput></literallayout></para>
+
+<para>Then, add the <computeroutput>pico_enable_filesystem</computeroutput> function to <computeroutput>CMakeLists.txt</computeroutput> to enable the file system:</para>
+
+<para><literallayout><computeroutput>&#32;.txt
+pico_enable_filesystem(${CMAKE_PROJECT_NAME})
+</computeroutput></literallayout> This sets up your project to use the pico-vfs file system functionality. From your program, call the file system initialization function <computeroutput><link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init()</link></computeroutput> to start using it:</para>
+
+<para><literallayout><computeroutput>#include&#32;&lt;pico/stdlib.h&gt;
+#include&#32;&lt;stdio.h&gt;
+#include&#32;&quot;filesystem/vfs.h&quot;
+
+int&#32;main(void)&#32;{
+&#32;&#32;&#32;&#32;stdio_init_all();
+&#32;&#32;&#32;&#32;fs_init();
+
+&#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(&quot;HELLO.TXT&quot;,&#32;&quot;w&quot;);
+&#32;&#32;&#32;&#32;fprintf(fp,&#32;&quot;Hello&#32;World!\n&quot;);
+&#32;&#32;&#32;&#32;fclose(fp);
+}
+</computeroutput></literallayout> By default, 1.4MB of littlefs is mounted at /, and the Pico&apos;s onboard flash memory is used as a block device.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md22">
+<title>Usage Guide</title>
+<para>For detailed usage examples, refer to <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e">EXAMPLE</link>. For configuration examples involving various block devices and file systems, refer to <link xlink:href="examples/fs_inits/">examples/fs_inits</link>. These include examples such as mounting a FAT file system on an SD card and littlefs on onboard flash memory into a single namespace.</para>
+
+<para>Additionally, a list of POSIX standard file APIs verified to work with pico-vfs is available in <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d">STANDARD</link>. Refer to this document to check which APIs are available. For management APIs not included in the POSIX standard, such as file system formatting and mounting, refer to <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i">API</link>.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md23">
+<title>Limitations</title>
+<para>For detailed limitations, refer to <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n">LIMITATION</link>. This document provides detailed explanations of potential limitations in specific scenarios and configurations.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md24">
+<title>License</title>
+<para>This project is licensed under the 3-Clause BSD License. For details, see the <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_c_e_n_s_e">LICENSE</link> file.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md25">
+<title>Related Projects and Inspirations</title>
+<para>There are multiple ways to add filesystems to the pico-sdk environment. Firstly, FatFs[^1] and littlefs<link xlink:href="[littlefs](https://github.com/littlefs-project/littlefs)">^2</link> are popular file system implementations. These filesystem implementations require writing drivers for the block devices used. They also each have their own Unix-like API, but with a distinctive dialect.</para>
+
+<para>While there are several solutions that cover the problem of writing drivers for the Raspberry Pi Pico, the carlk3[^3] implementation is probably the most popular. Especially, it includes DMA support to reduce CPU load and support for even faster SDIO<link xlink:href="[SDIO/iSDIO](https://www.sdcard.org/developers/sd-standard-overview/sdio-isdio/)">^4</link>. This would be the first choice for projects using SD cards and the FAT file system with pico-sdk.</para>
+
+<para>Among multi-filesystem implementations, Memotech-Bill[^5] implementation provides standard I/O support for pico-sdk using the Newlib[^6] hook. The littlefs file system for on-board flash and FatFs for SD cards can be operated as an integrated file system. It is an ambitious project that goes beyond files and integrates character devices such as TTYs and UARTs.</para>
+
+<para>While referring to these existing projects, pico-vfs was developed with the aim of separating and making interchangeable the implementation of drivers and file systems for block devices. This provides functionality similar to that of MicroPython&apos;s VFS[^7]and ARM Mbed OS&apos;s Storage[^8].</para>
+</section>
+<section xml:id="_README.md_1autotoc_md26">
+<title>References</title>
+<para>[^1]: <link xlink:href="http://elm-chan.org/fsw/ff/">Generic FAT Filesystem Module</link></para>
+
+<para>[^3]: <link xlink:href="https://github.com/carlk3/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico">C/C++ Library for SD Cards on the Pico</link></para>
+
+<para>[^5]: <link xlink:href="https://github.com/Memotech-Bill/pico-filesystem">Standard File Input / Output for the Pico SDK</link> [^6]: <link xlink:href="https://www.sourceware.org/newlib/">Newlib is a C library intended for use on embedded systems</link> [^7]: <link xlink:href="https://docs.micropython.org/en/latest/reference/filesystem.html">MicroPython Working with filesystems</link> [^8]: <link xlink:href="https://os.mbed.com/docs/mbed-os/v6.16/apis/data-storage-concepts.html">ARM Mbed OS - Data storage concepts</link> </para>
+</section>
+</section>
+</section>

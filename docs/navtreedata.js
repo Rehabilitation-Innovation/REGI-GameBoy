@@ -25,6 +25,9 @@
 var NAVTREE =
 [
   [ "TinyEngine", "index.html", [
+    [ "Features:", "index.html#autotoc_md1", null ],
+    [ "Repository and Layout:", "index.html#autotoc_md2", null ],
+    [ "How to build:", "index.html#autotoc_md3", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -45,8 +48,8 @@ var NAVTREE =
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Enumerator", "globals_eval.html", "globals_eval" ],
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
   ] ]
@@ -54,10 +57,12 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_dino_game_8cpp.html",
-"class_tiny_engine_scene_default.html#acaa36b599d0b9a47b36f222163e240c5",
-"globals_defs.html",
-"tinyengine__renderer__dvi_8cpp.html#a711c4e935d516d1f2213ce95ed3bc889"
+"_c_make_c_compiler_id_8c.html",
+"class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa30e0ca9f36deeff0ed20ad4f60829ee2",
+"dino__running_8h.html#a8739d012ec3ce5e288f803459f6dfb34",
+"lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a60f73b071388a649cac65d2026607540",
+"main_8h.html#ad3aea67d9c7c7dc0be847a1467786abb",
+"structc2_manifold.html#a5a4907aed423d0495921e65962163ccb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/multicore/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/multicore/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;pico/flash.h&gt;<?linebreak?>#include &lt;pico/multicore.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>&#160;&#160;&#160;(512 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>&#160;&#160;&#160;(0.5 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>&#160;&#160;&#160;0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00011">11</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a1f06fce82ce957c8dd28c5e07da29d97"/><section>
+    <title>FLASH_LENGTH_ALL</title>
+<indexterm><primary>FLASH_LENGTH_ALL</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>FLASH_LENGTH_ALL</secondary></indexterm>
+<para><computeroutput>#define FLASH_LENGTH_ALL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00015">15</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1ae38550b2008b82c08588d2340f196914"/><section>
+    <title>FLASH_START_AT</title>
+<indexterm><primary>FLASH_START_AT</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>FLASH_START_AT</secondary></indexterm>
+<para><computeroutput>#define FLASH_START_AT&#160;&#160;&#160;(0.5 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00014">14</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1add89fbb6b753518ca2f4fa0249456c8f"/><section>
+    <title>TEST_FILE_SIZE</title>
+<indexterm><primary>TEST_FILE_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>TEST_FILE_SIZE</secondary></indexterm>
+<para><computeroutput>#define TEST_FILE_SIZE&#160;&#160;&#160;(512 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00013">13</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00108">108</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00109 &#32;&#32;&#32;&#32;stdio_init_all();
+00110 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Start&#32;write&#32;and&#32;read&#32;tests:\n&quot;</emphasis>);
+00111 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>())&#32;{
+00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SD&#32;card&#32;device&#32;not&#32;found,&#32;skip\n&quot;</emphasis>);
+00113 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_sequential_write_read();
+00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remove(<emphasis role="stringliteral">&quot;/flash/core0&quot;</emphasis>);
+00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remove(<emphasis role="stringliteral">&quot;/sd/core0&quot;</emphasis>);
+00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_parallel_write_read();
+00118 &#32;&#32;&#32;&#32;}
+00119 
+00120 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;All&#32;tests&#32;are&#32;ok\n&quot;</emphasis>));
+00121 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+00123 }
+</programlisting></section>
+</section>
+</section>

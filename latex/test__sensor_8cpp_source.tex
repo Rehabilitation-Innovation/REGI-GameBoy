@@ -1,0 +1,66 @@
+\doxysection{test\+\_\+sensor.\+cpp}
+\hypertarget{test__sensor_8cpp_source}{}\label{test__sensor_8cpp_source}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_sensor.cpp@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/tests/test\_sensor.cpp}}
+\mbox{\hyperlink{test__sensor_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{distance__sensor_8h}{distance\_sensor.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{test__harness_8h}{test\_harness.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00033}\mbox{\hyperlink{pio_8h_a9878b5628ef662af86683649f5a7f753}{00033}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__sensor_8cpp_a9878b5628ef662af86683649f5a7f753}{pio\_sm\_put}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ uint32\_t\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00040}\mbox{\hyperlink{test__sensor_8cpp_a04cef081f3e07f3a0ca451ee7942c842}{00040}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__sensor_8cpp_a04cef081f3e07f3a0ca451ee7942c842}{test\_IsProgramLoaded\_AfterLoading}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Load\ on\ pio0.}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00042}00042\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Testing\ that\ programs\ are\ loaded\ in\ memory."{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00043}00043\ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{TestHarness::IsLoaded}}(0)\ ==\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00044}00044\ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{TestHarness::IsLoaded}}(1)\ ==\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00045}00045\ \ \ \ \ puts(\textcolor{stringliteral}{"{}\ Success"{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00051}\mbox{\hyperlink{test__sensor_8cpp_a077ff69d63e952252eae95bebc60f572}{00051}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__sensor_8cpp_a077ff69d63e952252eae95bebc60f572}{test\_IsProgramLoaded\_AtFirst}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Assert\ that\ at\ the\ start\ of\ the\ program}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ each\ distance\ sensor\ is\ not\ loaded}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00054}00054\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Checking\ that\ programs\ are\ not\ loaded\ in\ memory:\ "{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00055}00055\ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{TestHarness::IsLoaded}}(0)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00056}00056\ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{TestHarness::IsLoaded}}(1)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00057}00057\ \ \ \ \ puts(\textcolor{stringliteral}{"{}Success."{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00063}\mbox{\hyperlink{test__sensor_8cpp_a3e9ca87c5950258b37888dd7d2a6ee5d}{00063}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__sensor_8cpp_a3e9ca87c5950258b37888dd7d2a6ee5d}{test\_SensorMapEmptyAtStart}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00064}00064\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Testing\ that\ all\ sensors\ are\ mapped\ to\ 0\ at\ program\ load."{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}\ <\ 2;\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}\ <\ 4;\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{TestHarness::GetMappedSensor}}(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00070}00070\ \ \ \ \ puts(\textcolor{stringliteral}{"{}Success."{}});}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00071}00071\ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00076}\mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{00076}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{test\_SensorLocationIsCorrect}}(\mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}*\ address,\ \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00077}00077\ \ \ \ \ assert(\mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{TestHarness::GetMappedSensor}}(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}})\ ==\ address);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00080}\mbox{\hyperlink{test__sensor_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00080}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{test__sensor_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_a3e9ca87c5950258b37888dd7d2a6ee5d}{test\_SensorMapEmptyAtStart}}();}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_a077ff69d63e952252eae95bebc60f572}{test\_IsProgramLoaded\_AtFirst}}();}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{comment}{//\ Create\ instances}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00085}00085\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}\ pio0\_sensor\{15,\ 0,\ 1\};}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}\ pio1\_sensor\{15,\ 1,\ 2\};}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00088}00088\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_a04cef081f3e07f3a0ca451ee7942c842}{test\_IsProgramLoaded\_AfterLoading}}();}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Test\ the\ sensor\ address\ mapping\ is\ right\ for\ the\ loaded\ pios}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00090}00090\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{test\_SensorLocationIsCorrect}}(\&pio0\_sensor,\ 0,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{test\_SensorLocationIsCorrect}}(\&pio1\_sensor,\ 1,\ 2);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//\ Verify\ some\ other\ mappings\ are\ still\ 0}}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00093}00093\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{test\_SensorLocationIsCorrect}}(0,\ 0,\ 3);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00094}00094\ \ \ \ \ \mbox{\hyperlink{test__sensor_8cpp_ac8040954a006b40ec2cb594ce7b35622}{test\_SensorLocationIsCorrect}}(0,\ 1,\ 3);}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{test__sensor_8cpp_source_l00097}00097\ \}}
+
+\end{DoxyCode}

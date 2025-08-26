@@ -1,0 +1,214 @@
+\doxysection{ffsystem.\+c}
+\hypertarget{ffsystem_8c_source}{}\label{ffsystem_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffsystem.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffsystem.c}}
+\mbox{\hyperlink{ffsystem_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00002}00002\ \textcolor{comment}{/*\ A\ Sample\ Code\ of\ User\ Provided\ OS\ Dependent\ Functions\ for\ FatFs\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00003}00003\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ff_8h}{ff.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00008}00008\ \textcolor{preprocessor}{\#if\ FF\_USE\_LFN\ ==\ 3\ }\textcolor{comment}{/*\ Use\ dynamic\ memory\ allocation\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00010}00010\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00011}00011\ \textcolor{comment}{/*\ Allocate/Free\ a\ Memory\ Block\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00012}00012\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdlib.h>}\ \ \ \ \ \textcolor{comment}{/*\ with\ POSIX\ API\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00017}\mbox{\hyperlink{ffsystem_8c_ae63913186246b80cfce42dbab9e8bcab}{00017}}\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{ffsystem_8c_ae63913186246b80cfce42dbab9e8bcab}{ff\_memalloc}}\ (\ \ \textcolor{comment}{/*\ Returns\ pointer\ to\ the\ allocated\ memory\ block\ (null\ if\ not\ enough\ core)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ msize\ \ \ \ \ \ \textcolor{comment}{/*\ Number\ of\ bytes\ to\ allocate\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00019}00019\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ malloc((\textcolor{keywordtype}{size\_t})msize);\ \ \ \textcolor{comment}{/*\ Allocate\ a\ new\ memory\ block\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00025}\mbox{\hyperlink{ffsystem_8c_ab85fd090c8b8b17846ccc1e8cda16a9b}{00025}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ffsystem_8c_ab85fd090c8b8b17846ccc1e8cda16a9b}{ff\_memfree}}\ (}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}*\ mblock\ \ \ \ \textcolor{comment}{/*\ Pointer\ to\ the\ memory\ block\ to\ free\ (no\ effect\ if\ null)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00027}00027\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00028}00028\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00029}00029\ \ \ \ \ free(mblock);\ \ \ \textcolor{comment}{/*\ Free\ the\ memory\ block\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00032}00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00037}00037\ \textcolor{preprocessor}{\#if\ FF\_FS\_REENTRANT\ }\textcolor{comment}{/*\ Mutal\ exclusion\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00038}00038\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00039}00039\ \textcolor{comment}{/*\ Definitions\ of\ Mutex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00040}00040\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00042}00042\ \textcolor{preprocessor}{\#define\ OS\_TYPE\ 0\ \ \ }\textcolor{comment}{/*\ 0:Win32,\ 1:uITRON4.0,\ 2:uC/OS-\/II,\ 3:FreeRTOS,\ 4:CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00045}00045\ \textcolor{preprocessor}{\#if\ \ \ OS\_TYPE\ ==\ 0\ \ }\textcolor{comment}{/*\ Win32\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00046}00046\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00047}00047\ \textcolor{keyword}{static}\ HANDLE\ Mutex[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}\ +\ 1];\ \ \textcolor{comment}{/*\ Table\ of\ mutex\ handle\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00049}00049\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 1\ \ }\textcolor{comment}{/*\ uITRON\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00050}00050\ \textcolor{preprocessor}{\#include\ "{}itron.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00051}00051\ \textcolor{preprocessor}{\#include\ "{}kernel.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00052}00052\ \textcolor{keyword}{static}\ mtxid\ Mutex[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}\ +\ 1];\ \ \ \ \ \ \ \textcolor{comment}{/*\ Table\ of\ mutex\ ID\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00054}00054\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 2\ \ }\textcolor{comment}{/*\ uc/OS-\/II\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00055}00055\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00056}00056\ \textcolor{keyword}{static}\ OS\_EVENT\ *Mutex[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}\ +\ 1];\ \ \ \textcolor{comment}{/*\ Table\ of\ mutex\ pinter\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00058}00058\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 3\ \ }\textcolor{comment}{/*\ FreeRTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00059}00059\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00060}00060\ \textcolor{preprocessor}{\#include\ "{}semphr.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00061}00061\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ Mutex[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}\ +\ 1];\ \ \ \textcolor{comment}{/*\ Table\ of\ mutex\ handle\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00063}00063\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 4\ \ }\textcolor{comment}{/*\ CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00064}00064\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00065}00065\ \textcolor{keyword}{static}\ osMutexId\ Mutex[\mbox{\hyperlink{ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{FF\_VOLUMES}}\ +\ 1];\ \ \ \textcolor{comment}{/*\ Table\ of\ mutex\ ID\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00067}00067\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00071}00071\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00072}00072\ \textcolor{comment}{/*\ Create\ a\ Mutex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00073}00073\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00074}00074\ \textcolor{comment}{/*\ This\ function\ is\ called\ in\ f\_mount\ function\ to\ create\ a\ new\ mutex}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00075}00075\ \textcolor{comment}{/\ \ or\ semaphore\ for\ the\ volume.\ When\ a\ 0\ is\ returned,\ the\ f\_mount\ function}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00076}00076\ \textcolor{comment}{/\ \ fails\ with\ FR\_INT\_ERR.}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00077}00077\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00079}00079\ \textcolor{keywordtype}{int}\ ff\_mutex\_create\ (\ \ \ \textcolor{comment}{/*\ Returns\ 1:Function\ succeeded\ or\ 0:Could\ not\ create\ the\ mutex\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{int}\ vol\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mutex\ ID:\ Volume\ mutex\ (0\ to\ FF\_VOLUMES\ -\/\ 1)\ or\ system\ mutex\ (FF\_VOLUMES)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00081}00081\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00083}00083\ \textcolor{preprocessor}{\#if\ OS\_TYPE\ ==\ 0\ \ \ \ }\textcolor{comment}{/*\ Win32\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00084}00084\ \ \ \ \ Mutex[vol]\ =\ CreateMutex(NULL,\ FALSE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(Mutex[vol]\ !=\ INVALID\_HANDLE\_VALUE);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00087}00087\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 1\ \ }\textcolor{comment}{/*\ uITRON\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00088}00088\ \ \ \ \ T\_CMTX\ cmtx\ =\ \{TA\_TPRI,1\};}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00090}00090\ \ \ \ \ Mutex[vol]\ =\ acre\_mtx(\&cmtx);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(Mutex[vol]\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00093}00093\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 2\ \ }\textcolor{comment}{/*\ uC/OS-\/II\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00094}00094\ \ \ \ \ OS\_ERR\ err;}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00096}00096\ \ \ \ \ Mutex[vol]\ =\ OSMutexCreate(0,\ \&err);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(err\ ==\ OS\_NO\_ERR);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00099}00099\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 3\ \ }\textcolor{comment}{/*\ FreeRTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00100}00100\ \ \ \ \ Mutex[vol]\ =\ xSemaphoreCreateMutex();}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(Mutex[vol]\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00103}00103\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 4\ \ }\textcolor{comment}{/*\ CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00104}00104\ \ \ \ \ osMutexDef(cmsis\_os\_mutex);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00106}00106\ \ \ \ \ Mutex[vol]\ =\ osMutexCreate(osMutex(cmsis\_os\_mutex));}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(Mutex[vol]\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00109}00109\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00110}00110\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00113}00113\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00114}00114\ \textcolor{comment}{/*\ Delete\ a\ Mutex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00115}00115\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00116}00116\ \textcolor{comment}{/*\ This\ function\ is\ called\ in\ f\_mount\ function\ to\ delete\ a\ mutex\ or}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00117}00117\ \textcolor{comment}{/\ \ semaphore\ of\ the\ volume\ created\ with\ ff\_mutex\_create\ function.}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00118}00118\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00120}00120\ \textcolor{keywordtype}{void}\ ff\_mutex\_delete\ (\ \ \textcolor{comment}{/*\ Returns\ 1:Function\ succeeded\ or\ 0:Could\ not\ delete\ due\ to\ an\ error\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00121}00121\ \ \ \ \ \textcolor{keywordtype}{int}\ vol\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mutex\ ID:\ Volume\ mutex\ (0\ to\ FF\_VOLUMES\ -\/\ 1)\ or\ system\ mutex\ (FF\_VOLUMES)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00122}00122\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00124}00124\ \textcolor{preprocessor}{\#if\ OS\_TYPE\ ==\ 0\ \ \ \ }\textcolor{comment}{/*\ Win32\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00125}00125\ \ \ \ \ CloseHandle(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00127}00127\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 1\ \ }\textcolor{comment}{/*\ uITRON\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00128}00128\ \ \ \ \ del\_mtx(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00130}00130\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 2\ \ }\textcolor{comment}{/*\ uC/OS-\/II\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00131}00131\ \ \ \ \ OS\_ERR\ err;}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00133}00133\ \ \ \ \ OSMutexDel(Mutex[vol],\ OS\_DEL\_ALWAYS,\ \&err);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00135}00135\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 3\ \ }\textcolor{comment}{/*\ FreeRTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00136}00136\ \ \ \ \ vSemaphoreDelete(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00138}00138\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 4\ \ }\textcolor{comment}{/*\ CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00139}00139\ \ \ \ \ osMutexDelete(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00141}00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00145}00145\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00146}00146\ \textcolor{comment}{/*\ Request\ a\ Grant\ to\ Access\ the\ Volume\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00147}00147\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00148}00148\ \textcolor{comment}{/*\ This\ function\ is\ called\ on\ enter\ file\ functions\ to\ lock\ the\ volume.}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00149}00149\ \textcolor{comment}{/\ \ When\ a\ 0\ is\ returned,\ the\ file\ function\ fails\ with\ FR\_TIMEOUT.}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00150}00150\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00152}00152\ \textcolor{keywordtype}{int}\ ff\_mutex\_take\ (\ \textcolor{comment}{/*\ Returns\ 1:Succeeded\ or\ 0:Timeout\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00153}00153\ \ \ \ \ \textcolor{keywordtype}{int}\ vol\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mutex\ ID:\ Volume\ mutex\ (0\ to\ FF\_VOLUMES\ -\/\ 1)\ or\ system\ mutex\ (FF\_VOLUMES)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00154}00154\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00155}00155\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00156}00156\ \textcolor{preprocessor}{\#if\ OS\_TYPE\ ==\ 0\ \ \ \ }\textcolor{comment}{/*\ Win32\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(WaitForSingleObject(Mutex[vol],\ \mbox{\hyperlink{ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{FF\_FS\_TIMEOUT}})\ ==\ WAIT\_OBJECT\_0);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00159}00159\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 1\ \ }\textcolor{comment}{/*\ uITRON\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(tloc\_mtx(Mutex[vol],\ \mbox{\hyperlink{ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{FF\_FS\_TIMEOUT}})\ ==\ E\_OK);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00162}00162\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 2\ \ }\textcolor{comment}{/*\ uC/OS-\/II\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00163}00163\ \ \ \ \ OS\_ERR\ err;}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00165}00165\ \ \ \ \ OSMutexPend(Mutex[vol],\ \mbox{\hyperlink{ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{FF\_FS\_TIMEOUT}},\ \&err));}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00166}00166\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(err\ ==\ OS\_NO\_ERR);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00168}00168\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 3\ \ }\textcolor{comment}{/*\ FreeRTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(xSemaphoreTake(Mutex[vol],\ \mbox{\hyperlink{ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{FF\_FS\_TIMEOUT}})\ ==\ pdTRUE);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00171}00171\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 4\ \ }\textcolor{comment}{/*\ CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00172}00172\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(osMutexWait(Mutex[vol],\ \mbox{\hyperlink{ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{FF\_FS\_TIMEOUT}})\ ==\ osOK);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00174}00174\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00175}00175\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00179}00179\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00180}00180\ \textcolor{comment}{/*\ Release\ a\ Grant\ to\ Access\ the\ Volume\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00181}00181\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00182}00182\ \textcolor{comment}{/*\ This\ function\ is\ called\ on\ leave\ file\ functions\ to\ unlock\ the\ volume.}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00183}00183\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00185}00185\ \textcolor{keywordtype}{void}\ ff\_mutex\_give\ (}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00186}00186\ \ \ \ \ \textcolor{keywordtype}{int}\ vol\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mutex\ ID:\ Volume\ mutex\ (0\ to\ FF\_VOLUMES\ -\/\ 1)\ or\ system\ mutex\ (FF\_VOLUMES)\ */}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00187}00187\ )}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00189}00189\ \textcolor{preprocessor}{\#if\ OS\_TYPE\ ==\ 0\ \ \ \ }\textcolor{comment}{/*\ Win32\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00190}00190\ \ \ \ \ ReleaseMutex(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00192}00192\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 1\ \ }\textcolor{comment}{/*\ uITRON\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00193}00193\ \ \ \ \ unl\_mtx(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00195}00195\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 2\ \ }\textcolor{comment}{/*\ uC/OS-\/II\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00196}00196\ \ \ \ \ OSMutexPost(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00198}00198\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 3\ \ }\textcolor{comment}{/*\ FreeRTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00199}00199\ \ \ \ \ xSemaphoreGive(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00201}00201\ \textcolor{preprocessor}{\#elif\ OS\_TYPE\ ==\ 4\ \ }\textcolor{comment}{/*\ CMSIS-\/RTOS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00202}00202\ \ \ \ \ osMutexRelease(Mutex[vol]);}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00204}00204\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00205}00205\ \}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00207}00207\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FF\_FS\_REENTRANT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ffsystem_8c_source_l00208}00208\ }
+
+\end{DoxyCode}

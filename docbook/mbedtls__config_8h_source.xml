@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_mbedtls__config_8h_source" xml:lang="en-US">
+<title>mbedtls_config.h</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/mbedtls_config.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_mbedtls__config_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00002"/>00002 
+<anchor xml:id="_mbedtls__config_8h_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;limits.h&gt;</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00004"/>00004 
+<anchor xml:id="_mbedtls__config_8h_source_1l00005"/><link linkend="_mbedtls__config_8h_1a50fe70e2e5da2dda496e0432261136a5">00005</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_NO_PLATFORM_ENTROPY</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00006"/><link linkend="_mbedtls__config_8h_1a1a0f22be83a0b34bd8e8251b77a680a0">00006</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ENTROPY_HARDWARE_ALT</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00007"/>00007 
+<anchor xml:id="_mbedtls__config_8h_source_1l00008"/><link linkend="_mbedtls__config_8h_1ae6d6fb50d2997e49b202fa9fb4356158">00008</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_OUT_CONTENT_LEN&#32;&#32;&#32;&#32;2048</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00009"/>00009 
+<anchor xml:id="_mbedtls__config_8h_source_1l00010"/><link linkend="_mbedtls__config_8h_1a3bacd46ff8288c205efdb056d9ab2453">00010</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ALLOW_PRIVATE_ACCESS</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00011"/><link linkend="_mbedtls__config_8h_1a0d2a3e0e00f099a570fa56a0c4cf0d35">00011</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_HAVE_TIME</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00012"/>00012 
+<anchor xml:id="_mbedtls__config_8h_source_1l00013"/><link linkend="_mbedtls__config_8h_1ae0290beb1dc98ac21d930144d34ae2d0">00013</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_CIPHER_MODE_CBC</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00014"/><link linkend="_mbedtls__config_8h_1a8c45e2be551b48e4feb1453fff99b8d5">00014</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP192R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00015"/><link linkend="_mbedtls__config_8h_1a53ca938afec54658ef4b643c60ed617c">00015</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP224R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00016"/><link linkend="_mbedtls__config_8h_1aa7661e25bab8f0e87060ee05f1216fe4">00016</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP256R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00017"/><link linkend="_mbedtls__config_8h_1a8d7d810065d58b237787c6749b7ef232">00017</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP384R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00018"/><link linkend="_mbedtls__config_8h_1a0afb3cbe18e3ad5abde001c32f319d12">00018</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP521R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00019"/><link linkend="_mbedtls__config_8h_1a3a85a85a23a2b5935e97d400d224eac5">00019</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP192K1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00020"/><link linkend="_mbedtls__config_8h_1a056eb2e0e44147c2df7ec5a4c0c8b152">00020</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP224K1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00021"/><link linkend="_mbedtls__config_8h_1a5234a2a9d84b7b6c8de05f1494ead4d7">00021</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_SECP256K1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00022"/><link linkend="_mbedtls__config_8h_1abc22a5b0870dd8ff1b38cdce1423b0ff">00022</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_BP256R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00023"/><link linkend="_mbedtls__config_8h_1a980c4064e72ef188840d9b0a68d2e85e">00023</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_BP384R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00024"/><link linkend="_mbedtls__config_8h_1afd338008d2ae25ba0dba0c07ba1e2482">00024</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_BP512R1_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00025"/><link linkend="_mbedtls__config_8h_1a7bb6872451a7b080abda9d489bd56826">00025</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_DP_CURVE25519_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00026"/><link linkend="_mbedtls__config_8h_1a4e31bcb46f4cd29deced2ef3ef6a8925">00026</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_KEY_EXCHANGE_RSA_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00027"/><link linkend="_mbedtls__config_8h_1ab9ff33e1da5c1afaf8ce3fc47ab8d577">00027</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PKCS1_V15</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00028"/><link linkend="_mbedtls__config_8h_1a37056e26ff582813ab505fa8e59287b6">00028</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SHA256_SMALLER</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00029"/><link linkend="_mbedtls__config_8h_1ab69f58bd04df63c09ffaa435baa47bf7">00029</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_SERVER_NAME_INDICATION</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00030"/><link linkend="_mbedtls__config_8h_1a54a11655ee76cbd7b4d8b159e377adef">00030</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_AES_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00031"/><link linkend="_mbedtls__config_8h_1ab6d2cedeb9ad2d5f11e008708c922a7d">00031</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ASN1_PARSE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00032"/><link linkend="_mbedtls__config_8h_1a1cceb2b05fcbf777d24948d63a1aa74c">00032</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_BIGNUM_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00033"/><link linkend="_mbedtls__config_8h_1a4a186eda38ce80f484524f3f12de2923">00033</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_CIPHER_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00034"/><link linkend="_mbedtls__config_8h_1a493cf54dbd2c093c8541b1ad106436e9">00034</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_CTR_DRBG_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00035"/><link linkend="_mbedtls__config_8h_1a24884ce4da3fed0ceff29962dd7a01fc">00035</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ENTROPY_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00036"/><link linkend="_mbedtls__config_8h_1a8d615f5d4143f300c13c9f6fec1fb17a">00036</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ERROR_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00037"/><link linkend="_mbedtls__config_8h_1a17195cf7384dbcab5bae3f1d2971fb03">00037</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_MD_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00038"/><link linkend="_mbedtls__config_8h_1a76686ebb937ad5cc1623638965c4bc22">00038</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_MD5_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00039"/><link linkend="_mbedtls__config_8h_1a0960129d0cf6e043a1cbc7c41d7c2297">00039</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_OID_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00040"/><link linkend="_mbedtls__config_8h_1a2d9853334811c4e2220fb5c6266e908e">00040</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PKCS5_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00041"/><link linkend="_mbedtls__config_8h_1a0dcc79b4e757e34d2a625470fb016e18">00041</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PK_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00042"/><link linkend="_mbedtls__config_8h_1a09eefef8f4562ba86a9c7a47c114ddaa">00042</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PK_PARSE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00043"/><link linkend="_mbedtls__config_8h_1a756fb086e76be2a76954beb682195a49">00043</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PLATFORM_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00044"/><link linkend="_mbedtls__config_8h_1a035227f1c3c88103fdb13621e9a5df51">00044</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_RSA_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00045"/><link linkend="_mbedtls__config_8h_1af0a5a26171b8cc9ba46b9775cf56b541">00045</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SHA1_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00046"/><link linkend="_mbedtls__config_8h_1ad9ce2492f61eae86103d3e9ed90fd72e">00046</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SHA224_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00047"/><link linkend="_mbedtls__config_8h_1a8cc51fc9b077f5b669bc4dfba0bde43e">00047</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SHA256_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00048"/><link linkend="_mbedtls__config_8h_1adb76d28ffd9734d3643df457857a4424">00048</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SHA512_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00049"/><link linkend="_mbedtls__config_8h_1a38112435a93c8cf0e9c9e9c15cb3f516">00049</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_CLI_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00050"/><link linkend="_mbedtls__config_8h_1a311e2a994e4e5f25b550e170ca9605e0">00050</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_SRV_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00051"/><link linkend="_mbedtls__config_8h_1a85f2821433dbf22916e865a49f2652df">00051</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_TLS_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00052"/><link linkend="_mbedtls__config_8h_1a813d4cf0b3fc03db0f9dbec52ba04b40">00052</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_X509_CRT_PARSE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00053"/><link linkend="_mbedtls__config_8h_1ad377c385a02385defbd866a5b190bba8">00053</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_X509_USE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00054"/><link linkend="_mbedtls__config_8h_1a8099f25dc31d0f01f82482ede7906a94">00054</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_AES_FEWER_TABLES</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00055"/>00055 
+<anchor xml:id="_mbedtls__config_8h_source_1l00056"/>00056 <emphasis role="comment">/*&#32;TLS&#32;1.2&#32;*/</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00057"/><link linkend="_mbedtls__config_8h_1a8a7aca10569198cf8e8dbff1c40677c6">00057</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_SSL_PROTO_TLS1_2</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00058"/><link linkend="_mbedtls__config_8h_1a17ad52b9c597d50d6bab1557e96dd2e2">00058</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00059"/><link linkend="_mbedtls__config_8h_1a1302769eb08072aaf2d8cd6ca9ac206b">00059</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_GCM_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00060"/><link linkend="_mbedtls__config_8h_1aa3615295cbab56882c919eb9cf79fe10">00060</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECDH_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00061"/><link linkend="_mbedtls__config_8h_1ae9d24fd58758d905e43ace39f9798b46">00061</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECP_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00062"/><link linkend="_mbedtls__config_8h_1ac5796bd242fe0f33d66f9e2cc3c2b490">00062</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ECDSA_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00063"/><link linkend="_mbedtls__config_8h_1a79098f46901a7da949424ca81fcb4be2">00063</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_ASN1_WRITE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00064"/>00064 
+<anchor xml:id="_mbedtls__config_8h_source_1l00065"/>00065 <emphasis role="comment">//&#32;The&#32;following&#32;is&#32;needed&#32;to&#32;parse&#32;a&#32;certificate</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00066"/><link linkend="_mbedtls__config_8h_1ac90a92552ac2f87c701b24857fd6d4c1">00066</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_PEM_PARSE_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00067"/><link linkend="_mbedtls__config_8h_1a95e58aa3f6b5391f9fc423b3809cf9a4">00067</link> <emphasis role="preprocessor">#define&#32;MBEDTLS_BASE64_C</emphasis>
+<anchor xml:id="_mbedtls__config_8h_source_1l00068"/>00068 
+</programlisting></section>

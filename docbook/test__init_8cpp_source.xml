@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__init_8cpp_source" xml:lang="en-US">
+<title>test_init.cpp</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/tests/test_init.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_test__init_8cpp_source_1l00001"/>00001 
+<anchor xml:id="_test__init_8cpp_source_1l00024"/>00024 
+<anchor xml:id="_test__init_8cpp_source_1l00025"/>00025 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_distance__sensor_8h">distance_sensor.h</link>&quot;</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00026"/>00026 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_test__harness_8h">test_harness.h</link>&quot;</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00027"/>00027 <emphasis role="preprocessor">#include&#32;&lt;cassert&gt;</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00028"/>00028 <emphasis role="preprocessor">#include&#32;&lt;cstdio&gt;</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00029"/>00029 
+<anchor xml:id="_test__init_8cpp_source_1l00030"/><link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">00030</link> <link linkend="_class_test_harness">TestHarness</link>*&#32;<link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link>;
+<anchor xml:id="_test__init_8cpp_source_1l00031"/>00031 
+<anchor xml:id="_test__init_8cpp_source_1l00036"/>00036 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00037"/>00037 <emphasis role="comment">void&#32;test_LoadPrograms()&#32;{</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00038"/>00038 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Load&#32;on&#32;pio0.</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00039"/>00039 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;Testing&#32;that&#32;programs&#32;are&#32;loaded&#32;in&#32;memory.&quot;);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00040"/>00040 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Verify&#32;that&#32;the&#32;program&#32;is&#32;loaded&#32;after&#32;calling&#32;load&#32;program</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00041"/>00041 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;IsLoaded(0)&#32;==&#32;false);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00042"/>00042 <emphasis role="comment">&#32;&#32;&#32;&#32;test-&gt;LoadProgram(0);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00043"/>00043 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;IsLoaded(0)&#32;==&#32;true);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00044"/>00044 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Verify&#32;the&#32;program&#32;is&#32;loaded&#32;to&#32;the&#32;expected&#32;test&#32;address.</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00045"/>00045 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;GetOffset(0)&#32;==&#32;0);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00046"/>00046 <emphasis role="comment"></emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00047"/>00047 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Verify&#32;that&#32;the&#32;program&#32;is&#32;loaded&#32;after&#32;calling&#32;load&#32;program</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00048"/>00048 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;IsLoaded(1)&#32;==&#32;false);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00049"/>00049 <emphasis role="comment">&#32;&#32;&#32;&#32;test-&gt;LoadProgram(1);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00050"/>00050 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;IsLoaded(1)&#32;==&#32;true);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00051"/>00051 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Verify&#32;the&#32;program&#32;is&#32;loaded&#32;to&#32;the&#32;expected&#32;test&#32;address.</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00052"/>00052 <emphasis role="comment">&#32;&#32;&#32;&#32;assert(test-&gt;GetOffset(1)&#32;==&#32;1);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00053"/>00053 <emphasis role="comment">&#32;&#32;&#32;&#32;puts(&quot;&#32;Success&quot;);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00054"/>00054 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00055"/>00055 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00056"/>00056 
+<anchor xml:id="_test__init_8cpp_source_1l00060"/><link linkend="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572">00060</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link>()&#32;{
+<anchor xml:id="_test__init_8cpp_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;that&#32;at&#32;the&#32;start&#32;of&#32;the&#32;program</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;each&#32;distance&#32;sensor&#32;is&#32;not&#32;loaded</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00063"/>00063 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Checking&#32;that&#32;programs&#32;are&#32;not&#32;loaded&#32;in&#32;memory:&#32;&quot;</emphasis>);
+<anchor xml:id="_test__init_8cpp_source_1l00064"/>00064 &#32;&#32;&#32;&#32;assert(<link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link>-&gt;IsLoaded(0)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="_test__init_8cpp_source_1l00065"/>00065 &#32;&#32;&#32;&#32;assert(<link linkend="_test__init_8cpp_1a1638348297533c6be6ceb4d2ba46bb2d">test</link>-&gt;IsLoaded(1)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="_test__init_8cpp_source_1l00066"/>00066 &#32;&#32;&#32;&#32;puts(<emphasis role="stringliteral">&quot;Success.&quot;</emphasis>);
+<anchor xml:id="_test__init_8cpp_source_1l00067"/>00067 }
+<anchor xml:id="_test__init_8cpp_source_1l00068"/>00068 
+<anchor xml:id="_test__init_8cpp_source_1l00069"/>00069 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00070"/>00070 <emphasis role="comment">void&#32;test_SensorMapEmptyAtStart()&#32;{</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00071"/>00071 <emphasis role="comment">&#32;&#32;&#32;&#32;for&#32;(uint&#32;pio&#32;=&#32;0;&#32;pio&#32;&lt;&#32;2;&#32;pio++)&#32;{</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00072"/>00072 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;for&#32;(uint&#32;sm&#32;=&#32;0;&#32;sm&#32;&lt;&#32;4;&#32;sm++)&#32;{</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00073"/>00073 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(test-&gt;GetMappedSensor(pio,&#32;sm)&#32;==&#32;0);</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00074"/>00074 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00075"/>00075 <emphasis role="comment">&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00076"/>00076 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00077"/>00077 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="_test__init_8cpp_source_1l00078"/>00078 
+<anchor xml:id="_test__init_8cpp_source_1l00079"/>00079 
+<anchor xml:id="_test__init_8cpp_source_1l00080"/><link linkend="_test__init_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">00080</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_test__init_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link>()&#32;{
+<anchor xml:id="_test__init_8cpp_source_1l00081"/>00081 &#32;&#32;&#32;&#32;<link linkend="_test__init_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link>();
+<anchor xml:id="_test__init_8cpp_source_1l00082"/>00082 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_test__init_8cpp_source_1l00083"/>00083 }
+</programlisting></section>

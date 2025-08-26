@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source" xml:lang="en-US">
+<title>main.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/multicore/main.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&lt;assert.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&lt;pico/flash.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;pico/multicore.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;pico/stdlib.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;stdlib.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_vfs_8h">filesystem/vfs.h</link>&quot;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00010"/>00010 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00011"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">00011</link> <emphasis role="preprocessor">#define&#32;COLOR_GREEN(format)&#32;&#32;(&quot;\e[32m&quot;&#32;format&#32;&quot;\e[0m&quot;)</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00012"/>00012 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00013"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1add89fbb6b753518ca2f4fa0249456c8f">00013</link> <emphasis role="preprocessor">#define&#32;TEST_FILE_SIZE&#32;&#32;&#32;&#32;&#32;&#32;(512&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00014"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1ae38550b2008b82c08588d2340f196914">00014</link> <emphasis role="preprocessor">#define&#32;FLASH_START_AT&#32;&#32;&#32;&#32;&#32;&#32;(0.5&#32;*&#32;1024&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00015"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a1f06fce82ce957c8dd28c5e07da29d97">00015</link> <emphasis role="preprocessor">#define&#32;FLASH_LENGTH_ALL&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00016"/>00016 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00017"/>00017 <emphasis role="keyword">static</emphasis>&#32;uint8_t&#32;core1_buffer[1024*16];
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00018"/>00018 <emphasis role="keyword">static</emphasis>&#32;uint8_t&#32;core0_buffer[1024*16];
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00019"/>00019 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00020"/>00020 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;test_printf(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00022"/>00022 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;n&#32;=&#32;vprintf(format,&#32;args);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00025"/>00025 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00026"/>00026 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;50&#32;-&#32;(size_t)n;&#32;i++)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;.&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>)n;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00030"/>00030 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00031"/>00031 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00032"/>00032 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;write_read(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size,&#32;uint8_t&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;buf_size)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;open(path,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;remind&#32;=&#32;size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;seed&#32;=&#32;0;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(remind&#32;&gt;&#32;0)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;chunk&#32;=&#32;remind&#32;%&#32;buf_size&#32;?&#32;remind&#32;%&#32;buf_size&#32;:&#32;buf_size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;(size_t)chunk;&#32;i++)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;buffer[i]&#32;=&#32;rand_r(&amp;seed)&#32;&amp;&#32;0xFF;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;write_size&#32;=&#32;write(fd,&#32;buffer,&#32;chunk);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(write_size&#32;!=&#32;-1);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remind&#32;=&#32;remind&#32;-&#32;write_size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00045"/>00045 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;close(fd);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00048"/>00048 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;fd&#32;=&#32;open(path,&#32;O_RDONLY);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;assert(fd&#32;!=&#32;0);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;seed&#32;=&#32;0;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;remind&#32;=&#32;size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(remind&#32;&gt;&#32;0)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;chunk&#32;=&#32;remind&#32;%&#32;buf_size&#32;?&#32;remind&#32;%&#32;buf_size&#32;:&#32;buf_size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;read_size&#32;=&#32;read(fd,&#32;buffer,&#32;chunk);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(read_size&#32;!=&#32;-1);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00057"/>00057 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;(size_t)read_size;&#32;i++)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">volatile</emphasis>&#32;uint8_t&#32;r&#32;=&#32;rand_r(&amp;seed)&#32;&amp;&#32;0xFF;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(buffer[i]&#32;==&#32;r);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remind&#32;=&#32;remind&#32;-&#32;read_size;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;err&#32;=&#32;close(fd);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00066"/>00066 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00067"/>00067 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00068"/>00068 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_sequential_write_read(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;/flash/core0&#32;then&#32;/sd/core0&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;absolute_time_t&#32;start_at&#32;=&#32;get_absolute_time();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00071"/>00071 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;write_read(<emphasis role="stringliteral">&quot;/flash/core0&quot;</emphasis>,&#32;<link linkend="_integration_2test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>,&#32;core0_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(core0_buffer));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;write_read(<emphasis role="stringliteral">&quot;/sd/core0&quot;</emphasis>,&#32;<link linkend="_integration_2test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>&#32;*&#32;5,&#32;core0_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(core0_buffer));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00074"/>00074 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;duration&#32;=&#32;(double)absolute_time_diff_us(start_at,&#32;get_absolute_time())&#32;/&#32;1000&#32;/&#32;1000;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok,&#32;%.1f&#32;seconds\n&quot;</emphasis>),&#32;duration);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00077"/>00077 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00078"/>00078 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00079"/>00079 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;sd_card_write_read_task(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;flash_safe_execute_core_init();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;write_read(<emphasis role="stringliteral">&quot;/sd/core1&quot;</emphasis>,&#32;<link linkend="_integration_2test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>&#32;*&#32;5,&#32;core1_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(core1_buffer));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00082"/>00082 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00083"/>00083 &#32;&#32;&#32;&#32;multicore_fifo_push_blocking(1);&#32;<emphasis role="comment">//&#32;finish</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00086"/>00086 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00087"/>00087 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00088"/>00088 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_parallel_write_read(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;/flash/core0&#32;with&#32;/sd/core1&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00090"/>00090 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;NOTE:&#32;When&#32;running&#32;with&#32;pico-sdk&#32;1.5.1&#32;and&#32;openocd,&#32;core1&#32;needs&#32;to&#32;reset&#32;and&#32;sleep.</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00092"/>00092 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;*&#32;&#32;&#32;&#32;&#32;&#32;&#32;https://forums.raspberrypi.com/viewtopic.php?t=349795</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00093"/>00093 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;multicore_reset_core1();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;sleep_ms(100);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;absolute_time_t&#32;start_at&#32;=&#32;get_absolute_time();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;multicore_launch_core1(sd_card_write_read_task);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00098"/>00098 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;write_read(<emphasis role="stringliteral">&quot;/flash/core0&quot;</emphasis>,&#32;<link linkend="_integration_2test__copy__between__different__filesystems_8c_1add89fbb6b753518ca2f4fa0249456c8f">TEST_FILE_SIZE</link>,&#32;core0_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(core0_buffer));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;result&#32;=&#32;multicore_fifo_pop_blocking();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;assert(result&#32;==&#32;1);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00102"/>00102 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">double</emphasis>&#32;duration&#32;=&#32;(double)absolute_time_diff_us(start_at,&#32;get_absolute_time())&#32;/&#32;1000&#32;/&#32;1000;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok,&#32;%.1f&#32;seconds\n&quot;</emphasis>),&#32;duration);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00105"/>00105 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00106"/>00106 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00107"/>00107 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00108"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">00108</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;stdio_init_all();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00110"/>00110 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Start&#32;write&#32;and&#32;read&#32;tests:\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>())&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SD&#32;card&#32;device&#32;not&#32;found,&#32;skip\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_sequential_write_read();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remove(<emphasis role="stringliteral">&quot;/flash/core0&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;remove(<emphasis role="stringliteral">&quot;/sd/core0&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_parallel_write_read();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00119"/>00119 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;printf(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;All&#32;tests&#32;are&#32;ok\n&quot;</emphasis>));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(1)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tight_loop_contents();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_1l00123"/>00123 }
+</programlisting></section>

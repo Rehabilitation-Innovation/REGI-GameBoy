@@ -1,0 +1,101 @@
+\doxysection{Free\+RTOSConfig.\+h}
+\hypertarget{_free_r_t_o_s_config_8h_source}{}\label{_free_r_t_o_s_config_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/freertos\_benchmark/FreeRTOSConfig.h@{lib/pico-\/vfs-\/REGI-\/Local/examples/freertos\_benchmark/FreeRTOSConfig.h}}
+\mbox{\hyperlink{_free_r_t_o_s_config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FREERTOS\_CONFIG\_H}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FREERTOS\_CONFIG\_H}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00004}00004\ \textcolor{comment}{/*\ Scheduler\ Related\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00005}\mbox{\hyperlink{_free_r_t_o_s_config_8h_adde83486022745409c40605922b0bdd6}{00005}}\ \textcolor{preprocessor}{\#define\ configUSE\_PREEMPTION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00006}\mbox{\hyperlink{_free_r_t_o_s_config_8h_aa19d69387b32a94d79ea52bb2c6f2649}{00006}}\ \textcolor{preprocessor}{\#define\ configUSE\_TICKLESS\_IDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00007}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ac637ae45863c19fa2e919db0ed49301f}{00007}}\ \textcolor{preprocessor}{\#define\ configUSE\_IDLE\_HOOK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00008}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a23c5922c077106fad3f70b54d9071466}{00008}}\ \textcolor{preprocessor}{\#define\ configUSE\_TICK\_HOOK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00009}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{00009}}\ \textcolor{preprocessor}{\#define\ configTICK\_RATE\_HZ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ TickType\_t\ )\ 1000\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00010}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a9a78f5ac61e6cb172dadf2a51f11db38}{00010}}\ \textcolor{preprocessor}{\#define\ configMAX\_PRIORITIES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00011}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a}{00011}}\ \textcolor{preprocessor}{\#define\ configMINIMAL\_STACK\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ configSTACK\_DEPTH\_TYPE\ )\ 256}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00012}\mbox{\hyperlink{_free_r_t_o_s_config_8h_aac311ed9b9e5ae4d2d9648b33a24acce}{00012}}\ \textcolor{preprocessor}{\#define\ configUSE\_16\_BIT\_TICKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00014}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ad6a5061a742fee450ac455e4ad0f4b6c}{00014}}\ \textcolor{preprocessor}{\#define\ configIDLE\_SHOULD\_YIELD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00016}00016\ \textcolor{comment}{/*\ Synchronization\ Related\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00017}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a543bf3c79008974cc1d36bab51d94fbf}{00017}}\ \textcolor{preprocessor}{\#define\ configUSE\_MUTEXES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00018}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a9fe02d866cb1c4fbaa0c3de79f53d42d}{00018}}\ \textcolor{preprocessor}{\#define\ configUSE\_RECURSIVE\_MUTEXES\ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00019}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a2eb2a0baf886a7adab15b5735029434b}{00019}}\ \textcolor{preprocessor}{\#define\ configUSE\_APPLICATION\_TASK\_TAG\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00020}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a55778995203c57369d2fbfb10224943d}{00020}}\ \textcolor{preprocessor}{\#define\ configUSE\_COUNTING\_SEMAPHORES\ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00021}\mbox{\hyperlink{_free_r_t_o_s_config_8h_aa4b5138c4e42a180f0abd4f2455f90fb}{00021}}\ \textcolor{preprocessor}{\#define\ configQUEUE\_REGISTRY\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 8}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00022}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a7bfbcca89aaa971f59fe9233772cc33d}{00022}}\ \textcolor{preprocessor}{\#define\ configUSE\_QUEUE\_SETS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00023}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a493c5763eb7a39bd80779a1c58de0d82}{00023}}\ \textcolor{preprocessor}{\#define\ configUSE\_TIME\_SLICING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00024}\mbox{\hyperlink{_free_r_t_o_s_config_8h_acf3616a8cbe15687f6000cefcca84bbd}{00024}}\ \textcolor{preprocessor}{\#define\ configUSE\_NEWLIB\_REENTRANT\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00025}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a815d63f3e973f88335f639b03786e37f}{00025}}\ \textcolor{preprocessor}{\#define\ configENABLE\_BACKWARD\_COMPATIBILITY\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00026}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a8d32b5f74e55dfd12c5aa3415e16d75e}{00026}}\ \textcolor{preprocessor}{\#define\ configNUM\_THREAD\_LOCAL\_STORAGE\_POINTERS\ 5}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00028}00028\ \textcolor{comment}{/*\ System\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00029}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ae4e85bffd36d76cf2796092f0ccd784a}{00029}}\ \textcolor{preprocessor}{\#define\ configSTACK\_DEPTH\_TYPE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00030}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a019c8bfcdd8eca676c7b9993bda95967}{00030}}\ \textcolor{preprocessor}{\#define\ configMESSAGE\_BUFFER\_LENGTH\_TYPE\ \ \ \ \ \ \ \ size\_t}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00032}00032\ \textcolor{comment}{/*\ Memory\ allocation\ related\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00033}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a1d6797a53b62d501b095f964036a7ac4}{00033}}\ \textcolor{preprocessor}{\#define\ configSUPPORT\_STATIC\_ALLOCATION\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00034}\mbox{\hyperlink{_free_r_t_o_s_config_8h_afa3f8d6510699d972c9af08fa41f66dc}{00034}}\ \textcolor{preprocessor}{\#define\ configSUPPORT\_DYNAMIC\_ALLOCATION\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00035}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}{00035}}\ \textcolor{preprocessor}{\#define\ configTOTAL\_HEAP\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16*1024)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00036}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ae1a85802d42764830d47abe43a3d9a5e}{00036}}\ \textcolor{preprocessor}{\#define\ configAPPLICATION\_ALLOCATED\_HEAP\ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00038}00038\ \textcolor{comment}{/*\ Hook\ function\ related\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00039}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a847511ee433494b1e32c90602c967ae7}{00039}}\ \textcolor{preprocessor}{\#define\ configCHECK\_FOR\_STACK\_OVERFLOW\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00040}\mbox{\hyperlink{_free_r_t_o_s_config_8h_abdf48e7c9cf513f083aa9cbed0dd7cd7}{00040}}\ \textcolor{preprocessor}{\#define\ configUSE\_MALLOC\_FAILED\_HOOK\ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00041}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a0415288d8efe664e0b05a7b53fbfaa33}{00041}}\ \textcolor{preprocessor}{\#define\ configUSE\_DAEMON\_TASK\_STARTUP\_HOOK\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00043}00043\ \textcolor{comment}{/*\ Run\ time\ and\ task\ stats\ gathering\ related\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00044}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ad8081822f3ebc7c917b63bd7bdd7bc58}{00044}}\ \textcolor{preprocessor}{\#define\ configGENERATE\_RUN\_TIME\_STATS\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00045}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a27f5ee137dc9f125681a31f0b0a4b3be}{00045}}\ \textcolor{preprocessor}{\#define\ configUSE\_TRACE\_FACILITY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00046}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a5b7fae1e2f6d4fe42104ed8d28a0569d}{00046}}\ \textcolor{preprocessor}{\#define\ configUSE\_STATS\_FORMATTING\_FUNCTIONS\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00048}00048\ \textcolor{comment}{/*\ Co-\/routine\ related\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00049}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a57990715eb06402474b8b47e1d562616}{00049}}\ \textcolor{preprocessor}{\#define\ configUSE\_CO\_ROUTINES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00050}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ae8f3fd645e6e78dfeb8a6e874af6195a}{00050}}\ \textcolor{preprocessor}{\#define\ configMAX\_CO\_ROUTINE\_PRIORITIES\ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00052}00052\ \textcolor{comment}{/*\ Software\ timer\ related\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00053}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ac342ae309b0c53828d2ecad3e6de355b}{00053}}\ \textcolor{preprocessor}{\#define\ configUSE\_TIMERS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00054}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a05c75ff9029ba3f0ab5bde9196f1e873}{00054}}\ \textcolor{preprocessor}{\#define\ configTIMER\_TASK\_PRIORITY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ configMAX\_PRIORITIES\ -\/\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00055}\mbox{\hyperlink{_free_r_t_o_s_config_8h_abb9aa0f31c1f3b14a15083a3c6120918}{00055}}\ \textcolor{preprocessor}{\#define\ configTIMER\_QUEUE\_LENGTH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00056}\mbox{\hyperlink{_free_r_t_o_s_config_8h_aed7c7ebcdee603583a55e8ce04e55841}{00056}}\ \textcolor{preprocessor}{\#define\ configTIMER\_TASK\_STACK\_DEPTH\ \ \ \ \ \ \ \ \ \ \ \ 1024}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00058}00058\ \textcolor{comment}{/*\ SMP\ port\ only\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00059}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a54347391295d1c6e28adee983bc95541}{00059}}\ \textcolor{preprocessor}{\#define\ configNUMBER\_OF\_CORES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00060}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ac1b81309c5a6378435b8da0e2a9bc59d}{00060}}\ \textcolor{preprocessor}{\#define\ configNUM\_CORES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configNUMBER\_OF\_CORES\ \ \ \ }\textcolor{comment}{//\ for\ pico-\/sdk\ 1.5.1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00061}00061\ \textcolor{preprocessor}{\#if\ configNUMBER\_OF\_CORES\ >\ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00062}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ad3788b45709fcbc5340f7067aa2be7cd}{00062}}\ \textcolor{preprocessor}{\ \ \#define\ configUSE\_CORE\_AFFINITY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00063}00063\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00064}\mbox{\hyperlink{_free_r_t_o_s_config_8h_acaaee9f8dfb4289cd86af847721a7c71}{00064}}\ \textcolor{preprocessor}{\#define\ configTICK\_CORE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00065}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a5be709f19cf5399252445c59fa49ba71}{00065}}\ \textcolor{preprocessor}{\#define\ configRUN\_MULTIPLE\_PRIORITIES\ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00066}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a9c2cb32c0ba786b1f3185a70a52f55ba}{00066}}\ \textcolor{preprocessor}{\#define\ configUSE\_PASSIVE\_IDLE\_HOOK\ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00068}00068\ \textcolor{comment}{/*\ RP2040\ specific\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00069}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a2e6be5989dcd0c70aa688c83da8ee7e7}{00069}}\ \textcolor{preprocessor}{\#define\ configSUPPORT\_PICO\_SYNC\_INTEROP\ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00070}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a523964dcaea103ff50481aa05af9729e}{00070}}\ \textcolor{preprocessor}{\#define\ configSUPPORT\_PICO\_TIME\_INTEROP\ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00072}00072\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00073}00073\ \textcolor{comment}{/*\ Define\ to\ trap\ errors\ during\ development.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00074}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{00074}}\ \textcolor{preprocessor}{\#define\ configASSERT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(x)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00076}00076\ \textcolor{comment}{/*\ Set\ the\ following\ definitions\ to\ 1\ to\ include\ the\ API\ function,\ or\ zero}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00077}00077\ \textcolor{comment}{to\ exclude\ the\ API\ function.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00078}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ad6858ac8aaf726007fd19752956ef1bd}{00078}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_vTaskPrioritySet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00079}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a1279eb797355460aeeec06aa524e91df}{00079}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_uxTaskPriorityGet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00080}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a5ae1434fdf995108dc749ff9329f53bd}{00080}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_vTaskDelete\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00081}\mbox{\hyperlink{_free_r_t_o_s_config_8h_aef8fbb97819ad3d962f334ac298206d1}{00081}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_vTaskSuspend\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00082}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ae8459bfd5b428319bb10de9f504a53aa}{00082}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_vTaskDelayUntil\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00083}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a24361a6eb816a965f1ee4e2e08e364f8}{00083}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_vTaskDelay\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00084}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a9ed60ede556830584e6bfd4a3ab4f9de}{00084}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskGetSchedulerState\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00085}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ac96b6a6e70667f266db4278be71cbd78}{00085}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskGetCurrentTaskHandle\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00086}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a23c7b4b41fe9b575cf2329c7cbe78b86}{00086}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_uxTaskGetStackHighWaterMark\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00087}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ae8811def4dd6983011fed9ef8686f18f}{00087}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskGetIdleTaskHandle\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00088}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a4fd1d67d54044ac86e8ffc890180f9f6}{00088}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_eTaskGetState\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00089}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a4b4336acd61a8e513ca2376be84326b5}{00089}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTimerPendFunctionCall\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00090}\mbox{\hyperlink{_free_r_t_o_s_config_8h_ac54efb28edcc1d3b9d0844005ea20674}{00090}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskAbortDelay\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00091}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a33733d2bbe005751ec3a417e5ac373bf}{00091}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskGetHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00092}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a85e3dae9f3daa26f24e679cb6793811e}{00092}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xTaskResumeFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00093}\mbox{\hyperlink{_free_r_t_o_s_config_8h_a4e2902143b6abf777065c15940321911}{00093}}\ \textcolor{preprocessor}{\#define\ INCLUDE\_xQueueGetMutexHolder\ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config_8h_source_l00095}00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FREERTOS\_CONFIG\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

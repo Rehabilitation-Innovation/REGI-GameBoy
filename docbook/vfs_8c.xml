@@ -1,0 +1,649 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_vfs_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/filesystem/vfs.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/vfs.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;string.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;sys/errno.h&gt;<?linebreak?>#include &lt;sys/dirent.h&gt;<?linebreak?>#include &lt;sys/unistd.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structmountpoint__t">mountpoint_t</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structfile__descriptor__t">file_descriptor_t</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structdir__descriptor__t">dir_descriptor_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_vfs_8c_1ad12537cb47987ba10b4fac6446cf49fa">PICO_VFS_MAX_MOUNTPOINT</link>&#160;&#160;&#160;10</para>
+</listitem>
+            <listitem><para>#define <link linkend="_vfs_8c_1a4a9d13c5a7d33570511593f81d8aa493">FS_MAX_MOUNTPOINT</link>&#160;&#160;&#160;<link linkend="_vfs_8c_1ad12537cb47987ba10b4fac6446cf49fa">PICO_VFS_MAX_MOUNTPOINT</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_vfs_8c_1a0718d44242f5b7416ec3311212081e65">STDIO_FILNO_MAX</link>&#160;&#160;&#160;STDERR_FILENO</para>
+</listitem>
+            <listitem><para>#define <link linkend="_vfs_8c_1aa07c3cee02f6b8388d5616d76f19dcbf">FILENO_VALUE</link>(fd)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fd)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link> (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Format block device with specify file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link> (const char *dir, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Mount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link> (const char *path)</para>
+
+<para>Dismount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga72d0b65b57fe9e8c02c149a20c5fc0cd">fs_reformat</link> (const char *path)</para>
+
+<para>Reformat the mounted file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga9b690589883c3b7e8364ca1817ff6986">fs_info</link> (const char *path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> **fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> **device)</para>
+
+<para>Lookup filesystem and blockdevice objects from a mount point. </para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a11bde836cab6ec72897ede2286350e72">_unlink</link> (const char *path)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7">rename</link> (const char *old, const char *new)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a548e5b744ca2e97beb61ad7aa41114e2">mkdir</link> (const char *path, mode_t mode)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1ab2df76f2c62ae012c2e417813b5fe8ce">rmdir</link> (const char *path)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a43bfed3654a97b85373f2d4198990c8d">_stat</link> (const char *path, struct stat *st)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a96ed08daea40a660b6059ae5ddd9d063">_fstat</link> (int fildes, struct stat *st)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1aeea6b1ce10c4ced8db50f44cb6774b01">_open</link> (const char *path, int oflags,...)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a5af2dad9b50913a0025ea80a8577bea8">_close</link> (int fildes)</para>
+</listitem>
+            <listitem><para>void <link linkend="_vfs_8c_1a90927805d6b48285139ab31098623df1">stdio_flush</link> (void)</para>
+</listitem>
+            <listitem><para>ssize_t <link linkend="_vfs_8c_1a637f3b33cf8a2223862596efdee3ad33">_write</link> (int fildes, const void *buf, size_t nbyte)</para>
+</listitem>
+            <listitem><para>ssize_t <link linkend="_vfs_8c_1a6cfdb1d41006cb00b54a113c28dd3ab3">_read</link> (int fildes, void *buf, size_t nbyte)</para>
+</listitem>
+            <listitem><para>off_t <link linkend="_vfs_8c_1a1fd116a5c6d658acbe5e5786fa3e1868">_lseek</link> (int fildes, off_t offset, int whence)</para>
+</listitem>
+            <listitem><para>off_t <link linkend="_vfs_8c_1a9aedef60c47f7d3a05512b2a488c1d7d">_ftello_r</link> (struct _reent *ptr, register FILE *fp)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1a30e12ed09db8f77b0b4e7ffc5f1f609b">ftruncate</link> (int fildes, off_t length)</para>
+</listitem>
+            <listitem><para><link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> * <link linkend="_vfs_8c_1ad759a0269427a564f3ce672d43e885cf">opendir</link> (const char *path)</para>
+</listitem>
+            <listitem><para>int <link linkend="_vfs_8c_1ac0258906f9453b8abf03e945aa9c9676">closedir</link> (<link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> *dir)</para>
+</listitem>
+            <listitem><para>struct <link linkend="_structdirent">dirent</link> * <link linkend="_vfs_8c_1ab1ebcf210f49b305423bcc413c6427ee">readdir</link> (<link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> *dir)</para>
+</listitem>
+            <listitem><para>char * <link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link> (int errnum)</para>
+
+<para>File system error message. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df"/><section>
+    <title>FILENO_INDEX</title>
+<indexterm><primary>FILENO_INDEX</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>FILENO_INDEX</secondary></indexterm>
+<para><computeroutput>#define FILENO_INDEX( fd)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(fd&#32;-&#32;<link linkend="_vfs_8c_1a0718d44242f5b7416ec3311212081e65">STDIO_FILNO_MAX</link>&#32;-&#32;1)
+</programlisting><para>
+Definition at line <link linkend="_vfs_8c_source_1l00038">38</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+</section>
+<anchor xml:id="_vfs_8c_1aa07c3cee02f6b8388d5616d76f19dcbf"/><section>
+    <title>FILENO_VALUE</title>
+<indexterm><primary>FILENO_VALUE</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>FILENO_VALUE</secondary></indexterm>
+<para><computeroutput>#define FILENO_VALUE( fd)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(fd&#32;+&#32;<link linkend="_vfs_8c_1a0718d44242f5b7416ec3311212081e65">STDIO_FILNO_MAX</link>&#32;+&#32;1)
+</programlisting><para>
+Definition at line <link linkend="_vfs_8c_source_1l00037">37</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+</section>
+<anchor xml:id="_vfs_8c_1a4a9d13c5a7d33570511593f81d8aa493"/><section>
+    <title>FS_MAX_MOUNTPOINT</title>
+<indexterm><primary>FS_MAX_MOUNTPOINT</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>FS_MAX_MOUNTPOINT</secondary></indexterm>
+<para><computeroutput>#define FS_MAX_MOUNTPOINT&#160;&#160;&#160;<link linkend="_vfs_8c_1ad12537cb47987ba10b4fac6446cf49fa">PICO_VFS_MAX_MOUNTPOINT</link></computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00035">35</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+</section>
+<anchor xml:id="_vfs_8c_1ad12537cb47987ba10b4fac6446cf49fa"/><section>
+    <title>PICO_VFS_MAX_MOUNTPOINT</title>
+<indexterm><primary>PICO_VFS_MAX_MOUNTPOINT</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>PICO_VFS_MAX_MOUNTPOINT</secondary></indexterm>
+<para><computeroutput>#define PICO_VFS_MAX_MOUNTPOINT&#160;&#160;&#160;10</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00033">33</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+</section>
+<anchor xml:id="_vfs_8c_1a0718d44242f5b7416ec3311212081e65"/><section>
+    <title>STDIO_FILNO_MAX</title>
+<indexterm><primary>STDIO_FILNO_MAX</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>STDIO_FILNO_MAX</secondary></indexterm>
+<para><computeroutput>#define STDIO_FILNO_MAX&#160;&#160;&#160;STDERR_FILENO</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00036">36</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_vfs_8c_1a5af2dad9b50913a0025ea80a8577bea8"/><section>
+    <title>_close()</title>
+<indexterm><primary>_close</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_close</secondary></indexterm>
+<para><computeroutput>int _close (int fildes)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00444">444</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00444 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00445 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00446 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00447 
+00448 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00449 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;_close&#32;error&#32;fildes=%d\n&quot;</emphasis>,&#32;fildes);
+00450 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00451 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00452 &#32;&#32;&#32;&#32;}
+00453 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00454 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00455 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00456 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00457 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00458 &#32;&#32;&#32;&#32;}
+00459 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;file);
+00460 &#32;&#32;&#32;&#32;free(file);
+00461 &#32;&#32;&#32;&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem&#32;=&#32;NULL;
+00462 &#32;&#32;&#32;&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file&#32;=&#32;NULL;
+00463 &#32;&#32;&#32;&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].path[0]&#32;=&#32;<emphasis role="charliteral">&apos;\0&apos;</emphasis>;
+00464 
+00465 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00466 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00467 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a96ed08daea40a660b6059ae5ddd9d063"/><section>
+    <title>_fstat()</title>
+<indexterm><primary>_fstat</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_fstat</secondary></indexterm>
+<para><computeroutput>int _fstat (int fildes, struct stat * st)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00275">275</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00276 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00277 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00278 
+00279 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fildes&#32;==&#32;STDIN_FILENO&#32;||&#32;fildes&#32;==&#32;STDOUT_FILENO&#32;||&#32;fildes&#32;==&#32;STDERR_FILENO)&#32;{
+00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;st-&gt;st_size&#32;=&#32;0;
+00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;st-&gt;st_mode&#32;=&#32;S_IFCHR;
+00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(0);
+00284 &#32;&#32;&#32;&#32;}
+00285 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00288 &#32;&#32;&#32;&#32;}
+00289 
+00290 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00291 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00292 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00295 &#32;&#32;&#32;&#32;}
+00296 
+00297 &#32;&#32;&#32;&#32;off_t&#32;size&#32;=&#32;0;
+00298 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs-&gt;<link linkend="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225">type</link>&#32;!=&#32;<link linkend="_filesystem_8h_1ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92">FILESYSTEM_TYPE_FAT</link>)&#32;{
+00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;off_t&#32;current&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>(fs,&#32;file);
+00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;size&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;file,&#32;0,&#32;SEEK_END);
+00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;off_t&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;file,&#32;current,&#32;SEEK_SET);
+00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(current&#32;!=&#32;err)&#32;{
+00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00306 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;NOTE:&#32;Support&#32;for&#32;different&#32;behaviour&#32;of&#32;FatFs&#32;from&#32;POSIX&#x240D;</emphasis>
+00308 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*</emphasis>
+00309 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*&#32;FatFs&#32;has&#32;a&#32;problem&#32;where&#32;f_size()&#32;reports&#32;a&#32;larger&#32;than&#32;actual&#32;file&#32;size&#32;when&#x240D;</emphasis>
+00310 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*&#32;moved&#32;to&#32;a&#32;position&#32;beyond&#32;the&#32;f_lseek()&#32;file&#32;size;&#32;POSIX&#32;reports&#32;the&#32;actual&#32;size&#x240D;</emphasis>
+00311 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*&#32;written&#32;to&#32;the&#32;file,&#32;not&#32;the&#32;seek&#32;position.&#x240D;</emphasis>
+00312 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+00313 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].path;
+00314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00320 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00321 
+00322 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>stat&#32;finfo&#32;=&#32;{0};
+00323 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>(fs,&#32;entity_path,&#32;&amp;finfo);
+00324 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;!=&#32;0)&#32;{
+00325 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00326 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00327 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00328 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;size&#32;=&#32;finfo.st_size;
+00329 &#32;&#32;&#32;&#32;}
+00330 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00331 
+00332 &#32;&#32;&#32;&#32;st-&gt;st_size&#32;=&#32;size;
+00333 &#32;&#32;&#32;&#32;st-&gt;st_mode&#32;=&#32;S_IFREG;
+00334 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(0);
+00335 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a9aedef60c47f7d3a05512b2a488c1d7d"/><section>
+    <title>_ftello_r()</title>
+<indexterm><primary>_ftello_r</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_ftello_r</secondary></indexterm>
+<para><computeroutput>off_t _ftello_r (struct _reent * ptr, register FILE * fp)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00565">565</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00565 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00566 &#32;&#32;&#32;&#32;(void)ptr;
+00567 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fildes&#32;=&#32;fp-&gt;_file;
+00568 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00569 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00570 
+00571 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00572 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00573 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00574 &#32;&#32;&#32;&#32;}
+00575 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00576 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00577 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00579 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00580 &#32;&#32;&#32;&#32;}
+00581 
+00582 &#32;&#32;&#32;&#32;off_t&#32;pos&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>(fs,&#32;file);
+00583 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00584 
+00585 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(pos);
+00586 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a1fd116a5c6d658acbe5e5786fa3e1868"/><section>
+    <title>_lseek()</title>
+<indexterm><primary>_lseek</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_lseek</secondary></indexterm>
+<para><computeroutput>off_t _lseek (int fildes, off_t offset, int whence)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00544">544</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00544 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00545 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00546 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00547 
+00548 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00549 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00550 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00551 &#32;&#32;&#32;&#32;}
+00552 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00553 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00554 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00555 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00556 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00557 &#32;&#32;&#32;&#32;}
+00558 
+00559 &#32;&#32;&#32;&#32;off_t&#32;pos&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;file,&#32;offset,&#32;whence);
+00560 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00561 
+00562 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(pos);
+00563 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1aeea6b1ce10c4ced8db50f44cb6774b01"/><section>
+    <title>_open()</title>
+<indexterm><primary>_open</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_open</secondary></indexterm>
+<para><computeroutput>int _open (const char * path, int oflags,  ...)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00405">405</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00405 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00406 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00407 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00408 
+00409 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00410 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00411 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00412 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00413 &#32;&#32;&#32;&#32;}
+00414 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00415 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;find&#32;file&#32;descriptor</emphasis>
+00416 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;_assign_file_descriptor();
+00417 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fd&#32;==&#32;-1)&#32;{
+00418 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00419 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENFILE);
+00420 &#32;&#32;&#32;&#32;}
+00421 
+00422 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00423 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fd)].file&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structfs__file__t">fs_file_t</link>));
+00424 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(file&#32;==&#32;NULL)&#32;{
+00425 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00426 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOMEM);
+00427 &#32;&#32;&#32;&#32;}
+00428 
+00429 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;file,&#32;entity_path,&#32;oflags);
+00430 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;&lt;&#32;0)&#32;{
+00431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(file);
+00432 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fd)].file&#32;=&#32;NULL;
+00433 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00434 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00435 &#32;&#32;&#32;&#32;}
+00436 &#32;&#32;&#32;&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fd)].filesystem&#32;=&#32;fs;
+00437 &#32;&#32;&#32;&#32;strncpy(file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fd)].path,&#32;path,&#32;<link linkend="_filesystem_8h_1ae688d728e1acdfe5988c7db45d6f0166">PATH_MAX</link>);
+00438 
+00439 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00440 
+00441 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(fd);
+00442 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a6cfdb1d41006cb00b54a113c28dd3ab3"/><section>
+    <title>_read()</title>
+<indexterm><primary>_read</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_read</secondary></indexterm>
+<para><computeroutput>ssize_t _read (int fildes, void * buf, size_t nbyte)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00518">518</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00519 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00520 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00521 
+00522 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fildes&#32;==&#32;STDIN_FILENO)&#32;{
+00523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;read_bytes&#32;=&#32;pico_stdio_fallback_read(buf,&#32;nbyte);
+00524 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00525 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;read_bytes;
+00526 &#32;&#32;&#32;&#32;}
+00527 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00528 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00529 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00530 &#32;&#32;&#32;&#32;}
+00531 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00532 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00533 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00534 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00535 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00536 &#32;&#32;&#32;&#32;}
+00537 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00538 
+00539 &#32;&#32;&#32;&#32;ssize_t&#32;size&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;file,&#32;buf,&#32;nbyte);
+00540 
+00541 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(size);
+00542 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a43bfed3654a97b85373f2d4198990c8d"/><section>
+    <title>_stat()</title>
+<indexterm><primary>_stat</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_stat</secondary></indexterm>
+<para><computeroutput>int _stat (const char * path, struct stat * st)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00260">260</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00261 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00262 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00263 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00264 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00267 &#32;&#32;&#32;&#32;}
+00268 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00269 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00270 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>(fs,&#32;entity_path,&#32;st);
+00271 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00272 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00273 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a11bde836cab6ec72897ede2286350e72"/><section>
+    <title>_unlink()</title>
+<indexterm><primary>_unlink</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_unlink</secondary></indexterm>
+<para><computeroutput>int _unlink (const char * path)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00196">196</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00197 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00198 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00199 
+00200 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00201 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00204 &#32;&#32;&#32;&#32;}
+00205 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00206 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00207 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link>(fs,&#32;entity_path);
+00208 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00209 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00210 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a637f3b33cf8a2223862596efdee3ad33"/><section>
+    <title>_write()</title>
+<indexterm><primary>_write</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>_write</secondary></indexterm>
+<para><computeroutput>ssize_t _write (int fildes, const void * buf, size_t nbyte)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00492">492</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00492 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00493 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00494 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00495 
+00496 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fildes&#32;==&#32;STDOUT_FILENO&#32;||&#32;fildes&#32;==&#32;STDERR_FILENO)&#32;{
+00497 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pico_stdio_fallback_write(buf,&#32;nbyte);
+00498 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00499 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(ssize_t)nbyte;
+00500 &#32;&#32;&#32;&#32;}
+00501 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00502 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00503 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00504 &#32;&#32;&#32;&#32;}
+00505 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00506 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00507 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00508 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00509 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00510 &#32;&#32;&#32;&#32;}
+00511 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00512 
+00513 &#32;&#32;&#32;&#32;ssize_t&#32;size&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;file,&#32;buf,&#32;nbyte);
+00514 
+00515 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(size);
+00516 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1ac0258906f9453b8abf03e945aa9c9676"/><section>
+    <title>closedir()</title>
+<indexterm><primary>closedir</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>closedir</secondary></indexterm>
+<para><computeroutput>int closedir (<link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> * dir)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00650">650</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00650 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00651 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00652 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00653 
+00654 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>;
+00655 &#32;&#32;&#32;&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*_dir&#32;=&#32;dir_descriptor[dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>].dir;
+00656 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;dir_descriptor[dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>].filesystem;
+00657 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00658 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00659 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00660 &#32;&#32;&#32;&#32;}
+00661 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link>(fs,&#32;_dir);
+00662 &#32;&#32;&#32;&#32;dir_descriptor[fd].filesystem&#32;=&#32;NULL;
+00663 &#32;&#32;&#32;&#32;free(dir_descriptor[fd].dir);
+00664 &#32;&#32;&#32;&#32;dir_descriptor[fd].dir&#32;=&#32;NULL;
+00665 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00666 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00667 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a30e12ed09db8f77b0b4e7ffc5f1f609b"/><section>
+    <title>ftruncate()</title>
+<indexterm><primary>ftruncate</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>ftruncate</secondary></indexterm>
+<para><computeroutput>int ftruncate (int fildes, off_t length)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00588">588</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00588 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00589 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00590 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00591 
+00592 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!is_valid_file_descriptor(fildes))&#32;{
+00593 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00595 &#32;&#32;&#32;&#32;}
+00596 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].file;
+00597 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;file_descriptor[<link linkend="_vfs_8c_1a21683c936cc59a04b06c1fd39c40b7df">FILENO_INDEX</link>(fildes)].filesystem;
+00598 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00599 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00600 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EBADF);
+00601 &#32;&#32;&#32;&#32;}
+00602 
+00603 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3">file_truncate</link>(fs,&#32;file,&#32;length);
+00604 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00605 
+00606 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00607 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a548e5b744ca2e97beb61ad7aa41114e2"/><section>
+    <title>mkdir()</title>
+<indexterm><primary>mkdir</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>mkdir</secondary></indexterm>
+<para><computeroutput>int mkdir (const char * path, mode_t mode)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00230">230</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00231 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00232 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00233 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00234 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00237 &#32;&#32;&#32;&#32;}
+00238 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00239 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00240 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>(fs,&#32;entity_path,&#32;mode);
+00241 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00242 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00243 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1ad759a0269427a564f3ce672d43e885cf"/><section>
+    <title>opendir()</title>
+<indexterm><primary>opendir</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>opendir</secondary></indexterm>
+<para><computeroutput><link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> * opendir (const char * path)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00609">609</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00609 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00610 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00611 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00612 
+00613 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00614 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00615 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(-ENOENT);
+00616 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00617 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00618 &#32;&#32;&#32;&#32;}
+00619 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00620 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;find&#32;dir&#32;descriptor</emphasis>
+00621 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;_assign_dir_descriptor();
+00622 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fd&#32;==&#32;-1)&#32;{
+00623 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(-ENFILE);
+00624 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00625 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00626 &#32;&#32;&#32;&#32;}
+00627 
+00628 &#32;&#32;&#32;&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir&#32;=&#32;dir_descriptor[fd].dir&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structfs__dir__t">fs_dir_t</link>));
+00629 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dir&#32;==&#32;NULL)&#32;{
+00630 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(-ENOMEM);
+00631 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00632 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00633 &#32;&#32;&#32;&#32;}
+00634 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00635 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>(fs,&#32;dir,&#32;entity_path);
+00636 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;!=&#32;0)&#32;{
+00637 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(dir);
+00638 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dir_descriptor[fd].dir&#32;=&#32;NULL;
+00639 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(err);
+00640 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00641 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00642 &#32;&#32;&#32;&#32;}
+00643 &#32;&#32;&#32;&#32;dir_descriptor[fd].filesystem&#32;=&#32;fs;
+00644 &#32;&#32;&#32;&#32;dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>&#32;=&#32;fd;
+00645 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00646 
+00647 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;dir;
+00648 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1ab1ebcf210f49b305423bcc413c6427ee"/><section>
+    <title>readdir()</title>
+<indexterm><primary>readdir</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>readdir</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_structdirent">dirent</link> * readdir (<link linkend="_dirent_8h_1ae7917177082ed5bb5a50a36bcc72a5a1">DIR</link> * dir)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00669">669</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00669 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00670 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00671 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00672 
+00673 &#32;&#32;&#32;&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*_dir&#32;=&#32;dir_descriptor[dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>].dir;
+00674 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;dir_descriptor[dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>].filesystem;
+00675 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+00676 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(-EBADF);
+00677 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00678 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00679 &#32;&#32;&#32;&#32;}
+00680 &#32;&#32;&#32;&#32;memset(&amp;_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>,&#32;0,&#32;<emphasis role="keyword">sizeof</emphasis>(_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>));
+00681 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>(fs,&#32;_dir,&#32;&amp;_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>);
+00682 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;0)&#32;{
+00683 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00684 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;&amp;_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>;
+00685 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-ENOENT)&#32;{
+00686 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(&amp;_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>,&#32;0,&#32;<emphasis role="keyword">sizeof</emphasis>(_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>));
+00687 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(0);
+00688 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00689 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00690 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00691 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;memset(&amp;_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>,&#32;0,&#32;<emphasis role="keyword">sizeof</emphasis>(_dir-&gt;<link linkend="_structfs__dir__t_1aedd8474e43c6a35c6caed6c2469de4c5">current</link>));
+00692 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_error_remap(err);
+00693 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00694 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+00695 &#32;&#32;&#32;&#32;}
+00696 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7"/><section>
+    <title>rename()</title>
+<indexterm><primary>rename</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>rename</secondary></indexterm>
+<para><computeroutput>int rename (const char * old, const char * new)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00212">212</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00213 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Check&#32;if&#32;old&#32;and&#32;new&#32;are&#32;the&#32;same&#32;filesystem</emphasis>
+00214 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00215 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00216 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(old);
+00217 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00220 &#32;&#32;&#32;&#32;}
+00221 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*old_entity_path&#32;=&#32;remove_prefix(old,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00222 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*new_entity_path&#32;=&#32;remove_prefix(<emphasis role="keyword">new</emphasis>,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00223 
+00224 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00225 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link>(fs,&#32;old_entity_path,&#32;new_entity_path);
+00226 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00227 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00228 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1ab2df76f2c62ae012c2e417813b5fe8ce"/><section>
+    <title>rmdir()</title>
+<indexterm><primary>rmdir</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>rmdir</secondary></indexterm>
+<para><computeroutput>int rmdir (const char * path)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8c_source_1l00245">245</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00246 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00247 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00248 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00249 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00252 &#32;&#32;&#32;&#32;}
+00253 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*entity_path&#32;=&#32;remove_prefix(path,&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00254 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00255 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a396727009601ff7cd9505b724dc744f3">rmdir</link>(fs,&#32;entity_path);
+00256 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00257 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00258 }
+</programlisting></section>
+<anchor xml:id="_vfs_8c_1a90927805d6b48285139ab31098623df1"/><section>
+    <title>stdio_flush()</title>
+<indexterm><primary>stdio_flush</primary><secondary>vfs.c</secondary></indexterm>
+<indexterm><primary>vfs.c</primary><secondary>stdio_flush</secondary></indexterm>
+<para><computeroutput>void stdio_flush (void )<computeroutput>[extern]</computeroutput></computeroutput></para></section>
+</section>
+</section>

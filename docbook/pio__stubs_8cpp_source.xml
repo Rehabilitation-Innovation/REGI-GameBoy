@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pio__stubs_8cpp_source" xml:lang="en-US">
+<title>pio_stubs.cpp</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/hardware/pio_stubs.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_pio__stubs_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_pio_8h">pio.h</link>&quot;</emphasis>
+<anchor xml:id="_pio__stubs_8cpp_source_1l00002"/>00002 
+<anchor xml:id="_pio__stubs_8cpp_source_1l00010"/><link linkend="_pio_8h_1a3571e3c7c6e645e92b8d438203a911b9">00010</link> <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_pio__stubs_8cpp_1a3571e3c7c6e645e92b8d438203a911b9">pio_add_program</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_structpio__program__t">pio_program_t</link>*&#32;&#32;program)&#32;{
+<anchor xml:id="_pio__stubs_8cpp_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;simulated_offset&#32;=&#32;0;
+<anchor xml:id="_pio__stubs_8cpp_source_1l00012"/>00012 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;simulated_offset++;
+<anchor xml:id="_pio__stubs_8cpp_source_1l00013"/>00013 };
+<anchor xml:id="_pio__stubs_8cpp_source_1l00014"/>00014 
+<anchor xml:id="_pio__stubs_8cpp_source_1l00015"/><link linkend="_pio_8h_1a70a47a122f289106c36bcacc76add2bb">00015</link> uint32_t&#32;<link linkend="_pio__stubs_8cpp_1a70a47a122f289106c36bcacc76add2bb">pio_sm_get</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)&#32;{
+<anchor xml:id="_pio__stubs_8cpp_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0xDEADBEEF;
+<anchor xml:id="_pio__stubs_8cpp_source_1l00017"/>00017 }
+<anchor xml:id="_pio__stubs_8cpp_source_1l00018"/>00018 
+<anchor xml:id="_pio__stubs_8cpp_source_1l00019"/><link linkend="_pio_8h_1a028cdc4974a8af6f8a295741cb695d7b">00019</link> <emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_pio__stubs_8cpp_1a028cdc4974a8af6f8a295741cb695d7b">pio_interrupt_get</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)&#32;{
+<anchor xml:id="_pio__stubs_8cpp_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_pio__stubs_8cpp_source_1l00021"/>00021 }
+<anchor xml:id="_pio__stubs_8cpp_source_1l00022"/>00022 
+</programlisting></section>

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_host_2test__blockdevice_8c_source" xml:lang="en-US">
+<title>test_blockdevice.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/host/test_blockdevice.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_host_2test__blockdevice_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&lt;assert.h&gt;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_heap_8h">blockdevice/heap.h</link>&quot;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_fat_8h">filesystem/fat.h</link>&quot;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00007"/>00007 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00008"/><link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">00008</link> <emphasis role="preprocessor">#define&#32;COLOR_GREEN(format)&#32;&#32;(&quot;\e[32m&quot;&#32;format&#32;&quot;\e[0m&quot;)</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00009"/><link linkend="_host_2test__blockdevice_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">00009</link> <emphasis role="preprocessor">#define&#32;HEAP_STORAGE_SIZE&#32;&#32;&#32;&#32;(64&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00010"/><link linkend="_host_2test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4">00010</link> <emphasis role="preprocessor">#define&#32;LOOPBACK_STORAGE_SIZE&#32;&#32;1024</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00011"/><link linkend="_host_2test__blockdevice_8c_1ab8c390e6f53017179ae00255cd27fd11">00011</link> <emphasis role="preprocessor">#define&#32;LOOPBACK_BLOCK_SIZE&#32;&#32;&#32;&#32;512</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00012"/>00012 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&lt;ctype.h&gt;</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00014"/>00014 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;print_hex(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*label,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;uint8_t&#32;*buf&#32;=&#32;buffer;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00016"/>00016 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;%s:\n&quot;</emphasis>,&#32;label);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;offset&#32;=&#32;0;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;length;&#32;++i)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(i&#32;%&#32;16&#32;==&#32;0)
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;0x%04zu%s&quot;</emphasis>,&#32;offset,&#32;(i&#32;%&#32;512)&#32;==&#32;0&#32;?&#32;<emphasis role="stringliteral">&quot;&gt;&quot;</emphasis>&#32;:&#32;<emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(isalnum(buf[i]))&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&apos;%c&apos;&#32;&quot;</emphasis>,&#32;buf[i]);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;0x%02x&quot;</emphasis>,&#32;buf[i]);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(i&#32;%&#32;16&#32;==&#32;15)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\n&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;offset&#32;+=&#32;16;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;,&#32;&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00033"/>00033 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00034"/>00034 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00035"/>00035 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_printf(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;n&#32;=&#32;vprintf(format,&#32;args);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00040"/>00040 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;50&#32;-&#32;(size_t)n;&#32;i++)
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;.&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00044"/>00044 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00045"/>00045 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00046"/>00046 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;setup(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;(void)device;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00048"/>00048 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00049"/>00049 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00050"/>00050 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;cleanup(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;0,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00053"/>00053 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00054"/>00054 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00055"/>00055 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_init(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;init&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00057"/>00057 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;init&#32;is&#32;done&#32;when&#32;the&#32;object&#32;is&#32;created.</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a49aee7ebd3ba09abcc167ba8b026e2a3">deinit</link>(device);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00061"/>00061 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Init&#32;for&#32;later&#32;testing</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00065"/>00065 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00067"/>00067 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00068"/>00068 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00069"/>00069 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_sync(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;sync&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00071"/>00071 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>(device);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00074"/>00074 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00076"/>00076 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00077"/>00077 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00078"/>00078 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_erase_program_read(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00079"/>00079 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;erase,program,read&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00080"/>00080 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;addr&#32;=&#32;0;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00083"/>00083 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;erase&#32;test&#32;block</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;addr,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00087"/>00087 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00088"/>00088 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;program&#32;by&#32;random&#32;data</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;uint8_t&#32;*program_buffer&#32;=&#32;calloc(1,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;srand(length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;length;&#32;i++)
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;program_buffer[i]&#32;=&#32;rand()&#32;&amp;&#32;0xFF;
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>(device,&#32;program_buffer,&#32;addr,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00095"/>00095 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;read&#32;test&#32;block</emphasis>
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;uint8_t&#32;*read_buffer&#32;=&#32;calloc(1,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>(device,&#32;read_buffer,&#32;addr,&#32;length);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;assert(memcmp(program_buffer,&#32;read_buffer,&#32;length)&#32;==&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00101"/>00101 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00102"/>00102 &#32;&#32;&#32;&#32;free(read_buffer);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;free(program_buffer);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00104"/>00104 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00106"/>00106 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00107"/>00107 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00108"/>00108 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_trim(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;trim&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00110"/>00110 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a0326c4dca54ff9e7966053c3aa96adcf">trim</link>(device,&#32;0,&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00113"/>00113 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00115"/>00115 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00116"/>00116 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00117"/>00117 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_size(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;size&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00119"/>00119 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;assert(length&#32;&gt;&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00122"/>00122 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00124"/>00124 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00125"/>00125 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00126"/>00126 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_attribute(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00127"/>00127 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;attribute&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00128"/>00128 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;assert(device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>&#32;&gt;&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;assert(device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>&#32;&gt;&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;assert(device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>&#32;&gt;&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;assert(strlen(device-&gt;<link linkend="_structblockdevice_1ac5845731ff9674fc82a752fbd270130d">name</link>)&#32;&gt;&#32;0);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00133"/>00133 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;assert(device-&gt;<link linkend="_structblockdevice_1a73a27f59d5175f4a31d4ab3cd2a7e3c0">config</link>&#32;!=&#32;NULL);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00135"/>00135 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00137"/>00137 }
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00138"/>00138 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00139"/><link linkend="_pico-vfs-_r_e_g_i-_local_2tests_2host_2main_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">00139</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_host_2test__blockdevice_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">test_blockdevice</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00140"/>00140 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Heap&#32;memory:\n&quot;</emphasis>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;setup(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00144"/>00144 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;test_api_init(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;test_api_erase_program_read(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;test_api_trim(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;test_api_sync(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;test_api_size(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;test_api_attribute(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00151"/>00151 
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;cleanup(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+<anchor xml:id="_host_2test__blockdevice_8c_source_1l00154"/>00154 }
+</programlisting></section>

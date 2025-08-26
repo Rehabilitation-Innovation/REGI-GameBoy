@@ -14,5 +14,6 @@ var searchData=
   ['bind_5fserial_5finput_5fevent_11',['bind_serial_input_event',['../class_tiny_engine.html#a2094c36e13792cfde7dc90dc4637a2e7',1,'TinyEngine']]],
   ['black_5fpixel_12',['BLACK_PIXEL',['../tinyengine__renderer__dvi_8cpp.html#aa90b1bdc4d73c942cfb5aee6d1c83126',1,'tinyengine_renderer_dvi.cpp']]],
   ['black_5fpixel_5fa_13',['BLACK_PIXEL_A',['../tinyengine__renderer__dvi_8cpp.html#a913af424772ce9588089baaa25636cb7',1,'tinyengine_renderer_dvi.cpp']]],
-  ['black_5fpixel_5fb_14',['BLACK_PIXEL_B',['../tinyengine__renderer__dvi_8cpp.html#a776d675d2834015b9105fe6162d091bc',1,'tinyengine_renderer_dvi.cpp']]]
+  ['black_5fpixel_5fb_14',['BLACK_PIXEL_B',['../tinyengine__renderer__dvi_8cpp.html#a776d675d2834015b9105fe6162d091bc',1,'tinyengine_renderer_dvi.cpp']]],
+  ['build_3a_15',['How to build:',['../index.html#autotoc_md3',1,'']]]
 ];

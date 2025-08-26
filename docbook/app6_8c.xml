@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app6_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app6.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app6.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdio.h&gt;<?linebreak?>#include &lt;systimer.h&gt;<?linebreak?>#include &quot;diskio.h&quot;<?linebreak?>#include &quot;ff.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_app6_8c_1aefaa12616ed0724e96f62e899fe19864">test_raw_speed</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> lba, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> len, void *buff, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app6_8c_1aefaa12616ed0724e96f62e899fe19864"/><section>
+    <title>test_raw_speed()</title>
+<indexterm><primary>test_raw_speed</primary><secondary>app6.c</secondary></indexterm>
+<indexterm><primary>app6.c</primary><secondary>test_raw_speed</secondary></indexterm>
+<para><computeroutput>int test_raw_speed (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> lba, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> len, void * buff, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> sz_buff)</computeroutput></para><para>
+Definition at line <link linkend="_app6_8c_source_1l00011">11</link> of file <link linkend="_app6_8c_source">app6.c</link>.</para>
+<programlisting linenumbering="unnumbered">00018 {
+00019 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;ss;
+00020 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ofs,&#32;tmr;
+00021 
+00022 
+00023 <emphasis role="preprocessor">#if&#32;FF_MIN_SS&#32;!=&#32;FF_MAX_SS&#x240D;</emphasis>
+00024 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>,&#32;&amp;ss)&#32;!=&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\ndisk_ioctl()&#32;failed.\n&quot;</emphasis>);
+00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00027 &#32;&#32;&#32;&#32;}
+00028 <emphasis role="preprocessor">#else&#x240D;</emphasis>
+00029 &#32;&#32;&#32;&#32;ss&#32;=&#32;<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>;
+00030 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00031 
+00032 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Starting&#32;raw&#32;write&#32;test&#32;at&#32;sector&#32;%lu&#32;in&#32;%u&#32;bytes&#32;of&#32;data&#32;chunks...&quot;</emphasis>,&#32;lba,&#32;sz_buff);
+00033 &#32;&#32;&#32;&#32;tmr&#32;=&#32;systimer();
+00034 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(ofs&#32;=&#32;0;&#32;ofs&#32;&lt;&#32;len&#32;/&#32;ss;&#32;ofs&#32;+=&#32;sz_buff&#32;/&#32;ss)&#32;{
+00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(pdrv,&#32;buff,&#32;lba&#32;+&#32;ofs,&#32;sz_buff&#32;/&#32;ss)&#32;!=&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\ndisk_write()&#32;failed.\n&quot;</emphasis>);
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00039 &#32;&#32;&#32;&#32;}
+00040 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link>(pdrv,&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>,&#32;0)&#32;!=&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\ndisk_ioctl()&#32;failed.\n&quot;</emphasis>);
+00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00043 &#32;&#32;&#32;&#32;}
+00044 &#32;&#32;&#32;&#32;tmr&#32;=&#32;systimer()&#32;-&#32;tmr;
+00045 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\n%lu&#32;bytes&#32;written&#32;and&#32;it&#32;took&#32;%lu&#32;timer&#32;ticks.\n&quot;</emphasis>,&#32;len,&#32;tmr);
+00046 
+00047 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Starting&#32;raw&#32;read&#32;test&#32;at&#32;sector&#32;%lu&#32;in&#32;%u&#32;bytes&#32;of&#32;data&#32;chunks...&quot;</emphasis>,&#32;lba,&#32;sz_buff);
+00048 &#32;&#32;&#32;&#32;tmr&#32;=&#32;systimer();
+00049 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(ofs&#32;=&#32;0;&#32;ofs&#32;&lt;&#32;len&#32;/&#32;ss;&#32;ofs&#32;+=&#32;sz_buff&#32;/&#32;ss)&#32;{
+00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link>(pdrv,&#32;buff,&#32;lba&#32;+&#32;ofs,&#32;sz_buff&#32;/&#32;ss)&#32;!=&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>)&#32;{
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\ndisk_read()&#32;failed.\n&quot;</emphasis>);
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00054 &#32;&#32;&#32;&#32;}
+00055 &#32;&#32;&#32;&#32;tmr&#32;=&#32;systimer()&#32;-&#32;tmr;
+00056 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\n%lu&#32;bytes&#32;read&#32;and&#32;it&#32;took&#32;%lu&#32;timer&#32;ticks.\n&quot;</emphasis>,&#32;len,&#32;tmr);
+00057 
+00058 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Test&#32;completed.\n&quot;</emphasis>);
+00059 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00060 }
+</programlisting></section>
+</section>
+</section>

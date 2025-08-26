@@ -1,0 +1,716 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__filesystem" xml:lang="en-US">
+<title>
+<para>filesystem </para>
+</title>
+<indexterm><primary>filesystem</primary></indexterm>
+<para>
+
+<para>File system abstraction layer. </para>
+ 
+</para>
+<simplesect>
+    <title>Topics    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__filesystem__fat">filesystem_fat</link></para>
+
+<para>FAT file system. </para>
+</listitem>
+            <listitem><para><link linkend="_group__filesystem__littlefs">filesystem_littlefs</link></para>
+
+<para>littlefs file system </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structfs__file__t">fs_file_t</link></para>
+
+<para>file object </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structfs__dir__t">fs_dir_t</link></para>
+
+<para>directory object </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structfilesystem">filesystem</link></para>
+
+<para>file system abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef struct <link linkend="_structfilesystem">filesystem</link> <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link></para>
+
+<para>file system abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link> (void)</para>
+
+<para>Enable predefined file systems. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link> (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Format block device with specify file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link> (const char *path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Mount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link> (const char *path)</para>
+
+<para>Dismount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga72d0b65b57fe9e8c02c149a20c5fc0cd">fs_reformat</link> (const char *path)</para>
+
+<para>Reformat the mounted file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga9b690589883c3b7e8364ca1817ff6986">fs_info</link> (const char *path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> **fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> **device)</para>
+
+<para>Lookup filesystem and blockdevice objects from a mount point. </para>
+</listitem>
+            <listitem><para>char * <link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link> (int error)</para>
+
+<para>File system error message. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>File system abstraction layer. </para>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83"/><section>
+    <title>filesystem_t</title>
+<indexterm><primary>filesystem_t</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>filesystem_t</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structfilesystem">filesystem</link> <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link></computeroutput></para><para>
+
+<para>file system abstract object </para>
+</para>
+
+<para>All file system objects implement <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> </para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed"/><section>
+    <title>fs_format()</title>
+<indexterm><primary>fs_format</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_format</secondary></indexterm>
+<para><computeroutput>int fs_format (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> * fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * device)</computeroutput></para><para>
+
+<para>Format block device with specify file system. </para>
+</para>
+
+<para>Block devices can be formatted and made available as a file system.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>fs</entry><entry>
+<para>File system object. Format the block device according to the specified file system. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>device</entry><entry>
+<para>Block device used in the file system. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>0</entry><entry>
+<para>Format succeeded. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>-1</entry><entry>
+<para>Format failed. Error codes are indicated by errno. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00088">88</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00089 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>)&#32;{
+00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;!=&#32;<link linkend="_blockdevice_8h_1a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c">BD_ERROR_OK</link>)&#32;{
+00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00094 &#32;&#32;&#32;&#32;}
+00095 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>(fs,&#32;device);
+00096 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1ga9b690589883c3b7e8364ca1817ff6986"/><section>
+    <title>fs_info()</title>
+<indexterm><primary>fs_info</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_info</secondary></indexterm>
+<para><computeroutput>int fs_info (const char * path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> ** fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> ** device)</computeroutput></para><para>
+
+<para>Lookup filesystem and blockdevice objects from a mount point. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry>
+<para>Directory path of the mount point. Must be the same as the path specified for the mount. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>fs</entry><entry>
+<para>Pointer references to filesystem objects </para>
+</entry>
+                            </row>
+                            <row>
+<entry>device</entry><entry>
+<para>Pinter references to blockdevice objects </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>0</entry><entry>
+<para>Lookup succeeded </para>
+</entry>
+                            </row>
+                            <row>
+<entry>-1</entry><entry>
+<para>Lookup failed. Error codes are indicated by errno. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00177">177</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00178 &#32;&#32;&#32;&#32;(void)fs;
+00179 &#32;&#32;&#32;&#32;(void)device;
+00180 
+00181 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00182 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00183 
+00184 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00185 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00188 &#32;&#32;&#32;&#32;}
+00189 &#32;&#32;&#32;&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00190 &#32;&#32;&#32;&#32;*device&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab2a8127554cc303a3f1e04f0440a4a08">device</link>;
+00191 
+00192 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00193 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(0);
+00194 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0"/><section>
+    <title>fs_init()</title>
+<indexterm><primary>fs_init</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_init</secondary></indexterm>
+<para><computeroutput>bool fs_init (void )</computeroutput></para><para>
+
+<para>Enable predefined file systems. </para>
+</para>
+
+<para>This default function defines the block device and file system, formats it if necessary and then mounts it on <computeroutput>/</computeroutput> to make it available. The <computeroutput>pico_enable_filesystem</computeroutput> function in CMakeLists.txt provides a default or user-defined fs_init function.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>true</entry><entry>
+<para>Init succeeded. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>false</entry><entry>
+<para>Init failed. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_examples_2freertos__benchmark_2fs__init_8c_source_1l00016">16</link> of file <link linkend="_examples_2freertos__benchmark_2fs__init_8c_source">fs_init.c</link>.</para>
+<programlisting linenumbering="unnumbered">00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00017 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;mount&#32;/sd\n&quot;</emphasis>);
+00018 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*sd&#32;=&#32;<link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link>(spi0,
+00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1acd12af431f3d8c3752815d58f998c0ac">PICO_DEFAULT_SPI_TX_PIN</link>,
+00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1ab7eaa7dddacd975821969189da644cdb">PICO_DEFAULT_SPI_RX_PIN</link>,
+00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1adad46d9962adcf584b003bb52ef8e33e">PICO_DEFAULT_SPI_SCK_PIN</link>,
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1a1f76bedc8bb59acb457e1943dda8431d">PICO_DEFAULT_SPI_CSN_PIN</link>,
+00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;24&#32;*&#32;MHZ,
+00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+00025 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00026 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/sd&quot;</emphasis>,&#32;fat,&#32;sd);
+00027 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;format&#32;/sd&#32;with&#32;FAT\n&quot;</emphasis>);
+00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fat,&#32;sd);
+00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_format&#32;error:&#32;%s&quot;</emphasis>,&#32;strerror(errno));
+00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/sd&quot;</emphasis>,&#32;fat,&#32;sd);
+00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_mount&#32;error:&#32;%s&quot;</emphasis>,&#32;strerror(errno));
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00039 &#32;&#32;&#32;&#32;}
+00040 
+00041 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;format&#32;and&#32;mount&#32;/flash\n&quot;</emphasis>);
+00042 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_regi__rev1_8h_1a7ad5a8273ffcd10db868c3c3e03d5bf0">PICO_FLASH_SIZE_BYTES</link>&#32;-&#32;<link linkend="_vfs_8h_1abd5f971d09c17ed19e68d9e201b8884b">PICO_FS_DEFAULT_SIZE</link>,&#32;0);
+00043 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(500,&#32;16);
+00044 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fs,&#32;device);
+00045 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_format&#32;error:&#32;%s&quot;</emphasis>,&#32;strerror(errno));
+00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00048 &#32;&#32;&#32;&#32;}
+00049 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/flash&quot;</emphasis>,&#32;fs,&#32;device);
+00050 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_mount&#32;error:&#32;%s&quot;</emphasis>,&#32;strerror(errno));
+00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00053 &#32;&#32;&#32;&#32;}
+00054 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+00055 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013"/><section>
+    <title>fs_mount()</title>
+<indexterm><primary>fs_mount</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_mount</secondary></indexterm>
+<para><computeroutput>int fs_mount (const char * path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> * fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * device)</computeroutput></para><para>
+
+<para>Mount a file system. </para>
+</para>
+
+<para>Mounts a file system with block devices at the specified path.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry>
+<para>Directory path of the mount point. Specify a string beginning with a slash. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>fs</entry><entry>
+<para>File system object. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>device</entry><entry>
+<para>Block device used in the file system. Block devices must be formatted with a file system. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>0</entry><entry>
+<para>Mount succeeded. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>-1</entry><entry>
+<para>Mount failed. Error codes are indicated by errno. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00098">98</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00099 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!device-&gt;<link linkend="_structblockdevice_1a9a2c51cef39211e0d1c42fc3e395caa0">is_initialized</link>)&#32;{
+00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)
+00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00103 &#32;&#32;&#32;&#32;}
+00104 
+00105 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>(fs,&#32;device,&#32;<emphasis role="keyword">false</emphasis>);
+00106 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00108 &#32;&#32;&#32;&#32;}
+00109 
+00110 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00111 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00112 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_vfs_8c_1a4a9d13c5a7d33570511593f81d8aa493">FS_MAX_MOUNTPOINT</link>;&#32;i++)&#32;{
+00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mountpoints[i].<link linkend="_structfilesystem">filesystem</link>&#32;==&#32;NULL)&#32;{
+00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mountpoints[i].filesystem&#32;=&#32;fs;
+00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mountpoints[i].device&#32;=&#32;device;
+00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mountpoints[i].dir&#32;=&#32;strdup(dir);
+00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(0);
+00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00120 &#32;&#32;&#32;&#32;}
+00121 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00122 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-EFAULT);
+00123 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1ga72d0b65b57fe9e8c02c149a20c5fc0cd"/><section>
+    <title>fs_reformat()</title>
+<indexterm><primary>fs_reformat</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_reformat</secondary></indexterm>
+<para><computeroutput>int fs_reformat (const char * path)</computeroutput></para><para>
+
+<para>Reformat the mounted file system. </para>
+</para>
+
+<para>Reformat a file system mounted at the specified path.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry>
+<para>Directory path of the mount point. Must be the same as the path specified for the mount. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>0</entry><entry>
+<para>Reformat suceeded. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>-1</entry><entry>
+<para>Reformat failed. Error codes are indicated by errno. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00149">149</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00150 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00151 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00152 
+00153 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00154 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00157 &#32;&#32;&#32;&#32;}
+00158 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00159 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab2a8127554cc303a3f1e04f0440a4a08">device</link>;
+00160 
+00161 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>(fs);
+00162 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00165 &#32;&#32;&#32;&#32;}
+00166 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>(fs,&#32;device);
+00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00170 &#32;&#32;&#32;&#32;}
+00171 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>(fs,&#32;device,&#32;<emphasis role="keyword">false</emphasis>);
+00172 
+00173 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00174 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00175 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4"/><section>
+    <title>fs_strerror()</title>
+<indexterm><primary>fs_strerror</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_strerror</secondary></indexterm>
+<para><computeroutput>char * fs_strerror (int error)</computeroutput></para><para>
+
+<para>File system error message. </para>
+</para>
+
+<para>Convert the error code reported in the negative integer into a string.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>error</entry><entry>
+<para>Negative error code returned by the file system. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>Pointer to the corresponding message string. </para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00698">698</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00698 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00699 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(errnum&#32;&gt;&#32;5000)&#32;{
+00700 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;SD&#32;blockdevice&#32;error</emphasis>
+00701 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*str&#32;=&#32;<emphasis role="stringliteral">&quot;&quot;</emphasis>;
+00702 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(errnum)&#32;{
+00703 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5001:
+00704 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;operation&#32;would&#32;block&quot;</emphasis>;
+00705 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00706 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5002:
+00707 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;unsupported&#32;operation&quot;</emphasis>;
+00708 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00709 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5003:
+00710 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;invalid&#32;parameter&quot;</emphasis>;
+00711 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00712 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5004:
+00713 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;uninitialized&quot;</emphasis>;
+00714 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00715 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5005:
+00716 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;device&#32;is&#32;missing&#32;or&#32;not&#32;connected&quot;</emphasis>;
+00717 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00718 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5006:
+00719 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;write&#32;protected&quot;</emphasis>;
+00720 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00721 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5007:
+00722 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;unusable&#32;card&quot;</emphasis>;
+00723 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00724 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5008:
+00725 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;No&#32;response&#32;from&#32;device&quot;</emphasis>;
+00726 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00727 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5009:
+00728 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;CRC&#32;error&quot;</emphasis>;
+00729 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00730 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5010:
+00731 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;Erase&#32;error:&#32;reset/sequence&quot;</emphasis>;
+00732 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00733 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;5011:
+00734 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;Write&#32;error:&#32;!SPI_DATA_ACCEPTED&quot;</emphasis>;
+00735 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00736 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+00737 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00738 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00739 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">char</emphasis>&#32;*)str;
+00740 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(errnum&#32;&gt;&#32;4000)&#32;{
+00741 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;On-board&#32;flash&#32;blockdevice&#32;error</emphasis>
+00742 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*str&#32;=&#32;<emphasis role="stringliteral">&quot;&quot;</emphasis>;
+00743 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(errnum)&#32;{
+00744 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;4001:
+00745 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;operation&#32;timeout&quot;</emphasis>;
+00746 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00747 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;4002:
+00748 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;safe&#32;execution&#32;is&#32;not&#32;possible&quot;</emphasis>;
+00749 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00750 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;4003:
+00751 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str&#32;=&#32;<emphasis role="stringliteral">&quot;method&#32;fails&#32;due&#32;to&#32;dynamic&#32;resource&#32;exhaustion&quot;</emphasis>;
+00752 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00753 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+00754 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+00755 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00756 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<emphasis role="keywordtype">char</emphasis>&#32;*)str;
+00757 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00758 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;strerror(errnum);
+00759 &#32;&#32;&#32;&#32;}
+00760 }
+</programlisting></section>
+<anchor xml:id="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff"/><section>
+    <title>fs_unmount()</title>
+<indexterm><primary>fs_unmount</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>fs_unmount</secondary></indexterm>
+<para><computeroutput>int fs_unmount (const char * path)</computeroutput></para><para>
+
+<para>Dismount a file system. </para>
+</para>
+
+<para>Dismount a file system.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry>
+<para>Directory path of the mount point. Must be the same as the path specified for the mount. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>
+Return values</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>0</entry><entry>
+<para>Dismount succeeded. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>-1</entry><entry>
+<para>Dismount failed. Error codes are indicated by errno. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_vfs_8c_source_1l00125">125</link> of file <link linkend="_vfs_8c_source">vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00126 &#32;&#32;&#32;&#32;auto_init_recursive_mutex(_mutex);
+00127 &#32;&#32;&#32;&#32;recursive_mutex_enter_blocking(&amp;_mutex);
+00128 
+00129 &#32;&#32;&#32;&#32;<link linkend="_structmountpoint__t">mountpoint_t</link>&#32;*mp&#32;=&#32;find_mountpoint(path);
+00130 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mp&#32;==&#32;NULL)&#32;{
+00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(-ENOENT);
+00133 &#32;&#32;&#32;&#32;}
+00134 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>;
+00135 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>(fs);
+00136 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+00139 &#32;&#32;&#32;&#32;}
+00140 
+00141 &#32;&#32;&#32;&#32;mp-&gt;<link linkend="_structmountpoint__t_1a0e33cd9afdf66cdf0417e94e6580d723">filesystem</link>&#32;=&#32;NULL;
+00142 &#32;&#32;&#32;&#32;mp-&gt;<link linkend="_structmountpoint__t_1ab2a8127554cc303a3f1e04f0440a4a08">device</link>&#32;=&#32;NULL;
+00143 &#32;&#32;&#32;&#32;free((<emphasis role="keywordtype">char</emphasis>&#32;*)mp-&gt;<link linkend="_structmountpoint__t_1ab8b25dab2ca0301ce0190df5f4efff0d">dir</link>);
+00144 
+00145 &#32;&#32;&#32;&#32;recursive_mutex_exit(&amp;_mutex);
+00146 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(0);
+00147 }
+</programlisting></section>
+</section>
+    <xi:include href="group__filesystem__fat.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="group__filesystem__littlefs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</section>

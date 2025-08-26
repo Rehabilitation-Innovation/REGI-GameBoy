@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2hello_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/hello/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/hello/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;errno.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2hello_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2hello_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2hello_2main_8c_source_1l00012">12</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2hello_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;stdio_init_all();
+00014 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>();
+00015 
+00016 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/HELLO.TXT&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+00017 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fp&#32;==&#32;NULL)
+00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fopen&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00019 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!\n&quot;</emphasis>);
+00020 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fclose(fp);
+00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;close&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00023 
+00024 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/HELLO.TXT&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>);
+00025 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fp&#32;==&#32;NULL)
+00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fopen&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+00027 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512]&#32;=&#32;{0};
+00028 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+00029 &#32;&#32;&#32;&#32;fclose(fp);
+00030 
+00031 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;HELLO.TXT:&#32;%s&quot;</emphasis>,&#32;buffer);
+00032 }
+</programlisting></section>
+</section>
+</section>

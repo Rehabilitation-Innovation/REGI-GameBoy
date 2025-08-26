@@ -1,0 +1,43 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/include/filesystem/vfs.h File Reference}
+\hypertarget{vfs_8h}{}\label{vfs_8h}\index{lib/pico-\/vfs-\/REGI-\/Local/include/filesystem/vfs.h@{lib/pico-\/vfs-\/REGI-\/Local/include/filesystem/vfs.h}}
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include "{}filesystem/filesystem.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/blockdevice.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}{PICO\+\_\+\+FS\+\_\+\+DEFAULT\+\_\+\+SIZE}}~(1408 \texorpdfstring{$\ast$}{*} 1024)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Enable predefined file systems. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\+\_\+format}} (\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Format block device with specify file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\+\_\+mount}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Mount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\+\_\+unmount}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Dismount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{fs\+\_\+reformat}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Reformat the mounted file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}{fs\+\_\+info}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Lookup filesystem and blockdevice objects from a mount point. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}{fs\+\_\+strerror}} (int error)
+\begin{DoxyCompactList}\small\item\em File system error message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{vfs_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}\index{vfs.h@{vfs.h}!PICO\_FS\_DEFAULT\_SIZE@{PICO\_FS\_DEFAULT\_SIZE}}
+\index{PICO\_FS\_DEFAULT\_SIZE@{PICO\_FS\_DEFAULT\_SIZE}!vfs.h@{vfs.h}}
+\doxysubsubsection{\texorpdfstring{PICO\_FS\_DEFAULT\_SIZE}{PICO\_FS\_DEFAULT\_SIZE}}
+{\footnotesize\ttfamily \label{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b} 
+\#define PICO\+\_\+\+FS\+\_\+\+DEFAULT\+\_\+\+SIZE~(1408 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8h_source_l00019}{19}} of file \mbox{\hyperlink{vfs_8h_source}{vfs.\+h}}.
+

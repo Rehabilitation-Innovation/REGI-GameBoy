@@ -1,0 +1,67 @@
+\chapter{Example of pico-\/vfs library }
+\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e}{}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e}\index{Example of pico-\/vfs library@{Example of pico-\/vfs library}}
+\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md10}%
+\Hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md10}%
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ App  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ App  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }\\\cline{1-2}
+\endhead
+\href{examples/hello}{\texttt{hello}}  &Hello filesystem world.  \\\cline{1-2}
+\href{examples/fs_inits}{\texttt{fs\+\_\+inits}}  &Examples of file system layout combinations.  \\\cline{1-2}
+\href{examples/multicore_logger}{\texttt{multicore\+\_\+logger}}  &Multi-\/core logger that saves 1k\+Hz sampling data to an SD card  \\\cline{1-2}
+\href{examples/elastic_mqtt_client}{\texttt{elastic\+\_\+mqtt\+\_\+client}}  &Implements an MQTT client with a local queue to handle network disconnections seamlessly.  \\\cline{1-2}
+\href{examples/usb_logger}{\texttt{usb\+\_\+logger}}  &Data logger that mounts littlefs and FAT on flash memory and shares it with a PC via USB mass storage class.  \\\cline{1-2}
+\href{examples/benchmark}{\texttt{benchmark}}  &Data transfer tests with different block devices and different file system combinations.  \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md11}{}\doxysection{\texorpdfstring{Building sample code}{Building sample code}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md11}
+The \href{https://github.com/raspberrypi/pico-sdk}{\texttt{pico-\/sdk}} build environment is required to build the demonstration, see \href{https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf}{\texttt{Getting started with Raspberry Pi Pico}} to prepare the toolchain for your platform. This project contains a {\itshape git submodule}. When cloning, the {\ttfamily -\/-\/recursive} option must be given or a separate {\ttfamily git submodule update} must be performed.
+
+Firmware can be built from the {\itshape CMake} build directory of {\itshape pico-\/vfs}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build;\ cd\ build/}
+\DoxyCodeLine{PICO\_SDK\_PATH=/path/to/pico-\/sdk\ cmake\ ..}
+\DoxyCodeLine{make\ hello\ fs\_init\_example\ multicore\_logger\ usb\_logger\ benchmark}
+
+\end{DoxyCode}
+
+
+The {\ttfamily elastic\+\_\+mqtt\+\_\+client} uses Wi-\/\+Fi, so {\ttfamily PICO\+\_\+\+BOARD=pico\+\_\+w} needs to be specified. Furthermore, {\ttfamily WIFI\+\_\+\+SSID}, {\ttfamily WIFI\+\_\+\+PASSWORD}, {\ttfamily MQTT\+\_\+\+USER} and {\ttfamily MQTT\+\_\+\+PASSWORD} must be specified in the environment variables when running cmake. This example uses \href{https://io.adafruit.com/}{\texttt{Adafruit IO}}\textquotesingle{}s MQTT server.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{PICO\_SDK\_PATH=/path/to/pico-\/sdk\ WIFI\_SSID=SSID\ WIFI\_PASSWORD=PASSWORD\ MQTT\_USER=USER\ MQTT\_PASSWORD=PASSWORD\ cmake\ ..\ -\/DPICO\_BOARD=pico\_w}
+\DoxyCodeLine{make\ elastic\_mqtt\_client}
+
+\end{DoxyCode}
+\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md12}{}\doxysubsection{\texorpdfstring{Circuit Diagram}{Circuit Diagram}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e_autotoc_md12}
+If an SD card is to be used, a separate circuit must be connected via SPI. As an example, the schematic using the \href{https://www.adafruit.com/product/254}{\texttt{Adafruit Micro\+SD card breakout board+}} is as follows
+
+
+
+The spi and pin used in the block device argument can be customised. The following pins are used in the demonstration.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pin  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ PCB pin  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Usage  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pin  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ PCB pin  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Usage  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description  }\\\cline{1-4}
+\endhead
+GP18  &24  &SPI0 SCK  &SPI clock  \\\cline{1-4}
+GP19  &25  &SPI0 TX  &SPI Master Out Slave In  \\\cline{1-4}
+GP16  &21  &SPI0 RX  &SPI Master In Slave Out  \\\cline{1-4}
+GP17  &22  &SPI0 CSn  &SPI Chip select  \\\cline{1-4}
+\end{longtabu}

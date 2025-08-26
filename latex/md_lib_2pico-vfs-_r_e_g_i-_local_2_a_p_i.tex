@@ -1,0 +1,20 @@
+\chapter{File system management API }
+\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i}{}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i}\index{File system management API@{File system management API}}
+\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md4}%
+\Hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md4}%
+
+
+Many functions of pico-\/vfs are provided as POSIX and C standard file APIs, but the file system management procedures are provided by an API with the prefix {\ttfamily fs\+\_\+\texorpdfstring{$\ast$}{*}}. See \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d}{STANDARD.md}{0} for information on the POSIX and C standard file API.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md5}{}\doxysection{\texorpdfstring{{\ttfamily bool fs\+\_\+init(void)}}{{\ttfamily bool fs\+\_\+init(void)}}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md5}
+File system set-\/up. The user programme calls {\ttfamily \doxylink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init()}} to set up the file system and initialise it to a ready-\/to-\/use state. In addition to explicit execution from the program, the CMake function
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ .txt}
+\DoxyCodeLine{pico\_enable\_filesystem(\$\{CMAKE\_PROJECT\_NAME\}\ AUTO\_INIT\ TRUE)}
+
+\end{DoxyCode}
+ can be specified to automatically execute it with {\ttfamily pre\+\_\+main()} before {\ttfamily \doxylink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}}.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md6}{}\doxysection{\texorpdfstring{{\ttfamily int fs\+\_\+format(filesystem\+\_\+t \texorpdfstring{$\ast$}{*}fs, blockdevice\+\_\+t \texorpdfstring{$\ast$}{*}device)}}{{\ttfamily int fs\+\_\+format(filesystem\+\_\+t \texorpdfstring{$\ast$}{*}fs, blockdevice\+\_\+t \texorpdfstring{$\ast$}{*}device)}}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md6}
+Format block devices using file system objects.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md7}{}\doxysection{\texorpdfstring{{\ttfamily int fs\+\_\+mount(const char \texorpdfstring{$\ast$}{*}path, filesystem\+\_\+t \texorpdfstring{$\ast$}{*}fs, blockdevice\+\_\+t \texorpdfstring{$\ast$}{*}device)}}{{\ttfamily int fs\+\_\+mount(const char \texorpdfstring{$\ast$}{*}path, filesystem\+\_\+t \texorpdfstring{$\ast$}{*}fs, blockdevice\+\_\+t \texorpdfstring{$\ast$}{*}device)}}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md7}
+Mounts the file system at the specified path.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md8}{}\doxysection{\texorpdfstring{{\ttfamily int fs\+\_\+unmount(const char \texorpdfstring{$\ast$}{*}path)}}{{\ttfamily int fs\+\_\+unmount(const char \texorpdfstring{$\ast$}{*}path)}}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md8}
+Unmounts the file system at the specified path.\hypertarget{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md9}{}\doxysection{\texorpdfstring{{\ttfamily int fs\+\_\+reformat(const char \texorpdfstring{$\ast$}{*}path)}}{{\ttfamily int fs\+\_\+reformat(const char \texorpdfstring{$\ast$}{*}path)}}}\label{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_autotoc_md9}
+Reformat the file system for the specified path. 

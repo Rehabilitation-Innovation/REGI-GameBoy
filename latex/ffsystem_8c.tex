@@ -1,0 +1,50 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/source/ffsystem.c File Reference}
+\hypertarget{ffsystem_8c}{}\label{ffsystem_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffsystem.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffsystem.c}}
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{ffsystem_8c_ae63913186246b80cfce42dbab9e8bcab}{ff\+\_\+memalloc}} (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} msize)
+\item 
+void \mbox{\hyperlink{ffsystem_8c_ab85fd090c8b8b17846ccc1e8cda16a9b}{ff\+\_\+memfree}} (void \texorpdfstring{$\ast$}{*}mblock)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{ffsystem_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ffsystem_8c_ae63913186246b80cfce42dbab9e8bcab}\index{ffsystem.c@{ffsystem.c}!ff\_memalloc@{ff\_memalloc}}
+\index{ff\_memalloc@{ff\_memalloc}!ffsystem.c@{ffsystem.c}}
+\doxysubsubsection{\texorpdfstring{ff\_memalloc()}{ff\_memalloc()}}
+{\footnotesize\ttfamily \label{ffsystem_8c_ae63913186246b80cfce42dbab9e8bcab} 
+void \texorpdfstring{$\ast$}{*} ff\+\_\+memalloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{msize}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ffsystem_8c_source_l00017}{17}} of file \mbox{\hyperlink{ffsystem_8c_source}{ffsystem.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{return}\ malloc((\textcolor{keywordtype}{size\_t})msize);\ \ \ \textcolor{comment}{/*\ Allocate\ a\ new\ memory\ block\ */}}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+\Hypertarget{ffsystem_8c_ab85fd090c8b8b17846ccc1e8cda16a9b}\index{ffsystem.c@{ffsystem.c}!ff\_memfree@{ff\_memfree}}
+\index{ff\_memfree@{ff\_memfree}!ffsystem.c@{ffsystem.c}}
+\doxysubsubsection{\texorpdfstring{ff\_memfree()}{ff\_memfree()}}
+{\footnotesize\ttfamily \label{ffsystem_8c_ab85fd090c8b8b17846ccc1e8cda16a9b} 
+void ff\+\_\+memfree (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{mblock}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ffsystem_8c_source_l00025}{25}} of file \mbox{\hyperlink{ffsystem_8c_source}{ffsystem.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ free(mblock);\ \ \ \textcolor{comment}{/*\ Free\ the\ memory\ block\ */}}
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_heap_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/blockdevice/heap.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/blockdevice/heap.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice__heap__config__t">blockdevice_heap_config_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_heap_8c_1adec7dde74afae904fe3e92031e8e0528">PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</link>&#160;&#160;&#160;512</para>
+</listitem>
+            <listitem><para>#define <link linkend="_heap_8c_1a07180d1fe4034d774b430674348a9055">PICO_VFS_BLOCKDEVICE_HEAP_ERASE_VALUE</link>&#160;&#160;&#160;0xFF</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link> (size_t length)</para>
+
+<para>Create RAM heap memory block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the heap memory device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_heap_8c_1adec7dde74afae904fe3e92031e8e0528"/><section>
+    <title>PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</title>
+<indexterm><primary>PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</primary><secondary>heap.c</secondary></indexterm>
+<indexterm><primary>heap.c</primary><secondary>PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE</secondary></indexterm>
+<para><computeroutput>#define PICO_VFS_BLOCKDEVICE_HEAP_BLOCK_SIZE&#160;&#160;&#160;512</computeroutput></para><para>
+Definition at line <link linkend="_heap_8c_source_1l00015">15</link> of file <link linkend="_heap_8c_source">heap.c</link>.</para>
+</section>
+<anchor xml:id="_heap_8c_1a07180d1fe4034d774b430674348a9055"/><section>
+    <title>PICO_VFS_BLOCKDEVICE_HEAP_ERASE_VALUE</title>
+<indexterm><primary>PICO_VFS_BLOCKDEVICE_HEAP_ERASE_VALUE</primary><secondary>heap.c</secondary></indexterm>
+<indexterm><primary>heap.c</primary><secondary>PICO_VFS_BLOCKDEVICE_HEAP_ERASE_VALUE</secondary></indexterm>
+<para><computeroutput>#define PICO_VFS_BLOCKDEVICE_HEAP_ERASE_VALUE&#160;&#160;&#160;0xFF</computeroutput></para><para>
+Definition at line <link linkend="_heap_8c_source_1l00019">19</link> of file <link linkend="_heap_8c_source">heap.c</link>.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,212 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/src/filesystem/fat.c File Reference}
+\hypertarget{fat_8c}{}\label{fat_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fat.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fat.c}}
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pico/mutex.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/blockdevice.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+{\ttfamily \#include "{}diskio.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfat__file__t}{fat\+\_\+file\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structfilesystem__fat__context__t}{filesystem\+\_\+fat\+\_\+context\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} \mbox{\hyperlink{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1}{disk\+\_\+initialize}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv)
+\item 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} \mbox{\hyperlink{fat_8c_a8348ac5ee6d709420c02e45c111f4793}{disk\+\_\+status}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\+\_\+read}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}} sector, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} count)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\+\_\+write}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, const \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}} sector, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} count)
+\item 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\+\_\+ioctl}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} cmd, void \texorpdfstring{$\ast$}{*}buff)
+\item 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \mbox{\hyperlink{fat_8c_af58b536abfd30f77213f4ecaf2ac52f5}{get\+\_\+fattime}} (void)
+\item 
+\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\+\_\+fat\+\_\+create}} ()
+\begin{DoxyCompactList}\small\item\em Create FAT file system object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\+\_\+fat\+\_\+free}} (\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs)
+\begin{DoxyCompactList}\small\item\em Release FAT file system object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{fat_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1}\index{fat.c@{fat.c}!disk\_initialize@{disk\_initialize}}
+\index{disk\_initialize@{disk\_initialize}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{disk\_initialize()}{disk\_initialize()}}
+{\footnotesize\ttfamily \label{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1} 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} disk\+\_\+initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00089}{89}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_initialize\ on\ pdrv\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}})\_ffs[pdrv]-\/>init(\_ffs[pdrv]);}
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}
+\Hypertarget{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}\index{fat.c@{fat.c}!disk\_ioctl@{disk\_ioctl}}
+\index{disk\_ioctl@{disk\_ioctl}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{disk\_ioctl()}{disk\_ioctl()}}
+{\footnotesize\ttfamily \label{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+ioctl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{cmd}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buff}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00141}{141}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_ioctl(\%d)\(\backslash\)n"{}},\ cmd);}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}}:}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_a570216006f6a8fc4e1698b1bbb2d1dde}{GET\_SECTOR\_COUNT}}:}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff)\ =\ disk\_get\_sector\_count(pdrv);}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{GET\_SECTOR\_SIZE}}:}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ *)buff)\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_aec3bb4dfe075d0ba2f3b07b300a95500}{GET\_BLOCK\_SIZE}}:}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ *((\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff)\ =\ 1;\ \textcolor{comment}{//\ default\ when\ not\ known}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{diskio_8h_af09fd84bea8d4e889e272471f44d60d6}{CTRL\_TRIM}}:}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_ffs[pdrv]\ ==\ NULL)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d}{RES\_NOTRDY}};}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *sectors\ =\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ *)buff;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sectors[0]\ *\ ssize;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})(sectors[1]\ -\/\ sectors[0]\ +\ 1)\ *\ ssize;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[pdrv]-\/>trim(\_ffs[pdrv],\ addr,\ size);}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err\ ?\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}}\ :\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00180\ \}}
+
+\end{DoxyCode}
+\Hypertarget{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}\index{fat.c@{fat.c}!disk\_read@{disk\_read}}
+\index{disk\_read@{disk\_read}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{disk\_read()}{disk\_read()}}
+{\footnotesize\ttfamily \label{fat_8c_a0711b1d03b833e9d73b3be1a6397f461} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}}}]{sector}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00114}{114}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sector\ *\ ssize;}
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ count\ *\ ssize;}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[(int)pdrv]-\/>read(\_ffs[(\textcolor{keywordtype}{int})pdrv],\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *)buff,\ addr,\ size);}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{return}\ err\ ?\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}}\ :\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00120\ \}}
+
+\end{DoxyCode}
+\Hypertarget{fat_8c_a8348ac5ee6d709420c02e45c111f4793}\index{fat.c@{fat.c}!disk\_status@{disk\_status}}
+\index{disk\_status@{disk\_status}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{disk\_status()}{disk\_status()}}
+{\footnotesize\ttfamily \label{fat_8c_a8348ac5ee6d709420c02e45c111f4793} 
+\mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}} disk\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00109}{109}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_status\ on\ pdrv\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00112\ \}}
+
+\end{DoxyCode}
+\Hypertarget{fat_8c_ac24448955ef914f54a499df1fb45689d}\index{fat.c@{fat.c}!disk\_write@{disk\_write}}
+\index{disk\_write@{disk\_write}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{disk\_write()}{disk\_write()}}
+{\footnotesize\ttfamily \label{fat_8c_ac24448955ef914f54a499df1fb45689d} 
+\mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}} disk\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{const \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a1f3c30a83148a28340f009d4e583f087}{LBA\+\_\+t}}}]{sector}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00122}{122}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ debug\_if(\mbox{\hyperlink{fat_8h_ada8d3f747f9b5f3bc76f1bd335d454f9}{FFS\_DBG}},\ \textcolor{stringliteral}{"{}disk\_write\ [\%d]\(\backslash\)n"{}},\ pdrv);}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ssize\ =\ disk\_get\_sector\_size(pdrv);}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ addr\ =\ (\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}})sector\ *\ ssize;}
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\_size\_t}}\ size\ =\ count\ *\ ssize;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \_ffs[pdrv]-\/>erase(\_ffs[pdrv],\ addr,\ size);}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ err\ =\ \_ffs[pdrv]-\/>program(\_ffs[pdrv],\ buff,\ addr,\ size);}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3}{RES\_PARERR}};}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}};}
+\DoxyCodeLine{00139\ \}}
+
+\end{DoxyCode}
+\Hypertarget{fat_8c_af58b536abfd30f77213f4ecaf2ac52f5}\index{fat.c@{fat.c}!get\_fattime@{get\_fattime}}
+\index{get\_fattime@{get\_fattime}!fat.c@{fat.c}}
+\doxysubsubsection{\texorpdfstring{get\_fattime()}{get\_fattime()}}
+{\footnotesize\ttfamily \label{fat_8c_af58b536abfd30f77213f4ecaf2ac52f5} 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} get\+\_\+fattime (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{fat_8c_source_l00182}{182}} of file \mbox{\hyperlink{fat_8c_source}{fat.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ time\_t\ rawtime;}
+\DoxyCodeLine{00184\ \ \ \ \ time(\&rawtime);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *ptm\ =\ localtime(\&rawtime);}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_year\ -\/\ 80)\ <<\ 25}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_mon\ +\ 1)\ <<\ 21}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_mday)\ <<\ 16}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_hour)\ <<\ 11}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_min)\ <<\ 5}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ |\ (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}})(ptm-\/>tm\_sec\ /\ 2);}
+\DoxyCodeLine{00192\ \}}
+
+\end{DoxyCode}

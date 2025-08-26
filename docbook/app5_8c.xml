@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app5_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app5.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app5.c</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> <link linkend="_app5_8c_1a9772009a10ab7b6825e887b38708628a">test_contiguous_file</link> (<link linkend="_struct_f_i_l">FIL</link> *fp, int *cont)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app5_8c_1a9772009a10ab7b6825e887b38708628a"/><section>
+    <title>test_contiguous_file()</title>
+<indexterm><primary>test_contiguous_file</primary><secondary>app5.c</secondary></indexterm>
+<indexterm><primary>app5.c</primary><secondary>test_contiguous_file</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> test_contiguous_file (<link linkend="_struct_f_i_l">FIL</link> * fp, int * cont)</computeroutput></para><para>
+Definition at line <link linkend="_app5_8c_source_1l00005">5</link> of file <link linkend="_app5_8c_source">app5.c</link>.</para>
+<programlisting linenumbering="unnumbered">00009 {
+00010 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;clst,&#32;clsz,&#32;step;
+00011 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a3fc0992ad7436250b6b1a0592214b7f2">FSIZE_t</link>&#32;fsz;
+00012 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00013 
+00014 
+00015 &#32;&#32;&#32;&#32;*cont&#32;=&#32;0;
+00016 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8h_1ae4caf47dd5cbc123b61d35542481b1be">f_rewind</link>(fp);&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Validates&#32;and&#32;prepares&#32;the&#32;file&#32;*/</emphasis>
+00017 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00018 
+00019 <emphasis role="preprocessor">#if&#32;FF_MAX_SS&#32;==&#32;FF_MIN_SS&#x240D;</emphasis>
+00020 &#32;&#32;&#32;&#32;clsz&#32;=&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)fp-&gt;<link linkend="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4">obj</link>.<link linkend="_struct_f_f_o_b_j_i_d_1a867089659a2374d44ab917c60037fe5c">fs</link>-&gt;<link linkend="_struct_f_a_t_f_s_1ad7fa7a509f8d097a9ab182d6c47be568">csize</link>&#32;*&#32;<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Cluster&#32;size&#32;*/</emphasis>
+00021 <emphasis role="preprocessor">#else&#x240D;</emphasis>
+00022 &#32;&#32;&#32;&#32;clsz&#32;=&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)fp-&gt;<link linkend="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4">obj</link>.<link linkend="_struct_f_f_o_b_j_i_d_1a867089659a2374d44ab917c60037fe5c">fs</link>-&gt;<link linkend="_struct_f_a_t_f_s_1ad7fa7a509f8d097a9ab182d6c47be568">csize</link>&#32;*&#32;fp-&gt;<link linkend="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4">obj</link>.<link linkend="_struct_f_f_o_b_j_i_d_1a867089659a2374d44ab917c60037fe5c">fs</link>-&gt;ssize;
+00023 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00024 &#32;&#32;&#32;&#32;fsz&#32;=&#32;<link linkend="_ff_8h_1a26f33722c5bf1aa3cd6f0290a83eb2bc">f_size</link>(fp);
+00025 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fsz&#32;&gt;&#32;0)&#32;{
+00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clst&#32;=&#32;fp-&gt;<link linkend="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4">obj</link>.<link linkend="_struct_f_f_o_b_j_i_d_1ad990393e2ddf16f73671ded4b751becb">sclust</link>&#32;-&#32;1;&#32;&#32;<emphasis role="comment">/*&#32;A&#32;cluster&#32;leading&#32;the&#32;first&#32;cluster&#32;for&#32;first&#32;test&#32;*/</emphasis>
+00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(fsz)&#32;{
+00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;step&#32;=&#32;(fsz&#32;&gt;=&#32;clsz)&#32;?&#32;clsz&#32;:&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)fsz;
+00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(fp,&#32;<link linkend="_ff_8h_1a5e1daca7ce13cdc277e42185f7f9124f">f_tell</link>(fp)&#32;+&#32;step);&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Advances&#32;file&#32;pointer&#32;a&#32;cluster&#32;*/</emphasis>
+00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(clst&#32;+&#32;1&#32;!=&#32;fp-&gt;<link linkend="_struct_f_i_l_1aa41312aba551b9a6d1c9d3c8c7d2734b">clust</link>)&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Is&#32;not&#32;the&#32;cluster&#32;next&#32;to&#32;previous&#32;one?&#32;*/</emphasis>
+00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clst&#32;=&#32;fp-&gt;<link linkend="_struct_f_i_l_1aa41312aba551b9a6d1c9d3c8c7d2734b">clust</link>;&#32;fsz&#32;-=&#32;step;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Get&#32;current&#32;cluster&#32;for&#32;next&#32;test&#32;*/</emphasis>
+00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fsz&#32;==&#32;0)&#32;*cont&#32;=&#32;1;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;All&#32;done&#32;without&#32;fail?&#32;*/</emphasis>
+00035 &#32;&#32;&#32;&#32;}
+00036 
+00037 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>;
+00038 }
+</programlisting></section>
+</section>
+</section>

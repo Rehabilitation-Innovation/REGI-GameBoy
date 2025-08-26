@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_littlefs_8c_source" xml:lang="en-US">
+<title>littlefs.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/littlefs.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_littlefs_8c_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;errno.h&gt;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;fcntl.h&gt;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;pico/mutex.h&gt;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&quot;lfs.h&quot;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_blockdevice_8h">blockdevice/blockdevice.h</link>&quot;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_littlefs_8h">filesystem/littlefs.h</link>&quot;</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00012"/>00012 
+<anchor xml:id="_littlefs_8c_source_1l00013"/>00013 
+<anchor xml:id="_littlefs_8c_source_1l00014"/><link linkend="_structlittlefs__file__t">00014</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_littlefs_8c_source_1l00015"/><link linkend="_structlittlefs__file__t_1a8ec78f19cd268a5ee3f5cd22a3efc4fa">00015</link> &#32;&#32;&#32;lfs_file_t&#32;<link linkend="_structlittlefs__file__t_1a8ec78f19cd268a5ee3f5cd22a3efc4fa">file</link>;
+<anchor xml:id="_littlefs_8c_source_1l00016"/>00016 }&#32;<link linkend="_structlittlefs__file__t">littlefs_file_t</link>;
+<anchor xml:id="_littlefs_8c_source_1l00017"/>00017 
+<anchor xml:id="_littlefs_8c_source_1l00018"/><link linkend="_structfilesystem__littlefs__context__t">00018</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>{
+<anchor xml:id="_littlefs_8c_source_1l00019"/><link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">00019</link> &#32;&#32;&#32;&#32;lfs_t&#32;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>;
+<anchor xml:id="_littlefs_8c_source_1l00020"/><link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">00020</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>lfs_config&#32;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>;
+<anchor xml:id="_littlefs_8c_source_1l00021"/><link linkend="_structfilesystem__littlefs__context__t_1a481d99fcad1725a02b3e915b5146c40c">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structfilesystem__littlefs__context__t_1a481d99fcad1725a02b3e915b5146c40c">id</link>;
+<anchor xml:id="_littlefs_8c_source_1l00022"/><link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">00022</link> &#32;&#32;&#32;&#32;mutex_t&#32;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>;
+<anchor xml:id="_littlefs_8c_source_1l00023"/>00023 }&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>;
+<anchor xml:id="_littlefs_8c_source_1l00024"/>00024 
+<anchor xml:id="_littlefs_8c_source_1l00025"/>00025 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;FILESYSTEM_NAME[]&#32;=&#32;<emphasis role="stringliteral">&quot;littlefs&quot;</emphasis>;
+<anchor xml:id="_littlefs_8c_source_1l00026"/>00026 
+<anchor xml:id="_littlefs_8c_source_1l00027"/>00027 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_error_remap(<emphasis role="keywordtype">int</emphasis>&#32;err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_OK:
+<anchor xml:id="_littlefs_8c_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_littlefs_8c_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_IO:
+<anchor xml:id="_littlefs_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EIO;
+<anchor xml:id="_littlefs_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_NOENT:
+<anchor xml:id="_littlefs_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOENT;
+<anchor xml:id="_littlefs_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_EXIST:
+<anchor xml:id="_littlefs_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EEXIST;
+<anchor xml:id="_littlefs_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_NOTDIR:
+<anchor xml:id="_littlefs_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOTDIR;
+<anchor xml:id="_littlefs_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_ISDIR:
+<anchor xml:id="_littlefs_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EISDIR;
+<anchor xml:id="_littlefs_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_INVAL:
+<anchor xml:id="_littlefs_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EINVAL;
+<anchor xml:id="_littlefs_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_NOSPC:
+<anchor xml:id="_littlefs_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOSPC;
+<anchor xml:id="_littlefs_8c_source_1l00045"/>00045 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_NOMEM:
+<anchor xml:id="_littlefs_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_littlefs_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_ERR_CORRUPT:
+<anchor xml:id="_littlefs_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-EILSEQ;
+<anchor xml:id="_littlefs_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_littlefs_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_littlefs_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00052"/>00052 }
+<anchor xml:id="_littlefs_8c_source_1l00053"/>00053 
+<anchor xml:id="_littlefs_8c_source_1l00054"/>00054 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_flags_remap(<emphasis role="keywordtype">int</emphasis>&#32;flags)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;((((flags&#32;&amp;&#32;3)&#32;==&#32;O_RDONLY)&#32;?&#32;LFS_O_RDONLY&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(((flags&#32;&amp;&#32;3)&#32;==&#32;O_WRONLY)&#32;?&#32;LFS_O_WRONLY&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(((flags&#32;&amp;&#32;3)&#32;==&#32;O_RDWR)&#32;&#32;&#32;?&#32;LFS_O_RDWR&#32;&#32;&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;((flags&#32;&amp;&#32;O_CREAT)&#32;&#32;?&#32;LFS_O_CREAT&#32;&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;((flags&#32;&amp;&#32;O_EXCL)&#32;&#32;&#32;?&#32;LFS_O_EXCL&#32;&#32;&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;((flags&#32;&amp;&#32;O_TRUNC)&#32;&#32;?&#32;LFS_O_TRUNC&#32;&#32;:&#32;0)&#32;|
+<anchor xml:id="_littlefs_8c_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;((flags&#32;&amp;&#32;O_APPEND)&#32;?&#32;LFS_O_APPEND&#32;:&#32;0));
+<anchor xml:id="_littlefs_8c_source_1l00062"/>00062 }
+<anchor xml:id="_littlefs_8c_source_1l00063"/>00063 
+<anchor xml:id="_littlefs_8c_source_1l00064"/>00064 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_whence_remap(<emphasis role="keywordtype">int</emphasis>&#32;whence)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(whence)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;SEEK_SET:
+<anchor xml:id="_littlefs_8c_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;LFS_SEEK_SET;
+<anchor xml:id="_littlefs_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;SEEK_CUR:
+<anchor xml:id="_littlefs_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;LFS_SEEK_CUR;
+<anchor xml:id="_littlefs_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;SEEK_END:
+<anchor xml:id="_littlefs_8c_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;LFS_SEEK_END;
+<anchor xml:id="_littlefs_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_littlefs_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;whence;
+<anchor xml:id="_littlefs_8c_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00075"/>00075 }
+<anchor xml:id="_littlefs_8c_source_1l00076"/>00076 
+<anchor xml:id="_littlefs_8c_source_1l00077"/>00077 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_mode_remap(<emphasis role="keywordtype">int</emphasis>&#32;type)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00078"/>00078 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;mode&#32;=&#32;S_IRWXU&#32;|&#32;S_IRWXG&#32;|&#32;S_IRWXO;
+<anchor xml:id="_littlefs_8c_source_1l00079"/>00079 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(type)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_TYPE_DIR:
+<anchor xml:id="_littlefs_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;mode&#32;|&#32;S_IFDIR;
+<anchor xml:id="_littlefs_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_TYPE_REG:
+<anchor xml:id="_littlefs_8c_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;mode&#32;|&#32;S_IFREG;
+<anchor xml:id="_littlefs_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_littlefs_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_littlefs_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00087"/>00087 }
+<anchor xml:id="_littlefs_8c_source_1l00088"/>00088 
+<anchor xml:id="_littlefs_8c_source_1l00089"/>00089 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_type_remap(<emphasis role="keywordtype">int</emphasis>&#32;type)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(type)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_TYPE_DIR:
+<anchor xml:id="_littlefs_8c_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94">DT_DIR</link>;
+<anchor xml:id="_littlefs_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;LFS_TYPE_REG:
+<anchor xml:id="_littlefs_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc">DT_REG</link>;
+<anchor xml:id="_littlefs_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">default</emphasis>:
+<anchor xml:id="_littlefs_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74aeed6ea354e53d7846af370fa5ac314f9">DT_UNKNOWN</link>;
+<anchor xml:id="_littlefs_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00098"/>00098 }
+<anchor xml:id="_littlefs_8c_source_1l00099"/>00099 
+<anchor xml:id="_littlefs_8c_source_1l00100"/>00100 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;littlefs_read(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keyword">struct</emphasis>&#32;lfs_config&#32;*c,&#32;lfs_block_t&#32;block,
+<anchor xml:id="_littlefs_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lfs_off_t&#32;off,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;lfs_size_t&#32;size)
+<anchor xml:id="_littlefs_8c_source_1l00102"/>00102 {
+<anchor xml:id="_littlefs_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;c-&gt;context;
+<anchor xml:id="_littlefs_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device-&gt;<link linkend="_structblockdevice_1ae4801dd67b1481ac013520098523988e">read</link>(device,&#32;buffer,&#32;(<emphasis role="keywordtype">size_t</emphasis>)block&#32;*&#32;c-&gt;block_size&#32;+&#32;off,&#32;size);
+<anchor xml:id="_littlefs_8c_source_1l00105"/>00105 }
+<anchor xml:id="_littlefs_8c_source_1l00106"/>00106 
+<anchor xml:id="_littlefs_8c_source_1l00107"/>00107 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;littlefs_erase(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keyword">struct</emphasis>&#32;lfs_config&#32;*c,&#32;lfs_block_t&#32;block)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00108"/>00108 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;c-&gt;context;
+<anchor xml:id="_littlefs_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;block&#32;*&#32;c-&gt;block_size,&#32;c-&gt;block_size);
+<anchor xml:id="_littlefs_8c_source_1l00110"/>00110 }
+<anchor xml:id="_littlefs_8c_source_1l00111"/>00111 
+<anchor xml:id="_littlefs_8c_source_1l00112"/>00112 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;littlefs_program(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keyword">struct</emphasis>&#32;lfs_config&#32;*c,&#32;lfs_block_t&#32;block,
+<anchor xml:id="_littlefs_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lfs_off_t&#32;off,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;lfs_size_t&#32;size)
+<anchor xml:id="_littlefs_8c_source_1l00114"/>00114 {
+<anchor xml:id="_littlefs_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;c-&gt;context;
+<anchor xml:id="_littlefs_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device-&gt;<link linkend="_structblockdevice_1a07d24eb0a566f88aa45cf1d236006822">program</link>(device,&#32;buffer,&#32;block&#32;*&#32;c-&gt;block_size&#32;+&#32;off,&#32;size);
+<anchor xml:id="_littlefs_8c_source_1l00117"/>00117 }
+<anchor xml:id="_littlefs_8c_source_1l00118"/>00118 
+<anchor xml:id="_littlefs_8c_source_1l00119"/>00119 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;littlefs_sync(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keyword">struct</emphasis>&#32;lfs_config&#32;*c)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;c-&gt;context;
+<anchor xml:id="_littlefs_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;device-&gt;<link linkend="_structblockdevice_1aaff48a348ee1441de6d05ffad85875ee">sync</link>(device);
+<anchor xml:id="_littlefs_8c_source_1l00122"/>00122 }
+<anchor xml:id="_littlefs_8c_source_1l00123"/>00123 
+<anchor xml:id="_littlefs_8c_source_1l00124"/>00124 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;_init_config(<emphasis role="keyword">struct</emphasis>&#32;lfs_config&#32;*config,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;int32_t&#32;block_cycles&#32;=&#32;config-&gt;block_cycles;
+<anchor xml:id="_littlefs_8c_source_1l00126"/>00126 &#32;&#32;&#32;&#32;lfs_size_t&#32;lookahead_size&#32;=&#32;config-&gt;lookahead_size;
+<anchor xml:id="_littlefs_8c_source_1l00127"/>00127 &#32;&#32;&#32;&#32;memset(config,&#32;0,&#32;<emphasis role="keyword">sizeof</emphasis>(<emphasis role="keyword">struct</emphasis>&#32;lfs_config));
+<anchor xml:id="_littlefs_8c_source_1l00128"/>00128 &#32;&#32;&#32;&#32;config-&gt;block_cycles&#32;=&#32;block_cycles;
+<anchor xml:id="_littlefs_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;config-&gt;lookahead_size&#32;=&#32;lookahead_size;
+<anchor xml:id="_littlefs_8c_source_1l00130"/>00130 
+<anchor xml:id="_littlefs_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;config-&gt;read&#32;=&#32;littlefs_read;
+<anchor xml:id="_littlefs_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;config-&gt;prog&#32;=&#32;littlefs_program;
+<anchor xml:id="_littlefs_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;config-&gt;erase&#32;=&#32;littlefs_erase;
+<anchor xml:id="_littlefs_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;config-&gt;sync&#32;=&#32;littlefs_sync;
+<anchor xml:id="_littlefs_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;config-&gt;read_size&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a44ac5dc03dd62d3c48abbdbd0c9fed4d">read_size</link>;
+<anchor xml:id="_littlefs_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;config-&gt;prog_size&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>;
+<anchor xml:id="_littlefs_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;config-&gt;block_size&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>;
+<anchor xml:id="_littlefs_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;config-&gt;block_count&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device)&#32;/&#32;config-&gt;block_size;
+<anchor xml:id="_littlefs_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;config-&gt;cache_size&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ab4bddfc59b1c4918514f359c4b509dd3">erase_size</link>;
+<anchor xml:id="_littlefs_8c_source_1l00140"/>00140 &#32;&#32;&#32;&#32;config-&gt;context&#32;=&#32;device;
+<anchor xml:id="_littlefs_8c_source_1l00141"/>00141 }
+<anchor xml:id="_littlefs_8c_source_1l00142"/>00142 
+<anchor xml:id="_littlefs_8c_source_1l00143"/>00143 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;format(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00146"/>00146 
+<anchor xml:id="_littlefs_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_littlefs_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_littlefs_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00152"/>00152 
+<anchor xml:id="_littlefs_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;erase&#32;super&#32;block</emphasis>
+<anchor xml:id="_littlefs_8c_source_1l00154"/>00154 &#32;&#32;&#32;&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;0,&#32;device-&gt;<link linkend="_structblockdevice_1a79e2a5807006883bcbf1f60a91bdaf98">program_size</link>);
+<anchor xml:id="_littlefs_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_littlefs_8c_source_1l00158"/>00158 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00159"/>00159 
+<anchor xml:id="_littlefs_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;_init_config(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>,&#32;device);
+<anchor xml:id="_littlefs_8c_source_1l00161"/>00161 &#32;&#32;&#32;&#32;err&#32;=&#32;lfs_format(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>);
+<anchor xml:id="_littlefs_8c_source_1l00162"/>00162 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00166"/>00166 
+<anchor xml:id="_littlefs_8c_source_1l00167"/>00167 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00168"/>00168 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_littlefs_8c_source_1l00169"/>00169 }
+<anchor xml:id="_littlefs_8c_source_1l00170"/>00170 
+<anchor xml:id="_littlefs_8c_source_1l00171"/>00171 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;mount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;pending)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;(void)pending;
+<anchor xml:id="_littlefs_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00174"/>00174 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00175"/>00175 
+<anchor xml:id="_littlefs_8c_source_1l00176"/>00176 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_littlefs_8c_source_1l00177"/>00177 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err;
+<anchor xml:id="_littlefs_8c_source_1l00180"/>00180 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00181"/>00181 
+<anchor xml:id="_littlefs_8c_source_1l00182"/>00182 &#32;&#32;&#32;&#32;_init_config(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>,&#32;device);
+<anchor xml:id="_littlefs_8c_source_1l00183"/>00183 &#32;&#32;&#32;&#32;err&#32;=&#32;lfs_mount(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>);
+<anchor xml:id="_littlefs_8c_source_1l00184"/>00184 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00187"/>00187 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00188"/>00188 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00189"/>00189 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_littlefs_8c_source_1l00190"/>00190 }
+<anchor xml:id="_littlefs_8c_source_1l00191"/>00191 
+<anchor xml:id="_littlefs_8c_source_1l00192"/>00192 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;unmount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00193"/>00193 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00194"/>00194 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00195"/>00195 
+<anchor xml:id="_littlefs_8c_source_1l00196"/>00196 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;res&#32;=&#32;0;
+<anchor xml:id="_littlefs_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_unmount(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>);
+<anchor xml:id="_littlefs_8c_source_1l00198"/>00198 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;&amp;&amp;&#32;!res)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;res&#32;=&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00200"/>00200 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00201"/>00201 
+<anchor xml:id="_littlefs_8c_source_1l00202"/>00202 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00203"/>00203 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;res;
+<anchor xml:id="_littlefs_8c_source_1l00204"/>00204 }
+<anchor xml:id="_littlefs_8c_source_1l00205"/>00205 
+<anchor xml:id="_littlefs_8c_source_1l00206"/>00206 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_remove(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*filename)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00207"/>00207 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00208"/>00208 
+<anchor xml:id="_littlefs_8c_source_1l00209"/>00209 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00210"/>00210 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_remove(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;filename);
+<anchor xml:id="_littlefs_8c_source_1l00211"/>00211 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00212"/>00212 
+<anchor xml:id="_littlefs_8c_source_1l00213"/>00213 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00214"/>00214 }
+<anchor xml:id="_littlefs_8c_source_1l00215"/>00215 
+<anchor xml:id="_littlefs_8c_source_1l00216"/>00216 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_rename(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*oldpath,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*newpath)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00217"/>00217 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00218"/>00218 
+<anchor xml:id="_littlefs_8c_source_1l00219"/>00219 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00220"/>00220 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_rename(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;oldpath,&#32;newpath);
+<anchor xml:id="_littlefs_8c_source_1l00221"/>00221 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00222"/>00222 
+<anchor xml:id="_littlefs_8c_source_1l00223"/>00223 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00224"/>00224 }
+<anchor xml:id="_littlefs_8c_source_1l00225"/>00225 
+<anchor xml:id="_littlefs_8c_source_1l00226"/>00226 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_mkdir(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;mode_t&#32;mode)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00227"/>00227 &#32;&#32;&#32;&#32;(void)mode;
+<anchor xml:id="_littlefs_8c_source_1l00228"/>00228 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00229"/>00229 
+<anchor xml:id="_littlefs_8c_source_1l00230"/>00230 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00231"/>00231 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_mkdir(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;path);
+<anchor xml:id="_littlefs_8c_source_1l00232"/>00232 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00233"/>00233 
+<anchor xml:id="_littlefs_8c_source_1l00234"/>00234 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00235"/>00235 }
+<anchor xml:id="_littlefs_8c_source_1l00236"/>00236 
+<anchor xml:id="_littlefs_8c_source_1l00237"/>00237 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_rmdir(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00238"/>00238 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00239"/>00239 
+<anchor xml:id="_littlefs_8c_source_1l00240"/>00240 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00241"/>00241 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_remove(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;path);
+<anchor xml:id="_littlefs_8c_source_1l00242"/>00242 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00243"/>00243 
+<anchor xml:id="_littlefs_8c_source_1l00244"/>00244 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00245"/>00245 }
+<anchor xml:id="_littlefs_8c_source_1l00246"/>00246 
+<anchor xml:id="_littlefs_8c_source_1l00247"/>00247 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_stat(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;<emphasis role="keyword">struct</emphasis>&#32;stat&#32;*st)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00248"/>00248 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00249"/>00249 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>lfs_info&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>&#32;=&#32;{0};
+<anchor xml:id="_littlefs_8c_source_1l00250"/>00250 
+<anchor xml:id="_littlefs_8c_source_1l00251"/>00251 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00252"/>00252 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_stat(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;path,&#32;&amp;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>);
+<anchor xml:id="_littlefs_8c_source_1l00253"/>00253 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00254"/>00254 
+<anchor xml:id="_littlefs_8c_source_1l00255"/>00255 &#32;&#32;&#32;&#32;st-&gt;st_size&#32;=&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>.size;
+<anchor xml:id="_littlefs_8c_source_1l00256"/>00256 &#32;&#32;&#32;&#32;st-&gt;st_mode&#32;=&#32;_mode_remap(<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>.type);
+<anchor xml:id="_littlefs_8c_source_1l00257"/>00257 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00258"/>00258 }
+<anchor xml:id="_littlefs_8c_source_1l00259"/>00259 
+<anchor xml:id="_littlefs_8c_source_1l00260"/>00260 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_open(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path,&#32;<emphasis role="keywordtype">int</emphasis>&#32;flags)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00261"/>00261 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00262"/>00262 
+<anchor xml:id="_littlefs_8c_source_1l00263"/>00263 &#32;&#32;&#32;&#32;<link linkend="_structlittlefs__file__t">littlefs_file_t</link>&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structlittlefs__file__t">littlefs_file_t</link>));
+<anchor xml:id="_littlefs_8c_source_1l00264"/>00264 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(f&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;file_open:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_littlefs_8c_source_1l00266"/>00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_littlefs_8c_source_1l00267"/>00267 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00268"/>00268 
+<anchor xml:id="_littlefs_8c_source_1l00269"/>00269 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00270"/>00270 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_file_open(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;&amp;f-&gt;<link linkend="_structlittlefs__file__t_1a8ec78f19cd268a5ee3f5cd22a3efc4fa">file</link>,&#32;path,&#32;_flags_remap(flags));
+<anchor xml:id="_littlefs_8c_source_1l00271"/>00271 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00272"/>00272 
+<anchor xml:id="_littlefs_8c_source_1l00273"/>00273 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(f);
+<anchor xml:id="_littlefs_8c_source_1l00275"/>00275 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00276"/>00276 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00277"/>00277 }
+<anchor xml:id="_littlefs_8c_source_1l00278"/>00278 
+<anchor xml:id="_littlefs_8c_source_1l00279"/>00279 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_close(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00280"/>00280 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00281"/>00281 &#32;&#32;&#32;&#32;<link linkend="_structlittlefs__file__t">littlefs_file_t</link>&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00282"/>00282 
+<anchor xml:id="_littlefs_8c_source_1l00283"/>00283 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00284"/>00284 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_file_close(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;&amp;f-&gt;<link linkend="_structlittlefs__file__t_1a8ec78f19cd268a5ee3f5cd22a3efc4fa">file</link>);
+<anchor xml:id="_littlefs_8c_source_1l00285"/>00285 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00286"/>00286 
+<anchor xml:id="_littlefs_8c_source_1l00287"/>00287 &#32;&#32;&#32;&#32;free(f);
+<anchor xml:id="_littlefs_8c_source_1l00288"/>00288 &#32;&#32;&#32;&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>&#32;=&#32;NULL;
+<anchor xml:id="_littlefs_8c_source_1l00289"/>00289 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00290"/>00290 }
+<anchor xml:id="_littlefs_8c_source_1l00291"/>00291 
+<anchor xml:id="_littlefs_8c_source_1l00292"/>00292 <emphasis role="keyword">static</emphasis>&#32;ssize_t&#32;file_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;len)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00293"/>00293 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00294"/>00294 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00295"/>00295 
+<anchor xml:id="_littlefs_8c_source_1l00296"/>00296 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00297"/>00297 &#32;&#32;&#32;&#32;lfs_ssize_t&#32;res&#32;=&#32;lfs_file_read(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f,&#32;buffer,&#32;len);
+<anchor xml:id="_littlefs_8c_source_1l00298"/>00298 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00299"/>00299 
+<anchor xml:id="_littlefs_8c_source_1l00300"/>00300 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00301"/>00301 }
+<anchor xml:id="_littlefs_8c_source_1l00302"/>00302 
+<anchor xml:id="_littlefs_8c_source_1l00303"/>00303 <emphasis role="keyword">static</emphasis>&#32;ssize_t&#32;file_write(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*buffer,&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;len)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00304"/>00304 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00305"/>00305 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00306"/>00306 
+<anchor xml:id="_littlefs_8c_source_1l00307"/>00307 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00308"/>00308 &#32;&#32;&#32;&#32;lfs_ssize_t&#32;res&#32;=&#32;lfs_file_write(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f,&#32;buffer,&#32;len);
+<anchor xml:id="_littlefs_8c_source_1l00309"/>00309 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00310"/>00310 
+<anchor xml:id="_littlefs_8c_source_1l00311"/>00311 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00312"/>00312 }
+<anchor xml:id="_littlefs_8c_source_1l00313"/>00313 
+<anchor xml:id="_littlefs_8c_source_1l00314"/>00314 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_sync(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00315"/>00315 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00316"/>00316 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00317"/>00317 
+<anchor xml:id="_littlefs_8c_source_1l00318"/>00318 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00319"/>00319 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_file_sync(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f);
+<anchor xml:id="_littlefs_8c_source_1l00320"/>00320 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00321"/>00321 
+<anchor xml:id="_littlefs_8c_source_1l00322"/>00322 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00323"/>00323 }
+<anchor xml:id="_littlefs_8c_source_1l00324"/>00324 
+<anchor xml:id="_littlefs_8c_source_1l00325"/>00325 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_seek(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;off_t&#32;offset,&#32;<emphasis role="keywordtype">int</emphasis>&#32;whence)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00326"/>00326 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00327"/>00327 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00328"/>00328 
+<anchor xml:id="_littlefs_8c_source_1l00329"/>00329 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00330"/>00330 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;lfs_file_seek(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f,&#32;offset,&#32;_whence_remap(whence));
+<anchor xml:id="_littlefs_8c_source_1l00331"/>00331 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00332"/>00332 
+<anchor xml:id="_littlefs_8c_source_1l00333"/>00333 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00334"/>00334 }
+<anchor xml:id="_littlefs_8c_source_1l00335"/>00335 
+<anchor xml:id="_littlefs_8c_source_1l00336"/>00336 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_tell(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00337"/>00337 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00338"/>00338 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00339"/>00339 
+<anchor xml:id="_littlefs_8c_source_1l00340"/>00340 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00341"/>00341 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;lfs_file_tell(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f);
+<anchor xml:id="_littlefs_8c_source_1l00342"/>00342 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00343"/>00343 
+<anchor xml:id="_littlefs_8c_source_1l00344"/>00344 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00345"/>00345 }
+<anchor xml:id="_littlefs_8c_source_1l00346"/>00346 
+<anchor xml:id="_littlefs_8c_source_1l00347"/>00347 <emphasis role="keyword">static</emphasis>&#32;off_t&#32;file_size(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00348"/>00348 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00349"/>00349 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00350"/>00350 
+<anchor xml:id="_littlefs_8c_source_1l00351"/>00351 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00352"/>00352 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;lfs_file_size(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f);
+<anchor xml:id="_littlefs_8c_source_1l00353"/>00353 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00354"/>00354 
+<anchor xml:id="_littlefs_8c_source_1l00355"/>00355 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00356"/>00356 }
+<anchor xml:id="_littlefs_8c_source_1l00357"/>00357 
+<anchor xml:id="_littlefs_8c_source_1l00358"/>00358 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;file_truncate(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;*file,&#32;off_t&#32;length)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00359"/>00359 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00360"/>00360 &#32;&#32;&#32;&#32;lfs_file_t&#32;*f&#32;=&#32;file-&gt;<link linkend="_structfs__file__t_1a82c87724ca8d8a7e351eb9be4c973e18">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00361"/>00361 
+<anchor xml:id="_littlefs_8c_source_1l00362"/>00362 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00363"/>00363 &#32;&#32;&#32;&#32;off_t&#32;res&#32;=&#32;lfs_file_truncate(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;f,&#32;length);
+<anchor xml:id="_littlefs_8c_source_1l00364"/>00364 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00365"/>00365 
+<anchor xml:id="_littlefs_8c_source_1l00366"/>00366 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00367"/>00367 }
+<anchor xml:id="_littlefs_8c_source_1l00368"/>00368 
+<anchor xml:id="_littlefs_8c_source_1l00369"/>00369 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_open(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00370"/>00370 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00371"/>00371 &#32;&#32;&#32;&#32;lfs_dir_t&#32;*d&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(lfs_dir_t));
+<anchor xml:id="_littlefs_8c_source_1l00372"/>00372 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(d&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00373"/>00373 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;dir_open:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_littlefs_8c_source_1l00374"/>00374 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-ENOMEM;
+<anchor xml:id="_littlefs_8c_source_1l00375"/>00375 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00376"/>00376 
+<anchor xml:id="_littlefs_8c_source_1l00377"/>00377 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00378"/>00378 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_dir_open(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;d,&#32;path);
+<anchor xml:id="_littlefs_8c_source_1l00379"/>00379 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00380"/>00380 
+<anchor xml:id="_littlefs_8c_source_1l00381"/>00381 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!err)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00382"/>00382 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>&#32;=&#32;d;
+<anchor xml:id="_littlefs_8c_source_1l00383"/>00383 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dir-&gt;<link linkend="_structfs__dir__t_1a9778c8a1393e7166c1e655c9ed0a829e">fd</link>&#32;=&#32;-1;
+<anchor xml:id="_littlefs_8c_source_1l00384"/>00384 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00385"/>00385 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(d);
+<anchor xml:id="_littlefs_8c_source_1l00386"/>00386 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00387"/>00387 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00388"/>00388 }
+<anchor xml:id="_littlefs_8c_source_1l00389"/>00389 
+<anchor xml:id="_littlefs_8c_source_1l00390"/>00390 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_close(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00391"/>00391 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00392"/>00392 &#32;&#32;&#32;&#32;lfs_dir_t&#32;*d&#32;=&#32;dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00393"/>00393 
+<anchor xml:id="_littlefs_8c_source_1l00394"/>00394 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00395"/>00395 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;lfs_dir_close(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;d);
+<anchor xml:id="_littlefs_8c_source_1l00396"/>00396 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00397"/>00397 
+<anchor xml:id="_littlefs_8c_source_1l00398"/>00398 &#32;&#32;&#32;&#32;free(d);
+<anchor xml:id="_littlefs_8c_source_1l00399"/>00399 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(err);
+<anchor xml:id="_littlefs_8c_source_1l00400"/>00400 }
+<anchor xml:id="_littlefs_8c_source_1l00401"/>00401 
+<anchor xml:id="_littlefs_8c_source_1l00402"/>00402 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;dir_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;*dir,&#32;<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structdirent">dirent</link>&#32;*ent)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00403"/>00403 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00404"/>00404 &#32;&#32;&#32;&#32;lfs_dir_t&#32;*d&#32;=&#32;dir-&gt;<link linkend="_structfs__dir__t_1a32edef7806545ae549974da528041edf">context</link>;
+<anchor xml:id="_littlefs_8c_source_1l00405"/>00405 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>lfs_info&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>;
+<anchor xml:id="_littlefs_8c_source_1l00406"/>00406 
+<anchor xml:id="_littlefs_8c_source_1l00407"/>00407 &#32;&#32;&#32;&#32;mutex_enter_blocking(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00408"/>00408 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;res&#32;=&#32;lfs_dir_read(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aae43fc07afee68ac56116e29a61c6af6">littlefs</link>,&#32;d,&#32;&amp;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>);
+<anchor xml:id="_littlefs_8c_source_1l00409"/>00409 &#32;&#32;&#32;&#32;mutex_exit(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00410"/>00410 
+<anchor xml:id="_littlefs_8c_source_1l00411"/>00411 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;==&#32;1)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00412"/>00412 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ent-&gt;<link linkend="_structdirent_1a948760e3b7f607213a19f85e7af15a32">d_type</link>&#32;=&#32;_type_remap(<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>.type);
+<anchor xml:id="_littlefs_8c_source_1l00413"/>00413 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(ent-&gt;<link linkend="_structdirent_1a8cb13e39a90c43e6b180ff4f1614e4da">d_name</link>,&#32;<link linkend="__game_scene_8cpp_1ab5b03fe4e6a8a45e275a46ef2b76a73e">info</link>.name);
+<anchor xml:id="_littlefs_8c_source_1l00414"/>00414 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(LFS_ERR_OK);
+<anchor xml:id="_littlefs_8c_source_1l00415"/>00415 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(res&#32;==&#32;0)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00416"/>00416 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(LFS_ERR_NOENT);
+<anchor xml:id="_littlefs_8c_source_1l00417"/>00417 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00418"/>00418 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_error_remap(res);
+<anchor xml:id="_littlefs_8c_source_1l00419"/>00419 }
+<anchor xml:id="_littlefs_8c_source_1l00420"/>00420 
+<anchor xml:id="_littlefs_8c_source_1l00421"/><link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">00421</link> <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(uint32_t&#32;block_cycles,
+<anchor xml:id="_littlefs_8c_source_1l00422"/>00422 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lfs_size_t&#32;lookahead_size)
+<anchor xml:id="_littlefs_8c_source_1l00423"/>00423 {
+<anchor xml:id="_littlefs_8c_source_1l00424"/>00424 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>));
+<anchor xml:id="_littlefs_8c_source_1l00425"/>00425 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00426"/>00426 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;filesystem_littlefs_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_littlefs_8c_source_1l00427"/>00427 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_littlefs_8c_source_1l00428"/>00428 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00429"/>00429 
+<anchor xml:id="_littlefs_8c_source_1l00430"/>00430 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225">type</link>&#32;=&#32;<link linkend="_filesystem_8h_1ae11c5ff9c996a8d72f65fcf4d52f4804a598d9642db3e841af8699b0b240f0d36">FILESYSTEM_TYPE_LITTLEFS</link>;
+<anchor xml:id="_littlefs_8c_source_1l00431"/>00431 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link>&#32;=&#32;FILESYSTEM_NAME;
+<anchor xml:id="_littlefs_8c_source_1l00432"/>00432 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>&#32;=&#32;mount;
+<anchor xml:id="_littlefs_8c_source_1l00433"/>00433 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>&#32;=&#32;unmount;
+<anchor xml:id="_littlefs_8c_source_1l00434"/>00434 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>&#32;=&#32;format;
+<anchor xml:id="_littlefs_8c_source_1l00435"/>00435 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link>&#32;=&#32;file_remove;
+<anchor xml:id="_littlefs_8c_source_1l00436"/>00436 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link>&#32;=&#32;file_rename;
+<anchor xml:id="_littlefs_8c_source_1l00437"/>00437 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>&#32;=&#32;file_mkdir;
+<anchor xml:id="_littlefs_8c_source_1l00438"/>00438 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a396727009601ff7cd9505b724dc744f3">rmdir</link>&#32;=&#32;file_rmdir;
+<anchor xml:id="_littlefs_8c_source_1l00439"/>00439 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>&#32;=&#32;file_stat;
+<anchor xml:id="_littlefs_8c_source_1l00440"/>00440 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>&#32;=&#32;file_open;
+<anchor xml:id="_littlefs_8c_source_1l00441"/>00441 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>&#32;=&#32;file_close;
+<anchor xml:id="_littlefs_8c_source_1l00442"/>00442 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>&#32;=&#32;file_write;
+<anchor xml:id="_littlefs_8c_source_1l00443"/>00443 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>&#32;=&#32;file_read;
+<anchor xml:id="_littlefs_8c_source_1l00444"/>00444 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a6e562ac4ed1ead2c1654c5c9312b2394">file_sync</link>&#32;=&#32;file_sync;
+<anchor xml:id="_littlefs_8c_source_1l00445"/>00445 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>&#32;=&#32;file_seek;
+<anchor xml:id="_littlefs_8c_source_1l00446"/>00446 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>&#32;=&#32;file_tell;
+<anchor xml:id="_littlefs_8c_source_1l00447"/>00447 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1ab8ed19dbc2c21c95682aec0418f09e72">file_size</link>&#32;=&#32;file_size;
+<anchor xml:id="_littlefs_8c_source_1l00448"/>00448 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3">file_truncate</link>&#32;=&#32;file_truncate;
+<anchor xml:id="_littlefs_8c_source_1l00449"/>00449 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>&#32;=&#32;dir_open;
+<anchor xml:id="_littlefs_8c_source_1l00450"/>00450 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link>&#32;=&#32;dir_close;
+<anchor xml:id="_littlefs_8c_source_1l00451"/>00451 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>&#32;=&#32;dir_read;
+<anchor xml:id="_littlefs_8c_source_1l00452"/>00452 
+<anchor xml:id="_littlefs_8c_source_1l00453"/>00453 &#32;&#32;&#32;&#32;<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>&#32;*context&#32;=&#32;calloc(1,&#32;<emphasis role="keyword">sizeof</emphasis>(<link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link>));
+<anchor xml:id="_littlefs_8c_source_1l00454"/>00454 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(context&#32;==&#32;NULL)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00455"/>00455 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;<emphasis role="stringliteral">&quot;filesystem_littlefs_create:&#32;Out&#32;of&#32;memory\n&quot;</emphasis>);
+<anchor xml:id="_littlefs_8c_source_1l00456"/>00456 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(fs);
+<anchor xml:id="_littlefs_8c_source_1l00457"/>00457 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NULL;
+<anchor xml:id="_littlefs_8c_source_1l00458"/>00458 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_littlefs_8c_source_1l00459"/>00459 &#32;&#32;&#32;&#32;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a481d99fcad1725a02b3e915b5146c40c">id</link>&#32;=&#32;-1;
+<anchor xml:id="_littlefs_8c_source_1l00460"/>00460 &#32;&#32;&#32;&#32;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>.block_cycles&#32;=&#32;block_cycles;
+<anchor xml:id="_littlefs_8c_source_1l00461"/>00461 &#32;&#32;&#32;&#32;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1aa8da7b7fe3b414f414ff18eacf1a6702">config</link>.lookahead_size&#32;=&#32;lookahead_size;
+<anchor xml:id="_littlefs_8c_source_1l00462"/>00462 &#32;&#32;&#32;&#32;mutex_init(&amp;context-&gt;<link linkend="_structfilesystem__littlefs__context__t_1a4157a4ef6b6a802a975a897d0d0bdbe4">_mutex</link>);
+<anchor xml:id="_littlefs_8c_source_1l00463"/>00463 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>&#32;=&#32;context;
+<anchor xml:id="_littlefs_8c_source_1l00464"/>00464 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fs;
+<anchor xml:id="_littlefs_8c_source_1l00465"/>00465 }
+<anchor xml:id="_littlefs_8c_source_1l00466"/>00466 
+<anchor xml:id="_littlefs_8c_source_1l00467"/><link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">00467</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_littlefs_8c_source_1l00468"/>00468 &#32;&#32;&#32;&#32;free(fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>);
+<anchor xml:id="_littlefs_8c_source_1l00469"/>00469 &#32;&#32;&#32;&#32;fs-&gt;<link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link>&#32;=&#32;NULL;
+<anchor xml:id="_littlefs_8c_source_1l00470"/>00470 &#32;&#32;&#32;&#32;free(fs);
+<anchor xml:id="_littlefs_8c_source_1l00471"/>00471 &#32;&#32;&#32;&#32;fs&#32;=&#32;NULL;
+<anchor xml:id="_littlefs_8c_source_1l00472"/>00472 }
+</programlisting></section>

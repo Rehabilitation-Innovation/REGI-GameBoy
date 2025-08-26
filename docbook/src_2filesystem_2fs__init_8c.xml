@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_src_2filesystem_2fs__init_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/filesystem/fs_init.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/fs_init.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;hardware/flash.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_src_2filesystem_2fs__init_8c_1acdc7c707257b149d05bc7b779c55867c">__attribute__</link> ((weak))</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_src_2filesystem_2fs__init_8c_1acdc7c707257b149d05bc7b779c55867c"/><section>
+    <title>__attribute__()</title>
+<indexterm><primary>__attribute__</primary><secondary>fs_init.c</secondary></indexterm>
+<indexterm><primary>fs_init.c</primary><secondary>__attribute__</secondary></indexterm>
+<para><computeroutput>bool __attribute__ ((weak) )</computeroutput></para><para>
+Definition at line <link linkend="_src_2filesystem_2fs__init_8c_source_1l00012">12</link> of file <link linkend="_src_2filesystem_2fs__init_8c_source">fs_init.c</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(500,&#32;16);
+00014 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_regi__rev1_8h_1a7ad5a8273ffcd10db868c3c3e03d5bf0">PICO_FLASH_SIZE_BYTES</link>&#32;-&#32;<link linkend="_vfs_8h_1abd5f971d09c17ed19e68d9e201b8884b">PICO_FS_DEFAULT_SIZE</link>,&#32;0);
+00015 
+00016 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;fs,&#32;device);
+00017 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>(fs,&#32;device);
+00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;fs,&#32;device);
+00023 &#32;&#32;&#32;&#32;}
+00024 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;==&#32;0;
+00025 }
+</programlisting></section>
+</section>
+</section>

@@ -1,0 +1,315 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/documents/res/app4.c File Reference}
+\hypertarget{app4_8c}{}\label{app4_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app4.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app4.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+{\ttfamily \#include "{}diskio.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{app4_8c_ae2f7ddd95f2ba7877bb21a96348b7530}{test\+\_\+diskio}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} ncyc, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} sz\+\_\+buff)
+\item 
+int \mbox{\hyperlink{app4_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{app4_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app4_8c_a0ddf1224851353fc92bfbff6f499fa97}\index{app4.c@{app4.c}!main@{main}}
+\index{main@{main}!app4.c@{app4.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{app4_8c_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app4_8c_source_l00299}{299}} of file \mbox{\hyperlink{app4_8c_source}{app4.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00300\ \{}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordtype}{int}\ rc;}
+\DoxyCodeLine{00302\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ buff[\mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}}];\ \ \textcolor{comment}{/*\ Working\ buffer\ (4\ sector\ in\ size)\ */}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{comment}{/*\ Check\ function/compatibility\ of\ the\ physical\ drive\ \#0\ */}}
+\DoxyCodeLine{00305\ \ \ \ \ rc\ =\ \mbox{\hyperlink{app4_8c_ae2f7ddd95f2ba7877bb21a96348b7530}{test\_diskio}}(0,\ 3,\ buff,\ \textcolor{keyword}{sizeof}\ buff);}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{if}\ (rc)\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Sorry\ the\ function/compatibility\ test\ failed.\ (rc=\%d)\(\backslash\)nFatFs\ will\ not\ work\ with\ this\ disk\ driver.\(\backslash\)n"{}},\ rc);}
+\DoxyCodeLine{00309\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Congratulations!\ The\ disk\ driver\ works\ well.\(\backslash\)n"{}});}
+\DoxyCodeLine{00311\ \ \ \ \ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordflow}{return}\ rc;}
+\DoxyCodeLine{00314\ \}}
+
+\end{DoxyCode}
+\Hypertarget{app4_8c_ae2f7ddd95f2ba7877bb21a96348b7530}\index{app4.c@{app4.c}!test\_diskio@{test\_diskio}}
+\index{test\_diskio@{test\_diskio}!app4.c@{app4.c}}
+\doxysubsubsection{\texorpdfstring{test\_diskio()}{test\_diskio()}}
+{\footnotesize\ttfamily \label{app4_8c_ae2f7ddd95f2ba7877bb21a96348b7530} 
+int test\+\_\+diskio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{ncyc}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{sz\+\_\+buff}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app4_8c_source_l00036}{36}} of file \mbox{\hyperlink{app4_8c_source}{app4.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ n,\ cc,\ ns;}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ sz\_drv,\ lba,\ lba2,\ sz\_eblk,\ pns\ =\ 1;}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ sz\_sect;}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}\ *pbuff\ =\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}*)buff;}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{diskio_8h_adba6790898ce4029c20a34b898ce73c1}{DSTATUS}}\ ds;}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ dr;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ printf(\textcolor{stringliteral}{"{}test\_diskio(\%u,\ \%u,\ 0x\%08X,\ 0x\%08X)\(\backslash\)n"{}},\ pdrv,\ ncyc,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})buff,\ sz\_buff);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\_buff\ <\ \mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}}\ +\ 8)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Insufficient\ work\ area\ to\ run\ the\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{for}\ (cc\ =\ 1;\ cc\ <=\ ncyc;\ cc++)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Test\ cycle\ \%u\ of\ \%u\ start\ ****\(\backslash\)n"{}},\ cc,\ ncyc);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_initalize(\%u)"{}},\ pdrv);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ ds\ =\ \mbox{\hyperlink{fat_8c_a09cdaa6f36fa409bdf002727bff98eb1}{disk\_initialize}}(pdrv);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ds\ \&\ \mbox{\hyperlink{diskio_8h_abd6503c70d862b979a3f7080a59e9acd}{STA\_NOINIT}})\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Get\ drive\ size\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ GET\_SECTOR\_COUNT,\ 0x\%08X)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})\&sz\_drv);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ sz\_drv\ =\ 0;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a570216006f6a8fc4e1698b1bbb2d1dde}{GET\_SECTOR\_COUNT}},\ \&sz\_drv);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\_drv\ <\ 128)\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Failed:\ Insufficient\ drive\ size\ to\ test.\(\backslash\)n"{}});}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Number\ of\ sectors\ on\ the\ drive\ \%u\ is\ \%lu.\(\backslash\)n"{}},\ pdrv,\ sz\_drv);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#if\ FF\_MAX\_SS\ !=\ FF\_MIN\_SS }}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Get\ sector\ size\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ GET\_SECTOR\_SIZE,\ 0x\%X)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})\&sz\_sect);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ sz\_sect\ =\ 0;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{GET\_SECTOR\_SIZE}},\ \&sz\_sect);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 5;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Size\ of\ sector\ is\ \%u\ bytes.\(\backslash\)n"{}},\ sz\_sect);}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#else }}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ sz\_sect\ =\ \mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}};}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Get\ block\ size\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ GET\_BLOCK\_SIZE,\ 0x\%X)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})\&sz\_eblk);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ sz\_eblk\ =\ 0;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_aec3bb4dfe075d0ba2f3b07b300a95500}{GET\_BLOCK\_SIZE}},\ \&sz\_eblk);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}}\ ||\ sz\_eblk\ >=\ 2)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Size\ of\ the\ erase\ block\ is\ \%lu\ sectors.\(\backslash\)n"{}},\ sz\_eblk);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Size\ of\ the\ erase\ block\ is\ unknown.\(\backslash\)n"{}});}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Single\ sector\ write\ test\ */}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Single\ sector\ write\ test\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ lba\ =\ 0;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ sz\_sect;\ n++)\ pbuff[n]\ =\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_write(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ pbuff,\ lba,\ 1);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 6;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ CTRL\_SYNC,\ NULL)"{}},\ pdrv);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 7;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ memset(pbuff,\ 0,\ sz\_sect);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_read(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ pbuff,\ lba,\ 1);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 8;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ sz\_sect\ \&\&\ pbuff[n]\ ==\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);\ n++)\ ;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ sz\_sect)\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ matched.\(\backslash\)n"{}});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ differs\ from\ the\ data\ written.\(\backslash\)n"{}});}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 10;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ pns++;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Multiple\ sector\ write\ test\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ lba\ =\ 5;\ ns\ =\ sz\_buff\ /\ sz\_sect;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ns\ >\ 4)\ ns\ =\ 4;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ns\ >\ 1)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ ns);\ n++)\ pbuff[n]\ =\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_write(\%u,\ 0x\%X,\ \%lu,\ \%u)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba,\ ns);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ pbuff,\ lba,\ ns);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 11;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ CTRL\_SYNC,\ NULL)"{}},\ pdrv);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 12;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ memset(pbuff,\ 0,\ sz\_sect\ *\ ns);}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_read(\%u,\ 0x\%X,\ \%lu,\ \%u)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba,\ ns);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ pbuff,\ lba,\ ns);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 13;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ ns)\ \&\&\ pbuff[n]\ ==\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);\ n++)\ ;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ ns))\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ matched.\(\backslash\)n"{}});}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ differs\ from\ the\ data\ written.\(\backslash\)n"{}});}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 14;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Test\ skipped.\(\backslash\)n"{}});}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ pns++;}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Single\ sector\ write\ test\ (unaligned\ buffer\ address)\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ lba\ =\ 5;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ sz\_sect;\ n++)\ pbuff[n+3]\ =\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_write(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(pbuff+3),\ lba);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ pbuff+3,\ lba,\ 1);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 15;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ CTRL\_SYNC,\ NULL)"{}},\ pdrv);}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0);}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 16;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ memset(pbuff+5,\ 0,\ sz\_sect);}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_read(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(pbuff+5),\ lba);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ pbuff+5,\ lba,\ 1);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 17;}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ sz\_sect\ \&\&\ pbuff[n+5]\ ==\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);\ n++)\ ;}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ sz\_sect)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ matched.\(\backslash\)n"{}});}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ differs\ from\ the\ data\ written.\(\backslash\)n"{}});}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 18;}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ pns++;}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ 4GB\ barrier\ test\ ****\(\backslash\)n"{}});}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\_drv\ >=\ 128\ +\ 0x80000000\ /\ (sz\_sect\ /\ 2))\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ lba\ =\ 6;\ lba2\ =\ lba\ +\ 0x80000000\ /\ (sz\_sect\ /\ 2);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ n\ <\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ 2);\ n++)\ pbuff[n]\ =\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0);}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_write(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ pbuff,\ lba,\ 1);}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 19;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_write(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(pbuff+sz\_sect),\ lba2);}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ pbuff+sz\_sect,\ lba2,\ 1);}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 20;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_ioctl(\%u,\ CTRL\_SYNC,\ NULL)"{}},\ pdrv);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0);}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 21;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ memset(pbuff,\ 0,\ sz\_sect\ *\ 2);}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_read(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})pbuff,\ lba);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ pbuff,\ lba,\ 1);}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 22;}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ disk\_read(\%u,\ 0x\%X,\ \%lu,\ 1)"{}},\ pdrv,\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(pbuff+sz\_sect),\ lba2);}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ pbuff+sz\_sect,\ lba2,\ 1);}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dr\ ==\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ ok.\(\backslash\)n"{}});}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 23;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0,\ pn(pns);\ pbuff[n]\ ==\ (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}})pn(0)\ \&\&\ n\ <\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ 2);\ n++)\ ;}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ (\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}})(sz\_sect\ *\ 2))\ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ matched.\(\backslash\)n"{}});}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Read\ data\ differs\ from\ the\ data\ written.\(\backslash\)n"{}});}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 24;}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Test\ skipped.\(\backslash\)n"{}});}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ pns++;}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****\ Test\ cycle\ \%u\ of\ \%u\ completed\ ****\(\backslash\)n\(\backslash\)n"{}},\ cc,\ ncyc);}
+\DoxyCodeLine{00292\ \ \ \ \ \}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00295\ \}}
+
+\end{DoxyCode}

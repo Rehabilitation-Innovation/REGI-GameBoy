@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_vfs_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/filesystem/vfs.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/filesystem/vfs.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;fcntl.h&gt;<?linebreak?>#include &lt;sys/types.h&gt;<?linebreak?>#include &quot;filesystem/filesystem.h&quot;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_vfs_8h_1abd5f971d09c17ed19e68d9e201b8884b">PICO_FS_DEFAULT_SIZE</link>&#160;&#160;&#160;(1408 * 1024)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link> (void)</para>
+
+<para>Enable predefined file systems. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link> (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Format block device with specify file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link> (const char *path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Mount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link> (const char *path)</para>
+
+<para>Dismount a file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga72d0b65b57fe9e8c02c149a20c5fc0cd">fs_reformat</link> (const char *path)</para>
+
+<para>Reformat the mounted file system. </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__filesystem_1ga9b690589883c3b7e8364ca1817ff6986">fs_info</link> (const char *path, <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> **fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> **device)</para>
+
+<para>Lookup filesystem and blockdevice objects from a mount point. </para>
+</listitem>
+            <listitem><para>char * <link linkend="_group__filesystem_1ga852f1a8efec7c0556f59cdb951ab96c4">fs_strerror</link> (int error)</para>
+
+<para>File system error message. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_vfs_8h_1abd5f971d09c17ed19e68d9e201b8884b"/><section>
+    <title>PICO_FS_DEFAULT_SIZE</title>
+<indexterm><primary>PICO_FS_DEFAULT_SIZE</primary><secondary>vfs.h</secondary></indexterm>
+<indexterm><primary>vfs.h</primary><secondary>PICO_FS_DEFAULT_SIZE</secondary></indexterm>
+<para><computeroutput>#define PICO_FS_DEFAULT_SIZE&#160;&#160;&#160;(1408 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_vfs_8h_source_1l00019">19</link> of file <link linkend="_vfs_8h_source">vfs.h</link>.</para>
+</section>
+</section>
+</section>

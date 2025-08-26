@@ -1,0 +1,154 @@
+\doxysection{usb\+\_\+msc.\+c}
+\hypertarget{usb__msc_8c_source}{}\label{usb__msc_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/usb\_msc.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/usb\_msc.c}}
+\mbox{\hyperlink{usb__msc_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <bsp/board.h>}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <tusb.h>}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{flash_8h}{blockdevice/flash.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00012}\mbox{\hyperlink{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e}{00012}}\ \textcolor{preprocessor}{\#define\ ANSI\_CYAN\ \ \ \ \ "{}\(\backslash\)e[36m"{}}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00013}\mbox{\hyperlink{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8}{00013}}\ \textcolor{preprocessor}{\#define\ ANSI\_MAGENTA\ \ "{}\(\backslash\)e[35m"{}}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00014}\mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{00014}}\ \textcolor{preprocessor}{\#define\ ANSI\_CLEAR\ \ \ \ "{}\(\backslash\)e[0m"{}}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00016}00016\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ ejected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00017}00017\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ usb\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00019}00019\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db}{filesystem\_is\_exported}};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00020}00020\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00023}\mbox{\hyperlink{usb__msc_8c_a8dc878b9ad15bf25195a23232c151089}{00023}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{usb__msc_8c_a8dc878b9ad15bf25195a23232c151089}{usb\_connection\_status}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{return}\ usb\_connected;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00027}\mbox{\hyperlink{usb__msc_8c_a13e2fb6e00b5192eef1a15d98f916448}{00027}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{usb__msc_8c_a13e2fb6e00b5192eef1a15d98f916448}{tud\_mount\_cb}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00028}00028\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)e[45mmount\(\backslash\)e[0m\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00029}00029\ \ \ \ \ usb\_connected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00032}\mbox{\hyperlink{usb__msc_8c_a84ceba8c41ca46959876fc7cbc0e0071}{00032}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{usb__msc_8c_a84ceba8c41ca46959876fc7cbc0e0071}{tud\_suspend\_cb}}(\textcolor{keywordtype}{bool}\ remote\_wakeup\_en)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00033}00033\ \ \ \ \ (void)remote\_wakeup\_en;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00035}00035\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)e[45msuspend\(\backslash\)e[0m\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00036}00036\ \ \ \ \ usb\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00039}\mbox{\hyperlink{usb__msc_8c_ae2aefd1e5c3d470f440cd8f07dce9991}{00039}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{usb__msc_8c_ae2aefd1e5c3d470f440cd8f07dce9991}{tud\_msc\_inquiry\_cb}}(uint8\_t\ lun,\ uint8\_t\ vendor\_id[8],\ uint8\_t\ product\_id[16],\ uint8\_t\ product\_rev[4])\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00040}00040\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ vid[]\ =\ \textcolor{stringliteral}{"{}TinyUSB"{}};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ pid[]\ =\ \textcolor{stringliteral}{"{}Mass\ Storage"{}};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ rev[]\ =\ \textcolor{stringliteral}{"{}1.0"{}};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00046}00046\ \ \ \ \ memcpy(vendor\_id\ \ ,\ vid,\ strlen(vid));}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00047}00047\ \ \ \ \ memcpy(product\_id\ ,\ pid,\ strlen(pid));}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00048}00048\ \ \ \ \ memcpy(product\_rev,\ rev,\ strlen(rev));}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00051}\mbox{\hyperlink{usb__msc_8c_abbb293c273679cadfae2b360ccd5e437}{00051}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{usb__msc_8c_abbb293c273679cadfae2b360ccd5e437}{tud\_msc\_test\_unit\_ready\_cb}}(uint8\_t\ lun)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00052}00052\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db}{filesystem\_is\_exported}})\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_NOT\_READY,\ 0x3a,\ 0x00);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (ejected)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_NOT\_READY,\ 0x3a,\ 0x00);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00066}\mbox{\hyperlink{usb__msc_8c_ac721126f20ec8c7358cc89ba971f6065}{00066}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{usb__msc_8c_ac721126f20ec8c7358cc89ba971f6065}{tud\_msc\_capacity\_cb}}(uint8\_t\ lun,\ uint32\_t\ *block\_count,\ uint16\_t\ *block\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00067}00067\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00068}00068\ \ \ \ \ *block\_count\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>size(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}})\ /\ \ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00069}00069\ \ \ \ \ *block\_size\ \ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00072}\mbox{\hyperlink{usb__msc_8c_ac5112ed309407dee0e18a97ca415929c}{00072}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{usb__msc_8c_ac5112ed309407dee0e18a97ca415929c}{tud\_msc\_start\_stop\_cb}}(uint8\_t\ lun,\ uint8\_t\ power\_condition,\ \textcolor{keywordtype}{bool}\ start,\ \textcolor{keywordtype}{bool}\ load\_eject)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00073}00073\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00074}00074\ \ \ \ \ (void)\ power\_condition;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ load\_eject\ )\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ load\ disk\ storage}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ unload\ disk\ storage}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ ejected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00086}\mbox{\hyperlink{usb__msc_8c_a148e0153ce23f6ffd6305fb0e0fc4dfd}{00086}}\ int32\_t\ \mbox{\hyperlink{usb__msc_8c_a148e0153ce23f6ffd6305fb0e0fc4dfd}{tud\_msc\_read10\_cb}}(uint8\_t\ lun,\ uint32\_t\ lba,\ uint32\_t\ offset,\ \textcolor{keywordtype}{void}\ *buffer,\ uint32\_t\ bufsize)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00087}00087\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00088}00088\ \ \ \ \ (void)offset;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00090}00090\ \ \ \ \ printf(\mbox{\hyperlink{usb__msc_8c_a8e74e295b54795a32a16ea744f6aed5e}{ANSI\_CYAN}}\ \textcolor{stringliteral}{"{}USB\ read\#\%lu\ size=\%lu\(\backslash\)n"{}}\ \mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{ANSI\_CLEAR}},\ lba,\ bufsize);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00091}00091\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>read(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ buffer,\ lba\ *\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size,\ bufsize);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}read\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)\ bufsize;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00098}\mbox{\hyperlink{usb__msc_8c_a47fd17807a02c00f4f45880d7f0ad0fa}{00098}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{usb__msc_8c_a47fd17807a02c00f4f45880d7f0ad0fa}{tud\_msc\_is\_writable\_cb}}\ (uint8\_t\ lun)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00099}00099\ \ \ \ \ (void)\ lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00103}\mbox{\hyperlink{usb__msc_8c_a375a5cc4f5760603edf955765eca41a8}{00103}}\ int32\_t\ \mbox{\hyperlink{usb__msc_8c_a375a5cc4f5760603edf955765eca41a8}{tud\_msc\_write10\_cb}}(uint8\_t\ lun,\ uint32\_t\ lba,\ uint32\_t\ offset,\ uint8\_t\ *buffer,\ uint32\_t\ bufsize)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00104}00104\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00105}00105\ \ \ \ \ (void)offset;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00107}00107\ \ \ \ \ printf(\mbox{\hyperlink{usb__msc_8c_a8a9c0853e05b02c03acdfaab90f534c8}{ANSI\_MAGENTA}}\ \textcolor{stringliteral}{"{}USB\ write\#\%lu\ bufsize=\%lu\(\backslash\)n"{}}\ \mbox{\hyperlink{usb__msc_8c_a6afe43652e9f792d7c2609f8d50ff47b}{ANSI\_CLEAR}},\ lba,\ bufsize);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00109}00109\ \ \ \ \ uint32\_t\ block\_size\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase\_size;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00110}00110\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>erase(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ lba\ *\ block\_size,\ bufsize);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}erase\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00114}00114\ \ \ \ \ err\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}-\/>program(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}},\ buffer,\ lba\ *\ block\_size,\ bufsize);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}program\ error=\%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00117}00117\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)bufsize;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00122}\mbox{\hyperlink{usb__msc_8c_a8f5dcb9aacaba9e9932f2c941d4639e3}{00122}}\ int32\_t\ \mbox{\hyperlink{usb__msc_8c_a8f5dcb9aacaba9e9932f2c941d4639e3}{tud\_msc\_scsi\_cb}}(uint8\_t\ lun,\ uint8\_t\ \textcolor{keyword}{const}\ scsi\_cmd[16],\ \textcolor{keywordtype}{void}\ *buffer,\ uint16\_t\ bufsize)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00123}00123\ \ \ \ \ (void)lun;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{const}\ *response\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00126}00126\ \ \ \ \ int32\_t\ resplen\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00127}00127\ \ \ \ \ \textcolor{keywordtype}{bool}\ in\_xfer\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{switch}\ (scsi\_cmd[0])\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ tud\_msc\_set\_sense(lun,\ SCSI\_SENSE\_ILLEGAL\_REQUEST,\ 0x20,\ 0x00);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ resplen\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00134}00134\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (resplen\ >\ bufsize)}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ resplen\ =\ bufsize;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00139}00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ \&\&\ (resplen\ >\ 0))\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(in\_xfer)\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ memcpy(buffer,\ response,\ (\textcolor{keywordtype}{size\_t})resplen);}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ ;\ \textcolor{comment}{//\ SCSI\ output}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00145}00145\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00147}00147\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)resplen;}
+\DoxyCodeLine{\Hypertarget{usb__msc_8c_source_l00148}00148\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_integration_2test__blockdevice_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/integration/test_blockdevice.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/integration/test_blockdevice.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?>#include &quot;blockdevice/sd.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?>#include &lt;ctype.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>&#160;&#160;&#160;(0.5 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>&#160;&#160;&#160;(512 * 128)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4">LOOPBACK_STORAGE_SIZE</link>&#160;&#160;&#160;1024</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__blockdevice_8c_1ab8c390e6f53017179ae00255cd27fd11">LOOPBACK_BLOCK_SIZE</link>&#160;&#160;&#160;512</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_integration_2test__blockdevice_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">test_blockdevice</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_integration_2test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00013">13</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__blockdevice_8c_1a1f06fce82ce957c8dd28c5e07da29d97"/><section>
+    <title>FLASH_LENGTH_ALL</title>
+<indexterm><primary>FLASH_LENGTH_ALL</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>FLASH_LENGTH_ALL</secondary></indexterm>
+<para><computeroutput>#define FLASH_LENGTH_ALL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00015">15</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914"/><section>
+    <title>FLASH_START_AT</title>
+<indexterm><primary>FLASH_START_AT</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>FLASH_START_AT</secondary></indexterm>
+<para><computeroutput>#define FLASH_START_AT&#160;&#160;&#160;(0.5 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00014">14</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__blockdevice_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae"/><section>
+    <title>HEAP_STORAGE_SIZE</title>
+<indexterm><primary>HEAP_STORAGE_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>HEAP_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HEAP_STORAGE_SIZE&#160;&#160;&#160;(512 * 128)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00016">16</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__blockdevice_8c_1ab8c390e6f53017179ae00255cd27fd11"/><section>
+    <title>LOOPBACK_BLOCK_SIZE</title>
+<indexterm><primary>LOOPBACK_BLOCK_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>LOOPBACK_BLOCK_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_BLOCK_SIZE&#160;&#160;&#160;512</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00018">18</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4"/><section>
+    <title>LOOPBACK_STORAGE_SIZE</title>
+<indexterm><primary>LOOPBACK_STORAGE_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>LOOPBACK_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_STORAGE_SIZE&#160;&#160;&#160;1024</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00017">17</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_integration_2test__blockdevice_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6"/><section>
+    <title>test_blockdevice()</title>
+<indexterm><primary>test_blockdevice</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>test_blockdevice</secondary></indexterm>
+<para><computeroutput>void test_blockdevice (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__blockdevice_8c_source_1l00160">160</link> of file <link linkend="_integration_2test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+<programlisting linenumbering="unnumbered">00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00161 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Onboard-Flash:\n&quot;</emphasis>);
+00162 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00163 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00164 &#32;&#32;&#32;&#32;setup(flash);
+00165 
+00166 &#32;&#32;&#32;&#32;test_api_init(flash);
+00167 &#32;&#32;&#32;&#32;test_api_erase_program_read(flash);
+00168 &#32;&#32;&#32;&#32;test_api_trim(flash);
+00169 &#32;&#32;&#32;&#32;test_api_sync(flash);
+00170 &#32;&#32;&#32;&#32;test_api_size(flash);
+00171 &#32;&#32;&#32;&#32;test_api_attribute(flash);
+00172 
+00173 &#32;&#32;&#32;&#32;cleanup(flash);
+00174 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00175 
+00176 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;SPI&#32;SD&#32;card:\n&quot;</emphasis>);
+00177 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*sd&#32;=&#32;<link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link>(spi0,
+00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1acd12af431f3d8c3752815d58f998c0ac">PICO_DEFAULT_SPI_TX_PIN</link>,
+00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1ab7eaa7dddacd975821969189da644cdb">PICO_DEFAULT_SPI_RX_PIN</link>,
+00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1adad46d9962adcf584b003bb52ef8e33e">PICO_DEFAULT_SPI_SCK_PIN</link>,
+00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_regi__rev1_8h_1a1f76bedc8bb59acb457e1943dda8431d">PICO_DEFAULT_SPI_CSN_PIN</link>,
+00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;10&#32;*&#32;MHZ,
+00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+00184 &#32;&#32;&#32;&#32;assert(sd&#32;!=&#32;NULL);
+00185 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(is_sd_card_connected(sd))&#32;{
+00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setup(sd);
+00187 
+00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_init(sd);
+00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_erase_program_read(sd);
+00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_trim(sd);
+00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_sync(sd);
+00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_size(sd);
+00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_api_attribute(sd);
+00194 
+00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cleanup(sd);
+00196 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;init&quot;</emphasis>);
+00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;skip,&#32;device&#32;not&#32;connected\n&quot;</emphasis>);
+00199 &#32;&#32;&#32;&#32;}
+00200 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link>(sd);
+00201 
+00202 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Heap&#32;memory:\n&quot;</emphasis>);
+00203 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00204 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00205 &#32;&#32;&#32;&#32;setup(heap);
+00206 
+00207 &#32;&#32;&#32;&#32;test_api_init(heap);
+00208 &#32;&#32;&#32;&#32;test_api_erase_program_read(heap);
+00209 &#32;&#32;&#32;&#32;test_api_trim(heap);
+00210 &#32;&#32;&#32;&#32;test_api_sync(heap);
+00211 &#32;&#32;&#32;&#32;test_api_size(heap);
+00212 &#32;&#32;&#32;&#32;test_api_attribute(heap);
+00213 
+00214 &#32;&#32;&#32;&#32;cleanup(heap);
+00215 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00216 
+00217 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Loopback:\n&quot;</emphasis>);
+00218 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00219 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00220 &#32;&#32;&#32;&#32;setup(heap);
+00221 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00222 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00223 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fat,&#32;heap);
+00224 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;fat,&#32;heap);
+00225 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*loopback&#32;=&#32;<link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link>(<emphasis role="stringliteral">&quot;/loopback&quot;</emphasis>,
+00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_host_2test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4">LOOPBACK_STORAGE_SIZE</link>,
+00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_fs__init__loopback_8c_1ab8c390e6f53017179ae00255cd27fd11">LOOPBACK_BLOCK_SIZE</link>);
+00228 &#32;&#32;&#32;&#32;assert(loopback&#32;!=&#32;NULL);
+00229 
+00230 &#32;&#32;&#32;&#32;test_api_init(loopback);
+00231 &#32;&#32;&#32;&#32;test_api_erase_program_read(loopback);
+00232 &#32;&#32;&#32;&#32;test_api_trim(loopback);
+00233 &#32;&#32;&#32;&#32;test_api_sync(loopback);
+00234 &#32;&#32;&#32;&#32;test_api_size(loopback);
+00235 &#32;&#32;&#32;&#32;test_api_attribute(loopback);
+00236 
+00237 &#32;&#32;&#32;&#32;cleanup(loopback);
+00238 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link>(loopback);
+00239 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>);
+00240 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00241 &#32;&#32;&#32;&#32;cleanup(heap);
+00242 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00243 }
+</programlisting></section>
+</section>
+</section>

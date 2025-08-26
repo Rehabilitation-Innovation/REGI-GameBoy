@@ -1,0 +1,62 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests Directory Reference}
+\hypertarget{dir_ce75412898f8b9522fadb50a93042d25}{}\label{dir_ce75412898f8b9522fadb50a93042d25}\index{lib/pico-\/vfs-\/REGI-\/Local/tests Directory Reference@{lib/pico-\/vfs-\/REGI-\/Local/tests Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_140285b3917bf71a5dac3f1e0a5d589a}{host}}
+\item 
+directory \mbox{\hyperlink{dir_c48a5208279df4c13418e930ed4af3b9}{integration}}
+\item 
+directory \mbox{\hyperlink{dir_9fb03d1d3f783df13f5633e5588a878d}{large\+\_\+file}}
+\item 
+directory \mbox{\hyperlink{dir_0b5c47b80cc2db1d8e454fc0b1fd91ec}{multicore}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2main_8c}{main.\+c}}
+\item 
+file \mbox{\hyperlink{test__blockdevice_8c}{test\+\_\+blockdevice.\+c}}
+\item 
+file \mbox{\hyperlink{test__copy__between__different__filesystems_8c}{test\+\_\+copy\+\_\+between\+\_\+different\+\_\+filesystems.\+c}}
+\item 
+file \mbox{\hyperlink{test__filesystem_8c}{test\+\_\+filesystem.\+c}}
+\item 
+file \mbox{\hyperlink{test__standard_8c}{test\+\_\+standard.\+c}}
+\item 
+file \mbox{\hyperlink{test__vfs_8c}{test\+\_\+vfs.\+c}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md30}{}\doxysubsection{\texorpdfstring{Tests}{Tests}}\label{README.md_autotoc_md30}
+The project has four tests\+:
+
+
+\begin{DoxyEnumerate}
+\item unit tests {\ttfamily unittests} using heap memory
+\item integration tests {\ttfamily integrate} using Raspberry Pi Pico hardware
+\item multi-\/core tests {\ttfamily multicore}
+\item unit tests {\ttfamily host} on the host
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{make\ unittests\ integration\ multicore}
+\DoxyCodeLine{make\ run\_unittests}
+\DoxyCodeLine{make\ run\_integration}
+\DoxyCodeLine{make\ run\_multicore}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{cmake\ -\/DPICO\_PLATFORM=host}
+\DoxyCodeLine{make\ host}
+\DoxyCodeLine{./tests/host/host}
+
+\end{DoxyCode}
+ 

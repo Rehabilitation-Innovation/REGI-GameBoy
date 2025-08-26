@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_integration_2test__standard_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/integration/test_standard.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/integration/test_standard.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;wchar.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__standard_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>&#160;&#160;&#160;(0.5 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__standard_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__standard_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>&#160;&#160;&#160;500</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__standard_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>&#160;&#160;&#160;16</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c">test_remove</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641">test_rename</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0">test_rewind</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b">test_setbuf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1aea730026673818d647b9131ba3c4611e">test_setvbuf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7">test_fprintf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85">test_fscanf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4">test_fwprintf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1abbc013f8a99493a073666b2322bf6c95">test_fwscanf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a534f2453f80273e67167271ef3b73b94">test_tmpfile</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72">test_tmpnam</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ac28e570801f42ebf376f34e57ebab630">test_ungetc</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a">test_ungetwc</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_integration_2test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a">_test_vfprintf</link> (FILE *fp, const char *format,...)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b">test_vfprintf</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_integration_2test__standard_8c_1a273e209c9162f768d8dc867f34c5d934">_test_vfscanf</link> (FILE *fp, const char *format,...)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca">test_vfscanf</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_integration_2test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c">_test_vfwscanf</link> (FILE *fp, const wchar_t *format,...)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1aac55667f213bea843fc65ef35a65c135">test_vfwscanf</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_integration_2test__standard_8c_1ab711b6669c9731b7099653fa536722ae">test_standard</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00012">12</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__standard_8c_1a1f06fce82ce957c8dd28c5e07da29d97"/><section>
+    <title>FLASH_LENGTH_ALL</title>
+<indexterm><primary>FLASH_LENGTH_ALL</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>FLASH_LENGTH_ALL</secondary></indexterm>
+<para><computeroutput>#define FLASH_LENGTH_ALL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00014">14</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__standard_8c_1ae38550b2008b82c08588d2340f196914"/><section>
+    <title>FLASH_START_AT</title>
+<indexterm><primary>FLASH_START_AT</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>FLASH_START_AT</secondary></indexterm>
+<para><computeroutput>#define FLASH_START_AT&#160;&#160;&#160;(0.5 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00013">13</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__standard_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d"/><section>
+    <title>LITTLEFS_BLOCK_CYCLE</title>
+<indexterm><primary>LITTLEFS_BLOCK_CYCLE</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>LITTLEFS_BLOCK_CYCLE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_BLOCK_CYCLE&#160;&#160;&#160;500</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00015">15</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__standard_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d"/><section>
+    <title>LITTLEFS_LOOKAHEAD_SIZE</title>
+<indexterm><primary>LITTLEFS_LOOKAHEAD_SIZE</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>LITTLEFS_LOOKAHEAD_SIZE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_LOOKAHEAD_SIZE&#160;&#160;&#160;16</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00016">16</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_integration_2test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a"/><section>
+    <title>_test_vfprintf()</title>
+<indexterm><primary>_test_vfprintf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>_test_vfprintf</secondary></indexterm>
+<para><computeroutput>int _test_vfprintf (FILE * fp, const char * format,  ...)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00847">847</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00847 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00848 &#32;&#32;&#32;&#32;va_list&#32;args;
+00849 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+00850 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfprintf(fp,&#32;format,&#32;args);
+00851 &#32;&#32;&#32;&#32;va_end(args);
+00852 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+00853 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a273e209c9162f768d8dc867f34c5d934"/><section>
+    <title>_test_vfscanf()</title>
+<indexterm><primary>_test_vfscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>_test_vfscanf</secondary></indexterm>
+<para><computeroutput>int _test_vfscanf (FILE * fp, const char * format,  ...)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00875">875</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00875 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00876 &#32;&#32;&#32;&#32;va_list&#32;list;
+00877 &#32;&#32;&#32;&#32;va_start(list,&#32;format);
+00878 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfscanf(fp,&#32;format,&#32;list);
+00879 &#32;&#32;&#32;&#32;va_end(list);
+00880 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+00881 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c"/><section>
+    <title>_test_vfwscanf()</title>
+<indexterm><primary>_test_vfwscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>_test_vfwscanf</secondary></indexterm>
+<para><computeroutput>int _test_vfwscanf (FILE * fp, const wchar_t * format,  ...)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00902">902</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00902 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00903 &#32;&#32;&#32;&#32;va_list&#32;list;
+00904 &#32;&#32;&#32;&#32;va_start(list,&#32;format);
+00905 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfwscanf(fp,&#32;format,&#32;list);
+00906 &#32;&#32;&#32;&#32;va_end(list);
+00907 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+00908 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7"/><section>
+    <title>test_fprintf()</title>
+<indexterm><primary>test_fprintf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_fprintf</secondary></indexterm>
+<para><computeroutput>void test_fprintf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00713">713</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00713 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00714 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fprintf&quot;</emphasis>);
+00715 
+00716 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00717 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;%s&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+00718 &#32;&#32;&#32;&#32;rewind(fp);
+00719 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+00720 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+00721 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>)&#32;==&#32;0);
+00722 &#32;&#32;&#32;&#32;fclose(fp);
+00723 
+00724 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00725 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85"/><section>
+    <title>test_fscanf()</title>
+<indexterm><primary>test_fscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_fscanf</secondary></indexterm>
+<para><computeroutput>void test_fscanf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00727">727</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00727 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00728 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fscanf&quot;</emphasis>);
+00729 
+00730 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00731 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;%s&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;123,abc,0.987\n&quot;</emphasis>);
+00732 &#32;&#32;&#32;&#32;rewind(fp);
+00733 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+00734 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;strings[512];
+00735 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;float_value&#32;=&#32;0.0;
+00736 
+00737 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;assigned&#32;=&#32;fscanf(fp,&#32;<emphasis role="stringliteral">&quot;%d,%[^,],%f\n&quot;</emphasis>,&#32;&amp;int_value,&#32;strings,&#32;&amp;float_value);
+00738 &#32;&#32;&#32;&#32;assert(assigned&#32;==&#32;3);
+00739 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+00740 &#32;&#32;&#32;&#32;assert(strcmp(strings,&#32;<emphasis role="stringliteral">&quot;abc&quot;</emphasis>)&#32;==&#32;0);
+00741 &#32;&#32;&#32;&#32;assert(float_value&#32;&lt;&#32;1.0);
+00742 
+00743 &#32;&#32;&#32;&#32;fclose(fp);
+00744 
+00745 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00746 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4"/><section>
+    <title>test_fwprintf()</title>
+<indexterm><primary>test_fwprintf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_fwprintf</secondary></indexterm>
+<para><computeroutput>void test_fwprintf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00748">748</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00748 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00749 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwprintf&quot;</emphasis>);
+00750 
+00751 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00752 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+00753 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;12);
+00754 
+00755 &#32;&#32;&#32;&#32;fflush(fp);
+00756 &#32;&#32;&#32;&#32;rewind(fp);
+00757 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;buffer[512];
+00758 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;*line&#32;=&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+00759 &#32;&#32;&#32;&#32;assert(wcscmp(line,&#32;L<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+00760 
+00761 &#32;&#32;&#32;&#32;fclose(fp);
+00762 
+00763 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00764 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1abbc013f8a99493a073666b2322bf6c95"/><section>
+    <title>test_fwscanf()</title>
+<indexterm><primary>test_fwscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_fwscanf</secondary></indexterm>
+<para><computeroutput>void test_fwscanf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00766">766</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00766 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00767 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwscanf&quot;</emphasis>);
+00768 
+00769 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00770 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;123,abc,0.987\n&quot;</emphasis>);
+00771 &#32;&#32;&#32;&#32;rewind(fp);
+00772 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+00773 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;strings[512];
+00774 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;float_value&#32;=&#32;0.0;
+00775 
+00776 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;assigned&#32;=&#32;fwscanf(fp,&#32;L<emphasis role="stringliteral">&quot;%d,%[^,],%f\n&quot;</emphasis>,&#32;&amp;int_value,&#32;strings,&#32;&amp;float_value);
+00777 &#32;&#32;&#32;&#32;assert(assigned&#32;==&#32;3);
+00778 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+00779 &#32;&#32;&#32;&#32;assert(strcmp(strings,&#32;<emphasis role="stringliteral">&quot;abc&quot;</emphasis>)&#32;==&#32;0);
+00780 &#32;&#32;&#32;&#32;assert(float_value&#32;&lt;&#32;1.0);
+00781 
+00782 &#32;&#32;&#32;&#32;fclose(fp);
+00783 
+00784 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00785 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c"/><section>
+    <title>test_remove()</title>
+<indexterm><primary>test_remove</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_remove</secondary></indexterm>
+<para><computeroutput>void test_remove (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00587">587</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00587 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00588 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;remove&quot;</emphasis>);
+00589 
+00590 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/remove&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+00591 &#32;&#32;&#32;&#32;fclose(fp);
+00592 
+00593 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;remove(<emphasis role="stringliteral">&quot;/remove&quot;</emphasis>);
+00594 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00595 
+00596 &#32;&#32;&#32;&#32;err&#32;=&#32;remove(<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>);
+00597 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-1);
+00598 &#32;&#32;&#32;&#32;assert(errno&#32;==&#32;ENOENT);
+00599 
+00600 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00601 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641"/><section>
+    <title>test_rename()</title>
+<indexterm><primary>test_rename</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_rename</secondary></indexterm>
+<para><computeroutput>void test_rename (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00603">603</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00603 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00604 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;rename&quot;</emphasis>);
+00605 
+00606 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/rename&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+00607 &#32;&#32;&#32;&#32;fclose(fp);
+00608 
+00609 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7">rename</link>(<emphasis role="stringliteral">&quot;/rename&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+00610 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00611 
+00612 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7">rename</link>(<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+00613 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-1);
+00614 &#32;&#32;&#32;&#32;assert(errno&#32;==&#32;ENOENT);
+00615 
+00616 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00617 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0"/><section>
+    <title>test_rewind()</title>
+<indexterm><primary>test_rewind</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_rewind</secondary></indexterm>
+<para><computeroutput>void test_rewind (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00619">619</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00619 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00620 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;rewind&quot;</emphasis>);
+00621 
+00622 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/rewind&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00623 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+00624 &#32;&#32;&#32;&#32;rewind(fp);
+00625 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+00626 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+00627 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>)&#32;==&#32;0);
+00628 &#32;&#32;&#32;&#32;fclose(fp);
+00629 
+00630 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00631 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b"/><section>
+    <title>test_setbuf()</title>
+<indexterm><primary>test_setbuf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_setbuf</secondary></indexterm>
+<para><computeroutput>void test_setbuf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00633">633</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00633 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00634 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;setbuf&quot;</emphasis>);
+00635 
+00636 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[BUFSIZ]&#32;=&#32;{0};
+00637 
+00638 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+00639 &#32;&#32;&#32;&#32;setbuf(fp,&#32;buffer);
+00640 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+00641 &#32;&#32;&#32;&#32;fclose(fp);
+00642 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+00643 
+00644 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00645 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1aea730026673818d647b9131ba3c4611e"/><section>
+    <title>test_setvbuf()</title>
+<indexterm><primary>test_setvbuf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_setvbuf</secondary></indexterm>
+<para><computeroutput>void test_setvbuf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00647">647</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00647 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00648 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;setvbuf&quot;</emphasis>);
+00649 
+00650 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[BUFSIZ];
+00651 
+00652 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Do&#32;not&#32;use&#32;a&#32;buffer</emphasis>
+00653 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00654 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;fileno(fp);
+00655 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;setvbuf(fp,&#32;NULL,&#32;_IONBF,&#32;0);
+00656 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00657 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+00658 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+00659 
+00660 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00661 &#32;&#32;&#32;&#32;ssize_t&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00662 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>));
+00663 
+00664 &#32;&#32;&#32;&#32;close(fd);
+00665 &#32;&#32;&#32;&#32;fclose(fp);
+00666 
+00667 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;use&#32;full&#32;output&#32;buffering</emphasis>
+00668 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00669 &#32;&#32;&#32;&#32;fd&#32;=&#32;fileno(fp);
+00670 &#32;&#32;&#32;&#32;err&#32;=&#32;setvbuf(fp,&#32;buffer,&#32;_IOFBF,&#32;5);
+00671 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00672 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;He&quot;</emphasis>);
+00673 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00674 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00675 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;0);
+00676 
+00677 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;llo&#32;W&quot;</emphasis>);
+00678 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00679 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00680 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>));
+00681 
+00682 &#32;&#32;&#32;&#32;fflush(fp);
+00683 
+00684 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00685 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00686 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;W&quot;</emphasis>));
+00687 
+00688 &#32;&#32;&#32;&#32;close(fd);
+00689 &#32;&#32;&#32;&#32;fclose(fp);
+00690 
+00691 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;use&#32;line&#32;buffering</emphasis>
+00692 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00693 &#32;&#32;&#32;&#32;fd&#32;=&#32;fileno(fp);
+00694 &#32;&#32;&#32;&#32;err&#32;=&#32;setvbuf(fp,&#32;buffer,&#32;_IOLBF,&#32;128);
+00695 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00696 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>);
+00697 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00698 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00699 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;0);
+00700 
+00701 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;&#32;World\n&quot;</emphasis>);
+00702 
+00703 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+00704 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+00705 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>));
+00706 
+00707 &#32;&#32;&#32;&#32;close(fd);
+00708 &#32;&#32;&#32;&#32;fclose(fp);
+00709 
+00710 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00711 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ab711b6669c9731b7099653fa536722ae"/><section>
+    <title>test_standard()</title>
+<indexterm><primary>test_standard</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_standard</secondary></indexterm>
+<para><computeroutput>void test_standard (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00980">980</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00980 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00981 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(littlefs):\n&quot;</emphasis>);
+00982 
+00983 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00984 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00985 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00986 
+00987 &#32;&#32;&#32;&#32;setup(lfs,&#32;flash);
+00988 
+00989 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+00990 
+00991 &#32;&#32;&#32;&#32;cleanup(lfs,&#32;flash);
+00992 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00993 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00994 
+00995 
+00996 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(FAT):\n&quot;</emphasis>);
+00997 
+00998 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00999 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+01000 &#32;&#32;&#32;&#32;setup(fat,&#32;flash);
+01001 
+01002 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+01003 
+01004 &#32;&#32;&#32;&#32;cleanup(fat,&#32;flash);
+01005 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+01006 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+01007 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96"/><section>
+    <title>test_standard_file_api()</title>
+<indexterm><primary>test_standard_file_api</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_standard_file_api</secondary></indexterm>
+<para><computeroutput>void test_standard_file_api (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00930">930</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00930 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00931 &#32;&#32;&#32;&#32;test_clearerr();
+00932 &#32;&#32;&#32;&#32;test_fflush();
+00933 &#32;&#32;&#32;&#32;test_fgetc();
+00934 &#32;&#32;&#32;&#32;test_fgetpos();
+00935 &#32;&#32;&#32;&#32;test_fgets();
+00936 &#32;&#32;&#32;&#32;test_fgetwc();
+00937 &#32;&#32;&#32;&#32;test_fgetws();
+00938 &#32;&#32;&#32;&#32;test_fileno();
+00939 &#32;&#32;&#32;&#32;test_fmemopen();
+00940 &#32;&#32;&#32;&#32;test_fopen();
+00941 &#32;&#32;&#32;&#32;test_fputc();
+00942 &#32;&#32;&#32;&#32;test_fputs();
+00943 &#32;&#32;&#32;&#32;test_fputwc();
+00944 &#32;&#32;&#32;&#32;test_fputws();
+00945 &#32;&#32;&#32;&#32;test_fread();
+00946 &#32;&#32;&#32;&#32;test_freopen();
+00947 &#32;&#32;&#32;&#32;test_fseek();
+00948 &#32;&#32;&#32;&#32;test_fsetpos();
+00949 &#32;&#32;&#32;&#32;test_ftell();
+00950 &#32;&#32;&#32;&#32;test_fwide();
+00951 &#32;&#32;&#32;&#32;test_fwrite();
+00952 &#32;&#32;&#32;&#32;test_getc();
+00953 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_getdelim();&#32;&#32;//&#32;not&#32;support</emphasis>
+00954 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_getline();&#32;&#32;//&#32;not&#32;support</emphasis>
+00955 &#32;&#32;&#32;&#32;test_getw();
+00956 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_mktemp();&#32;&#32;//&#32;NOTE:&#32;`mktemp&apos;&#32;is&#32;dangerous;&#32;use&#32;`mkstemp&apos;&#32;instead</emphasis>
+00957 &#32;&#32;&#32;&#32;test_mkstemp();
+00958 &#32;&#32;&#32;&#32;test_open_memstream();
+00959 &#32;&#32;&#32;&#32;test_perror();
+00960 &#32;&#32;&#32;&#32;test_putc();
+00961 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_putc_unlocked();</emphasis>
+00962 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c">test_remove</link>();
+00963 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641">test_rename</link>();
+00964 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0">test_rewind</link>();
+00965 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b">test_setbuf</link>();
+00966 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aea730026673818d647b9131ba3c4611e">test_setvbuf</link>();
+00967 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7">test_fprintf</link>();
+00968 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85">test_fscanf</link>();
+00969 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4">test_fwprintf</link>();
+00970 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1abbc013f8a99493a073666b2322bf6c95">test_fwscanf</link>();
+00971 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a534f2453f80273e67167271ef3b73b94">test_tmpfile</link>();
+00972 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72">test_tmpnam</link>();
+00973 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ac28e570801f42ebf376f34e57ebab630">test_ungetc</link>();
+00974 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a">test_ungetwc</link>();
+00975 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b">test_vfprintf</link>();
+00976 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca">test_vfscanf</link>();
+00977 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aac55667f213bea843fc65ef35a65c135">test_vfwscanf</link>();
+00978 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a534f2453f80273e67167271ef3b73b94"/><section>
+    <title>test_tmpfile()</title>
+<indexterm><primary>test_tmpfile</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_tmpfile</secondary></indexterm>
+<para><computeroutput>void test_tmpfile (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00787">787</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00787 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00788 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;tmpfile&quot;</emphasis>);
+00789 
+00790 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;tmpfile();
+00791 &#32;&#32;&#32;&#32;assert(fp&#32;==&#32;NULL);
+00792 
+00793 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;not&#32;support\n&quot;</emphasis>);&#32;<emphasis role="comment">//&#32;tmpfile&#32;also&#32;requires&#32;the&#32;&#32;global&#32;pointr&#32;environ</emphasis>
+00794 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72"/><section>
+    <title>test_tmpnam()</title>
+<indexterm><primary>test_tmpnam</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_tmpnam</secondary></indexterm>
+<para><computeroutput>void test_tmpnam (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00796">796</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00796 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00797 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;tmpnam&quot;</emphasis>);
+00798 
+00799 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path&#32;=&#32;tmpnam(<emphasis role="stringliteral">&quot;prefix&quot;</emphasis>);
+00800 &#32;&#32;&#32;&#32;assert(path&#32;!=&#32;NULL);
+00801 &#32;&#32;&#32;&#32;assert(strcmp(path,&#32;<emphasis role="stringliteral">&quot;prefix&quot;</emphasis>)&#32;==&#32;0);&#32;<emphasis role="comment">//&#32;unintended&#32;behavior</emphasis>
+00802 
+00803 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;not&#32;support\n&quot;</emphasis>);&#32;<emphasis role="comment">//&#32;The&#32;global&#32;pointer&#32;environ&#32;is&#32;also&#32;required</emphasis>
+00804 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ac28e570801f42ebf376f34e57ebab630"/><section>
+    <title>test_ungetc()</title>
+<indexterm><primary>test_ungetc</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_ungetc</secondary></indexterm>
+<para><computeroutput>void test_ungetc (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00806">806</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00806 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00807 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;ungetc&quot;</emphasis>);
+00808 
+00809 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/ungetc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00810 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;12345&quot;</emphasis>);
+00811 &#32;&#32;&#32;&#32;fflush(fp);
+00812 
+00813 &#32;&#32;&#32;&#32;rewind(fp);
+00814 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+00815 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+00816 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+00817 &#32;&#32;&#32;&#32;ungetc(<emphasis role="charliteral">&apos;3&apos;</emphasis>,&#32;fp);
+00818 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+00819 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;4&apos;</emphasis>);
+00820 
+00821 &#32;&#32;&#32;&#32;fclose(fp);
+00822 
+00823 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00824 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a"/><section>
+    <title>test_ungetwc()</title>
+<indexterm><primary>test_ungetwc</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_ungetwc</secondary></indexterm>
+<para><computeroutput>void test_ungetwc (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00827">827</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00827 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00828 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;ungetwc&quot;</emphasis>);
+00829 
+00830 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/ungetc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00831 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;12345&quot;</emphasis>);
+00832 &#32;&#32;&#32;&#32;fflush(fp);
+00833 
+00834 &#32;&#32;&#32;&#32;rewind(fp);
+00835 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+00836 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+00837 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+00838 &#32;&#32;&#32;&#32;ungetwc(L<emphasis role="charliteral">&apos;3&apos;</emphasis>,&#32;fp);
+00839 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+00840 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;4&apos;</emphasis>);
+00841 
+00842 &#32;&#32;&#32;&#32;fclose(fp);
+00843 
+00844 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00845 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b"/><section>
+    <title>test_vfprintf()</title>
+<indexterm><primary>test_vfprintf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_vfprintf</secondary></indexterm>
+<para><computeroutput>void test_vfprintf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00855">855</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00855 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00856 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfprintf&quot;</emphasis>);
+00857 
+00858 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00859 
+00860 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;<link linkend="_integration_2test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a">_test_vfprintf</link>(fp,&#32;<emphasis role="stringliteral">&quot;%s&#32;%s\n&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;World&quot;</emphasis>);
+00861 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;12);
+00862 
+00863 &#32;&#32;&#32;&#32;fflush(fp);
+00864 &#32;&#32;&#32;&#32;rewind(fp);
+00865 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+00866 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+00867 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+00868 
+00869 &#32;&#32;&#32;&#32;fclose(fp);
+00870 
+00871 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00872 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca"/><section>
+    <title>test_vfscanf()</title>
+<indexterm><primary>test_vfscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_vfscanf</secondary></indexterm>
+<para><computeroutput>void test_vfscanf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00883">883</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00883 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00884 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfscnaf&quot;</emphasis>);
+00885 
+00886 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00887 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;123,ABC\n&quot;</emphasis>);
+00888 &#32;&#32;&#32;&#32;fflush(fp);
+00889 &#32;&#32;&#32;&#32;rewind(fp);
+00890 
+00891 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+00892 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;char_value[512];
+00893 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;number&#32;=&#32;<link linkend="_integration_2test__standard_8c_1a273e209c9162f768d8dc867f34c5d934">_test_vfscanf</link>(fp,&#32;<emphasis role="stringliteral">&quot;%d,%s\n&quot;</emphasis>,&#32;&amp;int_value,&#32;char_value);
+00894 &#32;&#32;&#32;&#32;assert(number&#32;==&#32;2);
+00895 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+00896 &#32;&#32;&#32;&#32;assert(strcmp(char_value,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+00897 &#32;&#32;&#32;&#32;fclose(fp);
+00898 
+00899 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00900 }
+</programlisting></section>
+<anchor xml:id="_integration_2test__standard_8c_1aac55667f213bea843fc65ef35a65c135"/><section>
+    <title>test_vfwscanf()</title>
+<indexterm><primary>test_vfwscanf</primary><secondary>test_standard.c</secondary></indexterm>
+<indexterm><primary>test_standard.c</primary><secondary>test_vfwscanf</secondary></indexterm>
+<para><computeroutput>void test_vfwscanf (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__standard_8c_source_1l00910">910</link> of file <link linkend="_integration_2test__standard_8c_source">test_standard.c</link>.</para>
+<programlisting linenumbering="unnumbered">00910 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00911 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfwscnaf&quot;</emphasis>);
+00912 
+00913 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfwscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+00914 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;123,ABC&quot;</emphasis>);
+00915 &#32;&#32;&#32;&#32;fflush(fp);
+00916 &#32;&#32;&#32;&#32;rewind(fp);
+00917 
+00918 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+00919 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;wchar_value[512]&#32;=&#32;{0};
+00920 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;number&#32;=&#32;<link linkend="_integration_2test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c">_test_vfwscanf</link>(fp,&#32;L<emphasis role="stringliteral">&quot;%d,%s&quot;</emphasis>,&#32;&amp;int_value,&#32;wchar_value);
+00921 &#32;&#32;&#32;&#32;assert(number&#32;==&#32;2);
+00922 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+00923 &#32;&#32;&#32;&#32;assert(strcmp(wchar_value,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+00924 
+00925 &#32;&#32;&#32;&#32;fclose(fp);
+00926 
+00927 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+00928 }
+</programlisting></section>
+</section>
+</section>

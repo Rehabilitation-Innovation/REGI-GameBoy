@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_56bc73bd2134923c62427a01040a750a" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main Directory Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Directories    </title>
+        <itemizedlist>
+            <listitem><para>directory <link linkend="_dir_b133db15c6db2db5e39f54f03d4259b3">include</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_9aa375878d37ad80f1c1074c8fefcebc">src</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_5b8dfded306fbaa43784ea3a78eb9422">test</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<section xml:id="_README.md_1autotoc_md0">
+<title>Pico C++ HC-SR04 Library</title>
+<para>C++ library for reading an HC-SR04 distance sensor using the raspberry pi pico.</para>
+</section>
+<section xml:id="_README.md_1autotoc_md1">
+<title>Features</title>
+<para><itemizedlist>
+<listitem>
+<para>Specify the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> / State machine to use</para>
+</listitem><listitem>
+<para>IRQ driven reads</para>
+</listitem><listitem>
+<para>Non blocking distance sensing</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_README.md_1autotoc_md2">
+<title>How to use</title>
+<para><literallayout><computeroutput>//&#32;Include&#32;the&#32;library
+#include&#32;&quot;distance_sensor.h&quot;
+
+int&#32;main()&#32;{
+&#32;&#32;&#32;&#32;//&#32;Create&#32;an&#32;instance&#32;of&#32;the&#32;sensor
+&#32;&#32;&#32;&#32;//&#32;specify&#32;the&#32;pio,&#32;state&#32;machine,&#32;and&#32;gpio&#32;pin&#32;connected&#32;to&#32;trigger
+&#32;&#32;&#32;&#32;//&#32;echo&#32;pin&#32;must&#32;be&#32;on&#32;gpio&#32;pin&#32;trigger&#32;+&#32;1.
+&#32;&#32;&#32;&#32;DistanceSensor&#32;hcsr04{pio0,&#32;0,&#32;0};
+
+&#32;&#32;&#32;&#32;//&#32;Trigger&#32;background&#32;sense
+&#32;&#32;&#32;&#32;hcsro4.TriggerRead();
+&#32;&#32;&#32;&#32;
+&#32;&#32;&#32;&#32;//&#32;wait&#32;for&#32;sensor&#32;to&#32;get&#32;a&#32;result
+&#32;&#32;&#32;&#32;while&#32;(hcsro4.is_sensing)&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_us(100);
+&#32;&#32;&#32;&#32;}
+
+&#32;&#32;&#32;&#32;//&#32;Read&#32;result
+&#32;&#32;&#32;&#32;printf(&quot;Reading&#32;%d&#32;centimeters\n&quot;,&#32;hcsr04.distance);
+}
+</computeroutput></literallayout></para>
+</section>
+<section xml:id="_README.md_1autotoc_md3">
+<title>How to include in your project</title>
+<para>Including this library in your project is simple.</para>
+
+<para><orderedlist>
+<listitem>
+<para>Clone the library into your repository. Using submodules is the simplest way to make sure all your repository users will have the same library you&apos;re using. <literallayout><computeroutput>git&#32;submodule&#32;add&#32;https://github.com/dangarbri/pico-distance-sensor
+</computeroutput></literallayout> if not using git, then just use <computeroutput>git clone</computeroutput> instead of <computeroutput>git submodule add</computeroutput></para>
+</listitem><listitem>
+<para>Update your &#8216;CMakeLists.txt&#8217; to point to the library <literallayout><computeroutput>include_directories(
+&#32;&#32;&#32;&#32;...&#32;#&#32;your&#32;include&#32;directories
+&#32;&#32;&#32;&#32;pico-distance-sensor/include&#32;#&#32;Add&#32;servo-lib&apos;s&#32;include&#32;directory&#32;to&#32;get&#32;&quot;servo.h&quot;
+)
+#&#32;Add&#32;the&#32;subdirectory&#32;so&#32;the&#32;library&#32;gets&#32;compiled
+add_subdirectory(pico-distance-sensor)
+#&#32;include&#32;it&#32;in&#32;your&#32;link&#32;libraries
+target_link_libraries(your_program&#32;pico_stdlib&#32;distance-sensor)
+</computeroutput></literallayout> </para>
+</listitem></orderedlist>
+</para>
+</section>
+</section>
+</section>

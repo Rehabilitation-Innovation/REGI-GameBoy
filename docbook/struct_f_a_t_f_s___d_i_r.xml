@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_f_a_t_f_s___d_i_r" xml:lang="en-US">
+<title>FATFS_DIR Struct Reference</title>
+<indexterm><primary>FATFS_DIR</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ff.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_struct_f_f_o_b_j_i_d">FFOBJID</link> <link linkend="_struct_f_a_t_f_s___d_i_r_1aa093b756538e6307178680c5c24939f7">obj</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s___d_i_r_1a00a9b9829a3a72bc7881d3ea8a0779a9">dptr</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s___d_i_r_1a219d74c6cc62ca86743f35b4dee1bb7e">clust</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s___d_i_r_1a9dbf89e967958c35ed9c7b2c3c60375e">sect</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * <link linkend="_struct_f_a_t_f_s___d_i_r_1a98b1f6c364ef043e542a558a5ea99ec5">dir</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s___d_i_r_1a625eb75f8fcc601fd9135724e5b8f4df">fn</link> [12]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_ff_8h_source_1l00226">226</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1a219d74c6cc62ca86743f35b4dee1bb7e"/><section>
+    <title>clust</title>
+<indexterm><primary>clust</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>clust</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS_DIR::clust</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00229">229</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1a98b1f6c364ef043e542a558a5ea99ec5"/><section>
+    <title>dir</title>
+<indexterm><primary>dir</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>dir</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>* FATFS_DIR::dir</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00231">231</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1a00a9b9829a3a72bc7881d3ea8a0779a9"/><section>
+    <title>dptr</title>
+<indexterm><primary>dptr</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>dptr</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS_DIR::dptr</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00228">228</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1a625eb75f8fcc601fd9135724e5b8f4df"/><section>
+    <title>fn</title>
+<indexterm><primary>fn</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>fn</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS_DIR::fn[12]</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00232">232</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1aa093b756538e6307178680c5c24939f7"/><section>
+    <title>obj</title>
+<indexterm><primary>obj</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>obj</secondary></indexterm>
+<para><computeroutput><link linkend="_struct_f_f_o_b_j_i_d">FFOBJID</link> FATFS_DIR::obj</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00227">227</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s___d_i_r_1a9dbf89e967958c35ed9c7b2c3c60375e"/><section>
+    <title>sect</title>
+<indexterm><primary>sect</primary><secondary>FATFS_DIR</secondary></indexterm>
+<indexterm><primary>FATFS_DIR</primary><secondary>sect</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS_DIR::sect</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00230">230</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/vendor/ff15/source/<link linkend="_ff_8h">ff.h</link></section>
+</section>

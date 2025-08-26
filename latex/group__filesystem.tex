@@ -1,0 +1,501 @@
+\doxysection{filesystem }
+\hypertarget{group__filesystem}{}\label{group__filesystem}\index{filesystem@{filesystem}}
+
+
+File system abstraction layer.  
+
+
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__filesystem__fat}{filesystem\+\_\+fat}}
+\begin{DoxyCompactList}\small\item\em FAT file system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__filesystem__littlefs}{filesystem\+\_\+littlefs}}
+\begin{DoxyCompactList}\small\item\em littlefs file system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfs__file__t}{fs\+\_\+file\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em file object \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfs__dir__t}{fs\+\_\+dir\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em directory object \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfilesystem}{filesystem}}
+\begin{DoxyCompactList}\small\item\em file system abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structfilesystem}{filesystem}} \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em file system abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Enable predefined file systems. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\+\_\+format}} (\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Format block device with specify file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\+\_\+mount}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Mount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\+\_\+unmount}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Dismount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{fs\+\_\+reformat}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Reformat the mounted file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}{fs\+\_\+info}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Lookup filesystem and blockdevice objects from a mount point. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}{fs\+\_\+strerror}} (int error)
+\begin{DoxyCompactList}\small\item\em File system error message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File system abstraction layer. 
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__filesystem_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}\index{filesystem@{filesystem}!filesystem\_t@{filesystem\_t}}
+\index{filesystem\_t@{filesystem\_t}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{filesystem\_t}{filesystem\_t}}
+{\footnotesize\ttfamily \label{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83} 
+typedef struct \mbox{\hyperlink{structfilesystem}{filesystem}} \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}}}
+
+
+
+file system abstract object 
+
+All file system objects implement \doxylink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t} 
+
+\label{doc-func-members}
+\Hypertarget{group__filesystem_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}\index{filesystem@{filesystem}!fs\_format@{fs\_format}}
+\index{fs\_format@{fs\_format}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_format()}{fs\_format()}}
+{\footnotesize\ttfamily \label{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed} 
+int fs\+\_\+format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Format block device with specify file system. 
+
+Block devices can be formatted and made available as a file system.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs} & File system object. Format the block device according to the specified file system. \\
+\hline
+{\em device} & Block device used in the file system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Format succeeded. \\
+\hline
+{\em -\/1} & Format failed. Error codes are indicated by errno. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00088}{88}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}(fs,\ device);}
+\DoxyCodeLine{00096\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}\index{filesystem@{filesystem}!fs\_info@{fs\_info}}
+\index{fs\_info@{fs\_info}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_info()}{fs\_info()}}
+{\footnotesize\ttfamily \label{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986} 
+int fs\+\_\+info (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Lookup filesystem and blockdevice objects from a mount point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Directory path of the mount point. Must be the same as the path specified for the mount. \\
+\hline
+{\em fs} & Pointer references to filesystem objects \\
+\hline
+{\em device} & Pinter references to blockdevice objects \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Lookup succeeded \\
+\hline
+{\em -\/1} & Lookup failed. Error codes are indicated by errno. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00177}{177}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{00179\ \ \ \ \ (void)device;}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00182\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ \ \ \ \ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00190\ \ \ \ \ *device\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{00194\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}\index{filesystem@{filesystem}!fs\_init@{fs\_init}}
+\index{fs\_init@{fs\_init}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_init()}{fs\_init()}}
+{\footnotesize\ttfamily \label{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0} 
+bool fs\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enable predefined file systems. 
+
+This default function defines the block device and file system, formats it if necessary and then mounts it on {\ttfamily /} to make it available. The {\ttfamily pico\+\_\+enable\+\_\+filesystem} function in CMake\+Lists.\+txt provides a default or user-\/defined fs\+\_\+init function.
+
+
+\begin{DoxyRetVals}{Return values}
+{\em true} & Init succeeded. \\
+\hline
+{\em false} & Init failed. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{examples_2freertos__benchmark_2fs__init_8c_source_l00016}{16}} of file \mbox{\hyperlink{examples_2freertos__benchmark_2fs__init_8c_source}{fs\+\_\+init.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ printf(\textcolor{stringliteral}{"{}mount\ /sd\(\backslash\)n"{}});}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *sd\ =\ \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\_sd\_create}}(spi0,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_acd12af431f3d8c3752815d58f998c0ac}{PICO\_DEFAULT\_SPI\_TX\_PIN}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_ab7eaa7dddacd975821969189da644cdb}{PICO\_DEFAULT\_SPI\_RX\_PIN}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_adad46d9962adcf584b003bb52ef8e33e}{PICO\_DEFAULT\_SPI\_SCK\_PIN}},}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_a1f76bedc8bb59acb457e1943dda8431d}{PICO\_DEFAULT\_SPI\_CSN\_PIN}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 24\ *\ MHZ,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false});}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/sd"{}},\ fat,\ sd);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}format\ /sd\ with\ FAT\(\backslash\)n"{}});}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fat,\ sd);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_format\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/sd"{}},\ fat,\ sd);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_mount\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ printf(\textcolor{stringliteral}{"{}format\ and\ mount\ /flash\(\backslash\)n"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{PICO\_FLASH\_SIZE\_BYTES}}\ -\/\ \mbox{\hyperlink{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}{PICO\_FS\_DEFAULT\_SIZE}},\ 0);}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(500,\ 16);}
+\DoxyCodeLine{00044\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fs,\ device);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_format\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/flash"{}},\ fs,\ device);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}fs\_mount\ error:\ \%s"{}},\ strerror(errno));}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00055\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_ga85336fdeb00149559c5c2008256c3013}\index{filesystem@{filesystem}!fs\_mount@{fs\_mount}}
+\index{fs\_mount@{fs\_mount}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_mount()}{fs\_mount()}}
+{\footnotesize\ttfamily \label{group__filesystem_ga85336fdeb00149559c5c2008256c3013} 
+int fs\+\_\+mount (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Mount a file system. 
+
+Mounts a file system with block devices at the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Directory path of the mount point. Specify a string beginning with a slash. \\
+\hline
+{\em fs} & File system object. \\
+\hline
+{\em device} & Block device used in the file system. Block devices must be formatted with a file system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Mount succeeded. \\
+\hline
+{\em -\/1} & Mount failed. Error codes are indicated by errno. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00098}{98}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err)}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}(fs,\ device,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00111\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{FS\_MAX\_MOUNTPOINT}};\ i++)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mountpoints[i].\mbox{\hyperlink{structfilesystem}{filesystem}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].filesystem\ =\ fs;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].device\ =\ device;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].dir\ =\ strdup(dir);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EFAULT);}
+\DoxyCodeLine{00123\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}\index{filesystem@{filesystem}!fs\_reformat@{fs\_reformat}}
+\index{fs\_reformat@{fs\_reformat}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_reformat()}{fs\_reformat()}}
+{\footnotesize\ttfamily \label{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd} 
+int fs\+\_\+reformat (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Reformat the mounted file system. 
+
+Reformat a file system mounted at the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Directory path of the mount point. Must be the same as the path specified for the mount. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Reformat suceeded. \\
+\hline
+{\em -\/1} & Reformat failed. Error codes are indicated by errno. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00149}{149}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00151\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}(fs,\ device);}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}(fs,\ device,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00175\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}\index{filesystem@{filesystem}!fs\_strerror@{fs\_strerror}}
+\index{fs\_strerror@{fs\_strerror}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_strerror()}{fs\_strerror()}}
+{\footnotesize\ttfamily \label{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4} 
+char \texorpdfstring{$\ast$}{*} fs\+\_\+strerror (\begin{DoxyParamCaption}\item[{int}]{error}{}\end{DoxyParamCaption})}
+
+
+
+File system error message. 
+
+Convert the error code reported in the negative integer into a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & Negative error code returned by the file system. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the corresponding message string. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00698}{698}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00699\ \ \ \ \ \textcolor{keywordflow}{if}\ (errnum\ >\ 5000)\ \{}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SD\ blockdevice\ error}}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errnum)\ \{}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5001:}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}operation\ would\ block"{}};}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5002:}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}unsupported\ operation"{}};}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5003:}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}invalid\ parameter"{}};}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5004:}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}uninitialized"{}};}
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5005:}
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}device\ is\ missing\ or\ not\ connected"{}};}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5006:}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}write\ protected"{}};}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5007:}
+\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}unusable\ card"{}};}
+\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5008:}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}No\ response\ from\ device"{}};}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5009:}
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}CRC\ error"{}};}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5010:}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}Erase\ error:\ reset/sequence"{}};}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5011:}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}Write\ error:\ !SPI\_DATA\_ACCEPTED"{}};}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{char}\ *)str;}
+\DoxyCodeLine{00740\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (errnum\ >\ 4000)\ \{}
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ On-\/board\ flash\ blockdevice\ error}}
+\DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errnum)\ \{}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4001:}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}operation\ timeout"{}};}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4002:}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}safe\ execution\ is\ not\ possible"{}};}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4003:}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}method\ fails\ due\ to\ dynamic\ resource\ exhaustion"{}};}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{char}\ *)str;}
+\DoxyCodeLine{00757\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ strerror(errnum);}
+\DoxyCodeLine{00759\ \ \ \ \ \}}
+\DoxyCodeLine{00760\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}\index{filesystem@{filesystem}!fs\_unmount@{fs\_unmount}}
+\index{fs\_unmount@{fs\_unmount}!filesystem@{filesystem}}
+\doxysubsubsection{\texorpdfstring{fs\_unmount()}{fs\_unmount()}}
+{\footnotesize\ttfamily \label{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff} 
+int fs\+\_\+unmount (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Dismount a file system. 
+
+Dismount a file system.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Directory path of the mount point. Must be the same as the path specified for the mount. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Dismount succeeded. \\
+\hline
+{\em -\/1} & Dismount failed. Error codes are indicated by errno. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00125}{125}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00127\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}}\ =\ NULL;}
+\DoxyCodeLine{00142\ \ \ \ \ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}}\ =\ NULL;}
+\DoxyCodeLine{00143\ \ \ \ \ free((\textcolor{keywordtype}{char}\ *)mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{00147\ \}}
+
+\end{DoxyCode}
+\input{group__filesystem__fat}
+\input{group__filesystem__littlefs}

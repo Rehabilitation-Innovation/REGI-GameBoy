@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structfilesystem" xml:lang="en-US">
+<title>filesystem Struct Reference</title>
+<indexterm><primary>filesystem</primary></indexterm>
+<para>
+
+<para>file system abstract object </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;filesystem.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint8_t <link linkend="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225">type</link></para>
+</listitem>
+            <listitem><para>const char * <link linkend="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db">name</link></para>
+</listitem>
+            <listitem><para>void * <link linkend="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46">context</link></para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device, bool pending)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *oldpath, const char *newpath)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path, mode_t mode)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a396727009601ff7cd9505b724dc744f3">rmdir</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path, struct stat *st)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, const char *path, int flags)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</para>
+</listitem>
+            <listitem><para>ssize_t(* <link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, const void *buffer, size_t size)</para>
+</listitem>
+            <listitem><para>ssize_t(* <link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, void *buffer, size_t size)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a6e562ac4ed1ead2c1654c5c9312b2394">file_sync</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</para>
+</listitem>
+            <listitem><para>off_t(* <link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, off_t offset, int whence)</para>
+</listitem>
+            <listitem><para>off_t(* <link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</para>
+</listitem>
+            <listitem><para>off_t(* <link linkend="_structfilesystem_1ab8ed19dbc2c21c95682aec0418f09e72">file_size</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3">file_truncate</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, off_t length)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir, const char *path)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir)</para>
+</listitem>
+            <listitem><para>int(* <link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link> )(struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir, struct <link linkend="_structdirent">dirent</link> *ent)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>file system abstract object </para>
+
+
+
+<para>All file system objects implement <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> </para>
+<para>
+Definition at line <link linkend="_filesystem_8h_source_1l00066">66</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structfilesystem_1aac656c97403627be0598d9f5b45f4b46"/><section>
+    <title>context</title>
+<indexterm><primary>context</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>context</secondary></indexterm>
+<para><computeroutput>void* filesystem::context</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00069">69</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a537d71bf313451145ca593fe2a63d728"/><section>
+    <title>dir_close</title>
+<indexterm><primary>dir_close</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>dir_close</secondary></indexterm>
+<para><computeroutput>int(* filesystem::dir_close) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00092">92</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a"/><section>
+    <title>dir_open</title>
+<indexterm><primary>dir_open</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>dir_open</secondary></indexterm>
+<para><computeroutput>int(* filesystem::dir_open) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir, const char *path)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00091">91</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001"/><section>
+    <title>dir_read</title>
+<indexterm><primary>dir_read</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>dir_read</secondary></indexterm>
+<para><computeroutput>int(* filesystem::dir_read) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__dir__t">fs_dir_t</link> *dir, struct <link linkend="_structdirent">dirent</link> *ent)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00093">93</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d"/><section>
+    <title>file_close</title>
+<indexterm><primary>file_close</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_close</secondary></indexterm>
+<para><computeroutput>int(* filesystem::file_close) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00082">82</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7"/><section>
+    <title>file_open</title>
+<indexterm><primary>file_open</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_open</secondary></indexterm>
+<para><computeroutput>int(* filesystem::file_open) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, const char *path, int flags)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00081">81</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794"/><section>
+    <title>file_read</title>
+<indexterm><primary>file_read</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_read</secondary></indexterm>
+<para><computeroutput>ssize_t(* filesystem::file_read) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, void *buffer, size_t size)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00084">84</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00"/><section>
+    <title>file_seek</title>
+<indexterm><primary>file_seek</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_seek</secondary></indexterm>
+<para><computeroutput>off_t(* filesystem::file_seek) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, off_t offset, int whence)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00086">86</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1ab8ed19dbc2c21c95682aec0418f09e72"/><section>
+    <title>file_size</title>
+<indexterm><primary>file_size</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_size</secondary></indexterm>
+<para><computeroutput>off_t(* filesystem::file_size) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00088">88</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a6e562ac4ed1ead2c1654c5c9312b2394"/><section>
+    <title>file_sync</title>
+<indexterm><primary>file_sync</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_sync</secondary></indexterm>
+<para><computeroutput>int(* filesystem::file_sync) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00085">85</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271"/><section>
+    <title>file_tell</title>
+<indexterm><primary>file_tell</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_tell</secondary></indexterm>
+<para><computeroutput>off_t(* filesystem::file_tell) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00087">87</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3"/><section>
+    <title>file_truncate</title>
+<indexterm><primary>file_truncate</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_truncate</secondary></indexterm>
+<para><computeroutput>int(* filesystem::file_truncate) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, off_t length)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00089">89</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f"/><section>
+    <title>file_write</title>
+<indexterm><primary>file_write</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>file_write</secondary></indexterm>
+<para><computeroutput>ssize_t(* filesystem::file_write) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_structfs__file__t">fs_file_t</link> *file, const void *buffer, size_t size)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00083">83</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53"/><section>
+    <title>format</title>
+<indexterm><primary>format</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>format</secondary></indexterm>
+<para><computeroutput>int(* filesystem::format) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00073">73</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a9f586df0f698f0472b033f406de87de3"/><section>
+    <title>mkdir</title>
+<indexterm><primary>mkdir</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>mkdir</secondary></indexterm>
+<para><computeroutput>int(* filesystem::mkdir) (struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path, mode_t mode)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00077">77</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1ab137318416813c5413e1fb5f356e712c"/><section>
+    <title>mount</title>
+<indexterm><primary>mount</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>mount</secondary></indexterm>
+<para><computeroutput>int(* filesystem::mount) (struct <link linkend="_structfilesystem">filesystem</link> *fs, <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device, bool pending)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00071">71</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a72ec4af591f1c4d4538ea3baaf5fb8db"/><section>
+    <title>name</title>
+<indexterm><primary>name</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>const char* filesystem::name</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00068">68</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663"/><section>
+    <title>remove</title>
+<indexterm><primary>remove</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>remove</secondary></indexterm>
+<para><computeroutput>int(* filesystem::remove) (struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00075">75</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af"/><section>
+    <title>rename</title>
+<indexterm><primary>rename</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>rename</secondary></indexterm>
+<para><computeroutput>int(* filesystem::rename) (struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *oldpath, const char *newpath)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00076">76</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a396727009601ff7cd9505b724dc744f3"/><section>
+    <title>rmdir</title>
+<indexterm><primary>rmdir</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>rmdir</secondary></indexterm>
+<para><computeroutput>int(* filesystem::rmdir) (struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00078">78</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd"/><section>
+    <title>stat</title>
+<indexterm><primary>stat</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>stat</secondary></indexterm>
+<para><computeroutput>int(* filesystem::stat) (struct <link linkend="_structfilesystem">filesystem</link> *fs, const char *path, struct stat *st)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00079">79</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225"/><section>
+    <title>type</title>
+<indexterm><primary>type</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>type</secondary></indexterm>
+<para><computeroutput>uint8_t filesystem::type</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00067">67</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1"/><section>
+    <title>unmount</title>
+<indexterm><primary>unmount</primary><secondary>filesystem</secondary></indexterm>
+<indexterm><primary>filesystem</primary><secondary>unmount</secondary></indexterm>
+<para><computeroutput>int(* filesystem::unmount) (struct <link linkend="_structfilesystem">filesystem</link> *fs)</computeroutput></para><para>
+Definition at line <link linkend="_filesystem_8h_source_1l00072">72</link> of file <link linkend="_filesystem_8h_source">filesystem.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/include/filesystem/<link linkend="_filesystem_8h">filesystem.h</link></section>
+</section>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_flash_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/blockdevice/flash.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/blockdevice/flash.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;hardware/flash.h&gt;<?linebreak?>#include &lt;hardware/regs/addressmap.h&gt;<?linebreak?>#include &lt;pico/flash.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice__flash__config__t">blockdevice_flash_config_t</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_struct__safe__flash__update__param__t">_safe_flash_update_param_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_flash_8c_1a13b5ee4f9cca276550c7a9702f1a7434">FLASH_SAFE_EXECUTE_TIMEOUT</link>&#160;&#160;&#160;10 * 1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_flash_8c_1a74d8a383b2d6b1927a56219027d8b74a">FLASH_BLOCK_DEVICE_ERROR_TIMEOUT</link>&#160;&#160;&#160;-4001</para>
+</listitem>
+            <listitem><para>#define <link linkend="_flash_8c_1a7ab3fcc54522204dbf732217a7844d4c">FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED</link>&#160;&#160;&#160;-4002</para>
+</listitem>
+            <listitem><para>#define <link linkend="_flash_8c_1ae99d723a78efffd6dc630edf5221b724">FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES</link>&#160;&#160;&#160;-4003</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link> (uint32_t start, size_t length)</para>
+
+<para>Create Raspberry Pi Pico On-board Flash block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the flash memory device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_flash_8c_1ae99d723a78efffd6dc630edf5221b724"/><section>
+    <title>FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES</title>
+<indexterm><primary>FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES</primary><secondary>flash.c</secondary></indexterm>
+<indexterm><primary>flash.c</primary><secondary>FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES</secondary></indexterm>
+<para><computeroutput>#define FLASH_BLOCK_DEVICE_ERROR_INSUFFICIENT_RESOURCES&#160;&#160;&#160;-4003</computeroutput></para>
+<para>method fails due to dynamic resource exhaustion </para>
+<para>
+Definition at line <link linkend="_flash_8c_source_1l00019">19</link> of file <link linkend="_flash_8c_source">flash.c</link>.</para>
+</section>
+<anchor xml:id="_flash_8c_1a7ab3fcc54522204dbf732217a7844d4c"/><section>
+    <title>FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED</title>
+<indexterm><primary>FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED</primary><secondary>flash.c</secondary></indexterm>
+<indexterm><primary>flash.c</primary><secondary>FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED</secondary></indexterm>
+<para><computeroutput>#define FLASH_BLOCK_DEVICE_ERROR_NOT_PERMITTED&#160;&#160;&#160;-4002</computeroutput></para>
+<para>safe execution is not possible </para>
+<para>
+Definition at line <link linkend="_flash_8c_source_1l00018">18</link> of file <link linkend="_flash_8c_source">flash.c</link>.</para>
+</section>
+<anchor xml:id="_flash_8c_1a74d8a383b2d6b1927a56219027d8b74a"/><section>
+    <title>FLASH_BLOCK_DEVICE_ERROR_TIMEOUT</title>
+<indexterm><primary>FLASH_BLOCK_DEVICE_ERROR_TIMEOUT</primary><secondary>flash.c</secondary></indexterm>
+<indexterm><primary>flash.c</primary><secondary>FLASH_BLOCK_DEVICE_ERROR_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define FLASH_BLOCK_DEVICE_ERROR_TIMEOUT&#160;&#160;&#160;-4001</computeroutput></para>
+<para>operation timeout </para>
+<para>
+Definition at line <link linkend="_flash_8c_source_1l00017">17</link> of file <link linkend="_flash_8c_source">flash.c</link>.</para>
+</section>
+<anchor xml:id="_flash_8c_1a13b5ee4f9cca276550c7a9702f1a7434"/><section>
+    <title>FLASH_SAFE_EXECUTE_TIMEOUT</title>
+<indexterm><primary>FLASH_SAFE_EXECUTE_TIMEOUT</primary><secondary>flash.c</secondary></indexterm>
+<indexterm><primary>flash.c</primary><secondary>FLASH_SAFE_EXECUTE_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define FLASH_SAFE_EXECUTE_TIMEOUT&#160;&#160;&#160;10 * 1000</computeroutput></para><para>
+Definition at line <link linkend="_flash_8c_source_1l00015">15</link> of file <link linkend="_flash_8c_source">flash.c</link>.</para>
+</section>
+</section>
+</section>

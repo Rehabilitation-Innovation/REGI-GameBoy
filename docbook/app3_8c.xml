@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app3_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app3.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app3.c</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_app3_8c_1a7519abb60fe91f6aa1d17f64fbae123a">clust2sect</link> (<link linkend="_struct_f_a_t_f_s">FATFS</link> *fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_app3_8c_1a65611adf1626e5e08da77cd33a98dd8b">get_fat</link> (<link linkend="_struct_f_a_t_f_s">FATFS</link> *fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> <link linkend="_app3_8c_1abd4b6b071a8d728a88727051c12bc6d7">put_fat</link> (<link linkend="_struct_f_a_t_f_s">FATFS</link> *fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> val)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_app3_8c_1a93a18e2a0a10c54e2911d39b95cca157">allocate_contiguous_clusters</link> (<link linkend="_struct_f_i_l">FIL</link> *fp, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> len)</para>
+</listitem>
+            <listitem><para>int <link linkend="_app3_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_app3_8c_1a93a18e2a0a10c54e2911d39b95cca157"/><section>
+    <title>allocate_contiguous_clusters()</title>
+<indexterm><primary>allocate_contiguous_clusters</primary><secondary>app3.c</secondary></indexterm>
+<indexterm><primary>app3.c</primary><secondary>allocate_contiguous_clusters</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> allocate_contiguous_clusters (<link linkend="_struct_f_i_l">FIL</link> * fp, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> len)</computeroutput></para><para>
+Definition at line <link linkend="_app3_8c_source_1l00020">20</link> of file <link linkend="_app3_8c_source">app3.c</link>.</para>
+<programlisting linenumbering="unnumbered">00024 {
+00025 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;csz,&#32;tcl,&#32;ncl,&#32;ccl,&#32;cl;
+00026 
+00027 
+00028 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(fp,&#32;0)&#32;||&#32;!len)&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Check&#32;if&#32;the&#32;given&#32;parameters&#32;are&#32;valid&#32;*/</emphasis>
+00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00030 &#32;&#32;&#32;&#32;csz&#32;=&#32;512UL&#32;*&#32;fp-&gt;fs-&gt;csize;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Cluster&#32;size&#32;in&#32;unit&#32;of&#32;byte&#32;(assuming&#32;512&#32;bytes/sector)&#32;*/</emphasis>
+00031 &#32;&#32;&#32;&#32;tcl&#32;=&#32;(len&#32;+&#32;csz&#32;-&#32;1)&#32;/&#32;csz;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Total&#32;number&#32;of&#32;clusters&#32;required&#32;*/</emphasis>
+00032 &#32;&#32;&#32;&#32;len&#32;=&#32;tcl&#32;*&#32;csz;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Round-up&#32;file&#32;size&#32;to&#32;the&#32;cluster&#32;boundary&#32;*/</emphasis>
+00033 
+00034 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Check&#32;if&#32;the&#32;existing&#32;cluster&#32;chain&#32;is&#32;contiguous&#32;*/</emphasis>
+00035 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(len&#32;==&#32;fp-&gt;fsize)&#32;{
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ncl&#32;=&#32;0;&#32;ccl&#32;=&#32;fp-&gt;sclust;
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cl&#32;=&#32;<link linkend="_app3_8c_1a65611adf1626e5e08da77cd33a98dd8b">get_fat</link>(fp-&gt;fs,&#32;ccl);&#32;&#32;<emphasis role="comment">/*&#32;Get&#32;the&#32;cluster&#32;status&#32;*/</emphasis>
+00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cl&#32;+&#32;1&#32;&lt;&#32;3)&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Hard&#32;error?&#32;*/</emphasis>
+00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cl&#32;!=&#32;ccl&#32;+&#32;1&#32;&amp;&amp;&#32;cl&#32;&lt;&#32;fp-&gt;fs-&gt;n_fatent)&#32;<emphasis role="keywordflow">break</emphasis>;&#32;&#32;<emphasis role="comment">/*&#32;Not&#32;contiguous?&#32;*/</emphasis>
+00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ccl&#32;=&#32;cl;
+00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(++ncl&#32;&lt;&#32;tcl);
+00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(ncl&#32;==&#32;tcl)&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Is&#32;the&#32;file&#32;contiguous?&#32;*/</emphasis>
+00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_app3_8c_1a7519abb60fe91f6aa1d17f64fbae123a">clust2sect</link>(fp-&gt;fs,&#32;fp-&gt;sclust);&#32;&#32;<emphasis role="comment">/*&#32;File&#32;is&#32;contiguous.&#32;Return&#32;the&#32;start&#32;sector&#32;*/</emphasis>
+00045 &#32;&#32;&#32;&#32;}
+00046 
+00047 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;File&#32;is&#32;not&#32;contiguous&#32;*/</emphasis>
+00048 <emphasis role="preprocessor">#if&#32;_FS_READONLY&#x240D;</emphasis>
+00049 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Exit&#32;if&#32;in&#32;read-only&#32;cfg.&#32;*/</emphasis>
+00050 <emphasis role="preprocessor">#else&#x240D;</emphasis>
+00051 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!(fp-&gt;<link linkend="_struct_f_i_l_1ac409508881f5a16f2998ae675072b376">flag</link>&#32;&amp;&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>))&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Exit&#32;if&#32;the&#32;file&#32;object&#32;is&#32;for&#32;read-only&#32;*/</emphasis>
+00052 
+00053 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_ff_8c_1a691a27b40c348f7c84b42e911636f38a">f_truncate</link>(fp))&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Remove&#32;the&#32;non-contiguous&#32;chain&#32;*/</emphasis>
+00054 
+00055 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Find&#32;a&#32;free&#32;contiguous&#32;area&#32;*/</emphasis>
+00056 &#32;&#32;&#32;&#32;ccl&#32;=&#32;cl&#32;=&#32;2;&#32;ncl&#32;=&#32;0;
+00057 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{
+00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cl&#32;&gt;=&#32;fp-&gt;fs-&gt;n_fatent)&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;<emphasis role="comment">/*&#32;No&#32;contiguous&#32;area&#32;is&#32;found.&#32;*/</emphasis>
+00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_app3_8c_1a65611adf1626e5e08da77cd33a98dd8b">get_fat</link>(fp-&gt;fs,&#32;cl))&#32;{&#32;&#32;<emphasis role="comment">/*&#32;Encounterd&#32;a&#32;cluster&#32;in&#32;use&#32;*/</emphasis>
+00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Skip&#32;the&#32;block&#32;of&#32;used&#32;clusters&#32;*/</emphasis>
+00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cl++;
+00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cl&#32;&gt;=&#32;fp-&gt;fs-&gt;n_fatent)&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;&#32;&#32;&#32;<emphasis role="comment">/*&#32;No&#32;contiguous&#32;area&#32;is&#32;found.&#32;*/</emphasis>
+00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<link linkend="_app3_8c_1a65611adf1626e5e08da77cd33a98dd8b">get_fat</link>(fp-&gt;fs,&#32;cl));
+00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ccl&#32;=&#32;cl;&#32;ncl&#32;=&#32;0;
+00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cl++;&#32;ncl++;
+00067 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(ncl&#32;&lt;&#32;tcl);
+00068 
+00069 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Create&#32;a&#32;contiguous&#32;cluster&#32;chain&#32;*/</emphasis>
+00070 &#32;&#32;&#32;&#32;fp-&gt;fs-&gt;last_clust&#32;=&#32;ccl&#32;-&#32;1;
+00071 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(fp,&#32;len))&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00072 
+00073 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_app3_8c_1a7519abb60fe91f6aa1d17f64fbae123a">clust2sect</link>(fp-&gt;fs,&#32;fp-&gt;sclust);&#32;&#32;<emphasis role="comment">/*&#32;Return&#32;file&#32;start&#32;sector&#32;*/</emphasis>
+00074 <emphasis role="preprocessor">#endif&#x240D;</emphasis>
+00075 }
+</programlisting></section>
+<anchor xml:id="_app3_8c_1a7519abb60fe91f6aa1d17f64fbae123a"/><section>
+    <title>clust2sect()</title>
+<indexterm><primary>clust2sect</primary><secondary>app3.c</secondary></indexterm>
+<indexterm><primary>app3.c</primary><secondary>clust2sect</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clust2sect (<link linkend="_struct_f_a_t_f_s">FATFS</link> * fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst)</computeroutput></para></section>
+<anchor xml:id="_app3_8c_1a65611adf1626e5e08da77cd33a98dd8b"/><section>
+    <title>get_fat()</title>
+<indexterm><primary>get_fat</primary><secondary>app3.c</secondary></indexterm>
+<indexterm><primary>app3.c</primary><secondary>get_fat</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> get_fat (<link linkend="_struct_f_a_t_f_s">FATFS</link> * fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst)</computeroutput></para></section>
+<anchor xml:id="_app3_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>app3.c</secondary></indexterm>
+<indexterm><primary>app3.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_app3_8c_source_1l00078">78</link> of file <link linkend="_app3_8c_source">app3.c</link>.</para>
+<programlisting linenumbering="unnumbered">00079 {
+00080 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+00081 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>&#32;dr;
+00082 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s">FATFS</link>&#32;fs;
+00083 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l">FIL</link>&#32;fil;
+00084 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;org;
+00085 
+00086 
+00087 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Open&#32;or&#32;create&#32;a&#32;file&#32;to&#32;write&#32;*/</emphasis>
+00088 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(&amp;fs,&#32;<emphasis role="stringliteral">&quot;&quot;</emphasis>,&#32;0);
+00089 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1aefdef7126128d99d0b3bd82c28e54d80">f_open</link>(&amp;fil,&#32;<emphasis role="stringliteral">&quot;fastrec.log&quot;</emphasis>,&#32;<link linkend="_ff_8h_1a1f4f3530ff03abbd979b072536e72290">FA_READ</link>&#32;|&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>&#32;|&#32;<link linkend="_ff_8h_1a17b01553029920ac0468912b4bcb16c7">FA_OPEN_ALWAYS</link>);
+00090 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr)&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00091 
+00092 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Check&#32;if&#32;the&#32;file&#32;is&#32;256MB&#32;in&#32;size&#32;and&#32;occupies&#32;a&#32;contiguous&#32;area.&#x240D;</emphasis>
+00093 <emphasis role="comment">&#32;&#32;&#32;&#32;/&#32;&#32;If&#32;not,&#32;a&#32;contiguous&#32;area&#32;will&#32;be&#32;re-allocated&#32;to&#32;the&#32;file.&#32;*/</emphasis>
+00094 &#32;&#32;&#32;&#32;org&#32;=&#32;<link linkend="_app3_8c_1a93a18e2a0a10c54e2911d39b95cca157">allocate_contiguous_clusters</link>(&amp;fil,&#32;0x10000000);
+00095 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!org)&#32;{
+00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Function&#32;failed&#32;due&#32;to&#32;any&#32;error&#32;or&#32;insufficient&#32;contiguous&#32;area.\n&quot;</emphasis>);
+00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(&amp;fil);
+00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+00099 &#32;&#32;&#32;&#32;}
+00100 
+00101 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Now&#32;you&#32;can&#32;read/write&#32;the&#32;file&#32;without&#32;filesystem&#32;layer.&#32;*/</emphasis>
+00102 &#32;&#32;&#32;&#32;...
+00103 &#32;&#32;&#32;&#32;dr&#32;=&#32;<link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link>(fil.fs-&gt;drv,&#32;Buff,&#32;org,&#32;1024);&#32;&#32;&#32;<emphasis role="comment">/*&#32;Write&#32;512KiB&#32;from&#32;top&#32;of&#32;the&#32;file&#32;*/</emphasis>
+00104 &#32;&#32;&#32;&#32;...
+00105 
+00106 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(&amp;fil);
+00107 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00108 }
+</programlisting></section>
+<anchor xml:id="_app3_8c_1abd4b6b071a8d728a88727051c12bc6d7"/><section>
+    <title>put_fat()</title>
+<indexterm><primary>put_fat</primary><secondary>app3.c</secondary></indexterm>
+<indexterm><primary>app3.c</primary><secondary>put_fat</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link> put_fat (<link linkend="_struct_f_a_t_f_s">FATFS</link> * fs, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> clst, <link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> val)</computeroutput></para></section>
+</section>
+</section>

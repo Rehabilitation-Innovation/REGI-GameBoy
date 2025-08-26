@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_sensor__stubs_8cpp_source" xml:lang="en-US">
+<title>sensor_stubs.cpp</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/sensor_stubs.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_sensor__stubs_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h">sensor.pio.h</link>&quot;</emphasis>
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00002"/>00002 
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00003"/><link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_1abb2fe088e1320015022ea8a3ee4ff969">00003</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_sensor__stubs_8cpp_1abb2fe088e1320015022ea8a3ee4ff969">distance_sensor_program_init</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;offset,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;pins,&#32;<link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link>&#32;isr)&#32;{}
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00004"/>00004 
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00005"/>00005 <emphasis role="comment">//&#32;Using&#32;arbitrary&#32;values&#32;to&#32;simulate&#32;a&#32;test&#32;program&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00006"/>00006 <emphasis role="comment">//&#32;for&#32;testing</emphasis>
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00007"/><link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_1af4ad3f5ae38c4079373b4a387d68612c">00007</link> <link linkend="_structpio__program__t">pio_program_t</link>&#32;distance_sensor_program&#32;=&#32;{
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00008"/>00008 &#32;&#32;&#32;&#32;(uint16_t*)0xDEAD,&#32;0x10,&#32;0x10
+<anchor xml:id="_sensor__stubs_8cpp_source_1l00009"/>00009 };
+</programlisting></section>

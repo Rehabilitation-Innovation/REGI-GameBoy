@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_sd_8h_source" xml:lang="en-US">
+<title>sd.h</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/blockdevice/sd.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_sd_8h_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_sd_8h_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_sd_8h_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_sd_8h_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_sd_8h_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_sd_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_sd_8h_source_1l00007"/>00007 
+<anchor xml:id="_sd_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_sd_8h_source_1l00013"/>00013 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_sd_8h_source_1l00014"/>00014 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_sd_8h_source_1l00015"/>00015 
+<anchor xml:id="_sd_8h_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&lt;stdint.h&gt;</emphasis>
+<anchor xml:id="_sd_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&lt;hardware/spi.h&gt;</emphasis>
+<anchor xml:id="_sd_8h_source_1l00018"/>00018 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_blockdevice_8h">blockdevice/blockdevice.h</link>&quot;</emphasis>
+<anchor xml:id="_sd_8h_source_1l00019"/>00019 
+<anchor xml:id="_sd_8h_source_1l00020"/>00020 
+<anchor xml:id="_sd_8h_source_1l00021"/><link linkend="_sd_8h_1a350d0200109d5c6deb52568dddf82d82">00021</link> <emphasis role="preprocessor">#define&#32;CONF_SD_INIT_FREQUENCY&#32;&#32;&#32;&#32;(10&#32;*&#32;1000&#32;*&#32;1000)</emphasis>
+<anchor xml:id="_sd_8h_source_1l00022"/><link linkend="_sd_8h_1a731016452cda5737bf6c2d2cdea4c1fe">00022</link> <emphasis role="preprocessor">#define&#32;CONF_SD_TRX_FREQUENCY&#32;&#32;&#32;&#32;&#32;(24&#32;*&#32;MHZ)</emphasis>
+<anchor xml:id="_sd_8h_source_1l00023"/>00023 
+<anchor xml:id="_sd_8h_source_1l00039"/>00039 <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*<link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link>(spi_inst_t&#32;*spi_inst,
+<anchor xml:id="_sd_8h_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;mosi,
+<anchor xml:id="_sd_8h_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;miso,
+<anchor xml:id="_sd_8h_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;sckl,
+<anchor xml:id="_sd_8h_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint8_t&#32;cs,
+<anchor xml:id="_sd_8h_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;uint32_t&#32;hz,
+<anchor xml:id="_sd_8h_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;enable_crc);
+<anchor xml:id="_sd_8h_source_1l00046"/>00046 
+<anchor xml:id="_sd_8h_source_1l00052"/>00052 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link>(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device);
+<anchor xml:id="_sd_8h_source_1l00053"/>00053 
+<anchor xml:id="_sd_8h_source_1l00054"/>00054 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_sd_8h_source_1l00055"/>00055 }
+<anchor xml:id="_sd_8h_source_1l00056"/>00056 <emphasis role="preprocessor">#endif</emphasis>
+</programlisting></section>

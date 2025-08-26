@@ -1,0 +1,59 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/fs\+\_\+inits/fs\+\_\+init\+\_\+loopback.c File Reference}
+\hypertarget{fs__init__loopback_8c}{}\label{fs__init__loopback_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/fs\_init\_loopback.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/fs\_inits/fs\_init\_loopback.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/flash.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/loopback.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\+\_\+\+LENGTH\+\_\+\+ALL}}~0
+\item 
+\#define \mbox{\hyperlink{fs__init__loopback_8c_ad75b221c9c4393a019b98aeecb27d6db}{LOOPBACK\+\_\+\+FILE\+\_\+\+SIZE}}~(640 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{fs__init__loopback_8c_ab8c390e6f53017179ae00255cd27fd11}{LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE}}~512
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Enable predefined file systems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{fs__init__loopback_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}\index{fs\_init\_loopback.c@{fs\_init\_loopback.c}!FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}}
+\index{FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}!fs\_init\_loopback.c@{fs\_init\_loopback.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_LENGTH\_ALL}{FLASH\_LENGTH\_ALL}}
+{\footnotesize\ttfamily \label{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97} 
+\#define FLASH\+\_\+\+LENGTH\+\_\+\+ALL~0}
+
+
+
+Definition at line \mbox{\hyperlink{fs__init__loopback_8c_source_l00015}{15}} of file \mbox{\hyperlink{fs__init__loopback_8c_source}{fs\+\_\+init\+\_\+loopback.\+c}}.
+
+\Hypertarget{fs__init__loopback_8c_ab8c390e6f53017179ae00255cd27fd11}\index{fs\_init\_loopback.c@{fs\_init\_loopback.c}!LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}}
+\index{LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}!fs\_init\_loopback.c@{fs\_init\_loopback.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_BLOCK\_SIZE}{LOOPBACK\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \label{fs__init__loopback_8c_ab8c390e6f53017179ae00255cd27fd11} 
+\#define LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE~512}
+
+
+
+Definition at line \mbox{\hyperlink{fs__init__loopback_8c_source_l00017}{17}} of file \mbox{\hyperlink{fs__init__loopback_8c_source}{fs\+\_\+init\+\_\+loopback.\+c}}.
+
+\Hypertarget{fs__init__loopback_8c_ad75b221c9c4393a019b98aeecb27d6db}\index{fs\_init\_loopback.c@{fs\_init\_loopback.c}!LOOPBACK\_FILE\_SIZE@{LOOPBACK\_FILE\_SIZE}}
+\index{LOOPBACK\_FILE\_SIZE@{LOOPBACK\_FILE\_SIZE}!fs\_init\_loopback.c@{fs\_init\_loopback.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_FILE\_SIZE}{LOOPBACK\_FILE\_SIZE}}
+{\footnotesize\ttfamily \label{fs__init__loopback_8c_ad75b221c9c4393a019b98aeecb27d6db} 
+\#define LOOPBACK\+\_\+\+FILE\+\_\+\+SIZE~(640 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{fs__init__loopback_8c_source_l00016}{16}} of file \mbox{\hyperlink{fs__init__loopback_8c_source}{fs\+\_\+init\+\_\+loopback.\+c}}.
+

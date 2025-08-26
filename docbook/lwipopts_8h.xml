@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_lwipopts_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/lwipopts.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/lwipopts.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdint.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a4afbdca581a58d57bc7a81118a95327e">MEMP_NUM_SYS_TIMEOUT</link>&#160;&#160;&#160;LWIP_NUM_SYS_TIMEOUT_INTERNAL + 8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a7bf86de1feb1fddf2bdd51fc932efc4f">SNTP_SET_SYSTEM_TIME</link>&#160;&#160;&#160;<link linkend="_lwipopts_8h_1a46f1c418d0f05268d7a0ebc8ce25d07c">set_system_time</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aef477c145ae404d77188b26b79b6996f">SNTP_SERVER_DNS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a26dee0e5d9c51b1dda0adad29c770a77">LWIP_ALTCP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ab03ba0306cf0a99ccce3d100142f60c8">LWIP_ALTCP_TLS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ac8dbfe10a4a9a64c1e2c62ea97e48639">LWIP_ALTCP_TLS_MBEDTLS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ae00ba99de94a5bf84d832be8976df59b">NO_SYS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a1cb62ce61ac39d7d6728ae5d3d3b927f">LWIP_SOCKET</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a4ef345cc270912bd2230b1c5ec51dfc8">MEM_LIBC_MALLOC</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a97343214666ee6dcb18c0bd77b441ea7">MEM_ALIGNMENT</link>&#160;&#160;&#160;4</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a2dcf8c45f945dd0c4301a94700f2112c">MEM_SIZE</link>&#160;&#160;&#160;4000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aa35fb3a1a76661e3ffb9722a57092de3">MEMP_NUM_TCP_SEG</link>&#160;&#160;&#160;32</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a087b00ea20a7edebcad33a1a1353a5d7">MEMP_NUM_ARP_QUEUE</link>&#160;&#160;&#160;10</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a50eaadc4cad0716410332691e382c38a">PBUF_POOL_SIZE</link>&#160;&#160;&#160;24</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a9609a014bba4638cc191d6a8f9556c87">LWIP_ARP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a30e02dc217cc2995d0fd241d510c904f">LWIP_ETHERNET</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ae4d45345c3ab8e5a355fda1d8d24fca6">LWIP_ICMP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aca452be5cb05d9666f8f57e582c39221">LWIP_RAW</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a7f535a6efb5cdf86c3210e35ece1d6a7">TCP_WND</link>&#160;&#160;&#160;(8 * <link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>&#160;&#160;&#160;1460</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a871d111968d8c6c7880ff36b93c5c4dd">TCP_SND_BUF</link>&#160;&#160;&#160;(8 * <link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a9beaa47832ead4180981bfbf71074904">TCP_SND_QUEUELEN</link>&#160;&#160;&#160;((4 * (<link linkend="_lwipopts_8h_1a871d111968d8c6c7880ff36b93c5c4dd">TCP_SND_BUF</link>) + (<link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link> - 1)) / (<link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>))</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1affb97d89516c38d3fcb9e44e5d707f36">LWIP_NETIF_STATUS_CALLBACK</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a1a446932dd927cc4136ba654c13bb97b">LWIP_NETIF_LINK_CALLBACK</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aa714dbfa66822ec4c6111bdb8cf753c1">LWIP_NETIF_HOSTNAME</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a478041b8544461258f6961bf0f3c1a77">LWIP_NETCONN</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a61ec04a08c4fde690d10819e582656a7">MEM_STATS</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a0173549afa76553583e5a02c6a791218">SYS_STATS</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ab8c2430be0e567a7499a95454aaa6041">MEMP_STATS</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ae58b452782d0327ae728192686c5a84a">LINK_STATS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aa0865f14286191bd72fc1a9d9cbe25d4">LWIP_CHKSUM_ALGORITHM</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a8a6ec62dc121064ac591b1fd8567bee9">LWIP_DHCP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a429e811a80ebb5157e14a854870c4410">LWIP_IPV4</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1aa4ed98deb97b77c633cb8870f34c71e9">LWIP_TCP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ab6030e96e72df649d2650fd32d7a67b3">LWIP_UDP</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a98710dd81446b7cb2daac736bae6f646">LWIP_DNS</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1a8b9369ab260f032686a81c77c5b4db77">LWIP_TCP_KEEPALIVE</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1abafb9f64a80e51b56c0abbcfc1f7e04e">LWIP_NETIF_TX_SINGLE_PBUF</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1ab2d91de7b2fce879b0a213682e1b0b69">DHCP_DOES_ARP_CHECK</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_lwipopts_8h_1add0c82329fccb78342e3eef98233aa55">LWIP_DHCP_DOES_ACD_CHECK</link>&#160;&#160;&#160;0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_lwipopts_8h_1a46f1c418d0f05268d7a0ebc8ce25d07c">set_system_time</link> (uint32_t sec)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_lwipopts_8h_1ab2d91de7b2fce879b0a213682e1b0b69"/><section>
+    <title>DHCP_DOES_ARP_CHECK</title>
+<indexterm><primary>DHCP_DOES_ARP_CHECK</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>DHCP_DOES_ARP_CHECK</secondary></indexterm>
+<para><computeroutput>#define DHCP_DOES_ARP_CHECK&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00046">46</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ae58b452782d0327ae728192686c5a84a"/><section>
+    <title>LINK_STATS</title>
+<indexterm><primary>LINK_STATS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LINK_STATS</secondary></indexterm>
+<para><computeroutput>#define LINK_STATS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00037">37</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a26dee0e5d9c51b1dda0adad29c770a77"/><section>
+    <title>LWIP_ALTCP</title>
+<indexterm><primary>LWIP_ALTCP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ALTCP</secondary></indexterm>
+<para><computeroutput>#define LWIP_ALTCP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00010">10</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ab03ba0306cf0a99ccce3d100142f60c8"/><section>
+    <title>LWIP_ALTCP_TLS</title>
+<indexterm><primary>LWIP_ALTCP_TLS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ALTCP_TLS</secondary></indexterm>
+<para><computeroutput>#define LWIP_ALTCP_TLS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00011">11</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ac8dbfe10a4a9a64c1e2c62ea97e48639"/><section>
+    <title>LWIP_ALTCP_TLS_MBEDTLS</title>
+<indexterm><primary>LWIP_ALTCP_TLS_MBEDTLS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ALTCP_TLS_MBEDTLS</secondary></indexterm>
+<para><computeroutput>#define LWIP_ALTCP_TLS_MBEDTLS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00012">12</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a9609a014bba4638cc191d6a8f9556c87"/><section>
+    <title>LWIP_ARP</title>
+<indexterm><primary>LWIP_ARP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ARP</secondary></indexterm>
+<para><computeroutput>#define LWIP_ARP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00022">22</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aa0865f14286191bd72fc1a9d9cbe25d4"/><section>
+    <title>LWIP_CHKSUM_ALGORITHM</title>
+<indexterm><primary>LWIP_CHKSUM_ALGORITHM</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_CHKSUM_ALGORITHM</secondary></indexterm>
+<para><computeroutput>#define LWIP_CHKSUM_ALGORITHM&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00038">38</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a8a6ec62dc121064ac591b1fd8567bee9"/><section>
+    <title>LWIP_DHCP</title>
+<indexterm><primary>LWIP_DHCP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_DHCP</secondary></indexterm>
+<para><computeroutput>#define LWIP_DHCP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00039">39</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1add0c82329fccb78342e3eef98233aa55"/><section>
+    <title>LWIP_DHCP_DOES_ACD_CHECK</title>
+<indexterm><primary>LWIP_DHCP_DOES_ACD_CHECK</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_DHCP_DOES_ACD_CHECK</secondary></indexterm>
+<para><computeroutput>#define LWIP_DHCP_DOES_ACD_CHECK&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00047">47</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a98710dd81446b7cb2daac736bae6f646"/><section>
+    <title>LWIP_DNS</title>
+<indexterm><primary>LWIP_DNS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_DNS</secondary></indexterm>
+<para><computeroutput>#define LWIP_DNS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00043">43</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a30e02dc217cc2995d0fd241d510c904f"/><section>
+    <title>LWIP_ETHERNET</title>
+<indexterm><primary>LWIP_ETHERNET</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ETHERNET</secondary></indexterm>
+<para><computeroutput>#define LWIP_ETHERNET&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00023">23</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ae4d45345c3ab8e5a355fda1d8d24fca6"/><section>
+    <title>LWIP_ICMP</title>
+<indexterm><primary>LWIP_ICMP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_ICMP</secondary></indexterm>
+<para><computeroutput>#define LWIP_ICMP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00024">24</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a429e811a80ebb5157e14a854870c4410"/><section>
+    <title>LWIP_IPV4</title>
+<indexterm><primary>LWIP_IPV4</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_IPV4</secondary></indexterm>
+<para><computeroutput>#define LWIP_IPV4&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00040">40</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a478041b8544461258f6961bf0f3c1a77"/><section>
+    <title>LWIP_NETCONN</title>
+<indexterm><primary>LWIP_NETCONN</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_NETCONN</secondary></indexterm>
+<para><computeroutput>#define LWIP_NETCONN&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00033">33</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aa714dbfa66822ec4c6111bdb8cf753c1"/><section>
+    <title>LWIP_NETIF_HOSTNAME</title>
+<indexterm><primary>LWIP_NETIF_HOSTNAME</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_NETIF_HOSTNAME</secondary></indexterm>
+<para><computeroutput>#define LWIP_NETIF_HOSTNAME&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00032">32</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a1a446932dd927cc4136ba654c13bb97b"/><section>
+    <title>LWIP_NETIF_LINK_CALLBACK</title>
+<indexterm><primary>LWIP_NETIF_LINK_CALLBACK</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_NETIF_LINK_CALLBACK</secondary></indexterm>
+<para><computeroutput>#define LWIP_NETIF_LINK_CALLBACK&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00031">31</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1affb97d89516c38d3fcb9e44e5d707f36"/><section>
+    <title>LWIP_NETIF_STATUS_CALLBACK</title>
+<indexterm><primary>LWIP_NETIF_STATUS_CALLBACK</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_NETIF_STATUS_CALLBACK</secondary></indexterm>
+<para><computeroutput>#define LWIP_NETIF_STATUS_CALLBACK&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00030">30</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1abafb9f64a80e51b56c0abbcfc1f7e04e"/><section>
+    <title>LWIP_NETIF_TX_SINGLE_PBUF</title>
+<indexterm><primary>LWIP_NETIF_TX_SINGLE_PBUF</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_NETIF_TX_SINGLE_PBUF</secondary></indexterm>
+<para><computeroutput>#define LWIP_NETIF_TX_SINGLE_PBUF&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00045">45</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aca452be5cb05d9666f8f57e582c39221"/><section>
+    <title>LWIP_RAW</title>
+<indexterm><primary>LWIP_RAW</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_RAW</secondary></indexterm>
+<para><computeroutput>#define LWIP_RAW&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00025">25</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a1cb62ce61ac39d7d6728ae5d3d3b927f"/><section>
+    <title>LWIP_SOCKET</title>
+<indexterm><primary>LWIP_SOCKET</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_SOCKET</secondary></indexterm>
+<para><computeroutput>#define LWIP_SOCKET&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00015">15</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aa4ed98deb97b77c633cb8870f34c71e9"/><section>
+    <title>LWIP_TCP</title>
+<indexterm><primary>LWIP_TCP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_TCP</secondary></indexterm>
+<para><computeroutput>#define LWIP_TCP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00041">41</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a8b9369ab260f032686a81c77c5b4db77"/><section>
+    <title>LWIP_TCP_KEEPALIVE</title>
+<indexterm><primary>LWIP_TCP_KEEPALIVE</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_TCP_KEEPALIVE</secondary></indexterm>
+<para><computeroutput>#define LWIP_TCP_KEEPALIVE&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00044">44</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ab6030e96e72df649d2650fd32d7a67b3"/><section>
+    <title>LWIP_UDP</title>
+<indexterm><primary>LWIP_UDP</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>LWIP_UDP</secondary></indexterm>
+<para><computeroutput>#define LWIP_UDP&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00042">42</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a97343214666ee6dcb18c0bd77b441ea7"/><section>
+    <title>MEM_ALIGNMENT</title>
+<indexterm><primary>MEM_ALIGNMENT</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEM_ALIGNMENT</secondary></indexterm>
+<para><computeroutput>#define MEM_ALIGNMENT&#160;&#160;&#160;4</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00017">17</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a4ef345cc270912bd2230b1c5ec51dfc8"/><section>
+    <title>MEM_LIBC_MALLOC</title>
+<indexterm><primary>MEM_LIBC_MALLOC</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEM_LIBC_MALLOC</secondary></indexterm>
+<para><computeroutput>#define MEM_LIBC_MALLOC&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00016">16</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a2dcf8c45f945dd0c4301a94700f2112c"/><section>
+    <title>MEM_SIZE</title>
+<indexterm><primary>MEM_SIZE</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEM_SIZE</secondary></indexterm>
+<para><computeroutput>#define MEM_SIZE&#160;&#160;&#160;4000</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00018">18</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a61ec04a08c4fde690d10819e582656a7"/><section>
+    <title>MEM_STATS</title>
+<indexterm><primary>MEM_STATS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEM_STATS</secondary></indexterm>
+<para><computeroutput>#define MEM_STATS&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00034">34</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a087b00ea20a7edebcad33a1a1353a5d7"/><section>
+    <title>MEMP_NUM_ARP_QUEUE</title>
+<indexterm><primary>MEMP_NUM_ARP_QUEUE</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEMP_NUM_ARP_QUEUE</secondary></indexterm>
+<para><computeroutput>#define MEMP_NUM_ARP_QUEUE&#160;&#160;&#160;10</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00020">20</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a4afbdca581a58d57bc7a81118a95327e"/><section>
+    <title>MEMP_NUM_SYS_TIMEOUT</title>
+<indexterm><primary>MEMP_NUM_SYS_TIMEOUT</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEMP_NUM_SYS_TIMEOUT</secondary></indexterm>
+<para><computeroutput>#define MEMP_NUM_SYS_TIMEOUT&#160;&#160;&#160;LWIP_NUM_SYS_TIMEOUT_INTERNAL + 8</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00007">7</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aa35fb3a1a76661e3ffb9722a57092de3"/><section>
+    <title>MEMP_NUM_TCP_SEG</title>
+<indexterm><primary>MEMP_NUM_TCP_SEG</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEMP_NUM_TCP_SEG</secondary></indexterm>
+<para><computeroutput>#define MEMP_NUM_TCP_SEG&#160;&#160;&#160;32</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00019">19</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ab8c2430be0e567a7499a95454aaa6041"/><section>
+    <title>MEMP_STATS</title>
+<indexterm><primary>MEMP_STATS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>MEMP_STATS</secondary></indexterm>
+<para><computeroutput>#define MEMP_STATS&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00036">36</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1ae00ba99de94a5bf84d832be8976df59b"/><section>
+    <title>NO_SYS</title>
+<indexterm><primary>NO_SYS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>NO_SYS</secondary></indexterm>
+<para><computeroutput>#define NO_SYS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00014">14</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a50eaadc4cad0716410332691e382c38a"/><section>
+    <title>PBUF_POOL_SIZE</title>
+<indexterm><primary>PBUF_POOL_SIZE</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>PBUF_POOL_SIZE</secondary></indexterm>
+<para><computeroutput>#define PBUF_POOL_SIZE&#160;&#160;&#160;24</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00021">21</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1aef477c145ae404d77188b26b79b6996f"/><section>
+    <title>SNTP_SERVER_DNS</title>
+<indexterm><primary>SNTP_SERVER_DNS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>SNTP_SERVER_DNS</secondary></indexterm>
+<para><computeroutput>#define SNTP_SERVER_DNS&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00009">9</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a7bf86de1feb1fddf2bdd51fc932efc4f"/><section>
+    <title>SNTP_SET_SYSTEM_TIME</title>
+<indexterm><primary>SNTP_SET_SYSTEM_TIME</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>SNTP_SET_SYSTEM_TIME</secondary></indexterm>
+<para><computeroutput>#define SNTP_SET_SYSTEM_TIME&#160;&#160;&#160;<link linkend="_lwipopts_8h_1a46f1c418d0f05268d7a0ebc8ce25d07c">set_system_time</link></computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00008">8</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a0173549afa76553583e5a02c6a791218"/><section>
+    <title>SYS_STATS</title>
+<indexterm><primary>SYS_STATS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>SYS_STATS</secondary></indexterm>
+<para><computeroutput>#define SYS_STATS&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00035">35</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b"/><section>
+    <title>TCP_MSS</title>
+<indexterm><primary>TCP_MSS</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>TCP_MSS</secondary></indexterm>
+<para><computeroutput>#define TCP_MSS&#160;&#160;&#160;1460</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00027">27</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a871d111968d8c6c7880ff36b93c5c4dd"/><section>
+    <title>TCP_SND_BUF</title>
+<indexterm><primary>TCP_SND_BUF</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>TCP_SND_BUF</secondary></indexterm>
+<para><computeroutput>#define TCP_SND_BUF&#160;&#160;&#160;(8 * <link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>)</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00028">28</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a9beaa47832ead4180981bfbf71074904"/><section>
+    <title>TCP_SND_QUEUELEN</title>
+<indexterm><primary>TCP_SND_QUEUELEN</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>TCP_SND_QUEUELEN</secondary></indexterm>
+<para><computeroutput>#define TCP_SND_QUEUELEN&#160;&#160;&#160;((4 * (<link linkend="_lwipopts_8h_1a871d111968d8c6c7880ff36b93c5c4dd">TCP_SND_BUF</link>) + (<link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link> - 1)) / (<link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>))</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00029">29</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+<anchor xml:id="_lwipopts_8h_1a7f535a6efb5cdf86c3210e35ece1d6a7"/><section>
+    <title>TCP_WND</title>
+<indexterm><primary>TCP_WND</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>TCP_WND</secondary></indexterm>
+<para><computeroutput>#define TCP_WND&#160;&#160;&#160;(8 * <link linkend="_lwipopts_8h_1af1ab7bb27860aa3677c387a2f3ba317b">TCP_MSS</link>)</computeroutput></para><para>
+Definition at line <link linkend="_lwipopts_8h_source_1l00026">26</link> of file <link linkend="_lwipopts_8h_source">lwipopts.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_lwipopts_8h_1a46f1c418d0f05268d7a0ebc8ce25d07c"/><section>
+    <title>set_system_time()</title>
+<indexterm><primary>set_system_time</primary><secondary>lwipopts.h</secondary></indexterm>
+<indexterm><primary>lwipopts.h</primary><secondary>set_system_time</secondary></indexterm>
+<para><computeroutput>void set_system_time (uint32_t sec)</computeroutput></para><para>
+Definition at line <link linkend="_ntp__sync_8c_source_1l00028">28</link> of file <link linkend="_ntp__sync_8c_source">ntp_sync.c</link>.</para>
+<programlisting linenumbering="unnumbered">00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00029 &#32;&#32;&#32;&#32;time_t&#32;epoch&#32;=&#32;sec;
+00030 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*time&#32;=&#32;gmtime(&amp;epoch);
+00031 &#32;&#32;&#32;&#32;datetime_t&#32;dt&#32;=&#32;{
+00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.year&#32;=&#32;(int16_t)&#32;(1900&#32;+&#32;time-&gt;tm_year),
+00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.month&#32;=&#32;(int8_t)&#32;(time-&gt;tm_mon&#32;+&#32;1),
+00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.day&#32;=&#32;(int8_t)&#32;time-&gt;tm_mday,
+00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.hour&#32;=&#32;(int8_t)&#32;time-&gt;tm_hour,
+00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.min&#32;=&#32;(int8_t)&#32;time-&gt;tm_min,
+00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sec&#32;=&#32;(int8_t)&#32;time-&gt;tm_sec,
+00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.dotw&#32;=&#32;(int8_t)&#32;time-&gt;tm_wday,
+00039 &#32;&#32;&#32;&#32;};
+00040 
+00041 &#32;&#32;&#32;&#32;rtc_set_datetime(&amp;dt);
+00042 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>timeval&#32;tv&#32;=&#32;{.tv_sec&#32;=&#32;mktime(time)};
+00043 &#32;&#32;&#32;&#32;settimeofday(&amp;tv,&#32;NULL);
+00044 }
+</programlisting></section>
+</section>
+</section>

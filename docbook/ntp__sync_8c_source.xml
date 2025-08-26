@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ntp__sync_8c_source" xml:lang="en-US">
+<title>ntp_sync.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/elastic_mqtt_client/ntp_sync.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_ntp__sync_8c_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;hardware/rtc.h&gt;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;lwip/apps/sntp.h&gt;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;pico/cyw43_arch.h&gt;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;pico/stdlib.h&gt;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&lt;stdint.h&gt;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00011"/>00011 
+<anchor xml:id="_ntp__sync_8c_source_1l00012"/><link linkend="_ntp__sync_8c_1a751e3f85cd240e89d390d18996089cd0">00012</link> <emphasis role="preprocessor">#define&#32;NTP_SERVER&#32;&quot;pool.ntp.org&quot;</emphasis>
+<anchor xml:id="_ntp__sync_8c_source_1l00013"/>00013 
+<anchor xml:id="_ntp__sync_8c_source_1l00014"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1ae31164e5a07f30e3f5d8074609d05b17">00014</link> <emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_ntp__sync_8c_1afe77477eb61cb1a9294020c022edabc5">ntp_sync</link>()&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00015"/>00015 &#32;&#32;&#32;&#32;sntp_setoperatingmode(SNTP_OPMODE_POLL);
+<anchor xml:id="_ntp__sync_8c_source_1l00016"/>00016 &#32;&#32;&#32;&#32;sntp_setservername(0,&#32;<link linkend="_ntp__sync_8c_1a751e3f85cd240e89d390d18996089cd0">NTP_SERVER</link>);
+<anchor xml:id="_ntp__sync_8c_source_1l00017"/>00017 &#32;&#32;&#32;&#32;sntp_init();
+<anchor xml:id="_ntp__sync_8c_source_1l00018"/>00018 
+<anchor xml:id="_ntp__sync_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;20;&#32;i++)&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(sntp_getreachability(0))&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_ntp__sync_8c_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_ntp__sync_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sleep_ms(1000);
+<anchor xml:id="_ntp__sync_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_ntp__sync_8c_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_ntp__sync_8c_source_1l00026"/>00026 }
+<anchor xml:id="_ntp__sync_8c_source_1l00027"/>00027 
+<anchor xml:id="_ntp__sync_8c_source_1l00028"/><link linkend="_lwipopts_8h_1a46f1c418d0f05268d7a0ebc8ce25d07c">00028</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_ntp__sync_8c_1a46f1c418d0f05268d7a0ebc8ce25d07c">set_system_time</link>(uint32_t&#32;sec)&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;time_t&#32;epoch&#32;=&#32;sec;
+<anchor xml:id="_ntp__sync_8c_source_1l00030"/>00030 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*time&#32;=&#32;gmtime(&amp;epoch);
+<anchor xml:id="_ntp__sync_8c_source_1l00031"/>00031 &#32;&#32;&#32;&#32;datetime_t&#32;dt&#32;=&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.year&#32;=&#32;(int16_t)&#32;(1900&#32;+&#32;time-&gt;tm_year),
+<anchor xml:id="_ntp__sync_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.month&#32;=&#32;(int8_t)&#32;(time-&gt;tm_mon&#32;+&#32;1),
+<anchor xml:id="_ntp__sync_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.day&#32;=&#32;(int8_t)&#32;time-&gt;tm_mday,
+<anchor xml:id="_ntp__sync_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.hour&#32;=&#32;(int8_t)&#32;time-&gt;tm_hour,
+<anchor xml:id="_ntp__sync_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.min&#32;=&#32;(int8_t)&#32;time-&gt;tm_min,
+<anchor xml:id="_ntp__sync_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.sec&#32;=&#32;(int8_t)&#32;time-&gt;tm_sec,
+<anchor xml:id="_ntp__sync_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.dotw&#32;=&#32;(int8_t)&#32;time-&gt;tm_wday,
+<anchor xml:id="_ntp__sync_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_ntp__sync_8c_source_1l00040"/>00040 
+<anchor xml:id="_ntp__sync_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;rtc_set_datetime(&amp;dt);
+<anchor xml:id="_ntp__sync_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>timeval&#32;tv&#32;=&#32;{.tv_sec&#32;=&#32;mktime(time)};
+<anchor xml:id="_ntp__sync_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;settimeofday(&amp;tv,&#32;NULL);
+<anchor xml:id="_ntp__sync_8c_source_1l00044"/>00044 }
+<anchor xml:id="_ntp__sync_8c_source_1l00045"/>00045 
+<anchor xml:id="_ntp__sync_8c_source_1l00046"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_1acbbd6c89dfe56e52af9064c81fbbb635">00046</link> <emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*<link linkend="_ntp__sync_8c_1a5fabcd416198038418e923db9259b7ff">get_timestamp</link>()&#32;{
+<anchor xml:id="_ntp__sync_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[30];
+<anchor xml:id="_ntp__sync_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;time_t&#32;now&#32;=&#32;time(NULL);
+<anchor xml:id="_ntp__sync_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>&#32;=&#32;gmtime(&amp;now);
+<anchor xml:id="_ntp__sync_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;strftime(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;<emphasis role="stringliteral">&quot;%Y-%m-%d&#32;%H:%M:%S&quot;</emphasis>,&#32;<link linkend="__dino_game_8cpp_1a87accd1af8e0aff4b818d891374f7cec">t</link>);
+<anchor xml:id="_ntp__sync_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;buffer;
+<anchor xml:id="_ntp__sync_8c_source_1l00052"/>00052 }
+</programlisting></section>

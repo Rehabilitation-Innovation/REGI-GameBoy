@@ -1,0 +1,121 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/usb\+\_\+logger/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/main.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/usb\_logger/main.c}}
+{\ttfamily \#include $<$bsp/board.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/adc.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/gpio.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/structs/ioqspi.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/sync.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$tusb.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a8218db278eda6b3652f3ac0338a3b260}{TEMPERATURE\+\_\+\+UNITS}}~\textquotesingle{}C\textquotesingle{}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_abf4fdc27ec7610b3aa5ee951ba9802c3}{USBCTRL\+\_\+\+REG}}~((uint32\+\_\+t \texorpdfstring{$\ast$}{*})(USBCTRL\+\_\+\+REGS\+\_\+\+BASE + 0x50))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db}{filesystem\+\_\+is\+\_\+exported}} = false
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}{flash2}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a8218db278eda6b3652f3ac0338a3b260}\index{main.c@{main.c}!TEMPERATURE\_UNITS@{TEMPERATURE\_UNITS}}
+\index{TEMPERATURE\_UNITS@{TEMPERATURE\_UNITS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TEMPERATURE\_UNITS}{TEMPERATURE\_UNITS}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a8218db278eda6b3652f3ac0338a3b260} 
+\#define TEMPERATURE\+\_\+\+UNITS~\textquotesingle{}C\textquotesingle{}}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00020}{20}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_abf4fdc27ec7610b3aa5ee951ba9802c3}\index{main.c@{main.c}!USBCTRL\_REG@{USBCTRL\_REG}}
+\index{USBCTRL\_REG@{USBCTRL\_REG}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{USBCTRL\_REG}{USBCTRL\_REG}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_abf4fdc27ec7610b3aa5ee951ba9802c3} 
+\#define USBCTRL\+\_\+\+REG~((uint32\+\_\+t \texorpdfstring{$\ast$}{*})(USBCTRL\+\_\+\+REGS\+\_\+\+BASE + 0x50))}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00021}{21}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00185}{185}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00186\ \ \ \ \ adc\_init();}
+\DoxyCodeLine{00187\ \ \ \ \ adc\_set\_temp\_sensor\_enabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{00188\ \ \ \ \ adc\_select\_input(4);}
+\DoxyCodeLine{00189\ \ \ \ \ board\_init();}
+\DoxyCodeLine{00190\ \ \ \ \ tud\_init(\mbox{\hyperlink{tusb__config_8h_a850f6280c7dc9aead785f6bedaaa0fb9}{BOARD\_TUD\_RHPORT}});}
+\DoxyCodeLine{00191\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{if}\ (!filesystem\_init())\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Start\ USB\ MSC\ Logger\ with\ two\ file\ systems\(\backslash\)n"{}});}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ filesystem\_management\_task();}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enable\_logging\_task)}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ logging\_task();}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ tud\_task();}
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+\DoxyCodeLine{00203\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db}\index{main.c@{main.c}!filesystem\_is\_exported@{filesystem\_is\_exported}}
+\index{filesystem\_is\_exported@{filesystem\_is\_exported}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{filesystem\_is\_exported}{filesystem\_is\_exported}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_afb4b5379673d98e6bdf98584c040c1db} 
+bool filesystem\+\_\+is\+\_\+exported = false}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00023}{23}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4}\index{main.c@{main.c}!flash2@{flash2}}
+\index{flash2@{flash2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{flash2}{flash2}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_ad8ecc24e18a9575a8814a8eafeb8a3b4} 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}}\texorpdfstring{$\ast$}{*} flash2}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_l00026}{26}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source}{main.\+c}}.
+

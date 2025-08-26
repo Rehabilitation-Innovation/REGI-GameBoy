@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_f_a_t_f_s" xml:lang="en-US">
+<title>FATFS Struct Reference</title>
+<indexterm><primary>FATFS</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ff.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1add27d97babe807b573eac98a71dc4ae5">fs_type</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1acae426c920cd7f59e5883f948e1b3184">pdrv</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1aaa678cb2c36f5e7d8157ae295f1fbb42">ldrv</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1a56716c7e7ac10cf46e73ffb2a2e9b545">n_fats</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1a647e43c9ccae94b7274793d1909897de">wflag</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1a84e9cdc5a6a8e33ea7ec192058abf161">fsi_flag</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> <link linkend="_struct_f_a_t_f_s_1a417095d7c20d56d417dc0998e0dd5a5c">id</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> <link linkend="_struct_f_a_t_f_s_1a189a00aa038044ffad0fc7f7dcf2aae1">n_rootdir</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> <link linkend="_struct_f_a_t_f_s_1ad7fa7a509f8d097a9ab182d6c47be568">csize</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s_1ac26e848817569fedc15a9a4e49ddedd1">last_clst</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s_1ac834248773bf338df807f0d7e6b6a579">free_clst</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s_1a8da50eeba6469bc20d60ca0cf9a1307c">n_fatent</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_a_t_f_s_1a53e9560659f14e66f306c2c444198bf3">fsize</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s_1a89358c0e7b2293254c9481dcd2984d30">volbase</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s_1a78b1024e7d7d086d132a58ee943b31df">fatbase</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s_1afc8c3d5d8408b70379f23382c6e28168">dirbase</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s_1a4ce7c10569f45fae1c709c9ee41f69cb">database</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_a_t_f_s_1aaf7eccaccdc9c4243230672d6b2f6566">winsect</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_a_t_f_s_1a49e9c5c3ae9c13755242b6ce5748ecb1">win</link> [<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_ff_8h_source_1l00132">132</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_f_a_t_f_s_1ad7fa7a509f8d097a9ab182d6c47be568"/><section>
+    <title>csize</title>
+<indexterm><primary>csize</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>csize</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> FATFS::csize</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00141">141</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a4ce7c10569f45fae1c709c9ee41f69cb"/><section>
+    <title>database</title>
+<indexterm><primary>database</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>database</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS::database</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00168">168</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1afc8c3d5d8408b70379f23382c6e28168"/><section>
+    <title>dirbase</title>
+<indexterm><primary>dirbase</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>dirbase</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS::dirbase</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00167">167</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a78b1024e7d7d086d132a58ee943b31df"/><section>
+    <title>fatbase</title>
+<indexterm><primary>fatbase</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>fatbase</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS::fatbase</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00166">166</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1ac834248773bf338df807f0d7e6b6a579"/><section>
+    <title>free_clst</title>
+<indexterm><primary>free_clst</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>free_clst</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS::free_clst</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00153">153</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1add27d97babe807b573eac98a71dc4ae5"/><section>
+    <title>fs_type</title>
+<indexterm><primary>fs_type</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>fs_type</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::fs_type</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00133">133</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a84e9cdc5a6a8e33ea7ec192058abf161"/><section>
+    <title>fsi_flag</title>
+<indexterm><primary>fsi_flag</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>fsi_flag</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::fsi_flag</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00138">138</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a53e9560659f14e66f306c2c444198bf3"/><section>
+    <title>fsize</title>
+<indexterm><primary>fsize</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>fsize</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS::fsize</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00164">164</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a417095d7c20d56d417dc0998e0dd5a5c"/><section>
+    <title>id</title>
+<indexterm><primary>id</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>id</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> FATFS::id</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00139">139</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1ac26e848817569fedc15a9a4e49ddedd1"/><section>
+    <title>last_clst</title>
+<indexterm><primary>last_clst</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>last_clst</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS::last_clst</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00152">152</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1aaa678cb2c36f5e7d8157ae295f1fbb42"/><section>
+    <title>ldrv</title>
+<indexterm><primary>ldrv</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>ldrv</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::ldrv</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00135">135</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a8da50eeba6469bc20d60ca0cf9a1307c"/><section>
+    <title>n_fatent</title>
+<indexterm><primary>n_fatent</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>n_fatent</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FATFS::n_fatent</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00163">163</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a56716c7e7ac10cf46e73ffb2a2e9b545"/><section>
+    <title>n_fats</title>
+<indexterm><primary>n_fats</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>n_fats</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::n_fats</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00136">136</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a189a00aa038044ffad0fc7f7dcf2aae1"/><section>
+    <title>n_rootdir</title>
+<indexterm><primary>n_rootdir</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>n_rootdir</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link> FATFS::n_rootdir</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00140">140</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1acae426c920cd7f59e5883f948e1b3184"/><section>
+    <title>pdrv</title>
+<indexterm><primary>pdrv</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>pdrv</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::pdrv</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00134">134</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a89358c0e7b2293254c9481dcd2984d30"/><section>
+    <title>volbase</title>
+<indexterm><primary>volbase</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>volbase</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS::volbase</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00165">165</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a647e43c9ccae94b7274793d1909897de"/><section>
+    <title>wflag</title>
+<indexterm><primary>wflag</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>wflag</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::wflag</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00137">137</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1a49e9c5c3ae9c13755242b6ce5748ecb1"/><section>
+    <title>win</title>
+<indexterm><primary>win</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>win</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FATFS::win[<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>]</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00173">173</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_a_t_f_s_1aaf7eccaccdc9c4243230672d6b2f6566"/><section>
+    <title>winsect</title>
+<indexterm><primary>winsect</primary><secondary>FATFS</secondary></indexterm>
+<indexterm><primary>FATFS</primary><secondary>winsect</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FATFS::winsect</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00172">172</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/vendor/ff15/source/<link linkend="_ff_8h">ff.h</link></section>
+</section>

@@ -1,0 +1,173 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/elastic\+\_\+mqtt\+\_\+client/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/main.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/main.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/adc.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/rtc.\+h$>$}\newline
+{\ttfamily \#include $<$lwip/altcp\+\_\+tls.\+h$>$}\newline
+{\ttfamily \#include $<$lwip/apps/mqtt.\+h$>$}\newline
+{\ttfamily \#include $<$lwip/dns.\+h$>$}\newline
+{\ttfamily \#include $<$pico/cyw43\+\_\+arch.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a977bd2592e99309a86e7034189e9e62d}{MQTT\+\_\+\+SERVER}}~"{}io.\+adafruit.\+com"{}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a400d28e1af2bcd57bf651dc23290a6d3}{MQTT\+\_\+\+TOPIC}}~(MQTT\+\_\+\+USER "{}/feeds/temperature"{})
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a2d8fa924dae44177190a2942c82202a9}{MQTT\+\_\+\+QOS\+\_\+\+AT\+\_\+\+LEAST\+\_\+\+ONCE}}~1
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a53323d173803daadacf3c9e70aa88592}{LOCAL\+\_\+\+QUEUE\+\_\+\+PATH}}~"{}/temperature.\+txt"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_ae31164e5a07f30e3f5d8074609d05b17}{ntp\+\_\+sync}} (void)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_acbbd6c89dfe56e52af9064c81fbbb635}{get\+\_\+timestamp}} (void)
+\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a53323d173803daadacf3c9e70aa88592}\index{main.c@{main.c}!LOCAL\_QUEUE\_PATH@{LOCAL\_QUEUE\_PATH}}
+\index{LOCAL\_QUEUE\_PATH@{LOCAL\_QUEUE\_PATH}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LOCAL\_QUEUE\_PATH}{LOCAL\_QUEUE\_PATH}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a53323d173803daadacf3c9e70aa88592} 
+\#define LOCAL\+\_\+\+QUEUE\+\_\+\+PATH~"{}/temperature.\+txt"{}}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_l00019}{19}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a2d8fa924dae44177190a2942c82202a9}\index{main.c@{main.c}!MQTT\_QOS\_AT\_LEAST\_ONCE@{MQTT\_QOS\_AT\_LEAST\_ONCE}}
+\index{MQTT\_QOS\_AT\_LEAST\_ONCE@{MQTT\_QOS\_AT\_LEAST\_ONCE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MQTT\_QOS\_AT\_LEAST\_ONCE}{MQTT\_QOS\_AT\_LEAST\_ONCE}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a2d8fa924dae44177190a2942c82202a9} 
+\#define MQTT\+\_\+\+QOS\+\_\+\+AT\+\_\+\+LEAST\+\_\+\+ONCE~1}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_l00018}{18}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a977bd2592e99309a86e7034189e9e62d}\index{main.c@{main.c}!MQTT\_SERVER@{MQTT\_SERVER}}
+\index{MQTT\_SERVER@{MQTT\_SERVER}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MQTT\_SERVER}{MQTT\_SERVER}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a977bd2592e99309a86e7034189e9e62d} 
+\#define MQTT\+\_\+\+SERVER~"{}io.\+adafruit.\+com"{}}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_l00016}{16}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a400d28e1af2bcd57bf651dc23290a6d3}\index{main.c@{main.c}!MQTT\_TOPIC@{MQTT\_TOPIC}}
+\index{MQTT\_TOPIC@{MQTT\_TOPIC}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MQTT\_TOPIC}{MQTT\_TOPIC}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a400d28e1af2bcd57bf651dc23290a6d3} 
+\#define MQTT\+\_\+\+TOPIC~(MQTT\+\_\+\+USER "{}/feeds/temperature"{})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_l00017}{17}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_acbbd6c89dfe56e52af9064c81fbbb635}\index{main.c@{main.c}!get\_timestamp@{get\_timestamp}}
+\index{get\_timestamp@{get\_timestamp}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{get\_timestamp()}{get\_timestamp()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_acbbd6c89dfe56e52af9064c81fbbb635} 
+const char \texorpdfstring{$\ast$}{*} get\+\_\+timestamp (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00046}{46}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ buffer[30];}
+\DoxyCodeLine{00048\ \ \ \ \ time\_t\ now\ =\ time(NULL);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ gmtime(\&now);}
+\DoxyCodeLine{00050\ \ \ \ \ strftime(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \textcolor{stringliteral}{"{}\%Y-\/\%m-\/\%d\ \%H:\%M:\%S"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer;}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source_l00152}{152}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00154\ \ \ \ \ rtc\_init();}
+\DoxyCodeLine{00155\ \ \ \ \ adc\_init();}
+\DoxyCodeLine{00156\ \ \ \ \ adc\_set\_temp\_sensor\_enabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{00157\ \ \ \ \ adc\_select\_input(4);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ ip\_addr\_t\ mqtt\_server\_addr\ =\ \{0\};}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{if}\ (!network\_init(\&mqtt\_server\_addr))\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}network\_init\ failed\(\backslash\)n"{}});}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ mqtt\_client\_t\ *client\ =\ mqtt\_client\_new();}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sensor\_value\ =\ read\_sensor\_data();}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *timestamp\ =\ \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_acbbd6c89dfe56e52af9064c81fbbb635}{get\_timestamp}}();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mantain\_network\_connection(client,\ \&mqtt\_server\_addr))\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Normal\ operation}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ publish\_message\_from\_file(client);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ publish\_message(client,\ sensor\_value,\ timestamp);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Network\ outage\ operation}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ save\_data\_to\_file(sensor\_value,\ timestamp);}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ sleep\_ms(10\ *\ 1000);}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ mqtt\_client\_free(client);}
+\DoxyCodeLine{00179\ \ \ \ \ cyw43\_arch\_deinit();}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00181\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_ae31164e5a07f30e3f5d8074609d05b17}\index{main.c@{main.c}!ntp\_sync@{ntp\_sync}}
+\index{ntp\_sync@{ntp\_sync}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ntp\_sync()}{ntp\_sync()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_ae31164e5a07f30e3f5d8074609d05b17} 
+bool ntp\+\_\+sync (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00014}{14}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ sntp\_setoperatingmode(SNTP\_OPMODE\_POLL);}
+\DoxyCodeLine{00016\ \ \ \ \ sntp\_setservername(0,\ \mbox{\hyperlink{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}{NTP\_SERVER}});}
+\DoxyCodeLine{00017\ \ \ \ \ sntp\_init();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 20;\ i++)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sntp\_getreachability(0))\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00026\ \}}
+
+\end{DoxyCode}

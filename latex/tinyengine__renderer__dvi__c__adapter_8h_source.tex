@@ -1,0 +1,36 @@
+\doxysection{tinyengine\+\_\+renderer\+\_\+dvi\+\_\+c\+\_\+adapter.\+h}
+\hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source}{}\label{tinyengine__renderer__dvi__c__adapter_8h_source}\index{backup/tinyengine\_renderer\_dvi\_c\_adapter.h@{backup/tinyengine\_renderer\_dvi\_c\_adapter.h}}
+\mbox{\hyperlink{tinyengine__renderer__dvi__c__adapter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine_8h}{tinyengine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__renderer__dvi__c_8h}{tinyengine\_renderer\_dvi\_c.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00009}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i}{00009}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{TinyEngineRendererDVI}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00010}00010\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00011}00011\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ m\_frame\_buf;}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00012}00012\ \ \ \ \ \textcolor{comment}{//\ TinyEngine\&\ m\_engine;}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00014}00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//\ tinyengine\_status\_t\ tinyengine\_renderer\_init(TinyEngine\&\ engine\_handle,\ TinyEngineFrameBuffer\&\ framebuffer);}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00016}00016\ \ \ \ \ \textcolor{comment}{//block\ until\ next\ vsync\ is\ hit\ and\ the\ buffers\ are\ flipped\ then\ the\ swap\ happens.}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00017}00017\ \ \ \ \ \textcolor{comment}{//\ void\ tinyengine\_renderer\_dvi\_flip\_blocking();}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00018}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{00018}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{TinyEngineRendererDVI}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ fr\_buf)\ :\ m\_frame\_buf(fr\_buf)\ \{}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{tinyengine\_renderer\_init}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00020}00020\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00022}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a09c4f163843cf199dc0afcfafd7953b5}{00022}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a09c4f163843cf199dc0afcfafd7953b5}{\string~TinyEngineRendererDVI}}()\ \{\};}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00023}00023\ \ \ \ \ \textcolor{comment}{//\ void\ dma\_irq\_handler();}}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad9985d571f39928ba4cebd35d84cd5f0}{swap\_blocking}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_aa12a0ece831ea57ad7b912b069493ce7}{swap\_non\_blocking}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00026}00026\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}{wait\_for\_vsync}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{tinyengine\_renderer\_init}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00029}00029\ \};}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi__c__adapter_8h_source_l00030}00030\ }
+
+\end{DoxyCode}

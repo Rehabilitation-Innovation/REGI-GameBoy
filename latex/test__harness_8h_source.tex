@@ -1,0 +1,19 @@
+\doxysection{test\+\_\+harness.\+h}
+\hypertarget{test__harness_8h_source}{}\label{test__harness_8h_source}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/test\_harness.h@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/test\_harness.h}}
+\mbox{\hyperlink{test__harness_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{distance__sensor_8h}{distance\_sensor.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00004}00004\ \textcolor{comment}{//\ Create\ a\ derived\ test\ class\ for\ access\ to\ protected\ members}}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00005}\mbox{\hyperlink{class_test_harness}{00005}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_test_harness_a445cb0c949020e46968c56264d0e1bd7}{TestHarness}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{DistanceSensor}}\ \{}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00006}00006\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00007}\mbox{\hyperlink{class_test_harness_a445cb0c949020e46968c56264d0e1bd7}{00007}}\ \ \ \ \ \mbox{\hyperlink{class_test_harness_a445cb0c949020e46968c56264d0e1bd7}{TestHarness}}(\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ trigger,\ \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})\ :\ \mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{DistanceSensor}}(trigger,\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})\ \{\};}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0}{GetOffset}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}});}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{IsLoaded}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}});}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}*\ \mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{GetMappedSensor}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}});}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00012}00012\ \};}
+\DoxyCodeLine{\Hypertarget{test__harness_8h_source_l00013}00013\ }
+
+\end{DoxyCode}

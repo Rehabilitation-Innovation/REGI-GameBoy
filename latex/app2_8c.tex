@@ -1,0 +1,102 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/documents/res/app2.c File Reference}
+\hypertarget{app2_8c}{}\label{app2_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app2.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app2.c}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} \mbox{\hyperlink{app2_8c_a246fe870ae7876feb9840f35c36f0969}{delete\+\_\+node}} (\mbox{\hyperlink{ff_8h_a03bdb8ce5895c7e261aadc2529637546}{TCHAR}} \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} sz\+\_\+buff, \mbox{\hyperlink{struct_f_i_l_i_n_f_o}{FILINFO}} \texorpdfstring{$\ast$}{*}fno)
+\item 
+int \mbox{\hyperlink{app2_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{app2_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app2_8c_a246fe870ae7876feb9840f35c36f0969}\index{app2.c@{app2.c}!delete\_node@{delete\_node}}
+\index{delete\_node@{delete\_node}!app2.c@{app2.c}}
+\doxysubsubsection{\texorpdfstring{delete\_node()}{delete\_node()}}
+{\footnotesize\ttfamily \label{app2_8c_a246fe870ae7876feb9840f35c36f0969} 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} delete\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a03bdb8ce5895c7e261aadc2529637546}{TCHAR}} \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{sz\+\_\+buff}{, }\item[{\mbox{\hyperlink{struct_f_i_l_i_n_f_o}{FILINFO}} \texorpdfstring{$\ast$}{*}}]{fno}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app2_8c_source_l00009}{9}} of file \mbox{\hyperlink{app2_8c_source}{app2.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ i,\ j;}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ dir;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_a0d5b386636ec82d4c1e912d5902aa0e0}{f\_opendir}}(\&dir,\ path);\ \textcolor{comment}{/*\ Open\ the\ sub-\/directory\ to\ make\ it\ empty\ */}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ path[i];\ i++)\ ;\ \textcolor{comment}{/*\ Get\ current\ path\ length\ */}}
+\DoxyCodeLine{00024\ \ \ \ \ path[i++]\ =\ \mbox{\hyperlink{ff_8h_ae936e4c15227768f7da4e0951def89c8}{\_T}}(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_ab8b2c70a95ca61f4f516c56fda7f82ab}{f\_readdir}}(\&dir,\ fno);\ \ \textcolor{comment}{/*\ Get\ a\ directory\ item\ */}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}}\ ||\ !fno-\/>\mbox{\hyperlink{struct_f_i_l_i_n_f_o_ac06b247cfb3b708c76413c436e52fa7e}{fname}}[0])\ \textcolor{keywordflow}{break};\ \ \ \textcolor{comment}{/*\ End\ of\ directory?\ */}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{\ \ \ \ \textcolor{comment}{/*\ Make\ a\ path\ name\ */}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ +\ j\ >=\ sz\_buff)\ \{\ \textcolor{comment}{/*\ Buffer\ over\ flow?\ */}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fr\ =\ 100;\ \textcolor{keywordflow}{break};\ \ \ \ \textcolor{comment}{/*\ Fails\ with\ 100\ when\ buffer\ overflow\ */}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ path[i\ +\ j]\ =\ fno-\/>\mbox{\hyperlink{struct_f_i_l_i_n_f_o_ac06b247cfb3b708c76413c436e52fa7e}{fname}}[j];}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (fno-\/>\mbox{\hyperlink{struct_f_i_l_i_n_f_o_ac06b247cfb3b708c76413c436e52fa7e}{fname}}[j++]);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fno-\/>\mbox{\hyperlink{struct_f_i_l_i_n_f_o_a838d542585831b085537b363f18205c0}{fattrib}}\ \&\ \mbox{\hyperlink{ff_8h_a3a9db44e978ed6c13b641e092d4cd7d3}{AM\_DIR}})\ \{\ \ \ \ \textcolor{comment}{/*\ Item\ is\ a\ sub-\/directory\ */}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ fr\ =\ \mbox{\hyperlink{app2_8c_a246fe870ae7876feb9840f35c36f0969}{delete\_node}}(path,\ sz\_buff,\ fno);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Item\ is\ a\ file\ */}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_a2858167fcd0bced48e9be434b3895efe}{f\_unlink}}(path);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ !=\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ path[-\/-\/i]\ =\ 0;\ \ \textcolor{comment}{/*\ Restore\ the\ path\ name\ */}}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{ff_8c_aba2c2f47f12fd4875bd6a62fa58fa1a9}{f\_closedir}}(\&dir);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr\ ==\ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1}{FR\_OK}})\ fr\ =\ \mbox{\hyperlink{ff_8c_a2858167fcd0bced48e9be434b3895efe}{f\_unlink}}(path);\ \ \textcolor{comment}{/*\ Delete\ the\ empty\ sub-\/directory\ */}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}
+\Hypertarget{app2_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{app2.c@{app2.c}!main@{main}}
+\index{main@{main}!app2.c@{app2.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{app2_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app2_8c_source_l00054}{54}} of file \mbox{\hyperlink{app2_8c_source}{app2.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}}\ fs;}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{ff_8h_a03bdb8ce5895c7e261aadc2529637546}{TCHAR}}\ buff[256];}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l_i_n_f_o}{FILINFO}}\ fno;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(\&fs,\ \mbox{\hyperlink{ff_8h_ae936e4c15227768f7da4e0951def89c8}{\_T}}(\textcolor{stringliteral}{"{}5:"{}}),\ 0);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{/*\ Directory\ to\ be\ deleted\ */}}
+\DoxyCodeLine{00065\ \ \ \ \ \_tcscpy(buff,\ \mbox{\hyperlink{ff_8h_ae936e4c15227768f7da4e0951def89c8}{\_T}}(\textcolor{stringliteral}{"{}5:dir"{}}));}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{/*\ Delete\ the\ directory\ */}}
+\DoxyCodeLine{00068\ \ \ \ \ fr\ =\ \mbox{\hyperlink{app2_8c_a246fe870ae7876feb9840f35c36f0969}{delete\_node}}(buff,\ \textcolor{keyword}{sizeof}\ buff\ /\ \textcolor{keyword}{sizeof}\ buff[0],\ \&fno);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ result\ */}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \_tprintf(\mbox{\hyperlink{ff_8h_ae936e4c15227768f7da4e0951def89c8}{\_T}}(\textcolor{stringliteral}{"{}Failed\ to\ delete\ the\ directory.\ (\%u)\(\backslash\)n"{}}),\ fr);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{00074\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \_tprintf(\mbox{\hyperlink{ff_8h_ae936e4c15227768f7da4e0951def89c8}{\_T}}(\textcolor{stringliteral}{"{}The\ directory\ and\ the\ contents\ have\ successfully\ been\ deleted.\(\backslash\)n"{}}),\ buff);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \}}
+
+\end{DoxyCode}

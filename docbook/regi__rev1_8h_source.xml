@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_regi__rev1_8h_source" xml:lang="en-US">
+<title>regi_rev1.h</title>
+<indexterm><primary>boards/regi_rev1.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_regi__rev1_8h_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;(c)&#32;2020&#32;Raspberry&#32;Pi&#32;(Trading)&#32;Ltd.</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00006"/>00006 
+<anchor xml:id="_regi__rev1_8h_source_1l00007"/>00007 &#32;<emphasis role="comment">//&#32;-----------------------------------------------------</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00008"/>00008 &#32;<emphasis role="comment">//&#32;NOTE:&#32;THIS&#32;HEADER&#32;IS&#32;ALSO&#32;INCLUDED&#32;BY&#32;ASSEMBLER&#32;SO</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00009"/>00009 &#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;SHOULD&#32;ONLY&#32;CONSIST&#32;OF&#32;PREPROCESSOR&#32;DIRECTIVES</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00010"/>00010 &#32;<emphasis role="comment">//&#32;-----------------------------------------------------</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00011"/>00011 
+<anchor xml:id="_regi__rev1_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#ifndef&#32;_REGI_REV_1_H</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#define&#32;_REGI_REV_1_H</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00014"/>00014 
+<anchor xml:id="_regi__rev1_8h_source_1l00015"/><link linkend="_regi__rev1_8h_1a84cada78bd4360891c500026949abd61">00015</link> <link linkend="_regi__rev1_8h_1a84cada78bd4360891c500026949abd61">pico_board_cmake_set</link>(PICO_PLATFORM,&#32;rp2350)
+<anchor xml:id="_regi__rev1_8h_source_1l00016"/>00016 
+<anchor xml:id="_regi__rev1_8h_source_1l00017"/>00017 <emphasis role="comment">//&#32;For&#32;board&#32;detection</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00018"/>00018 <emphasis role="preprocessor">#define&#32;REGI</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00019"/>00019 
+<anchor xml:id="_regi__rev1_8h_source_1l00020"/>00020 <emphasis role="comment">//&#32;---&#32;RP2350&#32;VARIANT&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00021"/>00021 <emphasis role="preprocessor">#define&#32;PICO_RP2350A&#32;0</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00022"/>00022 
+<anchor xml:id="_regi__rev1_8h_source_1l00023"/>00023 <emphasis role="comment">//&#32;---&#32;UART&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00024"/>00024 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_UART</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00025"/>00025 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_UART&#32;0</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00026"/>00026 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00027"/>00027 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_UART_TX_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00028"/>00028 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_UART_TX_PIN&#32;0</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00029"/>00029 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00030"/>00030 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_UART_RX_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00031"/>00031 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_UART_RX_PIN&#32;1</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00032"/>00032 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00033"/>00033 
+<anchor xml:id="_regi__rev1_8h_source_1l00034"/>00034 <emphasis role="comment">//&#32;no&#32;PICO_DEFAULT_WS2812_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00035"/>00035 
+<anchor xml:id="_regi__rev1_8h_source_1l00036"/>00036 <emphasis role="comment">//&#32;---&#32;I2C&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00037"/>00037 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_I2C</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00038"/>00038 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_I2C&#32;1</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00039"/>00039 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00040"/>00040 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_I2C_SDA_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00041"/>00041 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_I2C_SDA_PIN&#32;6</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00042"/>00042 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00043"/>00043 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_I2C_SCL_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00044"/>00044 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_I2C_SCL_PIN&#32;7</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00045"/>00045 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00046"/>00046 
+<anchor xml:id="_regi__rev1_8h_source_1l00047"/>00047 <emphasis role="comment">//&#32;---&#32;SPI&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00048"/>00048 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_SPI</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00049"/>00049 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_SPI&#32;0</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00050"/>00050 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00051"/>00051 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_SPI_SCK_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00052"/>00052 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_SPI_SCK_PIN&#32;18</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00053"/>00053 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00054"/>00054 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_SPI_TX_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00055"/>00055 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_SPI_TX_PIN&#32;19</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00056"/>00056 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00057"/>00057 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_SPI_RX_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00058"/>00058 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_SPI_RX_PIN&#32;16</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00059"/>00059 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00060"/>00060 <emphasis role="preprocessor">#ifndef&#32;PICO_DEFAULT_SPI_CSN_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00061"/>00061 <emphasis role="preprocessor">#define&#32;PICO_DEFAULT_SPI_CSN_PIN&#32;17</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00062"/>00062 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00063"/>00063 
+<anchor xml:id="_regi__rev1_8h_source_1l00064"/>00064 <emphasis role="comment">//&#32;---&#32;ADC&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00065"/>00065 <emphasis role="preprocessor">#ifndef&#32;WAVESHARE_BAT_ADC_PIN</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00066"/>00066 <emphasis role="preprocessor">#define&#32;WAVESHARE_BAT_ADC_PIN&#32;29</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00067"/>00067 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00068"/>00068 
+<anchor xml:id="_regi__rev1_8h_source_1l00069"/>00069 <emphasis role="comment">//&#32;---&#32;FLASH&#32;---</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00070"/>00070 
+<anchor xml:id="_regi__rev1_8h_source_1l00071"/>00071 <emphasis role="preprocessor">#define&#32;PICO_BOOT_STAGE2_CHOOSE_W25Q080&#32;1</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00072"/>00072 
+<anchor xml:id="_regi__rev1_8h_source_1l00073"/>00073 <emphasis role="preprocessor">#ifndef&#32;PICO_FLASH_SPI_CLKDIV</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00074"/>00074 <emphasis role="preprocessor">#define&#32;PICO_FLASH_SPI_CLKDIV&#32;2</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00075"/>00075 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00076"/>00076 
+<anchor xml:id="_regi__rev1_8h_source_1l00077"/>00077 pico_board_cmake_set_default(<link linkend="_regi__rev1_8h_1a7ad5a8273ffcd10db868c3c3e03d5bf0">PICO_FLASH_SIZE_BYTES</link>,&#32;(16&#32;*&#32;1024&#32;*&#32;1024))
+<anchor xml:id="_regi__rev1_8h_source_1l00078"/>00078 <emphasis role="preprocessor">#ifndef&#32;PICO_FLASH_SIZE_BYTES</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00079"/><link linkend="_regi__rev1_8h_1a7ad5a8273ffcd10db868c3c3e03d5bf0">00079</link> <emphasis role="preprocessor">#define&#32;PICO_FLASH_SIZE_BYTES&#32;(16&#32;*&#32;1024&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00080"/>00080 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00081"/>00081 <emphasis role="comment">//&#32;Drive&#32;high&#32;to&#32;force&#32;power&#32;supply&#32;into&#32;PWM&#32;mode&#32;(lower&#32;ripple&#32;on&#32;3V3&#32;at&#32;light&#32;loads)</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00082"/><link linkend="_regi__rev1_8h_1a11ebfeefe195a36f1bc2174c8dd928a1">00082</link> <emphasis role="preprocessor">#define&#32;PICO_SMPS_MODE_PIN&#32;47</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00083"/>00083 
+<anchor xml:id="_regi__rev1_8h_source_1l00084"/>00084 pico_board_cmake_set_default(<link linkend="_regi__rev1_8h_1ae0fd438812696e3d1a23842f755daf74">PICO_RP2350_A2_SUPPORTED</link>,&#32;1)
+<anchor xml:id="_regi__rev1_8h_source_1l00085"/>00085 <emphasis role="preprocessor">#ifndef&#32;PICO_RP2350_A2_SUPPORTED</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00086"/>00086 <emphasis role="preprocessor">#define&#32;PICO_RP2350_A2_SUPPORTED&#32;1</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00087"/>00087 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_regi__rev1_8h_source_1l00088"/>00088 
+<anchor xml:id="_regi__rev1_8h_source_1l00089"/>00089 <emphasis role="preprocessor">#endif</emphasis>
+</programlisting></section>

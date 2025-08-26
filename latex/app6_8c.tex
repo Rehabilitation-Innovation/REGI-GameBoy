@@ -1,0 +1,73 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/documents/res/app6.c File Reference}
+\hypertarget{app6_8c}{}\label{app6_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app6.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app6.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$systimer.\+h$>$}\newline
+{\ttfamily \#include "{}diskio.\+h"{}}\newline
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{app6_8c_aefaa12616ed0724e96f62e899fe19864}{test\+\_\+raw\+\_\+speed}} (\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}} pdrv, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} lba, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} len, void \texorpdfstring{$\ast$}{*}buff, \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}} sz\+\_\+buff)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{app6_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app6_8c_aefaa12616ed0724e96f62e899fe19864}\index{app6.c@{app6.c}!test\_raw\_speed@{test\_raw\_speed}}
+\index{test\_raw\_speed@{test\_raw\_speed}!app6.c@{app6.c}}
+\doxysubsubsection{\texorpdfstring{test\_raw\_speed()}{test\_raw\_speed()}}
+{\footnotesize\ttfamily \label{app6_8c_aefaa12616ed0724e96f62e899fe19864} 
+int test\+\_\+raw\+\_\+speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a4ae1dab0fb4b072a66584546209e7d58}{BYTE}}}]{pdrv}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{lba}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{len}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{\mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}}]{sz\+\_\+buff}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app6_8c_source_l00011}{11}} of file \mbox{\hyperlink{app6_8c_source}{app6.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ ss;}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ ofs,\ tmr;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#if\ FF\_MIN\_SS\ !=\ FF\_MAX\_SS }}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_ac73b5cf2135cbd459d109b96c9aa346a}{GET\_SECTOR\_SIZE}},\ \&ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_ioctl()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#else }}
+\DoxyCodeLine{00029\ \ \ \ \ ss\ =\ \mbox{\hyperlink{ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{FF\_MAX\_SS}};}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ raw\ write\ test\ at\ sector\ \%lu\ in\ \%u\ bytes\ of\ data\ chunks..."{}},\ lba,\ sz\_buff);}
+\DoxyCodeLine{00033\ \ \ \ \ tmr\ =\ systimer();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (ofs\ =\ 0;\ ofs\ <\ len\ /\ ss;\ ofs\ +=\ sz\_buff\ /\ ss)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(pdrv,\ buff,\ lba\ +\ ofs,\ sz\_buff\ /\ ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_write()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_ab00fa450a811dbdabe3c655c1a36fab4}{disk\_ioctl}}(pdrv,\ \mbox{\hyperlink{diskio_8h_a1b3c492f9aec325f0655941b75256f3c}{CTRL\_SYNC}},\ 0)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_ioctl()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ tmr\ =\ systimer()\ -\/\ tmr;}
+\DoxyCodeLine{00045\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%lu\ bytes\ written\ and\ it\ took\ \%lu\ timer\ ticks.\(\backslash\)n"{}},\ len,\ tmr);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ raw\ read\ test\ at\ sector\ \%lu\ in\ \%u\ bytes\ of\ data\ chunks..."{}},\ lba,\ sz\_buff);}
+\DoxyCodeLine{00048\ \ \ \ \ tmr\ =\ systimer();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{for}\ (ofs\ =\ 0;\ ofs\ <\ len\ /\ ss;\ ofs\ +=\ sz\_buff\ /\ ss)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fat_8c_a0711b1d03b833e9d73b3be1a6397f461}{disk\_read}}(pdrv,\ buff,\ lba\ +\ ofs,\ sz\_buff\ /\ ss)\ !=\ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737}{RES\_OK}})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)ndisk\_read()\ failed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ tmr\ =\ systimer()\ -\/\ tmr;}
+\DoxyCodeLine{00056\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%lu\ bytes\ read\ and\ it\ took\ \%lu\ timer\ ticks.\(\backslash\)n"{}},\ len,\ tmr);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Test\ completed.\(\backslash\)n"{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00060\ \}}
+
+\end{DoxyCode}

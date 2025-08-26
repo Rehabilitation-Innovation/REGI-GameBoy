@@ -1,0 +1,72 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/include/blockdevice/blockdevice.h File Reference}
+\hypertarget{blockdevice_8h}{}\label{blockdevice_8h}\index{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/blockdevice.h@{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/blockdevice.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structblockdevice}{blockdevice}}
+\begin{DoxyCompactList}\small\item\em block device abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint64\+\_\+t \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em block device abstract object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb}{bd\+\_\+error}} \{ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\+\_\+\+ERROR\+\_\+\+OK}} = 0
+, \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{BD\+\_\+\+ERROR\+\_\+\+DEVICE\+\_\+\+ERROR}} = -\/4001
+ \}
+\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{blockdevice_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}\index{blockdevice.h@{blockdevice.h}!bd\_size\_t@{bd\_size\_t}}
+\index{bd\_size\_t@{bd\_size\_t}!blockdevice.h@{blockdevice.h}}
+\doxysubsubsection{\texorpdfstring{bd\_size\_t}{bd\_size\_t}}
+{\footnotesize\ttfamily \label{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6} 
+typedef uint64\+\_\+t \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}}}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00020}{20}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{blockdevice_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb}\index{blockdevice.h@{blockdevice.h}!bd\_error@{bd\_error}}
+\index{bd\_error@{bd\_error}!blockdevice.h@{blockdevice.h}}
+\doxysubsubsection{\texorpdfstring{bd\_error}{bd\_error}}
+{\footnotesize\ttfamily \label{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb} 
+enum \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abb}{bd\+\_\+error}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BD\_ERROR\_OK@{BD\_ERROR\_OK}!blockdevice.h@{blockdevice.h}}\index{blockdevice.h@{blockdevice.h}!BD\_ERROR\_OK@{BD\_ERROR\_OK}}}\Hypertarget{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}\label{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c} 
+BD\+\_\+\+ERROR\+\_\+\+OK&no error \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BD\_ERROR\_DEVICE\_ERROR@{BD\_ERROR\_DEVICE\_ERROR}!blockdevice.h@{blockdevice.h}}\index{blockdevice.h@{blockdevice.h}!BD\_ERROR\_DEVICE\_ERROR@{BD\_ERROR\_DEVICE\_ERROR}}}\Hypertarget{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}\label{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774} 
+BD\+\_\+\+ERROR\+\_\+\+DEVICE\+\_\+\+ERROR&device specific error \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00022}{22}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0,\ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba228ff6ba36b53da202b8b66b772f4774}{BD\_ERROR\_DEVICE\_ERROR}}\ \ \ \ \ \ \ =\ -\/4001,\ }
+\DoxyCodeLine{00025\ \};}
+
+\end{DoxyCode}

@@ -7,7 +7,16 @@
 <para>PWM Tone generation library for Raspberry Pi Pico. Plays melodies and chirping sounds via PWM through a buzzer or speaker. </para>
  
 </para>
-<programlisting linenumbering="unnumbered">#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &quot;pitches.h&quot;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &quot;pitches.h&quot;<?linebreak?></programlisting>Include dependency graph for pwm-tone.h:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="pwm-tone_8h__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Classes    </title>
         <itemizedlist>
             <listitem><para>struct <link linkend="_structnote__t">note_t</link></para>

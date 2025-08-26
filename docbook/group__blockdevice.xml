@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__blockdevice" xml:lang="en-US">
+<title>
+<para>blockdevice </para>
+</title>
+<indexterm><primary>blockdevice</primary></indexterm>
+<para>
+
+<para>Block device abstraction layer for storage media. </para>
+ 
+</para>
+<simplesect>
+    <title>Topics    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice__flash">blockdevice_flash</link></para>
+
+<para>Raspberry Pi Pico on-board flash memory block device. </para>
+</listitem>
+            <listitem><para><link linkend="_group__blockdevice__heap">blockdevice_heap</link></para>
+
+<para>Heap memory block device. </para>
+</listitem>
+            <listitem><para><link linkend="_group__blockdevice__loopback">blockdevice_loopback</link></para>
+
+<para>Loopback disk image file block device. </para>
+</listitem>
+            <listitem><para><link linkend="_group__blockdevice__sd">blockdevice_sd</link></para>
+
+<para>SPI-connected SD/MMC card block device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structblockdevice">blockdevice</link></para>
+
+<para>block device abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef struct <link linkend="_structblockdevice">blockdevice</link> <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link></para>
+
+<para>block device abstract object </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Block device abstraction layer for storage media. </para>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4"/><section>
+    <title>blockdevice_t</title>
+<indexterm><primary>blockdevice_t</primary><secondary>blockdevice</secondary></indexterm>
+<indexterm><primary>blockdevice</primary><secondary>blockdevice_t</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structblockdevice">blockdevice</link> <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link></computeroutput></para><para>
+
+<para>block device abstract object </para>
+</para>
+
+<para>All block device objects implement <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> </para>
+</section>
+</section>
+    <xi:include href="group__blockdevice__flash.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="group__blockdevice__heap.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="group__blockdevice__loopback.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="group__blockdevice__sd.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</section>

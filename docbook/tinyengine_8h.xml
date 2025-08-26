@@ -2,7 +2,25 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine_8h" xml:lang="en-US">
 <title>inc/tinyengine.h File Reference</title>
 <indexterm><primary>inc/tinyengine.h</primary></indexterm>
-<programlisting linenumbering="unnumbered">#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;stdio.h&quot;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &quot;tinyengine_scene.h&quot;<?linebreak?>#include &lt;unordered_map&gt;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &lt;functional&gt;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &quot;pico/stdlib.h&quot;<?linebreak?>#include &quot;stdio.h&quot;<?linebreak?>#include &quot;hardware/spi.h&quot;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &quot;tinyengine_scene.h&quot;<?linebreak?>#include &lt;unordered_map&gt;<?linebreak?>#include &quot;hardware/pll.h&quot;<?linebreak?>#include &quot;hardware/vreg.h&quot;<?linebreak?>#include &quot;hardware/clocks.h&quot;<?linebreak?>#include &quot;hardware/structs/pll.h&quot;<?linebreak?>#include &quot;hardware/structs/clocks.h&quot;<?linebreak?>#include &quot;hardware/dma.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;hardware/irq.h&quot;<?linebreak?>#include &quot;hardware/structs/bus_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_ctrl.h&quot;<?linebreak?>#include &quot;hardware/structs/hstx_fifo.h&quot;<?linebreak?>#include &quot;hardware/structs/sio.h&quot;<?linebreak?>#include &quot;pico/multicore.h&quot;<?linebreak?>#include &quot;pico/sem.h&quot;<?linebreak?>#include &lt;functional&gt;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?></programlisting>Include dependency graph for tinyengine.h:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="tinyengine_8h__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="tinyengine_8h__dep__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Classes    </title>
         <itemizedlist>
             <listitem><para>struct <link linkend="_structvec2">vec2</link></para>

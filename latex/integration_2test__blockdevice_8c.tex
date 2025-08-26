@@ -1,0 +1,207 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/integration/test\+\_\+blockdevice.c File Reference}
+\hypertarget{integration_2test__blockdevice_8c}{}\label{integration_2test__blockdevice_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_blockdevice.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/integration/test\_blockdevice.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$hardware/clocks.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/heap.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/loopback.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/sd.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914}{FLASH\+\_\+\+START\+\_\+\+AT}}~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\+\_\+\+LENGTH\+\_\+\+ALL}}~0
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\+\_\+\+STORAGE\+\_\+\+SIZE}}~(512 \texorpdfstring{$\ast$}{*} 128)
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}{LOOPBACK\+\_\+\+STORAGE\+\_\+\+SIZE}}~1024
+\item 
+\#define \mbox{\hyperlink{integration_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11}{LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE}}~512
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{integration_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}{test\+\_\+blockdevice}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{integration_2test__blockdevice_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{integration_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_blockdevice.c@{test\_blockdevice.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00013}{13}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{integration_2test__blockdevice_8c_a1f06fce82ce957c8dd28c5e07da29d97}\index{test\_blockdevice.c@{test\_blockdevice.c}!FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}}
+\index{FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_LENGTH\_ALL}{FLASH\_LENGTH\_ALL}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_a1f06fce82ce957c8dd28c5e07da29d97} 
+\#define FLASH\+\_\+\+LENGTH\+\_\+\+ALL~0}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00015}{15}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914}\index{test\_blockdevice.c@{test\_blockdevice.c}!FLASH\_START\_AT@{FLASH\_START\_AT}}
+\index{FLASH\_START\_AT@{FLASH\_START\_AT}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_START\_AT}{FLASH\_START\_AT}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914} 
+\#define FLASH\+\_\+\+START\+\_\+\+AT~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00014}{14}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{integration_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}\index{test\_blockdevice.c@{test\_blockdevice.c}!HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}}
+\index{HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{HEAP\_STORAGE\_SIZE}{HEAP\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae} 
+\#define HEAP\+\_\+\+STORAGE\+\_\+\+SIZE~(512 \texorpdfstring{$\ast$}{*} 128)}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00016}{16}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{integration_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11}\index{test\_blockdevice.c@{test\_blockdevice.c}!LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}}
+\index{LOOPBACK\_BLOCK\_SIZE@{LOOPBACK\_BLOCK\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_BLOCK\_SIZE}{LOOPBACK\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11} 
+\#define LOOPBACK\+\_\+\+BLOCK\+\_\+\+SIZE~512}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00018}{18}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+\Hypertarget{integration_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}\index{test\_blockdevice.c@{test\_blockdevice.c}!LOOPBACK\_STORAGE\_SIZE@{LOOPBACK\_STORAGE\_SIZE}}
+\index{LOOPBACK\_STORAGE\_SIZE@{LOOPBACK\_STORAGE\_SIZE}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{LOOPBACK\_STORAGE\_SIZE}{LOOPBACK\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4} 
+\#define LOOPBACK\+\_\+\+STORAGE\+\_\+\+SIZE~1024}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00017}{17}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{integration_2test__blockdevice_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{integration_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}\index{test\_blockdevice.c@{test\_blockdevice.c}!test\_blockdevice@{test\_blockdevice}}
+\index{test\_blockdevice@{test\_blockdevice}!test\_blockdevice.c@{test\_blockdevice.c}}
+\doxysubsubsection{\texorpdfstring{test\_blockdevice()}{test\_blockdevice()}}
+{\footnotesize\ttfamily \label{integration_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6} 
+void test\+\_\+blockdevice (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{integration_2test__blockdevice_8c_source_l00160}{160}} of file \mbox{\hyperlink{integration_2test__blockdevice_8c_source}{test\+\_\+blockdevice.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ Onboard-\/Flash:\(\backslash\)n"{}});}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *flash\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{integration_2test__blockdevice_8c_ae38550b2008b82c08588d2340f196914}{FLASH\_START\_AT}},\ \mbox{\hyperlink{fs__init__loopback_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\_LENGTH\_ALL}});}
+\DoxyCodeLine{00163\ \ \ \ \ assert(flash\ !=\ NULL);}
+\DoxyCodeLine{00164\ \ \ \ \ setup(flash);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ test\_api\_init(flash);}
+\DoxyCodeLine{00167\ \ \ \ \ test\_api\_erase\_program\_read(flash);}
+\DoxyCodeLine{00168\ \ \ \ \ test\_api\_trim(flash);}
+\DoxyCodeLine{00169\ \ \ \ \ test\_api\_sync(flash);}
+\DoxyCodeLine{00170\ \ \ \ \ test\_api\_size(flash);}
+\DoxyCodeLine{00171\ \ \ \ \ test\_api\_attribute(flash);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ cleanup(flash);}
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__flash_ga8d9d318677d2c372535f4c775c5a22c9}{blockdevice\_flash\_free}}(flash);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ SPI\ SD\ card:\(\backslash\)n"{}});}
+\DoxyCodeLine{00177\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *sd\ =\ \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\_sd\_create}}(spi0,}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_acd12af431f3d8c3752815d58f998c0ac}{PICO\_DEFAULT\_SPI\_TX\_PIN}},}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_ab7eaa7dddacd975821969189da644cdb}{PICO\_DEFAULT\_SPI\_RX\_PIN}},}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_adad46d9962adcf584b003bb52ef8e33e}{PICO\_DEFAULT\_SPI\_SCK\_PIN}},}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{regi__rev1_8h_a1f76bedc8bb59acb457e1943dda8431d}{PICO\_DEFAULT\_SPI\_CSN\_PIN}},}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 10\ *\ MHZ,}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false});}
+\DoxyCodeLine{00184\ \ \ \ \ assert(sd\ !=\ NULL);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_sd\_card\_connected(sd))\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ setup(sd);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ test\_api\_init(sd);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ test\_api\_erase\_program\_read(sd);}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ test\_api\_trim(sd);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ test\_api\_sync(sd);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ test\_api\_size(sd);}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ test\_api\_attribute(sd);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ cleanup(sd);}
+\DoxyCodeLine{00196\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}init"{}});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}skip,\ device\ not\ connected\(\backslash\)n"{}});}
+\DoxyCodeLine{00199\ \ \ \ \ \}}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{blockdevice\_sd\_free}}(sd);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ Heap\ memory:\(\backslash\)n"{}});}
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00204\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00205\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ test\_api\_init(heap);}
+\DoxyCodeLine{00208\ \ \ \ \ test\_api\_erase\_program\_read(heap);}
+\DoxyCodeLine{00209\ \ \ \ \ test\_api\_trim(heap);}
+\DoxyCodeLine{00210\ \ \ \ \ test\_api\_sync(heap);}
+\DoxyCodeLine{00211\ \ \ \ \ test\_api\_size(heap);}
+\DoxyCodeLine{00212\ \ \ \ \ test\_api\_attribute(heap);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00215\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ Loopback:\(\backslash\)n"{}});}
+\DoxyCodeLine{00218\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00219\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00220\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{00222\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{00223\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(fat,\ heap);}
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fat,\ heap);}
+\DoxyCodeLine{00225\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *loopback\ =\ \mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{blockdevice\_loopback\_create}}(\textcolor{stringliteral}{"{}/loopback"{}},}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{host_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}{LOOPBACK\_STORAGE\_SIZE}},}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fs__init__loopback_8c_ab8c390e6f53017179ae00255cd27fd11}{LOOPBACK\_BLOCK\_SIZE}});}
+\DoxyCodeLine{00228\ \ \ \ \ assert(loopback\ !=\ NULL);}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ test\_api\_init(loopback);}
+\DoxyCodeLine{00231\ \ \ \ \ test\_api\_erase\_program\_read(loopback);}
+\DoxyCodeLine{00232\ \ \ \ \ test\_api\_trim(loopback);}
+\DoxyCodeLine{00233\ \ \ \ \ test\_api\_sync(loopback);}
+\DoxyCodeLine{00234\ \ \ \ \ test\_api\_size(loopback);}
+\DoxyCodeLine{00235\ \ \ \ \ test\_api\_attribute(loopback);}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ cleanup(loopback);}
+\DoxyCodeLine{00238\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{blockdevice\_loopback\_free}}(loopback);}
+\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{00240\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{00241\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00243\ \}}
+
+\end{DoxyCode}

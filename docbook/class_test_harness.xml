@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_test_harness" xml:lang="en-US">
+<title>TestHarness Class Reference</title>
+<indexterm><primary>TestHarness</primary></indexterm>
+<para>
+<computeroutput>#include &lt;test_harness.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for TestHarness:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_test_harness.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_test_harness_1a445cb0c949020e46968c56264d0e1bd7">TestHarness</link> (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> trigger, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Public Member Functions inherited from <link linkend="_class_distance_sensor">DistanceSensor</link>        <itemizedlist>
+            <listitem><para><link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> trigger_gpio)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a">TriggerRead</link> ()</para>
+</listitem>
+        </itemizedlist>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_test_harness_1a5d5d1980f22a3f7291231a61a94be7a0">GetOffset</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">IsLoaded</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+            <listitem><para>static <link linkend="_class_distance_sensor">DistanceSensor</link> * <link linkend="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd">GetMappedSensor</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Static Public Member Functions inherited from <link linkend="_class_distance_sensor">DistanceSensor</link>        <itemizedlist>
+            <listitem><para>static <link linkend="_class_distance_sensor">DistanceSensor</link> * <link linkend="_class_distance_sensor_1a495a45dfe6d75a99126fac0e9edc7572">GetMappedSensor</link> (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)</para>
+</listitem>
+        </itemizedlist>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+Public Attributes inherited from <link linkend="_class_distance_sensor">DistanceSensor</link>        <itemizedlist>
+            <listitem><para>uint32_t <link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">distance</link> = 0</para>
+</listitem>
+            <listitem><para>volatile bool <link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link></para>
+</listitem>
+            <listitem><para><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Static Protected Member Functions inherited from <link linkend="_class_distance_sensor">DistanceSensor</link>        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_distance_sensor_1ac6680c1265d7514097937d587d509bca">_InitializeSensorForGpio</link> (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> gpio, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>, <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link> handler)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5">_IsProgramLoaded</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+            <listitem><para>static <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a579d6f646f9a93ad2e0446917271d742">_LoadSensorProgram</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+        </itemizedlist>
+Static Protected Attributes inherited from <link linkend="_class_distance_sensor">DistanceSensor</link>        <itemizedlist>
+            <listitem><para>static <link linkend="_class_distance_sensor">DistanceSensor</link> * <link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link> [2][4] = {}</para>
+</listitem>
+            <listitem><para>static <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">_PioOffsets</link> [2] = { <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link>, <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link> }</para>
+</listitem>
+        </itemizedlist>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_test__harness_8h_source_1l00005">5</link> of file <link linkend="_test__harness_8h_source">test_harness.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_test_harness_1a445cb0c949020e46968c56264d0e1bd7"/><section>
+    <title>TestHarness()</title>
+<indexterm><primary>TestHarness</primary><secondary>TestHarness</secondary></indexterm>
+<indexterm><primary>TestHarness</primary><secondary>TestHarness</secondary></indexterm>
+<para><computeroutput>TestHarness::TestHarness (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> trigger, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_test__harness_8h_source_1l00007">7</link> of file <link linkend="_test__harness_8h_source">test_harness.h</link>.</para>
+<programlisting linenumbering="unnumbered">00007 :&#32;<link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>(trigger,&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)&#32;{};
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd"/><section>
+    <title>GetMappedSensor()</title>
+<indexterm><primary>GetMappedSensor</primary><secondary>TestHarness</secondary></indexterm>
+<indexterm><primary>TestHarness</primary><secondary>GetMappedSensor</secondary></indexterm>
+<para><computeroutput><link linkend="_class_distance_sensor">DistanceSensor</link> * TestHarness::GetMappedSensor (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_test__harness_8cpp_source_1l00012">12</link> of file <link linkend="_test__harness_8cpp_source">test_harness.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00013 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>][<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>];
+00014 }
+</programlisting></section>
+<anchor xml:id="_class_test_harness_1a5d5d1980f22a3f7291231a61a94be7a0"/><section>
+    <title>GetOffset()</title>
+<indexterm><primary>GetOffset</primary><secondary>TestHarness</secondary></indexterm>
+<indexterm><primary>TestHarness</primary><secondary>GetOffset</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> TestHarness::GetOffset (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_test__harness_8cpp_source_1l00003">3</link> of file <link linkend="_test__harness_8cpp_source">test_harness.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00003 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00004 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">DistanceSensor::_PioOffsets</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>];
+00005 }
+</programlisting></section>
+<anchor xml:id="_class_test_harness_1aad8f631b26945bb71e799106705bf072"/><section>
+    <title>IsLoaded()</title>
+<indexterm><primary>IsLoaded</primary><secondary>TestHarness</secondary></indexterm>
+<indexterm><primary>TestHarness</primary><secondary>IsLoaded</secondary></indexterm>
+<para><computeroutput>bool TestHarness::IsLoaded (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="_test__harness_8cpp_source_1l00008">8</link> of file <link linkend="_test__harness_8cpp_source">test_harness.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00008 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00009 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5">DistanceSensor::_IsProgramLoaded</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>);
+00010 }
+</programlisting></section>
+<para>
+The documentation for this class was generated from the following files:</para>
+lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/<link linkend="_test__harness_8h">test_harness.h</link>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/<link linkend="_test__harness_8cpp">test_harness.cpp</link></section>
+</section>

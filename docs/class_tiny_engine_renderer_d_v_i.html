@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: TinyEngineRendererDVI Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('class_tiny_engine_renderer_d_v_i.html','','class_tiny_engine_renderer_d_v_i-members'); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -108,16 +95,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="tinyengine__renderer__dvi_8h_source.html">tinyengine_renderer_dvi.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html">tinyengine_renderer_dvi_c_adapter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TinyEngineRendererDVI:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="class_tiny_engine_renderer_d_v_i.png" usemap="#TinyEngineRendererDVI_map" alt=""/>
-  <map id="TinyEngineRendererDVI_map" name="TinyEngineRendererDVI_map">
-<area href="class_tiny_engine_renderer_i.html" alt="TinyEngineRendererI" shape="rect" coords="0,0,149,24"/>
-  </map>
-</div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="class_tiny_engine_renderer_d_v_i__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Collaboration diagram for TinyEngineRendererDVI:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="class_tiny_engine_renderer_d_v_i__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -165,6 +153,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa12a0ece831ea57ad7b912b069493ce7" id="r_aa12a0ece831ea57ad7b912b069493ce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</a> ()</td></tr>
 <tr class="memitem:af10bc6442ebdf6db594fdc9c8f249414" id="r_af10bc6442ebdf6db594fdc9c8f249414"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</a> ()</td></tr>
 <tr class="memitem:ad99d6834cfcba17b8c9cbca951029c4a" id="r_ad99d6834cfcba17b8c9cbca951029c4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a> ()</td></tr>
+<tr class="memitem:a0e3df45316caf89ecd7ab4e21888d324" id="r_a0e3df45316caf89ecd7ab4e21888d324"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</a> (<a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;fr_buf)</td></tr>
+<tr class="memitem:a09c4f163843cf199dc0afcfafd7953b5" id="r_a09c4f163843cf199dc0afcfafd7953b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09c4f163843cf199dc0afcfafd7953b5">~TinyEngineRendererDVI</a> ()</td></tr>
+<tr class="memitem:ad9985d571f39928ba4cebd35d84cd5f0" id="r_ad9985d571f39928ba4cebd35d84cd5f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</a> ()</td></tr>
+<tr class="memitem:aa12a0ece831ea57ad7b912b069493ce7" id="r_aa12a0ece831ea57ad7b912b069493ce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</a> ()</td></tr>
+<tr class="memitem:af10bc6442ebdf6db594fdc9c8f249414" id="r_af10bc6442ebdf6db594fdc9c8f249414"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</a> ()</td></tr>
+<tr class="memitem:ad99d6834cfcba17b8c9cbca951029c4a" id="r_ad99d6834cfcba17b8c9cbca951029c4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a> ()</td></tr>
 <tr class="memitem:a3f7752c320d9957f7e88f85ac9d6f8de" id="r_a3f7752c320d9957f7e88f85ac9d6f8de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f7752c320d9957f7e88f85ac9d6f8de">gfx_dma_handler</a> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -188,7 +182,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8h_source.html#l00009">9</a> of file <a class="el" href="tinyengine__renderer__dvi_8h_source.html">tinyengine_renderer_dvi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html#l00009">9</a> of file <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html">tinyengine_renderer_dvi_c_adapter.h</a>.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a1907e8c778a78214ee236e72eb522ed5" name="a1907e8c778a78214ee236e72eb522ed5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1907e8c778a78214ee236e72eb522ed5">&#9670;&#160;</a></span>Mode</h2>
@@ -306,7 +300,66 @@ Protected Attributes</h2></td></tr>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0e3df45316caf89ecd7ab4e21888d324" name="a0e3df45316caf89ecd7ab4e21888d324"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e3df45316caf89ecd7ab4e21888d324">&#9670;&#160;</a></span>TinyEngineRendererDVI()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3df45316caf89ecd7ab4e21888d324">&#9670;&#160;</a></span>TinyEngineRendererDVI() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TinyEngineRendererDVI::TinyEngineRendererDVI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>fr_buf</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html#l00018">18</a> of file <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html">tinyengine_renderer_dvi_c_adapter.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>                                                         : m_frame_buf(fr_buf) {</div>
+<div class="line"><span class="lineno">   19</span>        <a class="code hl_function" href="#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a>();</div>
+<div class="line"><span class="lineno">   20</span>    };</div>
+<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad99d6834cfcba17b8c9cbca951029c4a"><div class="ttname"><a href="#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a></div><div class="ttdeci">tinyengine_status_t tinyengine_renderer_init()</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00007">tinyengine_renderer_dvi._c_adapter.cpp:7</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a09c4f163843cf199dc0afcfafd7953b5" name="a09c4f163843cf199dc0afcfafd7953b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c4f163843cf199dc0afcfafd7953b5">&#9670;&#160;</a></span>~TinyEngineRendererDVI() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TinyEngineRendererDVI::~TinyEngineRendererDVI </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html#l00022">22</a> of file <a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html">tinyengine_renderer_dvi_c_adapter.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   22</span>{};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0e3df45316caf89ecd7ab4e21888d324" name="a0e3df45316caf89ecd7ab4e21888d324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3df45316caf89ecd7ab4e21888d324">&#9670;&#160;</a></span>TinyEngineRendererDVI() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,20 +373,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html#l00729">729</a> of file <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html">tinyengine_renderer_dvi.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  729</span>                                                                          : m_frame_buf(fr_buf)</div>
-<div class="line"><span class="lineno">  730</span>{</div>
-<div class="line"><span class="lineno">  731</span>    <span class="comment">// Always use the bottom channels</span></div>
-<div class="line"><span class="lineno">  732</span>    dma_claim_mask((1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1);</div>
-<div class="line"><span class="lineno">  733</span>    <a class="code hl_function" href="#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a>();</div>
-<div class="line"><span class="lineno">  734</span>};</div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad99d6834cfcba17b8c9cbca951029c4a"><div class="ttname"><a href="#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a></div><div class="ttdeci">tinyengine_status_t tinyengine_renderer_init()</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00490">tinyengine_renderer_dvi.cpp:490</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8h_html_ae397473251f21f73a1dca055f1c0048e"><div class="ttname"><a href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a></div><div class="ttdeci">#define NUM_CHANS</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00006">tinyengine_renderer_dvi.h:6</a></div></div>
-</div><!-- fragment -->
 </div>
 </div>
 <a id="a09c4f163843cf199dc0afcfafd7953b5" name="a09c4f163843cf199dc0afcfafd7953b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09c4f163843cf199dc0afcfafd7953b5">&#9670;&#160;</a></span>~TinyEngineRendererDVI()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c4f163843cf199dc0afcfafd7953b5">&#9670;&#160;</a></span>~TinyEngineRendererDVI() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -379,7 +422,37 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ad9985d571f39928ba4cebd35d84cd5f0" name="ad9985d571f39928ba4cebd35d84cd5f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9985d571f39928ba4cebd35d84cd5f0">&#9670;&#160;</a></span>swap_blocking()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9985d571f39928ba4cebd35d84cd5f0">&#9670;&#160;</a></span>swap_blocking() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> TinyEngineRendererDVI::swap_blocking </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#a2469b0b227cbc4ff8a27f292f929d0d3">TinyEngineRendererI</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00002">2</a> of file <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html">tinyengine_renderer_dvi._c_adapter.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    2</span>{};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad9985d571f39928ba4cebd35d84cd5f0" name="ad9985d571f39928ba4cebd35d84cd5f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9985d571f39928ba4cebd35d84cd5f0">&#9670;&#160;</a></span>swap_blocking() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,7 +483,37 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aa12a0ece831ea57ad7b912b069493ce7" name="aa12a0ece831ea57ad7b912b069493ce7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa12a0ece831ea57ad7b912b069493ce7">&#9670;&#160;</a></span>swap_non_blocking()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa12a0ece831ea57ad7b912b069493ce7">&#9670;&#160;</a></span>swap_non_blocking() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> TinyEngineRendererDVI::swap_non_blocking </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#ab1c8fd0d87f133a519e26ae071765e9f">TinyEngineRendererI</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00003">3</a> of file <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html">tinyengine_renderer_dvi._c_adapter.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    3</span>{};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa12a0ece831ea57ad7b912b069493ce7" name="aa12a0ece831ea57ad7b912b069493ce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa12a0ece831ea57ad7b912b069493ce7">&#9670;&#160;</a></span>swap_non_blocking() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +543,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ad99d6834cfcba17b8c9cbca951029c4a" name="ad99d6834cfcba17b8c9cbca951029c4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad99d6834cfcba17b8c9cbca951029c4a">&#9670;&#160;</a></span>tinyengine_renderer_init()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99d6834cfcba17b8c9cbca951029c4a">&#9670;&#160;</a></span>tinyengine_renderer_init() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,263 +567,46 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#ab61c14e1610265da86010a83142674bd">TinyEngineRendererI</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html#l00490">490</a> of file <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html">tinyengine_renderer_dvi.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  491</span>{</div>
-<div class="line"><span class="lineno">  492</span>    <span class="comment">//framebuffer-&gt;flip_blocking = te_renderer_dvi_wait_vsync_blocking;// set this in the main initiator in tinyengine.c</span></div>
-<div class="line"><span class="lineno">  493</span>    display = <span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  494</span>    <span class="comment">// dma_claim_mask((1 &lt;&lt; NUM_CHANS) - 1);</span></div>
-<div class="line"><span class="lineno">  495</span>    ch_num = 0;</div>
-<div class="line"><span class="lineno">  496</span>    line_num = -1;</div>
-<div class="line"><span class="lineno">  497</span>    v_scanline = 2;</div>
-<div class="line"><span class="lineno">  498</span>    flip_next = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  499</span> </div>
-<div class="line"><span class="lineno">  500</span>    <span class="comment">// v_inactive_total = timing_mode-&gt;v_front_porch + timing_mode-&gt;v_sync_width + timing_mode-&gt;v_back_porch;</span></div>
-<div class="line"><span class="lineno">  501</span>    v_inactive_total = <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</a> + <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a12e2ff5f3949e456139ab32153e276df">MODE_V_SYNC_WIDTH</a> + <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#ae572b39c10ef4635a552fe095e0ad34e">MODE_V_BACK_PORCH</a>;</div>
-<div class="line"><span class="lineno">  502</span>    <span class="comment">// v_total_active_lines = v_inactive_total + timing_mode-&gt;v_active_lines;</span></div>
-<div class="line"><span class="lineno">  503</span>    v_total_active_lines = v_inactive_total + <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a989ecfb618e13a471b7ad44cd9fda4fa">MODE_V_ACTIVE_LINES</a>;</div>
-<div class="line"><span class="lineno">  504</span>    <a class="code hl_variable" href="#aa6f8cc917454c16a374452cc66b03687">v_repeat</a> = 1 &lt;&lt; v_repeat_shift;</div>
-<div class="line"><span class="lineno">  505</span>    <a class="code hl_variable" href="#a8a99856f9ce556f04f5032daec14a5f1">h_repeat</a> = 1 &lt;&lt; h_repeat_shift;</div>
-<div class="line"><span class="lineno">  506</span> </div>
-<div class="line"><span class="lineno">  507</span>    memcpy(vblank_line_vsync_off, vblank_line_vsync_off_src, <span class="keyword">sizeof</span>(vblank_line_vsync_off_src));</div>
-<div class="line"><span class="lineno">  508</span>    <span class="comment">// vblank_line_vsync_off[0] |= timing_mode-&gt;h_front_porch;</span></div>
-<div class="line"><span class="lineno">  509</span>    <span class="comment">// vblank_line_vsync_off[2] |= timing_mode-&gt;h_sync_width;</span></div>
-<div class="line"><span class="lineno">  510</span>    <span class="comment">// vblank_line_vsync_off[4] |= timing_mode-&gt;h_back_porch + timing_mode-&gt;h_active_pixels;</span></div>
-<div class="line"><span class="lineno">  511</span>    vblank_line_vsync_off[0] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</a>;</div>
-<div class="line"><span class="lineno">  512</span>    vblank_line_vsync_off[2] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</a>;</div>
-<div class="line"><span class="lineno">  513</span>    vblank_line_vsync_off[4] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</a> + <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</a>;</div>
-<div class="line"><span class="lineno">  514</span> </div>
-<div class="line"><span class="lineno">  515</span>    memcpy(vblank_line_vsync_on, vblank_line_vsync_on_src, <span class="keyword">sizeof</span>(vblank_line_vsync_on_src));</div>
-<div class="line"><span class="lineno">  516</span>    <span class="comment">// vblank_line_vsync_on[0] |= timing_mode-&gt;h_front_porch;</span></div>
-<div class="line"><span class="lineno">  517</span>    <span class="comment">// vblank_line_vsync_on[2] |= timing_mode-&gt;h_sync_width;</span></div>
-<div class="line"><span class="lineno">  518</span>    <span class="comment">// vblank_line_vsync_on[4] |= timing_mode-&gt;h_back_porch + timing_mode-&gt;h_active_pixels;</span></div>
-<div class="line"><span class="lineno">  519</span>    vblank_line_vsync_on[0] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</a>;</div>
-<div class="line"><span class="lineno">  520</span>    vblank_line_vsync_on[2] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</a>;</div>
-<div class="line"><span class="lineno">  521</span>    vblank_line_vsync_on[4] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</a> + <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</a>;</div>
-<div class="line"><span class="lineno">  522</span> </div>
-<div class="line"><span class="lineno">  523</span>    memcpy(vactive_line_header, vactive_line_header_src, <span class="keyword">sizeof</span>(vactive_line_header_src));</div>
-<div class="line"><span class="lineno">  524</span>    <span class="comment">// vactive_line_header[0] |= timing_mode-&gt;h_front_porch;</span></div>
-<div class="line"><span class="lineno">  525</span>    <span class="comment">// vactive_line_header[2] |= timing_mode-&gt;h_sync_width;</span></div>
-<div class="line"><span class="lineno">  526</span>    <span class="comment">// vactive_line_header[4] |= timing_mode-&gt;h_back_porch;</span></div>
-<div class="line"><span class="lineno">  527</span>    <span class="comment">// vactive_line_header[6] |= timing_mode-&gt;h_active_pixels;</span></div>
-<div class="line"><span class="lineno">  528</span>    vactive_line_header[0] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</a>;</div>
-<div class="line"><span class="lineno">  529</span>    vactive_line_header[2] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</a>;</div>
-<div class="line"><span class="lineno">  530</span>    vactive_line_header[4] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</a>;</div>
-<div class="line"><span class="lineno">  531</span>    vactive_line_header[6] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</a>;</div>
-<div class="line"><span class="lineno">  532</span> </div>
-<div class="line"><span class="lineno">  533</span>    memcpy(vactive_text_line_header, vactive_text_line_header_src, <span class="keyword">sizeof</span>(vactive_text_line_header_src));</div>
-<div class="line"><span class="lineno">  534</span>    <span class="comment">// vactive_text_line_header[0] |= timing_mode-&gt;h_front_porch;</span></div>
-<div class="line"><span class="lineno">  535</span>    <span class="comment">// vactive_text_line_header[2] |= timing_mode-&gt;h_sync_width;</span></div>
-<div class="line"><span class="lineno">  536</span>    <span class="comment">// vactive_text_line_header[4] |= timing_mode-&gt;h_back_porch;</span></div>
-<div class="line"><span class="lineno">  537</span>    <span class="comment">// vactive_text_line_header[7 + 6] |= timing_mode-&gt;h_active_pixels - 6;</span></div>
-<div class="line"><span class="lineno">  538</span>    vactive_text_line_header[0] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</a>;</div>
-<div class="line"><span class="lineno">  539</span>    vactive_text_line_header[2] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</a>;</div>
-<div class="line"><span class="lineno">  540</span>    vactive_text_line_header[4] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</a>;</div>
-<div class="line"><span class="lineno">  541</span>    vactive_text_line_header[7 + 6] |= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</a> - 6;</div>
-<div class="line"><span class="lineno">  542</span> </div>
-<div class="line"><span class="lineno">  543</span>    <span class="comment">// RGB332 pallete mode</span></div>
-<div class="line"><span class="lineno">  544</span>    <a class="code hl_variable" href="#add867ce010cc772f7e993a7ac326a05d">frame_bytes_per_pixel</a> = 1;</div>
-<div class="line"><span class="lineno">  545</span>    <span class="comment">// RGB 888 mode.</span></div>
-<div class="line"><span class="lineno">  546</span>    <span class="comment">// frame_bytes_per_pixel = 4;</span></div>
-<div class="line"><span class="lineno">  547</span>    line_bytes_per_pixel = 4;</div>
-<div class="line"><span class="lineno">  548</span> </div>
-<div class="line"><span class="lineno">  549</span>    <span class="comment">// frame_buffer_display = (uint8_t*)calloc(frame_width * frame_height * frame_bytes_per_pixel, 1);</span></div>
-<div class="line"><span class="lineno">  550</span>    <span class="comment">// frame_buffer_back = (uint8_t*)calloc(frame_width * frame_height * frame_bytes_per_pixel, 1);</span></div>
-<div class="line"><span class="lineno">  551</span> </div>
-<div class="line"><span class="lineno">  552</span> </div>
-<div class="line"><span class="lineno">  553</span>    <span class="comment">// if (!framebuffer-&gt;is_dual) {</span></div>
-<div class="line"><span class="lineno">  554</span>    <span class="comment">//     teerr(&quot;Frame buffer needs to be dual for DVI.&quot;);</span></div>
-<div class="line"><span class="lineno">  555</span> </div>
-<div class="line"><span class="lineno">  556</span>    <span class="comment">//     return TINYENGINE_ERROR;</span></div>
-<div class="line"><span class="lineno">  557</span>    <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">  558</span> </div>
-<div class="line"><span class="lineno">  559</span>    <span class="comment">// I just assign the pointers here because this makes the updating simpler.</span></div>
-<div class="line"><span class="lineno">  560</span>    <span class="comment">// s_frame_buf = framebuffer;</span></div>
-<div class="line"><span class="lineno">  561</span>    <span class="comment">// display_buf = _display_buffer;</span></div>
-<div class="line"><span class="lineno">  562</span>    frame_buffer_display = m_frame_buf.pixel_buffer_display;</div>
-<div class="line"><span class="lineno">  563</span>    <span class="comment">// frame_buffer_back = framebuffer-&gt;pixel_buffer_back;</span></div>
-<div class="line"><span class="lineno">  564</span>    <span class="comment">// frame_buffer_display = framebuffer-&gt;pixel_buffer_display;</span></div>
-<div class="line"><span class="lineno">  565</span>    <span class="comment">// memset(frame_buffer_display, (uint8_t)(0xF0), frame_width * frame_height * frame_bytes_per_pixel);</span></div>
-<div class="line"><span class="lineno">  566</span>    <span class="comment">// memset(frame_buffer_back, (uint8_t)0xF0, frame_width * frame_height * frame_bytes_per_pixel);</span></div>
-<div class="line"><span class="lineno">  567</span> </div>
-<div class="line"><span class="lineno">  568</span>    <span class="comment">// if (m_frame_buf.m_pixel_buffer_size != frame_width * frame_height * frame_bytes_per_pixel) {</span></div>
-<div class="line"><span class="lineno">  569</span>    <span class="comment">//     // teerr(&quot;Frame buffer size Error, check size. Must be 320x240x1 bytes&quot;);</span></div>
-<div class="line"><span class="lineno">  570</span>    <span class="comment">//     return;</span></div>
-<div class="line"><span class="lineno">  571</span>    <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">  572</span> </div>
-<div class="line"><span class="lineno">  573</span>    memset(display_palette, 0, <a class="code hl_variable" href="#ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</a> * <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="tinyengine__renderer__dvi_8h.html#a0e2f295d3fc0f6caf5e239667b4d5814">RGB888</a>));</div>
-<div class="line"><span class="lineno">  574</span>    <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 255; i++)</div>
-<div class="line"><span class="lineno">  575</span>    {</div>
-<div class="line"><span class="lineno">  576</span>        uint8_t r = (i &gt;&gt; 6) * 255 / 3;</div>
-<div class="line"><span class="lineno">  577</span>        uint8_t g = ((i &gt;&gt; 2) &amp; 7) * 255 / 7;</div>
-<div class="line"><span class="lineno">  578</span>        uint8_t b = (i &amp; 3) * 255 / 3;</div>
-<div class="line"><span class="lineno">  579</span>        display_palette[i] = (r &lt;&lt; 16) | (g &lt;&lt; 8) | b;</div>
-<div class="line"><span class="lineno">  580</span>    }</div>
-<div class="line"><span class="lineno">  581</span> </div>
-<div class="line"><span class="lineno">  582</span>    <span class="comment">// display_palette[255] = 0xFFFFFF; // just need to set 0xff to white this pallette method is clever. i wonder if i can switch pallettes based on sprites.</span></div>
-<div class="line"><span class="lineno">  583</span> </div>
-<div class="line"><span class="lineno">  584</span>    <span class="comment">// const bool is_text_mode = (mode == MODE_TEXT_MONO || mode == MODE_TEXT_RGB111);</span></div>
-<div class="line"><span class="lineno">  585</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> frame_pixel_words = (<a class="code hl_variable" href="#a5c8198aeb53c231de91bbf790a59f77c">frame_width</a> * <a class="code hl_variable" href="#a8a99856f9ce556f04f5032daec14a5f1">h_repeat</a> * line_bytes_per_pixel + 3) &gt;&gt; 2;</div>
-<div class="line"><span class="lineno">  586</span>    <span class="comment">// const int frame_line_words = frame_pixel_words + (is_text_mode ? count_of(vactive_text_line_header) : count_of(vactive_line_header));</span></div>
-<div class="line"><span class="lineno">  587</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> frame_line_words = frame_pixel_words + count_of(vactive_line_header);</div>
-<div class="line"><span class="lineno">  588</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> frame_lines = (<a class="code hl_variable" href="#aa6f8cc917454c16a374452cc66b03687">v_repeat</a> == 1) ? <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a> : <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#a426143609826cbf6d30a1ae2b3ae5753">NUM_FRAME_LINES</a>;</div>
-<div class="line"><span class="lineno">  589</span>    line_buffers = (uint32_t*)malloc(frame_line_words * 4 * frame_lines);</div>
-<div class="line"><span class="lineno">  590</span> </div>
-<div class="line"><span class="lineno">  591</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; frame_lines; ++i)</div>
-<div class="line"><span class="lineno">  592</span>    {</div>
-<div class="line"><span class="lineno">  593</span>        memcpy(&amp;line_buffers[i * frame_line_words], vactive_line_header,</div>
-<div class="line"><span class="lineno">  594</span>            count_of(vactive_line_header) * <span class="keyword">sizeof</span>(uint32_t));</div>
-<div class="line"><span class="lineno">  595</span>    }</div>
-<div class="line"><span class="lineno">  596</span> </div>
-<div class="line"><span class="lineno">  597</span>    <span class="comment">// Ensure HSTX FIFO is clear</span></div>
-<div class="line"><span class="lineno">  598</span>    reset_block_num(RESET_HSTX);</div>
-<div class="line"><span class="lineno">  599</span>    sleep_us(10);</div>
-<div class="line"><span class="lineno">  600</span>    unreset_block_num_wait_blocking(RESET_HSTX);</div>
-<div class="line"><span class="lineno">  601</span>    sleep_us(10);</div>
-<div class="line"><span class="lineno">  602</span> </div>
-<div class="line"><span class="lineno">  603</span>    <span class="comment">// Configure HSTX&#39;s TMDS encoder for RGB888</span></div>
-<div class="line"><span class="lineno">  604</span>    hstx_ctrl_hw-&gt;expand_tmds =</div>
-<div class="line"><span class="lineno">  605</span>        7 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L2_NBITS_LSB |</div>
-<div class="line"><span class="lineno">  606</span>        16 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L2_ROT_LSB |</div>
-<div class="line"><span class="lineno">  607</span>        7 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L1_NBITS_LSB |</div>
-<div class="line"><span class="lineno">  608</span>        8 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L1_ROT_LSB |</div>
-<div class="line"><span class="lineno">  609</span>        7 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L0_NBITS_LSB |</div>
-<div class="line"><span class="lineno">  610</span>        0 &lt;&lt; HSTX_CTRL_EXPAND_TMDS_L0_ROT_LSB;</div>
-<div class="line"><span class="lineno">  611</span> </div>
-<div class="line"><span class="lineno">  612</span>    <span class="comment">// Pixels and control symbols (RAW) are an</span></div>
-<div class="line"><span class="lineno">  613</span>    <span class="comment">// entire 32-bit word.</span></div>
-<div class="line"><span class="lineno">  614</span>    hstx_ctrl_hw-&gt;expand_shift =</div>
-<div class="line"><span class="lineno">  615</span>        1 &lt;&lt; HSTX_CTRL_EXPAND_SHIFT_ENC_N_SHIFTS_LSB |</div>
-<div class="line"><span class="lineno">  616</span>        0 &lt;&lt; HSTX_CTRL_EXPAND_SHIFT_ENC_SHIFT_LSB |</div>
-<div class="line"><span class="lineno">  617</span>        1 &lt;&lt; HSTX_CTRL_EXPAND_SHIFT_RAW_N_SHIFTS_LSB |</div>
-<div class="line"><span class="lineno">  618</span>        0 &lt;&lt; HSTX_CTRL_EXPAND_SHIFT_RAW_SHIFT_LSB;</div>
-<div class="line"><span class="lineno">  619</span> </div>
-<div class="line"><span class="lineno">  620</span>    <span class="comment">// Serial output config: clock period of 5 cycles, pop from command</span></div>
-<div class="line"><span class="lineno">  621</span>    <span class="comment">// expander every 5 cycles, shift the output shiftreg by 2 every cycle.</span></div>
-<div class="line"><span class="lineno">  622</span>    hstx_ctrl_hw-&gt;csr = 0;</div>
-<div class="line"><span class="lineno">  623</span>    hstx_ctrl_hw-&gt;csr =</div>
-<div class="line"><span class="lineno">  624</span>        HSTX_CTRL_CSR_EXPAND_EN_BITS |</div>
-<div class="line"><span class="lineno">  625</span>        5u &lt;&lt; HSTX_CTRL_CSR_CLKDIV_LSB |</div>
-<div class="line"><span class="lineno">  626</span>        5u &lt;&lt; HSTX_CTRL_CSR_N_SHIFTS_LSB |</div>
-<div class="line"><span class="lineno">  627</span>        2u &lt;&lt; HSTX_CTRL_CSR_SHIFT_LSB |</div>
-<div class="line"><span class="lineno">  628</span>        HSTX_CTRL_CSR_EN_BITS;</div>
-<div class="line"><span class="lineno">  629</span> </div>
-<div class="line"><span class="lineno">  630</span> </div>
-<div class="line"><span class="lineno">  631</span>    <span class="comment">// HSTX outputs 0 through 7 appear on GPIO 12 through 19.</span></div>
-<div class="line"><span class="lineno">  632</span>    <span class="keywordtype">int</span> HSTX_FIRST_PIN = 12;</div>
-<div class="line"><span class="lineno">  633</span>    <span class="keywordtype">int</span> clk_p = 12;</div>
-<div class="line"><span class="lineno">  634</span>    <span class="keywordtype">int</span> rgb_p[3] = { 14, 16, 18 };</div>
-<div class="line"><span class="lineno">  635</span> </div>
-<div class="line"><span class="lineno">  636</span>    <span class="comment">// Assign clock pair to two neighbouring pins:</span></div>
-<div class="line"><span class="lineno">  637</span>    {</div>
-<div class="line"><span class="lineno">  638</span>        <span class="keywordtype">int</span> bit = clk_p - HSTX_FIRST_PIN;</div>
-<div class="line"><span class="lineno">  639</span>        hstx_ctrl_hw-&gt;bit[bit] = HSTX_CTRL_BIT0_CLK_BITS;</div>
-<div class="line"><span class="lineno">  640</span>        hstx_ctrl_hw-&gt;bit[bit ^ 1] = HSTX_CTRL_BIT0_CLK_BITS | HSTX_CTRL_BIT0_INV_BITS;</div>
-<div class="line"><span class="lineno">  641</span>    }</div>
-<div class="line"><span class="lineno">  642</span> </div>
-<div class="line"><span class="lineno">  643</span>    <span class="keywordflow">for</span> (uint lane = 0; lane &lt; 3; ++lane)</div>
-<div class="line"><span class="lineno">  644</span>    {</div>
-<div class="line"><span class="lineno">  645</span>        <span class="comment">// For each TMDS lane, assign it to the correct GPIO pair based on the</span></div>
-<div class="line"><span class="lineno">  646</span>        <span class="comment">// desired pinout:</span></div>
-<div class="line"><span class="lineno">  647</span>        <span class="keywordtype">int</span> bit = rgb_p[lane] - HSTX_FIRST_PIN;</div>
-<div class="line"><span class="lineno">  648</span>        <span class="comment">// Output even bits during first half of each HSTX cycle, and odd bits</span></div>
-<div class="line"><span class="lineno">  649</span>        <span class="comment">// during second half. The shifter advances by two bits each cycle.</span></div>
-<div class="line"><span class="lineno">  650</span>        uint32_t lane_data_sel_bits =</div>
-<div class="line"><span class="lineno">  651</span>            (lane * 10) &lt;&lt; HSTX_CTRL_BIT0_SEL_P_LSB |</div>
-<div class="line"><span class="lineno">  652</span>            (lane * 10 + 1) &lt;&lt; HSTX_CTRL_BIT0_SEL_N_LSB;</div>
-<div class="line"><span class="lineno">  653</span>        <span class="comment">// The two halves of each pair get identical data, but one pin is inverted.</span></div>
-<div class="line"><span class="lineno">  654</span>        hstx_ctrl_hw-&gt;bit[bit] = lane_data_sel_bits;</div>
-<div class="line"><span class="lineno">  655</span>        hstx_ctrl_hw-&gt;bit[bit ^ 1] = lane_data_sel_bits | HSTX_CTRL_BIT0_INV_BITS;</div>
-<div class="line"><span class="lineno">  656</span>    }</div>
-<div class="line"><span class="lineno">  657</span> </div>
-<div class="line"><span class="lineno">  658</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 12; i &lt;= 19; ++i)</div>
-<div class="line"><span class="lineno">  659</span>    {</div>
-<div class="line"><span class="lineno">  660</span>        gpio_set_function(i, GPIO_FUNC_HSTX);</div>
-<div class="line"><span class="lineno">  661</span>        gpio_set_drive_strength(i, GPIO_DRIVE_STRENGTH_4MA);</div>
-<div class="line"><span class="lineno">  662</span>        <span class="comment">// if (252000 &gt; 900000) {</span></div>
-<div class="line"><span class="lineno">  663</span>        gpio_set_slew_rate(i, GPIO_SLEW_RATE_FAST);</div>
-<div class="line"><span class="lineno">  664</span>        <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">  665</span>    }</div>
-<div class="line"><span class="lineno">  666</span> </div>
-<div class="line"><span class="lineno">  667</span>    printf(<span class="stringliteral">&quot;GPIO Done\r\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  668</span> </div>
-<div class="line"><span class="lineno">  669</span>    <span class="comment">// The channels are set up identically, to transfer a whole scanline and</span></div>
-<div class="line"><span class="lineno">  670</span>    <span class="comment">// then chain to the next channel. Each time a channel finishes, we</span></div>
-<div class="line"><span class="lineno">  671</span>    <span class="comment">// reconfigure the one that just finished, meanwhile the other channel(s)</span></div>
-<div class="line"><span class="lineno">  672</span>    <span class="comment">// are already making progress.</span></div>
-<div class="line"><span class="lineno">  673</span>    <span class="comment">// Using just 2 channels was insufficient to avoid issues with the IRQ.</span></div>
-<div class="line"><span class="lineno">  674</span>    dma_channel_config c;</div>
-<div class="line"><span class="lineno">  675</span>    c = dma_channel_get_default_config(0);</div>
-<div class="line"><span class="lineno">  676</span>    channel_config_set_chain_to(&amp;c, 1);</div>
-<div class="line"><span class="lineno">  677</span>    channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
-<div class="line"><span class="lineno">  678</span>    dma_channel_configure(</div>
-<div class="line"><span class="lineno">  679</span>        0,</div>
-<div class="line"><span class="lineno">  680</span>        &amp;c,</div>
-<div class="line"><span class="lineno">  681</span>        &amp;hstx_fifo_hw-&gt;fifo,</div>
-<div class="line"><span class="lineno">  682</span>        vblank_line_vsync_off,</div>
-<div class="line"><span class="lineno">  683</span>        count_of(vblank_line_vsync_off),</div>
-<div class="line"><span class="lineno">  684</span>        <span class="keyword">false</span></div>
-<div class="line"><span class="lineno">  685</span>    );</div>
-<div class="line"><span class="lineno">  686</span>    c = dma_channel_get_default_config(1);</div>
-<div class="line"><span class="lineno">  687</span>    channel_config_set_chain_to(&amp;c, 2);</div>
-<div class="line"><span class="lineno">  688</span>    channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
-<div class="line"><span class="lineno">  689</span>    dma_channel_configure(</div>
-<div class="line"><span class="lineno">  690</span>        1,</div>
-<div class="line"><span class="lineno">  691</span>        &amp;c,</div>
-<div class="line"><span class="lineno">  692</span>        &amp;hstx_fifo_hw-&gt;fifo,</div>
-<div class="line"><span class="lineno">  693</span>        vblank_line_vsync_off,</div>
-<div class="line"><span class="lineno">  694</span>        count_of(vblank_line_vsync_off),</div>
-<div class="line"><span class="lineno">  695</span>        <span class="keyword">false</span></div>
-<div class="line"><span class="lineno">  696</span>    );</div>
-<div class="line"><span class="lineno">  697</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>; ++i)</div>
-<div class="line"><span class="lineno">  698</span>    {</div>
-<div class="line"><span class="lineno">  699</span>        c = dma_channel_get_default_config(i);</div>
-<div class="line"><span class="lineno">  700</span>        channel_config_set_chain_to(&amp;c, (i + 1) % <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>);</div>
-<div class="line"><span class="lineno">  701</span>        channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
-<div class="line"><span class="lineno">  702</span>        dma_channel_configure(</div>
-<div class="line"><span class="lineno">  703</span>            i,</div>
-<div class="line"><span class="lineno">  704</span>            &amp;c,</div>
-<div class="line"><span class="lineno">  705</span>            &amp;hstx_fifo_hw-&gt;fifo,</div>
-<div class="line"><span class="lineno">  706</span>            vblank_line_vsync_off,</div>
-<div class="line"><span class="lineno">  707</span>            count_of(vblank_line_vsync_off),</div>
-<div class="line"><span class="lineno">  708</span>            <span class="keyword">false</span></div>
-<div class="line"><span class="lineno">  709</span>        );</div>
-<div class="line"><span class="lineno">  710</span>    }</div>
-<div class="line"><span class="lineno">  711</span> </div>
-<div class="line"><span class="lineno">  712</span>    printf(<span class="stringliteral">&quot;DMA channels claimed\r\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  713</span> </div>
-<div class="line"><span class="lineno">  714</span>    dma_hw-&gt;intr = (1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1;</div>
-<div class="line"><span class="lineno">  715</span>    dma_hw-&gt;ints2 = (1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1;</div>
-<div class="line"><span class="lineno">  716</span>    dma_hw-&gt;inte2 = (1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1;</div>
-<div class="line"><span class="lineno">  717</span> </div>
-<div class="line"><span class="lineno">  718</span>    irq_set_exclusive_handler(DMA_IRQ_2, dma_irq_handler);</div>
-<div class="line"><span class="lineno">  719</span>    irq_set_enabled(DMA_IRQ_2, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  720</span> </div>
-<div class="line"><span class="lineno">  721</span>    dma_channel_start(0);</div>
-<div class="line"><span class="lineno">  722</span> </div>
-<div class="line"><span class="lineno">  723</span>    printf(<span class="stringliteral">&quot;DVHSTX started\r\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  724</span> </div>
-<div class="line"><span class="lineno">  725</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</a>;</div>
-<div class="line"><span class="lineno">  726</span>}</div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a5c8198aeb53c231de91bbf790a59f77c"><div class="ttname"><a href="#a5c8198aeb53c231de91bbf790a59f77c">TinyEngineRendererDVI::frame_width</a></div><div class="ttdeci">uint16_t frame_width</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00089">tinyengine_renderer_dvi.h:89</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a8a99856f9ce556f04f5032daec14a5f1"><div class="ttname"><a href="#a8a99856f9ce556f04f5032daec14a5f1">TinyEngineRendererDVI::h_repeat</a></div><div class="ttdeci">uint8_t h_repeat</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00092">tinyengine_renderer_dvi.h:92</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_aa6f8cc917454c16a374452cc66b03687"><div class="ttname"><a href="#aa6f8cc917454c16a374452cc66b03687">TinyEngineRendererDVI::v_repeat</a></div><div class="ttdeci">uint8_t v_repeat</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00093">tinyengine_renderer_dvi.h:93</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad94c9d8daaaab3efae690638e787e24d"><div class="ttname"><a href="#ad94c9d8daaaab3efae690638e787e24d">TinyEngineRendererDVI::PALETTE_SIZE</a></div><div class="ttdeci">static constexpr int PALETTE_SIZE</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00036">tinyengine_renderer_dvi.h:36</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_add867ce010cc772f7e993a7ac326a05d"><div class="ttname"><a href="#add867ce010cc772f7e993a7ac326a05d">TinyEngineRendererDVI::frame_bytes_per_pixel</a></div><div class="ttdeci">uint8_t frame_bytes_per_pixel</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00091">tinyengine_renderer_dvi.h:91</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_a12e2ff5f3949e456139ab32153e276df"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#a12e2ff5f3949e456139ab32153e276df">MODE_V_SYNC_WIDTH</a></div><div class="ttdeci">#define MODE_V_SYNC_WIDTH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00294">tinyengine_renderer_dvi.cpp:294</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_a3e83d04552dd9878c880de3f4efff302"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#a3e83d04552dd9878c880de3f4efff302">MODE_H_BACK_PORCH</a></div><div class="ttdeci">#define MODE_H_BACK_PORCH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00289">tinyengine_renderer_dvi.cpp:289</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_a4f132d63585d0891d2cb4875b4cb510d"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#a4f132d63585d0891d2cb4875b4cb510d">MODE_H_FRONT_PORCH</a></div><div class="ttdeci">#define MODE_H_FRONT_PORCH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00287">tinyengine_renderer_dvi.cpp:287</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_a644450016364544cd55de3d60b841cd0"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#a644450016364544cd55de3d60b841cd0">MODE_H_SYNC_WIDTH</a></div><div class="ttdeci">#define MODE_H_SYNC_WIDTH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00288">tinyengine_renderer_dvi.cpp:288</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_a989ecfb618e13a471b7ad44cd9fda4fa"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#a989ecfb618e13a471b7ad44cd9fda4fa">MODE_V_ACTIVE_LINES</a></div><div class="ttdeci">#define MODE_V_ACTIVE_LINES</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00296">tinyengine_renderer_dvi.cpp:296</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_ada3711590ea435fdbc8316125e08c7d6"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#ada3711590ea435fdbc8316125e08c7d6">MODE_H_ACTIVE_PIXELS</a></div><div class="ttdeci">#define MODE_H_ACTIVE_PIXELS</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00290">tinyengine_renderer_dvi.cpp:290</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_ae572b39c10ef4635a552fe095e0ad34e"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#ae572b39c10ef4635a552fe095e0ad34e">MODE_V_BACK_PORCH</a></div><div class="ttdeci">#define MODE_V_BACK_PORCH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00295">tinyengine_renderer_dvi.cpp:295</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8cpp_html_aeed8bd1fd1aca755891e0a08d3cd8fcb"><div class="ttname"><a href="tinyengine__renderer__dvi_8cpp.html#aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</a></div><div class="ttdeci">#define MODE_V_FRONT_PORCH</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8cpp_source.html#l00293">tinyengine_renderer_dvi.cpp:293</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8h_html_a0e2f295d3fc0f6caf5e239667b4d5814"><div class="ttname"><a href="tinyengine__renderer__dvi_8h.html#a0e2f295d3fc0f6caf5e239667b4d5814">RGB888</a></div><div class="ttdeci">uint32_t RGB888</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00007">tinyengine_renderer_dvi.h:7</a></div></div>
-<div class="ttc" id="atinyengine__renderer__dvi_8h_html_a426143609826cbf6d30a1ae2b3ae5753"><div class="ttname"><a href="tinyengine__renderer__dvi_8h.html#a426143609826cbf6d30a1ae2b3ae5753">NUM_FRAME_LINES</a></div><div class="ttdeci">#define NUM_FRAME_LINES</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00005">tinyengine_renderer_dvi.h:5</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00007">7</a> of file <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html">tinyengine_renderer_dvi._c_adapter.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    7</span>                                                                    {</div>
+<div class="line"><span class="lineno">    8</span>    <a class="code hl_define" href="tinyengine_8h.html#abdeb08b95394f8152bb146fd9a9139c4">telog</a>(<span class="stringliteral">&quot;Starting Renderer&quot;</span>);</div>
+<div class="line"><span class="lineno">    9</span>    <a class="code hl_function" href="tinyengine__renderer__dvi__c_8h.html#aebf6c33c95a2567557e6cff4509e9555">tinyengine_renderer_dvi_init</a>(m_frame_buf.pixel_buffer_display, m_frame_buf.m_pixel_buffer_size, 320, 240);</div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span>}</div>
+<div class="ttc" id="atinyengine_8h_html_abdeb08b95394f8152bb146fd9a9139c4"><div class="ttname"><a href="tinyengine_8h.html#abdeb08b95394f8152bb146fd9a9139c4">telog</a></div><div class="ttdeci">#define telog(M,...)</div><div class="ttdef"><b>Definition</b> <a href="tinyengine_8h_source.html#l00031">tinyengine.h:31</a></div></div>
+<div class="ttc" id="atinyengine__renderer__dvi__c_8h_html_aebf6c33c95a2567557e6cff4509e9555"><div class="ttname"><a href="tinyengine__renderer__dvi__c_8h.html#aebf6c33c95a2567557e6cff4509e9555">tinyengine_renderer_dvi_init</a></div><div class="ttdeci">void tinyengine_renderer_dvi_init(uint8_t *_display_buffer, uint32_t size, uint32_t height, uint32_t width)</div></div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="ad99d6834cfcba17b8c9cbca951029c4a" name="ad99d6834cfcba17b8c9cbca951029c4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99d6834cfcba17b8c9cbca951029c4a">&#9670;&#160;</a></span>tinyengine_renderer_init() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> TinyEngineRendererDVI::tinyengine_renderer_init </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#ab61c14e1610265da86010a83142674bd">TinyEngineRendererI</a>.</p>
+
+</div>
+</div>
 <a id="af10bc6442ebdf6db594fdc9c8f249414" name="af10bc6442ebdf6db594fdc9c8f249414"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af10bc6442ebdf6db594fdc9c8f249414">&#9670;&#160;</a></span>wait_for_vsync()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af10bc6442ebdf6db594fdc9c8f249414">&#9670;&#160;</a></span>wait_for_vsync() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,13 +630,39 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#a053505877ab12f6651964aaff7b4c75d">TinyEngineRendererI</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html#l00736">736</a> of file <a class="el" href="tinyengine__renderer__dvi_8cpp_source.html">tinyengine_renderer_dvi.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  737</span>{</div>
-<div class="line"><span class="lineno">  738</span>    <span class="keywordflow">while</span> (v_scanline &gt;= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</a>) __wfe();</div>
-<div class="line"><span class="lineno">  739</span> </div>
-<div class="line"><span class="lineno">  740</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</a>;</div>
-<div class="line"><span class="lineno">  741</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00004">4</a> of file <a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html">tinyengine_renderer_dvi._c_adapter.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    4</span>                                                          {</div>
+<div class="line"><span class="lineno">    5</span>    <a class="code hl_function" href="tinyengine__renderer__dvi__c_8h.html#a6b02cd7ab76f3e17dfd9dc647b0e6227">tinyengine_renderer_dvi_flip_blocking</a>();</div>
+<div class="line"><span class="lineno">    6</span>};</div>
+<div class="ttc" id="atinyengine__renderer__dvi__c_8h_html_a6b02cd7ab76f3e17dfd9dc647b0e6227"><div class="ttname"><a href="tinyengine__renderer__dvi__c_8h.html#a6b02cd7ab76f3e17dfd9dc647b0e6227">tinyengine_renderer_dvi_flip_blocking</a></div><div class="ttdeci">void tinyengine_renderer_dvi_flip_blocking()</div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="af10bc6442ebdf6db594fdc9c8f249414" name="af10bc6442ebdf6db594fdc9c8f249414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10bc6442ebdf6db594fdc9c8f249414">&#9670;&#160;</a></span>wait_for_vsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> TinyEngineRendererDVI::wait_for_vsync </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_tiny_engine_renderer_i.html#a053505877ab12f6651964aaff7b4c75d">TinyEngineRendererI</a>.</p>
+
 </div>
 </div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
@@ -987,7 +899,9 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
+<li>backup/<a class="el" href="tinyengine__renderer__dvi__c__adapter_8h_source.html">tinyengine_renderer_dvi_c_adapter.h</a></li>
 <li>inc/<a class="el" href="tinyengine__renderer__dvi_8h_source.html">tinyengine_renderer_dvi.h</a></li>
+<li>backup/<a class="el" href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html">tinyengine_renderer_dvi._c_adapter.cpp</a></li>
 <li>src/<a class="el" href="tinyengine__renderer__dvi_8cpp_source.html">tinyengine_renderer_dvi.cpp</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,0 +1,22 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/src/filesystem/littlefs.c File Reference}
+\hypertarget{littlefs_8c}{}\label{littlefs_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/littlefs.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/littlefs.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$pico/mutex.\+h$>$}\newline
+{\ttfamily \#include "{}lfs.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/blockdevice.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlittlefs__file__t}{littlefs\+\_\+file\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structfilesystem__littlefs__context__t}{filesystem\+\_\+littlefs\+\_\+context\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\+\_\+littlefs\+\_\+create}} (uint32\+\_\+t block\+\_\+cycles, lfs\+\_\+size\+\_\+t lookahead\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Create littlefs file system object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\+\_\+littlefs\+\_\+free}} (\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs)
+\begin{DoxyCompactList}\small\item\em Release littlefs file system object. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__harness_8cpp_source" xml:lang="en-US">
+<title>test_harness.cpp</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/test_harness.cpp</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_test__harness_8cpp_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_test__harness_8h">test_harness.h</link>&quot;</emphasis>
+<anchor xml:id="_test__harness_8cpp_source_1l00002"/>00002 
+<anchor xml:id="_test__harness_8cpp_source_1l00003"/><link linkend="_class_test_harness_1a5d5d1980f22a3f7291231a61a94be7a0">00003</link> <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_test_harness_1a5d5d1980f22a3f7291231a61a94be7a0">TestHarness::GetOffset</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)&#32;{
+<anchor xml:id="_test__harness_8cpp_source_1l00004"/>00004 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">DistanceSensor::_PioOffsets</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>];
+<anchor xml:id="_test__harness_8cpp_source_1l00005"/>00005 }
+<anchor xml:id="_test__harness_8cpp_source_1l00006"/>00006 
+<anchor xml:id="_test__harness_8cpp_source_1l00007"/>00007 
+<anchor xml:id="_test__harness_8cpp_source_1l00008"/><link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">00008</link> <emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">TestHarness::IsLoaded</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)&#32;{
+<anchor xml:id="_test__harness_8cpp_source_1l00009"/>00009 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5">DistanceSensor::_IsProgramLoaded</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>);
+<anchor xml:id="_test__harness_8cpp_source_1l00010"/>00010 }
+<anchor xml:id="_test__harness_8cpp_source_1l00011"/>00011 
+<anchor xml:id="_test__harness_8cpp_source_1l00012"/><link linkend="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd">00012</link> <link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link>*&#32;<link linkend="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd">TestHarness::GetMappedSensor</link>(<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link>&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)&#32;{
+<anchor xml:id="_test__harness_8cpp_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>][<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>];
+<anchor xml:id="_test__harness_8cpp_source_1l00014"/>00014 }
+</programlisting></section>

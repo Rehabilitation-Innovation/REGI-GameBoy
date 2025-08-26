@@ -1,0 +1,53 @@
+\doxysection{lwipopts.\+h}
+\hypertarget{lwipopts_8h_source}{}\label{lwipopts_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/lwipopts.h@{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/lwipopts.h}}
+\mbox{\hyperlink{lwipopts_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00005}00005\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{lwipopts_8h_a46f1c418d0f05268d7a0ebc8ce25d07c}{set\_system\_time}}(uint32\_t\ sec);}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00007}\mbox{\hyperlink{lwipopts_8h_a4afbdca581a58d57bc7a81118a95327e}{00007}}\ \textcolor{preprocessor}{\#define\ MEMP\_NUM\_SYS\_TIMEOUT\ \ \ \ \ \ \ \ LWIP\_NUM\_SYS\_TIMEOUT\_INTERNAL\ +\ 8}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00008}\mbox{\hyperlink{lwipopts_8h_a7bf86de1feb1fddf2bdd51fc932efc4f}{00008}}\ \textcolor{preprocessor}{\#define\ SNTP\_SET\_SYSTEM\_TIME\ \ \ \ \ \ \ \ set\_system\_time}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00009}\mbox{\hyperlink{lwipopts_8h_aef477c145ae404d77188b26b79b6996f}{00009}}\ \textcolor{preprocessor}{\#define\ SNTP\_SERVER\_DNS\ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00010}\mbox{\hyperlink{lwipopts_8h_a26dee0e5d9c51b1dda0adad29c770a77}{00010}}\ \textcolor{preprocessor}{\#define\ LWIP\_ALTCP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00011}\mbox{\hyperlink{lwipopts_8h_ab03ba0306cf0a99ccce3d100142f60c8}{00011}}\ \textcolor{preprocessor}{\#define\ LWIP\_ALTCP\_TLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00012}\mbox{\hyperlink{lwipopts_8h_ac8dbfe10a4a9a64c1e2c62ea97e48639}{00012}}\ \textcolor{preprocessor}{\#define\ LWIP\_ALTCP\_TLS\_MBEDTLS\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00014}\mbox{\hyperlink{lwipopts_8h_ae00ba99de94a5bf84d832be8976df59b}{00014}}\ \textcolor{preprocessor}{\#define\ NO\_SYS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00015}\mbox{\hyperlink{lwipopts_8h_a1cb62ce61ac39d7d6728ae5d3d3b927f}{00015}}\ \textcolor{preprocessor}{\#define\ LWIP\_SOCKET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00016}\mbox{\hyperlink{lwipopts_8h_a4ef345cc270912bd2230b1c5ec51dfc8}{00016}}\ \textcolor{preprocessor}{\#define\ MEM\_LIBC\_MALLOC\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00017}\mbox{\hyperlink{lwipopts_8h_a97343214666ee6dcb18c0bd77b441ea7}{00017}}\ \textcolor{preprocessor}{\#define\ MEM\_ALIGNMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00018}\mbox{\hyperlink{lwipopts_8h_a2dcf8c45f945dd0c4301a94700f2112c}{00018}}\ \textcolor{preprocessor}{\#define\ MEM\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4000}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00019}\mbox{\hyperlink{lwipopts_8h_aa35fb3a1a76661e3ffb9722a57092de3}{00019}}\ \textcolor{preprocessor}{\#define\ MEMP\_NUM\_TCP\_SEG\ \ \ \ \ \ \ \ \ \ \ \ 32}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00020}\mbox{\hyperlink{lwipopts_8h_a087b00ea20a7edebcad33a1a1353a5d7}{00020}}\ \textcolor{preprocessor}{\#define\ MEMP\_NUM\_ARP\_QUEUE\ \ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00021}\mbox{\hyperlink{lwipopts_8h_a50eaadc4cad0716410332691e382c38a}{00021}}\ \textcolor{preprocessor}{\#define\ PBUF\_POOL\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ 24}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00022}\mbox{\hyperlink{lwipopts_8h_a9609a014bba4638cc191d6a8f9556c87}{00022}}\ \textcolor{preprocessor}{\#define\ LWIP\_ARP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00023}\mbox{\hyperlink{lwipopts_8h_a30e02dc217cc2995d0fd241d510c904f}{00023}}\ \textcolor{preprocessor}{\#define\ LWIP\_ETHERNET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00024}\mbox{\hyperlink{lwipopts_8h_ae4d45345c3ab8e5a355fda1d8d24fca6}{00024}}\ \textcolor{preprocessor}{\#define\ LWIP\_ICMP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00025}\mbox{\hyperlink{lwipopts_8h_aca452be5cb05d9666f8f57e582c39221}{00025}}\ \textcolor{preprocessor}{\#define\ LWIP\_RAW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00026}\mbox{\hyperlink{lwipopts_8h_a7f535a6efb5cdf86c3210e35ece1d6a7}{00026}}\ \textcolor{preprocessor}{\#define\ TCP\_WND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8\ *\ TCP\_MSS)}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00027}\mbox{\hyperlink{lwipopts_8h_af1ab7bb27860aa3677c387a2f3ba317b}{00027}}\ \textcolor{preprocessor}{\#define\ TCP\_MSS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1460}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00028}\mbox{\hyperlink{lwipopts_8h_a871d111968d8c6c7880ff36b93c5c4dd}{00028}}\ \textcolor{preprocessor}{\#define\ TCP\_SND\_BUF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8\ *\ TCP\_MSS)}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00029}\mbox{\hyperlink{lwipopts_8h_a9beaa47832ead4180981bfbf71074904}{00029}}\ \textcolor{preprocessor}{\#define\ TCP\_SND\_QUEUELEN\ \ \ \ \ \ \ \ \ \ \ \ ((4\ *\ (TCP\_SND\_BUF)\ +\ (TCP\_MSS\ -\/\ 1))\ /\ (TCP\_MSS))}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00030}\mbox{\hyperlink{lwipopts_8h_affb97d89516c38d3fcb9e44e5d707f36}{00030}}\ \textcolor{preprocessor}{\#define\ LWIP\_NETIF\_STATUS\_CALLBACK\ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00031}\mbox{\hyperlink{lwipopts_8h_a1a446932dd927cc4136ba654c13bb97b}{00031}}\ \textcolor{preprocessor}{\#define\ LWIP\_NETIF\_LINK\_CALLBACK\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00032}\mbox{\hyperlink{lwipopts_8h_aa714dbfa66822ec4c6111bdb8cf753c1}{00032}}\ \textcolor{preprocessor}{\#define\ LWIP\_NETIF\_HOSTNAME\ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00033}\mbox{\hyperlink{lwipopts_8h_a478041b8544461258f6961bf0f3c1a77}{00033}}\ \textcolor{preprocessor}{\#define\ LWIP\_NETCONN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00034}\mbox{\hyperlink{lwipopts_8h_a61ec04a08c4fde690d10819e582656a7}{00034}}\ \textcolor{preprocessor}{\#define\ MEM\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00035}\mbox{\hyperlink{lwipopts_8h_a0173549afa76553583e5a02c6a791218}{00035}}\ \textcolor{preprocessor}{\#define\ SYS\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00036}\mbox{\hyperlink{lwipopts_8h_ab8c2430be0e567a7499a95454aaa6041}{00036}}\ \textcolor{preprocessor}{\#define\ MEMP\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00037}\mbox{\hyperlink{lwipopts_8h_ae58b452782d0327ae728192686c5a84a}{00037}}\ \textcolor{preprocessor}{\#define\ LINK\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00038}\mbox{\hyperlink{lwipopts_8h_aa0865f14286191bd72fc1a9d9cbe25d4}{00038}}\ \textcolor{preprocessor}{\#define\ LWIP\_CHKSUM\_ALGORITHM\ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00039}\mbox{\hyperlink{lwipopts_8h_a8a6ec62dc121064ac591b1fd8567bee9}{00039}}\ \textcolor{preprocessor}{\#define\ LWIP\_DHCP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00040}\mbox{\hyperlink{lwipopts_8h_a429e811a80ebb5157e14a854870c4410}{00040}}\ \textcolor{preprocessor}{\#define\ LWIP\_IPV4\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00041}\mbox{\hyperlink{lwipopts_8h_aa4ed98deb97b77c633cb8870f34c71e9}{00041}}\ \textcolor{preprocessor}{\#define\ LWIP\_TCP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00042}\mbox{\hyperlink{lwipopts_8h_ab6030e96e72df649d2650fd32d7a67b3}{00042}}\ \textcolor{preprocessor}{\#define\ LWIP\_UDP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00043}\mbox{\hyperlink{lwipopts_8h_a98710dd81446b7cb2daac736bae6f646}{00043}}\ \textcolor{preprocessor}{\#define\ LWIP\_DNS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00044}\mbox{\hyperlink{lwipopts_8h_a8b9369ab260f032686a81c77c5b4db77}{00044}}\ \textcolor{preprocessor}{\#define\ LWIP\_TCP\_KEEPALIVE\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00045}\mbox{\hyperlink{lwipopts_8h_abafb9f64a80e51b56c0abbcfc1f7e04e}{00045}}\ \textcolor{preprocessor}{\#define\ LWIP\_NETIF\_TX\_SINGLE\_PBUF\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00046}\mbox{\hyperlink{lwipopts_8h_ab2d91de7b2fce879b0a213682e1b0b69}{00046}}\ \textcolor{preprocessor}{\#define\ DHCP\_DOES\_ARP\_CHECK\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lwipopts_8h_source_l00047}\mbox{\hyperlink{lwipopts_8h_add0c82329fccb78342e3eef98233aa55}{00047}}\ \textcolor{preprocessor}{\#define\ LWIP\_DHCP\_DOES\_ACD\_CHECK\ \ \ \ 0}}
+
+\end{DoxyCode}

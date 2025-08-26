@@ -1,0 +1,58 @@
+\doxysection{ntp\+\_\+sync.\+c}
+\hypertarget{ntp__sync_8c_source}{}\label{ntp__sync_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/ntp\_sync.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/ntp\_sync.c}}
+\mbox{\hyperlink{ntp__sync_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <hardware/rtc.h>}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <lwip/apps/sntp.h>}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <pico/cyw43\_arch.h>}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <pico/stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00012}\mbox{\hyperlink{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}{00012}}\ \textcolor{preprocessor}{\#define\ NTP\_SERVER\ "{}pool.ntp.org"{}}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00014}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_ae31164e5a07f30e3f5d8074609d05b17}{00014}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{ntp__sync_8c_afe77477eb61cb1a9294020c022edabc5}{ntp\_sync}}()\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00015}00015\ \ \ \ \ sntp\_setoperatingmode(SNTP\_OPMODE\_POLL);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00016}00016\ \ \ \ \ sntp\_setservername(0,\ \mbox{\hyperlink{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}{NTP\_SERVER}});}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00017}00017\ \ \ \ \ sntp\_init();}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 20;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sntp\_getreachability(0))\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00028}\mbox{\hyperlink{lwipopts_8h_a46f1c418d0f05268d7a0ebc8ce25d07c}{00028}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ntp__sync_8c_a46f1c418d0f05268d7a0ebc8ce25d07c}{set\_system\_time}}(uint32\_t\ sec)\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00029}00029\ \ \ \ \ time\_t\ epoch\ =\ sec;}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *time\ =\ gmtime(\&epoch);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00031}00031\ \ \ \ \ datetime\_t\ dt\ =\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ .year\ =\ (int16\_t)\ (1900\ +\ time-\/>tm\_year),}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ .month\ =\ (int8\_t)\ (time-\/>tm\_mon\ +\ 1),}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ .day\ =\ (int8\_t)\ time-\/>tm\_mday,}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ .hour\ =\ (int8\_t)\ time-\/>tm\_hour,}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ .min\ =\ (int8\_t)\ time-\/>tm\_min,}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ .sec\ =\ (int8\_t)\ time-\/>tm\_sec,}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ .dotw\ =\ (int8\_t)\ time-\/>tm\_wday,}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00039}00039\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00041}00041\ \ \ \ \ rtc\_set\_datetime(\&dt);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{struct\ }timeval\ tv\ =\ \{.tv\_sec\ =\ mktime(time)\};}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00043}00043\ \ \ \ \ settimeofday(\&tv,\ NULL);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00046}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2elastic__mqtt__client_2main_8c_acbbd6c89dfe56e52af9064c81fbbb635}{00046}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{ntp__sync_8c_a5fabcd416198038418e923db9259b7ff}{get\_timestamp}}()\ \{}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ buffer[30];}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00048}00048\ \ \ \ \ time\_t\ now\ =\ time(NULL);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ gmtime(\&now);}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00050}00050\ \ \ \ \ strftime(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \textcolor{stringliteral}{"{}\%Y-\/\%m-\/\%d\ \%H:\%M:\%S"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}});}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer;}
+\DoxyCodeLine{\Hypertarget{ntp__sync_8c_source_l00052}00052\ \}}
+
+\end{DoxyCode}

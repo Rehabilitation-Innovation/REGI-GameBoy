@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_integration_2test__vfs_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/integration/test_vfs.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/integration/test_vfs.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;errno.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;sys/stat.h&gt;<?linebreak?>#include &lt;dirent.h&gt;<?linebreak?>#include &lt;unistd.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?>#include &quot;blockdevice/sd.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>&#160;&#160;&#160;(0.5 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>&#160;&#160;&#160;500</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>&#160;&#160;&#160;16</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a59003aa54417ee248f1b9efafcf493b0">MIN_FILENO</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593">BLOCKDEVICE_HEAP_SIZE</link>&#160;&#160;&#160;(64 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a275e53ae2306013323ba05fad39168ab">PICO_SPI1_TX_PIN</link>&#160;&#160;&#160;15</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240">PICO_SPI1_RX_PIN</link>&#160;&#160;&#160;12</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a">PICO_SPI1_SCK_PIN</link>&#160;&#160;&#160;14</para>
+</listitem>
+            <listitem><para>#define <link linkend="_integration_2test__vfs_8c_1abb61793f045373400bf402e12a351d74">PICO_SPI1_CSN_PIN</link>&#160;&#160;&#160;13</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_integration_2test__vfs_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb">test_vfs</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_integration_2test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593"/><section>
+    <title>BLOCKDEVICE_HEAP_SIZE</title>
+<indexterm><primary>BLOCKDEVICE_HEAP_SIZE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>BLOCKDEVICE_HEAP_SIZE</secondary></indexterm>
+<para><computeroutput>#define BLOCKDEVICE_HEAP_SIZE&#160;&#160;&#160;(64 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00024">24</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00018">18</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a1f06fce82ce957c8dd28c5e07da29d97"/><section>
+    <title>FLASH_LENGTH_ALL</title>
+<indexterm><primary>FLASH_LENGTH_ALL</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>FLASH_LENGTH_ALL</secondary></indexterm>
+<para><computeroutput>#define FLASH_LENGTH_ALL&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00020">20</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1ae38550b2008b82c08588d2340f196914"/><section>
+    <title>FLASH_START_AT</title>
+<indexterm><primary>FLASH_START_AT</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>FLASH_START_AT</secondary></indexterm>
+<para><computeroutput>#define FLASH_START_AT&#160;&#160;&#160;(0.5 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00019">19</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d"/><section>
+    <title>LITTLEFS_BLOCK_CYCLE</title>
+<indexterm><primary>LITTLEFS_BLOCK_CYCLE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>LITTLEFS_BLOCK_CYCLE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_BLOCK_CYCLE&#160;&#160;&#160;500</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00021">21</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d"/><section>
+    <title>LITTLEFS_LOOKAHEAD_SIZE</title>
+<indexterm><primary>LITTLEFS_LOOKAHEAD_SIZE</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>LITTLEFS_LOOKAHEAD_SIZE</secondary></indexterm>
+<para><computeroutput>#define LITTLEFS_LOOKAHEAD_SIZE&#160;&#160;&#160;16</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00022">22</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a59003aa54417ee248f1b9efafcf493b0"/><section>
+    <title>MIN_FILENO</title>
+<indexterm><primary>MIN_FILENO</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>MIN_FILENO</secondary></indexterm>
+<para><computeroutput>#define MIN_FILENO&#160;&#160;&#160;3</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00023">23</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1abb61793f045373400bf402e12a351d74"/><section>
+    <title>PICO_SPI1_CSN_PIN</title>
+<indexterm><primary>PICO_SPI1_CSN_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_CSN_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_CSN_PIN&#160;&#160;&#160;13</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00029">29</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240"/><section>
+    <title>PICO_SPI1_RX_PIN</title>
+<indexterm><primary>PICO_SPI1_RX_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_RX_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_RX_PIN&#160;&#160;&#160;12</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00027">27</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a"/><section>
+    <title>PICO_SPI1_SCK_PIN</title>
+<indexterm><primary>PICO_SPI1_SCK_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_SCK_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_SCK_PIN&#160;&#160;&#160;14</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00028">28</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+<anchor xml:id="_integration_2test__vfs_8c_1a275e53ae2306013323ba05fad39168ab"/><section>
+    <title>PICO_SPI1_TX_PIN</title>
+<indexterm><primary>PICO_SPI1_TX_PIN</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>PICO_SPI1_TX_PIN</secondary></indexterm>
+<para><computeroutput>#define PICO_SPI1_TX_PIN&#160;&#160;&#160;15</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00026">26</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_integration_2test__vfs_8c_1a6b6e3fca2ed024f4d0fa99c0b09542fb"/><section>
+    <title>test_vfs()</title>
+<indexterm><primary>test_vfs</primary><secondary>test_vfs.c</secondary></indexterm>
+<indexterm><primary>test_vfs.c</primary><secondary>test_vfs</secondary></indexterm>
+<para><computeroutput>void test_vfs (void )</computeroutput></para><para>
+Definition at line <link linkend="_integration_2test__vfs_8c_source_1l00518">518</link> of file <link linkend="_integration_2test__vfs_8c_source">test_vfs.c</link>.</para>
+<programlisting linenumbering="unnumbered">00518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00519 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;FAT:\n&quot;</emphasis>);
+00520 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00521 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00522 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00523 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00524 &#32;&#32;&#32;&#32;setup(flash);
+00525 
+00526 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;flash);
+00527 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;flash);
+00528 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00529 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00530 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00531 &#32;&#32;&#32;&#32;test_api_file_seek();
+00532 &#32;&#32;&#32;&#32;test_api_file_tell();
+00533 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00534 &#32;&#32;&#32;&#32;test_api_stat();
+00535 &#32;&#32;&#32;&#32;test_api_remove();
+00536 &#32;&#32;&#32;&#32;test_api_rename();
+00537 &#32;&#32;&#32;&#32;test_api_mkdir();
+00538 &#32;&#32;&#32;&#32;test_api_dir_open();
+00539 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00540 &#32;&#32;&#32;&#32;test_api_dir_read();
+00541 &#32;&#32;&#32;&#32;test_api_reformat();
+00542 &#32;&#32;&#32;&#32;test_api_unmount();
+00543 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;flash);
+00544 
+00545 &#32;&#32;&#32;&#32;cleanup(flash);
+00546 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00547 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00548 
+00549 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs:\n&quot;</emphasis>);
+00550 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00551 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00552 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00553 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00554 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00555 &#32;&#32;&#32;&#32;setup(flash);
+00556 
+00557 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;flash);
+00558 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;flash);
+00559 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00560 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00561 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00562 &#32;&#32;&#32;&#32;test_api_file_seek();
+00563 &#32;&#32;&#32;&#32;test_api_file_tell();
+00564 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00565 &#32;&#32;&#32;&#32;test_api_stat();
+00566 &#32;&#32;&#32;&#32;test_api_remove();
+00567 &#32;&#32;&#32;&#32;test_api_rename();
+00568 &#32;&#32;&#32;&#32;test_api_mkdir();
+00569 &#32;&#32;&#32;&#32;test_api_dir_open();
+00570 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00571 &#32;&#32;&#32;&#32;test_api_dir_read();
+00572 &#32;&#32;&#32;&#32;test_api_reformat();
+00573 &#32;&#32;&#32;&#32;test_api_unmount();
+00574 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;flash);
+00575 
+00576 &#32;&#32;&#32;&#32;cleanup(flash);
+00577 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00578 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00579 
+00580 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;littlefs&#32;on&#32;the&#32;Heap:\n&quot;</emphasis>);
+00581 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_integration_2test__vfs_8c_1a73f9ede05cd36c7e6943b56197e34593">BLOCKDEVICE_HEAP_SIZE</link>);
+00582 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00583 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00584 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00585 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00586 &#32;&#32;&#32;&#32;setup(heap);
+00587 
+00588 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;heap);
+00589 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;heap);
+00590 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00591 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00592 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00593 &#32;&#32;&#32;&#32;test_api_file_seek();
+00594 &#32;&#32;&#32;&#32;test_api_file_tell();
+00595 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00596 &#32;&#32;&#32;&#32;test_api_stat();
+00597 &#32;&#32;&#32;&#32;test_api_remove();
+00598 &#32;&#32;&#32;&#32;test_api_rename();
+00599 &#32;&#32;&#32;&#32;test_api_mkdir();
+00600 &#32;&#32;&#32;&#32;test_api_dir_open();
+00601 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00602 &#32;&#32;&#32;&#32;test_api_dir_read();
+00603 &#32;&#32;&#32;&#32;test_api_reformat();
+00604 &#32;&#32;&#32;&#32;test_api_unmount();
+00605 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(lfs,&#32;heap);
+00606 
+00607 &#32;&#32;&#32;&#32;cleanup(heap);
+00608 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00609 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00610 
+00611 
+00612 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;loopback&#32;FAT&#32;on&#32;littlefs:\n&quot;</emphasis>);
+00613 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+00614 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+00615 &#32;&#32;&#32;&#32;lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+00616 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+00617 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+00618 &#32;&#32;&#32;&#32;setup(flash);
+00619 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(lfs,&#32;flash);
+00620 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00621 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/flash&quot;</emphasis>,&#32;lfs,&#32;flash);
+00622 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+00623 
+00624 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*loopback&#32;=&#32;<link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link>(<emphasis role="stringliteral">&quot;/flash/loopback.dmg&quot;</emphasis>,&#32;64&#32;*&#32;1024,&#32;512);
+00625 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00626 &#32;&#32;&#32;&#32;assert(loopback&#32;!=&#32;NULL);
+00627 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00628 
+00629 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;loopback);
+00630 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;loopback);
+00631 &#32;&#32;&#32;&#32;test_api_file_open_close();
+00632 &#32;&#32;&#32;&#32;test_api_file_open_many();
+00633 &#32;&#32;&#32;&#32;test_api_file_write_read();
+00634 &#32;&#32;&#32;&#32;test_api_file_seek();
+00635 &#32;&#32;&#32;&#32;test_api_file_tell();
+00636 &#32;&#32;&#32;&#32;test_api_file_truncate();
+00637 &#32;&#32;&#32;&#32;test_api_stat();
+00638 &#32;&#32;&#32;&#32;test_api_remove();
+00639 &#32;&#32;&#32;&#32;test_api_rename();
+00640 &#32;&#32;&#32;&#32;test_api_mkdir();
+00641 &#32;&#32;&#32;&#32;test_api_dir_open();
+00642 &#32;&#32;&#32;&#32;test_api_dir_open_many();
+00643 &#32;&#32;&#32;&#32;test_api_dir_read();
+00644 &#32;&#32;&#32;&#32;test_api_reformat();
+00645 &#32;&#32;&#32;&#32;test_api_mount_unmount_repeat(fat,&#32;loopback);
+00646 
+00647 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00648 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link>(loopback);
+00649 
+00650 &#32;&#32;&#32;&#32;test_loopback_file();
+00651 
+00652 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/flash&quot;</emphasis>);
+00653 &#32;&#32;&#32;&#32;cleanup(flash);
+00654 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+00655 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+00656 
+00657 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;VFS&#32;not&#32;connected&#32;SD&#32;card&#32;error&#32;handling:\n&quot;</emphasis>);
+00658 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*sd&#32;=&#32;<link linkend="_group__blockdevice__sd_1ga4711fc3f61142ce9387c984809bd3db8">blockdevice_sd_create</link>(spi1,&#32;&#32;<emphasis role="comment">//&#32;SPI1&#32;without&#32;connection</emphasis>
+00659 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1a275e53ae2306013323ba05fad39168ab">PICO_SPI1_TX_PIN</link>,
+00660 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1a5ba4c4aa36b4d4b343838d39ed4db240">PICO_SPI1_RX_PIN</link>,
+00661 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1ab6e7784fe43df808a9103f9041af196a">PICO_SPI1_SCK_PIN</link>,
+00662 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_integration_2test__vfs_8c_1abb61793f045373400bf402e12a351d74">PICO_SPI1_CSN_PIN</link>,
+00663 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;10&#32;*&#32;MHZ,
+00664 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+00665 &#32;&#32;&#32;&#32;assert(sd&#32;!=&#32;NULL);
+00666 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00667 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00668 &#32;&#32;&#32;&#32;setup(sd);
+00669 
+00670 &#32;&#32;&#32;&#32;test_api_format_error(fat,&#32;sd);
+00671 &#32;&#32;&#32;&#32;test_api_mount_error(fat,&#32;sd);
+00672 
+00673 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00674 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__sd_1gada9c8624c3e06c29f3780fa5f77fb6d9">blockdevice_sd_free</link>(sd);
+00675 }
+</programlisting></section>
+</section>
+</section>

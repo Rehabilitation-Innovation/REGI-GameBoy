@@ -1,0 +1,311 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/test\+\_\+vfs.c File Reference}
+\hypertarget{test__vfs_8c}{}\label{test__vfs_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_vfs.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/test\_vfs.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/heap.\+h"{}}\newline
+{\ttfamily \#include "{}blockdevice/loopback.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\+\_\+\+STORAGE\+\_\+\+SIZE}}~(128 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE}}~500
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE}}~16
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}{MIN\+\_\+\+FILENO}}~3
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593}{BLOCKDEVICE\+\_\+\+HEAP\+\_\+\+SIZE}}~(64 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a275e53ae2306013323ba05fad39168ab}{PICO\+\_\+\+SPI1\+\_\+\+TX\+\_\+\+PIN}}~15
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_a5ba4c4aa36b4d4b343838d39ed4db240}{PICO\+\_\+\+SPI1\+\_\+\+RX\+\_\+\+PIN}}~12
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_ab6e7784fe43df808a9103f9041af196a}{PICO\+\_\+\+SPI1\+\_\+\+SCK\+\_\+\+PIN}}~19
+\item 
+\#define \mbox{\hyperlink{test__vfs_8c_abb61793f045373400bf402e12a351d74}{PICO\+\_\+\+SPI1\+\_\+\+CSN\+\_\+\+PIN}}~17
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__vfs_8c_a6b6e3fca2ed024f4d0fa99c0b09542fb}{test\+\_\+vfs}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{test__vfs_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593}\index{test\_vfs.c@{test\_vfs.c}!BLOCKDEVICE\_HEAP\_SIZE@{BLOCKDEVICE\_HEAP\_SIZE}}
+\index{BLOCKDEVICE\_HEAP\_SIZE@{BLOCKDEVICE\_HEAP\_SIZE}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{BLOCKDEVICE\_HEAP\_SIZE}{BLOCKDEVICE\_HEAP\_SIZE}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593} 
+\#define BLOCKDEVICE\+\_\+\+HEAP\+\_\+\+SIZE~(64 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00020}{20}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{test\_vfs.c@{test\_vfs.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00015}{15}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}\index{test\_vfs.c@{test\_vfs.c}!HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}}
+\index{HEAP\_STORAGE\_SIZE@{HEAP\_STORAGE\_SIZE}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{HEAP\_STORAGE\_SIZE}{HEAP\_STORAGE\_SIZE}}
+{\footnotesize\ttfamily \label{test__vfs_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae} 
+\#define HEAP\+\_\+\+STORAGE\+\_\+\+SIZE~(128 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00016}{16}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}\index{test\_vfs.c@{test\_vfs.c}!LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}}
+\index{LITTLEFS\_BLOCK\_CYCLE@{LITTLEFS\_BLOCK\_CYCLE}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_BLOCK\_CYCLE}{LITTLEFS\_BLOCK\_CYCLE}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d} 
+\#define LITTLEFS\+\_\+\+BLOCK\+\_\+\+CYCLE~500}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00017}{17}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}\index{test\_vfs.c@{test\_vfs.c}!LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}}
+\index{LITTLEFS\_LOOKAHEAD\_SIZE@{LITTLEFS\_LOOKAHEAD\_SIZE}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{LITTLEFS\_LOOKAHEAD\_SIZE}{LITTLEFS\_LOOKAHEAD\_SIZE}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a73694eeb2680f0f6e6fa72fcd0ad458d} 
+\#define LITTLEFS\+\_\+\+LOOKAHEAD\+\_\+\+SIZE~16}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00018}{18}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0}\index{test\_vfs.c@{test\_vfs.c}!MIN\_FILENO@{MIN\_FILENO}}
+\index{MIN\_FILENO@{MIN\_FILENO}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{MIN\_FILENO}{MIN\_FILENO}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a59003aa54417ee248f1b9efafcf493b0} 
+\#define MIN\+\_\+\+FILENO~3}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00019}{19}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_abb61793f045373400bf402e12a351d74}\index{test\_vfs.c@{test\_vfs.c}!PICO\_SPI1\_CSN\_PIN@{PICO\_SPI1\_CSN\_PIN}}
+\index{PICO\_SPI1\_CSN\_PIN@{PICO\_SPI1\_CSN\_PIN}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{PICO\_SPI1\_CSN\_PIN}{PICO\_SPI1\_CSN\_PIN}}
+{\footnotesize\ttfamily \label{test__vfs_8c_abb61793f045373400bf402e12a351d74} 
+\#define PICO\+\_\+\+SPI1\+\_\+\+CSN\+\_\+\+PIN~17}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00025}{25}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a5ba4c4aa36b4d4b343838d39ed4db240}\index{test\_vfs.c@{test\_vfs.c}!PICO\_SPI1\_RX\_PIN@{PICO\_SPI1\_RX\_PIN}}
+\index{PICO\_SPI1\_RX\_PIN@{PICO\_SPI1\_RX\_PIN}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{PICO\_SPI1\_RX\_PIN}{PICO\_SPI1\_RX\_PIN}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a5ba4c4aa36b4d4b343838d39ed4db240} 
+\#define PICO\+\_\+\+SPI1\+\_\+\+RX\+\_\+\+PIN~12}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00023}{23}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_ab6e7784fe43df808a9103f9041af196a}\index{test\_vfs.c@{test\_vfs.c}!PICO\_SPI1\_SCK\_PIN@{PICO\_SPI1\_SCK\_PIN}}
+\index{PICO\_SPI1\_SCK\_PIN@{PICO\_SPI1\_SCK\_PIN}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{PICO\_SPI1\_SCK\_PIN}{PICO\_SPI1\_SCK\_PIN}}
+{\footnotesize\ttfamily \label{test__vfs_8c_ab6e7784fe43df808a9103f9041af196a} 
+\#define PICO\+\_\+\+SPI1\+\_\+\+SCK\+\_\+\+PIN~19}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00024}{24}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+\Hypertarget{test__vfs_8c_a275e53ae2306013323ba05fad39168ab}\index{test\_vfs.c@{test\_vfs.c}!PICO\_SPI1\_TX\_PIN@{PICO\_SPI1\_TX\_PIN}}
+\index{PICO\_SPI1\_TX\_PIN@{PICO\_SPI1\_TX\_PIN}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{PICO\_SPI1\_TX\_PIN}{PICO\_SPI1\_TX\_PIN}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a275e53ae2306013323ba05fad39168ab} 
+\#define PICO\+\_\+\+SPI1\+\_\+\+TX\+\_\+\+PIN~15}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00022}{22}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{test__vfs_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{test__vfs_8c_a6b6e3fca2ed024f4d0fa99c0b09542fb}\index{test\_vfs.c@{test\_vfs.c}!test\_vfs@{test\_vfs}}
+\index{test\_vfs@{test\_vfs}!test\_vfs.c@{test\_vfs.c}}
+\doxysubsubsection{\texorpdfstring{test\_vfs()}{test\_vfs()}}
+{\footnotesize\ttfamily \label{test__vfs_8c_a6b6e3fca2ed024f4d0fa99c0b09542fb} 
+void test\+\_\+vfs (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__vfs_8c_source_l00525}{525}} of file \mbox{\hyperlink{test__vfs_8c_source}{test\+\_\+vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00526\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ FAT:\(\backslash\)n"{}});}
+\DoxyCodeLine{00527\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00528\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00529\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{00530\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{00531\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \ \ \ \ test\_api\_format(fat,\ heap);}
+\DoxyCodeLine{00534\ \ \ \ \ test\_api\_mount(fat,\ heap);}
+\DoxyCodeLine{00535\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{00536\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{00537\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{00538\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{00539\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{00540\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{00541\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{00542\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{00543\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{00544\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{00545\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{00546\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{00547\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{00548\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{00549\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{00550\ \ \ \ \ test\_api\_mount\_unmount\_repeat(fat,\ heap);}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00553\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{00554\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ littlefs:\(\backslash\)n"{}});}
+\DoxyCodeLine{00557\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00558\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00559\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{00561\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{00562\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00563\ }
+\DoxyCodeLine{00564\ \ \ \ \ test\_api\_format(lfs,\ heap);}
+\DoxyCodeLine{00565\ \ \ \ \ test\_api\_mount(lfs,\ heap);}
+\DoxyCodeLine{00566\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{00567\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{00568\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{00569\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{00570\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{00571\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{00572\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{00573\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{00574\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{00575\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{00576\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{00577\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{00578\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{00579\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{00580\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{00581\ \ \ \ \ test\_api\_mount\_unmount\_repeat(lfs,\ heap);}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00584\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00585\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ littlefs\ on\ the\ Heap:\(\backslash\)n"{}});}
+\DoxyCodeLine{00588\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{integration_2test__vfs_8c_a73f9ede05cd36c7e6943b56197e34593}{BLOCKDEVICE\_HEAP\_SIZE}});}
+\DoxyCodeLine{00589\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00590\ \ \ \ \ lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{00592\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{00593\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \ \ \ \ test\_api\_format(lfs,\ heap);}
+\DoxyCodeLine{00596\ \ \ \ \ test\_api\_mount(lfs,\ heap);}
+\DoxyCodeLine{00597\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{00598\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{00599\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{00600\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{00601\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{00602\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{00603\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{00604\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{00605\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{00606\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{00607\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{00608\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{00609\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{00610\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{00611\ \ \ \ \ test\_api\_unmount();}
+\DoxyCodeLine{00612\ \ \ \ \ test\_api\_mount\_unmount\_repeat(lfs,\ heap);}
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00615\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{00616\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \ \ \ \ printf(\textcolor{stringliteral}{"{}VFS\ loopback\ FAT\ on\ littlefs:\(\backslash\)n"{}});}
+\DoxyCodeLine{00620\ \ \ \ \ heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{00621\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{00622\ \ \ \ \ lfs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(\mbox{\hyperlink{test__benchmark_8c_a1c1a6c6d5b2ddab1836e6c57ace6e71d}{LITTLEFS\_BLOCK\_CYCLE}},}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__benchmark_8c_a73694eeb2680f0f6e6fa72fcd0ad458d}{LITTLEFS\_LOOKAHEAD\_SIZE}});}
+\DoxyCodeLine{00624\ \ \ \ \ assert(lfs\ !=\ NULL);}
+\DoxyCodeLine{00625\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{00626\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(lfs,\ heap);}
+\DoxyCodeLine{00627\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00628\ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/heap"{}},\ lfs,\ heap);}
+\DoxyCodeLine{00629\ \ \ \ \ assert(err\ ==\ 0);}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *loopback\ =\ \mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{blockdevice\_loopback\_create}}(\textcolor{stringliteral}{"{}/heap/loopback.dmg"{}},\ 64\ *\ 1024,\ 512);}
+\DoxyCodeLine{00632\ \ \ \ \ fat\ =\ \mbox{\hyperlink{group__filesystem__fat_ga5b7bf00bfce64f76dd5cba01901781c5}{filesystem\_fat\_create}}();}
+\DoxyCodeLine{00633\ \ \ \ \ assert(loopback\ !=\ NULL);}
+\DoxyCodeLine{00634\ \ \ \ \ assert(fat\ !=\ NULL);}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ \ \ \ \ test\_api\_format(fat,\ loopback);}
+\DoxyCodeLine{00637\ \ \ \ \ test\_api\_mount(fat,\ loopback);}
+\DoxyCodeLine{00638\ \ \ \ \ test\_api\_file\_open\_close();}
+\DoxyCodeLine{00639\ \ \ \ \ test\_api\_file\_open\_many();}
+\DoxyCodeLine{00640\ \ \ \ \ test\_api\_file\_write\_read();}
+\DoxyCodeLine{00641\ \ \ \ \ test\_api\_file\_seek();}
+\DoxyCodeLine{00642\ \ \ \ \ test\_api\_file\_tell();}
+\DoxyCodeLine{00643\ \ \ \ \ test\_api\_file\_truncate();}
+\DoxyCodeLine{00644\ \ \ \ \ test\_api\_stat();}
+\DoxyCodeLine{00645\ \ \ \ \ test\_api\_remove();}
+\DoxyCodeLine{00646\ \ \ \ \ test\_api\_rename();}
+\DoxyCodeLine{00647\ \ \ \ \ test\_api\_mkdir();}
+\DoxyCodeLine{00648\ \ \ \ \ test\_api\_dir\_open();}
+\DoxyCodeLine{00649\ \ \ \ \ test\_api\_dir\_open\_many();}
+\DoxyCodeLine{00650\ \ \ \ \ test\_api\_dir\_read();}
+\DoxyCodeLine{00651\ \ \ \ \ test\_api\_reformat();}
+\DoxyCodeLine{00652\ \ \ \ \ test\_api\_mount\_unmount\_repeat(fat,\ loopback);}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \ \ \ \ \mbox{\hyperlink{group__filesystem__fat_gac9daf020a57d62f1b2fe7eef5ce5847e}{filesystem\_fat\_free}}(fat);}
+\DoxyCodeLine{00655\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{blockdevice\_loopback\_free}}(loopback);}
+\DoxyCodeLine{00656\ }
+\DoxyCodeLine{00657\ \ \ \ \ test\_loopback\_file();}
+\DoxyCodeLine{00658\ }
+\DoxyCodeLine{00659\ \ \ \ \ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{stringliteral}{"{}/heap"{}});}
+\DoxyCodeLine{00660\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{00661\ \ \ \ \ \mbox{\hyperlink{group__filesystem__littlefs_ga4cdb39bf1728e9ee86032ef5c4abd704}{filesystem\_littlefs\_free}}(lfs);}
+\DoxyCodeLine{00662\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{00663\ \}}
+
+\end{DoxyCode}

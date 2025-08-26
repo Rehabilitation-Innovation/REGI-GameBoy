@@ -1,0 +1,775 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/src/filesystem/vfs.c File Reference}
+\hypertarget{vfs_8c}{}\label{vfs_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/vfs.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/vfs.c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/errno.\+h$>$}\newline
+{\ttfamily \#include $<$sys/dirent.\+h$>$}\newline
+{\ttfamily \#include $<$sys/unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pico/mutex.\+h$>$}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmountpoint__t}{mountpoint\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structfile__descriptor__t}{file\+\_\+descriptor\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structdir__descriptor__t}{dir\+\_\+descriptor\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa}{PICO\+\_\+\+VFS\+\_\+\+MAX\+\_\+\+MOUNTPOINT}}~10
+\item 
+\#define \mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{FS\+\_\+\+MAX\+\_\+\+MOUNTPOINT}}~\mbox{\hyperlink{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa}{PICO\+\_\+\+VFS\+\_\+\+MAX\+\_\+\+MOUNTPOINT}}
+\item 
+\#define \mbox{\hyperlink{vfs_8c_a0718d44242f5b7416ec3311212081e65}{STDIO\+\_\+\+FILNO\+\_\+\+MAX}}~STDERR\+\_\+\+FILENO
+\item 
+\#define \mbox{\hyperlink{vfs_8c_aa07c3cee02f6b8388d5616d76f19dcbf}{FILENO\+\_\+\+VALUE}}(fd)
+\item 
+\#define \mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\+\_\+\+INDEX}}(fd)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\+\_\+format}} (\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Format block device with specify file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\+\_\+mount}} (const char \texorpdfstring{$\ast$}{*}dir, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Mount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\+\_\+unmount}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Dismount a file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{fs\+\_\+reformat}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Reformat the mounted file system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}{fs\+\_\+info}} (const char \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Lookup filesystem and blockdevice objects from a mount point. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{vfs_8c_a11bde836cab6ec72897ede2286350e72}{\+\_\+unlink}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+int \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}} (const char \texorpdfstring{$\ast$}{*}old, const char \texorpdfstring{$\ast$}{*}new)
+\item 
+int \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}} (const char \texorpdfstring{$\ast$}{*}path, mode\+\_\+t mode)
+\item 
+int \mbox{\hyperlink{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce}{rmdir}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+int \mbox{\hyperlink{vfs_8c_a43bfed3654a97b85373f2d4198990c8d}{\+\_\+stat}} (const char \texorpdfstring{$\ast$}{*}path, struct stat \texorpdfstring{$\ast$}{*}st)
+\item 
+int \mbox{\hyperlink{vfs_8c_a96ed08daea40a660b6059ae5ddd9d063}{\+\_\+fstat}} (int fildes, struct stat \texorpdfstring{$\ast$}{*}st)
+\item 
+int \mbox{\hyperlink{vfs_8c_aeea6b1ce10c4ced8db50f44cb6774b01}{\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}path, int oflags,...)
+\item 
+int \mbox{\hyperlink{vfs_8c_a5af2dad9b50913a0025ea80a8577bea8}{\+\_\+close}} (int fildes)
+\item 
+void \mbox{\hyperlink{vfs_8c_a90927805d6b48285139ab31098623df1}{stdio\+\_\+flush}} (void)
+\item 
+ssize\+\_\+t \mbox{\hyperlink{vfs_8c_a637f3b33cf8a2223862596efdee3ad33}{\+\_\+write}} (int fildes, const void \texorpdfstring{$\ast$}{*}buf, size\+\_\+t nbyte)
+\item 
+ssize\+\_\+t \mbox{\hyperlink{vfs_8c_a6cfdb1d41006cb00b54a113c28dd3ab3}{\+\_\+read}} (int fildes, void \texorpdfstring{$\ast$}{*}buf, size\+\_\+t nbyte)
+\item 
+off\+\_\+t \mbox{\hyperlink{vfs_8c_a1fd116a5c6d658acbe5e5786fa3e1868}{\+\_\+lseek}} (int fildes, off\+\_\+t offset, int whence)
+\item 
+off\+\_\+t \mbox{\hyperlink{vfs_8c_a9aedef60c47f7d3a05512b2a488c1d7d}{\+\_\+ftello\+\_\+r}} (struct \+\_\+reent \texorpdfstring{$\ast$}{*}ptr, register FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b}{ftruncate}} (int fildes, off\+\_\+t length)
+\item 
+\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+int \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}} (\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*}dir)
+\item 
+struct \mbox{\hyperlink{structdirent}{dirent}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}} (\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*}dir)
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}{fs\+\_\+strerror}} (int errnum)
+\begin{DoxyCompactList}\small\item\em File system error message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{vfs_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}\index{vfs.c@{vfs.c}!FILENO\_INDEX@{FILENO\_INDEX}}
+\index{FILENO\_INDEX@{FILENO\_INDEX}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{FILENO\_INDEX}{FILENO\_INDEX}}
+{\footnotesize\ttfamily \label{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df} 
+\#define FILENO\+\_\+\+INDEX(\begin{DoxyParamCaption}\item[{}]{fd}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(fd\ -\/\ \mbox{\hyperlink{vfs_8c_a0718d44242f5b7416ec3311212081e65}{STDIO\_FILNO\_MAX}}\ -\/\ 1)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00038}{38}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+\Hypertarget{vfs_8c_aa07c3cee02f6b8388d5616d76f19dcbf}\index{vfs.c@{vfs.c}!FILENO\_VALUE@{FILENO\_VALUE}}
+\index{FILENO\_VALUE@{FILENO\_VALUE}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{FILENO\_VALUE}{FILENO\_VALUE}}
+{\footnotesize\ttfamily \label{vfs_8c_aa07c3cee02f6b8388d5616d76f19dcbf} 
+\#define FILENO\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{fd}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(fd\ +\ \mbox{\hyperlink{vfs_8c_a0718d44242f5b7416ec3311212081e65}{STDIO\_FILNO\_MAX}}\ +\ 1)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00037}{37}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+\Hypertarget{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}\index{vfs.c@{vfs.c}!FS\_MAX\_MOUNTPOINT@{FS\_MAX\_MOUNTPOINT}}
+\index{FS\_MAX\_MOUNTPOINT@{FS\_MAX\_MOUNTPOINT}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{FS\_MAX\_MOUNTPOINT}{FS\_MAX\_MOUNTPOINT}}
+{\footnotesize\ttfamily \label{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493} 
+\#define FS\+\_\+\+MAX\+\_\+\+MOUNTPOINT~\mbox{\hyperlink{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa}{PICO\+\_\+\+VFS\+\_\+\+MAX\+\_\+\+MOUNTPOINT}}}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00035}{35}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+\Hypertarget{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa}\index{vfs.c@{vfs.c}!PICO\_VFS\_MAX\_MOUNTPOINT@{PICO\_VFS\_MAX\_MOUNTPOINT}}
+\index{PICO\_VFS\_MAX\_MOUNTPOINT@{PICO\_VFS\_MAX\_MOUNTPOINT}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{PICO\_VFS\_MAX\_MOUNTPOINT}{PICO\_VFS\_MAX\_MOUNTPOINT}}
+{\footnotesize\ttfamily \label{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa} 
+\#define PICO\+\_\+\+VFS\+\_\+\+MAX\+\_\+\+MOUNTPOINT~10}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00033}{33}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+\Hypertarget{vfs_8c_a0718d44242f5b7416ec3311212081e65}\index{vfs.c@{vfs.c}!STDIO\_FILNO\_MAX@{STDIO\_FILNO\_MAX}}
+\index{STDIO\_FILNO\_MAX@{STDIO\_FILNO\_MAX}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{STDIO\_FILNO\_MAX}{STDIO\_FILNO\_MAX}}
+{\footnotesize\ttfamily \label{vfs_8c_a0718d44242f5b7416ec3311212081e65} 
+\#define STDIO\+\_\+\+FILNO\+\_\+\+MAX~STDERR\+\_\+\+FILENO}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00036}{36}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{vfs_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{vfs_8c_a5af2dad9b50913a0025ea80a8577bea8}\index{vfs.c@{vfs.c}!\_close@{\_close}}
+\index{\_close@{\_close}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_close()}{\_close()}}
+{\footnotesize\ttfamily \label{vfs_8c_a5af2dad9b50913a0025ea80a8577bea8} 
+int \+\_\+close (\begin{DoxyParamCaption}\item[{int}]{fildes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00444}{444}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00445\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00446\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_close\ error\ fildes=\%d\(\backslash\)n"{}},\ fildes);}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00452\ \ \ \ \ \}}
+\DoxyCodeLine{00453\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00454\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00458\ \ \ \ \ \}}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab649defbea72289a00b64b6eabdd1b4d}{file\_close}}(fs,\ file);}
+\DoxyCodeLine{00460\ \ \ \ \ free(file);}
+\DoxyCodeLine{00461\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem\ =\ NULL;}
+\DoxyCodeLine{00462\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file\ =\ NULL;}
+\DoxyCodeLine{00463\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].path[0]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00466\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00467\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a96ed08daea40a660b6059ae5ddd9d063}\index{vfs.c@{vfs.c}!\_fstat@{\_fstat}}
+\index{\_fstat@{\_fstat}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_fstat()}{\_fstat()}}
+{\footnotesize\ttfamily \label{vfs_8c_a96ed08daea40a660b6059ae5ddd9d063} 
+int \+\_\+fstat (\begin{DoxyParamCaption}\item[{int}]{fildes}{, }\item[{struct stat \texorpdfstring{$\ast$}{*}}]{st}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00275}{275}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00276\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00277\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDIN\_FILENO\ ||\ fildes\ ==\ STDOUT\_FILENO\ ||\ fildes\ ==\ STDERR\_FILENO)\ \{}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ st-\/>st\_size\ =\ 0;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ st-\/>st\_mode\ =\ S\_IFCHR;}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{00284\ \ \ \ \ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00288\ \ \ \ \ \}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00291\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00295\ \ \ \ \ \}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ off\_t\ size\ =\ 0;}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs-\/>\mbox{\hyperlink{structfilesystem_a4ba3d1ab6d89005e297c86eb8bafd225}{type}}\ !=\ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}{FILESYSTEM\_TYPE\_FAT}})\ \{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ off\_t\ current\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_acdf7fe4f2c1ef87fc1f2894cf473d271}{file\_tell}}(fs,\ file);}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ 0,\ SEEK\_END);}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ off\_t\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ current,\ SEEK\_SET);}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\ !=\ err)\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00306\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NOTE:\ Support\ for\ different\ behaviour\ of\ FatFs\ from\ POSIX }}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ FatFs\ has\ a\ problem\ where\ f\_size()\ reports\ a\ larger\ than\ actual\ file\ size\ when }}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ moved\ to\ a\ position\ beyond\ the\ f\_lseek()\ file\ size;\ POSIX\ reports\ the\ actual\ size }}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ written\ to\ the\ file,\ not\ the\ seek\ position. }}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].path;}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo\ =\ \{0\};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab5f68a612c88a96e638d2035a7ec59fd}{stat}}(fs,\ entity\_path,\ \&finfo);}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ size\ =\ finfo.st\_size;}
+\DoxyCodeLine{00329\ \ \ \ \ \}}
+\DoxyCodeLine{00330\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ st-\/>st\_size\ =\ size;}
+\DoxyCodeLine{00333\ \ \ \ \ st-\/>st\_mode\ =\ S\_IFREG;}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{00335\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a9aedef60c47f7d3a05512b2a488c1d7d}\index{vfs.c@{vfs.c}!\_ftello\_r@{\_ftello\_r}}
+\index{\_ftello\_r@{\_ftello\_r}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_ftello\_r()}{\_ftello\_r()}}
+{\footnotesize\ttfamily \label{vfs_8c_a9aedef60c47f7d3a05512b2a488c1d7d} 
+off\+\_\+t \+\_\+ftello\+\_\+r (\begin{DoxyParamCaption}\item[{struct \+\_\+reent \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{register FILE \texorpdfstring{$\ast$}{*}}]{fp}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00565}{565}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00566\ \ \ \ \ (void)ptr;}
+\DoxyCodeLine{00567\ \ \ \ \ \textcolor{keywordtype}{int}\ fildes\ =\ fp-\/>\_file;}
+\DoxyCodeLine{00568\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00569\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00574\ \ \ \ \ \}}
+\DoxyCodeLine{00575\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00576\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00577\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00580\ \ \ \ \ \}}
+\DoxyCodeLine{00581\ }
+\DoxyCodeLine{00582\ \ \ \ \ off\_t\ pos\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_acdf7fe4f2c1ef87fc1f2894cf473d271}{file\_tell}}(fs,\ file);}
+\DoxyCodeLine{00583\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00585\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(pos);}
+\DoxyCodeLine{00586\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a1fd116a5c6d658acbe5e5786fa3e1868}\index{vfs.c@{vfs.c}!\_lseek@{\_lseek}}
+\index{\_lseek@{\_lseek}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_lseek()}{\_lseek()}}
+{\footnotesize\ttfamily \label{vfs_8c_a1fd116a5c6d658acbe5e5786fa3e1868} 
+off\+\_\+t \+\_\+lseek (\begin{DoxyParamCaption}\item[{int}]{fildes}{, }\item[{off\+\_\+t}]{offset}{, }\item[{int}]{whence}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00544}{544}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00545\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00546\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00547\ }
+\DoxyCodeLine{00548\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00551\ \ \ \ \ \}}
+\DoxyCodeLine{00552\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00553\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00554\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00557\ \ \ \ \ \}}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00559\ \ \ \ \ off\_t\ pos\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ offset,\ whence);}
+\DoxyCodeLine{00560\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(pos);}
+\DoxyCodeLine{00563\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_aeea6b1ce10c4ced8db50f44cb6774b01}\index{vfs.c@{vfs.c}!\_open@{\_open}}
+\index{\_open@{\_open}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_open()}{\_open()}}
+{\footnotesize\ttfamily \label{vfs_8c_aeea6b1ce10c4ced8db50f44cb6774b01} 
+int \+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{int}]{oflags}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00405}{405}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00406\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00407\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00409\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00413\ \ \ \ \ \}}
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00415\ \ \ \ \ \textcolor{comment}{//\ find\ file\ descriptor}}
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ \_assign\_file\_descriptor();}
+\DoxyCodeLine{00417\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENFILE);}
+\DoxyCodeLine{00420\ \ \ \ \ \}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00423\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].file\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}));}
+\DoxyCodeLine{00424\ \ \ \ \ \textcolor{keywordflow}{if}\ (file\ ==\ NULL)\ \{}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOMEM);}
+\DoxyCodeLine{00427\ \ \ \ \ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a28f1a1f90cf5c05660e20b20e55cf1c7}{file\_open}}(fs,\ file,\ entity\_path,\ oflags);}
+\DoxyCodeLine{00430\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ <\ 0)\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ free(file);}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].file\ =\ NULL;}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00435\ \ \ \ \ \}}
+\DoxyCodeLine{00436\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].filesystem\ =\ fs;}
+\DoxyCodeLine{00437\ \ \ \ \ strncpy(file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].path,\ path,\ \mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}});}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(fd);}
+\DoxyCodeLine{00442\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a6cfdb1d41006cb00b54a113c28dd3ab3}\index{vfs.c@{vfs.c}!\_read@{\_read}}
+\index{\_read@{\_read}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_read()}{\_read()}}
+{\footnotesize\ttfamily \label{vfs_8c_a6cfdb1d41006cb00b54a113c28dd3ab3} 
+ssize\+\_\+t \+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fildes}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{size\+\_\+t}]{nbyte}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00518}{518}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00519\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00520\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDIN\_FILENO)\ \{}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ read\_bytes\ =\ pico\_stdio\_fallback\_read(buf,\ nbyte);}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ read\_bytes;}
+\DoxyCodeLine{00526\ \ \ \ \ \}}
+\DoxyCodeLine{00527\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00530\ \ \ \ \ \}}
+\DoxyCodeLine{00531\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00532\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00536\ \ \ \ \ \}}
+\DoxyCodeLine{00537\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ \ \ \ \ ssize\_t\ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_afa641bc200d34300f3306a7f2b1c0794}{file\_read}}(fs,\ file,\ buf,\ nbyte);}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00541\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(size);}
+\DoxyCodeLine{00542\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a43bfed3654a97b85373f2d4198990c8d}\index{vfs.c@{vfs.c}!\_stat@{\_stat}}
+\index{\_stat@{\_stat}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_stat()}{\_stat()}}
+{\footnotesize\ttfamily \label{vfs_8c_a43bfed3654a97b85373f2d4198990c8d} 
+int \+\_\+stat (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{struct stat \texorpdfstring{$\ast$}{*}}]{st}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00260}{260}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00262\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab5f68a612c88a96e638d2035a7ec59fd}{stat}}(fs,\ entity\_path,\ st);}
+\DoxyCodeLine{00271\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00273\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a11bde836cab6ec72897ede2286350e72}\index{vfs.c@{vfs.c}!\_unlink@{\_unlink}}
+\index{\_unlink@{\_unlink}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_unlink()}{\_unlink()}}
+{\footnotesize\ttfamily \label{vfs_8c_a11bde836cab6ec72897ede2286350e72} 
+int \+\_\+unlink (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00196}{196}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00197\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00198\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00204\ \ \ \ \ \}}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00206\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a168c6ebc947bcef4dd441c4846199663}{remove}}(fs,\ entity\_path);}
+\DoxyCodeLine{00208\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00210\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a637f3b33cf8a2223862596efdee3ad33}\index{vfs.c@{vfs.c}!\_write@{\_write}}
+\index{\_write@{\_write}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{\_write()}{\_write()}}
+{\footnotesize\ttfamily \label{vfs_8c_a637f3b33cf8a2223862596efdee3ad33} 
+ssize\+\_\+t \+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fildes}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{size\+\_\+t}]{nbyte}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00492}{492}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00493\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00494\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDOUT\_FILENO\ ||\ fildes\ ==\ STDERR\_FILENO)\ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ pico\_stdio\_fallback\_write(buf,\ nbyte);}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (ssize\_t)nbyte;}
+\DoxyCodeLine{00500\ \ \ \ \ \}}
+\DoxyCodeLine{00501\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00504\ \ \ \ \ \}}
+\DoxyCodeLine{00505\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00506\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00507\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00510\ \ \ \ \ \}}
+\DoxyCodeLine{00511\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00513\ \ \ \ \ ssize\_t\ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aa101ba0e335b6b94b615cd27edbef29f}{file\_write}}(fs,\ file,\ buf,\ nbyte);}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(size);}
+\DoxyCodeLine{00516\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}\index{vfs.c@{vfs.c}!closedir@{closedir}}
+\index{closedir@{closedir}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{closedir()}{closedir()}}
+{\footnotesize\ttfamily \label{vfs_8c_ac0258906f9453b8abf03e945aa9c9676} 
+int closedir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*}}]{dir}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00650}{650}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00651\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00652\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}};}
+\DoxyCodeLine{00655\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *\_dir\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].dir;}
+\DoxyCodeLine{00656\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].filesystem;}
+\DoxyCodeLine{00657\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00660\ \ \ \ \ \}}
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a537d71bf313451145ca593fe2a63d728}{dir\_close}}(fs,\ \_dir);}
+\DoxyCodeLine{00662\ \ \ \ \ dir\_descriptor[fd].filesystem\ =\ NULL;}
+\DoxyCodeLine{00663\ \ \ \ \ free(dir\_descriptor[fd].dir);}
+\DoxyCodeLine{00664\ \ \ \ \ dir\_descriptor[fd].dir\ =\ NULL;}
+\DoxyCodeLine{00665\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00666\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00667\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b}\index{vfs.c@{vfs.c}!ftruncate@{ftruncate}}
+\index{ftruncate@{ftruncate}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{ftruncate()}{ftruncate()}}
+{\footnotesize\ttfamily \label{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b} 
+int ftruncate (\begin{DoxyParamCaption}\item[{int}]{fildes}{, }\item[{off\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00588}{588}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00589\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00590\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00592\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00595\ \ \ \ \ \}}
+\DoxyCodeLine{00596\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{00597\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{00598\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00601\ \ \ \ \ \}}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a1318c5761c315dc5354e5154aae7d0f3}{file\_truncate}}(fs,\ file,\ length);}
+\DoxyCodeLine{00604\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00607\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}\index{vfs.c@{vfs.c}!mkdir@{mkdir}}
+\index{mkdir@{mkdir}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{mkdir()}{mkdir()}}
+{\footnotesize\ttfamily \label{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2} 
+int mkdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{mode\+\_\+t}]{mode}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00230}{230}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00231\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00232\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00237\ \ \ \ \ \}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a9f586df0f698f0472b033f406de87de3}{mkdir}}(fs,\ entity\_path,\ mode);}
+\DoxyCodeLine{00241\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00243\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_ad759a0269427a564f3ce672d43e885cf}\index{vfs.c@{vfs.c}!opendir@{opendir}}
+\index{opendir@{opendir}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{opendir()}{opendir()}}
+{\footnotesize\ttfamily \label{vfs_8c_ad759a0269427a564f3ce672d43e885cf} 
+\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*} opendir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00609}{609}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00610\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00611\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00612\ }
+\DoxyCodeLine{00613\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00614\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00618\ \ \ \ \ \}}
+\DoxyCodeLine{00619\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{comment}{//\ find\ dir\ descriptor}}
+\DoxyCodeLine{00621\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ \_assign\_dir\_descriptor();}
+\DoxyCodeLine{00622\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENFILE);}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00626\ \ \ \ \ \}}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *dir\ =\ dir\_descriptor[fd].dir\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}));}
+\DoxyCodeLine{00629\ \ \ \ \ \textcolor{keywordflow}{if}\ (dir\ ==\ NULL)\ \{}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENOMEM);}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00633\ \ \ \ \ \}}
+\DoxyCodeLine{00634\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00635\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a85af88c13c623c820eca217dd81c2a2a}{dir\_open}}(fs,\ dir,\ entity\_path);}
+\DoxyCodeLine{00636\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ free(dir);}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ dir\_descriptor[fd].dir\ =\ NULL;}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \_error\_remap(err);}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00642\ \ \ \ \ \}}
+\DoxyCodeLine{00643\ \ \ \ \ dir\_descriptor[fd].filesystem\ =\ fs;}
+\DoxyCodeLine{00644\ \ \ \ \ dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}\ =\ fd;}
+\DoxyCodeLine{00645\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \ \ \ \ \textcolor{keywordflow}{return}\ dir;}
+\DoxyCodeLine{00648\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}\index{vfs.c@{vfs.c}!readdir@{readdir}}
+\index{readdir@{readdir}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{readdir()}{readdir()}}
+{\footnotesize\ttfamily \label{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee} 
+struct \mbox{\hyperlink{structdirent}{dirent}} \texorpdfstring{$\ast$}{*} readdir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}} \texorpdfstring{$\ast$}{*}}]{dir}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00669}{669}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00670\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00671\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *\_dir\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].dir;}
+\DoxyCodeLine{00674\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].filesystem;}
+\DoxyCodeLine{00675\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00679\ \ \ \ \ \}}
+\DoxyCodeLine{00680\ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{00681\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a36cd5c106f4d8a95cdf1ee4a73052001}{dir\_read}}(fs,\ \_dir,\ \&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}});}
+\DoxyCodeLine{00682\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ 0)\ \{}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}};}
+\DoxyCodeLine{00685\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (err\ ==\ -\/ENOENT)\ \{}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \_error\_remap(0);}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00690\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \_error\_remap(err);}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00695\ \ \ \ \ \}}
+\DoxyCodeLine{00696\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}\index{vfs.c@{vfs.c}!rename@{rename}}
+\index{rename@{rename}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{rename()}{rename()}}
+{\footnotesize\ttfamily \label{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7} 
+int rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{old}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{new}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00212}{212}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//\ TODO:\ Check\ if\ old\ and\ new\ are\ the\ same\ filesystem}}
+\DoxyCodeLine{00214\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00215\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(old);}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *old\_entity\_path\ =\ remove\_prefix(old,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *new\_entity\_path\ =\ remove\_prefix(\textcolor{keyword}{new},\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a1642d2b8278ee2e0e28e67e3c871e7af}{rename}}(fs,\ old\_entity\_path,\ new\_entity\_path);}
+\DoxyCodeLine{00226\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00228\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce}\index{vfs.c@{vfs.c}!rmdir@{rmdir}}
+\index{rmdir@{rmdir}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{rmdir()}{rmdir()}}
+{\footnotesize\ttfamily \label{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce} 
+int rmdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vfs_8c_source_l00245}{245}} of file \mbox{\hyperlink{vfs_8c_source}{vfs.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00246\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{00247\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{00248\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{00252\ \ \ \ \ \}}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a396727009601ff7cd9505b724dc744f3}{rmdir}}(fs,\ entity\_path);}
+\DoxyCodeLine{00256\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{00258\ \}}
+
+\end{DoxyCode}
+\Hypertarget{vfs_8c_a90927805d6b48285139ab31098623df1}\index{vfs.c@{vfs.c}!stdio\_flush@{stdio\_flush}}
+\index{stdio\_flush@{stdio\_flush}!vfs.c@{vfs.c}}
+\doxysubsubsection{\texorpdfstring{stdio\_flush()}{stdio\_flush()}}
+{\footnotesize\ttfamily \label{vfs_8c_a90927805d6b48285139ab31098623df1} 
+void stdio\+\_\+flush (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+

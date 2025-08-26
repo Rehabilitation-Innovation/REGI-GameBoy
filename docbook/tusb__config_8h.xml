@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tusb__config_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/usb_logger/tusb_config.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger/tusb_config.h</primary></indexterm>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a850f6280c7dc9aead785f6bedaaa0fb9">BOARD_TUD_RHPORT</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a1d0d7228d7d9fc274b2280cd8e007003">BOARD_TUD_MAX_SPEED</link>&#160;&#160;&#160;OPT_MODE_DEFAULT_SPEED</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a3d27955bb9aee39c43cb3756ffb372c1">CFG_TUSB_OS</link>&#160;&#160;&#160;OPT_OS_NONE</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a4c102f40f3ecdd15c3c64b3e903e8385">CFG_TUSB_DEBUG</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a49885f91dd20d11d4f692a931ee57667">CFG_TUD_ENABLED</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1aa37f3ad3cbb642d9d14ee056dd3e3ca8">CFG_TUD_MAX_SPEED</link>&#160;&#160;&#160;<link linkend="_tusb__config_8h_1a1d0d7228d7d9fc274b2280cd8e007003">BOARD_TUD_MAX_SPEED</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a360b21fa11ef498d9c4dc49428ab780f">CFG_TUSB_MEM_SECTION</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1ae46ca7dc14babee346d8af7aa8db403e">CFG_TUSB_MEM_ALIGN</link>&#160;&#160;&#160;<link linkend="_src_2filesystem_2fs__init_8c_1acdc7c707257b149d05bc7b779c55867c">__attribute__</link> ((aligned(4)))</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a9b99a70dc9fc74ecc23108ab18bbebe4">CFG_TUD_ENDPOINT0_SIZE</link>&#160;&#160;&#160;64</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a7df8fc8e36e96c632d18c5e6a283cbad">CFG_TUD_CDC</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a159e8998f430441201fe575035576de3">CFG_TUD_MSC</link>&#160;&#160;&#160;1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a59ed1f17152d738c0f50edf02565cd20">CFG_TUD_HID</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1aa407aa4b24ddb98c5c8c27d533ec0e9a">CFG_TUD_MIDI</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a5332fe14c3199537455edc6faaa0ef9b">CFG_TUD_VENDOR</link>&#160;&#160;&#160;0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a0be811273fed0a24763e4a22700e2b1d">CFG_TUD_CDC_RX_BUFSIZE</link>&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a1583fbe8a2453ca3a5986bd6633390c4">CFG_TUD_CDC_TX_BUFSIZE</link>&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1a9484fcfe46fd923c94d7fdd93af1179b">CFG_TUD_CDC_EP_BUFSIZE</link>&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_tusb__config_8h_1ae152a02e8ae360a620dd3200dbc5f3c3">CFG_TUD_MSC_EP_BUFSIZE</link>&#160;&#160;&#160;4096</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_tusb__config_8h_1a1d0d7228d7d9fc274b2280cd8e007003"/><section>
+    <title>BOARD_TUD_MAX_SPEED</title>
+<indexterm><primary>BOARD_TUD_MAX_SPEED</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>BOARD_TUD_MAX_SPEED</secondary></indexterm>
+<para><computeroutput>#define BOARD_TUD_MAX_SPEED&#160;&#160;&#160;OPT_MODE_DEFAULT_SPEED</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00019">19</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a850f6280c7dc9aead785f6bedaaa0fb9"/><section>
+    <title>BOARD_TUD_RHPORT</title>
+<indexterm><primary>BOARD_TUD_RHPORT</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>BOARD_TUD_RHPORT</secondary></indexterm>
+<para><computeroutput>#define BOARD_TUD_RHPORT&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00014">14</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a7df8fc8e36e96c632d18c5e6a283cbad"/><section>
+    <title>CFG_TUD_CDC</title>
+<indexterm><primary>CFG_TUD_CDC</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_CDC</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_CDC&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00069">69</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a9484fcfe46fd923c94d7fdd93af1179b"/><section>
+    <title>CFG_TUD_CDC_EP_BUFSIZE</title>
+<indexterm><primary>CFG_TUD_CDC_EP_BUFSIZE</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_CDC_EP_BUFSIZE</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_CDC_EP_BUFSIZE&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00080">80</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a0be811273fed0a24763e4a22700e2b1d"/><section>
+    <title>CFG_TUD_CDC_RX_BUFSIZE</title>
+<indexterm><primary>CFG_TUD_CDC_RX_BUFSIZE</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_CDC_RX_BUFSIZE</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_CDC_RX_BUFSIZE&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00076">76</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a1583fbe8a2453ca3a5986bd6633390c4"/><section>
+    <title>CFG_TUD_CDC_TX_BUFSIZE</title>
+<indexterm><primary>CFG_TUD_CDC_TX_BUFSIZE</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_CDC_TX_BUFSIZE</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_CDC_TX_BUFSIZE&#160;&#160;&#160;(TUD_OPT_HIGH_SPEED ? 512 : 64)</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00077">77</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a49885f91dd20d11d4f692a931ee57667"/><section>
+    <title>CFG_TUD_ENABLED</title>
+<indexterm><primary>CFG_TUD_ENABLED</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_ENABLED</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_ENABLED&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00040">40</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a9b99a70dc9fc74ecc23108ab18bbebe4"/><section>
+    <title>CFG_TUD_ENDPOINT0_SIZE</title>
+<indexterm><primary>CFG_TUD_ENDPOINT0_SIZE</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_ENDPOINT0_SIZE</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_ENDPOINT0_SIZE&#160;&#160;&#160;64</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00065">65</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a59ed1f17152d738c0f50edf02565cd20"/><section>
+    <title>CFG_TUD_HID</title>
+<indexterm><primary>CFG_TUD_HID</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_HID</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_HID&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00071">71</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1aa37f3ad3cbb642d9d14ee056dd3e3ca8"/><section>
+    <title>CFG_TUD_MAX_SPEED</title>
+<indexterm><primary>CFG_TUD_MAX_SPEED</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_MAX_SPEED</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_MAX_SPEED&#160;&#160;&#160;<link linkend="_tusb__config_8h_1a1d0d7228d7d9fc274b2280cd8e007003">BOARD_TUD_MAX_SPEED</link></computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00043">43</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1aa407aa4b24ddb98c5c8c27d533ec0e9a"/><section>
+    <title>CFG_TUD_MIDI</title>
+<indexterm><primary>CFG_TUD_MIDI</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_MIDI</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_MIDI&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00072">72</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a159e8998f430441201fe575035576de3"/><section>
+    <title>CFG_TUD_MSC</title>
+<indexterm><primary>CFG_TUD_MSC</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_MSC</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_MSC&#160;&#160;&#160;1</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00070">70</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1ae152a02e8ae360a620dd3200dbc5f3c3"/><section>
+    <title>CFG_TUD_MSC_EP_BUFSIZE</title>
+<indexterm><primary>CFG_TUD_MSC_EP_BUFSIZE</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_MSC_EP_BUFSIZE</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_MSC_EP_BUFSIZE&#160;&#160;&#160;4096</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00083">83</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a5332fe14c3199537455edc6faaa0ef9b"/><section>
+    <title>CFG_TUD_VENDOR</title>
+<indexterm><primary>CFG_TUD_VENDOR</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUD_VENDOR</secondary></indexterm>
+<para><computeroutput>#define CFG_TUD_VENDOR&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00073">73</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a4c102f40f3ecdd15c3c64b3e903e8385"/><section>
+    <title>CFG_TUSB_DEBUG</title>
+<indexterm><primary>CFG_TUSB_DEBUG</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUSB_DEBUG</secondary></indexterm>
+<para><computeroutput>#define CFG_TUSB_DEBUG&#160;&#160;&#160;0</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00036">36</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1ae46ca7dc14babee346d8af7aa8db403e"/><section>
+    <title>CFG_TUSB_MEM_ALIGN</title>
+<indexterm><primary>CFG_TUSB_MEM_ALIGN</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUSB_MEM_ALIGN</secondary></indexterm>
+<para><computeroutput>#define CFG_TUSB_MEM_ALIGN&#160;&#160;&#160;<link linkend="_src_2filesystem_2fs__init_8c_1acdc7c707257b149d05bc7b779c55867c">__attribute__</link> ((aligned(4)))</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00057">57</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a360b21fa11ef498d9c4dc49428ab780f"/><section>
+    <title>CFG_TUSB_MEM_SECTION</title>
+<indexterm><primary>CFG_TUSB_MEM_SECTION</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUSB_MEM_SECTION</secondary></indexterm>
+<para><computeroutput>#define CFG_TUSB_MEM_SECTION</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00053">53</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+<anchor xml:id="_tusb__config_8h_1a3d27955bb9aee39c43cb3756ffb372c1"/><section>
+    <title>CFG_TUSB_OS</title>
+<indexterm><primary>CFG_TUSB_OS</primary><secondary>tusb_config.h</secondary></indexterm>
+<indexterm><primary>tusb_config.h</primary><secondary>CFG_TUSB_OS</secondary></indexterm>
+<para><computeroutput>#define CFG_TUSB_OS&#160;&#160;&#160;OPT_OS_NONE</computeroutput></para><para>
+Definition at line <link linkend="_tusb__config_8h_source_1l00032">32</link> of file <link linkend="_tusb__config_8h_source">tusb_config.h</link>.</para>
+</section>
+</section>
+</section>

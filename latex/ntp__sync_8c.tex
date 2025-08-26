@@ -1,0 +1,120 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/examples/elastic\+\_\+mqtt\+\_\+client/ntp\+\_\+sync.c File Reference}
+\hypertarget{ntp__sync_8c}{}\label{ntp__sync_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/ntp\_sync.c@{lib/pico-\/vfs-\/REGI-\/Local/examples/elastic\_mqtt\_client/ntp\_sync.c}}
+{\ttfamily \#include $<$hardware/rtc.\+h$>$}\newline
+{\ttfamily \#include $<$lwip/apps/sntp.\+h$>$}\newline
+{\ttfamily \#include $<$pico/cyw43\+\_\+arch.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}{NTP\+\_\+\+SERVER}}~"{}pool.\+ntp.\+org"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{ntp__sync_8c_afe77477eb61cb1a9294020c022edabc5}{ntp\+\_\+sync}} ()
+\item 
+void \mbox{\hyperlink{ntp__sync_8c_a46f1c418d0f05268d7a0ebc8ce25d07c}{set\+\_\+system\+\_\+time}} (uint32\+\_\+t sec)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{ntp__sync_8c_a5fabcd416198038418e923db9259b7ff}{get\+\_\+timestamp}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{ntp__sync_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}\index{ntp\_sync.c@{ntp\_sync.c}!NTP\_SERVER@{NTP\_SERVER}}
+\index{NTP\_SERVER@{NTP\_SERVER}!ntp\_sync.c@{ntp\_sync.c}}
+\doxysubsubsection{\texorpdfstring{NTP\_SERVER}{NTP\_SERVER}}
+{\footnotesize\ttfamily \label{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0} 
+\#define NTP\+\_\+\+SERVER~"{}pool.\+ntp.\+org"{}}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00012}{12}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{ntp__sync_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ntp__sync_8c_a5fabcd416198038418e923db9259b7ff}\index{ntp\_sync.c@{ntp\_sync.c}!get\_timestamp@{get\_timestamp}}
+\index{get\_timestamp@{get\_timestamp}!ntp\_sync.c@{ntp\_sync.c}}
+\doxysubsubsection{\texorpdfstring{get\_timestamp()}{get\_timestamp()}}
+{\footnotesize\ttfamily \label{ntp__sync_8c_a5fabcd416198038418e923db9259b7ff} 
+const char \texorpdfstring{$\ast$}{*} get\+\_\+timestamp (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00046}{46}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ buffer[30];}
+\DoxyCodeLine{00048\ \ \ \ \ time\_t\ now\ =\ time(NULL);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *\mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}}\ =\ gmtime(\&now);}
+\DoxyCodeLine{00050\ \ \ \ \ strftime(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \textcolor{stringliteral}{"{}\%Y-\/\%m-\/\%d\ \%H:\%M:\%S"{}},\ \mbox{\hyperlink{_dino_game_8cpp_a87accd1af8e0aff4b818d891374f7cec}{t}});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer;}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+\Hypertarget{ntp__sync_8c_afe77477eb61cb1a9294020c022edabc5}\index{ntp\_sync.c@{ntp\_sync.c}!ntp\_sync@{ntp\_sync}}
+\index{ntp\_sync@{ntp\_sync}!ntp\_sync.c@{ntp\_sync.c}}
+\doxysubsubsection{\texorpdfstring{ntp\_sync()}{ntp\_sync()}}
+{\footnotesize\ttfamily \label{ntp__sync_8c_afe77477eb61cb1a9294020c022edabc5} 
+bool ntp\+\_\+sync (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00014}{14}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ sntp\_setoperatingmode(SNTP\_OPMODE\_POLL);}
+\DoxyCodeLine{00016\ \ \ \ \ sntp\_setservername(0,\ \mbox{\hyperlink{ntp__sync_8c_a751e3f85cd240e89d390d18996089cd0}{NTP\_SERVER}});}
+\DoxyCodeLine{00017\ \ \ \ \ sntp\_init();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 20;\ i++)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sntp\_getreachability(0))\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00026\ \}}
+
+\end{DoxyCode}
+\Hypertarget{ntp__sync_8c_a46f1c418d0f05268d7a0ebc8ce25d07c}\index{ntp\_sync.c@{ntp\_sync.c}!set\_system\_time@{set\_system\_time}}
+\index{set\_system\_time@{set\_system\_time}!ntp\_sync.c@{ntp\_sync.c}}
+\doxysubsubsection{\texorpdfstring{set\_system\_time()}{set\_system\_time()}}
+{\footnotesize\ttfamily \label{ntp__sync_8c_a46f1c418d0f05268d7a0ebc8ce25d07c} 
+void set\+\_\+system\+\_\+time (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{sec}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ntp__sync_8c_source_l00028}{28}} of file \mbox{\hyperlink{ntp__sync_8c_source}{ntp\+\_\+sync.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ time\_t\ epoch\ =\ sec;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *time\ =\ gmtime(\&epoch);}
+\DoxyCodeLine{00031\ \ \ \ \ datetime\_t\ dt\ =\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ .year\ =\ (int16\_t)\ (1900\ +\ time-\/>tm\_year),}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ .month\ =\ (int8\_t)\ (time-\/>tm\_mon\ +\ 1),}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ .day\ =\ (int8\_t)\ time-\/>tm\_mday,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ .hour\ =\ (int8\_t)\ time-\/>tm\_hour,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ .min\ =\ (int8\_t)\ time-\/>tm\_min,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ .sec\ =\ (int8\_t)\ time-\/>tm\_sec,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ .dotw\ =\ (int8\_t)\ time-\/>tm\_wday,}
+\DoxyCodeLine{00039\ \ \ \ \ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ rtc\_set\_datetime(\&dt);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{struct\ }timeval\ tv\ =\ \{.tv\_sec\ =\ mktime(time)\};}
+\DoxyCodeLine{00043\ \ \ \ \ settimeofday(\&tv,\ NULL);}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}

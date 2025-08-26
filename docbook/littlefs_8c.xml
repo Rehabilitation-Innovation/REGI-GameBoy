@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_littlefs_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/filesystem/littlefs.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/littlefs.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;errno.h&gt;<?linebreak?>#include &lt;fcntl.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &quot;lfs.h&quot;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structlittlefs__file__t">littlefs_file_t</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structfilesystem__littlefs__context__t">filesystem_littlefs_context_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> * <link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link> (uint32_t block_cycles, lfs_size_t lookahead_size)</para>
+
+<para>Create littlefs file system object. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link> (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs)</para>
+
+<para>Release littlefs file system object. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

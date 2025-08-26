@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__blockdevice_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/tests/test_blockdevice.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/test_blockdevice.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;assert.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;blockdevice/heap.h&quot;<?linebreak?>#include &quot;blockdevice/loopback.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?>#include &lt;ctype.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__blockdevice_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>&#160;&#160;&#160;(64 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4">LOOPBACK_STORAGE_SIZE</link>&#160;&#160;&#160;1024</para>
+</listitem>
+            <listitem><para>#define <link linkend="_test__blockdevice_8c_1ab8c390e6f53017179ae00255cd27fd11">LOOPBACK_BLOCK_SIZE</link>&#160;&#160;&#160;512</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_test__blockdevice_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6">test_blockdevice</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_test__blockdevice_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_test__blockdevice_8c_source_1l00011">11</link> of file <link linkend="_test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_test__blockdevice_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae"/><section>
+    <title>HEAP_STORAGE_SIZE</title>
+<indexterm><primary>HEAP_STORAGE_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>HEAP_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define HEAP_STORAGE_SIZE&#160;&#160;&#160;(64 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_test__blockdevice_8c_source_1l00012">12</link> of file <link linkend="_test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_test__blockdevice_8c_1ab8c390e6f53017179ae00255cd27fd11"/><section>
+    <title>LOOPBACK_BLOCK_SIZE</title>
+<indexterm><primary>LOOPBACK_BLOCK_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>LOOPBACK_BLOCK_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_BLOCK_SIZE&#160;&#160;&#160;512</computeroutput></para><para>
+Definition at line <link linkend="_test__blockdevice_8c_source_1l00014">14</link> of file <link linkend="_test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+<anchor xml:id="_test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4"/><section>
+    <title>LOOPBACK_STORAGE_SIZE</title>
+<indexterm><primary>LOOPBACK_STORAGE_SIZE</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>LOOPBACK_STORAGE_SIZE</secondary></indexterm>
+<para><computeroutput>#define LOOPBACK_STORAGE_SIZE&#160;&#160;&#160;1024</computeroutput></para><para>
+Definition at line <link linkend="_test__blockdevice_8c_source_1l00013">13</link> of file <link linkend="_test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_test__blockdevice_8c_1aaa6a7a1b08b6bd092fbeeebf2476e6a6"/><section>
+    <title>test_blockdevice()</title>
+<indexterm><primary>test_blockdevice</primary><secondary>test_blockdevice.c</secondary></indexterm>
+<indexterm><primary>test_blockdevice.c</primary><secondary>test_blockdevice</secondary></indexterm>
+<para><computeroutput>void test_blockdevice (void )</computeroutput></para><para>
+Definition at line <link linkend="_test__blockdevice_8c_source_1l00142">142</link> of file <link linkend="_test__blockdevice_8c_source">test_blockdevice.c</link>.</para>
+<programlisting linenumbering="unnumbered">00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00143 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Heap&#32;memory:\n&quot;</emphasis>);
+00144 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00145 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00146 &#32;&#32;&#32;&#32;setup(heap);
+00147 
+00148 &#32;&#32;&#32;&#32;test_api_init(heap);
+00149 &#32;&#32;&#32;&#32;test_api_erase_program_read(heap);
+00150 &#32;&#32;&#32;&#32;test_api_trim(heap);
+00151 &#32;&#32;&#32;&#32;test_api_sync(heap);
+00152 &#32;&#32;&#32;&#32;test_api_size(heap);
+00153 &#32;&#32;&#32;&#32;test_api_attribute(heap);
+00154 
+00155 &#32;&#32;&#32;&#32;cleanup(heap);
+00156 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00157 
+00158 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Block&#32;device&#32;Loopback:\n&quot;</emphasis>);
+00159 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+00160 &#32;&#32;&#32;&#32;assert(heap&#32;!=&#32;NULL);
+00161 &#32;&#32;&#32;&#32;setup(heap);
+00162 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+00163 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+00164 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fat,&#32;heap);
+00165 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;fat,&#32;heap);
+00166 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*loopback&#32;=&#32;<link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link>(<emphasis role="stringliteral">&quot;/loopback&quot;</emphasis>,
+00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_host_2test__blockdevice_8c_1ab0b32c3001dc854345376d139b2fc9d4">LOOPBACK_STORAGE_SIZE</link>,
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_fs__init__loopback_8c_1ab8c390e6f53017179ae00255cd27fd11">LOOPBACK_BLOCK_SIZE</link>);
+00169 &#32;&#32;&#32;&#32;assert(loopback&#32;!=&#32;NULL);
+00170 
+00171 &#32;&#32;&#32;&#32;test_api_init(loopback);
+00172 &#32;&#32;&#32;&#32;test_api_erase_program_read(loopback);
+00173 &#32;&#32;&#32;&#32;test_api_trim(loopback);
+00174 &#32;&#32;&#32;&#32;test_api_sync(loopback);
+00175 &#32;&#32;&#32;&#32;test_api_size(loopback);
+00176 &#32;&#32;&#32;&#32;test_api_attribute(loopback);
+00177 
+00178 &#32;&#32;&#32;&#32;cleanup(loopback);
+00179 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link>(loopback);
+00180 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>);
+00181 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+00182 &#32;&#32;&#32;&#32;cleanup(heap);
+00183 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+00184 }
+</programlisting></section>
+</section>
+</section>

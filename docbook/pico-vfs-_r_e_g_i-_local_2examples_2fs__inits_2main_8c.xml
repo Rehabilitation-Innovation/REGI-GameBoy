@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/fs_inits/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/fs_inits/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;errno.h&gt;<?linebreak?>#include &lt;fcntl.h&gt;<?linebreak?>#include &lt;hardware/clocks.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(format)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a39dba520911d1902db3bdc3f0280df2f">BENCHMARK_SIZE</link>&#160;&#160;&#160;(0.6 * 1024 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a259e80f4d6fca169b3e2e5b82dd316d1">BENCHMARK_SIZE_SMALL</link>&#160;&#160;&#160;(256 * 1024)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1abcbfd1e47b0212e084d9a16e323844c7">BENCHMARK_SIZE_TINY</link>&#160;&#160;&#160;(100 * 1024)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a39dba520911d1902db3bdc3f0280df2f"/><section>
+    <title>BENCHMARK_SIZE</title>
+<indexterm><primary>BENCHMARK_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BENCHMARK_SIZE</secondary></indexterm>
+<para><computeroutput>#define BENCHMARK_SIZE&#160;&#160;&#160;(0.6 * 1024 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_1l00018">18</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a259e80f4d6fca169b3e2e5b82dd316d1"/><section>
+    <title>BENCHMARK_SIZE_SMALL</title>
+<indexterm><primary>BENCHMARK_SIZE_SMALL</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BENCHMARK_SIZE_SMALL</secondary></indexterm>
+<para><computeroutput>#define BENCHMARK_SIZE_SMALL&#160;&#160;&#160;(256 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_1l00019">19</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1abcbfd1e47b0212e084d9a16e323844c7"/><section>
+    <title>BENCHMARK_SIZE_TINY</title>
+<indexterm><primary>BENCHMARK_SIZE_TINY</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BENCHMARK_SIZE_TINY</secondary></indexterm>
+<para><computeroutput>#define BENCHMARK_SIZE_TINY&#160;&#160;&#160;(100 * 1024)</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_1l00020">20</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a589fea3c63209fa4d21b6b30d8c365c3"/><section>
+    <title>COLOR_GREEN</title>
+<indexterm><primary>COLOR_GREEN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>COLOR_GREEN</secondary></indexterm>
+<para><computeroutput>#define COLOR_GREEN( format)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">(<emphasis role="stringliteral">&quot;\e[32m&quot;</emphasis>&#32;format&#32;<emphasis role="stringliteral">&quot;\e[0m&quot;</emphasis>)
+</programlisting><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_1l00017">17</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source_1l00135">135</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2fs__inits_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00136 &#32;&#32;&#32;&#32;stdio_init_all();
+00137 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init</link>();
+00138 
+00139 &#32;&#32;&#32;&#32;benchmark_write();
+00140 &#32;&#32;&#32;&#32;benchmark_read();
+00141 }
+</programlisting></section>
+</section>
+</section>

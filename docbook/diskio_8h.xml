@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_diskio_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/vendor/ff15/source/diskio.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/source/diskio.h</primary></indexterm>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_diskio_8h_1abd6503c70d862b979a3f7080a59e9acd">STA_NOINIT</link>&#160;&#160;&#160;0x01	/* Drive not initialized */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1aec625080763d6cf487e550a6c9a2dd19">STA_NODISK</link>&#160;&#160;&#160;0x02	/* No medium in the drive */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a9ec6dc5f6620a33fabe388d3a111ca8c">STA_PROTECT</link>&#160;&#160;&#160;0x04	/* Write protected */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>&#160;&#160;&#160;0	/* Complete pending write process (needed at <link linkend="_ffconf_8h_1ac932d228331b07248a3faa6f5904a49d">FF_FS_READONLY</link> == 0) */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde">GET_SECTOR_COUNT</link>&#160;&#160;&#160;1	/* Get media size (needed at <link linkend="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429">FF_USE_MKFS</link> == 1) */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>&#160;&#160;&#160;2	/* Get sector size (needed at <link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link> != <link linkend="_ffconf_8h_1a5c25535bf118c111157fe72fff3cbea5">FF_MIN_SS</link>) */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500">GET_BLOCK_SIZE</link>&#160;&#160;&#160;3	/* Get erase block size (needed at <link linkend="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429">FF_USE_MKFS</link> == 1) */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1af09fd84bea8d4e889e272471f44d60d6">CTRL_TRIM</link>&#160;&#160;&#160;4	/* Inform device that the data on the block of sectors is no longer used (needed at <link linkend="_ffconf_8h_1a263c9f484beef1e88f2de0a96d8dad9b">FF_USE_TRIM</link> == 1) */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a345531a07462afbd999f414708e3b65b">CTRL_POWER</link>&#160;&#160;&#160;5	/* Get/Set power status */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1af40e5cf3000553a978ff6e30dae70858">CTRL_LOCK</link>&#160;&#160;&#160;6	/* Lock/Unlock media removal */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a5e40e16d2d7ce196858950f070b9ec03">CTRL_EJECT</link>&#160;&#160;&#160;7	/* Eject media */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1add07021167069f5914211a2f8830fabb">CTRL_FORMAT</link>&#160;&#160;&#160;8	/* Create physical format on the media */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1aba3a81a9a47c7d1bf3ac7749bc72dcfd">MMC_GET_TYPE</link>&#160;&#160;&#160;10	/* Get card type */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1ae3b858b81287929f7c7bea3b7aec3087">MMC_GET_CSD</link>&#160;&#160;&#160;11	/* Get CSD */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a17ad303dd18b19a4c90ab30a8a1c14c4">MMC_GET_CID</link>&#160;&#160;&#160;12	/* Get CID */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1aff118ba6bd7a9fe7699cee049cff5d6c">MMC_GET_OCR</link>&#160;&#160;&#160;13	/* Get OCR */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a5cc43c8449b872e16ea5ab42592f793e">MMC_GET_SDSTAT</link>&#160;&#160;&#160;14	/* Get SD status */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a9eb2d8ccc0b89299bc442396811f8723">ISDIO_READ</link>&#160;&#160;&#160;55	/* Read data form SD iSDIO register */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a9637dcd58e0f1f301edf0cccff9e3507">ISDIO_WRITE</link>&#160;&#160;&#160;56	/* Write data to SD iSDIO register */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1aa79f4043470c49016d80558773e740a5">ISDIO_MRITE</link>&#160;&#160;&#160;57	/* Masked write data to SD iSDIO register */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a23f5fff3341e98825ea1f7367fd09f1a">ATA_GET_REV</link>&#160;&#160;&#160;20	/* Get F/W revision */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a31f556ab98ab80c39058b38d9283865d">ATA_GET_MODEL</link>&#160;&#160;&#160;21	/* Get model <link linkend="__dino_game_8cpp_1a8f8f80d37794cde9472343e4487ba3eb">name</link> */</para>
+</listitem>
+            <listitem><para>#define <link linkend="_diskio_8h_1a469c4f989757ee1ee404134fea3c74ba">ATA_GET_SN</link>&#160;&#160;&#160;22	/* Get serial number */</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> { <?linebreak?><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link> = 0
+, <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba78011f5557679ec178fb40bd21e89840">RES_ERROR</link>
+, <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba442a6d4393dc404827067bc4e981b322">RES_WRPRT</link>
+, <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>
+, <?linebreak?><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_diskio_8h_1a09cdaa6f36fa409bdf002727bff98eb1">disk_initialize</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_diskio_8h_1a8348ac5ee6d709420c02e45c111f4793">disk_status</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8h_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8h_1ac24448955ef914f54a499df1fb45689d">disk_write</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_diskio_8h_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void *buff)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_diskio_8h_1a31f556ab98ab80c39058b38d9283865d"/><section>
+    <title>ATA_GET_MODEL</title>
+<indexterm><primary>ATA_GET_MODEL</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ATA_GET_MODEL</secondary></indexterm>
+<para><computeroutput>#define ATA_GET_MODEL&#160;&#160;&#160;21	/* Get model <link linkend="__dino_game_8cpp_1a8f8f80d37794cde9472343e4487ba3eb">name</link> */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00070">70</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a23f5fff3341e98825ea1f7367fd09f1a"/><section>
+    <title>ATA_GET_REV</title>
+<indexterm><primary>ATA_GET_REV</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ATA_GET_REV</secondary></indexterm>
+<para><computeroutput>#define ATA_GET_REV&#160;&#160;&#160;20	/* Get F/W revision */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00069">69</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a469c4f989757ee1ee404134fea3c74ba"/><section>
+    <title>ATA_GET_SN</title>
+<indexterm><primary>ATA_GET_SN</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ATA_GET_SN</secondary></indexterm>
+<para><computeroutput>#define ATA_GET_SN&#160;&#160;&#160;22	/* Get serial number */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00071">71</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a5e40e16d2d7ce196858950f070b9ec03"/><section>
+    <title>CTRL_EJECT</title>
+<indexterm><primary>CTRL_EJECT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_EJECT</secondary></indexterm>
+<para><computeroutput>#define CTRL_EJECT&#160;&#160;&#160;7	/* Eject media */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00055">55</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1add07021167069f5914211a2f8830fabb"/><section>
+    <title>CTRL_FORMAT</title>
+<indexterm><primary>CTRL_FORMAT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_FORMAT</secondary></indexterm>
+<para><computeroutput>#define CTRL_FORMAT&#160;&#160;&#160;8	/* Create physical format on the media */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00056">56</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1af40e5cf3000553a978ff6e30dae70858"/><section>
+    <title>CTRL_LOCK</title>
+<indexterm><primary>CTRL_LOCK</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_LOCK</secondary></indexterm>
+<para><computeroutput>#define CTRL_LOCK&#160;&#160;&#160;6	/* Lock/Unlock media removal */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00054">54</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a345531a07462afbd999f414708e3b65b"/><section>
+    <title>CTRL_POWER</title>
+<indexterm><primary>CTRL_POWER</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_POWER</secondary></indexterm>
+<para><computeroutput>#define CTRL_POWER&#160;&#160;&#160;5	/* Get/Set power status */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00053">53</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c"/><section>
+    <title>CTRL_SYNC</title>
+<indexterm><primary>CTRL_SYNC</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_SYNC</secondary></indexterm>
+<para><computeroutput>#define CTRL_SYNC&#160;&#160;&#160;0	/* Complete pending write process (needed at <link linkend="_ffconf_8h_1ac932d228331b07248a3faa6f5904a49d">FF_FS_READONLY</link> == 0) */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00046">46</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1af09fd84bea8d4e889e272471f44d60d6"/><section>
+    <title>CTRL_TRIM</title>
+<indexterm><primary>CTRL_TRIM</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>CTRL_TRIM</secondary></indexterm>
+<para><computeroutput>#define CTRL_TRIM&#160;&#160;&#160;4	/* Inform device that the data on the block of sectors is no longer used (needed at <link linkend="_ffconf_8h_1a263c9f484beef1e88f2de0a96d8dad9b">FF_USE_TRIM</link> == 1) */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00050">50</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500"/><section>
+    <title>GET_BLOCK_SIZE</title>
+<indexterm><primary>GET_BLOCK_SIZE</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>GET_BLOCK_SIZE</secondary></indexterm>
+<para><computeroutput>#define GET_BLOCK_SIZE&#160;&#160;&#160;3	/* Get erase block size (needed at <link linkend="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429">FF_USE_MKFS</link> == 1) */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00049">49</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde"/><section>
+    <title>GET_SECTOR_COUNT</title>
+<indexterm><primary>GET_SECTOR_COUNT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>GET_SECTOR_COUNT</secondary></indexterm>
+<para><computeroutput>#define GET_SECTOR_COUNT&#160;&#160;&#160;1	/* Get media size (needed at <link linkend="_ffconf_8h_1ad700e28d02d7da4b5f1b9c049b117429">FF_USE_MKFS</link> == 1) */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00047">47</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a"/><section>
+    <title>GET_SECTOR_SIZE</title>
+<indexterm><primary>GET_SECTOR_SIZE</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>GET_SECTOR_SIZE</secondary></indexterm>
+<para><computeroutput>#define GET_SECTOR_SIZE&#160;&#160;&#160;2	/* Get sector size (needed at <link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link> != <link linkend="_ffconf_8h_1a5c25535bf118c111157fe72fff3cbea5">FF_MIN_SS</link>) */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00048">48</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1aa79f4043470c49016d80558773e740a5"/><section>
+    <title>ISDIO_MRITE</title>
+<indexterm><primary>ISDIO_MRITE</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ISDIO_MRITE</secondary></indexterm>
+<para><computeroutput>#define ISDIO_MRITE&#160;&#160;&#160;57	/* Masked write data to SD iSDIO register */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00066">66</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a9eb2d8ccc0b89299bc442396811f8723"/><section>
+    <title>ISDIO_READ</title>
+<indexterm><primary>ISDIO_READ</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ISDIO_READ</secondary></indexterm>
+<para><computeroutput>#define ISDIO_READ&#160;&#160;&#160;55	/* Read data form SD iSDIO register */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00064">64</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a9637dcd58e0f1f301edf0cccff9e3507"/><section>
+    <title>ISDIO_WRITE</title>
+<indexterm><primary>ISDIO_WRITE</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>ISDIO_WRITE</secondary></indexterm>
+<para><computeroutput>#define ISDIO_WRITE&#160;&#160;&#160;56	/* Write data to SD iSDIO register */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00065">65</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a17ad303dd18b19a4c90ab30a8a1c14c4"/><section>
+    <title>MMC_GET_CID</title>
+<indexterm><primary>MMC_GET_CID</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>MMC_GET_CID</secondary></indexterm>
+<para><computeroutput>#define MMC_GET_CID&#160;&#160;&#160;12	/* Get CID */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00061">61</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1ae3b858b81287929f7c7bea3b7aec3087"/><section>
+    <title>MMC_GET_CSD</title>
+<indexterm><primary>MMC_GET_CSD</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>MMC_GET_CSD</secondary></indexterm>
+<para><computeroutput>#define MMC_GET_CSD&#160;&#160;&#160;11	/* Get CSD */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00060">60</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1aff118ba6bd7a9fe7699cee049cff5d6c"/><section>
+    <title>MMC_GET_OCR</title>
+<indexterm><primary>MMC_GET_OCR</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>MMC_GET_OCR</secondary></indexterm>
+<para><computeroutput>#define MMC_GET_OCR&#160;&#160;&#160;13	/* Get OCR */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00062">62</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a5cc43c8449b872e16ea5ab42592f793e"/><section>
+    <title>MMC_GET_SDSTAT</title>
+<indexterm><primary>MMC_GET_SDSTAT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>MMC_GET_SDSTAT</secondary></indexterm>
+<para><computeroutput>#define MMC_GET_SDSTAT&#160;&#160;&#160;14	/* Get SD status */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00063">63</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1aba3a81a9a47c7d1bf3ac7749bc72dcfd"/><section>
+    <title>MMC_GET_TYPE</title>
+<indexterm><primary>MMC_GET_TYPE</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>MMC_GET_TYPE</secondary></indexterm>
+<para><computeroutput>#define MMC_GET_TYPE&#160;&#160;&#160;10	/* Get card type */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00059">59</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1aec625080763d6cf487e550a6c9a2dd19"/><section>
+    <title>STA_NODISK</title>
+<indexterm><primary>STA_NODISK</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>STA_NODISK</secondary></indexterm>
+<para><computeroutput>#define STA_NODISK&#160;&#160;&#160;0x02	/* No medium in the drive */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00039">39</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1abd6503c70d862b979a3f7080a59e9acd"/><section>
+    <title>STA_NOINIT</title>
+<indexterm><primary>STA_NOINIT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>STA_NOINIT</secondary></indexterm>
+<para><computeroutput>#define STA_NOINIT&#160;&#160;&#160;0x01	/* Drive not initialized */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00038">38</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+<anchor xml:id="_diskio_8h_1a9ec6dc5f6620a33fabe388d3a111ca8c"/><section>
+    <title>STA_PROTECT</title>
+<indexterm><primary>STA_PROTECT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>STA_PROTECT</secondary></indexterm>
+<para><computeroutput>#define STA_PROTECT&#160;&#160;&#160;0x04	/* Write protected */</computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00040">40</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1"/><section>
+    <title>DSTATUS</title>
+<indexterm><primary>DSTATUS</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>DSTATUS</secondary></indexterm>
+<para><computeroutput>typedef <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link></computeroutput></para><para>
+Definition at line <link linkend="_diskio_8h_source_1l00013">13</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b"/><section>
+    <title>DRESULT</title>
+<indexterm><primary>DRESULT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>DRESULT</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>RES_OK</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>RES_OK</secondary></indexterm>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737"/>RES_OK</entry><entry></entry></row><row><entry><indexterm><primary>RES_ERROR</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>RES_ERROR</secondary></indexterm>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba78011f5557679ec178fb40bd21e89840"/>RES_ERROR</entry><entry></entry></row><row><entry><indexterm><primary>RES_WRPRT</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>RES_WRPRT</secondary></indexterm>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba442a6d4393dc404827067bc4e981b322"/>RES_WRPRT</entry><entry></entry></row><row><entry><indexterm><primary>RES_NOTRDY</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>RES_NOTRDY</secondary></indexterm>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d"/>RES_NOTRDY</entry><entry></entry></row><row><entry><indexterm><primary>RES_PARERR</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>RES_PARERR</secondary></indexterm>
+<anchor xml:id="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3"/>RES_PARERR</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_diskio_8h_source_1l00016">16</link> of file <link linkend="_diskio_8h_source">diskio.h</link>.</para>
+<programlisting linenumbering="unnumbered">00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00017 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>&#32;=&#32;0,&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;0:&#32;Successful&#32;*/</emphasis>
+00018 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba78011f5557679ec178fb40bd21e89840">RES_ERROR</link>,&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;1:&#32;R/W&#32;Error&#32;*/</emphasis>
+00019 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba442a6d4393dc404827067bc4e981b322">RES_WRPRT</link>,&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;2:&#32;Write&#32;Protected&#32;*/</emphasis>
+00020 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>,&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;3:&#32;Not&#32;Ready&#32;*/</emphasis>
+00021 &#32;&#32;&#32;&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;4:&#32;Invalid&#32;Parameter&#32;*/</emphasis>
+00022 }&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link>;
+</programlisting></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_diskio_8h_1a09cdaa6f36fa409bdf002727bff98eb1"/><section>
+    <title>disk_initialize()</title>
+<indexterm><primary>disk_initialize</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>disk_initialize</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_initialize (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00089">89</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00090 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_initialize&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>)_ffs[pdrv]-&gt;init(_ffs[pdrv]);
+00092 }
+</programlisting></section>
+<anchor xml:id="_diskio_8h_1ab00fa450a811dbdabe3c655c1a36fab4"/><section>
+    <title>disk_ioctl()</title>
+<indexterm><primary>disk_ioctl</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>disk_ioctl</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_ioctl (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void * buff)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00141">141</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00142 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_ioctl(%d)\n&quot;</emphasis>,&#32;cmd);
+00143 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(cmd)&#32;{
+00144 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>:
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00150 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde">GET_SECTOR_COUNT</link>:
+00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_count(pdrv);
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00157 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>:
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_size(pdrv);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00164 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500">GET_BLOCK_SIZE</link>:
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;1;&#32;<emphasis role="comment">//&#32;default&#32;when&#32;not&#32;known</emphasis>
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1af09fd84bea8d4e889e272471f44d60d6">CTRL_TRIM</link>:
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*sectors&#32;=&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff;
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sectors[0]&#32;*&#32;ssize;
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)(sectors[1]&#32;-&#32;sectors[0]&#32;+&#32;1)&#32;*&#32;ssize;
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;trim(_ffs[pdrv],&#32;addr,&#32;size);
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00178 &#32;&#32;&#32;&#32;}
+00179 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00180 }
+</programlisting></section>
+<anchor xml:id="_diskio_8h_1a0711b1d03b833e9d73b3be1a6397f461"/><section>
+    <title>disk_read()</title>
+<indexterm><primary>disk_read</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>disk_read</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_read (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00114">114</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00115 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00116 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+00117 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+00118 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[(int)pdrv]-&gt;read(_ffs[(<emphasis role="keywordtype">int</emphasis>)pdrv],&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*)buff,&#32;addr,&#32;size);
+00119 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00120 }
+</programlisting></section>
+<anchor xml:id="_diskio_8h_1a8348ac5ee6d709420c02e45c111f4793"/><section>
+    <title>disk_status()</title>
+<indexterm><primary>disk_status</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>disk_status</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_status (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00109">109</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00110 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_status&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00111 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00112 }
+</programlisting></section>
+<anchor xml:id="_diskio_8h_1ac24448955ef914f54a499df1fb45689d"/><section>
+    <title>disk_write()</title>
+<indexterm><primary>disk_write</primary><secondary>diskio.h</secondary></indexterm>
+<indexterm><primary>diskio.h</primary><secondary>disk_write</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_write (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00122">122</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00123 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_write&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00124 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00125 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+00126 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+00127 
+00128 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;erase(_ffs[pdrv],&#32;addr,&#32;size);
+00129 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00131 &#32;&#32;&#32;&#32;}
+00132 
+00133 &#32;&#32;&#32;&#32;err&#32;=&#32;_ffs[pdrv]-&gt;program(_ffs[pdrv],&#32;buff,&#32;addr,&#32;size);
+00134 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00136 &#32;&#32;&#32;&#32;}
+00137 
+00138 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00139 }
+</programlisting></section>
+</section>
+</section>

@@ -1,0 +1,38 @@
+\doxysection{sd.\+h}
+\hypertarget{sd_8h_source}{}\label{sd_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/sd.h@{lib/pico-\/vfs-\/REGI-\/Local/include/blockdevice/sd.h}}
+\mbox{\hyperlink{sd_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00006}00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00012}00012\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00013}00013\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <hardware/spi.h>}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{blockdevice_8h}{blockdevice/blockdevice.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00021}\mbox{\hyperlink{sd_8h_a350d0200109d5c6deb52568dddf82d82}{00021}}\ \textcolor{preprocessor}{\#define\ CONF\_SD\_INIT\_FREQUENCY\ \ \ \ (10\ *\ 1000\ *\ 1000)}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00022}\mbox{\hyperlink{sd_8h_a731016452cda5737bf6c2d2cdea4c1fe}{00022}}\ \textcolor{preprocessor}{\#define\ CONF\_SD\_TRX\_FREQUENCY\ \ \ \ \ (24\ *\ MHZ)}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00039}00039\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *\mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\_sd\_create}}(spi\_inst\_t\ *spi\_inst,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ mosi,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ miso,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ sckl,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ cs,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ hz,}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ enable\_crc);}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00052}00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{blockdevice\_sd\_free}}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device);}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00054}00054\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{sd_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

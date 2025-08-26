@@ -491,7 +491,7 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00487}\mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4bfff3f1d70f74509484b34c8461003b}{00487}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_a4bfff3f1d70f74509484b34c8461003b}{scroll\_framebuffer}}(\textcolor{keywordtype}{void});}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00488}00488\ }
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00489}00489\ \textcolor{comment}{//\ void\ tinyengine\_renderer\_dvi\_init(uint8\_t*\ \_display\_buffer,\ uint32\_t\ size,\ uint32\_t\ width,\ uint32\_t\ height)\ \{}}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00490}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{00490}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{TinyEngineRendererDVI::tinyengine\_renderer\_init}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00490}00490\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{TinyEngineRendererDVI::tinyengine\_renderer\_init}}()}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00491}00491\ \{}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00492}00492\ \ \ \ \ \textcolor{comment}{//framebuffer-\/>flip\_blocking\ =\ te\_renderer\_dvi\_wait\_vsync\_blocking;//\ set\ this\ in\ the\ main\ initiator\ in\ tinyengine.c}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00493}00493\ \ \ \ \ display\ =\ \textcolor{keyword}{this};}
@@ -563,7 +563,7 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00559}00559\ \ \ \ \ \textcolor{comment}{//\ I\ just\ assign\ the\ pointers\ here\ because\ this\ makes\ the\ updating\ simpler.}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00560}00560\ \ \ \ \ \textcolor{comment}{//\ s\_frame\_buf\ =\ framebuffer;}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00561}00561\ \ \ \ \ \textcolor{comment}{//\ display\_buf\ =\ \_display\_buffer;}}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00562}00562\ \ \ \ \ frame\_buffer\_display\ =\ m\_frame\_buf.pixel\_buffer\_display;}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00562}00562\ \ \ \ \ frame\_buffer\_display\ =\ m\_frame\_buf.\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}};}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00563}00563\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_back\ =\ framebuffer-\/>pixel\_buffer\_back;}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00564}00564\ \ \ \ \ \textcolor{comment}{//\ frame\_buffer\_display\ =\ framebuffer-\/>pixel\_buffer\_display;}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00565}00565\ \ \ \ \ \textcolor{comment}{//\ memset(frame\_buffer\_display,\ (uint8\_t)(0xF0),\ frame\_width\ *\ frame\_height\ *\ frame\_bytes\_per\_pixel);}}
@@ -678,7 +678,7 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00674}00674\ \ \ \ \ dma\_channel\_config\ c;}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00675}00675\ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(0);}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00676}00676\ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ 1);}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00677}00677\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00677}00677\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03}{DREQ\_HSTX}});}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00678}00678\ \ \ \ \ dma\_channel\_configure(}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00679}00679\ \ \ \ \ \ \ \ \ 0,}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00680}00680\ \ \ \ \ \ \ \ \ \&c,}
@@ -689,7 +689,7 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00685}00685\ \ \ \ \ );}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00686}00686\ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(1);}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00687}00687\ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ 2);}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00688}00688\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00688}00688\ \ \ \ \ channel\_config\_set\_dreq(\&c,\ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03}{DREQ\_HSTX}});}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00689}00689\ \ \ \ \ dma\_channel\_configure(}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00690}00690\ \ \ \ \ \ \ \ \ 1,}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00691}00691\ \ \ \ \ \ \ \ \ \&c,}
@@ -702,7 +702,7 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00698}00698\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00699}00699\ \ \ \ \ \ \ \ \ c\ =\ dma\_channel\_get\_default\_config(i);}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00700}00700\ \ \ \ \ \ \ \ \ channel\_config\_set\_chain\_to(\&c,\ (i\ +\ 1)\ \%\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}});}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00701}00701\ \ \ \ \ \ \ \ \ channel\_config\_set\_dreq(\&c,\ DREQ\_HSTX);}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00701}00701\ \ \ \ \ \ \ \ \ channel\_config\_set\_dreq(\&c,\ \mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03}{DREQ\_HSTX}});}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00702}00702\ \ \ \ \ \ \ \ \ dma\_channel\_configure(}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ i,}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ \&c,}
@@ -719,8 +719,8 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00715}00715\ \ \ \ \ dma\_hw-\/>ints2\ =\ (1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1;}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00716}00716\ \ \ \ \ dma\_hw-\/>inte2\ =\ (1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1;}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00717}00717\ }
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00718}00718\ \ \ \ \ irq\_set\_exclusive\_handler(DMA\_IRQ\_2,\ dma\_irq\_handler);}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00719}00719\ \ \ \ \ irq\_set\_enabled(DMA\_IRQ\_2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00718}00718\ \ \ \ \ irq\_set\_exclusive\_handler(\mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955}{DMA\_IRQ\_2}},\ dma\_irq\_handler);}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00719}00719\ \ \ \ \ irq\_set\_enabled(\mbox{\hyperlink{lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955}{DMA\_IRQ\_2}},\ \textcolor{keyword}{true});}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00720}00720\ }
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00721}00721\ \ \ \ \ dma\_channel\_start(0);}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00722}00722\ }
@@ -730,14 +730,14 @@
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00726}00726\ \}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00727}00727\ }
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00728}00728\ }
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00729}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{00729}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{TinyEngineRendererDVI::TinyEngineRendererDVI}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ fr\_buf)\ :\ m\_frame\_buf(fr\_buf)}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00729}00729\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_a0e3df45316caf89ecd7ab4e21888d324}{TinyEngineRendererDVI::TinyEngineRendererDVI}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ fr\_buf)\ :\ m\_frame\_buf(fr\_buf)}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00730}00730\ \{}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00731}00731\ \ \ \ \ \textcolor{comment}{//\ Always\ use\ the\ bottom\ channels}}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00732}00732\ \ \ \ \ dma\_claim\_mask((1\ <<\ \mbox{\hyperlink{tinyengine__renderer__dvi_8h_ae397473251f21f73a1dca055f1c0048e}{NUM\_CHANS}})\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00733}00733\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_ad99d6834cfcba17b8c9cbca951029c4a}{tinyengine\_renderer\_init}}();}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00733}00733\ \ \ \ \ tinyengine\_renderer\_init();}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00734}00734\ \};}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00735}00735\ }
-\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00736}\mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}{00736}}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}{TinyEngineRendererDVI::wait\_for\_vsync}}()}
+\DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00736}00736\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\_status\_t}}\ \mbox{\hyperlink{class_tiny_engine_renderer_d_v_i_af10bc6442ebdf6db594fdc9c8f249414}{TinyEngineRendererDVI::wait\_for\_vsync}}()}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00737}00737\ \{}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00738}00738\ \ \ \ \ \textcolor{keywordflow}{while}\ (v\_scanline\ >=\ \mbox{\hyperlink{tinyengine__renderer__dvi_8cpp_aeed8bd1fd1aca755891e0a08d3cd8fcb}{MODE\_V\_FRONT\_PORCH}})\ \_\_wfe();}
 \DoxyCodeLine{\Hypertarget{tinyengine__renderer__dvi_8cpp_source_l00739}00739\ }

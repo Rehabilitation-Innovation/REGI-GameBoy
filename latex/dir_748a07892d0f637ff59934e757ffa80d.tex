@@ -1,0 +1,128 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local Directory Reference}
+\hypertarget{dir_748a07892d0f637ff59934e757ffa80d}{}\label{dir_748a07892d0f637ff59934e757ffa80d}\index{lib/pico-\/vfs-\/REGI-\/Local Directory Reference@{lib/pico-\/vfs-\/REGI-\/Local Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_02b9f7d16b5a0a906d8ae81113054da2}{examples}}
+\item 
+directory \mbox{\hyperlink{dir_d93ed572feb50e9f4407bb2d5849148d}{include}}
+\item 
+directory \mbox{\hyperlink{dir_5584aeaa170479e31351d33e5b059ea9}{src}}
+\item 
+directory \mbox{\hyperlink{dir_ce75412898f8b9522fadb50a93042d25}{tests}}
+\item 
+directory \mbox{\hyperlink{dir_cc3ce6136ef4316272ed36e8d3434f7b}{vendor}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md17}{}\doxysubsection{\texorpdfstring{Thin virtual file system for Raspberry Pi Pico}{Thin virtual file system for Raspberry Pi Pico}}\label{README.md_autotoc_md17}
+Designed specifically for the Raspberry Pi Pico, {\ttfamily pico-\/vfs} is a virtual file system that allows users to efficiently and easily utilize different storage media such as onboard flash memory and SD cards using familiar POSIX and C standard file APIs. It streamlines file operations in embedded projects, providing a flexible and scalable file system.\hypertarget{README.md_autotoc_md18}{}\doxysubsection{\texorpdfstring{Key Features}{Key Features}}\label{README.md_autotoc_md18}
+
+\begin{DoxyItemize}
+\item {\bfseries{POSIX and C Standard File API Support}}\+: Users can perform basic POSIX file operations such as {\ttfamily open}, {\ttfamily read}, {\ttfamily write}, along with higher-\/level file functions like {\ttfamily fopen}, {\ttfamily fread}, {\ttfamily fwrite} enabling file operations in embedded projects with familiar APIs.
+\item {\bfseries{Virtual File System}}\+: Multiple different file systems can be mounted into a single namespace, allowing programs to operate without needing to consider differences in storage media and file systems.
+\item {\bfseries{Pre-\/configured File System}}\+: To reduce the time and complexity of initial setup, default file system configurations are included. Additionally, an {\ttfamily AUTO\+\_\+\+INIT} feature is available to automatically initialize the file system before the execution of {\ttfamily \doxylink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}}.
+\item {\bfseries{Modular Design}}\+: pico-\/vfs adopts a multi-\/layer architecture, allowing components such as the block device abstraction layer and the file system abstraction layer to be freely exchanged and added.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md19}{}\doxysubsection{\texorpdfstring{Examples of Use Cases}{Examples of Use Cases}}\label{README.md_autotoc_md19}
+pico-\/vfs unlocks various applications for the Raspberry Pi Pico. Here\textquotesingle{}s how it can be used\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Basic File Usage in Embedded Environments}}\+: Manage configuration settings and record debug information using familiar POSIX-\/compliant file APIs.
+\item {\bfseries{Elastic MQTT Client}}\+: Implements an MQTT client with a local queue to handle network disconnections seamlessly. \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e}{View Sample Code}{0}
+\item {\bfseries{Complex UNIX Application Porting}}\+: Port SQLite3 to the Pico using pico-\/vfs, enabling complex data management tasks on the device. \href{https://github.com/oyama/pico-sqlite}{\texttt{Visit pico-\/sqlite Project}}
+\end{DoxyItemize}
+
+These are just a few examples. Utilize the flexibility and capabilities of pico-\/vfs to develop custom solutions tailored to your projects.\hypertarget{README.md_autotoc_md20}{}\doxysubsection{\texorpdfstring{Modular Design Architecture}{Modular Design Architecture}}\label{README.md_autotoc_md20}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ \ \ \ \ Application\ Code\ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ \ \ Virtual\ File\ System\ \ \ \ \ \ \ |\ <<<\ POSIX\ File\ API\ Layer}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ littlefs\ \ \ \ |\ \ \ \ \ \ FAT\ \ \ \ \ \ |\ <<<\ File\ System\ Layer}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ Flash\ Memory\ \ |\ \ \ \ SD\ Card\ \ \ \ |\ <<<\ Block\ Device\ Layer}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ \ Physical\ Storage\ Media\ \ \ \ \ |}
+\DoxyCodeLine{|\ \ \ \ \ \ (Flash,\ SD\ card,\ Heap)\ \ \ \ \ |}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+
+\end{DoxyCode}
+
+
+pico-\/vfs employs an architecture designed to achieve efficient and flexible data management. The combination of file systems and block devices is not restricted, allowing for free reconfiguration\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Block Device Layer}}\+: Abstracts differences in physical storage media such as SD cards and flash memory into a consistent interface, enabling developers to easily add or replace storage media.
+\item {\bfseries{File System Layer}}\+: Integrates different file systems such as littlefs and FAT seamlessly, providing transparent data access to applications.
+\item {\bfseries{POSIX File API Layer}}\+: Through the above layers, it offers a standard file API compliant with POSIX, used in desktop and server environments. This allows for immediate implementation of file operations like opening, reading, writing, and closing without the need for additional learning costs.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md21}{}\doxysubsection{\texorpdfstring{Setup and Configuration}{Setup and Configuration}}\label{README.md_autotoc_md21}
+To add pico-\/vfs to your project, first place the pico-\/vfs source in your project directory using the following commands\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/oyama/pico-\/vfs.git}
+\DoxyCodeLine{cd\ pico-\/vfs}
+\DoxyCodeLine{git\ submodule\ update\ -\/-\/init}
+
+\end{DoxyCode}
+
+
+Next, add the following lines to your project\textquotesingle{}s {\ttfamily CMake\+Lists.\+txt} to include pico-\/vfs in the build process\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ .txt}
+\DoxyCodeLine{add\_subdirectory(pico-\/vfs)}
+
+\end{DoxyCode}
+
+
+Then, add the {\ttfamily pico\+\_\+enable\+\_\+filesystem} function to {\ttfamily CMake\+Lists.\+txt} to enable the file system\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ .txt}
+\DoxyCodeLine{pico\_enable\_filesystem(\$\{CMAKE\_PROJECT\_NAME\})}
+
+\end{DoxyCode}
+ This sets up your project to use the pico-\/vfs file system functionality. From your program, call the file system initialization function {\ttfamily \doxylink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init()}} to start using it\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <pico/stdlib.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ FILE\ *fp\ =\ fopen(\textcolor{stringliteral}{"{}HELLO.TXT"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{\ \ \ \ fprintf(fp,\ \textcolor{stringliteral}{"{}Hello\ World!\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \ fclose(fp);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ By default, 1.\+4\+MB of littlefs is mounted at /, and the Pico\textquotesingle{}s onboard flash memory is used as a block device.\hypertarget{README.md_autotoc_md22}{}\doxysubsection{\texorpdfstring{Usage Guide}{Usage Guide}}\label{README.md_autotoc_md22}
+For detailed usage examples, refer to \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_e_x_a_m_p_l_e}{EXAMPLE}{0}. For configuration examples involving various block devices and file systems, refer to \href{examples/fs_inits/}{\texttt{examples/fs\+\_\+inits}}. These include examples such as mounting a FAT file system on an SD card and littlefs on onboard flash memory into a single namespace.
+
+Additionally, a list of POSIX standard file APIs verified to work with pico-\/vfs is available in \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d}{STANDARD}{0}. Refer to this document to check which APIs are available. For management APIs not included in the POSIX standard, such as file system formatting and mounting, refer to \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i}{API}{0}.\hypertarget{README.md_autotoc_md23}{}\doxysubsection{\texorpdfstring{Limitations}{Limitations}}\label{README.md_autotoc_md23}
+For detailed limitations, refer to \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_m_i_t_a_t_i_o_n}{LIMITATION}{0}. This document provides detailed explanations of potential limitations in specific scenarios and configurations.\hypertarget{README.md_autotoc_md24}{}\doxysubsection{\texorpdfstring{License}{License}}\label{README.md_autotoc_md24}
+This project is licensed under the 3-\/Clause BSD License. For details, see the \doxysectlink{md_lib_2pico-vfs-_r_e_g_i-_local_2_l_i_c_e_n_s_e}{LICENSE}{0} file.\hypertarget{README.md_autotoc_md25}{}\doxysubsection{\texorpdfstring{Related Projects and Inspirations}{Related Projects and Inspirations}}\label{README.md_autotoc_md25}
+There are multiple ways to add filesystems to the pico-\/sdk environment. Firstly, Fat\+Fs\mbox{[}\texorpdfstring{$^\wedge$}{\string^}1\mbox{]} and littlefs\href{[littlefs](https://github.com/littlefs-project/littlefs)}{\texttt{\texorpdfstring{$^\wedge$}{\string^}2}} are popular file system implementations. These filesystem implementations require writing drivers for the block devices used. They also each have their own Unix-\/like API, but with a distinctive dialect.
+
+While there are several solutions that cover the problem of writing drivers for the Raspberry Pi Pico, the carlk3\mbox{[}\texorpdfstring{$^\wedge$}{\string^}3\mbox{]} implementation is probably the most popular. Especially, it includes DMA support to reduce CPU load and support for even faster SDIO\href{[SDIO/iSDIO](https://www.sdcard.org/developers/sd-standard-overview/sdio-isdio/)}{\texttt{\texorpdfstring{$^\wedge$}{\string^}4}}. This would be the first choice for projects using SD cards and the FAT file system with pico-\/sdk.
+
+Among multi-\/filesystem implementations, Memotech-\/\+Bill\mbox{[}\texorpdfstring{$^\wedge$}{\string^}5\mbox{]} implementation provides standard I/O support for pico-\/sdk using the Newlib\mbox{[}\texorpdfstring{$^\wedge$}{\string^}6\mbox{]} hook. The littlefs file system for on-\/board flash and Fat\+Fs for SD cards can be operated as an integrated file system. It is an ambitious project that goes beyond files and integrates character devices such as TTYs and UARTs.
+
+While referring to these existing projects, pico-\/vfs was developed with the aim of separating and making interchangeable the implementation of drivers and file systems for block devices. This provides functionality similar to that of Micro\+Python\textquotesingle{}s VFS\mbox{[}\texorpdfstring{$^\wedge$}{\string^}7\mbox{]}and ARM Mbed OS\textquotesingle{}s Storage\mbox{[}\texorpdfstring{$^\wedge$}{\string^}8\mbox{]}.\hypertarget{README.md_autotoc_md26}{}\doxysubsection{\texorpdfstring{References}{References}}\label{README.md_autotoc_md26}
+\mbox{[}\texorpdfstring{$^\wedge$}{\string^}1\mbox{]}\+: \href{http://elm-chan.org/fsw/ff/}{\texttt{Generic FAT Filesystem Module}}
+
+\mbox{[}\texorpdfstring{$^\wedge$}{\string^}3\mbox{]}\+: \href{https://github.com/carlk3/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico}{\texttt{C/\+C++ Library for SD Cards on the Pico}}
+
+\mbox{[}\texorpdfstring{$^\wedge$}{\string^}5\mbox{]}\+: \href{https://github.com/Memotech-Bill/pico-filesystem}{\texttt{Standard File Input / Output for the Pico SDK}} \mbox{[}\texorpdfstring{$^\wedge$}{\string^}6\mbox{]}\+: \href{https://www.sourceware.org/newlib/}{\texttt{Newlib is a C library intended for use on embedded systems}} \mbox{[}\texorpdfstring{$^\wedge$}{\string^}7\mbox{]}\+: \href{https://docs.micropython.org/en/latest/reference/filesystem.html}{\texttt{Micro\+Python Working with filesystems}} \mbox{[}\texorpdfstring{$^\wedge$}{\string^}8\mbox{]}\+: \href{https://os.mbed.com/docs/mbed-os/v6.16/apis/data-storage-concepts.html}{\texttt{ARM Mbed OS -\/ Data storage concepts}} 

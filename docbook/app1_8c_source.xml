@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_app1_8c_source" xml:lang="en-US">
+<title>app1.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/vendor/ff15/documents/res/app1.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_app1_8c_source_1l00001"/>00001 <emphasis role="comment">/*------------------------------------------------------------/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00002"/>00002 <emphasis role="comment">/&#32;Open&#32;or&#32;create&#32;a&#32;file&#32;in&#32;append&#32;mode</emphasis>
+<anchor xml:id="_app1_8c_source_1l00003"/>00003 <emphasis role="comment">/&#32;(This&#32;function&#32;was&#32;sperseded&#32;by&#32;FA_OPEN_APPEND&#32;flag&#32;at&#32;FatFs&#32;R0.12a)</emphasis>
+<anchor xml:id="_app1_8c_source_1l00004"/>00004 <emphasis role="comment">/------------------------------------------------------------*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00005"/>00005 
+<anchor xml:id="_app1_8c_source_1l00006"/><link linkend="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c">00006</link> <link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;<link linkend="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c">open_append</link>&#32;(
+<anchor xml:id="_app1_8c_source_1l00007"/>00007 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l">FIL</link>*&#32;fp,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;[OUT]&#32;File&#32;object&#32;to&#32;create&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00008"/>00008 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>*&#32;path&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;[IN]&#32;&#32;File&#32;name&#32;to&#32;be&#32;opened&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00009"/>00009 )
+<anchor xml:id="_app1_8c_source_1l00010"/>00010 {
+<anchor xml:id="_app1_8c_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+<anchor xml:id="_app1_8c_source_1l00012"/>00012 
+<anchor xml:id="_app1_8c_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Opens&#32;an&#32;existing&#32;file.&#32;If&#32;not&#32;exist,&#32;creates&#32;a&#32;new&#32;file.&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00014"/>00014 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1aefdef7126128d99d0b3bd82c28e54d80">f_open</link>(fp,&#32;path,&#32;<link linkend="_ff_8h_1afa366963220c89b882c0361794020c14">FA_WRITE</link>&#32;|&#32;<link linkend="_ff_8h_1a17b01553029920ac0468912b4bcb16c7">FA_OPEN_ALWAYS</link>);
+<anchor xml:id="_app1_8c_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;==&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;{
+<anchor xml:id="_app1_8c_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Seek&#32;to&#32;end&#32;of&#32;the&#32;file&#32;to&#32;append&#32;data&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00017"/>00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_ff_8c_1a7c4bcf81d9122f0b5376852ec6a8c3eb">f_lseek</link>(fp,&#32;<link linkend="_ff_8h_1a26f33722c5bf1aa3cd6f0290a83eb2bc">f_size</link>(fp));
+<anchor xml:id="_app1_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)
+<anchor xml:id="_app1_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(fp);
+<anchor xml:id="_app1_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_app1_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;fr;
+<anchor xml:id="_app1_8c_source_1l00022"/>00022 }
+<anchor xml:id="_app1_8c_source_1l00023"/>00023 
+<anchor xml:id="_app1_8c_source_1l00024"/>00024 
+<anchor xml:id="_app1_8c_source_1l00025"/><link linkend="_app1_8c_1a840291bc02cba5474a4cb46a9b9566fe">00025</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_app1_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link>&#32;(<emphasis role="keywordtype">void</emphasis>)
+<anchor xml:id="_app1_8c_source_1l00026"/>00026 {
+<anchor xml:id="_app1_8c_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44c">FRESULT</link>&#32;fr;
+<anchor xml:id="_app1_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<link linkend="_struct_f_a_t_f_s">FATFS</link>&#32;fs;
+<anchor xml:id="_app1_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<link linkend="_struct_f_i_l">FIL</link>&#32;fil;
+<anchor xml:id="_app1_8c_source_1l00030"/>00030 
+<anchor xml:id="_app1_8c_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Open&#32;or&#32;create&#32;a&#32;log&#32;file&#32;and&#32;ready&#32;to&#32;append&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a16a934c2bbfa2160295810adc49d5509">f_mount</link>(&amp;fs,&#32;<emphasis role="stringliteral">&quot;&quot;</emphasis>,&#32;0);
+<anchor xml:id="_app1_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;fr&#32;=&#32;<link linkend="_app1_8c_1a1fce2c571e1e933acc7a1cbfb9173e3c">open_append</link>(&amp;fil,&#32;<emphasis role="stringliteral">&quot;logfile.txt&quot;</emphasis>);
+<anchor xml:id="_app1_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fr&#32;!=&#32;<link linkend="_ff_8h_1a49d0171ecbd362cda5680a0d360db44ca62fce5cd9df008f8fc85f99706bda5f1">FR_OK</link>)&#32;<emphasis role="keywordflow">return</emphasis>&#32;1;
+<anchor xml:id="_app1_8c_source_1l00035"/>00035 
+<anchor xml:id="_app1_8c_source_1l00036"/>00036 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Append&#32;a&#32;line&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1a4ce26253177c167df849e76f69b5c66c">f_printf</link>(&amp;fil,&#32;<emphasis role="stringliteral">&quot;%02u/%02u/%u,&#32;%2u:%02u\n&quot;</emphasis>,&#32;Mday,&#32;Mon,&#32;Year,&#32;Hour,&#32;Min);
+<anchor xml:id="_app1_8c_source_1l00038"/>00038 
+<anchor xml:id="_app1_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;Close&#32;the&#32;file&#32;*/</emphasis>
+<anchor xml:id="_app1_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<link linkend="_ff_8c_1a53882db20ef4323dcfd1874d7733ffc3">f_close</link>(&amp;fil);
+<anchor xml:id="_app1_8c_source_1l00041"/>00041 
+<anchor xml:id="_app1_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_app1_8c_source_1l00043"/>00043 }
+<anchor xml:id="_app1_8c_source_1l00044"/>00044 
+</programlisting></section>

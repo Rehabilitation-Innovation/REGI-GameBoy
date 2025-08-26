@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h" xml:lang="en-US">
+<title>build/pico-sdk/src/extra_doxygen/dreq.h File Reference</title>
+<indexterm><primary>build/pico-sdk/src/extra_doxygen/dreq.h</primary></indexterm>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef enum <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014">dreq_num_rp2350</link> <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link></para>
+
+<para>DREQ numbers for DMA pacing on RP2350 (used as typedef <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link>) </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014">dreq_num_rp2350</link> { <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad7529b7e45af2d7eab4b740ff15b49d8">DREQ_PIO0_TX0</link> = 0
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac5fedec084064e1d9ff9c6a382c1ccf8">DREQ_PIO0_TX1</link> = 1
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa2e360dbf123d634d08e5fae27aa29e5">DREQ_PIO0_TX2</link> = 2
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a156b1b999c6b2dd877545c8c79060a30">DREQ_PIO0_TX3</link> = 3
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac4bc12d74b758a7b39c1977c401e2fe1">DREQ_PIO0_RX0</link> = 4
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a19b55b49bb618eed839edccba14c0d8f">DREQ_PIO0_RX1</link> = 5
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a967d6b5eb2d3e06113b2b1606ef2af2c">DREQ_PIO0_RX2</link> = 6
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a10f8705467782c859f05f82aa3c3c9f5">DREQ_PIO0_RX3</link> = 7
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a3c22f2c9eb4a49654bba70dbc99bc893">DREQ_PIO1_TX0</link> = 8
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37f1bb39c3aa38a753df88e7e6c57feb">DREQ_PIO1_TX1</link> = 9
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a13d7cb74708595298d788ba0ce25f6a0">DREQ_PIO1_TX2</link> = 10
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aaa5859ea1daaf5f0760fb4dea23116c3">DREQ_PIO1_TX3</link> = 11
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a833bfa99e8b74de9bfc1872958a742e3">DREQ_PIO1_RX0</link> = 12
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8da9c5655eb51f2fb8a33b16827796a9">DREQ_PIO1_RX1</link> = 13
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0198dfe2da7237817e780a483144df8f">DREQ_PIO1_RX2</link> = 14
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab093d84a1df12a37ab6e9d62ee1f6d57">DREQ_PIO1_RX3</link> = 15
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a6a3e73df9d0e562b41b571e272100302">DREQ_PIO2_TX0</link> = 16
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37c21bac317747dda953dca55954db16">DREQ_PIO2_TX1</link> = 17
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abadc20c78c83d2db4fcf3980f1d5b87f">DREQ_PIO2_TX2</link> = 18
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa94c2b7f002c28a6050dda127aeaf3b1">DREQ_PIO2_TX3</link> = 19
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8bb28cdeea9248c04665464cabc6b1e6">DREQ_PIO2_RX0</link> = 20
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a58a5eb511f85599b5e2b93cee7537b18">DREQ_PIO2_RX1</link> = 21
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a9f4f2e7b3cf525ff519db02b0047bf87">DREQ_PIO2_RX2</link> = 22
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae7c631f739c8fb2e161c88911376ab26">DREQ_PIO2_RX3</link> = 23
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4b8b13f940414660401a7b334d85b64b">DREQ_SPI0_TX</link> = 24
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a46641088908dd355dc82971e7c7fbd35">DREQ_SPI0_RX</link> = 25
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a01d244742e157d2d2fb8e55b5fd6d81b">DREQ_SPI1_TX</link> = 26
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a04665a3e6a5c58a6cbf2d0fe1503cf00">DREQ_SPI1_RX</link> = 27
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a80ecb62e37f0c5af2780b93d4995326d">DREQ_UART0_TX</link> = 28
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4812587fa3aa4cfd7ea0d91e20246b95">DREQ_UART0_RX</link> = 29
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa64110e7f89692b9c789275b4d8b04c0">DREQ_UART1_TX</link> = 30
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae5c7e2a566983a1148113e2987e059d5">DREQ_UART1_RX</link> = 31
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a2a861c9dcce9e158ace7bc5d547ebde1">DREQ_PWM_WRAP0</link> = 32
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1504bdb2bd8aaa535903ea11aa2c2994">DREQ_PWM_WRAP1</link> = 33
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014acb766e3b38daca5c8cd35459d835d7a2">DREQ_PWM_WRAP2</link> = 34
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a017ebaacb45d90c4f20db2d5edded874">DREQ_PWM_WRAP3</link> = 35
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5fdd41bb900549d6ff26772cc9fd507a">DREQ_PWM_WRAP4</link> = 36
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aced239695d7bf65c41827e1eb6cbc04a">DREQ_PWM_WRAP5</link> = 37
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014add0e022489d6ad4f835a97c6e354c15b">DREQ_PWM_WRAP6</link> = 38
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014adafe5a7f2f401a496e842c7a2c95dac5">DREQ_PWM_WRAP7</link> = 39
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4ab337ff0746f2d9d432020658a478af">DREQ_PWM_WRAP8</link> = 40
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8d7bd836d3ba015fc800e227b6408f73">DREQ_PWM_WRAP9</link> = 41
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad17feaa0e6a99ccf14b5d7285ab363d1">DREQ_PWM_WRAP10</link> = 42
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a14ba987e523bd38f813f93322d053a4c">DREQ_PWM_WRAP11</link> = 43
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab51c1095a1fec8ad39050cf49fd01835">DREQ_I2C0_TX</link> = 44
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a675d15a4afa861045235a441d46d0580">DREQ_I2C0_RX</link> = 45
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a74c786868da56dbb18b7da2c7748568f">DREQ_I2C1_TX</link> = 46
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0b5156eb2381872ddc1837d83de16b8b">DREQ_I2C1_RX</link> = 47
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5f3aedb5ef1de25b99afcde8742b4590">DREQ_ADC</link> = 48
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aedbcc51f819f4c85c3ab8f51b654ebdc">DREQ_XIP_STREAM</link> = 49
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a79533c8a78e8f62f1f564954a755e02a">DREQ_XIP_QMITX</link> = 50
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a35519b1f622ee38560ffd2dfa1571c9b">DREQ_XIP_QMIRX</link> = 51
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</link> = 52
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1ef0656e59fedc445052acc548cce490">DREQ_CORESIGHT</link> = 53
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a7a5f3a4ca267d2cd53c43779fb5494ba">DREQ_SHA256</link> = 54
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a49bb6d90479edbff257068afd1a5bfe1">DREQ_DMA_TIMER0</link> = 59
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a11c9291490c2ddf45df69f45a2f83dcf">DREQ_DMA_TIMER1</link> = 60
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abb60a9d9038192f9db081b51b9c23f65">DREQ_DMA_TIMER2</link> = 61
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a86d08425822a129c3eaa1479e920c67c">DREQ_DMA_TIMER3</link> = 62
+, <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae683f0bb3ee8b854fe4cea850cf9d4c8">DREQ_FORCE</link> = 63
+, <?linebreak?><link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad305cc1fa59fa14d6b14b9c3b9855170">DREQ_COUNT</link>
+ }</para>
+
+<para>DREQ numbers for DMA pacing on RP2350 (used as typedef <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link>) </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9"/><section>
+    <title>dreq_num_t</title>
+<indexterm><primary>dreq_num_t</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>dreq_num_t</secondary></indexterm>
+<para><computeroutput>typedef enum <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014">dreq_num_rp2350</link> <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link></computeroutput></para><para>
+
+<para>DREQ numbers for DMA pacing on RP2350 (used as typedef <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link>) </para>
+</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014"/><section>
+    <title>dreq_num_rp2350</title>
+<indexterm><primary>dreq_num_rp2350</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>dreq_num_rp2350</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014">dreq_num_rp2350</link></computeroutput></para><para>
+
+<para>DREQ numbers for DMA pacing on RP2350 (used as typedef <link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link>) </para>
+</para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>DREQ_PIO0_TX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_TX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad7529b7e45af2d7eab4b740ff15b49d8"/>DREQ_PIO0_TX0</entry><entry>
+<para>Select PIO0&apos;s TX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_TX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_TX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac5fedec084064e1d9ff9c6a382c1ccf8"/>DREQ_PIO0_TX1</entry><entry>
+<para>Select PIO0&apos;s TX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_TX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_TX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa2e360dbf123d634d08e5fae27aa29e5"/>DREQ_PIO0_TX2</entry><entry>
+<para>Select PIO0&apos;s TX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_TX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_TX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a156b1b999c6b2dd877545c8c79060a30"/>DREQ_PIO0_TX3</entry><entry>
+<para>Select PIO0&apos;s TX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_RX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_RX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac4bc12d74b758a7b39c1977c401e2fe1"/>DREQ_PIO0_RX0</entry><entry>
+<para>Select PIO0&apos;s RX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_RX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_RX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a19b55b49bb618eed839edccba14c0d8f"/>DREQ_PIO0_RX1</entry><entry>
+<para>Select PIO0&apos;s RX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_RX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_RX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a967d6b5eb2d3e06113b2b1606ef2af2c"/>DREQ_PIO0_RX2</entry><entry>
+<para>Select PIO0&apos;s RX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO0_RX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO0_RX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a10f8705467782c859f05f82aa3c3c9f5"/>DREQ_PIO0_RX3</entry><entry>
+<para>Select PIO0&apos;s RX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_TX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_TX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a3c22f2c9eb4a49654bba70dbc99bc893"/>DREQ_PIO1_TX0</entry><entry>
+<para>Select PIO1&apos;s TX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_TX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_TX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37f1bb39c3aa38a753df88e7e6c57feb"/>DREQ_PIO1_TX1</entry><entry>
+<para>Select PIO1&apos;s TX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_TX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_TX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a13d7cb74708595298d788ba0ce25f6a0"/>DREQ_PIO1_TX2</entry><entry>
+<para>Select PIO1&apos;s TX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_TX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_TX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aaa5859ea1daaf5f0760fb4dea23116c3"/>DREQ_PIO1_TX3</entry><entry>
+<para>Select PIO1&apos;s TX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_RX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_RX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a833bfa99e8b74de9bfc1872958a742e3"/>DREQ_PIO1_RX0</entry><entry>
+<para>Select PIO1&apos;s RX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_RX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_RX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8da9c5655eb51f2fb8a33b16827796a9"/>DREQ_PIO1_RX1</entry><entry>
+<para>Select PIO1&apos;s RX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_RX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_RX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0198dfe2da7237817e780a483144df8f"/>DREQ_PIO1_RX2</entry><entry>
+<para>Select PIO1&apos;s RX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO1_RX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO1_RX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab093d84a1df12a37ab6e9d62ee1f6d57"/>DREQ_PIO1_RX3</entry><entry>
+<para>Select PIO1&apos;s RX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_TX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_TX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a6a3e73df9d0e562b41b571e272100302"/>DREQ_PIO2_TX0</entry><entry>
+<para>Select PIO2&apos;s TX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_TX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_TX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37c21bac317747dda953dca55954db16"/>DREQ_PIO2_TX1</entry><entry>
+<para>Select PIO2&apos;s TX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_TX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_TX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abadc20c78c83d2db4fcf3980f1d5b87f"/>DREQ_PIO2_TX2</entry><entry>
+<para>Select PIO2&apos;s TX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_TX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_TX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa94c2b7f002c28a6050dda127aeaf3b1"/>DREQ_PIO2_TX3</entry><entry>
+<para>Select PIO2&apos;s TX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_RX0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_RX0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8bb28cdeea9248c04665464cabc6b1e6"/>DREQ_PIO2_RX0</entry><entry>
+<para>Select PIO2&apos;s RX FIFO 0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_RX1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_RX1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a58a5eb511f85599b5e2b93cee7537b18"/>DREQ_PIO2_RX1</entry><entry>
+<para>Select PIO2&apos;s RX FIFO 1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_RX2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_RX2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a9f4f2e7b3cf525ff519db02b0047bf87"/>DREQ_PIO2_RX2</entry><entry>
+<para>Select PIO2&apos;s RX FIFO 2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PIO2_RX3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PIO2_RX3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae7c631f739c8fb2e161c88911376ab26"/>DREQ_PIO2_RX3</entry><entry>
+<para>Select PIO2&apos;s RX FIFO 3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_SPI0_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_SPI0_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4b8b13f940414660401a7b334d85b64b"/>DREQ_SPI0_TX</entry><entry>
+<para>Select SPI0&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_SPI0_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_SPI0_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a46641088908dd355dc82971e7c7fbd35"/>DREQ_SPI0_RX</entry><entry>
+<para>Select SPI0&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_SPI1_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_SPI1_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a01d244742e157d2d2fb8e55b5fd6d81b"/>DREQ_SPI1_TX</entry><entry>
+<para>Select SPI1&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_SPI1_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_SPI1_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a04665a3e6a5c58a6cbf2d0fe1503cf00"/>DREQ_SPI1_RX</entry><entry>
+<para>Select SPI1&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_UART0_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_UART0_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a80ecb62e37f0c5af2780b93d4995326d"/>DREQ_UART0_TX</entry><entry>
+<para>Select UART0&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_UART0_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_UART0_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4812587fa3aa4cfd7ea0d91e20246b95"/>DREQ_UART0_RX</entry><entry>
+<para>Select UART0&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_UART1_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_UART1_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa64110e7f89692b9c789275b4d8b04c0"/>DREQ_UART1_TX</entry><entry>
+<para>Select UART1&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_UART1_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_UART1_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae5c7e2a566983a1148113e2987e059d5"/>DREQ_UART1_RX</entry><entry>
+<para>Select UART1&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a2a861c9dcce9e158ace7bc5d547ebde1"/>DREQ_PWM_WRAP0</entry><entry>
+<para>Select PWM Counter 0&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1504bdb2bd8aaa535903ea11aa2c2994"/>DREQ_PWM_WRAP1</entry><entry>
+<para>Select PWM Counter 1&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014acb766e3b38daca5c8cd35459d835d7a2"/>DREQ_PWM_WRAP2</entry><entry>
+<para>Select PWM Counter 2&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a017ebaacb45d90c4f20db2d5edded874"/>DREQ_PWM_WRAP3</entry><entry>
+<para>Select PWM Counter 3&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP4</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP4</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5fdd41bb900549d6ff26772cc9fd507a"/>DREQ_PWM_WRAP4</entry><entry>
+<para>Select PWM Counter 4&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP5</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP5</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aced239695d7bf65c41827e1eb6cbc04a"/>DREQ_PWM_WRAP5</entry><entry>
+<para>Select PWM Counter 5&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP6</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP6</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014add0e022489d6ad4f835a97c6e354c15b"/>DREQ_PWM_WRAP6</entry><entry>
+<para>Select PWM Counter 6&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP7</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP7</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014adafe5a7f2f401a496e842c7a2c95dac5"/>DREQ_PWM_WRAP7</entry><entry>
+<para>Select PWM Counter 7&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP8</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP8</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4ab337ff0746f2d9d432020658a478af"/>DREQ_PWM_WRAP8</entry><entry>
+<para>Select PWM Counter 8&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP9</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP9</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8d7bd836d3ba015fc800e227b6408f73"/>DREQ_PWM_WRAP9</entry><entry>
+<para>Select PWM Counter 9&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP10</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP10</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad17feaa0e6a99ccf14b5d7285ab363d1"/>DREQ_PWM_WRAP10</entry><entry>
+<para>Select PWM Counter 10&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_PWM_WRAP11</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_PWM_WRAP11</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a14ba987e523bd38f813f93322d053a4c"/>DREQ_PWM_WRAP11</entry><entry>
+<para>Select PWM Counter 11&apos;s Wrap Value as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_I2C0_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_I2C0_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab51c1095a1fec8ad39050cf49fd01835"/>DREQ_I2C0_TX</entry><entry>
+<para>Select I2C0&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_I2C0_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_I2C0_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a675d15a4afa861045235a441d46d0580"/>DREQ_I2C0_RX</entry><entry>
+<para>Select I2C0&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_I2C1_TX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_I2C1_TX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a74c786868da56dbb18b7da2c7748568f"/>DREQ_I2C1_TX</entry><entry>
+<para>Select I2C1&apos;s TX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_I2C1_RX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_I2C1_RX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0b5156eb2381872ddc1837d83de16b8b"/>DREQ_I2C1_RX</entry><entry>
+<para>Select I2C1&apos;s RX FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_ADC</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_ADC</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5f3aedb5ef1de25b99afcde8742b4590"/>DREQ_ADC</entry><entry>
+<para>Select the ADC as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_XIP_STREAM</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_XIP_STREAM</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aedbcc51f819f4c85c3ab8f51b654ebdc"/>DREQ_XIP_STREAM</entry><entry>
+<para>Select the XIP Streaming FIFO as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_XIP_QMITX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_XIP_QMITX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a79533c8a78e8f62f1f564954a755e02a"/>DREQ_XIP_QMITX</entry><entry>
+<para>Select XIP_QMITX as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_XIP_QMIRX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_XIP_QMIRX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a35519b1f622ee38560ffd2dfa1571c9b"/>DREQ_XIP_QMIRX</entry><entry>
+<para>Select XIP_QMIRX as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_HSTX</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_HSTX</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03"/>DREQ_HSTX</entry><entry>
+<para>Select HSTX as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_CORESIGHT</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_CORESIGHT</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1ef0656e59fedc445052acc548cce490"/>DREQ_CORESIGHT</entry><entry>
+<para>Select CORESIGHT as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_SHA256</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_SHA256</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a7a5f3a4ca267d2cd53c43779fb5494ba"/>DREQ_SHA256</entry><entry>
+<para>Select SHA256 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_DMA_TIMER0</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_DMA_TIMER0</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a49bb6d90479edbff257068afd1a5bfe1"/>DREQ_DMA_TIMER0</entry><entry>
+<para>Select DMA_TIMER0 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_DMA_TIMER1</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_DMA_TIMER1</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a11c9291490c2ddf45df69f45a2f83dcf"/>DREQ_DMA_TIMER1</entry><entry>
+<para>Select DMA_TIMER1 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_DMA_TIMER2</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_DMA_TIMER2</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abb60a9d9038192f9db081b51b9c23f65"/>DREQ_DMA_TIMER2</entry><entry>
+<para>Select DMA_TIMER2 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_DMA_TIMER3</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_DMA_TIMER3</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a86d08425822a129c3eaa1479e920c67c"/>DREQ_DMA_TIMER3</entry><entry>
+<para>Select DMA_TIMER3 as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_FORCE</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_FORCE</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae683f0bb3ee8b854fe4cea850cf9d4c8"/>DREQ_FORCE</entry><entry>
+<para>Select FORCE as DREQ. </para>
+</entry></row><row><entry><indexterm><primary>DREQ_COUNT</primary><secondary>dreq.h</secondary></indexterm>
+<indexterm><primary>dreq.h</primary><secondary>DREQ_COUNT</secondary></indexterm>
+<anchor xml:id="_pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad305cc1fa59fa14d6b14b9c3b9855170"/>DREQ_COUNT</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_source_1l00081">81</link> of file <link linkend="_pico-sdk_2src_2extra__doxygen_2dreq_8h_source">dreq.h</link>.</para>
+<programlisting linenumbering="unnumbered">00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00082 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad7529b7e45af2d7eab4b740ff15b49d8">DREQ_PIO0_TX0</link>&#32;=&#32;0,&#32;
+00083 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac5fedec084064e1d9ff9c6a382c1ccf8">DREQ_PIO0_TX1</link>&#32;=&#32;1,&#32;
+00084 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa2e360dbf123d634d08e5fae27aa29e5">DREQ_PIO0_TX2</link>&#32;=&#32;2,&#32;
+00085 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a156b1b999c6b2dd877545c8c79060a30">DREQ_PIO0_TX3</link>&#32;=&#32;3,&#32;
+00086 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ac4bc12d74b758a7b39c1977c401e2fe1">DREQ_PIO0_RX0</link>&#32;=&#32;4,&#32;
+00087 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a19b55b49bb618eed839edccba14c0d8f">DREQ_PIO0_RX1</link>&#32;=&#32;5,&#32;
+00088 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a967d6b5eb2d3e06113b2b1606ef2af2c">DREQ_PIO0_RX2</link>&#32;=&#32;6,&#32;
+00089 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a10f8705467782c859f05f82aa3c3c9f5">DREQ_PIO0_RX3</link>&#32;=&#32;7,&#32;
+00090 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a3c22f2c9eb4a49654bba70dbc99bc893">DREQ_PIO1_TX0</link>&#32;=&#32;8,&#32;
+00091 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37f1bb39c3aa38a753df88e7e6c57feb">DREQ_PIO1_TX1</link>&#32;=&#32;9,&#32;
+00092 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a13d7cb74708595298d788ba0ce25f6a0">DREQ_PIO1_TX2</link>&#32;=&#32;10,&#32;
+00093 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aaa5859ea1daaf5f0760fb4dea23116c3">DREQ_PIO1_TX3</link>&#32;=&#32;11,&#32;
+00094 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a833bfa99e8b74de9bfc1872958a742e3">DREQ_PIO1_RX0</link>&#32;=&#32;12,&#32;
+00095 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8da9c5655eb51f2fb8a33b16827796a9">DREQ_PIO1_RX1</link>&#32;=&#32;13,&#32;
+00096 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0198dfe2da7237817e780a483144df8f">DREQ_PIO1_RX2</link>&#32;=&#32;14,&#32;
+00097 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab093d84a1df12a37ab6e9d62ee1f6d57">DREQ_PIO1_RX3</link>&#32;=&#32;15,&#32;
+00098 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a6a3e73df9d0e562b41b571e272100302">DREQ_PIO2_TX0</link>&#32;=&#32;16,&#32;
+00099 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a37c21bac317747dda953dca55954db16">DREQ_PIO2_TX1</link>&#32;=&#32;17,&#32;
+00100 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abadc20c78c83d2db4fcf3980f1d5b87f">DREQ_PIO2_TX2</link>&#32;=&#32;18,&#32;
+00101 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa94c2b7f002c28a6050dda127aeaf3b1">DREQ_PIO2_TX3</link>&#32;=&#32;19,&#32;
+00102 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8bb28cdeea9248c04665464cabc6b1e6">DREQ_PIO2_RX0</link>&#32;=&#32;20,&#32;
+00103 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a58a5eb511f85599b5e2b93cee7537b18">DREQ_PIO2_RX1</link>&#32;=&#32;21,&#32;
+00104 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a9f4f2e7b3cf525ff519db02b0047bf87">DREQ_PIO2_RX2</link>&#32;=&#32;22,&#32;
+00105 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae7c631f739c8fb2e161c88911376ab26">DREQ_PIO2_RX3</link>&#32;=&#32;23,&#32;
+00106 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4b8b13f940414660401a7b334d85b64b">DREQ_SPI0_TX</link>&#32;=&#32;24,&#32;
+00107 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a46641088908dd355dc82971e7c7fbd35">DREQ_SPI0_RX</link>&#32;=&#32;25,&#32;
+00108 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a01d244742e157d2d2fb8e55b5fd6d81b">DREQ_SPI1_TX</link>&#32;=&#32;26,&#32;
+00109 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a04665a3e6a5c58a6cbf2d0fe1503cf00">DREQ_SPI1_RX</link>&#32;=&#32;27,&#32;
+00110 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a80ecb62e37f0c5af2780b93d4995326d">DREQ_UART0_TX</link>&#32;=&#32;28,&#32;
+00111 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4812587fa3aa4cfd7ea0d91e20246b95">DREQ_UART0_RX</link>&#32;=&#32;29,&#32;
+00112 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aa64110e7f89692b9c789275b4d8b04c0">DREQ_UART1_TX</link>&#32;=&#32;30,&#32;
+00113 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae5c7e2a566983a1148113e2987e059d5">DREQ_UART1_RX</link>&#32;=&#32;31,&#32;
+00114 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a2a861c9dcce9e158ace7bc5d547ebde1">DREQ_PWM_WRAP0</link>&#32;=&#32;32,&#32;
+00115 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1504bdb2bd8aaa535903ea11aa2c2994">DREQ_PWM_WRAP1</link>&#32;=&#32;33,&#32;
+00116 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014acb766e3b38daca5c8cd35459d835d7a2">DREQ_PWM_WRAP2</link>&#32;=&#32;34,&#32;
+00117 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a017ebaacb45d90c4f20db2d5edded874">DREQ_PWM_WRAP3</link>&#32;=&#32;35,&#32;
+00118 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5fdd41bb900549d6ff26772cc9fd507a">DREQ_PWM_WRAP4</link>&#32;=&#32;36,&#32;
+00119 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aced239695d7bf65c41827e1eb6cbc04a">DREQ_PWM_WRAP5</link>&#32;=&#32;37,&#32;
+00120 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014add0e022489d6ad4f835a97c6e354c15b">DREQ_PWM_WRAP6</link>&#32;=&#32;38,&#32;
+00121 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014adafe5a7f2f401a496e842c7a2c95dac5">DREQ_PWM_WRAP7</link>&#32;=&#32;39,&#32;
+00122 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a4ab337ff0746f2d9d432020658a478af">DREQ_PWM_WRAP8</link>&#32;=&#32;40,&#32;
+00123 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a8d7bd836d3ba015fc800e227b6408f73">DREQ_PWM_WRAP9</link>&#32;=&#32;41,&#32;
+00124 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad17feaa0e6a99ccf14b5d7285ab363d1">DREQ_PWM_WRAP10</link>&#32;=&#32;42,&#32;
+00125 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a14ba987e523bd38f813f93322d053a4c">DREQ_PWM_WRAP11</link>&#32;=&#32;43,&#32;
+00126 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ab51c1095a1fec8ad39050cf49fd01835">DREQ_I2C0_TX</link>&#32;=&#32;44,&#32;
+00127 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a675d15a4afa861045235a441d46d0580">DREQ_I2C0_RX</link>&#32;=&#32;45,&#32;
+00128 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a74c786868da56dbb18b7da2c7748568f">DREQ_I2C1_TX</link>&#32;=&#32;46,&#32;
+00129 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a0b5156eb2381872ddc1837d83de16b8b">DREQ_I2C1_RX</link>&#32;=&#32;47,&#32;
+00130 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a5f3aedb5ef1de25b99afcde8742b4590">DREQ_ADC</link>&#32;=&#32;48,&#32;
+00131 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014aedbcc51f819f4c85c3ab8f51b654ebdc">DREQ_XIP_STREAM</link>&#32;=&#32;49,&#32;
+00132 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a79533c8a78e8f62f1f564954a755e02a">DREQ_XIP_QMITX</link>&#32;=&#32;50,&#32;
+00133 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a35519b1f622ee38560ffd2dfa1571c9b">DREQ_XIP_QMIRX</link>&#32;=&#32;51,&#32;
+00134 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</link>&#32;=&#32;52,&#32;
+00135 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a1ef0656e59fedc445052acc548cce490">DREQ_CORESIGHT</link>&#32;=&#32;53,&#32;
+00136 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a7a5f3a4ca267d2cd53c43779fb5494ba">DREQ_SHA256</link>&#32;=&#32;54,&#32;
+00137 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a49bb6d90479edbff257068afd1a5bfe1">DREQ_DMA_TIMER0</link>&#32;=&#32;59,&#32;
+00138 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a11c9291490c2ddf45df69f45a2f83dcf">DREQ_DMA_TIMER1</link>&#32;=&#32;60,&#32;
+00139 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014abb60a9d9038192f9db081b51b9c23f65">DREQ_DMA_TIMER2</link>&#32;=&#32;61,&#32;
+00140 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014a86d08425822a129c3eaa1479e920c67c">DREQ_DMA_TIMER3</link>&#32;=&#32;62,&#32;
+00141 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ae683f0bb3ee8b854fe4cea850cf9d4c8">DREQ_FORCE</link>&#32;=&#32;63,&#32;
+00142 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1a6f0a19defc495cfa6078364122266014ad305cc1fa59fa14d6b14b9c3b9855170">DREQ_COUNT</link>
+00143 }&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_1adedf0e3a016a52299183d4d54d9e71e9">dreq_num_t</link>;
+</programlisting></section>
+</section>
+</section>

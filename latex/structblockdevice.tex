@@ -1,0 +1,201 @@
+\doxysection{blockdevice Struct Reference}
+\hypertarget{structblockdevice}{}\label{structblockdevice}\index{blockdevice@{blockdevice}}
+
+
+block device abstract object  
+
+
+
+
+{\ttfamily \#include $<$blockdevice.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, const void \texorpdfstring{$\ast$}{*}buffer, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, const void \texorpdfstring{$\ast$}{*}buffer, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})
+\item 
+\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}} )(struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)
+\item 
+size\+\_\+t \mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\+\_\+size}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\+\_\+size}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\+\_\+size}}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}
+\item 
+bool \mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\+\_\+initialized}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+block device abstract object 
+
+All block device objects implement \doxylink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t} 
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00032}{32}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structblockdevice_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}\index{blockdevice@{blockdevice}!config@{config}}
+\index{config@{config}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0} 
+void\texorpdfstring{$\ast$}{*} blockdevice\+::config}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00045}{45}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}\index{blockdevice@{blockdevice}!deinit@{deinit}}
+\index{deinit@{deinit}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{deinit}{deinit}}
+{\footnotesize\ttfamily \label{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::deinit) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00034}{34}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}\index{blockdevice@{blockdevice}!erase@{erase}}
+\index{erase@{erase}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{erase}{erase}}
+{\footnotesize\ttfamily \label{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::erase) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00038}{38}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}\index{blockdevice@{blockdevice}!erase\_size@{erase\_size}}
+\index{erase\_size@{erase\_size}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{erase\_size}{erase\_size}}
+{\footnotesize\ttfamily \label{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3} 
+size\+\_\+t blockdevice\+::erase\+\_\+size}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00042}{42}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_ad37adc41062aa442c1f80852285e0b35}\index{blockdevice@{blockdevice}!init@{init}}
+\index{init@{init}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{init}{init}}
+{\footnotesize\ttfamily \label{structblockdevice_ad37adc41062aa442c1f80852285e0b35} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::init) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00033}{33}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}\index{blockdevice@{blockdevice}!is\_initialized@{is\_initialized}}
+\index{is\_initialized@{is\_initialized}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{is\_initialized}{is\_initialized}}
+{\footnotesize\ttfamily \label{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0} 
+bool blockdevice\+::is\+\_\+initialized}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00046}{46}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_ac5845731ff9674fc82a752fbd270130d}\index{blockdevice@{blockdevice}!name@{name}}
+\index{name@{name}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{structblockdevice_ac5845731ff9674fc82a752fbd270130d} 
+const char\texorpdfstring{$\ast$}{*} blockdevice\+::name}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00044}{44}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}\index{blockdevice@{blockdevice}!program@{program}}
+\index{program@{program}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{program}{program}}
+{\footnotesize\ttfamily \label{structblockdevice_a07d24eb0a566f88aa45cf1d236006822} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::program) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, const void \texorpdfstring{$\ast$}{*}buffer, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00037}{37}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}\index{blockdevice@{blockdevice}!program\_size@{program\_size}}
+\index{program\_size@{program\_size}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{program\_size}{program\_size}}
+{\footnotesize\ttfamily \label{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98} 
+size\+\_\+t blockdevice\+::program\+\_\+size}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00043}{43}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_ae4801dd67b1481ac013520098523988e}\index{blockdevice@{blockdevice}!read@{read}}
+\index{read@{read}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{read}{read}}
+{\footnotesize\ttfamily \label{structblockdevice_ae4801dd67b1481ac013520098523988e} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::read) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, const void \texorpdfstring{$\ast$}{*}buffer, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00036}{36}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}\index{blockdevice@{blockdevice}!read\_size@{read\_size}}
+\index{read\_size@{read\_size}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{read\_size}{read\_size}}
+{\footnotesize\ttfamily \label{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d} 
+size\+\_\+t blockdevice\+::read\+\_\+size}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00041}{41}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_abba40bbe04d3a88d270634a788249477}\index{blockdevice@{blockdevice}!size@{size}}
+\index{size@{size}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily \label{structblockdevice_abba40bbe04d3a88d270634a788249477} 
+\mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}}(\texorpdfstring{$\ast$}{*} blockdevice\+::size) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00040}{40}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}\index{blockdevice@{blockdevice}!sync@{sync}}
+\index{sync@{sync}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{sync}{sync}}
+{\footnotesize\ttfamily \label{structblockdevice_aaff48a348ee1441de6d05ffad85875ee} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::sync) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device)}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00035}{35}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+\Hypertarget{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}\index{blockdevice@{blockdevice}!trim@{trim}}
+\index{trim@{trim}!blockdevice@{blockdevice}}
+\doxysubsubsection{\texorpdfstring{trim}{trim}}
+{\footnotesize\ttfamily \label{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf} 
+int(\texorpdfstring{$\ast$}{*} blockdevice\+::trim) (struct \mbox{\hyperlink{structblockdevice}{blockdevice}} \texorpdfstring{$\ast$}{*}device, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} addr, \mbox{\hyperlink{blockdevice_8h_a0457670798518d3ca4a2e67aec5d2cc6}{bd\+\_\+size\+\_\+t}} \mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}})}
+
+
+
+Definition at line \mbox{\hyperlink{blockdevice_8h_source_l00039}{39}} of file \mbox{\hyperlink{blockdevice_8h_source}{blockdevice.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/pico-\/vfs-\/\+REGI-\/\+Local/include/blockdevice/\mbox{\hyperlink{blockdevice_8h}{blockdevice.\+h}}\end{DoxyCompactItemize}

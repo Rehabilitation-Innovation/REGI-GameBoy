@@ -1,0 +1,112 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/multicore/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/multicore/main.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/multicore/main.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$pico/flash.\+h$>$}\newline
+{\ttfamily \#include $<$pico/multicore.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_add89fbb6b753518ca2f4fa0249456c8f}{TEST\+\_\+\+FILE\+\_\+\+SIZE}}~(512 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_ae38550b2008b82c08588d2340f196914}{FLASH\+\_\+\+START\+\_\+\+AT}}~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a1f06fce82ce957c8dd28c5e07da29d97}{FLASH\+\_\+\+LENGTH\+\_\+\+ALL}}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{main.c@{main.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_l00011}{11}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a1f06fce82ce957c8dd28c5e07da29d97}\index{main.c@{main.c}!FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}}
+\index{FLASH\_LENGTH\_ALL@{FLASH\_LENGTH\_ALL}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_LENGTH\_ALL}{FLASH\_LENGTH\_ALL}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a1f06fce82ce957c8dd28c5e07da29d97} 
+\#define FLASH\+\_\+\+LENGTH\+\_\+\+ALL~0}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_l00015}{15}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_ae38550b2008b82c08588d2340f196914}\index{main.c@{main.c}!FLASH\_START\_AT@{FLASH\_START\_AT}}
+\index{FLASH\_START\_AT@{FLASH\_START\_AT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{FLASH\_START\_AT}{FLASH\_START\_AT}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_ae38550b2008b82c08588d2340f196914} 
+\#define FLASH\+\_\+\+START\+\_\+\+AT~(0.\+5 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_l00014}{14}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_add89fbb6b753518ca2f4fa0249456c8f}\index{main.c@{main.c}!TEST\_FILE\_SIZE@{TEST\_FILE\_SIZE}}
+\index{TEST\_FILE\_SIZE@{TEST\_FILE\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TEST\_FILE\_SIZE}{TEST\_FILE\_SIZE}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_add89fbb6b753518ca2f4fa0249456c8f} 
+\#define TEST\+\_\+\+FILE\+\_\+\+SIZE~(512 \texorpdfstring{$\ast$}{*} 1024)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_l00013}{13}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source_l00108}{108}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2multicore_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00110\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Start\ write\ and\ read\ tests:\(\backslash\)n"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}())\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SD\ card\ device\ not\ found,\ skip\(\backslash\)n"{}});}
+\DoxyCodeLine{00113\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ test\_sequential\_write\_read();}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ remove(\textcolor{stringliteral}{"{}/flash/core0"{}});}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ remove(\textcolor{stringliteral}{"{}/sd/core0"{}});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ test\_parallel\_write\_read();}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ printf(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}All\ tests\ are\ ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ tight\_loop\_contents();}
+\DoxyCodeLine{00123\ \}}
+
+\end{DoxyCode}

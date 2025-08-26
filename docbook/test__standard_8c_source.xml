@@ -1,0 +1,1023 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__standard_8c_source" xml:lang="en-US">
+<title>test_standard.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/test_standard.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_test__standard_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&lt;assert.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&lt;errno.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;wchar.h&gt;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_heap_8h">blockdevice/heap.h</link>&quot;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_fat_8h">filesystem/fat.h</link>&quot;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_littlefs_8h">filesystem/littlefs.h</link>&quot;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_vfs_8h">filesystem/vfs.h</link>&quot;</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00011"/>00011 
+<anchor xml:id="_test__standard_8c_source_1l00012"/><link linkend="_test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">00012</link> <emphasis role="preprocessor">#define&#32;COLOR_GREEN(format)&#32;&#32;&#32;&#32;&#32;&#32;(&quot;\e[32m&quot;&#32;format&#32;&quot;\e[0m&quot;)</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00013"/><link linkend="_test__standard_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">00013</link> <emphasis role="preprocessor">#define&#32;HEAP_STORAGE_SIZE&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(128&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00014"/><link linkend="_test__standard_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">00014</link> <emphasis role="preprocessor">#define&#32;LITTLEFS_BLOCK_CYCLE&#32;&#32;&#32;&#32;&#32;500</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00015"/><link linkend="_test__standard_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">00015</link> <emphasis role="preprocessor">#define&#32;LITTLEFS_LOOKAHEAD_SIZE&#32;&#32;16</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00016"/>00016 
+<anchor xml:id="_test__standard_8c_source_1l00017"/>00017 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_printf(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_test__standard_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_test__standard_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;n&#32;=&#32;vprintf(format,&#32;args);
+<anchor xml:id="_test__standard_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_test__standard_8c_source_1l00022"/>00022 
+<anchor xml:id="_test__standard_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;50&#32;-&#32;(size_t)n;&#32;i++)
+<anchor xml:id="_test__standard_8c_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;.&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00026"/>00026 }
+<anchor xml:id="_test__standard_8c_source_1l00027"/>00027 
+<anchor xml:id="_test__standard_8c_source_1l00028"/>00028 
+<anchor xml:id="_test__standard_8c_source_1l00029"/>00029 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;setup(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00030"/>00030 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fs,&#32;device);
+<anchor xml:id="_test__standard_8c_source_1l00031"/>00031 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>,&#32;fs,&#32;device);
+<anchor xml:id="_test__standard_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00034"/>00034 }
+<anchor xml:id="_test__standard_8c_source_1l00035"/>00035 
+<anchor xml:id="_test__standard_8c_source_1l00036"/>00036 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;cleanup(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;(void)fs;
+<anchor xml:id="_test__standard_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device);
+<anchor xml:id="_test__standard_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;0,&#32;length);
+<anchor xml:id="_test__standard_8c_source_1l00042"/>00042 }
+<anchor xml:id="_test__standard_8c_source_1l00043"/>00043 
+<anchor xml:id="_test__standard_8c_source_1l00044"/>00044 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_clearerr(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00045"/>00045 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;clearerr&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00047"/>00047 
+<anchor xml:id="_test__standard_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/clearerr&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;assert(feof(fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;assert(ferror(fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;hello&#32;world\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;assert(feof(fp)&#32;!=&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;clearerr(fp);
+<anchor xml:id="_test__standard_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;assert(feof(fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00057"/>00057 
+<anchor xml:id="_test__standard_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/clearerr&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;can&apos;t&#32;write&#32;stream\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;assert(ferror(fp)&#32;!=&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00061"/>00061 &#32;&#32;&#32;&#32;clearerr(fp);
+<anchor xml:id="_test__standard_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;assert(ferror(fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00064"/>00064 
+<anchor xml:id="_test__standard_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00066"/>00066 }
+<anchor xml:id="_test__standard_8c_source_1l00067"/>00067 
+<anchor xml:id="_test__standard_8c_source_1l00068"/>00068 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fflush(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fflush&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00070"/>00070 
+<anchor xml:id="_test__standard_8c_source_1l00071"/>00071 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fflush&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;hello&#32;world&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;fileno(fp);
+<anchor xml:id="_test__standard_8c_source_1l00074"/>00074 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>stat&#32;st;
+<anchor xml:id="_test__standard_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fstat(fd,&#32;&amp;st);
+<anchor xml:id="_test__standard_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00077"/>00077 &#32;&#32;&#32;&#32;assert(st.st_size&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00078"/>00078 
+<anchor xml:id="_test__standard_8c_source_1l00079"/>00079 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;err&#32;=&#32;fstat(fd,&#32;&amp;st);
+<anchor xml:id="_test__standard_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;assert(st.st_size&#32;&gt;&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00083"/>00083 
+<anchor xml:id="_test__standard_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00086"/>00086 
+<anchor xml:id="_test__standard_8c_source_1l00087"/>00087 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00088"/>00088 }
+<anchor xml:id="_test__standard_8c_source_1l00089"/>00089 
+<anchor xml:id="_test__standard_8c_source_1l00090"/>00090 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fgetc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fgetc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00092"/>00092 
+<anchor xml:id="_test__standard_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fgetc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;012AB&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00097"/>00097 
+<anchor xml:id="_test__standard_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;A&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00102"/>00102 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;B&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;EOF);
+<anchor xml:id="_test__standard_8c_source_1l00104"/>00104 
+<anchor xml:id="_test__standard_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00106"/>00106 
+<anchor xml:id="_test__standard_8c_source_1l00107"/>00107 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00108"/>00108 }
+<anchor xml:id="_test__standard_8c_source_1l00109"/>00109 
+<anchor xml:id="_test__standard_8c_source_1l00110"/>00110 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fgetpos(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fgetpos&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00112"/>00112 
+<anchor xml:id="_test__standard_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fgetpos&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;012AB&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00117"/>00117 
+<anchor xml:id="_test__standard_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;fpos_t&#32;pos;
+<anchor xml:id="_test__standard_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fgetpos(fp,&#32;&amp;pos);
+<anchor xml:id="_test__standard_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;assert(pos&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00122"/>00122 
+<anchor xml:id="_test__standard_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_END);
+<anchor xml:id="_test__standard_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;err&#32;=&#32;fgetpos(fp,&#32;&amp;pos);
+<anchor xml:id="_test__standard_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00126"/>00126 &#32;&#32;&#32;&#32;assert(pos&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;012AB&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00127"/>00127 
+<anchor xml:id="_test__standard_8c_source_1l00128"/>00128 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00129"/>00129 
+<anchor xml:id="_test__standard_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00131"/>00131 }
+<anchor xml:id="_test__standard_8c_source_1l00132"/>00132 
+<anchor xml:id="_test__standard_8c_source_1l00133"/>00133 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fgets(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fgets&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00135"/>00135 
+<anchor xml:id="_test__standard_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fgets&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;0123456789\nABCDEF\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00140"/>00140 
+<anchor xml:id="_test__standard_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00145"/>00145 
+<anchor xml:id="_test__standard_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00149"/>00149 
+<anchor xml:id="_test__standard_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;assert(line&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00152"/>00152 
+<anchor xml:id="_test__standard_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00154"/>00154 
+<anchor xml:id="_test__standard_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00156"/>00156 }
+<anchor xml:id="_test__standard_8c_source_1l00157"/>00157 
+<anchor xml:id="_test__standard_8c_source_1l00158"/>00158 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fgetwc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fgetwc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00160"/>00160 
+<anchor xml:id="_test__standard_8c_source_1l00161"/>00161 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fgetwc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00162"/>00162 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;WCHAR&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00165"/>00165 
+<anchor xml:id="_test__standard_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;W&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00167"/>00167 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;C&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00168"/>00168 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;H&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00169"/>00169 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;A&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00170"/>00170 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;R&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00171"/>00171 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;WEOF);
+<anchor xml:id="_test__standard_8c_source_1l00172"/>00172 
+<anchor xml:id="_test__standard_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00174"/>00174 
+<anchor xml:id="_test__standard_8c_source_1l00175"/>00175 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00176"/>00176 }
+<anchor xml:id="_test__standard_8c_source_1l00177"/>00177 
+<anchor xml:id="_test__standard_8c_source_1l00178"/>00178 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fgetws(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00179"/>00179 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fgetws&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00180"/>00180 
+<anchor xml:id="_test__standard_8c_source_1l00181"/>00181 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fgetws&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00182"/>00182 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;WCHAR\nSTRINGS\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00183"/>00183 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00184"/>00184 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00185"/>00185 
+<anchor xml:id="_test__standard_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00187"/>00187 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;*line&#32;=&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00188"/>00188 &#32;&#32;&#32;&#32;assert(wcscmp(line,&#32;L<emphasis role="stringliteral">&quot;WCHAR\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00189"/>00189 &#32;&#32;&#32;&#32;assert(wcscmp(buffer,&#32;L<emphasis role="stringliteral">&quot;WCHAR\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;line&#32;=&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00191"/>00191 &#32;&#32;&#32;&#32;assert(wcscmp(line,&#32;L<emphasis role="stringliteral">&quot;STRINGS\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00192"/>00192 &#32;&#32;&#32;&#32;assert(wcscmp(buffer,&#32;L<emphasis role="stringliteral">&quot;STRINGS\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00193"/>00193 
+<anchor xml:id="_test__standard_8c_source_1l00194"/>00194 &#32;&#32;&#32;&#32;line&#32;=&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00195"/>00195 &#32;&#32;&#32;&#32;assert(line&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00196"/>00196 
+<anchor xml:id="_test__standard_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00198"/>00198 
+<anchor xml:id="_test__standard_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00200"/>00200 }
+<anchor xml:id="_test__standard_8c_source_1l00201"/>00201 
+<anchor xml:id="_test__standard_8c_source_1l00202"/>00202 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fileno(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00203"/>00203 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fileno&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00204"/>00204 
+<anchor xml:id="_test__standard_8c_source_1l00205"/>00205 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fileno&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00206"/>00206 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;hello&#32;world\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00207"/>00207 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00208"/>00208 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;fileno(fp);
+<anchor xml:id="_test__standard_8c_source_1l00209"/>00209 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00210"/>00210 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00211"/>00211 &#32;&#32;&#32;&#32;ssize_t&#32;len&#32;=&#32;read(fd,&#32;buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer));
+<anchor xml:id="_test__standard_8c_source_1l00212"/>00212 &#32;&#32;&#32;&#32;assert(len&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;hello&#32;world\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00213"/>00213 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;hello&#32;world\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00214"/>00214 
+<anchor xml:id="_test__standard_8c_source_1l00215"/>00215 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00216"/>00216 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00217"/>00217 
+<anchor xml:id="_test__standard_8c_source_1l00218"/>00218 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00219"/>00219 }
+<anchor xml:id="_test__standard_8c_source_1l00220"/>00220 
+<anchor xml:id="_test__standard_8c_source_1l00221"/>00221 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fmemopen(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00222"/>00222 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fmemopen&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00223"/>00223 
+<anchor xml:id="_test__standard_8c_source_1l00224"/>00224 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00225"/>00225 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fmemopen(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00226"/>00226 &#32;&#32;&#32;&#32;assert(fprintf(fp,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;11);
+<anchor xml:id="_test__standard_8c_source_1l00227"/>00227 &#32;&#32;&#32;&#32;assert(fprintf(fp,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;7);
+<anchor xml:id="_test__standard_8c_source_1l00228"/>00228 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00229"/>00229 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00230"/>00230 
+<anchor xml:id="_test__standard_8c_source_1l00231"/>00231 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00232"/>00232 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00233"/>00233 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00234"/>00234 &#32;&#32;&#32;&#32;assert(strcmp(read_buffer,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00235"/>00235 
+<anchor xml:id="_test__standard_8c_source_1l00236"/>00236 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00237"/>00237 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00238"/>00238 &#32;&#32;&#32;&#32;assert(strcmp(read_buffer,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00239"/>00239 
+<anchor xml:id="_test__standard_8c_source_1l00240"/>00240 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00241"/>00241 &#32;&#32;&#32;&#32;assert(line&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00242"/>00242 
+<anchor xml:id="_test__standard_8c_source_1l00243"/>00243 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00244"/>00244 
+<anchor xml:id="_test__standard_8c_source_1l00245"/>00245 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00246"/>00246 }
+<anchor xml:id="_test__standard_8c_source_1l00247"/>00247 
+<anchor xml:id="_test__standard_8c_source_1l00248"/>00248 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fopen(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00249"/>00249 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fopen&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00250"/>00250 
+<anchor xml:id="_test__standard_8c_source_1l00251"/>00251 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fopen-not-exists&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00252"/>00252 &#32;&#32;&#32;&#32;assert(fp&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00253"/>00253 &#32;&#32;&#32;&#32;assert(errno&#32;==&#32;ENOENT);
+<anchor xml:id="_test__standard_8c_source_1l00254"/>00254 
+<anchor xml:id="_test__standard_8c_source_1l00255"/>00255 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fopen&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00256"/>00256 &#32;&#32;&#32;&#32;assert(fp&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00257"/>00257 &#32;&#32;&#32;&#32;assert(fprintf(fp,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;11);
+<anchor xml:id="_test__standard_8c_source_1l00258"/>00258 &#32;&#32;&#32;&#32;assert(fprintf(fp,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;7);
+<anchor xml:id="_test__standard_8c_source_1l00259"/>00259 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00260"/>00260 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00261"/>00261 
+<anchor xml:id="_test__standard_8c_source_1l00262"/>00262 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fopen&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00263"/>00263 &#32;&#32;&#32;&#32;assert(fp&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00264"/>00264 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00265"/>00265 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00266"/>00266 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00267"/>00267 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00268"/>00268 
+<anchor xml:id="_test__standard_8c_source_1l00269"/>00269 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00270"/>00270 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00271"/>00271 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00272"/>00272 
+<anchor xml:id="_test__standard_8c_source_1l00273"/>00273 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00274"/>00274 &#32;&#32;&#32;&#32;assert(line&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00275"/>00275 
+<anchor xml:id="_test__standard_8c_source_1l00276"/>00276 &#32;&#32;&#32;&#32;err&#32;=&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00277"/>00277 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00278"/>00278 
+<anchor xml:id="_test__standard_8c_source_1l00279"/>00279 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fopen&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;a+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00280"/>00280 &#32;&#32;&#32;&#32;assert(fp&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00281"/>00281 &#32;&#32;&#32;&#32;assert(ftell(fp)&#32;&gt;&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00282"/>00282 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;APPEND\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00283"/>00283 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00284"/>00284 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00285"/>00285 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;0123456789\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00286"/>00286 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00287"/>00287 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;ABCDEF\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00288"/>00288 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00289"/>00289 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;APPEND\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00290"/>00290 &#32;&#32;&#32;&#32;err&#32;=&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00291"/>00291 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00292"/>00292 
+<anchor xml:id="_test__standard_8c_source_1l00293"/>00293 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00294"/>00294 }
+<anchor xml:id="_test__standard_8c_source_1l00295"/>00295 
+<anchor xml:id="_test__standard_8c_source_1l00296"/>00296 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fputc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00297"/>00297 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fputc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00298"/>00298 
+<anchor xml:id="_test__standard_8c_source_1l00299"/>00299 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fputc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00300"/>00300 &#32;&#32;&#32;&#32;assert(fputc(<emphasis role="charliteral">&apos;A&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;A&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00301"/>00301 &#32;&#32;&#32;&#32;assert(fputc(<emphasis role="charliteral">&apos;B&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;B&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00302"/>00302 &#32;&#32;&#32;&#32;assert(fputc(<emphasis role="charliteral">&apos;C&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;C&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00303"/>00303 
+<anchor xml:id="_test__standard_8c_source_1l00304"/>00304 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00305"/>00305 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00306"/>00306 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00307"/>00307 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00308"/>00308 
+<anchor xml:id="_test__standard_8c_source_1l00309"/>00309 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00310"/>00310 
+<anchor xml:id="_test__standard_8c_source_1l00311"/>00311 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00312"/>00312 }
+<anchor xml:id="_test__standard_8c_source_1l00313"/>00313 
+<anchor xml:id="_test__standard_8c_source_1l00314"/>00314 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fputs(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00315"/>00315 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fputs&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00316"/>00316 
+<anchor xml:id="_test__standard_8c_source_1l00317"/>00317 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fputs&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00318"/>00318 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fputs(<emphasis role="stringliteral">&quot;Hello\n&quot;</emphasis>,&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00319"/>00319 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00320"/>00320 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00321"/>00321 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00322"/>00322 
+<anchor xml:id="_test__standard_8c_source_1l00323"/>00323 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00324"/>00324 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00325"/>00325 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00326"/>00326 
+<anchor xml:id="_test__standard_8c_source_1l00327"/>00327 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00328"/>00328 
+<anchor xml:id="_test__standard_8c_source_1l00329"/>00329 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00330"/>00330 }
+<anchor xml:id="_test__standard_8c_source_1l00331"/>00331 
+<anchor xml:id="_test__standard_8c_source_1l00332"/>00332 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fputwc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00333"/>00333 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fputwc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00334"/>00334 
+<anchor xml:id="_test__standard_8c_source_1l00335"/>00335 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fputwc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00336"/>00336 &#32;&#32;&#32;&#32;assert(fputwc(L<emphasis role="charliteral">&apos;W&apos;</emphasis>,&#32;fp)&#32;==&#32;L<emphasis role="charliteral">&apos;W&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00337"/>00337 &#32;&#32;&#32;&#32;assert(fputwc(L<emphasis role="charliteral">&apos;C&apos;</emphasis>,&#32;fp)&#32;==&#32;L<emphasis role="charliteral">&apos;C&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00338"/>00338 
+<anchor xml:id="_test__standard_8c_source_1l00339"/>00339 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00340"/>00340 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00341"/>00341 &#32;&#32;&#32;&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00342"/>00342 &#32;&#32;&#32;&#32;assert(wcscmp(buffer,&#32;L<emphasis role="stringliteral">&quot;WC&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00343"/>00343 
+<anchor xml:id="_test__standard_8c_source_1l00344"/>00344 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00345"/>00345 
+<anchor xml:id="_test__standard_8c_source_1l00346"/>00346 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00347"/>00347 }
+<anchor xml:id="_test__standard_8c_source_1l00348"/>00348 
+<anchor xml:id="_test__standard_8c_source_1l00349"/>00349 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fputws(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00350"/>00350 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fputws&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00351"/>00351 
+<anchor xml:id="_test__standard_8c_source_1l00352"/>00352 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fputws&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00353"/>00353 &#32;&#32;&#32;&#32;assert(fputws(L<emphasis role="stringliteral">&quot;WIDE&#32;CHAR\n&quot;</emphasis>,&#32;fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00354"/>00354 
+<anchor xml:id="_test__standard_8c_source_1l00355"/>00355 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00356"/>00356 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00357"/>00357 &#32;&#32;&#32;&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00358"/>00358 &#32;&#32;&#32;&#32;assert(wcscmp(buffer,&#32;L<emphasis role="stringliteral">&quot;WIDE&#32;CHAR\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00359"/>00359 
+<anchor xml:id="_test__standard_8c_source_1l00360"/>00360 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00361"/>00361 
+<anchor xml:id="_test__standard_8c_source_1l00362"/>00362 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00363"/>00363 }
+<anchor xml:id="_test__standard_8c_source_1l00364"/>00364 
+<anchor xml:id="_test__standard_8c_source_1l00365"/>00365 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fread(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00366"/>00366 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fread&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00367"/>00367 
+<anchor xml:id="_test__standard_8c_source_1l00368"/>00368 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fread&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00369"/>00369 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00370"/>00370 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00371"/>00371 
+<anchor xml:id="_test__standard_8c_source_1l00372"/>00372 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00373"/>00373 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size&#32;=&#32;fread(buffer,&#32;1,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00374"/>00374 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00375"/>00375 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00376"/>00376 
+<anchor xml:id="_test__standard_8c_source_1l00377"/>00377 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00378"/>00378 
+<anchor xml:id="_test__standard_8c_source_1l00379"/>00379 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00380"/>00380 }
+<anchor xml:id="_test__standard_8c_source_1l00381"/>00381 
+<anchor xml:id="_test__standard_8c_source_1l00382"/>00382 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_freopen(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00383"/>00383 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;freopen&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00384"/>00384 
+<anchor xml:id="_test__standard_8c_source_1l00385"/>00385 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/freopen&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00386"/>00386 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00387"/>00387 
+<anchor xml:id="_test__standard_8c_source_1l00388"/>00388 &#32;&#32;&#32;&#32;fp&#32;=&#32;freopen(<emphasis role="stringliteral">&quot;/freopen&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>,&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00389"/>00389 &#32;&#32;&#32;&#32;assert(fp&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00390"/>00390 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00391"/>00391 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00392"/>00392 &#32;&#32;&#32;&#32;assert(fp&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00393"/>00393 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00394"/>00394 
+<anchor xml:id="_test__standard_8c_source_1l00395"/>00395 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00396"/>00396 
+<anchor xml:id="_test__standard_8c_source_1l00397"/>00397 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00398"/>00398 }
+<anchor xml:id="_test__standard_8c_source_1l00399"/>00399 
+<anchor xml:id="_test__standard_8c_source_1l00400"/>00400 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fseek(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00401"/>00401 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fseek&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00402"/>00402 
+<anchor xml:id="_test__standard_8c_source_1l00403"/>00403 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fseek&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00404"/>00404 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello\nWorld\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00405"/>00405 
+<anchor xml:id="_test__standard_8c_source_1l00406"/>00406 &#32;&#32;&#32;&#32;assert(fseek(fp,&#32;6,&#32;SEEK_SET)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00407"/>00407 
+<anchor xml:id="_test__standard_8c_source_1l00408"/>00408 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00409"/>00409 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00410"/>00410 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00411"/>00411 
+<anchor xml:id="_test__standard_8c_source_1l00412"/>00412 &#32;&#32;&#32;&#32;assert(fseek(fp,&#32;0,&#32;SEEK_SET)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00413"/>00413 
+<anchor xml:id="_test__standard_8c_source_1l00414"/>00414 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00415"/>00415 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;Hello\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00416"/>00416 
+<anchor xml:id="_test__standard_8c_source_1l00417"/>00417 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00418"/>00418 
+<anchor xml:id="_test__standard_8c_source_1l00419"/>00419 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00420"/>00420 }
+<anchor xml:id="_test__standard_8c_source_1l00421"/>00421 
+<anchor xml:id="_test__standard_8c_source_1l00422"/>00422 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fsetpos(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00423"/>00423 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fsetpos&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00424"/>00424 
+<anchor xml:id="_test__standard_8c_source_1l00425"/>00425 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fsetpos&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00426"/>00426 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello\nWorld\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00427"/>00427 
+<anchor xml:id="_test__standard_8c_source_1l00428"/>00428 &#32;&#32;&#32;&#32;fpos_t&#32;pos&#32;=&#32;6;
+<anchor xml:id="_test__standard_8c_source_1l00429"/>00429 &#32;&#32;&#32;&#32;assert(fsetpos(fp,&#32;&amp;pos)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00430"/>00430 
+<anchor xml:id="_test__standard_8c_source_1l00431"/>00431 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00432"/>00432 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00433"/>00433 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00434"/>00434 
+<anchor xml:id="_test__standard_8c_source_1l00435"/>00435 &#32;&#32;&#32;&#32;pos&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00436"/>00436 &#32;&#32;&#32;&#32;assert(fsetpos(fp,&#32;&amp;pos)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00437"/>00437 
+<anchor xml:id="_test__standard_8c_source_1l00438"/>00438 &#32;&#32;&#32;&#32;line&#32;=&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00439"/>00439 &#32;&#32;&#32;&#32;assert(strcmp(line,&#32;<emphasis role="stringliteral">&quot;Hello\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00440"/>00440 
+<anchor xml:id="_test__standard_8c_source_1l00441"/>00441 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00442"/>00442 
+<anchor xml:id="_test__standard_8c_source_1l00443"/>00443 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00444"/>00444 }
+<anchor xml:id="_test__standard_8c_source_1l00445"/>00445 
+<anchor xml:id="_test__standard_8c_source_1l00446"/>00446 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_ftell(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00447"/>00447 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;ftell&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00448"/>00448 
+<anchor xml:id="_test__standard_8c_source_1l00449"/>00449 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/ftell&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00450"/>00450 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello\nWorld\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00451"/>00451 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00452"/>00452 &#32;&#32;&#32;&#32;assert(ftell(fp)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00453"/>00453 
+<anchor xml:id="_test__standard_8c_source_1l00454"/>00454 &#32;&#32;&#32;&#32;fseek(fp,&#32;6,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00455"/>00455 &#32;&#32;&#32;&#32;assert(ftell(fp)&#32;==&#32;6);
+<anchor xml:id="_test__standard_8c_source_1l00456"/>00456 
+<anchor xml:id="_test__standard_8c_source_1l00457"/>00457 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00458"/>00458 
+<anchor xml:id="_test__standard_8c_source_1l00459"/>00459 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00460"/>00460 }
+<anchor xml:id="_test__standard_8c_source_1l00461"/>00461 
+<anchor xml:id="_test__standard_8c_source_1l00462"/>00462 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fwide(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00463"/>00463 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwide&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00464"/>00464 
+<anchor xml:id="_test__standard_8c_source_1l00465"/>00465 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwide&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00466"/>00466 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;0)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00467"/>00467 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;byte\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00468"/>00468 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;0)&#32;&lt;&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00469"/>00469 
+<anchor xml:id="_test__standard_8c_source_1l00470"/>00470 &#32;&#32;&#32;&#32;fp&#32;=&#32;freopen(<emphasis role="stringliteral">&quot;/fwide&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>,&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00471"/>00471 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;0)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00472"/>00472 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;1)&#32;&gt;&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00473"/>00473 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00474"/>00474 
+<anchor xml:id="_test__standard_8c_source_1l00475"/>00475 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwide.wide&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00476"/>00476 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;0)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00477"/>00477 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;wide\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00478"/>00478 &#32;&#32;&#32;&#32;assert(fwide(fp,&#32;0)&#32;&gt;&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00479"/>00479 
+<anchor xml:id="_test__standard_8c_source_1l00480"/>00480 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00481"/>00481 
+<anchor xml:id="_test__standard_8c_source_1l00482"/>00482 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00483"/>00483 }
+<anchor xml:id="_test__standard_8c_source_1l00484"/>00484 
+<anchor xml:id="_test__standard_8c_source_1l00485"/>00485 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_fwrite(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00486"/>00486 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwrite&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00487"/>00487 
+<anchor xml:id="_test__standard_8c_source_1l00488"/>00488 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwrite&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00489"/>00489 &#32;&#32;&#32;&#32;uint8_t&#32;write_buffer[]&#32;=&#32;{0x01,&#32;0x02,&#32;0x03,&#32;0x04};
+<anchor xml:id="_test__standard_8c_source_1l00490"/>00490 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size&#32;=&#32;fwrite(write_buffer,&#32;1,&#32;<emphasis role="keyword">sizeof</emphasis>(write_buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00491"/>00491 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;<emphasis role="keyword">sizeof</emphasis>(write_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00492"/>00492 
+<anchor xml:id="_test__standard_8c_source_1l00493"/>00493 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00494"/>00494 
+<anchor xml:id="_test__standard_8c_source_1l00495"/>00495 &#32;&#32;&#32;&#32;uint8_t&#32;read_buffer[4]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00496"/>00496 &#32;&#32;&#32;&#32;size&#32;=&#32;fread(read_buffer,&#32;1,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00497"/>00497 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00498"/>00498 &#32;&#32;&#32;&#32;assert(memcmp(write_buffer,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(write_buffer))&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00499"/>00499 
+<anchor xml:id="_test__standard_8c_source_1l00500"/>00500 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00501"/>00501 
+<anchor xml:id="_test__standard_8c_source_1l00502"/>00502 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00503"/>00503 }
+<anchor xml:id="_test__standard_8c_source_1l00504"/>00504 
+<anchor xml:id="_test__standard_8c_source_1l00505"/>00505 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_getc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00506"/>00506 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;getc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00507"/>00507 
+<anchor xml:id="_test__standard_8c_source_1l00508"/>00508 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/getc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00509"/>00509 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;012AB&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00510"/>00510 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00511"/>00511 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00512"/>00512 
+<anchor xml:id="_test__standard_8c_source_1l00513"/>00513 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;0&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00514"/>00514 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00515"/>00515 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00516"/>00516 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;A&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00517"/>00517 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;B&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00518"/>00518 &#32;&#32;&#32;&#32;assert(getc(fp)&#32;==&#32;EOF);
+<anchor xml:id="_test__standard_8c_source_1l00519"/>00519 
+<anchor xml:id="_test__standard_8c_source_1l00520"/>00520 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00521"/>00521 
+<anchor xml:id="_test__standard_8c_source_1l00522"/>00522 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00523"/>00523 }
+<anchor xml:id="_test__standard_8c_source_1l00524"/>00524 
+<anchor xml:id="_test__standard_8c_source_1l00525"/>00525 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_getw(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00526"/>00526 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;getw&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00527"/>00527 
+<anchor xml:id="_test__standard_8c_source_1l00528"/>00528 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/getw&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00529"/>00529 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;word&#32;=&#32;536870911;
+<anchor xml:id="_test__standard_8c_source_1l00530"/>00530 &#32;&#32;&#32;&#32;fwrite(&amp;word,&#32;1,&#32;<emphasis role="keyword">sizeof</emphasis>(word),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00531"/>00531 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00532"/>00532 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00533"/>00533 
+<anchor xml:id="_test__standard_8c_source_1l00534"/>00534 &#32;&#32;&#32;&#32;assert(getw(fp)&#32;==&#32;word);
+<anchor xml:id="_test__standard_8c_source_1l00535"/>00535 &#32;&#32;&#32;&#32;assert(getw(fp)&#32;==&#32;EOF);
+<anchor xml:id="_test__standard_8c_source_1l00536"/>00536 
+<anchor xml:id="_test__standard_8c_source_1l00537"/>00537 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00538"/>00538 
+<anchor xml:id="_test__standard_8c_source_1l00539"/>00539 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00540"/>00540 }
+<anchor xml:id="_test__standard_8c_source_1l00541"/>00541 
+<anchor xml:id="_test__standard_8c_source_1l00542"/>00542 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_mkstemp(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00543"/>00543 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;mkstemp&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00544"/>00544 
+<anchor xml:id="_test__standard_8c_source_1l00545"/>00545 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/mkstemp.000000&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00546"/>00546 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;exists\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00547"/>00547 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00548"/>00548 
+<anchor xml:id="_test__standard_8c_source_1l00549"/>00549 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;path[]&#32;=&#32;<emphasis role="stringliteral">&quot;/mkstemp.XXXXXX&quot;</emphasis>;
+<anchor xml:id="_test__standard_8c_source_1l00550"/>00550 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;mkstemp(path);
+<anchor xml:id="_test__standard_8c_source_1l00551"/>00551 &#32;&#32;&#32;&#32;assert(fd&#32;&gt;=&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00552"/>00552 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00553"/>00553 
+<anchor xml:id="_test__standard_8c_source_1l00554"/>00554 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00555"/>00555 }
+<anchor xml:id="_test__standard_8c_source_1l00556"/>00556 
+<anchor xml:id="_test__standard_8c_source_1l00557"/>00557 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_open_memstream(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00558"/>00558 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;open_memstream&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00559"/>00559 
+<anchor xml:id="_test__standard_8c_source_1l00560"/>00560 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*buffer&#32;=&#32;NULL;
+<anchor xml:id="_test__standard_8c_source_1l00561"/>00561 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;size&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00562"/>00562 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;open_memstream(&amp;buffer,&#32;&amp;size);
+<anchor xml:id="_test__standard_8c_source_1l00563"/>00563 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;hello&#32;world&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00564"/>00564 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00565"/>00565 
+<anchor xml:id="_test__standard_8c_source_1l00566"/>00566 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;hello&#32;world&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00567"/>00567 &#32;&#32;&#32;&#32;assert(memcmp(buffer,&#32;<emphasis role="stringliteral">&quot;hello&#32;world&quot;</emphasis>,&#32;<emphasis role="keyword">sizeof</emphasis>(<emphasis role="stringliteral">&quot;hello&#32;world&quot;</emphasis>))&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00568"/>00568 &#32;&#32;&#32;&#32;free(buffer);
+<anchor xml:id="_test__standard_8c_source_1l00569"/>00569 
+<anchor xml:id="_test__standard_8c_source_1l00570"/>00570 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00571"/>00571 }
+<anchor xml:id="_test__standard_8c_source_1l00572"/>00572 
+<anchor xml:id="_test__standard_8c_source_1l00573"/>00573 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_perror(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00574"/>00574 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;perror&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00575"/>00575 
+<anchor xml:id="_test__standard_8c_source_1l00576"/>00576 &#32;&#32;&#32;&#32;errno&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00577"/>00577 &#32;&#32;&#32;&#32;perror(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00578"/>00578 }
+<anchor xml:id="_test__standard_8c_source_1l00579"/>00579 
+<anchor xml:id="_test__standard_8c_source_1l00580"/>00580 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_putc(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00581"/>00581 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;putc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00582"/>00582 
+<anchor xml:id="_test__standard_8c_source_1l00583"/>00583 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/putc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00584"/>00584 &#32;&#32;&#32;&#32;assert(putc(<emphasis role="charliteral">&apos;A&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;A&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00585"/>00585 &#32;&#32;&#32;&#32;assert(putc(<emphasis role="charliteral">&apos;B&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;B&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00586"/>00586 &#32;&#32;&#32;&#32;assert(putc(<emphasis role="charliteral">&apos;C&apos;</emphasis>,&#32;fp)&#32;==&#32;<emphasis role="charliteral">&apos;C&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00587"/>00587 
+<anchor xml:id="_test__standard_8c_source_1l00588"/>00588 &#32;&#32;&#32;&#32;fseek(fp,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00589"/>00589 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00590"/>00590 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00591"/>00591 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00592"/>00592 
+<anchor xml:id="_test__standard_8c_source_1l00593"/>00593 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00594"/>00594 
+<anchor xml:id="_test__standard_8c_source_1l00595"/>00595 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00596"/>00596 }
+<anchor xml:id="_test__standard_8c_source_1l00597"/>00597 
+<anchor xml:id="_test__standard_8c_source_1l00598"/><link linkend="_test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c">00598</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c">test_remove</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00599"/>00599 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;remove&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00600"/>00600 
+<anchor xml:id="_test__standard_8c_source_1l00601"/>00601 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/remove&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00602"/>00602 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00603"/>00603 
+<anchor xml:id="_test__standard_8c_source_1l00604"/>00604 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;remove(<emphasis role="stringliteral">&quot;/remove&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00605"/>00605 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00606"/>00606 
+<anchor xml:id="_test__standard_8c_source_1l00607"/>00607 &#32;&#32;&#32;&#32;err&#32;=&#32;remove(<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00608"/>00608 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-1);
+<anchor xml:id="_test__standard_8c_source_1l00609"/>00609 &#32;&#32;&#32;&#32;assert(errno&#32;==&#32;ENOENT);
+<anchor xml:id="_test__standard_8c_source_1l00610"/>00610 
+<anchor xml:id="_test__standard_8c_source_1l00611"/>00611 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00612"/>00612 }
+<anchor xml:id="_test__standard_8c_source_1l00613"/>00613 
+<anchor xml:id="_test__standard_8c_source_1l00614"/><link linkend="_test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641">00614</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641">test_rename</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00615"/>00615 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;rename&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00616"/>00616 
+<anchor xml:id="_test__standard_8c_source_1l00617"/>00617 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/rename&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00618"/>00618 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00619"/>00619 
+<anchor xml:id="_test__standard_8c_source_1l00620"/>00620 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7">rename</link>(<emphasis role="stringliteral">&quot;/rename&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00621"/>00621 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00622"/>00622 
+<anchor xml:id="_test__standard_8c_source_1l00623"/>00623 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_vfs_8c_1a2ce7c2db9fdb6aec06afaf3cfc5979c7">rename</link>(<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00624"/>00624 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-1);
+<anchor xml:id="_test__standard_8c_source_1l00625"/>00625 &#32;&#32;&#32;&#32;assert(errno&#32;==&#32;ENOENT);
+<anchor xml:id="_test__standard_8c_source_1l00626"/>00626 
+<anchor xml:id="_test__standard_8c_source_1l00627"/>00627 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00628"/>00628 }
+<anchor xml:id="_test__standard_8c_source_1l00629"/>00629 
+<anchor xml:id="_test__standard_8c_source_1l00630"/><link linkend="_test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0">00630</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0">test_rewind</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00631"/>00631 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;rewind&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00632"/>00632 
+<anchor xml:id="_test__standard_8c_source_1l00633"/>00633 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/rewind&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00634"/>00634 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00635"/>00635 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00636"/>00636 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00637"/>00637 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00638"/>00638 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00639"/>00639 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00640"/>00640 
+<anchor xml:id="_test__standard_8c_source_1l00641"/>00641 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00642"/>00642 }
+<anchor xml:id="_test__standard_8c_source_1l00643"/>00643 
+<anchor xml:id="_test__standard_8c_source_1l00644"/><link linkend="_test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b">00644</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b">test_setbuf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00645"/>00645 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;setbuf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00646"/>00646 
+<anchor xml:id="_test__standard_8c_source_1l00647"/>00647 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[BUFSIZ]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00648"/>00648 
+<anchor xml:id="_test__standard_8c_source_1l00649"/>00649 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00650"/>00650 &#32;&#32;&#32;&#32;setbuf(fp,&#32;buffer);
+<anchor xml:id="_test__standard_8c_source_1l00651"/>00651 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00652"/>00652 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00653"/>00653 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00654"/>00654 
+<anchor xml:id="_test__standard_8c_source_1l00655"/>00655 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00656"/>00656 }
+<anchor xml:id="_test__standard_8c_source_1l00657"/>00657 
+<anchor xml:id="_test__standard_8c_source_1l00658"/><link linkend="_test__standard_8c_1aea730026673818d647b9131ba3c4611e">00658</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1aea730026673818d647b9131ba3c4611e">test_setvbuf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00659"/>00659 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;setvbuf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00660"/>00660 
+<anchor xml:id="_test__standard_8c_source_1l00661"/>00661 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[BUFSIZ];
+<anchor xml:id="_test__standard_8c_source_1l00662"/>00662 
+<anchor xml:id="_test__standard_8c_source_1l00663"/>00663 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Do&#32;not&#32;use&#32;a&#32;buffer</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00664"/>00664 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00665"/>00665 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;fileno(fp);
+<anchor xml:id="_test__standard_8c_source_1l00666"/>00666 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;setvbuf(fp,&#32;NULL,&#32;_IONBF,&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00667"/>00667 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00668"/>00668 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00669"/>00669 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00670"/>00670 
+<anchor xml:id="_test__standard_8c_source_1l00671"/>00671 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00672"/>00672 &#32;&#32;&#32;&#32;ssize_t&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00673"/>00673 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00674"/>00674 
+<anchor xml:id="_test__standard_8c_source_1l00675"/>00675 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00676"/>00676 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00677"/>00677 
+<anchor xml:id="_test__standard_8c_source_1l00678"/>00678 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;use&#32;full&#32;output&#32;buffering</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00679"/>00679 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00680"/>00680 &#32;&#32;&#32;&#32;fd&#32;=&#32;fileno(fp);
+<anchor xml:id="_test__standard_8c_source_1l00681"/>00681 &#32;&#32;&#32;&#32;err&#32;=&#32;setvbuf(fp,&#32;buffer,&#32;_IOFBF,&#32;5);
+<anchor xml:id="_test__standard_8c_source_1l00682"/>00682 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00683"/>00683 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;He&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00684"/>00684 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00685"/>00685 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00686"/>00686 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00687"/>00687 
+<anchor xml:id="_test__standard_8c_source_1l00688"/>00688 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;llo&#32;W&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00689"/>00689 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00690"/>00690 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00691"/>00691 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00692"/>00692 
+<anchor xml:id="_test__standard_8c_source_1l00693"/>00693 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00694"/>00694 
+<anchor xml:id="_test__standard_8c_source_1l00695"/>00695 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00696"/>00696 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00697"/>00697 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;W&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00698"/>00698 
+<anchor xml:id="_test__standard_8c_source_1l00699"/>00699 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00700"/>00700 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00701"/>00701 
+<anchor xml:id="_test__standard_8c_source_1l00702"/>00702 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;use&#32;line&#32;buffering</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00703"/>00703 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/setvbuf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00704"/>00704 &#32;&#32;&#32;&#32;fd&#32;=&#32;fileno(fp);
+<anchor xml:id="_test__standard_8c_source_1l00705"/>00705 &#32;&#32;&#32;&#32;err&#32;=&#32;setvbuf(fp,&#32;buffer,&#32;_IOLBF,&#32;128);
+<anchor xml:id="_test__standard_8c_source_1l00706"/>00706 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00707"/>00707 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00708"/>00708 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00709"/>00709 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00710"/>00710 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00711"/>00711 
+<anchor xml:id="_test__standard_8c_source_1l00712"/>00712 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;&#32;World\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00713"/>00713 
+<anchor xml:id="_test__standard_8c_source_1l00714"/>00714 &#32;&#32;&#32;&#32;lseek(fd,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_test__standard_8c_source_1l00715"/>00715 &#32;&#32;&#32;&#32;size&#32;=&#32;read(fd,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_test__standard_8c_source_1l00716"/>00716 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;strlen(<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00717"/>00717 
+<anchor xml:id="_test__standard_8c_source_1l00718"/>00718 &#32;&#32;&#32;&#32;close(fd);
+<anchor xml:id="_test__standard_8c_source_1l00719"/>00719 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00720"/>00720 
+<anchor xml:id="_test__standard_8c_source_1l00721"/>00721 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00722"/>00722 }
+<anchor xml:id="_test__standard_8c_source_1l00723"/>00723 
+<anchor xml:id="_test__standard_8c_source_1l00724"/><link linkend="_test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7">00724</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7">test_fprintf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00725"/>00725 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fprintf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00726"/>00726 
+<anchor xml:id="_test__standard_8c_source_1l00727"/>00727 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00728"/>00728 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;%s&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00729"/>00729 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00730"/>00730 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00731"/>00731 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00732"/>00732 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00733"/>00733 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00734"/>00734 
+<anchor xml:id="_test__standard_8c_source_1l00735"/>00735 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00736"/>00736 }
+<anchor xml:id="_test__standard_8c_source_1l00737"/>00737 
+<anchor xml:id="_test__standard_8c_source_1l00738"/><link linkend="_test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85">00738</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85">test_fscanf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00739"/>00739 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fscanf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00740"/>00740 
+<anchor xml:id="_test__standard_8c_source_1l00741"/>00741 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00742"/>00742 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;%s&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;123,abc,0.987\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00743"/>00743 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00744"/>00744 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00745"/>00745 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;strings[512];
+<anchor xml:id="_test__standard_8c_source_1l00746"/>00746 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;float_value&#32;=&#32;0.0;
+<anchor xml:id="_test__standard_8c_source_1l00747"/>00747 
+<anchor xml:id="_test__standard_8c_source_1l00748"/>00748 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;assigned&#32;=&#32;fscanf(fp,&#32;<emphasis role="stringliteral">&quot;%d,%[^,],%f\n&quot;</emphasis>,&#32;&amp;int_value,&#32;strings,&#32;&amp;float_value);
+<anchor xml:id="_test__standard_8c_source_1l00749"/>00749 &#32;&#32;&#32;&#32;assert(assigned&#32;==&#32;3);
+<anchor xml:id="_test__standard_8c_source_1l00750"/>00750 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+<anchor xml:id="_test__standard_8c_source_1l00751"/>00751 &#32;&#32;&#32;&#32;assert(strcmp(strings,&#32;<emphasis role="stringliteral">&quot;abc&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00752"/>00752 &#32;&#32;&#32;&#32;assert(float_value&#32;&lt;&#32;1.0);
+<anchor xml:id="_test__standard_8c_source_1l00753"/>00753 
+<anchor xml:id="_test__standard_8c_source_1l00754"/>00754 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00755"/>00755 
+<anchor xml:id="_test__standard_8c_source_1l00756"/>00756 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00757"/>00757 }
+<anchor xml:id="_test__standard_8c_source_1l00758"/>00758 
+<anchor xml:id="_test__standard_8c_source_1l00759"/><link linkend="_test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4">00759</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4">test_fwprintf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00760"/>00760 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwprintf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00761"/>00761 
+<anchor xml:id="_test__standard_8c_source_1l00762"/>00762 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00763"/>00763 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00764"/>00764 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;12);
+<anchor xml:id="_test__standard_8c_source_1l00765"/>00765 
+<anchor xml:id="_test__standard_8c_source_1l00766"/>00766 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00767"/>00767 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00768"/>00768 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00769"/>00769 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;*line&#32;=&#32;fgetws(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00770"/>00770 &#32;&#32;&#32;&#32;assert(wcscmp(line,&#32;L<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00771"/>00771 
+<anchor xml:id="_test__standard_8c_source_1l00772"/>00772 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00773"/>00773 
+<anchor xml:id="_test__standard_8c_source_1l00774"/>00774 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00775"/>00775 }
+<anchor xml:id="_test__standard_8c_source_1l00776"/>00776 
+<anchor xml:id="_test__standard_8c_source_1l00777"/><link linkend="_test__standard_8c_1abbc013f8a99493a073666b2322bf6c95">00777</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1abbc013f8a99493a073666b2322bf6c95">test_fwscanf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00778"/>00778 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;fwscanf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00779"/>00779 
+<anchor xml:id="_test__standard_8c_source_1l00780"/>00780 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/fwscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00781"/>00781 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;123,abc,0.987\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00782"/>00782 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00783"/>00783 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00784"/>00784 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;strings[512];
+<anchor xml:id="_test__standard_8c_source_1l00785"/>00785 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;float_value&#32;=&#32;0.0;
+<anchor xml:id="_test__standard_8c_source_1l00786"/>00786 
+<anchor xml:id="_test__standard_8c_source_1l00787"/>00787 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;assigned&#32;=&#32;fwscanf(fp,&#32;L<emphasis role="stringliteral">&quot;%d,%[^,],%f\n&quot;</emphasis>,&#32;&amp;int_value,&#32;strings,&#32;&amp;float_value);
+<anchor xml:id="_test__standard_8c_source_1l00788"/>00788 &#32;&#32;&#32;&#32;assert(assigned&#32;==&#32;3);
+<anchor xml:id="_test__standard_8c_source_1l00789"/>00789 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+<anchor xml:id="_test__standard_8c_source_1l00790"/>00790 &#32;&#32;&#32;&#32;assert(strcmp(strings,&#32;<emphasis role="stringliteral">&quot;abc&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00791"/>00791 &#32;&#32;&#32;&#32;assert(float_value&#32;&lt;&#32;1.0);
+<anchor xml:id="_test__standard_8c_source_1l00792"/>00792 
+<anchor xml:id="_test__standard_8c_source_1l00793"/>00793 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00794"/>00794 
+<anchor xml:id="_test__standard_8c_source_1l00795"/>00795 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00796"/>00796 }
+<anchor xml:id="_test__standard_8c_source_1l00797"/>00797 
+<anchor xml:id="_test__standard_8c_source_1l00798"/><link linkend="_test__standard_8c_1a534f2453f80273e67167271ef3b73b94">00798</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a534f2453f80273e67167271ef3b73b94">test_tmpfile</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00799"/>00799 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;tmpfile&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00800"/>00800 
+<anchor xml:id="_test__standard_8c_source_1l00801"/>00801 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;tmpfile();
+<anchor xml:id="_test__standard_8c_source_1l00802"/>00802 &#32;&#32;&#32;&#32;assert(fp&#32;==&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00803"/>00803 
+<anchor xml:id="_test__standard_8c_source_1l00804"/>00804 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;not&#32;support\n&quot;</emphasis>);&#32;<emphasis role="comment">//&#32;tmpfile&#32;also&#32;requires&#32;the&#32;&#32;global&#32;pointr&#32;environ</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00805"/>00805 }
+<anchor xml:id="_test__standard_8c_source_1l00806"/>00806 
+<anchor xml:id="_test__standard_8c_source_1l00807"/><link linkend="_test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72">00807</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72">test_tmpnam</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00808"/>00808 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;tmpnam&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00809"/>00809 
+<anchor xml:id="_test__standard_8c_source_1l00810"/>00810 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*path&#32;=&#32;tmpnam(<emphasis role="stringliteral">&quot;prefix&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00811"/>00811 &#32;&#32;&#32;&#32;assert(path&#32;!=&#32;NULL);
+<anchor xml:id="_test__standard_8c_source_1l00812"/>00812 &#32;&#32;&#32;&#32;assert(strcmp(path,&#32;<emphasis role="stringliteral">&quot;prefix&quot;</emphasis>)&#32;==&#32;0);&#32;<emphasis role="comment">//&#32;unintended&#32;behavior</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00813"/>00813 
+<anchor xml:id="_test__standard_8c_source_1l00814"/>00814 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;not&#32;support\n&quot;</emphasis>);&#32;<emphasis role="comment">//&#32;The&#32;global&#32;pointer&#32;environ&#32;is&#32;also&#32;required</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00815"/>00815 }
+<anchor xml:id="_test__standard_8c_source_1l00816"/>00816 
+<anchor xml:id="_test__standard_8c_source_1l00817"/><link linkend="_test__standard_8c_1ac28e570801f42ebf376f34e57ebab630">00817</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ac28e570801f42ebf376f34e57ebab630">test_ungetc</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00818"/>00818 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;ungetc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00819"/>00819 
+<anchor xml:id="_test__standard_8c_source_1l00820"/>00820 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/ungetc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00821"/>00821 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;12345&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00822"/>00822 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00823"/>00823 
+<anchor xml:id="_test__standard_8c_source_1l00824"/>00824 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00825"/>00825 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00826"/>00826 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00827"/>00827 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00828"/>00828 &#32;&#32;&#32;&#32;ungetc(<emphasis role="charliteral">&apos;3&apos;</emphasis>,&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00829"/>00829 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00830"/>00830 &#32;&#32;&#32;&#32;assert(fgetc(fp)&#32;==&#32;<emphasis role="charliteral">&apos;4&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00831"/>00831 
+<anchor xml:id="_test__standard_8c_source_1l00832"/>00832 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00833"/>00833 
+<anchor xml:id="_test__standard_8c_source_1l00834"/>00834 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00835"/>00835 }
+<anchor xml:id="_test__standard_8c_source_1l00836"/>00836 
+<anchor xml:id="_test__standard_8c_source_1l00837"/>00837 
+<anchor xml:id="_test__standard_8c_source_1l00838"/><link linkend="_test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a">00838</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a">test_ungetwc</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00839"/>00839 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;ungetwc&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00840"/>00840 
+<anchor xml:id="_test__standard_8c_source_1l00841"/>00841 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/ungetc&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00842"/>00842 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;12345&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00843"/>00843 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00844"/>00844 
+<anchor xml:id="_test__standard_8c_source_1l00845"/>00845 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00846"/>00846 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;1&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00847"/>00847 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;2&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00848"/>00848 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00849"/>00849 &#32;&#32;&#32;&#32;ungetwc(L<emphasis role="charliteral">&apos;3&apos;</emphasis>,&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00850"/>00850 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;3&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00851"/>00851 &#32;&#32;&#32;&#32;assert(fgetwc(fp)&#32;==&#32;L<emphasis role="charliteral">&apos;4&apos;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00852"/>00852 
+<anchor xml:id="_test__standard_8c_source_1l00853"/>00853 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00854"/>00854 
+<anchor xml:id="_test__standard_8c_source_1l00855"/>00855 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00856"/>00856 }
+<anchor xml:id="_test__standard_8c_source_1l00857"/>00857 
+<anchor xml:id="_test__standard_8c_source_1l00858"/><link linkend="_test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a">00858</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a">_test_vfprintf</link>(FILE&#32;*fp,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00859"/>00859 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_test__standard_8c_source_1l00860"/>00860 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_test__standard_8c_source_1l00861"/>00861 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfprintf(fp,&#32;format,&#32;args);
+<anchor xml:id="_test__standard_8c_source_1l00862"/>00862 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_test__standard_8c_source_1l00863"/>00863 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+<anchor xml:id="_test__standard_8c_source_1l00864"/>00864 }
+<anchor xml:id="_test__standard_8c_source_1l00865"/>00865 
+<anchor xml:id="_test__standard_8c_source_1l00866"/><link linkend="_test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b">00866</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b">test_vfprintf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00867"/>00867 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfprintf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00868"/>00868 
+<anchor xml:id="_test__standard_8c_source_1l00869"/>00869 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfprintf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00870"/>00870 
+<anchor xml:id="_test__standard_8c_source_1l00871"/>00871 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;<link linkend="_integration_2test__standard_8c_1ad0d9f637977ba7dc073049a1e937a32a">_test_vfprintf</link>(fp,&#32;<emphasis role="stringliteral">&quot;%s&#32;%s\n&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;Hello&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;World&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00872"/>00872 &#32;&#32;&#32;&#32;assert(size&#32;==&#32;12);
+<anchor xml:id="_test__standard_8c_source_1l00873"/>00873 
+<anchor xml:id="_test__standard_8c_source_1l00874"/>00874 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00875"/>00875 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00876"/>00876 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512];
+<anchor xml:id="_test__standard_8c_source_1l00877"/>00877 &#32;&#32;&#32;&#32;fgets(buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer),&#32;fp);
+<anchor xml:id="_test__standard_8c_source_1l00878"/>00878 &#32;&#32;&#32;&#32;assert(strcmp(buffer,&#32;<emphasis role="stringliteral">&quot;Hello&#32;World\n&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00879"/>00879 
+<anchor xml:id="_test__standard_8c_source_1l00880"/>00880 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00881"/>00881 
+<anchor xml:id="_test__standard_8c_source_1l00882"/>00882 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00883"/>00883 }
+<anchor xml:id="_test__standard_8c_source_1l00884"/>00884 
+<anchor xml:id="_test__standard_8c_source_1l00885"/>00885 
+<anchor xml:id="_test__standard_8c_source_1l00886"/><link linkend="_test__standard_8c_1a273e209c9162f768d8dc867f34c5d934">00886</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a273e209c9162f768d8dc867f34c5d934">_test_vfscanf</link>(FILE&#32;*fp,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00887"/>00887 &#32;&#32;&#32;&#32;va_list&#32;list;
+<anchor xml:id="_test__standard_8c_source_1l00888"/>00888 &#32;&#32;&#32;&#32;va_start(list,&#32;format);
+<anchor xml:id="_test__standard_8c_source_1l00889"/>00889 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfscanf(fp,&#32;format,&#32;list);
+<anchor xml:id="_test__standard_8c_source_1l00890"/>00890 &#32;&#32;&#32;&#32;va_end(list);
+<anchor xml:id="_test__standard_8c_source_1l00891"/>00891 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+<anchor xml:id="_test__standard_8c_source_1l00892"/>00892 }
+<anchor xml:id="_test__standard_8c_source_1l00893"/>00893 
+<anchor xml:id="_test__standard_8c_source_1l00894"/><link linkend="_test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca">00894</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca">test_vfscanf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00895"/>00895 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfscnaf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00896"/>00896 
+<anchor xml:id="_test__standard_8c_source_1l00897"/>00897 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00898"/>00898 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;123,ABC\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00899"/>00899 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00900"/>00900 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00901"/>00901 
+<anchor xml:id="_test__standard_8c_source_1l00902"/>00902 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00903"/>00903 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;char_value[512];
+<anchor xml:id="_test__standard_8c_source_1l00904"/>00904 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;number&#32;=&#32;<link linkend="_integration_2test__standard_8c_1a273e209c9162f768d8dc867f34c5d934">_test_vfscanf</link>(fp,&#32;<emphasis role="stringliteral">&quot;%d,%s\n&quot;</emphasis>,&#32;&amp;int_value,&#32;char_value);
+<anchor xml:id="_test__standard_8c_source_1l00905"/>00905 &#32;&#32;&#32;&#32;assert(number&#32;==&#32;2);
+<anchor xml:id="_test__standard_8c_source_1l00906"/>00906 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+<anchor xml:id="_test__standard_8c_source_1l00907"/>00907 &#32;&#32;&#32;&#32;assert(strcmp(char_value,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00908"/>00908 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00909"/>00909 
+<anchor xml:id="_test__standard_8c_source_1l00910"/>00910 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00911"/>00911 }
+<anchor xml:id="_test__standard_8c_source_1l00912"/>00912 
+<anchor xml:id="_test__standard_8c_source_1l00913"/><link linkend="_test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c">00913</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c">_test_vfwscanf</link>(FILE&#32;*fp,&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">wchar_t</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00914"/>00914 &#32;&#32;&#32;&#32;va_list&#32;list;
+<anchor xml:id="_test__standard_8c_source_1l00915"/>00915 &#32;&#32;&#32;&#32;va_start(list,&#32;format);
+<anchor xml:id="_test__standard_8c_source_1l00916"/>00916 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;size&#32;=&#32;vfwscanf(fp,&#32;format,&#32;list);
+<anchor xml:id="_test__standard_8c_source_1l00917"/>00917 &#32;&#32;&#32;&#32;va_end(list);
+<anchor xml:id="_test__standard_8c_source_1l00918"/>00918 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;size;
+<anchor xml:id="_test__standard_8c_source_1l00919"/>00919 }
+<anchor xml:id="_test__standard_8c_source_1l00920"/>00920 
+<anchor xml:id="_test__standard_8c_source_1l00921"/><link linkend="_test__standard_8c_1aac55667f213bea843fc65ef35a65c135">00921</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1aac55667f213bea843fc65ef35a65c135">test_vfwscanf</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00922"/>00922 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;vfwscnaf&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00923"/>00923 
+<anchor xml:id="_test__standard_8c_source_1l00924"/>00924 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;/vfwscanf&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w+&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00925"/>00925 &#32;&#32;&#32;&#32;fwprintf(fp,&#32;L<emphasis role="stringliteral">&quot;123,ABC&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00926"/>00926 &#32;&#32;&#32;&#32;fflush(fp);
+<anchor xml:id="_test__standard_8c_source_1l00927"/>00927 &#32;&#32;&#32;&#32;rewind(fp);
+<anchor xml:id="_test__standard_8c_source_1l00928"/>00928 
+<anchor xml:id="_test__standard_8c_source_1l00929"/>00929 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;int_value&#32;=&#32;0;
+<anchor xml:id="_test__standard_8c_source_1l00930"/>00930 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;wchar_value[512]&#32;=&#32;{0};
+<anchor xml:id="_test__standard_8c_source_1l00931"/>00931 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;number&#32;=&#32;<link linkend="_integration_2test__standard_8c_1ac3795d88f0f9f696f096bd2db0067d6c">_test_vfwscanf</link>(fp,&#32;L<emphasis role="stringliteral">&quot;%d,%s&quot;</emphasis>,&#32;&amp;int_value,&#32;wchar_value);
+<anchor xml:id="_test__standard_8c_source_1l00932"/>00932 &#32;&#32;&#32;&#32;assert(number&#32;==&#32;2);
+<anchor xml:id="_test__standard_8c_source_1l00933"/>00933 &#32;&#32;&#32;&#32;assert(int_value&#32;==&#32;123);
+<anchor xml:id="_test__standard_8c_source_1l00934"/>00934 &#32;&#32;&#32;&#32;assert(strcmp(wchar_value,&#32;<emphasis role="stringliteral">&quot;ABC&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_test__standard_8c_source_1l00935"/>00935 
+<anchor xml:id="_test__standard_8c_source_1l00936"/>00936 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_test__standard_8c_source_1l00937"/>00937 
+<anchor xml:id="_test__standard_8c_source_1l00938"/>00938 &#32;&#32;&#32;&#32;printf(<link linkend="_integration_2test__standard_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_test__standard_8c_source_1l00939"/>00939 }
+<anchor xml:id="_test__standard_8c_source_1l00940"/>00940 
+<anchor xml:id="_test__standard_8c_source_1l00941"/><link linkend="_test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">00941</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00942"/>00942 &#32;&#32;&#32;&#32;test_clearerr();
+<anchor xml:id="_test__standard_8c_source_1l00943"/>00943 &#32;&#32;&#32;&#32;test_fflush();
+<anchor xml:id="_test__standard_8c_source_1l00944"/>00944 &#32;&#32;&#32;&#32;test_fgetc();
+<anchor xml:id="_test__standard_8c_source_1l00945"/>00945 &#32;&#32;&#32;&#32;test_fgetpos();
+<anchor xml:id="_test__standard_8c_source_1l00946"/>00946 &#32;&#32;&#32;&#32;test_fgets();
+<anchor xml:id="_test__standard_8c_source_1l00947"/>00947 &#32;&#32;&#32;&#32;test_fgetwc();
+<anchor xml:id="_test__standard_8c_source_1l00948"/>00948 &#32;&#32;&#32;&#32;test_fgetws();
+<anchor xml:id="_test__standard_8c_source_1l00949"/>00949 &#32;&#32;&#32;&#32;test_fileno();
+<anchor xml:id="_test__standard_8c_source_1l00950"/>00950 &#32;&#32;&#32;&#32;test_fmemopen();
+<anchor xml:id="_test__standard_8c_source_1l00951"/>00951 &#32;&#32;&#32;&#32;test_fopen();
+<anchor xml:id="_test__standard_8c_source_1l00952"/>00952 &#32;&#32;&#32;&#32;test_fputc();
+<anchor xml:id="_test__standard_8c_source_1l00953"/>00953 &#32;&#32;&#32;&#32;test_fputs();
+<anchor xml:id="_test__standard_8c_source_1l00954"/>00954 &#32;&#32;&#32;&#32;test_fputwc();
+<anchor xml:id="_test__standard_8c_source_1l00955"/>00955 &#32;&#32;&#32;&#32;test_fputws();
+<anchor xml:id="_test__standard_8c_source_1l00956"/>00956 &#32;&#32;&#32;&#32;test_fread();
+<anchor xml:id="_test__standard_8c_source_1l00957"/>00957 &#32;&#32;&#32;&#32;test_freopen();
+<anchor xml:id="_test__standard_8c_source_1l00958"/>00958 &#32;&#32;&#32;&#32;test_fseek();
+<anchor xml:id="_test__standard_8c_source_1l00959"/>00959 &#32;&#32;&#32;&#32;test_fsetpos();
+<anchor xml:id="_test__standard_8c_source_1l00960"/>00960 &#32;&#32;&#32;&#32;test_ftell();
+<anchor xml:id="_test__standard_8c_source_1l00961"/>00961 &#32;&#32;&#32;&#32;test_fwide();
+<anchor xml:id="_test__standard_8c_source_1l00962"/>00962 &#32;&#32;&#32;&#32;test_fwrite();
+<anchor xml:id="_test__standard_8c_source_1l00963"/>00963 &#32;&#32;&#32;&#32;test_getc();
+<anchor xml:id="_test__standard_8c_source_1l00964"/>00964 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_getdelim();&#32;&#32;//&#32;not&#32;support</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00965"/>00965 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_getline();&#32;&#32;//&#32;not&#32;support</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00966"/>00966 &#32;&#32;&#32;&#32;test_getw();
+<anchor xml:id="_test__standard_8c_source_1l00967"/>00967 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_mktemp();&#32;&#32;//&#32;NOTE:&#32;`mktemp&apos;&#32;is&#32;dangerous;&#32;use&#32;`mkstemp&apos;&#32;instead</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00968"/>00968 &#32;&#32;&#32;&#32;test_mkstemp();
+<anchor xml:id="_test__standard_8c_source_1l00969"/>00969 &#32;&#32;&#32;&#32;test_open_memstream();
+<anchor xml:id="_test__standard_8c_source_1l00970"/>00970 &#32;&#32;&#32;&#32;test_perror();
+<anchor xml:id="_test__standard_8c_source_1l00971"/>00971 &#32;&#32;&#32;&#32;test_putc();
+<anchor xml:id="_test__standard_8c_source_1l00972"/>00972 &#32;&#32;&#32;&#32;<emphasis role="comment">//test_putc_unlocked();</emphasis>
+<anchor xml:id="_test__standard_8c_source_1l00973"/>00973 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a3f1e3a1e92719c977ba5c770a5ba9e0c">test_remove</link>();
+<anchor xml:id="_test__standard_8c_source_1l00974"/>00974 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1adc51af22a8ada57efbc3181ef68e9641">test_rename</link>();
+<anchor xml:id="_test__standard_8c_source_1l00975"/>00975 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ab538e4b167eb4d7afcdcb787139043b0">test_rewind</link>();
+<anchor xml:id="_test__standard_8c_source_1l00976"/>00976 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a2c3ad47e27f2f5b7faef1b166d42e27b">test_setbuf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00977"/>00977 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aea730026673818d647b9131ba3c4611e">test_setvbuf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00978"/>00978 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a989c49685fb7c6f781d6f17cf2e2bdd7">test_fprintf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00979"/>00979 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aa77be1b41c24fb892ee5a84c4b43bb85">test_fscanf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00980"/>00980 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ad0767e68998cd2d0a4580b4e665173e4">test_fwprintf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00981"/>00981 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1abbc013f8a99493a073666b2322bf6c95">test_fwscanf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00982"/>00982 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a534f2453f80273e67167271ef3b73b94">test_tmpfile</link>();
+<anchor xml:id="_test__standard_8c_source_1l00983"/>00983 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ac63aa1a607494e187c8dfccf50300d72">test_tmpnam</link>();
+<anchor xml:id="_test__standard_8c_source_1l00984"/>00984 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ac28e570801f42ebf376f34e57ebab630">test_ungetc</link>();
+<anchor xml:id="_test__standard_8c_source_1l00985"/>00985 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a06b0ce5e9064644d94a478cf56270e6a">test_ungetwc</link>();
+<anchor xml:id="_test__standard_8c_source_1l00986"/>00986 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1ace180f5d1e8a9f00c162e4371c9ece9b">test_vfprintf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00987"/>00987 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a6ef2ab3300dad6febf40abdefbbfe5ca">test_vfscanf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00988"/>00988 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1aac55667f213bea843fc65ef35a65c135">test_vfwscanf</link>();
+<anchor xml:id="_test__standard_8c_source_1l00989"/>00989 }
+<anchor xml:id="_test__standard_8c_source_1l00990"/>00990 
+<anchor xml:id="_test__standard_8c_source_1l00991"/><link linkend="_test__standard_8c_1ab711b6669c9731b7099653fa536722ae">00991</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_integration_2test__standard_8c_1ab711b6669c9731b7099653fa536722ae">test_standard</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_test__standard_8c_source_1l00992"/>00992 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(littlefs):\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l00993"/>00993 
+<anchor xml:id="_test__standard_8c_source_1l00994"/>00994 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+<anchor xml:id="_test__standard_8c_source_1l00995"/>00995 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+<anchor xml:id="_test__standard_8c_source_1l00996"/>00996 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+<anchor xml:id="_test__standard_8c_source_1l00997"/>00997 
+<anchor xml:id="_test__standard_8c_source_1l00998"/>00998 &#32;&#32;&#32;&#32;setup(lfs,&#32;heap);
+<anchor xml:id="_test__standard_8c_source_1l00999"/>00999 
+<anchor xml:id="_test__standard_8c_source_1l01000"/>01000 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+<anchor xml:id="_test__standard_8c_source_1l01001"/>01001 
+<anchor xml:id="_test__standard_8c_source_1l01002"/>01002 &#32;&#32;&#32;&#32;cleanup(lfs,&#32;heap);
+<anchor xml:id="_test__standard_8c_source_1l01003"/>01003 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+<anchor xml:id="_test__standard_8c_source_1l01004"/>01004 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+<anchor xml:id="_test__standard_8c_source_1l01005"/>01005 
+<anchor xml:id="_test__standard_8c_source_1l01006"/>01006 
+<anchor xml:id="_test__standard_8c_source_1l01007"/>01007 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;POSIX&#32;and&#32;C&#32;standard&#32;file&#32;API(FAT):\n&quot;</emphasis>);
+<anchor xml:id="_test__standard_8c_source_1l01008"/>01008 
+<anchor xml:id="_test__standard_8c_source_1l01009"/>01009 &#32;&#32;&#32;&#32;heap&#32;=&#32;<link linkend="_group__blockdevice__heap_1ga9500b5327f9bf0e2bf3ca11ec122748f">blockdevice_heap_create</link>(<link linkend="_fs__init__heap_8c_1ac1d21a4fb714b1ecddeb24d45a2f6dae">HEAP_STORAGE_SIZE</link>);
+<anchor xml:id="_test__standard_8c_source_1l01010"/>01010 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+<anchor xml:id="_test__standard_8c_source_1l01011"/>01011 &#32;&#32;&#32;&#32;setup(fat,&#32;heap);
+<anchor xml:id="_test__standard_8c_source_1l01012"/>01012 
+<anchor xml:id="_test__standard_8c_source_1l01013"/>01013 &#32;&#32;&#32;&#32;<link linkend="_integration_2test__standard_8c_1a9eb7b08d8b095f5a1fea041c1bc13e96">test_standard_file_api</link>();
+<anchor xml:id="_test__standard_8c_source_1l01014"/>01014 
+<anchor xml:id="_test__standard_8c_source_1l01015"/>01015 &#32;&#32;&#32;&#32;cleanup(fat,&#32;heap);
+<anchor xml:id="_test__standard_8c_source_1l01016"/>01016 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+<anchor xml:id="_test__standard_8c_source_1l01017"/>01017 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__heap_1ga6d78ccbc7b18231fadf2dd61c42f2a84">blockdevice_heap_free</link>(heap);
+<anchor xml:id="_test__standard_8c_source_1l01018"/>01018 }
+</programlisting></section>

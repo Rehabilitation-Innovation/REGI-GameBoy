@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_fat_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/src/filesystem/fat.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/src/filesystem/fat.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdarg.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;time.h&gt;<?linebreak?>#include &lt;unistd.h&gt;<?linebreak?>#include &lt;pico/mutex.h&gt;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;ff.h&quot;<?linebreak?>#include &quot;diskio.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structfat__file__t">fat_file_t</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structfilesystem__fat__context__t">filesystem_fat_context_t</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_fat_8c_1a09cdaa6f36fa409bdf002727bff98eb1">disk_initialize</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> <link linkend="_fat_8c_1a8348ac5ee6d709420c02e45c111f4793">disk_status</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461">disk_read</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_fat_8c_1ac24448955ef914f54a499df1fb45689d">disk_write</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> *buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</para>
+</listitem>
+            <listitem><para><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> <link linkend="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4">disk_ioctl</link> (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void *buff)</para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_fat_8c_1af58b536abfd30f77213f4ecaf2ac52f5">get_fattime</link> (void)</para>
+</listitem>
+            <listitem><para><link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> * <link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link> ()</para>
+
+<para>Create FAT file system object. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link> (<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link> *fs)</para>
+
+<para>Release FAT file system object. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_fat_8c_1a09cdaa6f36fa409bdf002727bff98eb1"/><section>
+    <title>disk_initialize()</title>
+<indexterm><primary>disk_initialize</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>disk_initialize</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_initialize (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00089">89</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00090 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_initialize&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00091 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link>)_ffs[pdrv]-&gt;init(_ffs[pdrv]);
+00092 }
+</programlisting></section>
+<anchor xml:id="_fat_8c_1ab00fa450a811dbdabe3c655c1a36fab4"/><section>
+    <title>disk_ioctl()</title>
+<indexterm><primary>disk_ioctl</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>disk_ioctl</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_ioctl (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> cmd, void * buff)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00141">141</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00142 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_ioctl(%d)\n&quot;</emphasis>,&#32;cmd);
+00143 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(cmd)&#32;{
+00144 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a1b3c492f9aec325f0655941b75256f3c">CTRL_SYNC</link>:
+00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00150 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1a570216006f6a8fc4e1698b1bbb2d1dde">GET_SECTOR_COUNT</link>:
+00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_count(pdrv);
+00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00157 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1ac73b5cf2135cbd459d109b96c9aa346a">GET_SECTOR_SIZE</link>:
+00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1a197942eefa7db30960ae396d68339b97">WORD</link>&#32;*)buff)&#32;=&#32;disk_get_sector_size(pdrv);
+00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00164 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1aec3bb4dfe075d0ba2f3b07b300a95500">GET_BLOCK_SIZE</link>:
+00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*((<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff)&#32;=&#32;1;&#32;<emphasis role="comment">//&#32;default&#32;when&#32;not&#32;known</emphasis>
+00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;<link linkend="_diskio_8h_1af09fd84bea8d4e889e272471f44d60d6">CTRL_TRIM</link>:
+00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_ffs[pdrv]&#32;==&#32;NULL)&#32;{
+00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baad64c27c69eb1ff39ae67c5f77bb2b1d">RES_NOTRDY</link>;
+00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*sectors&#32;=&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;*)buff;
+00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sectors[0]&#32;*&#32;ssize;
+00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)(sectors[1]&#32;-&#32;sectors[0]&#32;+&#32;1)&#32;*&#32;ssize;
+00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;trim(_ffs[pdrv],&#32;addr,&#32;size);
+00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00178 &#32;&#32;&#32;&#32;}
+00179 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00180 }
+</programlisting></section>
+<anchor xml:id="_fat_8c_1a0711b1d03b833e9d73b3be1a6397f461"/><section>
+    <title>disk_read()</title>
+<indexterm><primary>disk_read</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>disk_read</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_read (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00114">114</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00115 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00116 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+00117 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+00118 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[(int)pdrv]-&gt;read(_ffs[(<emphasis role="keywordtype">int</emphasis>)pdrv],&#32;(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;*)buff,&#32;addr,&#32;size);
+00119 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;err&#32;?&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>&#32;:&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00120 }
+</programlisting></section>
+<anchor xml:id="_fat_8c_1a8348ac5ee6d709420c02e45c111f4793"/><section>
+    <title>disk_status()</title>
+<indexterm><primary>disk_status</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>disk_status</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1adba6790898ce4029c20a34b898ce73c1">DSTATUS</link> disk_status (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00109">109</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00110 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_status&#32;on&#32;pdrv&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00111 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00112 }
+</programlisting></section>
+<anchor xml:id="_fat_8c_1ac24448955ef914f54a499df1fb45689d"/><section>
+    <title>disk_write()</title>
+<indexterm><primary>disk_write</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>disk_write</secondary></indexterm>
+<para><computeroutput><link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2b">DRESULT</link> disk_write (<link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> pdrv, const <link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * buff, <link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> sector, <link linkend="_ff_8h_1a36cb3b01d81ffd844bbbfb54003e06ec">UINT</link> count)</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00122">122</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00123 &#32;&#32;&#32;&#32;debug_if(<link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">FFS_DBG</link>,&#32;<emphasis role="stringliteral">&quot;disk_write&#32;[%d]\n&quot;</emphasis>,&#32;pdrv);
+00124 &#32;&#32;&#32;&#32;<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>&#32;ssize&#32;=&#32;disk_get_sector_size(pdrv);
+00125 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;addr&#32;=&#32;(<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>)sector&#32;*&#32;ssize;
+00126 &#32;&#32;&#32;&#32;<link linkend="_blockdevice_8h_1a0457670798518d3ca4a2e67aec5d2cc6">bd_size_t</link>&#32;size&#32;=&#32;count&#32;*&#32;ssize;
+00127 
+00128 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;_ffs[pdrv]-&gt;erase(_ffs[pdrv],&#32;addr,&#32;size);
+00129 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00131 &#32;&#32;&#32;&#32;}
+00132 
+00133 &#32;&#32;&#32;&#32;err&#32;=&#32;_ffs[pdrv]-&gt;program(_ffs[pdrv],&#32;buff,&#32;addr,&#32;size);
+00134 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err)&#32;{
+00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2baf4dcc07fd46310b5495fa8025c89a9f3">RES_PARERR</link>;
+00136 &#32;&#32;&#32;&#32;}
+00137 
+00138 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_diskio_8h_1aacdfef1dad6565f65c26d12fe0ea4b2ba2ea4b6ef3fffc17dd1d38ab5c2837737">RES_OK</link>;
+00139 }
+</programlisting></section>
+<anchor xml:id="_fat_8c_1af58b536abfd30f77213f4ecaf2ac52f5"/><section>
+    <title>get_fattime()</title>
+<indexterm><primary>get_fattime</primary><secondary>fat.c</secondary></indexterm>
+<indexterm><primary>fat.c</primary><secondary>get_fattime</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> get_fattime (void )</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00182">182</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+<programlisting linenumbering="unnumbered">00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00183 &#32;&#32;&#32;&#32;time_t&#32;rawtime;
+00184 &#32;&#32;&#32;&#32;time(&amp;rawtime);
+00185 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>tm&#32;*ptm&#32;=&#32;localtime(&amp;rawtime);
+00186 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_year&#32;-&#32;80)&#32;&lt;&lt;&#32;25
+00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_mon&#32;+&#32;1)&#32;&lt;&lt;&#32;21
+00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_mday)&#32;&lt;&lt;&#32;16
+00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_hour)&#32;&lt;&lt;&#32;11
+00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_min)&#32;&lt;&lt;&#32;5
+00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|&#32;(<link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link>)(ptm-&gt;tm_sec&#32;/&#32;2);
+00192 }
+</programlisting></section>
+</section>
+</section>

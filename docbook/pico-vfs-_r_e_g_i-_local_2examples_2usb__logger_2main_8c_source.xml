@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source" xml:lang="en-US">
+<title>main.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger/main.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00001"/>00001 <emphasis role="comment">/*&#32;USB&#32;MSC&#32;Logger&#32;with&#32;two&#32;file&#32;systems</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00002"/>00002 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00003"/>00003 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00004"/>00004 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00005"/>00005 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00006"/>00006 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;bsp/board.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;hardware/adc.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;hardware/gpio.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&lt;hardware/structs/ioqspi.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&lt;hardware/sync.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&lt;pico/stdlib.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&lt;tusb.h&gt;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00015"/>00015 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_flash_8h">blockdevice/flash.h</link>&quot;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_fat_8h">filesystem/fat.h</link>&quot;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_littlefs_8h">filesystem/littlefs.h</link>&quot;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00018"/>00018 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_vfs_8h">filesystem/vfs.h</link>&quot;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00019"/>00019 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00020"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a8218db278eda6b3652f3ac0338a3b260">00020</link> <emphasis role="preprocessor">#define&#32;TEMPERATURE_UNITS&#32;&apos;C&apos;</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00021"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1abf4fdc27ec7610b3aa5ee951ba9802c3">00021</link> <emphasis role="preprocessor">#define&#32;USBCTRL_REG&#32;&#32;&#32;&#32;((uint32_t&#32;*)(USBCTRL_REGS_BASE&#32;+&#32;0x50))</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00022"/>00022 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00023"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db">00023</link> <emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db">filesystem_is_exported</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00024"/>00024 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;enable_logging_task&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00025"/>00025 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash1;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00026"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">00026</link> <link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">flash2</link>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00027"/>00027 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*littlefs;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00028"/>00028 <emphasis role="keyword">static</emphasis>&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00029"/>00029 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00030"/>00030 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00031"/>00031 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">float</emphasis>&#32;read_onboard_temperature(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;unit)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">float</emphasis>&#32;conversionFactor&#32;=&#32;3.3f&#32;/&#32;(1&#32;&lt;&lt;&#32;12);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00033"/>00033 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;adc&#32;=&#32;(float)adc_read()&#32;*&#32;conversionFactor;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;tempC&#32;=&#32;27.0f&#32;-&#32;(adc&#32;-&#32;0.706f)&#32;/&#32;0.001721f;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00036"/>00036 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(unit&#32;==&#32;<emphasis role="charliteral">&apos;C&apos;</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;tempC;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(unit&#32;==&#32;<emphasis role="charliteral">&apos;F&apos;</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;tempC&#32;*&#32;9&#32;/&#32;5&#32;+&#32;32;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00042"/>00042 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1.0f;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00044"/>00044 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00045"/>00045 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00046"/>00046 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;__no_inline_not_in_flash_func(bootsel_button_get)(void)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keyword">const</emphasis>&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;CS_PIN_INDEX&#32;=&#32;1;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;uint32_t&#32;flags&#32;=&#32;save_and_disable_interrupts();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;hw_write_masked(&amp;ioqspi_hw-&gt;io[CS_PIN_INDEX].ctrl,
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;GPIO_OVERRIDE_LOW&#32;&lt;&lt;&#32;IO_QSPI_GPIO_QSPI_SS_CTRL_OEOVER_LSB,
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IO_QSPI_GPIO_QSPI_SS_CTRL_OEOVER_BITS);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keyword">volatile</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;1000;&#32;++i);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;button_state&#32;=&#32;!(sio_hw-&gt;gpio_hi_in&#32;&amp;&#32;(1u&#32;&lt;&lt;&#32;CS_PIN_INDEX));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;hw_write_masked(&amp;ioqspi_hw-&gt;io[CS_PIN_INDEX].ctrl,
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;GPIO_OVERRIDE_NORMAL&#32;&lt;&lt;&#32;IO_QSPI_GPIO_QSPI_SS_CTRL_OEOVER_LSB,
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IO_QSPI_GPIO_QSPI_SS_CTRL_OEOVER_BITS);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;restore_interrupts(flags);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00058"/>00058 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;button_state;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00060"/>00060 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00061"/>00061 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00062"/>00062 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;filesystem_init(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;flash1&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(1&#32;*&#32;1024&#32;*&#32;1024,&#32;512&#32;*&#32;1024);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">flash2</link>&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(1&#32;*&#32;1024&#32;*&#32;1024&#32;+&#32;512&#32;*&#32;1024,&#32;0);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00065"/>00065 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;littlefs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(500,&#32;16);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00067"/>00067 &#32;&#32;&#32;&#32;fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00068"/>00068 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(littlefs,&#32;flash1);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_format&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00074"/>00074 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1gac9f86bdbfdf77fb98f51551c4b6068ed">fs_format</link>(fat,&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">flash2</link>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_format&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00078"/>00078 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00079"/>00079 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/internal&quot;</emphasis>,&#32;littlefs,&#32;flash1);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_mount&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00086"/>00086 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00087"/>00087 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00088"/>00088 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;export_filesystem(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;copy&#32;/internal&#32;to&#32;/export\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00090"/>00090 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;src&#32;=&#32;open(<emphasis role="stringliteral">&quot;/internal/TEMP.TXT&quot;</emphasis>,&#32;O_RDONLY);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00092"/>00092 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(src&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00094"/>00094 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00095"/>00095 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga85336fdeb00149559c5c2008256c3013">fs_mount</link>(<emphasis role="stringliteral">&quot;/export&quot;</emphasis>,&#32;fat,&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">flash2</link>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_mount&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00101"/>00101 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00102"/>00102 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;dist&#32;=&#32;open(<emphasis role="stringliteral">&quot;/export/TEMP.TXT&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dist&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;open&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00106"/>00106 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00107"/>00107 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[1024*64];
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00108"/>00108 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;read_size&#32;=&#32;read(src,&#32;buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(buffer));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(read_size&#32;==&#32;0)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ssize_t&#32;write_size&#32;=&#32;write(dist,&#32;buffer,&#32;read_size);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(write_size&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;write&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;close(dist);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;close(src);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00120"/>00120 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;err&#32;=&#32;<link linkend="_group__filesystem_1ga16e3ebc7a28d4b1ba08759b03ec739ff">fs_unmount</link>(<emphasis role="stringliteral">&quot;/export&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;fs_unmount&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00126"/>00126 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00127"/>00127 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00128"/>00128 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;logging_task(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!enable_logging_task)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00131"/>00131 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;uint64_t&#32;last_measure&#32;=&#32;0;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;uint64_t&#32;now&#32;=&#32;time_us_64();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;uint64_t&#32;duration&#32;=&#32;now&#32;-&#32;last_measure;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(duration&#32;&lt;&#32;1000000)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00137"/>00137 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">float</emphasis>&#32;temperature&#32;=&#32;read_onboard_temperature(<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a8218db278eda6b3652f3ac0338a3b260">TEMPERATURE_UNITS</link>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;temperature=%.1f\n&quot;</emphasis>,&#32;temperature);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00140"/>00140 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;fd&#32;=&#32;open(<emphasis role="stringliteral">&quot;/internal/TEMP.TXT&quot;</emphasis>,&#32;O_WRONLY|O_APPEND|O_CREAT);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fd&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;open(&apos;/internal/TEMP.TXT&apos;)&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;length&#32;=&#32;sprintf(buffer,&#32;<emphasis role="stringliteral">&quot;temperature,%.1f\n&quot;</emphasis>,&#32;temperature);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;ssize_t&#32;write_size&#32;=&#32;write(fd,&#32;buffer,&#32;length);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(write_size&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;write&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;close(fd);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(err&#32;==&#32;-1)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;close&#32;error:&#32;%s\n&quot;</emphasis>,&#32;strerror(errno));
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00154"/>00154 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;last_measure&#32;=&#32;now;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00156"/>00156 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00157"/>00157 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00158"/>00158 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;is_usb_connected(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;tud_ready();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00160"/>00160 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00161"/>00161 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00162"/>00162 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;filesystem_management_task(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;last_status&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00164"/>00164 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;usb&#32;=&#32;is_usb_connected();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Override&#32;USB&#32;connection&#32;status&#32;as&#32;long&#32;as&#32;the&#32;BOOTSEL&#32;button&#32;is&#32;pressed.</emphasis>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00167"/>00167 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(bootsel_button_get())
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;usb&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00169"/>00169 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00170"/>00170 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(last_status&#32;!=&#32;usb)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(usb)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;enable_logging_task&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;USB&#32;connected\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;export_filesystem();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db">filesystem_is_exported</link>&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;<emphasis role="keywordflow">else</emphasis>&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;USB&#32;disconnected\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db">filesystem_is_exported</link>&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;enable_logging_task&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;last_status&#32;=&#32;usb;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00183"/>00183 }
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00184"/>00184 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00185"/><link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">00185</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;adc_init();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00187"/>00187 &#32;&#32;&#32;&#32;adc_set_temp_sensor_enabled(<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00188"/>00188 &#32;&#32;&#32;&#32;adc_select_input(4);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00189"/>00189 &#32;&#32;&#32;&#32;board_init();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;tud_init(<link linkend="_tusb__config_8h_1a850f6280c7dc9aead785f6bedaaa0fb9">BOARD_TUD_RHPORT</link>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00191"/>00191 &#32;&#32;&#32;&#32;stdio_init_all();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00192"/>00192 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!filesystem_init())&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00194"/>00194 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00195"/>00195 
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00196"/>00196 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Start&#32;USB&#32;MSC&#32;Logger&#32;with&#32;two&#32;file&#32;systems\n&quot;</emphasis>);
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;filesystem_management_task();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(enable_logging_task)
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;logging_task();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tud_task();
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00202"/>00202 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00203"/>00203 }
+</programlisting></section>

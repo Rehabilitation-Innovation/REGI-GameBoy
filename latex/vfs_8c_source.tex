@@ -1,0 +1,772 @@
+\doxysection{vfs.\+c}
+\hypertarget{vfs_8c_source}{}\label{vfs_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/vfs.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/vfs.c}}
+\mbox{\hyperlink{vfs_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ 2024,\ Hiroyuki\ OYAMA}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <sys/errno.h>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{dirent_8h}{sys/dirent.h}}>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <sys/unistd.h>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <pico/mutex.h>}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vfs_8h}{filesystem/vfs.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00015}\mbox{\hyperlink{structmountpoint__t}{00015}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00016}\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{00016}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00017}\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{00017}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00018}\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{00018}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00019}00019\ \}\ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00021}\mbox{\hyperlink{structfile__descriptor__t}{00021}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00022}\mbox{\hyperlink{structfile__descriptor__t_a460b0237a9ab39d21d2cee70d112517f}{00022}}\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *\mbox{\hyperlink{structfile__descriptor__t_a460b0237a9ab39d21d2cee70d112517f}{file}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00023}\mbox{\hyperlink{structfile__descriptor__t_a402fa703a0fcdd4f478035069f853b89}{00023}}\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *\mbox{\hyperlink{structfile__descriptor__t_a402fa703a0fcdd4f478035069f853b89}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00024}\mbox{\hyperlink{structfile__descriptor__t_aab35f181a890bc25bdabd57fca6ee043}{00024}}\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structfile__descriptor__t_aab35f181a890bc25bdabd57fca6ee043}{path}}[\mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}}\ +\ 1];}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00025}00025\ \}\ \mbox{\hyperlink{structfile__descriptor__t}{file\_descriptor\_t}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00027}\mbox{\hyperlink{structdir__descriptor__t}{00027}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00028}\mbox{\hyperlink{structdir__descriptor__t_ad03bb3f26e7e55f01bed6e31dfe6e2c4}{00028}}\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *\mbox{\hyperlink{structdir__descriptor__t_ad03bb3f26e7e55f01bed6e31dfe6e2c4}{dir}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00029}\mbox{\hyperlink{structdir__descriptor__t_ac932335d01e6ef300dae0a9dd1214af6}{00029}}\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *\mbox{\hyperlink{structdir__descriptor__t_ac932335d01e6ef300dae0a9dd1214af6}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00030}00030\ \}\ \mbox{\hyperlink{structdir__descriptor__t}{dir\_descriptor\_t}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00032}00032\ \textcolor{preprocessor}{\#if\ !defined(PICO\_VFS\_MAX\_MOUNTPOINT)}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00033}\mbox{\hyperlink{vfs_8c_ad12537cb47987ba10b4fac6446cf49fa}{00033}}\ \textcolor{preprocessor}{\#define\ PICO\_VFS\_MAX\_MOUNTPOINT\ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00035}\mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{00035}}\ \textcolor{preprocessor}{\#define\ FS\_MAX\_MOUNTPOINT\ \ \ \ \ \ \ \ \ \ \ \ \ \ PICO\_VFS\_MAX\_MOUNTPOINT}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00036}\mbox{\hyperlink{vfs_8c_a0718d44242f5b7416ec3311212081e65}{00036}}\ \textcolor{preprocessor}{\#define\ STDIO\_FILNO\_MAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ STDERR\_FILENO}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00037}\mbox{\hyperlink{vfs_8c_aa07c3cee02f6b8388d5616d76f19dcbf}{00037}}\ \textcolor{preprocessor}{\#define\ FILENO\_VALUE(fd)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (fd\ +\ STDIO\_FILNO\_MAX\ +\ 1)\ \ }\textcolor{comment}{//\ Conversion\ to\ file\ descriptors\ for\ publication}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00038}\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{00038}}\ \textcolor{preprocessor}{\#define\ FILENO\_INDEX(fd)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (fd\ -\/\ STDIO\_FILNO\_MAX\ -\/\ 1)\ \ }\textcolor{comment}{//\ Conversion\ to\ file\ descriptors\ for\ internal\ use}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00040}00040\ \textcolor{keyword}{static}\ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ mountpoints[\mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{FS\_MAX\_MOUNTPOINT}}]\ =\ \{0\};\ \ \textcolor{comment}{//\ Mount\ points\ and\ file\ system\ map}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00041}00041\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ max\_file\_descriptor\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ File\ descriptor\ current\ maximum\ value}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00042}00042\ \textcolor{keyword}{static}\ \mbox{\hyperlink{structfile__descriptor__t}{file\_descriptor\_t}}\ *file\_descriptor\ =\ NULL;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ File\ descriptor\ and\ file\ system\ map}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00043}00043\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ max\_dir\_descriptor\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dir\ descriptor\ current\ maximum\ value}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00044}00044\ \textcolor{keyword}{static}\ \mbox{\hyperlink{structdir__descriptor__t}{dir\_descriptor\_t}}\ *dir\_descriptor\ =\ NULL;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dir\ descriptor\ and\ file\ system\ map}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00045}00045\ \textcolor{keyword}{static}\ recursive\_mutex\_t\ \mbox{\hyperlink{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}{\_\_attribute\_\_}}((unused))\ \_mutex;\ \ \ \textcolor{comment}{//\ Recursive\ mutexes\ are\ used\ because\ recursive\ calls\ occur,\ e.g.\ on\ loopback\ devices}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00047}00047\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_error\_remap(\textcolor{keywordtype}{int}\ err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ >=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ errno\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00053}00053\ \ \ \ \ errno\ =\ -\/err;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00057}00057\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *remove\_prefix(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *prefix)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ len\_prefix\ =\ strlen(prefix);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ len\_str\ =\ strlen(str);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (len\_str\ <\ len\_prefix\ ||\ strncmp(str,\ prefix,\ len\_prefix)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ str;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ str\ +\ len\_prefix;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00067}00067\ \textcolor{keyword}{static}\ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *find\_mountpoint(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00068}00068\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *longest\_match\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ longest\_length\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{FS\_MAX\_MOUNTPOINT}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ prefix\_length\ =\ strlen(mountpoints[i].dir);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (prefix\_length\ >\ longest\_length\ \&\&\ strncmp(path,\ mountpoints[i].dir,\ prefix\_length)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ longest\_match\ =\ \&mountpoints[i];}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ longest\_length\ =\ prefix\_length;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ longest\_match;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00081}00081\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ is\_valid\_file\_descriptor(\textcolor{keywordtype}{int}\ fildes)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ <=\ \mbox{\hyperlink{vfs_8c_a0718d44242f5b7416ec3311212081e65}{STDIO\_FILNO\_MAX}}\ ||\ (\textcolor{keywordtype}{int})max\_file\_descriptor\ <=\ \mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes))}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00088}\mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{00088}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__filesystem_gac9f86bdbfdf77fb98f51551c4b6068ed}{fs\_format}}(\mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}(fs,\ device);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00098}\mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{00098}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dir,\ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (!device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err)}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00105}00105\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}(fs,\ device,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00108}00108\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00110}00110\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00111}00111\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{vfs_8c_a4a9d13c5a7d33570511593f81d8aa493}{FS\_MAX\_MOUNTPOINT}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mountpoints[i].\mbox{\hyperlink{structfilesystem}{filesystem}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].filesystem\ =\ fs;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].device\ =\ device;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ mountpoints[i].dir\ =\ strdup(dir);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00120}00120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00121}00121\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EFAULT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00123}00123\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00125}\mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{00125}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__filesystem_ga16e3ebc7a28d4b1ba08759b03ec739ff}{fs\_unmount}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00126}00126\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00127}00127\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00129}00129\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00134}00134\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00135}00135\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00139}00139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00141}00141\ \ \ \ \ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00142}00142\ \ \ \ \ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00143}00143\ \ \ \ \ free((\textcolor{keywordtype}{char}\ *)mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00145}00145\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00147}00147\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00149}\mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{00149}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__filesystem_ga72d0b65b57fe9e8c02c149a20c5fc0cd}{fs\_reformat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00150}00150\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00151}00151\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00153}00153\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00158}00158\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00159}00159\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00161}00161\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a6e052dafa112dba9a6d729a49cae08c1}{unmount}}(fs);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00162}00162\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00165}00165\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00166}00166\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}(fs,\ device);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00167}00167\ \ \ \ \ \textcolor{keywordflow}{if}\ (err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00171}00171\ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab137318416813c5413e1fb5f356e712c}{mount}}(fs,\ device,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00173}00173\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00174}00174\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00175}00175\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00177}\mbox{\hyperlink{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}{00177}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__filesystem_ga9b690589883c3b7e8364ca1817ff6986}{fs\_info}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ **fs,\ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ **device)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00178}00178\ \ \ \ \ (void)fs;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00179}00179\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00181}00181\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00182}00182\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00184}00184\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00189}00189\ \ \ \ \ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00190}00190\ \ \ \ \ *device\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab2a8127554cc303a3f1e04f0440a4a08}{device}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00192}00192\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00194}00194\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00196}\mbox{\hyperlink{vfs_8c_a11bde836cab6ec72897ede2286350e72}{00196}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a11bde836cab6ec72897ede2286350e72}{\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00197}00197\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00198}00198\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00200}00200\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00201}00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00204}00204\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00205}00205\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00206}00206\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a168c6ebc947bcef4dd441c4846199663}{remove}}(fs,\ entity\_path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00208}00208\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00210}00210\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00212}\mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{00212}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a2ce7c2db9fdb6aec06afaf3cfc5979c7}{rename}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *old,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{new})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00213}00213\ \ \ \ \ \textcolor{comment}{//\ TODO:\ Check\ if\ old\ and\ new\ are\ the\ same\ filesystem}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00214}00214\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00215}00215\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00216}00216\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(old);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00217}00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00221}00221\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *old\_entity\_path\ =\ remove\_prefix(old,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00222}00222\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *new\_entity\_path\ =\ remove\_prefix(\textcolor{keyword}{new},\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00224}00224\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00225}00225\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a1642d2b8278ee2e0e28e67e3c871e7af}{rename}}(fs,\ old\_entity\_path,\ new\_entity\_path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00226}00226\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00227}00227\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00228}00228\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00230}\mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{00230}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a548e5b744ca2e97beb61ad7aa41114e2}{mkdir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ mode\_t\ mode)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00231}00231\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00232}00232\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00238}00238\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00239}00239\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a9f586df0f698f0472b033f406de87de3}{mkdir}}(fs,\ entity\_path,\ mode);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00241}00241\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00243}00243\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00245}\mbox{\hyperlink{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce}{00245}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_ab2df76f2c62ae012c2e417813b5fe8ce}{rmdir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00246}00246\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00247}00247\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00248}00248\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00249}00249\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00252}00252\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00253}00253\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00254}00254\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00255}00255\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a396727009601ff7cd9505b724dc744f3}{rmdir}}(fs,\ entity\_path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00256}00256\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00258}00258\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00260}\mbox{\hyperlink{vfs_8c_a43bfed3654a97b85373f2d4198990c8d}{00260}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a43bfed3654a97b85373f2d4198990c8d}{\_stat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keyword}{struct}\ stat\ *st)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00261}00261\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00262}00262\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00263}00263\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00268}00268\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00269}00269\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00270}00270\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab5f68a612c88a96e638d2035a7ec59fd}{stat}}(fs,\ entity\_path,\ st);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00271}00271\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00273}00273\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00275}\mbox{\hyperlink{vfs_8c_a96ed08daea40a660b6059ae5ddd9d063}{00275}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a96ed08daea40a660b6059ae5ddd9d063}{\_fstat}}(\textcolor{keywordtype}{int}\ fildes,\ \textcolor{keyword}{struct}\ stat\ *st)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00276}00276\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00277}00277\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00279}00279\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDIN\_FILENO\ ||\ fildes\ ==\ STDOUT\_FILENO\ ||\ fildes\ ==\ STDERR\_FILENO)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ st-\/>st\_size\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ st-\/>st\_mode\ =\ S\_IFCHR;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00283}00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00284}00284\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00285}00285\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00288}00288\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00290}00290\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00291}00291\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00292}00292\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00295}00295\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00297}00297\ \ \ \ \ off\_t\ size\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00298}00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs-\/>\mbox{\hyperlink{structfilesystem_a4ba3d1ab6d89005e297c86eb8bafd225}{type}}\ !=\ \mbox{\hyperlink{filesystem_8h_ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92}{FILESYSTEM\_TYPE\_FAT}})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ off\_t\ current\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_acdf7fe4f2c1ef87fc1f2894cf473d271}{file\_tell}}(fs,\ file);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ 0,\ SEEK\_END);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ off\_t\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ current,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\ !=\ err)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00306}00306\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NOTE:\ Support\ for\ different\ behaviour\ of\ FatFs\ from\ POSIX}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00308}00308\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00309}00309\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ FatFs\ has\ a\ problem\ where\ f\_size()\ reports\ a\ larger\ than\ actual\ file\ size\ when}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00310}00310\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ moved\ to\ a\ position\ beyond\ the\ f\_lseek()\ file\ size;\ POSIX\ reports\ the\ actual\ size}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00311}00311\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ written\ to\ the\ file,\ not\ the\ seek\ position.}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00312}00312\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].path;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00314}00314\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00315}00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }stat\ finfo\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab5f68a612c88a96e638d2035a7ec59fd}{stat}}(fs,\ entity\_path,\ \&finfo);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ size\ =\ finfo.st\_size;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00329}00329\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00330}00330\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00332}00332\ \ \ \ \ st-\/>st\_size\ =\ size;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00333}00333\ \ \ \ \ st-\/>st\_mode\ =\ S\_IFREG;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00334}00334\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00335}00335\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00337}00337\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_assign\_file\_descriptor()\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00338}00338\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00339}00339\ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_file\_descriptor\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00340}00340\ \ \ \ \ \ \ \ \ max\_file\_descriptor\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00341}00341\ \ \ \ \ \ \ \ \ file\_descriptor\ =\ calloc(max\_file\_descriptor,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfile__descriptor__t}{file\_descriptor\_t}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\_descriptor\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_open:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00345}00345\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00346}00346\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00347}00347\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ max\_file\_descriptor;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\_descriptor[i].\mbox{\hyperlink{structfilesystem}{filesystem}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ fd\ =\ i;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00352}00352\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00353}00353\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00354}00354\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extend\ the\ management\ array}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00355}00355\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ last\_max\ =\ max\_file\_descriptor;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ max\_file\_descriptor\ *=\ 2;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ file\_descriptor\ =\ realloc(file\_descriptor,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfile__descriptor__t}{file\_descriptor\_t}})\ *\ max\_file\_descriptor);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\_descriptor\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_open:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00361}00361\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ last\_max;\ i\ <\ max\_file\_descriptor;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ file\_descriptor[i].filesystem\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ file\_descriptor[i].file\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00365}00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00366}00366\ \ \ \ \ \ \ \ \ fd\ =\ last\_max;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00367}00367\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00368}00368\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{vfs_8c_aa07c3cee02f6b8388d5616d76f19dcbf}{FILENO\_VALUE}}(fd);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00369}00369\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00371}00371\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \_assign\_dir\_descriptor(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00372}00372\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00373}00373\ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_dir\_descriptor\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ max\_dir\_descriptor\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00375}00375\ \ \ \ \ \ \ \ \ dir\_descriptor\ =\ calloc(max\_dir\_descriptor,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structdir__descriptor__t}{dir\_descriptor\_t}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dir\_descriptor\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_opendir:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00379}00379\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00380}00380\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00381}00381\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ max\_dir\_descriptor;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dir\_descriptor[i].\mbox{\hyperlink{structfilesystem}{filesystem}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ fd\ =\ i;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00385}00385\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00386}00386\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00387}00387\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extend\ the\ management\ array}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00389}00389\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ last\_max\ =\ max\_dir\_descriptor;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00390}00390\ \ \ \ \ \ \ \ \ max\_dir\_descriptor\ *=\ 2;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00391}00391\ \ \ \ \ \ \ \ \ dir\_descriptor\ =\ realloc(dir\_descriptor,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structdir__descriptor__t}{dir\_descriptor\_t}})\ *\ max\_dir\_descriptor);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dir\_descriptor\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_opendir:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00395}00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00396}00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ last\_max;\ i\ <\ max\_dir\_descriptor;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ dir\_descriptor[i].filesystem\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ dir\_descriptor[i].dir\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00399}00399\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00400}00400\ \ \ \ \ \ \ \ \ fd\ =\ (int)last\_max;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00401}00401\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00402}00402\ \ \ \ \ \textcolor{keywordflow}{return}\ fd;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00403}00403\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00405}\mbox{\hyperlink{vfs_8c_aeea6b1ce10c4ced8db50f44cb6774b01}{00405}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_aeea6b1ce10c4ced8db50f44cb6774b01}{\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path,\ \textcolor{keywordtype}{int}\ oflags,\ ...)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00406}00406\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00407}00407\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00409}00409\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00410}00410\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00413}00413\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00414}00414\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00415}00415\ \ \ \ \ \textcolor{comment}{//\ find\ file\ descriptor}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00416}00416\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ \_assign\_file\_descriptor();}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00417}00417\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENFILE);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00420}00420\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00422}00422\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00423}00423\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].file\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00424}00424\ \ \ \ \ \textcolor{keywordflow}{if}\ (file\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/ENOMEM);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00427}00427\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00429}00429\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a28f1a1f90cf5c05660e20b20e55cf1c7}{file\_open}}(fs,\ file,\ entity\_path,\ oflags);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00430}00430\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ free(file);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].file\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00435}00435\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00436}00436\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].filesystem\ =\ fs;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00437}00437\ \ \ \ \ strncpy(file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fd)].path,\ path,\ \mbox{\hyperlink{filesystem_8h_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00439}00439\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00440}00440\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00441}00441\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(fd);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00442}00442\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00443}00443\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00444}\mbox{\hyperlink{vfs_8c_a5af2dad9b50913a0025ea80a8577bea8}{00444}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a5af2dad9b50913a0025ea80a8577bea8}{\_close}}(\textcolor{keywordtype}{int}\ fildes)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00445}00445\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00446}00446\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00448}00448\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\_close\ error\ fildes=\%d\(\backslash\)n"{}},\ fildes);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00452}00452\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00453}00453\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00454}00454\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00455}00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00458}00458\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00459}00459\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ab649defbea72289a00b64b6eabdd1b4d}{file\_close}}(fs,\ file);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00460}00460\ \ \ \ \ free(file);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00461}00461\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00462}00462\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00463}00463\ \ \ \ \ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].path[0]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00465}00465\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00466}00466\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00467}00467\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00470}\mbox{\hyperlink{vfs_8c_a90927805d6b48285139ab31098623df1}{00470}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{vfs_8c_a90927805d6b48285139ab31098623df1}{stdio\_flush}}(\textcolor{keywordtype}{void});\ \ \textcolor{comment}{//\ from\ pico\_stdio/stcio.c}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00472}00472\ \textcolor{comment}{//\ \_write\ to\ STDOUT\_FILENO\ and\ STDERR\_FILENO\ falls\ back\ to\ \`{}putchar`\ in\ the\ pico\_stdio\ library}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00473}00473\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ pico\_stdio\_fallback\_write(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buf,\ \textcolor{keywordtype}{size\_t}\ nbyte)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00474}00474\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *out\ =\ buf;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00475}00475\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ nbyte;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ putchar(out[i]);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00477}00477\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00478}00478\ \ \ \ \ \mbox{\hyperlink{vfs_8c_a90927805d6b48285139ab31098623df1}{stdio\_flush}}();}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00479}00479\ \ \ \ \ \textcolor{keywordflow}{return}\ nbyte;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00480}00480\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00481}00481\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00482}00482\ \textcolor{comment}{//\ \_read\ to\ STDIN\_FILENO\ fall\ back\ to\ \`{}getchar`\ in\ the\ pico\_stdio\ library}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00483}00483\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ pico\_stdio\_fallback\_read(\textcolor{keywordtype}{void}\ *buf,\ \textcolor{keywordtype}{size\_t}\ nbyte)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00484}00484\ \ \ \ \ (void)buf;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00485}00485\ \ \ \ \ (void)nbyte;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00487}00487\ \ \ \ \ uint8\_t\ *in\ =\ buf;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00488}00488\ \ \ \ \ in[0]\ =\ getchar();}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00489}00489\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00490}00490\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00492}\mbox{\hyperlink{vfs_8c_a637f3b33cf8a2223862596efdee3ad33}{00492}}\ ssize\_t\ \mbox{\hyperlink{vfs_8c_a637f3b33cf8a2223862596efdee3ad33}{\_write}}(\textcolor{keywordtype}{int}\ fildes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buf,\ \textcolor{keywordtype}{size\_t}\ nbyte)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00493}00493\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00494}00494\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00496}00496\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDOUT\_FILENO\ ||\ fildes\ ==\ STDERR\_FILENO)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00497}00497\ \ \ \ \ \ \ \ \ pico\_stdio\_fallback\_write(buf,\ nbyte);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00498}00498\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00499}00499\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (ssize\_t)nbyte;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00500}00500\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00501}00501\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00502}00502\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00503}00503\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00504}00504\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00505}00505\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00506}00506\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00507}00507\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00508}00508\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00509}00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00510}00510\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00511}00511\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00512}00512\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00513}00513\ \ \ \ \ ssize\_t\ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_aa101ba0e335b6b94b615cd27edbef29f}{file\_write}}(fs,\ file,\ buf,\ nbyte);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00515}00515\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(size);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00516}00516\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00518}\mbox{\hyperlink{vfs_8c_a6cfdb1d41006cb00b54a113c28dd3ab3}{00518}}\ ssize\_t\ \mbox{\hyperlink{vfs_8c_a6cfdb1d41006cb00b54a113c28dd3ab3}{\_read}}(\textcolor{keywordtype}{int}\ fildes,\ \textcolor{keywordtype}{void}\ *buf,\ \textcolor{keywordtype}{size\_t}\ nbyte)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00519}00519\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00520}00520\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (fildes\ ==\ STDIN\_FILENO)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00523}00523\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ read\_bytes\ =\ pico\_stdio\_fallback\_read(buf,\ nbyte);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00524}00524\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00525}00525\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ read\_bytes;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00526}00526\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00527}00527\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00528}00528\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00529}00529\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00530}00530\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00531}00531\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00532}00532\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00533}00533\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00534}00534\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00535}00535\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00536}00536\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00537}00537\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00539}00539\ \ \ \ \ ssize\_t\ size\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_afa641bc200d34300f3306a7f2b1c0794}{file\_read}}(fs,\ file,\ buf,\ nbyte);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00541}00541\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(size);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00542}00542\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00544}\mbox{\hyperlink{vfs_8c_a1fd116a5c6d658acbe5e5786fa3e1868}{00544}}\ off\_t\ \mbox{\hyperlink{vfs_8c_a1fd116a5c6d658acbe5e5786fa3e1868}{\_lseek}}(\textcolor{keywordtype}{int}\ fildes,\ off\_t\ offset,\ \textcolor{keywordtype}{int}\ whence)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00545}00545\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00546}00546\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00547}00547\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00548}00548\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00549}00549\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00550}00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00551}00551\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00552}00552\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00553}00553\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00554}00554\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00555}00555\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00556}00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00557}00557\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00558}00558\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00559}00559\ \ \ \ \ off\_t\ pos\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a42ee5c83a7fe9edddb0181f9b54d7b00}{file\_seek}}(fs,\ file,\ offset,\ whence);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00560}00560\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00562}00562\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(pos);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00563}00563\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00565}\mbox{\hyperlink{vfs_8c_a9aedef60c47f7d3a05512b2a488c1d7d}{00565}}\ off\_t\ \mbox{\hyperlink{vfs_8c_a9aedef60c47f7d3a05512b2a488c1d7d}{\_ftello\_r}}(\textcolor{keyword}{struct}\ \_reent\ *ptr,\ \textcolor{keyword}{register}\ FILE\ *fp)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00566}00566\ \ \ \ \ (void)ptr;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00567}00567\ \ \ \ \ \textcolor{keywordtype}{int}\ fildes\ =\ fp-\/>\_file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00568}00568\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00569}00569\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00571}00571\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00572}00572\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00573}00573\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00574}00574\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00575}00575\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00576}00576\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00577}00577\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00578}00578\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00579}00579\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00580}00580\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00581}00581\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00582}00582\ \ \ \ \ off\_t\ pos\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_acdf7fe4f2c1ef87fc1f2894cf473d271}{file\_tell}}(fs,\ file);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00583}00583\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00584}00584\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00585}00585\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(pos);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00586}00586\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00588}\mbox{\hyperlink{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b}{00588}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_a30e12ed09db8f77b0b4e7ffc5f1f609b}{ftruncate}}(\textcolor{keywordtype}{int}\ fildes,\ off\_t\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00589}00589\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00590}00590\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00592}00592\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_valid\_file\_descriptor(fildes))\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00593}00593\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00594}00594\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00595}00595\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00596}00596\ \ \ \ \ \mbox{\hyperlink{structfs__file__t}{fs\_file\_t}}\ *file\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].file;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00597}00597\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ file\_descriptor[\mbox{\hyperlink{vfs_8c_a21683c936cc59a04b06c1fd39c40b7df}{FILENO\_INDEX}}(fildes)].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00598}00598\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00599}00599\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00600}00600\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00601}00601\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00603}00603\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a1318c5761c315dc5354e5154aae7d0f3}{file\_truncate}}(fs,\ file,\ length);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00604}00604\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00606}00606\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00607}00607\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00609}\mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{00609}}\ \mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *\mbox{\hyperlink{vfs_8c_ad759a0269427a564f3ce672d43e885cf}{opendir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *path)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00610}00610\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00611}00611\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00613}00613\ \ \ \ \ \mbox{\hyperlink{structmountpoint__t}{mountpoint\_t}}\ *mp\ =\ find\_mountpoint(path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00614}00614\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00615}00615\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENOENT);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00616}00616\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00617}00617\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00618}00618\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00619}00619\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *entity\_path\ =\ remove\_prefix(path,\ mp-\/>\mbox{\hyperlink{structmountpoint__t_ab8b25dab2ca0301ce0190df5f4efff0d}{dir}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00620}00620\ \ \ \ \ \textcolor{comment}{//\ find\ dir\ descriptor}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00621}00621\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ \_assign\_dir\_descriptor();}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00622}00622\ \ \ \ \ \textcolor{keywordflow}{if}\ (fd\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00623}00623\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENFILE);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00624}00624\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00625}00625\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00626}00626\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00627}00627\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00628}00628\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *dir\ =\ dir\_descriptor[fd].dir\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00629}00629\ \ \ \ \ \textcolor{keywordflow}{if}\ (dir\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00630}00630\ \ \ \ \ \ \ \ \ \_error\_remap(-\/ENOMEM);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00631}00631\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00632}00632\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00633}00633\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00634}00634\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ mp-\/>\mbox{\hyperlink{structmountpoint__t_a0e33cd9afdf66cdf0417e94e6580d723}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00635}00635\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a85af88c13c623c820eca217dd81c2a2a}{dir\_open}}(fs,\ dir,\ entity\_path);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00636}00636\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00637}00637\ \ \ \ \ \ \ \ \ free(dir);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ dir\_descriptor[fd].dir\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00639}00639\ \ \ \ \ \ \ \ \ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00640}00640\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00641}00641\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00642}00642\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00643}00643\ \ \ \ \ dir\_descriptor[fd].filesystem\ =\ fs;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00644}00644\ \ \ \ \ dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}\ =\ fd;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00645}00645\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00646}00646\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00647}00647\ \ \ \ \ \textcolor{keywordflow}{return}\ dir;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00648}00648\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00649}00649\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00650}\mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{00650}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vfs_8c_ac0258906f9453b8abf03e945aa9c9676}{closedir}}(\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00651}00651\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00652}00652\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00654}00654\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\ =\ dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00655}00655\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *\_dir\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].dir;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00656}00656\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00657}00657\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00658}00658\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00659}00659\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00660}00660\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00661}00661\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a537d71bf313451145ca593fe2a63d728}{dir\_close}}(fs,\ \_dir);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00662}00662\ \ \ \ \ dir\_descriptor[fd].filesystem\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00663}00663\ \ \ \ \ free(dir\_descriptor[fd].dir);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00664}00664\ \ \ \ \ dir\_descriptor[fd].dir\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00665}00665\ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00666}00666\ \ \ \ \ \textcolor{keywordflow}{return}\ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00667}00667\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00668}00668\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00669}\mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{00669}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirent}{dirent}}\ *\mbox{\hyperlink{vfs_8c_ab1ebcf210f49b305423bcc413c6427ee}{readdir}}(\mbox{\hyperlink{dirent_8h_ae7917177082ed5bb5a50a36bcc72a5a1}{DIR}}\ *dir)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00670}00670\ \ \ \ \ auto\_init\_recursive\_mutex(\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00671}00671\ \ \ \ \ recursive\_mutex\_enter\_blocking(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00673}00673\ \ \ \ \ \mbox{\hyperlink{structfs__dir__t}{fs\_dir\_t}}\ *\_dir\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].dir;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00674}00674\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ dir\_descriptor[dir-\/>\mbox{\hyperlink{structfs__dir__t_a9778c8a1393e7166c1e655c9ed0a829e}{fd}}].filesystem;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00675}00675\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00676}00676\ \ \ \ \ \ \ \ \ \_error\_remap(-\/EBADF);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00677}00677\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00679}00679\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00680}00680\ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00681}00681\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_a36cd5c106f4d8a95cdf1ee4a73052001}{dir\_read}}(fs,\ \_dir,\ \&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}});}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00682}00682\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00683}00683\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00684}00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00685}00685\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (err\ ==\ -\/ENOENT)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00686}00686\ \ \ \ \ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00687}00687\ \ \ \ \ \ \ \ \ \_error\_remap(0);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00688}00688\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00689}00689\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00690}00690\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00691}00691\ \ \ \ \ \ \ \ \ memset(\&\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}},\ 0,\ \textcolor{keyword}{sizeof}(\_dir-\/>\mbox{\hyperlink{structfs__dir__t_aedd8474e43c6a35c6caed6c2469de4c5}{current}}));}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00692}00692\ \ \ \ \ \ \ \ \ \_error\_remap(err);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00693}00693\ \ \ \ \ \ \ \ \ recursive\_mutex\_exit(\&\_mutex);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00694}00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00695}00695\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00696}00696\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00697}00697\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00698}\mbox{\hyperlink{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}{00698}}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{group__filesystem_ga852f1a8efec7c0556f59cdb951ab96c4}{fs\_strerror}}(\textcolor{keywordtype}{int}\ errnum)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00699}00699\ \ \ \ \ \textcolor{keywordflow}{if}\ (errnum\ >\ 5000)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00700}00700\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SD\ blockdevice\ error}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00701}00701\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00702}00702\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errnum)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00703}00703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5001:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}operation\ would\ block"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00706}00706\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5002:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00707}00707\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}unsupported\ operation"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5003:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}invalid\ parameter"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00712}00712\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5004:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}uninitialized"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00715}00715\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5005:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}device\ is\ missing\ or\ not\ connected"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00718}00718\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5006:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00719}00719\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}write\ protected"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00720}00720\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00721}00721\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5007:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00722}00722\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}unusable\ card"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00723}00723\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00724}00724\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5008:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00725}00725\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}No\ response\ from\ device"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00726}00726\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00727}00727\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5009:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}CRC\ error"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00730}00730\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5010:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}Erase\ error:\ reset/sequence"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00733}00733\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5011:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}Write\ error:\ !SPI\_DATA\_ACCEPTED"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00736}00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00737}00737\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00738}00738\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00739}00739\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{char}\ *)str;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00740}00740\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (errnum\ >\ 4000)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00741}00741\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ On-\/board\ flash\ blockdevice\ error}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00742}00742\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00743}00743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errnum)\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00744}00744\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4001:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}operation\ timeout"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00747}00747\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4002:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}safe\ execution\ is\ not\ possible"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00749}00749\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00750}00750\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4003:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ str\ =\ \textcolor{stringliteral}{"{}method\ fails\ due\ to\ dynamic\ resource\ exhaustion"{}};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00753}00753\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00754}00754\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00755}00755\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00756}00756\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{char}\ *)str;}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00757}00757\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00758}00758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ strerror(errnum);}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00759}00759\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00760}00760\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00761}00761\ }
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00762}00762\ \textcolor{preprocessor}{\#if\ defined(PICO\_FS\_AUTO\_INIT)}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00763}00763\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}{\_\_attribute\_\_}}((constructor))\ pre\_main(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00764}00764\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}();}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00765}00765\ \}}
+\DoxyCodeLine{\Hypertarget{vfs_8c_source_l00766}00766\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

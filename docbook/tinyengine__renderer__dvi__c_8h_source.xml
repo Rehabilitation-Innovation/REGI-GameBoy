@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__renderer__dvi__c_8h_source" xml:lang="en-US">
+<title>tinyengine_renderer_dvi_c.h</title>
+<indexterm><primary>backup/tinyengine_renderer_dvi_c.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00002"/>00002 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00003"/>00003 
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&quot;pico/stdlib.h&quot;</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00005"/>00005 
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00006"/><link linkend="_tinyengine__renderer__dvi__c_8h_1aebf6c33c95a2567557e6cff4509e9555">00006</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_tinyengine__renderer__dvi__c_8h_1aebf6c33c95a2567557e6cff4509e9555">tinyengine_renderer_dvi_init</link>(uint8_t*&#32;_display_buffer,&#32;uint32_t&#32;size,&#32;uint32_t&#32;height,&#32;uint32_t&#32;width);
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00007"/>00007 
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00008"/>00008 &#32;&#32;&#32;&#32;<emphasis role="comment">//block&#32;until&#32;next&#32;vsync&#32;is&#32;hit&#32;and&#32;the&#32;buffers&#32;are&#32;flipped&#32;then&#32;the&#32;swap&#32;happens.</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00009"/><link linkend="_tinyengine__renderer__dvi__c_8h_1a6b02cd7ab76f3e17dfd9dc647b0e6227">00009</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_tinyengine__renderer__dvi__c_8h_1a6b02cd7ab76f3e17dfd9dc647b0e6227">tinyengine_renderer_dvi_flip_blocking</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00010"/>00010 
+<anchor xml:id="_tinyengine__renderer__dvi__c_8h_source_1l00011"/>00011 }
+</programlisting></section>

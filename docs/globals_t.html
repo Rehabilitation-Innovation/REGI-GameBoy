@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('globals_t.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -108,7 +95,7 @@ $(function() {
 
 <h3 class="doxsection"><a id="index_t" name="index_t"></a>- t -</h3><ul>
 <li>t&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a87accd1af8e0aff4b818d891374f7cec">DinoGame.cpp</a></li>
-<li>te_audio_init()&#160;:&#160;<a class="el" href="tinyengine__audio_8cpp.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.cpp</a>, <a class="el" href="tinyengine__audio_8h.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.h</a></li>
+<li>te_audio_init()&#160;:&#160;<a class="el" href="tinyengine__audio_8h.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.h</a>, <a class="el" href="tinyengine__audio_8cpp.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.cpp</a></li>
 <li>TE_COLOR_BEIGE&#160;:&#160;<a class="el" href="tinyengine_8h.html#a829fe390136dd6a8d694d3cb79239a1d">tinyengine.h</a></li>
 <li>TE_COLOR_BLACK&#160;:&#160;<a class="el" href="tinyengine_8h.html#a59d5594fe685d6af5d9e7b84df48c21f">tinyengine.h</a></li>
 <li>TE_COLOR_BLUE&#160;:&#160;<a class="el" href="tinyengine_8h.html#ab370040868943afd827cc4ce9d917242">tinyengine.h</a></li>
@@ -160,6 +147,14 @@ $(function() {
 <li>TILE010_HEIGHT&#160;:&#160;<a class="el" href="dino__running_8h.html#a5e8b6f2e2ec88a430c720294f110a5b2">dino_running.h</a></li>
 <li>TILE010_WIDTH&#160;:&#160;<a class="el" href="dino__running_8h.html#a7d4a3b65e59dff45c74f6fb5b54c8cb3">dino_running.h</a></li>
 <li>time_&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a7713b8e35a97e9bb1ae59df540f16e9a">DinoGame.cpp</a></li>
+<li>TIMER0_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a8aefc9b5ce0307f2983c7cfe9cfcee0e">intctrl.h</a></li>
+<li>TIMER0_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a5b912fdba3cd93427d74b8ef527d980f">intctrl.h</a></li>
+<li>TIMER0_IRQ_2&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a959d2d69aa10978b36fb4fbecc77a465">intctrl.h</a></li>
+<li>TIMER0_IRQ_3&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a021f4aa1758af47eb23298196e1f22c5">intctrl.h</a></li>
+<li>TIMER1_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a4ba1f242076b28a4217181e0f65896ec">intctrl.h</a></li>
+<li>TIMER1_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a757d218b48843638d3f8f45fa6fd48f9">intctrl.h</a></li>
+<li>TIMER1_IRQ_2&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a156a0e9cbc66e4ce56dfb52d09d86858">intctrl.h</a></li>
+<li>TIMER1_IRQ_3&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8af2fb391af7b873b5268e3824068d08c0">intctrl.h</a></li>
 <li>tinyengine_clbk_t&#160;:&#160;<a class="el" href="tinyengine_8h.html#af40e0caed873f0d43c9aa17f9305097c">tinyengine.h</a></li>
 <li>TINYENGINE_ERROR&#160;:&#160;<a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a7670d68312436b54933d8e01f44c8744">tinyengine.h</a></li>
 <li>tinyengine_init_clbk_t&#160;:&#160;<a class="el" href="tinyengine_8h.html#a76b533bee9971abbcb979aa618d83a38">tinyengine.h</a></li>
@@ -167,6 +162,8 @@ $(function() {
 <li>TINYENGINE_OUTOFBOUNDS_ERROR&#160;:&#160;<a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d">tinyengine.h</a></li>
 <li>TINYENGINE_RENDER_ERROR&#160;:&#160;<a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4aec8519a813083cc138b836d9467944">tinyengine.h</a></li>
 <li>TINYENGINE_RENDERER_DVI&#160;:&#160;<a class="el" href="tinyengine_8h.html#a5e3e54543d9b8db6eb20aac03f3c8e9ba28e35a7085b638c18a90ebafb20d0ba2">tinyengine.h</a></li>
+<li>tinyengine_renderer_dvi_flip_blocking()&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi__c_8h.html#a6b02cd7ab76f3e17dfd9dc647b0e6227">tinyengine_renderer_dvi_c.h</a></li>
+<li>tinyengine_renderer_dvi_init()&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi__c_8h.html#aebf6c33c95a2567557e6cff4509e9555">tinyengine_renderer_dvi_c.h</a></li>
 <li>tinyengine_renderer_t&#160;:&#160;<a class="el" href="tinyengine_8h.html#a5e3e54543d9b8db6eb20aac03f3c8e9b">tinyengine.h</a></li>
 <li>tinyengine_status_t&#160;:&#160;<a class="el" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine.h</a></li>
 <li>TMDS_BALANCED_HIGH&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi_8cpp.html#aead23ec580b3e6424a2e0ce6be4e68c9">tinyengine_renderer_dvi.cpp</a></li>
@@ -180,6 +177,7 @@ $(function() {
 <li>tone()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6be2aff54804e191b2eec031a3657cd3">pwm-tone.h</a></li>
 <li>tone_init()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6007f918a626559d13695f7c8fccce1f">pwm-tone.h</a></li>
 <li>tonegenerator_t&#160;:&#160;<a class="el" href="pwm-tone_8h.html#aec190e0f4998d86760fd9820c9bce07e">pwm-tone.h</a></li>
+<li>TRNG_IRQ&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aeef89f7a46f31d1ce96fd0f6328b78c8">intctrl.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

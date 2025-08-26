@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_fat_8h_source" xml:lang="en-US">
+<title>fat.h</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/filesystem/fat.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_fat_8h_source_1l00001"/>00001 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_fat_8h_source_1l00002"/>00002 <emphasis role="comment">&#32;*&#32;Copyright&#32;2024,&#32;Hiroyuki&#32;OYAMA</emphasis>
+<anchor xml:id="_fat_8h_source_1l00003"/>00003 <emphasis role="comment">&#32;*</emphasis>
+<anchor xml:id="_fat_8h_source_1l00004"/>00004 <emphasis role="comment">&#32;*&#32;SPDX-License-Identifier:&#32;BSD-3-Clause</emphasis>
+<anchor xml:id="_fat_8h_source_1l00005"/>00005 <emphasis role="comment">&#32;*/</emphasis>
+<anchor xml:id="_fat_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_fat_8h_source_1l00007"/>00007 
+<anchor xml:id="_fat_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_fat_8h_source_1l00014"/>00014 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;{
+<anchor xml:id="_fat_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_fat_8h_source_1l00016"/>00016 
+<anchor xml:id="_fat_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_filesystem_8h">filesystem/filesystem.h</link>&quot;</emphasis>
+<anchor xml:id="_fat_8h_source_1l00018"/>00018 
+<anchor xml:id="_fat_8h_source_1l00019"/><link linkend="_fat_8h_1ada8d3f747f9b5f3bc76f1bd335d454f9">00019</link> <emphasis role="preprocessor">#define&#32;FFS_DBG&#32;&#32;0</emphasis>
+<anchor xml:id="_fat_8h_source_1l00020"/>00020 
+<anchor xml:id="_fat_8h_source_1l00021"/>00021 
+<anchor xml:id="_fat_8h_source_1l00028"/>00028 <link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+<anchor xml:id="_fat_8h_source_1l00029"/>00029 
+<anchor xml:id="_fat_8h_source_1l00035"/>00035 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs);
+<anchor xml:id="_fat_8h_source_1l00036"/>00036 
+<anchor xml:id="_fat_8h_source_1l00037"/>00037 <emphasis role="preprocessor">#ifdef&#32;__cplusplus</emphasis>
+<anchor xml:id="_fat_8h_source_1l00038"/>00038 }
+<anchor xml:id="_fat_8h_source_1l00039"/>00039 <emphasis role="preprocessor">#endif</emphasis>
+</programlisting></section>

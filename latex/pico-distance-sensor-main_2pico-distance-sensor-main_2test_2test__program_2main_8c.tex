@@ -1,0 +1,172 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\+\_\+program/main.c File Reference}
+\hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c}{}\label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/main.c@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/main.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}pico.\+h"{}}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}sensor.\+pio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/pio.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9caf14a448f24e2cb8735c41e6efd40}{SENSE\+\_\+\+COMPLETE\+\_\+\+IRQ}}~0b0001
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9c1cf133f9da3ffb171e522c90dccbe}{print\+\_\+debug\+\_\+info}} ()
+\item 
+void \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab5736b949a4e3c634a25345994a89e08}{sense\+\_\+irq}} ()
+\item 
+void \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a5e011fdfdbd1a313f9a0ddf4e231064f}{begin\+\_\+sense}} ()
+\item 
+int \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint32\+\_\+t \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\+\_\+counter}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9caf14a448f24e2cb8735c41e6efd40}\index{main.c@{main.c}!SENSE\_COMPLETE\_IRQ@{SENSE\_COMPLETE\_IRQ}}
+\index{SENSE\_COMPLETE\_IRQ@{SENSE\_COMPLETE\_IRQ}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SENSE\_COMPLETE\_IRQ}{SENSE\_COMPLETE\_IRQ}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9caf14a448f24e2cb8735c41e6efd40} 
+\#define SENSE\+\_\+\+COMPLETE\+\_\+\+IRQ~0b0001}
+
+MIT License
+
+Copyright (c) 2022 Daniel Garcia-\/\+Briseno
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00031}{31}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a5e011fdfdbd1a313f9a0ddf4e231064f}\index{main.c@{main.c}!begin\_sense@{begin\_sense}}
+\index{begin\_sense@{begin\_sense}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{begin\_sense()}{begin\_sense()}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a5e011fdfdbd1a313f9a0ddf4e231064f} 
+void begin\+\_\+sense (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00054}{54}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ pio\_sm\_put\_blocking(\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0,\ 0xFFFFFFFF);}
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00058}{58}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00060\ \ \ \ \ sleep\_ms(5000);}
+\DoxyCodeLine{00061\ \ \ \ \ puts(\textcolor{stringliteral}{"{}Testing\ the\ HC-\/SR04\ distance\ sensor\ with\ PIO"{}});}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}}\ =\ \mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}}\ =\ 0;}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ offset\ =\ \mbox{\hyperlink{pio_8h_a3571e3c7c6e645e92b8d438203a911b9}{pio\_add\_program}}(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \&distance\_sensor\_program);}
+\DoxyCodeLine{00065\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Loaded\ program\ to\ pio\ offset\ 0x\%08X\(\backslash\)n"{}},\ offset);}
+\DoxyCodeLine{00066\ \ \ \ \ distance\_sensor\_program\_init(\mbox{\hyperlink{_dino_game_8cpp_ac79a43604cef3e167780e935276174d0}{pio}},\ \mbox{\hyperlink{_dino_game_8cpp_abeba240b99c2caa6556ccab58b8c8ebb}{sm}},\ offset,\ 0,\ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab5736b949a4e3c634a25345994a89e08}{sense\_irq}});}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ count\ =\ 0;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Sense\ count\ \%d:\ \(\backslash\)n"{}},\ count++);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a5e011fdfdbd1a313f9a0ddf4e231064f}{begin\_sense}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ ISR\ to\ notify\ us\ that\ the\ sense\ is\ done.}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\_counter}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_us(100);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Got\ counter\ value\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\_counter}});}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Sensor\ distance\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\_counter}}\ /\ 58);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\_counter}}\ =\ 0;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9c1cf133f9da3ffb171e522c90dccbe}\index{main.c@{main.c}!print\_debug\_info@{print\_debug\_info}}
+\index{print\_debug\_info@{print\_debug\_info}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{print\_debug\_info()}{print\_debug\_info()}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9c1cf133f9da3ffb171e522c90dccbe} 
+void print\+\_\+debug\+\_\+info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00035}{35}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ printf(\textcolor{stringliteral}{"{}FSTAT:\ 0x\%08X\(\backslash\)n"{}},\ pio0\_hw-\/>fstat);}
+\DoxyCodeLine{00037\ \ \ \ \ printf(\textcolor{stringliteral}{"{}FDEBUG:\ 0x\%08X\(\backslash\)n"{}},\ pio0\_hw-\/>fdebug);}
+\DoxyCodeLine{00038\ \}}
+
+\end{DoxyCode}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab5736b949a4e3c634a25345994a89e08}\index{main.c@{main.c}!sense\_irq@{sense\_irq}}
+\index{sense\_irq@{sense\_irq}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{sense\_irq()}{sense\_irq()}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab5736b949a4e3c634a25345994a89e08} 
+void sense\+\_\+irq (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00040}{40}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ uint32\_t\ irq\ =\ pio0\_hw-\/>irq;}
+\DoxyCodeLine{00042\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Working\ with\ irq:\ 0x\%08X\(\backslash\)n"{}},\ irq);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (irq\ \&\ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_ab9caf14a448f24e2cb8735c41e6efd40}{SENSE\_COMPLETE\_IRQ}})\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ pio\_sm\_get\_rx\_fifo\_level(\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}There\ are\ \%d\ items\ in\ the\ rx\ fifo\(\backslash\)n"{}},\ count);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ 0)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}{pio\_counter}}\ =\ (\mbox{\hyperlink{pio_8h_a70a47a122f289106c36bcacc76add2bb}{\string~pio\_sm\_get}}(\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0)\ *\ 2);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ hw\_clear\_bits(\&pio0\_hw-\/>irq,\ irq);}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee}\index{main.c@{main.c}!pio\_counter@{pio\_counter}}
+\index{pio\_counter@{pio\_counter}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{pio\_counter}{pio\_counter}}
+{\footnotesize\ttfamily \label{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_a3ae8ed65af7a4257f7f7ba6dedae55ee} 
+volatile uint32\+\_\+t pio\+\_\+counter = 0}
+
+
+
+Definition at line \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source_l00033}{33}} of file \mbox{\hyperlink{pico-distance-sensor-main_2pico-distance-sensor-main_2test_2test__program_2main_8c_source}{main.\+c}}.
+

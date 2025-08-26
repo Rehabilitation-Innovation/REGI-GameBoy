@@ -1,0 +1,20 @@
+\doxysection{test\+\_\+harness.\+cpp}
+\hypertarget{test__harness_8cpp_source}{}\label{test__harness_8cpp_source}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/test\_harness.cpp@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\_tests/test\_harness.cpp}}
+\mbox{\hyperlink{test__harness_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{test__harness_8h}{test\_harness.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00003}\mbox{\hyperlink{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0}{00003}}\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0}{TestHarness::GetOffset}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00004}00004\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{DistanceSensor::\_PioOffsets}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}];}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00005}00005\ \}}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00008}\mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{00008}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{TestHarness::IsLoaded}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00009}00009\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5}{DistanceSensor::\_IsProgramLoaded}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}});}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00010}00010\ \}}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00012}\mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{00012}}\ \mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{DistanceSensor}}*\ \mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{TestHarness::GetMappedSensor}}(\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{\_sensor\_map}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}][\mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}];}
+\DoxyCodeLine{\Hypertarget{test__harness_8cpp_source_l00014}00014\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,148 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/documents/res/app3.c File Reference}
+\hypertarget{app3_8c}{}\label{app3_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app3.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/documents/res/app3.c}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \mbox{\hyperlink{app3_8c_a7519abb60fe91f6aa1d17f64fbae123a}{clust2sect}} (\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} clst)
+\item 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \mbox{\hyperlink{app3_8c_a65611adf1626e5e08da77cd33a98dd8b}{get\+\_\+fat}} (\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} clst)
+\item 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} \mbox{\hyperlink{app3_8c_abd4b6b071a8d728a88727051c12bc6d7}{put\+\_\+fat}} (\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}fs, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} clst, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} val)
+\item 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \mbox{\hyperlink{app3_8c_a93a18e2a0a10c54e2911d39b95cca157}{allocate\+\_\+contiguous\+\_\+clusters}} (\mbox{\hyperlink{struct_f_i_l}{FIL}} \texorpdfstring{$\ast$}{*}fp, \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} len)
+\item 
+int \mbox{\hyperlink{app3_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{app3_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app3_8c_a93a18e2a0a10c54e2911d39b95cca157}\index{app3.c@{app3.c}!allocate\_contiguous\_clusters@{allocate\_contiguous\_clusters}}
+\index{allocate\_contiguous\_clusters@{allocate\_contiguous\_clusters}!app3.c@{app3.c}}
+\doxysubsubsection{\texorpdfstring{allocate\_contiguous\_clusters()}{allocate\_contiguous\_clusters()}}
+{\footnotesize\ttfamily \label{app3_8c_a93a18e2a0a10c54e2911d39b95cca157} 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} allocate\+\_\+contiguous\+\_\+clusters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_i_l}{FIL}} \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app3_8c_source_l00020}{20}} of file \mbox{\hyperlink{app3_8c_source}{app3.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ csz,\ tcl,\ ncl,\ ccl,\ cl;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(fp,\ 0)\ ||\ !len)\ \ \ \ \ \textcolor{comment}{/*\ Check\ if\ the\ given\ parameters\ are\ valid\ */}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ csz\ =\ 512UL\ *\ fp-\/>fs-\/>csize;\ \ \ \ \textcolor{comment}{/*\ Cluster\ size\ in\ unit\ of\ byte\ (assuming\ 512\ bytes/sector)\ */}}
+\DoxyCodeLine{00031\ \ \ \ \ tcl\ =\ (len\ +\ csz\ -\/\ 1)\ /\ csz;\ \ \ \ \textcolor{comment}{/*\ Total\ number\ of\ clusters\ required\ */}}
+\DoxyCodeLine{00032\ \ \ \ \ len\ =\ tcl\ *\ csz;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Round-\/up\ file\ size\ to\ the\ cluster\ boundary\ */}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{/*\ Check\ if\ the\ existing\ cluster\ chain\ is\ contiguous\ */}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (len\ ==\ fp-\/>fsize)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ ncl\ =\ 0;\ ccl\ =\ fp-\/>sclust;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ cl\ =\ \mbox{\hyperlink{app3_8c_a65611adf1626e5e08da77cd33a98dd8b}{get\_fat}}(fp-\/>fs,\ ccl);\ \ \textcolor{comment}{/*\ Get\ the\ cluster\ status\ */}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cl\ +\ 1\ <\ 3)\ \textcolor{keywordflow}{return}\ 0;\ \ \ \textcolor{comment}{/*\ Hard\ error?\ */}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cl\ !=\ ccl\ +\ 1\ \&\&\ cl\ <\ fp-\/>fs-\/>n\_fatent)\ \textcolor{keywordflow}{break};\ \ \textcolor{comment}{/*\ Not\ contiguous?\ */}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ ccl\ =\ cl;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (++ncl\ <\ tcl);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ncl\ ==\ tcl)\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Is\ the\ file\ contiguous?\ */}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{app3_8c_a7519abb60fe91f6aa1d17f64fbae123a}{clust2sect}}(fp-\/>fs,\ fp-\/>sclust);\ \ \textcolor{comment}{/*\ File\ is\ contiguous.\ Return\ the\ start\ sector\ */}}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{/*\ File\ is\ not\ contiguous\ */}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#if\ \_FS\_READONLY }}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Exit\ if\ in\ read-\/only\ cfg.\ */}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#else }}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(fp-\/>\mbox{\hyperlink{struct_f_i_l_ac409508881f5a16f2998ae675072b376}{flag}}\ \&\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}}))\ \textcolor{keywordflow}{return}\ 0;\ \ \ \textcolor{comment}{/*\ Exit\ if\ the\ file\ object\ is\ for\ read-\/only\ */}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{ff_8c_a691a27b40c348f7c84b42e911636f38a}{f\_truncate}}(fp))\ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Remove\ the\ non-\/contiguous\ chain\ */}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{/*\ Find\ a\ free\ contiguous\ area\ */}}
+\DoxyCodeLine{00056\ \ \ \ \ ccl\ =\ cl\ =\ 2;\ ncl\ =\ 0;}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cl\ >=\ fp-\/>fs-\/>n\_fatent)\ \textcolor{keywordflow}{return}\ 0;\ \ \ \textcolor{comment}{/*\ No\ contiguous\ area\ is\ found.\ */}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{app3_8c_a65611adf1626e5e08da77cd33a98dd8b}{get\_fat}}(fp-\/>fs,\ cl))\ \{\ \ \textcolor{comment}{/*\ Encounterd\ a\ cluster\ in\ use\ */}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{\ \ \ \ \textcolor{comment}{/*\ Skip\ the\ block\ of\ used\ clusters\ */}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cl++;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cl\ >=\ fp-\/>fs-\/>n\_fatent)\ \textcolor{keywordflow}{return}\ 0;\ \ \ \textcolor{comment}{/*\ No\ contiguous\ area\ is\ found.\ */}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{app3_8c_a65611adf1626e5e08da77cd33a98dd8b}{get\_fat}}(fp-\/>fs,\ cl));}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ ccl\ =\ cl;\ ncl\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ cl++;\ ncl++;}
+\DoxyCodeLine{00067\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (ncl\ <\ tcl);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{/*\ Create\ a\ contiguous\ cluster\ chain\ */}}
+\DoxyCodeLine{00070\ \ \ \ \ fp-\/>fs-\/>last\_clust\ =\ ccl\ -\/\ 1;}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{ff_8c_a7c4bcf81d9122f0b5376852ec6a8c3eb}{f\_lseek}}(fp,\ len))\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{app3_8c_a7519abb60fe91f6aa1d17f64fbae123a}{clust2sect}}(fp-\/>fs,\ fp-\/>sclust);\ \ \textcolor{comment}{/*\ Return\ file\ start\ sector\ */}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00075\ \}}
+
+\end{DoxyCode}
+\Hypertarget{app3_8c_a7519abb60fe91f6aa1d17f64fbae123a}\index{app3.c@{app3.c}!clust2sect@{clust2sect}}
+\index{clust2sect@{clust2sect}!app3.c@{app3.c}}
+\doxysubsubsection{\texorpdfstring{clust2sect()}{clust2sect()}}
+{\footnotesize\ttfamily \label{app3_8c_a7519abb60fe91f6aa1d17f64fbae123a} 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} clust2sect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{clst}{}\end{DoxyParamCaption})}
+
+\Hypertarget{app3_8c_a65611adf1626e5e08da77cd33a98dd8b}\index{app3.c@{app3.c}!get\_fat@{get\_fat}}
+\index{get\_fat@{get\_fat}!app3.c@{app3.c}}
+\doxysubsubsection{\texorpdfstring{get\_fat()}{get\_fat()}}
+{\footnotesize\ttfamily \label{app3_8c_a65611adf1626e5e08da77cd33a98dd8b} 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} get\+\_\+fat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{clst}{}\end{DoxyParamCaption})}
+
+\Hypertarget{app3_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{app3.c@{app3.c}!main@{main}}
+\index{main@{main}!app3.c@{app3.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{app3_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app3_8c_source_l00078}{78}} of file \mbox{\hyperlink{app3_8c_source}{app3.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00079\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}}\ fr;}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{diskio_8h_aacdfef1dad6565f65c26d12fe0ea4b2b}{DRESULT}}\ dr;}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}}\ fs;}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{struct_f_i_l}{FIL}}\ fil;}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}\ org;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{/*\ Open\ or\ create\ a\ file\ to\ write\ */}}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{ff_8c_a16a934c2bbfa2160295810adc49d5509}{f\_mount}}(\&fs,\ \textcolor{stringliteral}{"{}"{}},\ 0);}
+\DoxyCodeLine{00089\ \ \ \ \ fr\ =\ \mbox{\hyperlink{ff_8c_aefdef7126128d99d0b3bd82c28e54d80}{f\_open}}(\&fil,\ \textcolor{stringliteral}{"{}fastrec.log"{}},\ \mbox{\hyperlink{ff_8h_a1f4f3530ff03abbd979b072536e72290}{FA\_READ}}\ |\ \mbox{\hyperlink{ff_8h_afa366963220c89b882c0361794020c14}{FA\_WRITE}}\ |\ \mbox{\hyperlink{ff_8h_a17b01553029920ac0468912b4bcb16c7}{FA\_OPEN\_ALWAYS}});}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (fr)\ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{/*\ Check\ if\ the\ file\ is\ 256MB\ in\ size\ and\ occupies\ a\ contiguous\ area. }}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ /\ \ If\ not,\ a\ contiguous\ area\ will\ be\ re-\/allocated\ to\ the\ file.\ */}}
+\DoxyCodeLine{00094\ \ \ \ \ org\ =\ \mbox{\hyperlink{app3_8c_a93a18e2a0a10c54e2911d39b95cca157}{allocate\_contiguous\_clusters}}(\&fil,\ 0x10000000);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (!org)\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Function\ failed\ due\ to\ any\ error\ or\ insufficient\ contiguous\ area.\(\backslash\)n"{}});}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(\&fil);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{/*\ Now\ you\ can\ read/write\ the\ file\ without\ filesystem\ layer.\ */}}
+\DoxyCodeLine{00102\ \ \ \ \ ...}
+\DoxyCodeLine{00103\ \ \ \ \ dr\ =\ \mbox{\hyperlink{fat_8c_ac24448955ef914f54a499df1fb45689d}{disk\_write}}(fil.fs-\/>drv,\ Buff,\ org,\ 1024);\ \ \ \textcolor{comment}{/*\ Write\ 512KiB\ from\ top\ of\ the\ file\ */}}
+\DoxyCodeLine{00104\ \ \ \ \ ...}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{ff_8c_a53882db20ef4323dcfd1874d7733ffc3}{f\_close}}(\&fil);}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00108\ \}}
+
+\end{DoxyCode}
+\Hypertarget{app3_8c_abd4b6b071a8d728a88727051c12bc6d7}\index{app3.c@{app3.c}!put\_fat@{put\_fat}}
+\index{put\_fat@{put\_fat}!app3.c@{app3.c}}
+\doxysubsubsection{\texorpdfstring{put\_fat()}{put\_fat()}}
+{\footnotesize\ttfamily \label{app3_8c_abd4b6b071a8d728a88727051c12bc6d7} 
+\mbox{\hyperlink{ff_8h_a49d0171ecbd362cda5680a0d360db44c}{FRESULT}} put\+\_\+fat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_a_t_f_s}{FATFS}} \texorpdfstring{$\ast$}{*}}]{fs}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{clst}{, }\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{val}{}\end{DoxyParamCaption})}
+

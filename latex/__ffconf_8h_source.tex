@@ -1,0 +1,302 @@
+\doxysection{\+\_\+ffconf.\+h}
+\hypertarget{__ffconf_8h_source}{}\label{__ffconf_8h_source}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/\_ffconf.h@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/\_ffconf.h}}
+\mbox{\hyperlink{__ffconf_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00002}00002\ \textcolor{comment}{/\ \ Configurations\ of\ FatFs\ Module}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00003}00003\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00005}\mbox{\hyperlink{__ffconf_8h_a275a34cd0d8f3b9b04ee91df269136e3}{00005}}\ \textcolor{preprocessor}{\#define\ FFCONF\_DEF\ \ 80286\ \ \ }\textcolor{comment}{/*\ Revision\ ID\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00007}00007\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00008}00008\ \textcolor{comment}{/\ Function\ Configurations}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00009}00009\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00011}\mbox{\hyperlink{__ffconf_8h_ac932d228331b07248a3faa6f5904a49d}{00011}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_READONLY\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00012}00012\ \textcolor{comment}{/*\ This\ option\ switches\ read-\/only\ configuration.\ (0:Read/Write\ or\ 1:Read-\/only)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00013}00013\ \textcolor{comment}{/\ \ Read-\/only\ configuration\ removes\ writing\ API\ functions,\ f\_write(),\ f\_sync(),}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00014}00014\ \textcolor{comment}{/\ \ f\_unlink(),\ f\_mkdir(),\ f\_chmod(),\ f\_rename(),\ f\_truncate(),\ f\_getfree()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00015}00015\ \textcolor{comment}{/\ \ and\ optional\ writing\ functions\ as\ well.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00018}\mbox{\hyperlink{__ffconf_8h_a33ce7fb406e1c861aa717fc8f4864e58}{00018}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_MINIMIZE\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00019}00019\ \textcolor{comment}{/*\ This\ option\ defines\ minimization\ level\ to\ remove\ some\ basic\ API\ functions.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00020}00020\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00021}00021\ \textcolor{comment}{/\ \ \ 0:\ Basic\ functions\ are\ fully\ enabled.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00022}00022\ \textcolor{comment}{/\ \ \ 1:\ f\_stat(),\ f\_getfree(),\ f\_unlink(),\ f\_mkdir(),\ f\_truncate()\ and\ f\_rename()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00023}00023\ \textcolor{comment}{/\ \ \ \ \ \ are\ removed.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00024}00024\ \textcolor{comment}{/\ \ \ 2:\ f\_opendir(),\ f\_readdir()\ and\ f\_closedir()\ are\ removed\ in\ addition\ to\ 1.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00025}00025\ \textcolor{comment}{/\ \ \ 3:\ f\_lseek()\ function\ is\ removed\ in\ addition\ to\ 2.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00028}\mbox{\hyperlink{__ffconf_8h_aa52eeffe3cb0583877e219481dd8dbdc}{00028}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_FIND\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00029}00029\ \textcolor{comment}{/*\ This\ option\ switches\ filtered\ directory\ read\ functions,\ f\_findfirst()\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00030}00030\ \textcolor{comment}{/\ \ f\_findnext().\ (0:Disable,\ 1:Enable\ 2:Enable\ with\ matching\ altname[]\ too)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00033}\mbox{\hyperlink{__ffconf_8h_ad700e28d02d7da4b5f1b9c049b117429}{00033}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_MKFS\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00034}00034\ \textcolor{comment}{/*\ This\ option\ switches\ f\_mkfs()\ function.\ (0:Disable\ or\ 1:Enable)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00037}\mbox{\hyperlink{__ffconf_8h_ac34dea7a30cf68a1f171af88fa37518a}{00037}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_FASTSEEK\ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00038}00038\ \textcolor{comment}{/*\ This\ option\ switches\ fast\ seek\ function.\ (0:Disable\ or\ 1:Enable)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00041}\mbox{\hyperlink{__ffconf_8h_a9629a453509390e34097b3268dcaac19}{00041}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_EXPAND\ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00042}00042\ \textcolor{comment}{/*\ This\ option\ switches\ f\_expand\ function.\ (0:Disable\ or\ 1:Enable)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00045}\mbox{\hyperlink{__ffconf_8h_af22e3a349a7d2c4618fe89a8311ca8d6}{00045}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_CHMOD\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00046}00046\ \textcolor{comment}{/*\ This\ option\ switches\ attribute\ manipulation\ functions,\ f\_chmod()\ and\ f\_utime().}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00047}00047\ \textcolor{comment}{/\ \ (0:Disable\ or\ 1:Enable)\ Also\ FF\_FS\_READONLY\ needs\ to\ be\ 0\ to\ enable\ this\ option.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00050}\mbox{\hyperlink{__ffconf_8h_a46c839d4e87f5873f44166c7b5bf7592}{00050}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_LABEL\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00051}00051\ \textcolor{comment}{/*\ This\ option\ switches\ volume\ label\ functions,\ f\_getlabel()\ and\ f\_setlabel().}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00052}00052\ \textcolor{comment}{/\ \ (0:Disable\ or\ 1:Enable)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00055}\mbox{\hyperlink{__ffconf_8h_abb96514dcc1016a49be66162e596a9d0}{00055}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_FORWARD\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00056}00056\ \textcolor{comment}{/*\ This\ option\ switches\ f\_forward()\ function.\ (0:Disable\ or\ 1:Enable)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00059}\mbox{\hyperlink{__ffconf_8h_a9870e2a5b84ce00fc47e0fd89b337495}{00059}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_STRFUNC\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00060}\mbox{\hyperlink{__ffconf_8h_a7d8e68a5699cf1ceb7ed4fdfba8e2ca0}{00060}}\ \textcolor{preprocessor}{\#define\ FF\_PRINT\_LLI\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00061}\mbox{\hyperlink{__ffconf_8h_a81c59406fe9df657bfb6d75e409da207}{00061}}\ \textcolor{preprocessor}{\#define\ FF\_PRINT\_FLOAT\ \ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00062}\mbox{\hyperlink{__ffconf_8h_a6ecc215308b4ead043b2e4e513ea203e}{00062}}\ \textcolor{preprocessor}{\#define\ FF\_STRF\_ENCODE\ \ 3}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00063}00063\ \textcolor{comment}{/*\ FF\_USE\_STRFUNC\ switches\ string\ functions,\ f\_gets(),\ f\_putc(),\ f\_puts()\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00064}00064\ \textcolor{comment}{/\ \ f\_printf().}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00065}00065\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00066}00066\ \textcolor{comment}{/\ \ \ 0:\ Disable.\ FF\_PRINT\_LLI,\ FF\_PRINT\_FLOAT\ and\ FF\_STRF\_ENCODE\ have\ no\ effect.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00067}00067\ \textcolor{comment}{/\ \ \ 1:\ Enable\ without\ LF-\/CRLF\ conversion.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00068}00068\ \textcolor{comment}{/\ \ \ 2:\ Enable\ with\ LF-\/CRLF\ conversion.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00069}00069\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00070}00070\ \textcolor{comment}{/\ \ FF\_PRINT\_LLI\ =\ 1\ makes\ f\_printf()\ support\ long\ long\ argument\ and\ FF\_PRINT\_FLOAT\ =\ 1/2}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00071}00071\ \textcolor{comment}{/\ \ makes\ f\_printf()\ support\ floating\ point\ argument.\ These\ features\ want\ C99\ or\ later.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00072}00072\ \textcolor{comment}{/\ \ When\ FF\_LFN\_UNICODE\ >=\ 1\ with\ LFN\ enabled,\ string\ functions\ convert\ the\ character}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00073}00073\ \textcolor{comment}{/\ \ encoding\ in\ it.\ FF\_STRF\_ENCODE\ selects\ assumption\ of\ character\ encoding\ ON\ THE\ FILE}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00074}00074\ \textcolor{comment}{/\ \ to\ be\ read/written\ via\ those\ functions.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00075}00075\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00076}00076\ \textcolor{comment}{/\ \ \ 0:\ ANSI/OEM\ in\ current\ CP}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00077}00077\ \textcolor{comment}{/\ \ \ 1:\ Unicode\ in\ UTF-\/16LE}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00078}00078\ \textcolor{comment}{/\ \ \ 2:\ Unicode\ in\ UTF-\/16BE}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00079}00079\ \textcolor{comment}{/\ \ \ 3:\ Unicode\ in\ UTF-\/8}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00080}00080\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00083}00083\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00084}00084\ \textcolor{comment}{/\ Locale\ and\ Namespace\ Configurations}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00085}00085\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00087}\mbox{\hyperlink{__ffconf_8h_a56bf522419025961acdfaf6388f40402}{00087}}\ \textcolor{preprocessor}{\#define\ FF\_CODE\_PAGE\ \ \ \ 932}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00088}00088\ \textcolor{comment}{/*\ This\ option\ specifies\ the\ OEM\ code\ page\ to\ be\ used\ on\ the\ target\ system.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00089}00089\ \textcolor{comment}{/\ \ Incorrect\ code\ page\ setting\ can\ cause\ a\ file\ open\ failure.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00090}00090\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00091}00091\ \textcolor{comment}{/\ \ \ 437\ -\/\ U.S.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00092}00092\ \textcolor{comment}{/\ \ \ 720\ -\/\ Arabic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00093}00093\ \textcolor{comment}{/\ \ \ 737\ -\/\ Greek}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00094}00094\ \textcolor{comment}{/\ \ \ 771\ -\/\ KBL}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00095}00095\ \textcolor{comment}{/\ \ \ 775\ -\/\ Baltic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00096}00096\ \textcolor{comment}{/\ \ \ 850\ -\/\ Latin\ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00097}00097\ \textcolor{comment}{/\ \ \ 852\ -\/\ Latin\ 2}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00098}00098\ \textcolor{comment}{/\ \ \ 855\ -\/\ Cyrillic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00099}00099\ \textcolor{comment}{/\ \ \ 857\ -\/\ Turkish}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00100}00100\ \textcolor{comment}{/\ \ \ 860\ -\/\ Portuguese}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00101}00101\ \textcolor{comment}{/\ \ \ 861\ -\/\ Icelandic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00102}00102\ \textcolor{comment}{/\ \ \ 862\ -\/\ Hebrew}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00103}00103\ \textcolor{comment}{/\ \ \ 863\ -\/\ Canadian\ French}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00104}00104\ \textcolor{comment}{/\ \ \ 864\ -\/\ Arabic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00105}00105\ \textcolor{comment}{/\ \ \ 865\ -\/\ Nordic}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00106}00106\ \textcolor{comment}{/\ \ \ 866\ -\/\ Russian}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00107}00107\ \textcolor{comment}{/\ \ \ 869\ -\/\ Greek\ 2}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00108}00108\ \textcolor{comment}{/\ \ \ 932\ -\/\ Japanese\ (DBCS)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00109}00109\ \textcolor{comment}{/\ \ \ 936\ -\/\ Simplified\ Chinese\ (DBCS)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00110}00110\ \textcolor{comment}{/\ \ \ 949\ -\/\ Korean\ (DBCS)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00111}00111\ \textcolor{comment}{/\ \ \ 950\ -\/\ Traditional\ Chinese\ (DBCS)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00112}00112\ \textcolor{comment}{/\ \ \ \ \ 0\ -\/\ Include\ all\ code\ pages\ above\ and\ configured\ by\ f\_setcp()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00113}00113\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00116}\mbox{\hyperlink{__ffconf_8h_ab7f7a23eae4a1de30c8198ed980f9784}{00116}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_LFN\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00117}\mbox{\hyperlink{__ffconf_8h_adf88cd7c56034e4b94a6f2b3b83f95bf}{00117}}\ \textcolor{preprocessor}{\#define\ FF\_MAX\_LFN\ \ \ \ \ \ 255}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00118}00118\ \textcolor{comment}{/*\ The\ FF\_USE\_LFN\ switches\ the\ support\ for\ LFN\ (long\ file\ name).}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00119}00119\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00120}00120\ \textcolor{comment}{/\ \ \ 0:\ Disable\ LFN.\ FF\_MAX\_LFN\ has\ no\ effect.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00121}00121\ \textcolor{comment}{/\ \ \ 1:\ Enable\ LFN\ with\ static\ \ working\ buffer\ on\ the\ BSS.\ Always\ NOT\ thread-\/safe.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00122}00122\ \textcolor{comment}{/\ \ \ 2:\ Enable\ LFN\ with\ dynamic\ working\ buffer\ on\ the\ STACK.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00123}00123\ \textcolor{comment}{/\ \ \ 3:\ Enable\ LFN\ with\ dynamic\ working\ buffer\ on\ the\ HEAP.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00124}00124\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00125}00125\ \textcolor{comment}{/\ \ To\ enable\ the\ LFN,\ ffunicode.c\ needs\ to\ be\ added\ to\ the\ project.\ The\ LFN\ function}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00126}00126\ \textcolor{comment}{/\ \ requiers\ certain\ internal\ working\ buffer\ occupies\ (FF\_MAX\_LFN\ +\ 1)\ *\ 2\ bytes\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00127}00127\ \textcolor{comment}{/\ \ additional\ (FF\_MAX\_LFN\ +\ 44)\ /\ 15\ *\ 32\ bytes\ when\ exFAT\ is\ enabled.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00128}00128\ \textcolor{comment}{/\ \ The\ FF\_MAX\_LFN\ defines\ size\ of\ the\ working\ buffer\ in\ UTF-\/16\ code\ unit\ and\ it\ can}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00129}00129\ \textcolor{comment}{/\ \ be\ in\ range\ of\ 12\ to\ 255.\ It\ is\ recommended\ to\ be\ set\ it\ 255\ to\ fully\ support\ LFN}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00130}00130\ \textcolor{comment}{/\ \ specification.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00131}00131\ \textcolor{comment}{/\ \ When\ use\ stack\ for\ the\ working\ buffer,\ take\ care\ on\ stack\ overflow.\ When\ use\ heap}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00132}00132\ \textcolor{comment}{/\ \ memory\ for\ the\ working\ buffer,\ memory\ management\ functions,\ ff\_memalloc()\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00133}00133\ \textcolor{comment}{/\ \ ff\_memfree()\ exemplified\ in\ ffsystem.c,\ need\ to\ be\ added\ to\ the\ project.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00136}\mbox{\hyperlink{__ffconf_8h_a95aeacb103bd1c4e03b3e154e450c534}{00136}}\ \textcolor{preprocessor}{\#define\ FF\_LFN\_UNICODE\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00137}00137\ \textcolor{comment}{/*\ This\ option\ switches\ the\ character\ encoding\ on\ the\ API\ when\ LFN\ is\ enabled.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00138}00138\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00139}00139\ \textcolor{comment}{/\ \ \ 0:\ ANSI/OEM\ in\ current\ CP\ (TCHAR\ =\ char)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00140}00140\ \textcolor{comment}{/\ \ \ 1:\ Unicode\ in\ UTF-\/16\ (TCHAR\ =\ WCHAR)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00141}00141\ \textcolor{comment}{/\ \ \ 2:\ Unicode\ in\ UTF-\/8\ (TCHAR\ =\ char)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00142}00142\ \textcolor{comment}{/\ \ \ 3:\ Unicode\ in\ UTF-\/32\ (TCHAR\ =\ DWORD)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00143}00143\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00144}00144\ \textcolor{comment}{/\ \ Also\ behavior\ of\ string\ I/O\ functions\ will\ be\ affected\ by\ this\ option.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00145}00145\ \textcolor{comment}{/\ \ When\ LFN\ is\ not\ enabled,\ this\ option\ has\ no\ effect.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00148}\mbox{\hyperlink{__ffconf_8h_a7d29ac29d2d2db71cc7d045ea38fa927}{00148}}\ \textcolor{preprocessor}{\#define\ FF\_LFN\_BUF\ \ \ \ \ \ 255}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00149}\mbox{\hyperlink{__ffconf_8h_ac19c6abcf1fc6e2bbf204003462cfedb}{00149}}\ \textcolor{preprocessor}{\#define\ FF\_SFN\_BUF\ \ \ \ \ \ 12}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00150}00150\ \textcolor{comment}{/*\ This\ set\ of\ options\ defines\ size\ of\ file\ name\ members\ in\ the\ FILINFO\ structure}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00151}00151\ \textcolor{comment}{/\ \ which\ is\ used\ to\ read\ out\ directory\ items.\ These\ values\ should\ be\ suffcient\ for}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00152}00152\ \textcolor{comment}{/\ \ the\ file\ names\ to\ read.\ The\ maximum\ possible\ length\ of\ the\ read\ file\ name\ depends}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00153}00153\ \textcolor{comment}{/\ \ on\ character\ encoding.\ When\ LFN\ is\ not\ enabled,\ these\ options\ have\ no\ effect.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00156}\mbox{\hyperlink{__ffconf_8h_af0d4b41a010f1a611bc6fb9e42357350}{00156}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_RPATH\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00157}00157\ \textcolor{comment}{/*\ This\ option\ configures\ support\ for\ relative\ path.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00158}00158\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00159}00159\ \textcolor{comment}{/\ \ \ 0:\ Disable\ relative\ path\ and\ remove\ related\ functions.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00160}00160\ \textcolor{comment}{/\ \ \ 1:\ Enable\ relative\ path.\ f\_chdir()\ and\ f\_chdrive()\ are\ available.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00161}00161\ \textcolor{comment}{/\ \ \ 2:\ f\_getcwd()\ function\ is\ available\ in\ addition\ to\ 1.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00162}00162\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00165}00165\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00166}00166\ \textcolor{comment}{/\ Drive/Volume\ Configurations}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00167}00167\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00169}\mbox{\hyperlink{__ffconf_8h_a2343dca8b59f249f6a88574fda8ac31c}{00169}}\ \textcolor{preprocessor}{\#define\ FF\_VOLUMES\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00170}00170\ \textcolor{comment}{/*\ Number\ of\ volumes\ (logical\ drives)\ to\ be\ used.\ (1-\/10)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00173}\mbox{\hyperlink{__ffconf_8h_a056575130662da5bc7ac26a5b1d25838}{00173}}\ \textcolor{preprocessor}{\#define\ FF\_STR\_VOLUME\_ID\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00174}\mbox{\hyperlink{__ffconf_8h_adf45484c0fd7a2ffe8b56f83019317d0}{00174}}\ \textcolor{preprocessor}{\#define\ FF\_VOLUME\_STRS\ \ \ \ \ \ "{}RAM"{},"{}NAND"{},"{}CF"{},"{}SD"{},"{}SD2"{},"{}USB"{},"{}USB2"{},"{}USB3"{}}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00175}00175\ \textcolor{comment}{/*\ FF\_STR\_VOLUME\_ID\ switches\ support\ for\ volume\ ID\ in\ arbitrary\ strings.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00176}00176\ \textcolor{comment}{/\ \ When\ FF\_STR\_VOLUME\_ID\ is\ set\ to\ 1\ or\ 2,\ arbitrary\ strings\ can\ be\ used\ as\ drive}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00177}00177\ \textcolor{comment}{/\ \ number\ in\ the\ path\ name.\ FF\_VOLUME\_STRS\ defines\ the\ volume\ ID\ strings\ for\ each}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00178}00178\ \textcolor{comment}{/\ \ logical\ drives.\ Number\ of\ items\ must\ not\ be\ less\ than\ FF\_VOLUMES.\ Valid}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00179}00179\ \textcolor{comment}{/\ \ characters\ for\ the\ volume\ ID\ strings\ are\ A-\/Z,\ a-\/z\ and\ 0-\/9,\ however,\ they\ are}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00180}00180\ \textcolor{comment}{/\ \ compared\ in\ case-\/insensitive.\ If\ FF\_STR\_VOLUME\_ID\ >=\ 1\ and\ FF\_VOLUME\_STRS\ is}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00181}00181\ \textcolor{comment}{/\ \ not\ defined,\ a\ user\ defined\ volume\ string\ table\ is\ needed\ as:}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00182}00182\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00183}00183\ \textcolor{comment}{/\ \ const\ char*\ VolumeStr[FF\_VOLUMES]\ =\ \{"{}ram"{},"{}flash"{},"{}sd"{},"{}usb"{},...}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00184}00184\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00187}\mbox{\hyperlink{__ffconf_8h_a6f07d18b72c37af9fb5deda0e8a13131}{00187}}\ \textcolor{preprocessor}{\#define\ FF\_MULTI\_PARTITION\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00188}00188\ \textcolor{comment}{/*\ This\ option\ switches\ support\ for\ multiple\ volumes\ on\ the\ physical\ drive.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00189}00189\ \textcolor{comment}{/\ \ By\ default\ (0),\ each\ logical\ drive\ number\ is\ bound\ to\ the\ same\ physical\ drive}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00190}00190\ \textcolor{comment}{/\ \ number\ and\ only\ an\ FAT\ volume\ found\ on\ the\ physical\ drive\ will\ be\ mounted.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00191}00191\ \textcolor{comment}{/\ \ When\ this\ function\ is\ enabled\ (1),\ each\ logical\ drive\ number\ can\ be\ bound\ to}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00192}00192\ \textcolor{comment}{/\ \ arbitrary\ physical\ drive\ and\ partition\ listed\ in\ the\ VolToPart[].\ Also\ f\_fdisk()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00193}00193\ \textcolor{comment}{/\ \ function\ will\ be\ available.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00196}\mbox{\hyperlink{__ffconf_8h_a5c25535bf118c111157fe72fff3cbea5}{00196}}\ \textcolor{preprocessor}{\#define\ FF\_MIN\_SS\ \ \ \ \ \ \ 512}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00197}\mbox{\hyperlink{__ffconf_8h_a104c36ee46f9d6e76dadf37f3d9696cc}{00197}}\ \textcolor{preprocessor}{\#define\ FF\_MAX\_SS\ \ \ \ \ \ \ 512}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00198}00198\ \textcolor{comment}{/*\ This\ set\ of\ options\ configures\ the\ range\ of\ sector\ size\ to\ be\ supported.\ (512,}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00199}00199\ \textcolor{comment}{/\ \ 1024,\ 2048\ or\ 4096)\ Always\ set\ both\ 512\ for\ most\ systems,\ generic\ memory\ card\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00200}00200\ \textcolor{comment}{/\ \ harddisk,\ but\ a\ larger\ value\ may\ be\ required\ for\ on-\/board\ flash\ memory\ and\ some}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00201}00201\ \textcolor{comment}{/\ \ type\ of\ optical\ media.\ When\ FF\_MAX\_SS\ is\ larger\ than\ FF\_MIN\_SS,\ FatFs\ is\ configured}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00202}00202\ \textcolor{comment}{/\ \ for\ variable\ sector\ size\ mode\ and\ disk\_ioctl()\ function\ needs\ to\ implement}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00203}00203\ \textcolor{comment}{/\ \ GET\_SECTOR\_SIZE\ command.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00206}\mbox{\hyperlink{__ffconf_8h_ab92e95c077afccc4d6f847cbf766e1cd}{00206}}\ \textcolor{preprocessor}{\#define\ FF\_LBA64\ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00207}00207\ \textcolor{comment}{/*\ This\ option\ switches\ support\ for\ 64-\/bit\ LBA.\ (0:Disable\ or\ 1:Enable)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00208}00208\ \textcolor{comment}{/\ \ To\ enable\ the\ 64-\/bit\ LBA,\ also\ exFAT\ needs\ to\ be\ enabled.\ (FF\_FS\_EXFAT\ ==\ 1)\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00211}\mbox{\hyperlink{__ffconf_8h_a1f3a98483912d219d3688edfa5717949}{00211}}\ \textcolor{preprocessor}{\#define\ FF\_MIN\_GPT\ \ \ \ \ \ 0x10000000}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00212}00212\ \textcolor{comment}{/*\ Minimum\ number\ of\ sectors\ to\ switch\ GPT\ as\ partitioning\ format\ in\ f\_mkfs\ and}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00213}00213\ \textcolor{comment}{/\ \ f\_fdisk\ function.\ 0x100000000\ max.\ This\ option\ has\ no\ effect\ when\ FF\_LBA64\ ==\ 0.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00216}\mbox{\hyperlink{__ffconf_8h_a263c9f484beef1e88f2de0a96d8dad9b}{00216}}\ \textcolor{preprocessor}{\#define\ FF\_USE\_TRIM\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00217}00217\ \textcolor{comment}{/*\ This\ option\ switches\ support\ for\ ATA-\/TRIM.\ (0:Disable\ or\ 1:Enable)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00218}00218\ \textcolor{comment}{/\ \ To\ enable\ Trim\ function,\ also\ CTRL\_TRIM\ command\ should\ be\ implemented\ to\ the}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00219}00219\ \textcolor{comment}{/\ \ disk\_ioctl()\ function.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00223}00223\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00224}00224\ \textcolor{comment}{/\ System\ Configurations}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00225}00225\ \textcolor{comment}{/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00227}\mbox{\hyperlink{__ffconf_8h_a618a0c0a1db7d420dee23ee81379c387}{00227}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_TINY\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00228}00228\ \textcolor{comment}{/*\ This\ option\ switches\ tiny\ buffer\ configuration.\ (0:Normal\ or\ 1:Tiny)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00229}00229\ \textcolor{comment}{/\ \ At\ the\ tiny\ configuration,\ size\ of\ file\ object\ (FIL)\ is\ shrinked\ FF\_MAX\_SS\ bytes.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00230}00230\ \textcolor{comment}{/\ \ Instead\ of\ private\ sector\ buffer\ eliminated\ from\ the\ file\ object,\ common\ sector}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00231}00231\ \textcolor{comment}{/\ \ buffer\ in\ the\ filesystem\ object\ (FATFS)\ is\ used\ for\ the\ file\ data\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00234}\mbox{\hyperlink{__ffconf_8h_a4374b721b8019acc9761fdd8b829ccd0}{00234}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_EXFAT\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00235}00235\ \textcolor{comment}{/*\ This\ option\ switches\ support\ for\ exFAT\ filesystem.\ (0:Disable\ or\ 1:Enable)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00236}00236\ \textcolor{comment}{/\ \ To\ enable\ exFAT,\ also\ LFN\ needs\ to\ be\ enabled.\ (FF\_USE\_LFN\ >=\ 1)}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00237}00237\ \textcolor{comment}{/\ \ Note\ that\ enabling\ exFAT\ discards\ ANSI\ C\ (C89)\ compatibility.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00240}\mbox{\hyperlink{__ffconf_8h_ad9c1285af8f3963c253b0351558ad40d}{00240}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_NORTC\ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00241}\mbox{\hyperlink{__ffconf_8h_acc2167f3af4dd4f6ec84a57a82f923dd}{00241}}\ \textcolor{preprocessor}{\#define\ FF\_NORTC\_MON\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00242}\mbox{\hyperlink{__ffconf_8h_a1726418a7d765c3ae4da9c43d2349151}{00242}}\ \textcolor{preprocessor}{\#define\ FF\_NORTC\_MDAY\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00243}\mbox{\hyperlink{__ffconf_8h_aa23a9857382e458421fb87ef11ff9c63}{00243}}\ \textcolor{preprocessor}{\#define\ FF\_NORTC\_YEAR\ \ \ 2022}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00244}00244\ \textcolor{comment}{/*\ The\ option\ FF\_FS\_NORTC\ switches\ timestamp\ feature.\ If\ the\ system\ does\ not\ have}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00245}00245\ \textcolor{comment}{/\ \ an\ RTC\ or\ valid\ timestamp\ is\ not\ needed,\ set\ FF\_FS\_NORTC\ =\ 1\ to\ disable\ the}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00246}00246\ \textcolor{comment}{/\ \ timestamp\ feature.\ Every\ object\ modified\ by\ FatFs\ will\ have\ a\ fixed\ timestamp}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00247}00247\ \textcolor{comment}{/\ \ defined\ by\ FF\_NORTC\_MON,\ FF\_NORTC\_MDAY\ and\ FF\_NORTC\_YEAR\ in\ local\ time.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00248}00248\ \textcolor{comment}{/\ \ To\ enable\ timestamp\ function\ (FF\_FS\_NORTC\ =\ 0),\ get\_fattime()\ function\ need\ to\ be}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00249}00249\ \textcolor{comment}{/\ \ added\ to\ the\ project\ to\ read\ current\ time\ form\ real-\/time\ clock.\ FF\_NORTC\_MON,}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00250}00250\ \textcolor{comment}{/\ \ FF\_NORTC\_MDAY\ and\ FF\_NORTC\_YEAR\ have\ no\ effect.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00251}00251\ \textcolor{comment}{/\ \ These\ options\ have\ no\ effect\ in\ read-\/only\ configuration\ (FF\_FS\_READONLY\ =\ 1).\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00254}\mbox{\hyperlink{__ffconf_8h_a660f7a4d681d9006004a8178f29f3c00}{00254}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_NOFSINFO\ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00255}00255\ \textcolor{comment}{/*\ If\ you\ need\ to\ know\ correct\ free\ space\ on\ the\ FAT32\ volume,\ set\ bit\ 0\ of\ this}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00256}00256\ \textcolor{comment}{/\ \ option,\ and\ f\_getfree()\ function\ at\ the\ first\ time\ after\ volume\ mount\ will\ force}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00257}00257\ \textcolor{comment}{/\ \ a\ full\ FAT\ scan.\ Bit\ 1\ controls\ the\ use\ of\ last\ allocated\ cluster\ number.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00258}00258\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00259}00259\ \textcolor{comment}{/\ \ bit0=0:\ Use\ free\ cluster\ count\ in\ the\ FSINFO\ if\ available.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00260}00260\ \textcolor{comment}{/\ \ bit0=1:\ Do\ not\ trust\ free\ cluster\ count\ in\ the\ FSINFO.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00261}00261\ \textcolor{comment}{/\ \ bit1=0:\ Use\ last\ allocated\ cluster\ number\ in\ the\ FSINFO\ if\ available.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00262}00262\ \textcolor{comment}{/\ \ bit1=1:\ Do\ not\ trust\ last\ allocated\ cluster\ number\ in\ the\ FSINFO.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00263}00263\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00266}\mbox{\hyperlink{__ffconf_8h_ab76cc3251ebd18a5c33f9f18656317f3}{00266}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_LOCK\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00267}00267\ \textcolor{comment}{/*\ The\ option\ FF\_FS\_LOCK\ switches\ file\ lock\ function\ to\ control\ duplicated\ file\ open}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00268}00268\ \textcolor{comment}{/\ \ and\ illegal\ operation\ to\ open\ objects.\ This\ option\ must\ be\ 0\ when\ FF\_FS\_READONLY}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00269}00269\ \textcolor{comment}{/\ \ is\ 1.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00270}00270\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00271}00271\ \textcolor{comment}{/\ \ 0:\ \ Disable\ file\ lock\ function.\ To\ avoid\ volume\ corruption,\ application\ program}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00272}00272\ \textcolor{comment}{/\ \ \ \ \ \ should\ avoid\ illegal\ open,\ remove\ and\ rename\ to\ the\ open\ objects.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00273}00273\ \textcolor{comment}{/\ \ >0:\ Enable\ file\ lock\ function.\ The\ value\ defines\ how\ many\ files/sub-\/directories}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00274}00274\ \textcolor{comment}{/\ \ \ \ \ \ can\ be\ opened\ simultaneously\ under\ file\ lock\ control.\ Note\ that\ the\ file}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00275}00275\ \textcolor{comment}{/\ \ \ \ \ \ lock\ control\ is\ independent\ of\ re-\/entrancy.\ */}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00278}\mbox{\hyperlink{__ffconf_8h_a42c81182eb3a8e31a4129f711ee44666}{00278}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_REENTRANT\ 0}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00279}\mbox{\hyperlink{__ffconf_8h_a0f4ab16049c9d59da5ee3f503c425b71}{00279}}\ \textcolor{preprocessor}{\#define\ FF\_FS\_TIMEOUT\ \ \ 1000}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00280}00280\ \textcolor{comment}{/*\ The\ option\ FF\_FS\_REENTRANT\ switches\ the\ re-\/entrancy\ (thread\ safe)\ of\ the\ FatFs}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00281}00281\ \textcolor{comment}{/\ \ module\ itself.\ Note\ that\ regardless\ of\ this\ option,\ file\ access\ to\ different}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00282}00282\ \textcolor{comment}{/\ \ volume\ is\ always\ re-\/entrant\ and\ volume\ control\ functions,\ f\_mount(),\ f\_mkfs()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00283}00283\ \textcolor{comment}{/\ \ and\ f\_fdisk()\ function,\ are\ always\ not\ re-\/entrant.\ Only\ file/directory\ access}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00284}00284\ \textcolor{comment}{/\ \ to\ the\ same\ volume\ is\ under\ control\ of\ this\ featuer.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00285}00285\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00286}00286\ \textcolor{comment}{/\ \ \ 0:\ Disable\ re-\/entrancy.\ FF\_FS\_TIMEOUT\ have\ no\ effect.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00287}00287\ \textcolor{comment}{/\ \ \ 1:\ Enable\ re-\/entrancy.\ Also\ user\ provided\ synchronization\ handlers,}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00288}00288\ \textcolor{comment}{/\ \ \ \ \ \ ff\_mutex\_create(),\ ff\_mutex\_delete(),\ ff\_mutex\_take()\ and\ ff\_mutex\_give()}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00289}00289\ \textcolor{comment}{/\ \ \ \ \ \ function,\ must\ be\ added\ to\ the\ project.\ Samples\ are\ available\ in\ ffsystem.c.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00290}00290\ \textcolor{comment}{/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00291}00291\ \textcolor{comment}{/\ \ The\ FF\_FS\_TIMEOUT\ defines\ timeout\ period\ in\ unit\ of\ O/S\ time\ tick.}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00292}00292\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{__ffconf_8h_source_l00296}00296\ \textcolor{comment}{/*-\/-\/-\/\ End\ of\ configuration\ options\ -\/-\/-\/*/}}
+
+\end{DoxyCode}

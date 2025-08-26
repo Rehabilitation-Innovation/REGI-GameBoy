@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_f_i_l" xml:lang="en-US">
+<title>FIL Struct Reference</title>
+<indexterm><primary>FIL</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ff.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_struct_f_f_o_b_j_i_d">FFOBJID</link> <link linkend="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4">obj</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_i_l_1ac409508881f5a16f2998ae675072b376">flag</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_i_l_1aea440945db26de9c4a88065c0c887fda">err</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a3fc0992ad7436250b6b1a0592214b7f2">FSIZE_t</link> <link linkend="_struct_f_i_l_1a088b03ab2e02f82e10e17bdd938190a6">fptr</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> <link linkend="_struct_f_i_l_1aa41312aba551b9a6d1c9d3c8c7d2734b">clust</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_i_l_1aa3f9f9ed9341b765862d073a95c86001">sect</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> <link linkend="_struct_f_i_l_1a19e61b116df8e6f2138243998e43f131">dir_sect</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> * <link linkend="_struct_f_i_l_1a5af9e9fb312b629220eaf684dd28c4a9">dir_ptr</link></para>
+</listitem>
+            <listitem><para><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> <link linkend="_struct_f_i_l_1ac2aa36f0fa61cd82f905173d51f719b0">buf</link> [<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_ff_8h_source_1l00203">203</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_f_i_l_1ac2aa36f0fa61cd82f905173d51f719b0"/><section>
+    <title>buf</title>
+<indexterm><primary>buf</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>buf</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FIL::buf[<link linkend="_ffconf_8h_1a104c36ee46f9d6e76dadf37f3d9696cc">FF_MAX_SS</link>]</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00218">218</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1aa41312aba551b9a6d1c9d3c8c7d2734b"/><section>
+    <title>clust</title>
+<indexterm><primary>clust</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>clust</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1ad342ac907eb044443153a22f964bf0af">DWORD</link> FIL::clust</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00208">208</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1a5af9e9fb312b629220eaf684dd28c4a9"/><section>
+    <title>dir_ptr</title>
+<indexterm><primary>dir_ptr</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>dir_ptr</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link>* FIL::dir_ptr</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00212">212</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1a19e61b116df8e6f2138243998e43f131"/><section>
+    <title>dir_sect</title>
+<indexterm><primary>dir_sect</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>dir_sect</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FIL::dir_sect</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00211">211</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1aea440945db26de9c4a88065c0c887fda"/><section>
+    <title>err</title>
+<indexterm><primary>err</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>err</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FIL::err</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00206">206</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1ac409508881f5a16f2998ae675072b376"/><section>
+    <title>flag</title>
+<indexterm><primary>flag</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>flag</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a4ae1dab0fb4b072a66584546209e7d58">BYTE</link> FIL::flag</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00205">205</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1a088b03ab2e02f82e10e17bdd938190a6"/><section>
+    <title>fptr</title>
+<indexterm><primary>fptr</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>fptr</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a3fc0992ad7436250b6b1a0592214b7f2">FSIZE_t</link> FIL::fptr</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00207">207</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1ad95b6e85106673b0d7a1855da4d264f4"/><section>
+    <title>obj</title>
+<indexterm><primary>obj</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>obj</secondary></indexterm>
+<para><computeroutput><link linkend="_struct_f_f_o_b_j_i_d">FFOBJID</link> FIL::obj</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00204">204</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<anchor xml:id="_struct_f_i_l_1aa3f9f9ed9341b765862d073a95c86001"/><section>
+    <title>sect</title>
+<indexterm><primary>sect</primary><secondary>FIL</secondary></indexterm>
+<indexterm><primary>FIL</primary><secondary>sect</secondary></indexterm>
+<para><computeroutput><link linkend="_ff_8h_1a1f3c30a83148a28340f009d4e583f087">LBA_t</link> FIL::sect</computeroutput></para><para>
+Definition at line <link linkend="_ff_8h_source_1l00209">209</link> of file <link linkend="_ff_8h_source">ff.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/vendor/ff15/source/<link linkend="_ff_8h">ff.h</link></section>
+</section>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_sensor__stubs_8cpp" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/sensor_stubs.cpp File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/stubs/sensor_stubs.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;sensor.pio.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_sensor__stubs_8cpp_1abb2fe088e1320015022ea8a3ee4ff969">distance_sensor_program_init</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> offset, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> pins, <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link> isr)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_structpio__program__t">pio_program_t</link> <link linkend="_sensor__stubs_8cpp_1af4ad3f5ae38c4079373b4a387d68612c">distance_sensor_program</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_sensor__stubs_8cpp_1abb2fe088e1320015022ea8a3ee4ff969"/><section>
+    <title>distance_sensor_program_init()</title>
+<indexterm><primary>distance_sensor_program_init</primary><secondary>sensor_stubs.cpp</secondary></indexterm>
+<indexterm><primary>sensor_stubs.cpp</primary><secondary>distance_sensor_program_init</secondary></indexterm>
+<para><computeroutput>void distance_sensor_program_init (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> offset, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> pins, <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link> isr)</computeroutput></para>
+<para>Stubs for testing </para>
+<para>
+Definition at line <link linkend="_sensor__stubs_8cpp_source_1l00003">3</link> of file <link linkend="_sensor__stubs_8cpp_source">sensor_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00003 {}
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_sensor__stubs_8cpp_1af4ad3f5ae38c4079373b4a387d68612c"/><section>
+    <title>distance_sensor_program</title>
+<indexterm><primary>distance_sensor_program</primary><secondary>sensor_stubs.cpp</secondary></indexterm>
+<indexterm><primary>sensor_stubs.cpp</primary><secondary>distance_sensor_program</secondary></indexterm>
+<para><computeroutput><link linkend="_structpio__program__t">pio_program_t</link> distance_sensor_program</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting linenumbering="unnumbered">=&#32;{
+&#32;&#32;&#32;&#32;(uint16_t*)0xDEAD,&#32;0x10,&#32;0x10
+}
+</programlisting><para>
+Definition at line <link linkend="_sensor__stubs_8cpp_source_1l00007">7</link> of file <link linkend="_sensor__stubs_8cpp_source">sensor_stubs.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00007 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00008 &#32;&#32;&#32;&#32;(uint16_t*)0xDEAD,&#32;0x10,&#32;0x10
+00009 };
+</programlisting></section>
+</section>
+</section>

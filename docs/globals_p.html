@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('globals_p.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -114,8 +101,45 @@ $(function() {
 <li>pattern_snakes()&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a936c520c77dd3640169856dda95c0755">DinoGame.cpp</a></li>
 <li>pattern_sparkle()&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a22d482c11872140be273ca3b3ddda1ec">DinoGame.cpp</a></li>
 <li>pattern_table&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a5a4c6b92e5ee81465b3510b5754da506">DinoGame.cpp</a></li>
+<li>pico_board_cmake_set()&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a84cada78bd4360891c500026949abd61">regi_rev1.h</a></li>
+<li>PICO_BOOT_STAGE2_CHOOSE_W25Q080&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a868e795ee21e547e10edf12a3aeafbc9">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_I2C&#160;:&#160;<a class="el" href="regi__rev1_8h.html#aa97a6c55314d1b099ced2860a6b3dcc7">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_I2C_SCL_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a8b06cc6391b2a8f7d6da3f027381611d">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_I2C_SDA_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#abc0792454cd382ae0cf50dffadfaa02e">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_SPI&#160;:&#160;<a class="el" href="regi__rev1_8h.html#ae4e23302c26c165c8f4519ccc664e992">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_SPI_CSN_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a1f76bedc8bb59acb457e1943dda8431d">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_SPI_RX_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#ab7eaa7dddacd975821969189da644cdb">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_SPI_SCK_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#adad46d9962adcf584b003bb52ef8e33e">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_SPI_TX_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#acd12af431f3d8c3752815d58f998c0ac">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_UART&#160;:&#160;<a class="el" href="regi__rev1_8h.html#ac6468dfeffb42ab797be2e0b3d886428">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_UART_RX_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a14ba1da2ef162698e5fc3fe54896103e">regi_rev1.h</a></li>
+<li>PICO_DEFAULT_UART_TX_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a596b6d76c33b68f0cab100a6360a0784">regi_rev1.h</a></li>
+<li>PICO_FLASH_SIZE_BYTES&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">regi_rev1.h</a></li>
+<li>PICO_FLASH_SPI_CLKDIV&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a090528628a511947179066f60c2aeb8a">regi_rev1.h</a></li>
+<li>PICO_RP2350_A2_SUPPORTED&#160;:&#160;<a class="el" href="regi__rev1_8h.html#ae0fd438812696e3d1a23842f755daf74">regi_rev1.h</a></li>
+<li>PICO_RP2350A&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a82ed167c189e248cd45960a4ddf976bf">regi_rev1.h</a></li>
+<li>PICO_SDK_VERSION_MAJOR&#160;:&#160;<a class="el" href="version_8h.html#a389b2ab6feac8cb2e16cc15c2355b1a9">version.h</a></li>
+<li>PICO_SDK_VERSION_MINOR&#160;:&#160;<a class="el" href="version_8h.html#a2dda83706b2cefcf15dfdbc278676c0f">version.h</a></li>
+<li>PICO_SDK_VERSION_REVISION&#160;:&#160;<a class="el" href="version_8h.html#a5be32caa1531cc592aeff17e4c5b230d">version.h</a></li>
+<li>PICO_SDK_VERSION_STRING&#160;:&#160;<a class="el" href="version_8h.html#a335c1eae5c5da86063f72343c92764db">version.h</a></li>
+<li>PICO_SMPS_MODE_PIN&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a11ebfeefe195a36f1bc2174c8dd928a1">regi_rev1.h</a></li>
 <li>pio&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#ac79a43604cef3e167780e935276174d0">DinoGame.cpp</a></li>
+<li>PIO0_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a6a1531131ebf36cef68deb1b098c169e">intctrl.h</a></li>
+<li>PIO0_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a8342ee77067f98e1796e79d437093367">intctrl.h</a></li>
+<li>PIO1_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a25729562658fcf2aa86e87e54617e7af">intctrl.h</a></li>
+<li>PIO1_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a02a272c2eed06831563b441793eb4964">intctrl.h</a></li>
+<li>PIO2_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a6a797ac81319a12d8f727b0df3bf4b45">intctrl.h</a></li>
+<li>PIO2_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aeaaf6372e890b298cab2d23ccf6b7e25">intctrl.h</a></li>
+<li>PLATFORM_ID&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#adbc5372f40838899018fadbc89bd588b">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#adbc5372f40838899018fadbc89bd588b">CMakeCXXCompilerId.cpp</a></li>
 <li>play_tone&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a10e04ce2c5a546147cbd9f4baee936cb">DinoGame.cpp</a></li>
+<li>PLL_SYS_IRQ&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a946ceb547b06cf725bcdc28171249d5a">intctrl.h</a></li>
+<li>PLL_USB_IRQ&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a875f153be03e06f3da74de8ed802ae12">intctrl.h</a></li>
+<li>POWMAN_IRQ_POW&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8ac30f13a1f91cc090fdb619028183ad0e">intctrl.h</a></li>
+<li>POWMAN_IRQ_TIMER&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a803d6485cd5cc1737bbaa006eb30e0f8">intctrl.h</a></li>
+<li>PROC0_IRQ_CTI&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a0ed6df37fc7086fc72331ac64d5abcf0">intctrl.h</a></li>
+<li>PROC1_IRQ_CTI&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8af8101a6cce54937f4af39f3c27a2fe6d">intctrl.h</a></li>
+<li>PWM_IRQ_WRAP_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8ab95e3cb2a0db0f078b2f51d43d6f0221">intctrl.h</a></li>
+<li>PWM_IRQ_WRAP_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a9b21deae090eb8ab1c69eaa4dd71572f">intctrl.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

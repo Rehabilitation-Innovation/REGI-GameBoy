@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_loopback_8h" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/include/blockdevice/loopback.h File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/include/blockdevice/loopback.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;stdint.h&gt;<?linebreak?>#include &quot;blockdevice/blockdevice.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_group__blockdevice__loopback_1gaf43766de5178a14bc204b9ec3b2a474d">blockdevice_loopback_create</link> (const char *path, size_t capacity, size_t block_size)</para>
+
+<para>Create loopback block device. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__blockdevice__loopback_1ga3c4a5393adc24e81505704fba94c1a15">blockdevice_loopback_free</link> (<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> *device)</para>
+
+<para>Release the loopback device. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

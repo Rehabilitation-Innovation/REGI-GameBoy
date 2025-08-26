@@ -1,17 +1,15 @@
 var searchData=
 [
-  ['width_5fsnake_0',['WIDTH_SNAKE',['../_snake_game_8cpp.html#a3860afceb5fa79682a69fb8a4f101af0',1,'SnakeGame.cpp']]],
-  ['ws2812_5fparallel_5fpio_5fversion_1',['ws2812_parallel_pio_version',['../ws2812_8pio_8h.html#ad2e4cacba07cd608fe1b38063ed51ad5',1,'ws2812.pio.h']]],
-  ['ws2812_5fparallel_5ft1_2',['ws2812_parallel_T1',['../ws2812_8pio_8h.html#a81b4730a6b930d668a7f8449f79c1ac9',1,'ws2812.pio.h']]],
-  ['ws2812_5fparallel_5ft2_3',['ws2812_parallel_T2',['../ws2812_8pio_8h.html#af9da2fa537c957203f523a14bd3edbac',1,'ws2812.pio.h']]],
-  ['ws2812_5fparallel_5ft3_4',['ws2812_parallel_T3',['../ws2812_8pio_8h.html#a552f0e986654508ae5868a03c7764458',1,'ws2812.pio.h']]],
-  ['ws2812_5fparallel_5fwrap_5',['ws2812_parallel_wrap',['../ws2812_8pio_8h.html#a73fe32407bd7a459c3f3f46371e9a9c2',1,'ws2812.pio.h']]],
-  ['ws2812_5fparallel_5fwrap_5ftarget_6',['ws2812_parallel_wrap_target',['../ws2812_8pio_8h.html#a54e98b6fc73e77f96df6426d2ded1a31',1,'ws2812.pio.h']]],
-  ['ws2812_5fpin_7',['WS2812_PIN',['../_dino_game_8cpp.html#af75dc8bf5891f41c539ef9b8ebd3d1c3',1,'DinoGame.cpp']]],
-  ['ws2812_5fpio_5fversion_8',['ws2812_pio_version',['../ws2812_8pio_8h.html#a90b6be51b02e3d6a1c81f9ff0083efe4',1,'ws2812.pio.h']]],
-  ['ws2812_5ft1_9',['ws2812_T1',['../ws2812_8pio_8h.html#add4c28498a010b0f0f82008c778531d4',1,'ws2812.pio.h']]],
-  ['ws2812_5ft2_10',['ws2812_T2',['../ws2812_8pio_8h.html#a012a8a957212c5746db3258cd19d1f0f',1,'ws2812.pio.h']]],
-  ['ws2812_5ft3_11',['ws2812_T3',['../ws2812_8pio_8h.html#a7488dfcd2f37624c92b9e1ddc2100277',1,'ws2812.pio.h']]],
-  ['ws2812_5fwrap_12',['ws2812_wrap',['../ws2812_8pio_8h.html#abec411212fc51a42b1b9e741ef50916c',1,'ws2812.pio.h']]],
-  ['ws2812_5fwrap_5ftarget_13',['ws2812_wrap_target',['../ws2812_8pio_8h.html#abf06adf2afef479a93bc15758b26491e',1,'ws2812.pio.h']]]
+  ['sd_5fboot_5fflash_5foffset_0',['SD_BOOT_FLASH_OFFSET',['../main_8h.html#a172de278de1da90d09ac78f3de502671',1,'main.h']]],
+  ['sd_5fcs_5fpin_1',['SD_CS_PIN',['../main_8h.html#a04d57a6c18b2d5e81f31093e58ed0c62',1,'main.h']]],
+  ['sd_5fmiso_5fpin_2',['SD_MISO_PIN',['../main_8h.html#ad3aea67d9c7c7dc0be847a1467786abb',1,'main.h']]],
+  ['sd_5fmosi_5fpin_3',['SD_MOSI_PIN',['../main_8h.html#a1150cf94392cb54e7e979e6b69f210fb',1,'main.h']]],
+  ['sd_5fsclk_5fpin_4',['SD_SCLK_PIN',['../main_8h.html#af72f113c59e467dc74e8c79177da3a48',1,'main.h']]],
+  ['sd_5fspi0_5',['SD_SPI0',['../main_8h.html#ab0d72a395fa77f3dd4418076f87ea81c',1,'main.h']]],
+  ['stringify_6',['STRINGIFY',['../_c_make_c_compiler_id_8c.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp']]],
+  ['stringify_5fhelper_7',['STRINGIFY_HELPER',['../_c_make_c_compiler_id_8c.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp']]],
+  ['sync_5fv0_5fh0_8',['SYNC_V0_H0',['../tinyengine__renderer__dvi_8cpp.html#a29db1628b45eab271991fc2da1ad01f5',1,'tinyengine_renderer_dvi.cpp']]],
+  ['sync_5fv0_5fh1_9',['SYNC_V0_H1',['../tinyengine__renderer__dvi_8cpp.html#a34106096aae9fd6a6f8b50dde105dfeb',1,'tinyengine_renderer_dvi.cpp']]],
+  ['sync_5fv1_5fh0_10',['SYNC_V1_H0',['../tinyengine__renderer__dvi_8cpp.html#a83aa3de8e439e8c44fcd2d38bad7cd13',1,'tinyengine_renderer_dvi.cpp']]],
+  ['sync_5fv1_5fh1_11',['SYNC_V1_H1',['../tinyengine__renderer__dvi_8cpp.html#a33a88cfa260db3be502f5c95166e2a69',1,'tinyengine_renderer_dvi.cpp']]]
 ];

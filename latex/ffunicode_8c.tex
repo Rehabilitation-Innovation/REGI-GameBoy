@@ -1,0 +1,284 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/vendor/ff15/source/ffunicode.c File Reference}
+\hypertarget{ffunicode_8c}{}\label{ffunicode_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffunicode.c@{lib/pico-\/vfs-\/REGI-\/Local/vendor/ff15/source/ffunicode.c}}
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ffunicode_8c_a373853218ab4794caaeb75972e228e2e}{MERGE2}}(a,  b)
+\item 
+\#define \mbox{\hyperlink{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}{CVTBL}}(tbl,  cp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}} \mbox{\hyperlink{ffunicode_8c_a72914966e82f8df3504a3659834f2abe}{ff\+\_\+uni2oem}} (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} uni, \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}} cp)
+\item 
+\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}} \mbox{\hyperlink{ffunicode_8c_a52f09f31c84747cc135c90282509961a}{ff\+\_\+oem2uni}} (\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}} oem, \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}} cp)
+\item 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} \mbox{\hyperlink{ffunicode_8c_acb0bf9acde41b603662ab45811cbc806}{ff\+\_\+wtoupper}} (\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} uni)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{ffunicode_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}\index{ffunicode.c@{ffunicode.c}!CVTBL@{CVTBL}}
+\index{CVTBL@{CVTBL}!ffunicode.c@{ffunicode.c}}
+\doxysubsubsection{\texorpdfstring{CVTBL}{CVTBL}}
+{\footnotesize\ttfamily \label{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8} 
+\#define CVTBL(\begin{DoxyParamCaption}\item[{}]{tbl}{, }\item[{}]{cp}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{ffunicode_8c_a373853218ab4794caaeb75972e228e2e}{MERGE2}}(tbl,\ cp)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{ffunicode_8c_source_l00031}{31}} of file \mbox{\hyperlink{ffunicode_8c_source}{ffunicode.\+c}}.
+
+\Hypertarget{ffunicode_8c_a373853218ab4794caaeb75972e228e2e}\index{ffunicode.c@{ffunicode.c}!MERGE2@{MERGE2}}
+\index{MERGE2@{MERGE2}!ffunicode.c@{ffunicode.c}}
+\doxysubsubsection{\texorpdfstring{MERGE2}{MERGE2}}
+{\footnotesize\ttfamily \label{ffunicode_8c_a373853218ab4794caaeb75972e228e2e} 
+\#define MERGE2(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{a\ \#\#\ b}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{ffunicode_8c_source_l00030}{30}} of file \mbox{\hyperlink{ffunicode_8c_source}{ffunicode.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{ffunicode_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ffunicode_8c_a52f09f31c84747cc135c90282509961a}\index{ffunicode.c@{ffunicode.c}!ff\_oem2uni@{ff\_oem2uni}}
+\index{ff\_oem2uni@{ff\_oem2uni}!ffunicode.c@{ffunicode.c}}
+\doxysubsubsection{\texorpdfstring{ff\_oem2uni()}{ff\_oem2uni()}}
+{\footnotesize\ttfamily \label{ffunicode_8c_a52f09f31c84747cc135c90282509961a} 
+\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}} ff\+\_\+oem2uni (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}}}]{oem}{, }\item[{\mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}}]{cp}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ffunicode_8c_source_l15311}{15311}} of file \mbox{\hyperlink{ffunicode_8c_source}{ffunicode.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15315\ \{}
+\DoxyCodeLine{15316\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}}*\ p;}
+\DoxyCodeLine{15317\ \ \ \ \ \mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}}\ c\ =\ 0;}
+\DoxyCodeLine{15318\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ i\ =\ 0,\ n,\ li,\ hi;}
+\DoxyCodeLine{15319\ }
+\DoxyCodeLine{15320\ }
+\DoxyCodeLine{15321\ \ \ \ \ \textcolor{keywordflow}{if}\ (oem\ <\ 0x80)\ \{\ \ \ \textcolor{comment}{/*\ ASCII?\ */}}
+\DoxyCodeLine{15322\ \ \ \ \ \ \ \ \ c\ =\ oem;}
+\DoxyCodeLine{15323\ }
+\DoxyCodeLine{15324\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Extended\ char\ */}}
+\DoxyCodeLine{15325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cp\ ==\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}})\ \{\ \ \ \textcolor{comment}{/*\ Is\ it\ valid\ code\ page?\ */}}
+\DoxyCodeLine{15326\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ \mbox{\hyperlink{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}{CVTBL}}(oem2uni,\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}});}
+\DoxyCodeLine{15327\ \ \ \ \ \ \ \ \ \ \ \ \ hi\ =\ \textcolor{keyword}{sizeof}\ \mbox{\hyperlink{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}{CVTBL}}(oem2uni,\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}})\ /\ 4\ -\/\ 1;}
+\DoxyCodeLine{15328\ \ \ \ \ \ \ \ \ \ \ \ \ li\ =\ 0;}
+\DoxyCodeLine{15329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 16;\ n;\ n-\/-\/)\ \{}
+\DoxyCodeLine{15330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ li\ +\ (hi\ -\/\ li)\ /\ 2;}
+\DoxyCodeLine{15331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (oem\ ==\ p[i\ *\ 2])\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{15332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (oem\ >\ p[i\ *\ 2])\ \{}
+\DoxyCodeLine{15333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ li\ =\ i;}
+\DoxyCodeLine{15334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{15335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hi\ =\ i;}
+\DoxyCodeLine{15336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15337\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ 0)\ c\ =\ p[i\ *\ 2\ +\ 1];}
+\DoxyCodeLine{15339\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15340\ \ \ \ \ \}}
+\DoxyCodeLine{15341\ }
+\DoxyCodeLine{15342\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{15343\ \}}
+
+\end{DoxyCode}
+\Hypertarget{ffunicode_8c_a72914966e82f8df3504a3659834f2abe}\index{ffunicode.c@{ffunicode.c}!ff\_uni2oem@{ff\_uni2oem}}
+\index{ff\_uni2oem@{ff\_uni2oem}!ffunicode.c@{ffunicode.c}}
+\doxysubsubsection{\texorpdfstring{ff\_uni2oem()}{ff\_uni2oem()}}
+{\footnotesize\ttfamily \label{ffunicode_8c_a72914966e82f8df3504a3659834f2abe} 
+\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}} ff\+\_\+uni2oem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{uni}{, }\item[{\mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}}]{cp}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ffunicode_8c_source_l15275}{15275}} of file \mbox{\hyperlink{ffunicode_8c_source}{ffunicode.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15279\ \{}
+\DoxyCodeLine{15280\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}}*\ p;}
+\DoxyCodeLine{15281\ \ \ \ \ \mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}}\ c\ =\ 0,\ uc;}
+\DoxyCodeLine{15282\ \ \ \ \ \mbox{\hyperlink{ff_8h_a36cb3b01d81ffd844bbbfb54003e06ec}{UINT}}\ i\ =\ 0,\ n,\ li,\ hi;}
+\DoxyCodeLine{15283\ }
+\DoxyCodeLine{15284\ }
+\DoxyCodeLine{15285\ \ \ \ \ \textcolor{keywordflow}{if}\ (uni\ <\ 0x80)\ \{\ \ \ \textcolor{comment}{/*\ ASCII?\ */}}
+\DoxyCodeLine{15286\ \ \ \ \ \ \ \ \ c\ =\ (\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}})uni;}
+\DoxyCodeLine{15287\ }
+\DoxyCodeLine{15288\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Non-\/ASCII\ */}}
+\DoxyCodeLine{15289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (uni\ <\ 0x10000\ \&\&\ cp\ ==\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}})\ \{\ \ \textcolor{comment}{/*\ Is\ it\ in\ BMP\ and\ valid\ code\ page?\ */}}
+\DoxyCodeLine{15290\ \ \ \ \ \ \ \ \ \ \ \ \ uc\ =\ (\mbox{\hyperlink{ff_8h_a0bb095da65fbe52192dd9e3e643c7568}{WCHAR}})uni;}
+\DoxyCodeLine{15291\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ \mbox{\hyperlink{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}{CVTBL}}(uni2oem,\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}});}
+\DoxyCodeLine{15292\ \ \ \ \ \ \ \ \ \ \ \ \ hi\ =\ \textcolor{keyword}{sizeof}\ \mbox{\hyperlink{ffunicode_8c_afcbf86dfddc068d1df5155276ffc8ef8}{CVTBL}}(uni2oem,\ \mbox{\hyperlink{ffconf_8h_a56bf522419025961acdfaf6388f40402}{FF\_CODE\_PAGE}})\ /\ 4\ -\/\ 1;}
+\DoxyCodeLine{15293\ \ \ \ \ \ \ \ \ \ \ \ \ li\ =\ 0;}
+\DoxyCodeLine{15294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 16;\ n;\ n-\/-\/)\ \{}
+\DoxyCodeLine{15295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ li\ +\ (hi\ -\/\ li)\ /\ 2;}
+\DoxyCodeLine{15296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (uc\ ==\ p[i\ *\ 2])\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{15297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (uc\ >\ p[i\ *\ 2])\ \{}
+\DoxyCodeLine{15298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ li\ =\ i;}
+\DoxyCodeLine{15299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{15300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hi\ =\ i;}
+\DoxyCodeLine{15301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15302\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ 0)\ c\ =\ p[i\ *\ 2\ +\ 1];}
+\DoxyCodeLine{15304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15305\ \ \ \ \ \}}
+\DoxyCodeLine{15306\ }
+\DoxyCodeLine{15307\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{15308\ \}}
+
+\end{DoxyCode}
+\Hypertarget{ffunicode_8c_acb0bf9acde41b603662ab45811cbc806}\index{ffunicode.c@{ffunicode.c}!ff\_wtoupper@{ff\_wtoupper}}
+\index{ff\_wtoupper@{ff\_wtoupper}!ffunicode.c@{ffunicode.c}}
+\doxysubsubsection{\texorpdfstring{ff\_wtoupper()}{ff\_wtoupper()}}
+{\footnotesize\ttfamily \label{ffunicode_8c_acb0bf9acde41b603662ab45811cbc806} 
+\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}} ff\+\_\+wtoupper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ff_8h_ad342ac907eb044443153a22f964bf0af}{DWORD}}}]{uni}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ffunicode_8c_source_l15464}{15464}} of file \mbox{\hyperlink{ffunicode_8c_source}{ffunicode.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15467\ \{}
+\DoxyCodeLine{15468\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}*\ p;}
+\DoxyCodeLine{15469\ \ \ \ \ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ uc,\ bc,\ nc,\ cmd;}
+\DoxyCodeLine{15470\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ cvt1[]\ =\ \{\ \ \ \ \textcolor{comment}{/*\ Compressed\ up\ conversion\ table\ for\ U+0000\ -\/\ U+0FFF\ */}}
+\DoxyCodeLine{15471\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Basic\ Latin\ */}}
+\DoxyCodeLine{15472\ \ \ \ \ \ \ \ \ 0x0061,0x031A,}
+\DoxyCodeLine{15473\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Latin-\/1\ Supplement\ */}}
+\DoxyCodeLine{15474\ \ \ \ \ \ \ \ \ 0x00E0,0x0317,}
+\DoxyCodeLine{15475\ \ \ \ \ \ \ \ \ 0x00F8,0x0307,}
+\DoxyCodeLine{15476\ \ \ \ \ \ \ \ \ 0x00FF,0x0001,0x0178,}
+\DoxyCodeLine{15477\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Latin\ Extended-\/A\ */}}
+\DoxyCodeLine{15478\ \ \ \ \ \ \ \ \ 0x0100,0x0130,}
+\DoxyCodeLine{15479\ \ \ \ \ \ \ \ \ 0x0132,0x0106,}
+\DoxyCodeLine{15480\ \ \ \ \ \ \ \ \ 0x0139,0x0110,}
+\DoxyCodeLine{15481\ \ \ \ \ \ \ \ \ 0x014A,0x012E,}
+\DoxyCodeLine{15482\ \ \ \ \ \ \ \ \ 0x0179,0x0106,}
+\DoxyCodeLine{15483\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Latin\ Extended-\/B\ */}}
+\DoxyCodeLine{15484\ \ \ \ \ \ \ \ \ 0x0180,0x004D,0x0243,0x0181,0x0182,0x0182,0x0184,0x0184,0x0186,0x0187,0x0187,0x0189,0x018A,0x018B,0x018B,0x018D,0x018E,0x018F,0x0190,0x0191,0x0191,0x0193,0x0194,0x01F6,0x0196,0x0197,0x0198,0x0198,0x023D,0x019B,0x019C,0x019D,0x0220,0x019F,0x01A0,0x01A0,0x01A2,0x01A2,0x01A4,0x01A4,0x01A6,0x01A7,0x01A7,0x01A9,0x01AA,0x01AB,0x01AC,0x01AC,0x01AE,0x01AF,0x01AF,0x01B1,0x01B2,0x01B3,0x01B3,0x01B5,0x01B5,0x01B7,0x01B8,0x01B8,0x01BA,0x01BB,0x01BC,0x01BC,0x01BE,0x01F7,0x01C0,0x01C1,0x01C2,0x01C3,0x01C4,0x01C5,0x01C4,0x01C7,0x01C8,0x01C7,0x01CA,0x01CB,0x01CA,}
+\DoxyCodeLine{15485\ \ \ \ \ \ \ \ \ 0x01CD,0x0110,}
+\DoxyCodeLine{15486\ \ \ \ \ \ \ \ \ 0x01DD,0x0001,0x018E,}
+\DoxyCodeLine{15487\ \ \ \ \ \ \ \ \ 0x01DE,0x0112,}
+\DoxyCodeLine{15488\ \ \ \ \ \ \ \ \ 0x01F3,0x0003,0x01F1,0x01F4,0x01F4,}
+\DoxyCodeLine{15489\ \ \ \ \ \ \ \ \ 0x01F8,0x0128,}
+\DoxyCodeLine{15490\ \ \ \ \ \ \ \ \ 0x0222,0x0112,}
+\DoxyCodeLine{15491\ \ \ \ \ \ \ \ \ 0x023A,0x0009,0x2C65,0x023B,0x023B,0x023D,0x2C66,0x023F,0x0240,0x0241,0x0241,}
+\DoxyCodeLine{15492\ \ \ \ \ \ \ \ \ 0x0246,0x010A,}
+\DoxyCodeLine{15493\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ IPA\ Extensions\ */}}
+\DoxyCodeLine{15494\ \ \ \ \ \ \ \ \ 0x0253,0x0040,0x0181,0x0186,0x0255,0x0189,0x018A,0x0258,0x018F,0x025A,0x0190,0x025C,0x025D,0x025E,0x025F,0x0193,0x0261,0x0262,0x0194,0x0264,0x0265,0x0266,0x0267,0x0197,0x0196,0x026A,0x2C62,0x026C,0x026D,0x026E,0x019C,0x0270,0x0271,0x019D,0x0273,0x0274,0x019F,0x0276,0x0277,0x0278,0x0279,0x027A,0x027B,0x027C,0x2C64,0x027E,0x027F,0x01A6,0x0281,0x0282,0x01A9,0x0284,0x0285,0x0286,0x0287,0x01AE,0x0244,0x01B1,0x01B2,0x0245,0x028D,0x028E,0x028F,0x0290,0x0291,0x01B7,}
+\DoxyCodeLine{15495\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Greek,\ Coptic\ */}}
+\DoxyCodeLine{15496\ \ \ \ \ \ \ \ \ 0x037B,0x0003,0x03FD,0x03FE,0x03FF,}
+\DoxyCodeLine{15497\ \ \ \ \ \ \ \ \ 0x03AC,0x0004,0x0386,0x0388,0x0389,0x038A,}
+\DoxyCodeLine{15498\ \ \ \ \ \ \ \ \ 0x03B1,0x0311,}
+\DoxyCodeLine{15499\ \ \ \ \ \ \ \ \ 0x03C2,0x0002,0x03A3,0x03A3,}
+\DoxyCodeLine{15500\ \ \ \ \ \ \ \ \ 0x03C4,0x0308,}
+\DoxyCodeLine{15501\ \ \ \ \ \ \ \ \ 0x03CC,0x0003,0x038C,0x038E,0x038F,}
+\DoxyCodeLine{15502\ \ \ \ \ \ \ \ \ 0x03D8,0x0118,}
+\DoxyCodeLine{15503\ \ \ \ \ \ \ \ \ 0x03F2,0x000A,0x03F9,0x03F3,0x03F4,0x03F5,0x03F6,0x03F7,0x03F7,0x03F9,0x03FA,0x03FA,}
+\DoxyCodeLine{15504\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Cyrillic\ */}}
+\DoxyCodeLine{15505\ \ \ \ \ \ \ \ \ 0x0430,0x0320,}
+\DoxyCodeLine{15506\ \ \ \ \ \ \ \ \ 0x0450,0x0710,}
+\DoxyCodeLine{15507\ \ \ \ \ \ \ \ \ 0x0460,0x0122,}
+\DoxyCodeLine{15508\ \ \ \ \ \ \ \ \ 0x048A,0x0136,}
+\DoxyCodeLine{15509\ \ \ \ \ \ \ \ \ 0x04C1,0x010E,}
+\DoxyCodeLine{15510\ \ \ \ \ \ \ \ \ 0x04CF,0x0001,0x04C0,}
+\DoxyCodeLine{15511\ \ \ \ \ \ \ \ \ 0x04D0,0x0144,}
+\DoxyCodeLine{15512\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Armenian\ */}}
+\DoxyCodeLine{15513\ \ \ \ \ \ \ \ \ 0x0561,0x0426,}
+\DoxyCodeLine{15514\ }
+\DoxyCodeLine{15515\ \ \ \ \ \ \ \ \ 0x0000\ \ \textcolor{comment}{/*\ EOT\ */}}
+\DoxyCodeLine{15516\ \ \ \ \ \};}
+\DoxyCodeLine{15517\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}}\ cvt2[]\ =\ \{\ \ \ \ \textcolor{comment}{/*\ Compressed\ up\ conversion\ table\ for\ U+1000\ -\/\ U+FFFF\ */}}
+\DoxyCodeLine{15518\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Phonetic\ Extensions\ */}}
+\DoxyCodeLine{15519\ \ \ \ \ \ \ \ \ 0x1D7D,0x0001,0x2C63,}
+\DoxyCodeLine{15520\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Latin\ Extended\ Additional\ */}}
+\DoxyCodeLine{15521\ \ \ \ \ \ \ \ \ 0x1E00,0x0196,}
+\DoxyCodeLine{15522\ \ \ \ \ \ \ \ \ 0x1EA0,0x015A,}
+\DoxyCodeLine{15523\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Greek\ Extended\ */}}
+\DoxyCodeLine{15524\ \ \ \ \ \ \ \ \ 0x1F00,0x0608,}
+\DoxyCodeLine{15525\ \ \ \ \ \ \ \ \ 0x1F10,0x0606,}
+\DoxyCodeLine{15526\ \ \ \ \ \ \ \ \ 0x1F20,0x0608,}
+\DoxyCodeLine{15527\ \ \ \ \ \ \ \ \ 0x1F30,0x0608,}
+\DoxyCodeLine{15528\ \ \ \ \ \ \ \ \ 0x1F40,0x0606,}
+\DoxyCodeLine{15529\ \ \ \ \ \ \ \ \ 0x1F51,0x0007,0x1F59,0x1F52,0x1F5B,0x1F54,0x1F5D,0x1F56,0x1F5F,}
+\DoxyCodeLine{15530\ \ \ \ \ \ \ \ \ 0x1F60,0x0608,}
+\DoxyCodeLine{15531\ \ \ \ \ \ \ \ \ 0x1F70,0x000E,0x1FBA,0x1FBB,0x1FC8,0x1FC9,0x1FCA,0x1FCB,0x1FDA,0x1FDB,0x1FF8,0x1FF9,0x1FEA,0x1FEB,0x1FFA,0x1FFB,}
+\DoxyCodeLine{15532\ \ \ \ \ \ \ \ \ 0x1F80,0x0608,}
+\DoxyCodeLine{15533\ \ \ \ \ \ \ \ \ 0x1F90,0x0608,}
+\DoxyCodeLine{15534\ \ \ \ \ \ \ \ \ 0x1FA0,0x0608,}
+\DoxyCodeLine{15535\ \ \ \ \ \ \ \ \ 0x1FB0,0x0004,0x1FB8,0x1FB9,0x1FB2,0x1FBC,}
+\DoxyCodeLine{15536\ \ \ \ \ \ \ \ \ 0x1FCC,0x0001,0x1FC3,}
+\DoxyCodeLine{15537\ \ \ \ \ \ \ \ \ 0x1FD0,0x0602,}
+\DoxyCodeLine{15538\ \ \ \ \ \ \ \ \ 0x1FE0,0x0602,}
+\DoxyCodeLine{15539\ \ \ \ \ \ \ \ \ 0x1FE5,0x0001,0x1FEC,}
+\DoxyCodeLine{15540\ \ \ \ \ \ \ \ \ 0x1FF3,0x0001,0x1FFC,}
+\DoxyCodeLine{15541\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Letterlike\ Symbols\ */}}
+\DoxyCodeLine{15542\ \ \ \ \ \ \ \ \ 0x214E,0x0001,0x2132,}
+\DoxyCodeLine{15543\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Number\ forms\ */}}
+\DoxyCodeLine{15544\ \ \ \ \ \ \ \ \ 0x2170,0x0210,}
+\DoxyCodeLine{15545\ \ \ \ \ \ \ \ \ 0x2184,0x0001,0x2183,}
+\DoxyCodeLine{15546\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enclosed\ Alphanumerics\ */}}
+\DoxyCodeLine{15547\ \ \ \ \ \ \ \ \ 0x24D0,0x051A,}
+\DoxyCodeLine{15548\ \ \ \ \ \ \ \ \ 0x2C30,0x042F,}
+\DoxyCodeLine{15549\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Latin\ Extended-\/C\ */}}
+\DoxyCodeLine{15550\ \ \ \ \ \ \ \ \ 0x2C60,0x0102,}
+\DoxyCodeLine{15551\ \ \ \ \ \ \ \ \ 0x2C67,0x0106,\ 0x2C75,0x0102,}
+\DoxyCodeLine{15552\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Coptic\ */}}
+\DoxyCodeLine{15553\ \ \ \ \ \ \ \ \ 0x2C80,0x0164,}
+\DoxyCodeLine{15554\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Georgian\ Supplement\ */}}
+\DoxyCodeLine{15555\ \ \ \ \ \ \ \ \ 0x2D00,0x0826,}
+\DoxyCodeLine{15556\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Full-\/width\ */}}
+\DoxyCodeLine{15557\ \ \ \ \ \ \ \ \ 0xFF41,0x031A,}
+\DoxyCodeLine{15558\ }
+\DoxyCodeLine{15559\ \ \ \ \ \ \ \ \ 0x0000\ \ \textcolor{comment}{/*\ EOT\ */}}
+\DoxyCodeLine{15560\ \ \ \ \ \};}
+\DoxyCodeLine{15561\ }
+\DoxyCodeLine{15562\ }
+\DoxyCodeLine{15563\ \ \ \ \ \textcolor{keywordflow}{if}\ (uni\ <\ 0x10000)\ \{\ \ \ \ \textcolor{comment}{/*\ Is\ it\ in\ BMP?\ */}}
+\DoxyCodeLine{15564\ \ \ \ \ \ \ \ \ uc\ =\ (\mbox{\hyperlink{ff_8h_a197942eefa7db30960ae396d68339b97}{WORD}})uni;}
+\DoxyCodeLine{15565\ \ \ \ \ \ \ \ \ p\ =\ uc\ <\ 0x1000\ ?\ cvt1\ :\ cvt2;}
+\DoxyCodeLine{15566\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)\ \{}
+\DoxyCodeLine{15567\ \ \ \ \ \ \ \ \ \ \ \ \ bc\ =\ *p++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Get\ the\ block\ base\ */}}
+\DoxyCodeLine{15568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bc\ ==\ 0\ ||\ uc\ <\ bc)\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Not\ matched?\ */}}
+\DoxyCodeLine{15569\ \ \ \ \ \ \ \ \ \ \ \ \ nc\ =\ *p++;\ cmd\ =\ nc\ >>\ 8;\ nc\ \&=\ 0xFF;\ \ \ \textcolor{comment}{/*\ Get\ processing\ command\ and\ block\ size\ */}}
+\DoxyCodeLine{15570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (uc\ <\ bc\ +\ nc)\ \{\ \textcolor{comment}{/*\ In\ the\ block?\ */}}
+\DoxyCodeLine{15571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{15572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:\ uc\ =\ p[uc\ -\/\ bc];\ \textcolor{keywordflow}{break};\ \ \ \ \ \textcolor{comment}{/*\ Table\ conversion\ */}}
+\DoxyCodeLine{15573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ uc\ -\/=\ (uc\ -\/\ bc)\ \&\ 1;\ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ Case\ pairs\ */}}
+\DoxyCodeLine{15574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ uc\ -\/=\ 16;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/16\ */}}
+\DoxyCodeLine{15575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ uc\ -\/=\ 32;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/32\ */}}
+\DoxyCodeLine{15576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:\ uc\ -\/=\ 48;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/48\ */}}
+\DoxyCodeLine{15577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 5:\ uc\ -\/=\ 26;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/26\ */}}
+\DoxyCodeLine{15578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 6:\ uc\ +=\ 8;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ +8\ */}}
+\DoxyCodeLine{15579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 7:\ uc\ -\/=\ 80;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/80\ */}}
+\DoxyCodeLine{15580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 8:\ uc\ -\/=\ 0x1C60;\ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ -\/0x1C60\ */}}
+\DoxyCodeLine{15581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{15583\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15584\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmd\ ==\ 0)\ p\ +=\ nc;\ \ \textcolor{comment}{/*\ Skip\ table\ if\ needed\ */}}
+\DoxyCodeLine{15585\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{15586\ \ \ \ \ \ \ \ \ uni\ =\ uc;}
+\DoxyCodeLine{15587\ \ \ \ \ \}}
+\DoxyCodeLine{15588\ }
+\DoxyCodeLine{15589\ \ \ \ \ \textcolor{keywordflow}{return}\ uni;}
+\DoxyCodeLine{15590\ \}}
+
+\end{DoxyCode}

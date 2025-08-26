@@ -1,0 +1,155 @@
+\doxysection{Test\+Harness Class Reference}
+\hypertarget{class_test_harness}{}\label{class_test_harness}\index{TestHarness@{TestHarness}}
+
+
+{\ttfamily \#include $<$test\+\_\+harness.\+h$>$}
+
+Inheritance diagram for Test\+Harness\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_test_harness}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_test_harness_a445cb0c949020e46968c56264d0e1bd7}{Test\+Harness}} (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} trigger, \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{Distance\+Sensor}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} trigger\+\_\+gpio)
+\item 
+void \mbox{\hyperlink{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}{Trigger\+Read}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0}{Get\+Offset}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\item 
+static bool \mbox{\hyperlink{class_test_harness_aad8f631b26945bb71e799106705bf072}{Is\+Loaded}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\item 
+static \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_test_harness_af877a434e8fd6b886275e9b6658000fd}{Get\+Mapped\+Sensor}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distance_sensor_a495a45dfe6d75a99126fac0e9edc7572}{Get\+Mapped\+Sensor}} (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}}}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}{distance}} = 0
+\item 
+volatile bool \mbox{\hyperlink{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}{is\+\_\+sensing}} = false
+\item 
+\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}
+\item 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}}}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_distance_sensor_ac6680c1265d7514097937d587d509bca}{\+\_\+\+Initialize\+Sensor\+For\+Gpio}} (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} gpio, \mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}, \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}, \mbox{\hyperlink{pio_8h_a8478ee26cc144e947ccd75b0169059a6}{irq\+\_\+handler\+\_\+t}} handler)
+\item 
+static bool \mbox{\hyperlink{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5}{\+\_\+\+Is\+Program\+Loaded}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\item 
+static \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a579d6f646f9a93ad2e0446917271d742}{\+\_\+\+Load\+Sensor\+Program}} (\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}} \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{\+\_\+sensor\+\_\+map}} \mbox{[}2\mbox{]}\mbox{[}4\mbox{]} = \{\}
+\item 
+static \mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{\+\_\+\+Pio\+Offsets}} \mbox{[}2\mbox{]} = \{ \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}}, \mbox{\hyperlink{distance__sensor_8cpp_ac255e2cb81d22d228e8a5880c41b01d4}{PIO\+\_\+\+OFFSET\+\_\+\+UNSET}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{test__harness_8h_source_l00005}{5}} of file \mbox{\hyperlink{test__harness_8h_source}{test\+\_\+harness.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_test_harness_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_test_harness_a445cb0c949020e46968c56264d0e1bd7}\index{TestHarness@{TestHarness}!TestHarness@{TestHarness}}
+\index{TestHarness@{TestHarness}!TestHarness@{TestHarness}}
+\doxysubsubsection{\texorpdfstring{TestHarness()}{TestHarness()}}
+{\footnotesize\ttfamily \label{class_test_harness_a445cb0c949020e46968c56264d0e1bd7} 
+Test\+Harness\+::\+Test\+Harness (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{trigger}{, }\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{test__harness_8h_source_l00007}{7}} of file \mbox{\hyperlink{test__harness_8h_source}{test\+\_\+harness.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ :\ \mbox{\hyperlink{class_distance_sensor_a4a6d6037e4620999c69ed1f791e9fc8f}{DistanceSensor}}(trigger,\ \mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}},\ \mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}})\ \{\};}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{class_test_harness_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_test_harness_af877a434e8fd6b886275e9b6658000fd}\index{TestHarness@{TestHarness}!GetMappedSensor@{GetMappedSensor}}
+\index{GetMappedSensor@{GetMappedSensor}!TestHarness@{TestHarness}}
+\doxysubsubsection{\texorpdfstring{GetMappedSensor()}{GetMappedSensor()}}
+{\footnotesize\ttfamily \label{class_test_harness_af877a434e8fd6b886275e9b6658000fd} 
+\mbox{\hyperlink{class_distance_sensor}{Distance\+Sensor}} \texorpdfstring{$\ast$}{*} Test\+Harness\+::\+Get\+Mapped\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{, }\item[{\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}}]{sm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{test__harness_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{test__harness_8cpp_source}{test\+\_\+harness.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a7d72dcd2d9677b603de8cd063585906f}{\_sensor\_map}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}][\mbox{\hyperlink{class_distance_sensor_adc868e5c2d1642787d12fee059a21a7e}{sm}}];}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0}\index{TestHarness@{TestHarness}!GetOffset@{GetOffset}}
+\index{GetOffset@{GetOffset}!TestHarness@{TestHarness}}
+\doxysubsubsection{\texorpdfstring{GetOffset()}{GetOffset()}}
+{\footnotesize\ttfamily \label{class_test_harness_a5d5d1980f22a3f7291231a61a94be7a0} 
+\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}} Test\+Harness\+::\+Get\+Offset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{test__harness_8cpp_source_l00003}{3}} of file \mbox{\hyperlink{test__harness_8cpp_source}{test\+\_\+harness.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a6f3e1143fe2261abc7292f7eaa52971c}{DistanceSensor::\_PioOffsets}}[\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}}];}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_test_harness_aad8f631b26945bb71e799106705bf072}\index{TestHarness@{TestHarness}!IsLoaded@{IsLoaded}}
+\index{IsLoaded@{IsLoaded}!TestHarness@{TestHarness}}
+\doxysubsubsection{\texorpdfstring{IsLoaded()}{IsLoaded()}}
+{\footnotesize\ttfamily \label{class_test_harness_aad8f631b26945bb71e799106705bf072} 
+bool Test\+Harness\+::\+Is\+Loaded (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO}}}]{pio}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{test__harness_8cpp_source_l00008}{8}} of file \mbox{\hyperlink{test__harness_8cpp_source}{test\+\_\+harness.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_distance_sensor_a84eafa3ba57d16a4266b9982356a29c5}{DistanceSensor::\_IsProgramLoaded}}(\mbox{\hyperlink{class_distance_sensor_a729f0233e67ca6fc6a09b29faa0d4138}{pio}});}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\+\_\+tests/\mbox{\hyperlink{test__harness_8h}{test\+\_\+harness.\+h}}\item 
+lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/unit\+\_\+tests/\mbox{\hyperlink{test__harness_8cpp}{test\+\_\+harness.\+cpp}}\end{DoxyCompactItemize}

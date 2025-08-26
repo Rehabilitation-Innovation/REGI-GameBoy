@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_integration_2test__filesystem_8c_source" xml:lang="en-US">
+<title>test_filesystem.c</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/tests/integration/test_filesystem.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_integration_2test__filesystem_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&lt;assert.h&gt;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_flash_8h">blockdevice/flash.h</link>&quot;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_fat_8h">filesystem/fat.h</link>&quot;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_littlefs_8h">filesystem/littlefs.h</link>&quot;</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00008"/>00008 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00009"/><link linkend="_integration_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">00009</link> <emphasis role="preprocessor">#define&#32;COLOR_GREEN(format)&#32;&#32;&#32;&#32;&#32;&#32;(&quot;\e[32m&quot;&#32;format&#32;&quot;\e[0m&quot;)</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00010"/><link linkend="_integration_2test__filesystem_8c_1ae38550b2008b82c08588d2340f196914">00010</link> <emphasis role="preprocessor">#define&#32;FLASH_START_AT&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(0.5&#32;*&#32;1024&#32;*&#32;1024)</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00011"/><link linkend="_integration_2test__filesystem_8c_1a1f06fce82ce957c8dd28c5e07da29d97">00011</link> <emphasis role="preprocessor">#define&#32;FLASH_LENGTH_ALL&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00012"/><link linkend="_integration_2test__filesystem_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">00012</link> <emphasis role="preprocessor">#define&#32;LITTLEFS_BLOCK_CYCLE&#32;&#32;&#32;&#32;&#32;500</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00013"/><link linkend="_integration_2test__filesystem_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">00013</link> <emphasis role="preprocessor">#define&#32;LITTLEFS_LOOKAHEAD_SIZE&#32;&#32;16</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00014"/>00014 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00015"/>00015 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00016"/>00016 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_printf(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*format,&#32;...)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00017"/>00017 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;va_start(args,&#32;format);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;n&#32;=&#32;vprintf(format,&#32;args);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00021"/>00021 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00022"/>00022 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">size_t</emphasis>&#32;i&#32;=&#32;0;&#32;i&#32;&lt;&#32;50&#32;-&#32;(size_t)n;&#32;i++)
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;.&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00025"/>00025 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00026"/>00026 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00027"/>00027 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;setup(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;(void)device;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00029"/>00029 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00030"/>00030 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00031"/>00031 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;cleanup(<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">size_t</emphasis>&#32;length&#32;=&#32;device-&gt;<link linkend="_structblockdevice_1abba40bbe04d3a88d270634a788249477">size</link>(device);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Deinit&#32;is&#32;performed&#32;when&#32;unmounting,&#32;so&#32;re-init&#32;is&#32;required.</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00034"/>00034 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1ad37adc41062aa442c1f80852285e0b35">init</link>(device);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00035"/>00035 &#32;&#32;&#32;&#32;device-&gt;<link linkend="_structblockdevice_1aca297cb4c31042de2aeda00a9b8f8196">erase</link>(device,&#32;0,&#32;length);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00036"/>00036 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00037"/>00037 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00038"/>00038 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_format(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00039"/>00039 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;format&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00040"/>00040 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00041"/>00041 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ad7739bd29a4ee1d7e839c3bfe58d3c53">format</link>(fs,&#32;device);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00043"/>00043 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00045"/>00045 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00046"/>00046 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00047"/>00047 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_mount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs,&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*device)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;mount&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00049"/>00049 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab137318416813c5413e1fb5f356e712c">mount</link>(fs,&#32;device,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00052"/>00052 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00054"/>00054 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00055"/>00055 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00056"/>00056 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_unmount(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;unmount&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00058"/>00058 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a6e052dafa112dba9a6d729a49cae08c1">unmount</link>(fs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00061"/>00061 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00063"/>00063 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00064"/>00064 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00065"/>00065 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_open_close(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_open,file_close&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00067"/>00067 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDONLY);&#32;&#32;<emphasis role="comment">//&#32;non-existing&#32;file</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00070"/>00070 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-ENOENT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00071"/>00071 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00074"/>00074 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00077"/>00077 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00078"/>00078 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00079"/>00079 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00080"/>00080 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00081"/>00081 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_write_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_write,file_read&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00083"/>00083 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00085"/>00085 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00087"/>00087 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00088"/>00088 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[512]&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00091"/>00091 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00092"/>00092 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00093"/>00093 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00094"/>00094 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00095"/>00095 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDONLY);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00096"/>00096 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00098"/>00098 &#32;&#32;&#32;&#32;ssize_t&#32;read_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;&amp;file,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00099"/>00099 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)read_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;assert(strcmp(read_buffer,&#32;write_buffer)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00101"/>00101 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00102"/>00102 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00104"/>00104 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00106"/>00106 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00107"/>00107 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00108"/>00108 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_seek(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_seek&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00110"/>00110 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDWR|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00114"/>00114 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[]&#32;=&#32;<emphasis role="stringliteral">&quot;123456789ABCDEF&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00118"/>00118 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;off_t&#32;offset&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;&amp;file,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;assert(offset&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00121"/>00121 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;ssize_t&#32;read_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;&amp;file,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)read_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;assert(strcmp(write_buffer,&#32;read_buffer)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00126"/>00126 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00127"/>00127 &#32;&#32;&#32;&#32;offset&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;&amp;file,&#32;9,&#32;SEEK_SET);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00128"/>00128 &#32;&#32;&#32;&#32;assert(offset&#32;==&#32;9);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;memset(read_buffer,&#32;0,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;read_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;&amp;file,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)read_length&#32;==&#32;strlen(write_buffer)&#32;-&#32;9);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;assert(strcmp(<emphasis role="stringliteral">&quot;ABCDEF&quot;</emphasis>,&#32;read_buffer)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00133"/>00133 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00136"/>00136 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00138"/>00138 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00139"/>00139 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00140"/>00140 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_tell(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_tell&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00142"/>00142 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDWR|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00146"/>00146 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[]&#32;=&#32;<emphasis role="stringliteral">&quot;123456789ABCDEF&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00150"/>00150 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;off_t&#32;offset&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;&amp;file,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;assert(offset&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00153"/>00153 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00154"/>00154 &#32;&#32;&#32;&#32;off_t&#32;pos&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;assert(pos&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00156"/>00156 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;offset&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;&amp;file,&#32;0,&#32;SEEK_END);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00158"/>00158 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)offset&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00159"/>00159 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;pos&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1acdf7fe4f2c1ef87fc1f2894cf473d271">file_tell</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00161"/>00161 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)pos&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00162"/>00162 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00165"/>00165 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00167"/>00167 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00168"/>00168 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00169"/>00169 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_size(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00170"/>00170 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_size&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00171"/>00171 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDWR|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00174"/>00174 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00175"/>00175 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00176"/>00176 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[]&#32;=&#32;<emphasis role="stringliteral">&quot;123456789ABCDEF&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00177"/>00177 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00178"/>00178 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00179"/>00179 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00180"/>00180 &#32;&#32;&#32;&#32;off_t&#32;size&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab8ed19dbc2c21c95682aec0418f09e72">file_size</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00181"/>00181 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)size&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00182"/>00182 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00183"/>00183 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00184"/>00184 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00185"/>00185 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00187"/>00187 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00188"/>00188 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00189"/>00189 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_file_truncate(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;file_truncate&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00191"/>00191 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00192"/>00192 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00193"/>00193 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_RDWR|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00194"/>00194 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00195"/>00195 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00196"/>00196 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[]&#32;=&#32;<emphasis role="stringliteral">&quot;123456789ABCDEF&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00198"/>00198 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00199"/>00199 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00200"/>00200 &#32;&#32;&#32;&#32;off_t&#32;offset&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a42ee5c83a7fe9edddb0181f9b54d7b00">file_seek</link>(fs,&#32;&amp;file,&#32;0,&#32;SEEK_SET);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00201"/>00201 &#32;&#32;&#32;&#32;assert(offset&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00202"/>00202 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00203"/>00203 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a1318c5761c315dc5354e5154aae7d0f3">file_truncate</link>(fs,&#32;&amp;file,&#32;9);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00204"/>00204 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00205"/>00205 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00206"/>00206 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00207"/>00207 &#32;&#32;&#32;&#32;ssize_t&#32;read_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;&amp;file,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00208"/>00208 &#32;&#32;&#32;&#32;assert(read_length&#32;==&#32;9);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00209"/>00209 &#32;&#32;&#32;&#32;assert(strcmp(read_buffer,&#32;<emphasis role="stringliteral">&quot;123456789&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00210"/>00210 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00211"/>00211 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00212"/>00212 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00213"/>00213 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00214"/>00214 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00215"/>00215 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00216"/>00216 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00217"/>00217 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_dir_open(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00218"/>00218 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;dir_open,dir_close&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00219"/>00219 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00220"/>00220 &#32;&#32;&#32;&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;dir;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00221"/>00221 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>(fs,&#32;&amp;dir,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>);&#32;&#32;<emphasis role="comment">//&#32;non-exists&#32;directory</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00222"/>00222 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-ENOTDIR&#32;||&#32;err&#32;==&#32;-ENOENT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00223"/>00223 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00224"/>00224 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>(fs,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>,&#32;0777);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00225"/>00225 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00226"/>00226 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00227"/>00227 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>(fs,&#32;&amp;dir,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00228"/>00228 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00229"/>00229 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00230"/>00230 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link>(fs,&#32;&amp;dir);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00231"/>00231 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00232"/>00232 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00233"/>00233 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00234"/>00234 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00235"/>00235 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00236"/>00236 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_dir_read(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00237"/>00237 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;dir_read&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00238"/>00238 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00239"/>00239 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>(fs,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>,&#32;0777);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00240"/>00240 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0&#32;||&#32;err&#32;==&#32;-EEXIST);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00241"/>00241 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00242"/>00242 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00243"/>00243 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/dir/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00244"/>00244 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00245"/>00245 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00246"/>00246 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00247"/>00247 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00248"/>00248 &#32;&#32;&#32;&#32;<link linkend="_structfs__dir__t">fs_dir_t</link>&#32;dir;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00249"/>00249 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a85af88c13c623c820eca217dd81c2a2a">dir_open</link>(fs,&#32;&amp;dir,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00250"/>00250 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00251"/>00251 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00252"/>00252 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structdirent">dirent</link>&#32;ent;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00253"/>00253 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00254"/>00254 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fs-&gt;<link linkend="_structfilesystem_1a4ba3d1ab6d89005e297c86eb8bafd225">type</link>&#32;!=&#32;<link linkend="_filesystem_8h_1ae11c5ff9c996a8d72f65fcf4d52f4804a0c11236c0a4aca6a7701b384bdc11d92">FILESYSTEM_TYPE_FAT</link>)&#32;{&#32;&#32;<emphasis role="comment">//&#32;FAT&#32;does&#32;not&#32;return&#32;dot&#32;entries</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>(fs,&#32;&amp;dir,&#32;&amp;ent);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(ent.d_type&#32;==&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94">DT_DIR</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(strcmp(ent.d_name,&#32;<emphasis role="stringliteral">&quot;.&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00259"/>00259 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00260"/>00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>(fs,&#32;&amp;dir,&#32;&amp;ent);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00261"/>00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(ent.d_type&#32;==&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a40b944f75d390136b9f74124dc23ef94">DT_DIR</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(strcmp(ent.d_name,&#32;<emphasis role="stringliteral">&quot;..&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00264"/>00264 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00265"/>00265 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>(fs,&#32;&amp;dir,&#32;&amp;ent);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00266"/>00266 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00267"/>00267 &#32;&#32;&#32;&#32;assert(ent.d_type&#32;==&#32;<link linkend="_filesystem_8h_1a7eb42ef11a5e99c122b8efbbfa431b74a2154e45e317a72dc8b51333a7f2930bc">DT_REG</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00268"/>00268 &#32;&#32;&#32;&#32;assert(strcmp(ent.d_name,&#32;<emphasis role="stringliteral">&quot;file&quot;</emphasis>)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00269"/>00269 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00270"/>00270 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a36cd5c106f4d8a95cdf1ee4a73052001">dir_read</link>(fs,&#32;&amp;dir,&#32;&amp;ent);&#32;&#32;<emphasis role="comment">//&#32;Reach&#32;the&#32;end&#32;of&#32;the&#32;directory</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00271"/>00271 &#32;&#32;&#32;&#32;assert(err&#32;!=&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00272"/>00272 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00273"/>00273 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a537d71bf313451145ca593fe2a63d728">dir_close</link>(fs,&#32;&amp;dir);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00274"/>00274 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00275"/>00275 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00276"/>00276 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00277"/>00277 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00278"/>00278 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00279"/>00279 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_remove(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00280"/>00280 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;remove&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00281"/>00281 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00282"/>00282 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link>(fs,&#32;<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00283"/>00283 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-ENOENT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00284"/>00284 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00285"/>00285 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00286"/>00286 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00287"/>00287 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00288"/>00288 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00289"/>00289 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00290"/>00290 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00291"/>00291 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a168c6ebc947bcef4dd441c4846199663">remove</link>(fs,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00292"/>00292 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00293"/>00293 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00294"/>00294 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00295"/>00295 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00296"/>00296 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00297"/>00297 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_rename(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00298"/>00298 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;rename&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00299"/>00299 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00300"/>00300 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link>(fs,&#32;<emphasis role="stringliteral">&quot;/not-exists&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00301"/>00301 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;-ENOENT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00302"/>00302 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00303"/>00303 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00304"/>00304 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00305"/>00305 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00306"/>00306 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[512]&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00307"/>00307 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00308"/>00308 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00309"/>00309 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00310"/>00310 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00311"/>00311 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00312"/>00312 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00313"/>00313 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a1642d2b8278ee2e0e28e67e3c871e7af">rename</link>(fs,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00314"/>00314 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00315"/>00315 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00316"/>00316 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/renamed&quot;</emphasis>,&#32;O_RDONLY);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00317"/>00317 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00318"/>00318 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;read_buffer[512]&#32;=&#32;{0};
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00319"/>00319 &#32;&#32;&#32;&#32;ssize_t&#32;read_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1afa641bc200d34300f3306a7f2b1c0794">file_read</link>(fs,&#32;&amp;file,&#32;read_buffer,&#32;<emphasis role="keyword">sizeof</emphasis>(read_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00320"/>00320 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)read_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00321"/>00321 &#32;&#32;&#32;&#32;assert(strcmp(read_buffer,&#32;write_buffer)&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00322"/>00322 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00323"/>00323 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00324"/>00324 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00325"/>00325 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00326"/>00326 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00327"/>00327 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00328"/>00328 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00329"/>00329 <emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;test_api_stat(<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fs)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00330"/>00330 &#32;&#32;&#32;&#32;test_printf(<emphasis role="stringliteral">&quot;stat&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00331"/>00331 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00332"/>00332 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;regular&#32;file</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00333"/>00333 &#32;&#32;&#32;&#32;<link linkend="_structfs__file__t">fs_file_t</link>&#32;file;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00334"/>00334 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a28f1a1f90cf5c05660e20b20e55cf1c7">file_open</link>(fs,&#32;&amp;file,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;O_WRONLY|O_CREAT);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00335"/>00335 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00336"/>00336 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;write_buffer[512]&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00337"/>00337 &#32;&#32;&#32;&#32;ssize_t&#32;write_length&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1aa101ba0e335b6b94b615cd27edbef29f">file_write</link>(fs,&#32;&amp;file,&#32;write_buffer,&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00338"/>00338 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)write_length&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00339"/>00339 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00340"/>00340 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab649defbea72289a00b64b6eabdd1b4d">file_close</link>(fs,&#32;&amp;file);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00341"/>00341 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00342"/>00342 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00343"/>00343 &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>stat&#32;finfo;
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00344"/>00344 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>(fs,&#32;<emphasis role="stringliteral">&quot;/file&quot;</emphasis>,&#32;&amp;finfo);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00345"/>00345 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00346"/>00346 &#32;&#32;&#32;&#32;assert((<emphasis role="keywordtype">size_t</emphasis>)finfo.st_size&#32;==&#32;strlen(write_buffer));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00347"/>00347 &#32;&#32;&#32;&#32;assert(finfo.st_mode&#32;&amp;&#32;S_IFREG);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00348"/>00348 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00349"/>00349 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;directory</emphasis>
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00350"/>00350 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1a9f586df0f698f0472b033f406de87de3">mkdir</link>(fs,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>,&#32;0777);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00351"/>00351 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0&#32;||&#32;err&#32;==&#32;-EEXIST);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00352"/>00352 &#32;&#32;&#32;&#32;err&#32;=&#32;fs-&gt;<link linkend="_structfilesystem_1ab5f68a612c88a96e638d2035a7ec59fd">stat</link>(fs,&#32;<emphasis role="stringliteral">&quot;/dir&quot;</emphasis>,&#32;&amp;finfo);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00353"/>00353 &#32;&#32;&#32;&#32;assert(err&#32;==&#32;0);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00354"/>00354 &#32;&#32;&#32;&#32;assert(finfo.st_mode&#32;&amp;&#32;S_IFDIR);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00355"/>00355 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00356"/>00356 &#32;&#32;&#32;&#32;printf(<link linkend="_host_2test__filesystem_8c_1a589fea3c63209fa4d21b6b30d8c365c3">COLOR_GREEN</link>(<emphasis role="stringliteral">&quot;ok\n&quot;</emphasis>));
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00357"/>00357 }
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00358"/>00358 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00359"/><link linkend="_integration_2test__filesystem_8c_1af735a8051c1fced4d3ccfa7bfc207a2e">00359</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_host_2test__filesystem_8c_1af735a8051c1fced4d3ccfa7bfc207a2e">test_filesystem</link>(<emphasis role="keywordtype">void</emphasis>)&#32;{
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00360"/>00360 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;File&#32;system&#32;FAT:\n&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00361"/>00361 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00362"/>00362 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>&#32;*flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00363"/>00363 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00364"/>00364 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00365"/>00365 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*fat&#32;=&#32;<link linkend="_group__filesystem__fat_1ga5b7bf00bfce64f76dd5cba01901781c5">filesystem_fat_create</link>();
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00366"/>00366 &#32;&#32;&#32;&#32;assert(fat&#32;!=&#32;NULL);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00367"/>00367 &#32;&#32;&#32;&#32;setup(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00368"/>00368 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00369"/>00369 &#32;&#32;&#32;&#32;test_api_format(fat,&#32;flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00370"/>00370 &#32;&#32;&#32;&#32;test_api_mount(fat,&#32;flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00371"/>00371 &#32;&#32;&#32;&#32;test_api_file_open_close(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00372"/>00372 &#32;&#32;&#32;&#32;test_api_file_write_read(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00373"/>00373 &#32;&#32;&#32;&#32;test_api_file_seek(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00374"/>00374 &#32;&#32;&#32;&#32;test_api_file_tell(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00375"/>00375 &#32;&#32;&#32;&#32;test_api_file_size(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00376"/>00376 &#32;&#32;&#32;&#32;test_api_file_truncate(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00377"/>00377 &#32;&#32;&#32;&#32;test_api_dir_open(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00378"/>00378 &#32;&#32;&#32;&#32;test_api_dir_read(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00379"/>00379 &#32;&#32;&#32;&#32;test_api_remove(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00380"/>00380 &#32;&#32;&#32;&#32;test_api_rename(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00381"/>00381 &#32;&#32;&#32;&#32;test_api_stat(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00382"/>00382 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00383"/>00383 &#32;&#32;&#32;&#32;test_api_unmount(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00384"/>00384 &#32;&#32;&#32;&#32;cleanup(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00385"/>00385 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00386"/>00386 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__fat_1gac9daf020a57d62f1b2fe7eef5ce5847e">filesystem_fat_free</link>(fat);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00387"/>00387 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00388"/>00388 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00389"/>00389 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;File&#32;system&#32;littlefs:\n&quot;</emphasis>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00390"/>00390 &#32;&#32;&#32;&#32;flash&#32;=&#32;<link linkend="_group__blockdevice__flash_1gaa4f26759924c70f9a86436aa58f67cfc">blockdevice_flash_create</link>(<link linkend="_integration_2test__blockdevice_8c_1ae38550b2008b82c08588d2340f196914">FLASH_START_AT</link>,&#32;<link linkend="_fs__init__loopback_8c_1a1f06fce82ce957c8dd28c5e07da29d97">FLASH_LENGTH_ALL</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00391"/>00391 &#32;&#32;&#32;&#32;assert(flash&#32;!=&#32;NULL);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00392"/>00392 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem_1gad16024c6aa37d328b78a38f8c006ac83">filesystem_t</link>&#32;*lfs&#32;=&#32;<link linkend="_group__filesystem__littlefs_1ga6bf5205dec6fdf2ec2d190c44f5f2594">filesystem_littlefs_create</link>(<link linkend="_test__benchmark_8c_1a1c1a6c6d5b2ddab1836e6c57ace6e71d">LITTLEFS_BLOCK_CYCLE</link>,
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00393"/>00393 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_test__benchmark_8c_1a73694eeb2680f0f6e6fa72fcd0ad458d">LITTLEFS_LOOKAHEAD_SIZE</link>);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00394"/>00394 &#32;&#32;&#32;&#32;assert(lfs&#32;!=&#32;NULL);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00395"/>00395 &#32;&#32;&#32;&#32;setup(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00396"/>00396 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00397"/>00397 &#32;&#32;&#32;&#32;test_api_format(lfs,&#32;flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00398"/>00398 &#32;&#32;&#32;&#32;test_api_mount(lfs,&#32;flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00399"/>00399 &#32;&#32;&#32;&#32;test_api_file_open_close(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00400"/>00400 &#32;&#32;&#32;&#32;test_api_file_write_read(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00401"/>00401 &#32;&#32;&#32;&#32;test_api_file_seek(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00402"/>00402 &#32;&#32;&#32;&#32;test_api_file_tell(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00403"/>00403 &#32;&#32;&#32;&#32;test_api_file_size(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00404"/>00404 &#32;&#32;&#32;&#32;test_api_file_truncate(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00405"/>00405 &#32;&#32;&#32;&#32;test_api_dir_open(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00406"/>00406 &#32;&#32;&#32;&#32;test_api_dir_read(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00407"/>00407 &#32;&#32;&#32;&#32;test_api_remove(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00408"/>00408 &#32;&#32;&#32;&#32;test_api_rename(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00409"/>00409 &#32;&#32;&#32;&#32;test_api_stat(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00410"/>00410 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00411"/>00411 &#32;&#32;&#32;&#32;test_api_unmount(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00412"/>00412 
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00413"/>00413 &#32;&#32;&#32;&#32;cleanup(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00414"/>00414 &#32;&#32;&#32;&#32;<link linkend="_group__blockdevice__flash_1ga8d9d318677d2c372535f4c775c5a22c9">blockdevice_flash_free</link>(flash);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00415"/>00415 &#32;&#32;&#32;&#32;<link linkend="_group__filesystem__littlefs_1ga4cdb39bf1728e9ee86032ef5c4abd704">filesystem_littlefs_free</link>(lfs);
+<anchor xml:id="_integration_2test__filesystem_8c_source_1l00416"/>00416 }
+</programlisting></section>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structfilesystem__fat__context__t" xml:lang="en-US">
+<title>filesystem_fat_context_t Struct Reference</title>
+<indexterm><primary>filesystem_fat_context_t</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_struct_f_a_t_f_s">FATFS</link> <link linkend="_structfilesystem__fat__context__t_1ae411384365b516cdd396691a05d15be0">fatfs</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f">id</link></para>
+</listitem>
+            <listitem><para>mutex_t <link linkend="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2">_mutex</link></para>
+</listitem>
+            <listitem><para>mutex_t <link linkend="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f">_mutex_format</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_fat_8c_source_1l00023">23</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structfilesystem__fat__context__t_1a7028c243cac191667ed940f855a787d2"/><section>
+    <title>_mutex</title>
+<indexterm><primary>_mutex</primary><secondary>filesystem_fat_context_t</secondary></indexterm>
+<indexterm><primary>filesystem_fat_context_t</primary><secondary>_mutex</secondary></indexterm>
+<para><computeroutput>mutex_t filesystem_fat_context_t::_mutex</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00026">26</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem__fat__context__t_1a40ba9b3bd43dd8f91c1bb1bdd2a99e9f"/><section>
+    <title>_mutex_format</title>
+<indexterm><primary>_mutex_format</primary><secondary>filesystem_fat_context_t</secondary></indexterm>
+<indexterm><primary>filesystem_fat_context_t</primary><secondary>_mutex_format</secondary></indexterm>
+<para><computeroutput>mutex_t filesystem_fat_context_t::_mutex_format</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00027">27</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem__fat__context__t_1ae411384365b516cdd396691a05d15be0"/><section>
+    <title>fatfs</title>
+<indexterm><primary>fatfs</primary><secondary>filesystem_fat_context_t</secondary></indexterm>
+<indexterm><primary>filesystem_fat_context_t</primary><secondary>fatfs</secondary></indexterm>
+<para><computeroutput><link linkend="_struct_f_a_t_f_s">FATFS</link> filesystem_fat_context_t::fatfs</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00024">24</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+</section>
+<anchor xml:id="_structfilesystem__fat__context__t_1a3c9acdc4934b517d4d2b55f31ffd4f2f"/><section>
+    <title>id</title>
+<indexterm><primary>id</primary><secondary>filesystem_fat_context_t</secondary></indexterm>
+<indexterm><primary>filesystem_fat_context_t</primary><secondary>id</secondary></indexterm>
+<para><computeroutput>int filesystem_fat_context_t::id</computeroutput></para><para>
+Definition at line <link linkend="_fat_8c_source_1l00025">25</link> of file <link linkend="_fat_8c_source">fat.c</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/pico-vfs-REGI-Local/src/filesystem/<link linkend="_fat_8c">fat.c</link></section>
+</section>

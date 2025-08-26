@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_distance_sensor" xml:lang="en-US">
+<title>DistanceSensor Class Reference</title>
+<indexterm><primary>DistanceSensor</primary></indexterm>
+<para>
+<computeroutput>#include &lt;distance_sensor.h&gt;</computeroutput>
+</para>
+<para>Inheritance diagram for DistanceSensor:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_distance_sensor.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f">DistanceSensor</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> trigger_gpio)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a">TriggerRead</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static <link linkend="_class_distance_sensor">DistanceSensor</link> * <link linkend="_class_distance_sensor_1a495a45dfe6d75a99126fac0e9edc7572">GetMappedSensor</link> (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint32_t <link linkend="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c">distance</link> = 0</para>
+</listitem>
+            <listitem><para>volatile bool <link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link></para>
+</listitem>
+            <listitem><para><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_distance_sensor_1ac6680c1265d7514097937d587d509bca">_InitializeSensorForGpio</link> (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> gpio, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>, <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link> handler)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5">_IsProgramLoaded</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+            <listitem><para>static <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a579d6f646f9a93ad2e0446917271d742">_LoadSensorProgram</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static <link linkend="_class_distance_sensor">DistanceSensor</link> * <link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link> [2][4] = {}</para>
+</listitem>
+            <listitem><para>static <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">_PioOffsets</link> [2] = { <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link>, <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link> }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Interface for using an HC-SR04 distance sensor. Has not been tested with other sensors </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00008">8</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_distance_sensor_1a4a6d6037e4620999c69ed1f791e9fc8f"/><section>
+    <title>DistanceSensor()</title>
+<indexterm><primary>DistanceSensor</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>DistanceSensor</secondary></indexterm>
+<para><computeroutput>DistanceSensor::DistanceSensor (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> trigger_gpio)</computeroutput></para>
+<para>Initializes the sensor. <note><title>Note</title>
+
+<para>Due to the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> implementation, the echo pin must be connected to trigger_gpio + 1. If you connect the trigger pin to GPIO 5, then GPIO 6 must be the echo pin. </para>
+</note>
+
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>in</entry><entry>trigger_gpio</entry><entry>
+<para>GPIO connected to the trigger pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>pio</entry><entry>
+<para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> block to use, Either pio0 or pio1 </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>sm</entry><entry>
+<para>The state machine to use, 0 to 3 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00064">64</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>),&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>(<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>)&#32;{
+00065 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Initialize&#32;the&#32;program&#32;and&#32;set&#32;up&#32;the&#32;IRQ&#32;handler&#32;to&#32;save&#32;the</emphasis>
+00066 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;distance&#32;reading&#32;to&#32;this-&gt;distance.</emphasis>
+00067 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">DistanceSensor::_sensor_map</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>&#32;==&#32;<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#32;?&#32;0&#32;:&#32;1][<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>]&#32;=&#32;<emphasis role="keyword">this</emphasis>;
+00068 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor_1ac6680c1265d7514097937d587d509bca">_InitializeSensorForGpio</link>(trigger_gpio,&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;_SensorIrq);
+00069 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;IRQ&#32;initialized\r\n&quot;</emphasis>);
+00070 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;sleep_ms(1000);</emphasis>
+00071 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_distance_sensor_1ac6680c1265d7514097937d587d509bca"/><section>
+    <title>_InitializeSensorForGpio()</title>
+<indexterm><primary>_InitializeSensorForGpio</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>_InitializeSensorForGpio</secondary></indexterm>
+<para><computeroutput>void DistanceSensor::_InitializeSensorForGpio (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> gpio, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm, <link linkend="_pio_8h_1a8478ee26cc144e947ccd75b0169059a6">irq_handler_t</link> handler)<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>
+<para>Initializes the distance program to run on the given gpio pin 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>in</entry><entry>trigger_gpio</entry><entry>
+<para>GPIO connected to the trigger pin </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>pio</entry><entry>
+<para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> block to use, Either pio0 or pio1 </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>sm</entry><entry>
+<para>The state machine to use, 0 to 3 </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>handler</entry><entry>
+<para>Function to execute when distance is sampled </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00073">73</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00074 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Load&#32;the&#32;program&#32;and&#32;get&#32;the&#32;offset</emphasis>
+00075 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Note&#32;this&#32;is&#32;safe&#32;to&#32;call&#32;even&#32;if&#32;the&#32;sensor&#32;was&#32;already&#32;loaded,&#32;it&#32;will&#32;not&#32;reload&#32;it.</emphasis>
+00076 &#32;&#32;&#32;&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;offset&#32;=&#32;<link linkend="_class_distance_sensor_1a579d6f646f9a93ad2e0446917271d742">_LoadSensorProgram</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>);
+00077 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Initialize&#32;the&#32;program&#32;in&#32;the&#32;PIO</emphasis>
+00078 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Initializing&#32;program&#32;on&#32;pio&#32;%d,&#32;sm&#32;%d,&#32;offset&#32;%d,&#32;gpio&#32;%d\n&quot;</emphasis>,&#32;<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>&#32;==&#32;<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#32;?&#32;0&#32;:&#32;1,&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;offset,&#32;gpio);
+00079 &#32;&#32;&#32;&#32;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_1abb2fe088e1320015022ea8a3ee4ff969">distance_sensor_program_init</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;offset,&#32;gpio,&#32;handler);
+00080 }
+</programlisting></section>
+<anchor xml:id="_class_distance_sensor_1a84eafa3ba57d16a4266b9982356a29c5"/><section>
+    <title>_IsProgramLoaded()</title>
+<indexterm><primary>_IsProgramLoaded</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>_IsProgramLoaded</secondary></indexterm>
+<para><computeroutput>bool DistanceSensor::_IsProgramLoaded (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio)<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>
+<para>Checks if the sensor program is already loaded in the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <note><title>Note</title>
+
+<para>This checks the _is_loaded_in_pio mapping </para>
+</note>
+
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>in</entry><entry>pio</entry><entry>
+<para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> memory to check</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                Checks if _PioMemory has the pio offset saved in it </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00098">98</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00099 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Get&#32;the&#32;offset&#32;from&#32;the&#32;offset&#32;array</emphasis>
+00100 &#32;&#32;&#32;&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;offset&#32;=&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">DistanceSensor::_PioOffsets</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>&#32;==&#32;<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#32;?&#32;0&#32;:&#32;1];
+00101 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;offset&#32;!=&#32;<link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link>;
+00102 }
+</programlisting></section>
+<anchor xml:id="_class_distance_sensor_1a579d6f646f9a93ad2e0446917271d742"/><section>
+    <title>_LoadSensorProgram()</title>
+<indexterm><primary>_LoadSensorProgram</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>_LoadSensorProgram</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> DistanceSensor::_LoadSensorProgram (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio)<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>
+<para>Loads the <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> program into memory if it&apos;s not already loaded 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>in</entry><entry>pio</entry><entry>
+<para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> block to use, Either pio0 or pio1 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>Program offset </para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00082">82</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00083 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;If&#32;the&#32;program&#32;hasn&apos;t&#32;already&#32;been&#32;loaded&#32;in&#32;memory,&#32;then&#32;load&#32;it.</emphasis>
+00084 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;if&#32;(!DistanceSensor::_IsProgramLoaded(pio))&#32;{</emphasis>
+00085 &#32;&#32;&#32;&#32;<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;offset&#32;=&#32;<link linkend="_pio_8h_1a3571e3c7c6e645e92b8d438203a911b9">pio_add_program</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;&amp;<link linkend="_lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2test_2unit__tests_2stubs_2sensor_8pio_8h_1af4ad3f5ae38c4079373b4a387d68612c">distance_sensor_program</link>);
+00086 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Loaded&#32;pio&#32;program&#32;to&#32;offset&#32;0x%08X\n&quot;</emphasis>,&#32;offset);
+00087 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Cache&#32;the&#32;offset&#32;so&#32;we&#32;don&apos;t&#32;need&#32;to&#32;reload&#32;it.</emphasis>
+00088 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">DistanceSensor::_PioOffsets</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>&#32;==&#32;<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#32;?&#32;0&#32;:&#32;1]&#32;=&#32;offset;
+00089 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+00090 
+00091 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Return&#32;the&#32;offset&#32;in&#32;memory&#32;for&#32;the&#32;program</emphasis>
+00092 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c">DistanceSensor::_PioOffsets</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>&#32;==&#32;<link linkend="_pio_8h_1a916d05e71da7f2173cd22b46bbfa0a11">pio0</link>&#32;?&#32;0&#32;:&#32;1];
+00093 }
+</programlisting></section>
+<anchor xml:id="_class_distance_sensor_1a495a45dfe6d75a99126fac0e9edc7572"/><section>
+    <title>GetMappedSensor()</title>
+<indexterm><primary>GetMappedSensor</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>GetMappedSensor</secondary></indexterm>
+<para><computeroutput><link linkend="_class_distance_sensor">DistanceSensor</link> * DistanceSensor::GetMappedSensor (<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)<computeroutput>[static]</computeroutput></computeroutput></para>
+<para>Gets the distance sensor mapped to the given state machine 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>in</entry><entry>pio</entry><entry>
+<para>0 or 1 </para>
+</entry>
+                            </row>
+                            <row>
+<entry>in</entry><entry>sm</entry><entry>
+<para>0 to 4 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>NULL or <link linkend="_class_distance_sensor">DistanceSensor</link> pointer </para>
+</formalpara>
+</para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00104">104</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00105 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f">_sensor_map</link>[<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>][<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>];
+00106 }
+</programlisting></section>
+<anchor xml:id="_class_distance_sensor_1aa2d0dec65e7626a6958f26df13b29f0a"/><section>
+    <title>TriggerRead()</title>
+<indexterm><primary>TriggerRead</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>TriggerRead</secondary></indexterm>
+<para><computeroutput>void DistanceSensor::TriggerRead ( )</computeroutput></para>
+<para>Trigger a sensor read </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8cpp_source_1l00108">108</link> of file <link linkend="_distance__sensor_8cpp_source">distance_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00109 &#32;&#32;&#32;&#32;<link linkend="_pio_8h_1a9878b5628ef662af86683649f5a7f753">pio_sm_put</link>(<link linkend="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138">pio</link>,&#32;<link linkend="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e">sm</link>,&#32;0xFFFFFFFF);
+00110 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f">is_sensing</link>&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+00111 }
+</programlisting></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_distance_sensor_1a6f3e1143fe2261abc7292f7eaa52971c"/><section>
+    <title>_PioOffsets</title>
+<indexterm><primary>_PioOffsets</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>_PioOffsets</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> DistanceSensor::_PioOffsets = { <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link>, <link linkend="_distance__sensor_8cpp_1ac255e2cb81d22d228e8a5880c41b01d4">PIO_OFFSET_UNSET</link> }<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>
+<para>Offset into <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> memory for the sensor program Cached here so we don&apos;t waste space in <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> memory by reloading it. </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00036">36</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<anchor xml:id="_class_distance_sensor_1a7d72dcd2d9677b603de8cd063585906f"/><section>
+    <title>_sensor_map</title>
+<indexterm><primary>_sensor_map</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>_sensor_map</secondary></indexterm>
+<para><computeroutput><link linkend="_class_distance_sensor">DistanceSensor</link> * DistanceSensor::_sensor_map = {}<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>
+<para>My solution to the &quot;C++ IRQ problem&quot; The problem is that an IRQ needs to be a plain C function, so I can&apos;t have a function that modifies the running instance of the <link linkend="_class_distance_sensor">DistanceSensor</link> that triggered the request. There&apos;s no way for the IRQ to know which sensor sent the request.</para>
+
+<para>But I can store the instance of the distance sensor in a map, so the sensor running on <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> 0, state machine 1 will map to _sensor_map[0][1]. Thus the ISR can access the sensor instance to provide a reading</para>
+
+<para>Instance of map that stores the memory address of the loaded pio program </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00035">35</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<anchor xml:id="_class_distance_sensor_1a2fda11f424b3634164f1b900ee6a0e3c"/><section>
+    <title>distance</title>
+<indexterm><primary>distance</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>distance</secondary></indexterm>
+<para><computeroutput>uint32_t DistanceSensor::distance = 0</computeroutput></para>
+<para>Last distance reading </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00037">37</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<anchor xml:id="_class_distance_sensor_1a5cad29b69f0ae171cfe3a2be0e346f8f"/><section>
+    <title>is_sensing</title>
+<indexterm><primary>is_sensing</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>is_sensing</secondary></indexterm>
+<para><computeroutput>volatile bool DistanceSensor::is_sensing = false</computeroutput></para><para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00039">39</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<anchor xml:id="_class_distance_sensor_1a729f0233e67ca6fc6a09b29faa0d4138"/><section>
+    <title>pio</title>
+<indexterm><primary>pio</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>pio</secondary></indexterm>
+<para><computeroutput><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> DistanceSensor::pio</computeroutput></para>
+<para><link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> bound to this sensor </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00044">44</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<anchor xml:id="_class_distance_sensor_1adc868e5c2d1642787d12fee059a21a7e"/><section>
+    <title>sm</title>
+<indexterm><primary>sm</primary><secondary>DistanceSensor</secondary></indexterm>
+<indexterm><primary>DistanceSensor</primary><secondary>sm</secondary></indexterm>
+<para><computeroutput><link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> DistanceSensor::sm</computeroutput></para>
+<para>State machine this sensor is running on </para>
+<para>
+Definition at line <link linkend="_distance__sensor_8h_source_1l00049">49</link> of file <link linkend="_distance__sensor_8h_source">distance_sensor.h</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+lib/pico-distance-sensor-main/pico-distance-sensor-main/include/<link linkend="_distance__sensor_8h">distance_sensor.h</link>lib/pico-distance-sensor-main/pico-distance-sensor-main/src/<link linkend="_distance__sensor_8cpp">distance_sensor.cpp</link></section>
+</section>

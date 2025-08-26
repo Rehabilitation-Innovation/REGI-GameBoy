@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TinyEngine: Main Page</title>
+<title>TinyEngine: TinyEngine</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('index.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -103,10 +90,38 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">TinyEngine Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">TinyEngine </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
+<p>Introducing TinyEngine, this is a basic and small game engine for rendering 2D graphics to a framebuffer. The main use of this engine is currently on the RehabTendo at the Glenrose Rehabilitation Hospital. I created this as part of my Coop work term project, it uses a custom PCB fabricated to integrate different control methods for rehabilitation excersises.</p>
+<p>Here is a prototype PCB and the first revision of the case design.</p>
+<p><img src="image.png" alt="Closed Case" class="inline"/></p>
+<p><img src="image-1.png" alt="PCB" class="inline"/></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Features:</h1>
+<ul>
+<li>Rechargable single cell battery support. With power path management and smart charging with safety timer.</li>
+<li>RP2350 dual core MCU with DVI output over HDMI and parrallel FPC connector for ILI or simalar parallel screens.</li>
+<li>Dual 8 Ohm speaker output with 5W max output power each.</li>
+<li>32 GB SD card game and asset storage</li>
+<li>Custom Bootloader with abilitty to load multiple games.</li>
+<li>5V boost converter to power external controllers an peripherals from oboard battery.</li>
+<li>4x WS2812B RGB LEDs chained from single PIO output</li>
+<li>16MB flash storage.</li>
+<li>2nd QSPI expansion for PSRAM or more flash.</li>
+<li>Dedicated mute and ON OFF switches with dedicated out of box reset switch.</li>
+<li>Many exposed headers for lots of different control methods.</li>
+<li>Dedicated debug LEDs.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+Repository and Layout:</h1>
+<p>The repository is structured to represent a conventional C++ program. src and inc folders have segragated headers and sources. Lib has all of the external libraries used.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+How to build:</h1>
+<p>This source is a static library and requires a sub project dependency to be ran. For Further guidence please view Confluence guides on compilation and flashing. </p>
+</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 </div><!-- doc-content -->

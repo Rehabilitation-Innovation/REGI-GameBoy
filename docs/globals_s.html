@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('globals_s.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -118,17 +105,32 @@ $(function() {
 <li>SD_SCLK_PIN&#160;:&#160;<a class="el" href="main_8h.html#af72f113c59e467dc74e8c79177da3a48">main.h</a></li>
 <li>SD_SPI0&#160;:&#160;<a class="el" href="main_8h.html#ab0d72a395fa77f3dd4418076f87ea81c">main.h</a></li>
 <li>serial_input_queue&#160;:&#160;<a class="el" href="tinyengine_8cpp.html#a0d3ac15188af7c6cabbbe6e0e8fdf77e">tinyengine.cpp</a></li>
-<li>set_frequency()&#160;:&#160;<a class="el" href="tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.cpp</a>, <a class="el" href="tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.h</a></li>
+<li>set_frequency()&#160;:&#160;<a class="el" href="tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.h</a>, <a class="el" href="tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.cpp</a></li>
 <li>set_rest_duration()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6004e97a98d19f40a6893e47e9d9e4f0">pwm-tone.h</a></li>
 <li>set_tempo()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#ac124ae29e40f75662b6327b3a99185b8">pwm-tone.h</a></li>
+<li>SIO_IRQ_BELL&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8abee4ee8eee7b960d0cf734578ffef811">intctrl.h</a></li>
+<li>SIO_IRQ_BELL_NS&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a72f9b9916df889c0a55731b3a51b8e05">intctrl.h</a></li>
+<li>SIO_IRQ_FIFO&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8afe8f5a1a66b8b6c489a8fb3bb618815f">intctrl.h</a></li>
+<li>SIO_IRQ_FIFO_NS&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a2bcf85572bb5a5f53ec4444798261541">intctrl.h</a></li>
+<li>SIO_IRQ_MTIMECMP&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a750e73e82e614dff437a37149bd59eb1">intctrl.h</a></li>
 <li>sm&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#abeba240b99c2caa6556ccab58b8c8ebb">DinoGame.cpp</a></li>
 <li>snakeTailLen&#160;:&#160;<a class="el" href="_snake_game_8cpp.html#a0c988e922b2bb3514a84d3a32d9769a9">SnakeGame.cpp</a></li>
 <li>snakeTailx_snake&#160;:&#160;<a class="el" href="_snake_game_8cpp.html#ae170759b728a81554c554cc328bb4911">SnakeGame.cpp</a></li>
 <li>snakeTaily_snake&#160;:&#160;<a class="el" href="_snake_game_8cpp.html#af7d39550ddd119a00436dfc0b308561a">SnakeGame.cpp</a></li>
+<li>SPARE_IRQ_0&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aad3052d1d06b983df4551cd9ddd739ae">intctrl.h</a></li>
+<li>SPARE_IRQ_1&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a1db065c3095a5f7f4c08becc89cc146e">intctrl.h</a></li>
+<li>SPARE_IRQ_2&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a8632f943b2645a064df4b4f32be6cfb4">intctrl.h</a></li>
+<li>SPARE_IRQ_3&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a37d25d9bef6f9987f6f0acd1199fdd06">intctrl.h</a></li>
+<li>SPARE_IRQ_4&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8ae1e37d639062c9f84055a9137fc29870">intctrl.h</a></li>
+<li>SPARE_IRQ_5&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8af00c937dd1333d2fa5e52d906dd7529b">intctrl.h</a></li>
+<li>SPI0_IRQ&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a10b2c78ee63a060db5d9f30b8f1daf8a">intctrl.h</a></li>
+<li>SPI1_IRQ&#160;:&#160;<a class="el" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8a60f73b071388a649cac65d2026607540">intctrl.h</a></li>
 <li>start_text&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#aa87b70da41217e2357375701aca8f910">DinoGame.cpp</a></li>
 <li>stop_melody()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a3123c1851a4e308ee3b84662745a3d0c">pwm-tone.h</a></li>
 <li>stop_tone()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a3ec0d39f66fb7cfa934cac14e1d6a2a7">pwm-tone.h</a></li>
 <li>string&#160;:&#160;<a class="el" href="_game_scene_8cpp.html#a599ac9672c5ed92e22c3259396cbb7d8">GameScene.cpp</a></li>
+<li>STRINGIFY&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a43e1cad902b6477bec893cb6430bd6c8">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8">CMakeCXXCompilerId.cpp</a></li>
+<li>STRINGIFY_HELPER&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d">CMakeCXXCompilerId.cpp</a></li>
 <li>SYNC_V0_H0&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi_8cpp.html#a29db1628b45eab271991fc2da1ad01f5">tinyengine_renderer_dvi.cpp</a></li>
 <li>SYNC_V0_H1&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi_8cpp.html#a34106096aae9fd6a6f8b50dde105dfeb">tinyengine_renderer_dvi.cpp</a></li>
 <li>SYNC_V1_H0&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi_8cpp.html#a83aa3de8e439e8c44fcd2d38bad7cd13">tinyengine_renderer_dvi.cpp</a></li>

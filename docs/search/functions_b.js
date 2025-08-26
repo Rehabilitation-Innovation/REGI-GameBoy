@@ -1,7 +1,7 @@
 var searchData=
 [
   ['scroll_5fframebuffer_0',['scroll_framebuffer',['../tinyengine__renderer__dvi_8cpp.html#a4bfff3f1d70f74509484b34c8461003b',1,'tinyengine_renderer_dvi.cpp']]],
-  ['set_5ffrequency_1',['set_frequency',['../tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e',1,'set_frequency():&#160;tinyengine.cpp'],['../tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e',1,'set_frequency():&#160;tinyengine.cpp']]],
+  ['set_5ffrequency_1',['set_frequency',['../tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e',1,'set_frequency():&#160;tinyengine.cpp'],['../tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e',1,'set_frequency():&#160;tinyengine.cpp']]],
   ['set_5floop_5fclbk_2',['set_loop_clbk',['../class_tiny_engine.html#a02f63945d1cf474d461cd2a0998a3dfe',1,'TinyEngine']]],
   ['set_5fm_5fanimated_3',['set_m_animated',['../class_sprite.html#af4281d1664fda219368b190c0b233bcd',1,'Sprite']]],
   ['set_5fm_5fanimation_5fdata_4',['set_m_animation_data',['../class_sprite.html#af6c4408de4c7b235abd8228d674ef2cb',1,'Sprite']]],
@@ -33,6 +33,6 @@ var searchData=
   ['start_5floop_30',['start_loop',['../class_tiny_engine.html#a30d77a4f317c491bd8ebcf8d5e3852a3',1,'TinyEngine']]],
   ['stop_5fmelody_31',['stop_melody',['../pwm-tone_8h.html#a3123c1851a4e308ee3b84662745a3d0c',1,'pwm-tone.h']]],
   ['stop_5ftone_32',['stop_tone',['../pwm-tone_8h.html#a3ec0d39f66fb7cfa934cac14e1d6a2a7',1,'pwm-tone.h']]],
-  ['swap_5fblocking_33',['swap_blocking',['../class_tiny_engine_renderer_i.html#a2469b0b227cbc4ff8a27f292f929d0d3',1,'TinyEngineRendererI::swap_blocking()'],['../class_tiny_engine_frame_buffer.html#af33ffd30dcce76dc620c8e5bb7c1a28d',1,'TinyEngineFrameBuffer::swap_blocking()'],['../class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0',1,'TinyEngineRendererDVI::swap_blocking()']]],
-  ['swap_5fnon_5fblocking_34',['swap_non_blocking',['../class_tiny_engine_renderer_i.html#ab1c8fd0d87f133a519e26ae071765e9f',1,'TinyEngineRendererI::swap_non_blocking()'],['../class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7',1,'TinyEngineRendererDVI::swap_non_blocking()']]]
+  ['swap_5fblocking_33',['swap_blocking',['../class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0',1,'TinyEngineRendererDVI::swap_blocking()'],['../class_tiny_engine_renderer_i.html#a2469b0b227cbc4ff8a27f292f929d0d3',1,'TinyEngineRendererI::swap_blocking()'],['../class_tiny_engine_frame_buffer.html#af33ffd30dcce76dc620c8e5bb7c1a28d',1,'TinyEngineFrameBuffer::swap_blocking()'],['../class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0',1,'TinyEngineRendererDVI::swap_blocking()']]],
+  ['swap_5fnon_5fblocking_34',['swap_non_blocking',['../class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7',1,'TinyEngineRendererDVI::swap_non_blocking()'],['../class_tiny_engine_renderer_i.html#ab1c8fd0d87f133a519e26ae071765e9f',1,'TinyEngineRendererI::swap_non_blocking()'],['../class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7',1,'TinyEngineRendererDVI::swap_non_blocking()']]]
 ];

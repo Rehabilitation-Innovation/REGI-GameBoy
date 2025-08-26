@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i" xml:lang="en-US">
+<title>
+<para>File system management API </para>
+</title>
+<indexterm><primary>File system management API</primary></indexterm>
+
+<para><anchor xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md4"/></para>
+
+<para>Many functions of pico-vfs are provided as POSIX and C standard file APIs, but the file system management procedures are provided by an API with the prefix <computeroutput>fs_*</computeroutput>. See <link linkend="_md_lib_2pico-vfs-_r_e_g_i-_local_2_s_t_a_n_d_a_r_d">STANDARD.md</link> for information on the POSIX and C standard file API.</para>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md5">
+<title><computeroutput>bool fs_init(void)</computeroutput></title>
+<para>File system set-up. The user programme calls <computeroutput><link linkend="_group__filesystem_1gafb19e37469a751aa61de3dcd0c70b4b0">fs_init()</link></computeroutput> to set up the file system and initialise it to a ready-to-use state. In addition to explicit execution from the program, the CMake function</para>
+
+<para><literallayout><computeroutput>&#32;.txt
+pico_enable_filesystem(${CMAKE_PROJECT_NAME}&#32;AUTO_INIT&#32;TRUE)
+</computeroutput></literallayout> can be specified to automatically execute it with <computeroutput>pre_main()</computeroutput> before <computeroutput><link linkend="_class__main_8cxx_1ae66f6b31b5ad750f1fe042a706a4e3d4">main()</link></computeroutput>.</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md6">
+<title><computeroutput>int fs_format(filesystem_t *fs, blockdevice_t *device)</computeroutput></title>
+<para>Format block devices using file system objects.</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md7">
+<title><computeroutput>int fs_mount(const char *path, filesystem_t *fs, blockdevice_t *device)</computeroutput></title>
+<para>Mounts the file system at the specified path.</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md8">
+<title><computeroutput>int fs_unmount(const char *path)</computeroutput></title>
+<para>Unmounts the file system at the specified path.</para>
+</section>
+<section xml:id="_md_lib_2pico-vfs-_r_e_g_i-_local_2_a_p_i_1autotoc_md9">
+<title><computeroutput>int fs_reformat(const char *path)</computeroutput></title>
+<para>Reformat the file system for the specified path. </para>
+</section>
+</section>

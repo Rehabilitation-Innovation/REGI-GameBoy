@@ -1,0 +1,158 @@
+\doxysubsection{blockdevice\+\_\+sd }
+\hypertarget{group__blockdevice__sd}{}\label{group__blockdevice__sd}\index{blockdevice\_sd@{blockdevice\_sd}}
+
+
+SPI-\/connected SD/\+MMC card block device.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}{blockdevice\+\_\+sd\+\_\+create}} (spi\+\_\+inst\+\_\+t \texorpdfstring{$\ast$}{*}spi\+\_\+inst, uint8\+\_\+t mosi, uint8\+\_\+t miso, uint8\+\_\+t sckl, uint8\+\_\+t cs, uint32\+\_\+t hz, bool enable\+\_\+crc)
+\begin{DoxyCompactList}\small\item\em Create SD card block device with SPI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}{blockdevice\+\_\+sd\+\_\+free}} (\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Release the SD card device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+SPI-\/connected SD/\+MMC card block device. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__blockdevice__sd_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8}\index{blockdevice\_sd@{blockdevice\_sd}!blockdevice\_sd\_create@{blockdevice\_sd\_create}}
+\index{blockdevice\_sd\_create@{blockdevice\_sd\_create}!blockdevice\_sd@{blockdevice\_sd}}
+\doxysubsubsubsection{\texorpdfstring{blockdevice\_sd\_create()}{blockdevice\_sd\_create()}}
+{\footnotesize\ttfamily \label{group__blockdevice__sd_ga4711fc3f61142ce9387c984809bd3db8} 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} blockdevice\+\_\+sd\+\_\+create (\begin{DoxyParamCaption}\item[{spi\+\_\+inst\+\_\+t \texorpdfstring{$\ast$}{*}}]{spi\+\_\+inst}{, }\item[{uint8\+\_\+t}]{mosi}{, }\item[{uint8\+\_\+t}]{miso}{, }\item[{uint8\+\_\+t}]{sckl}{, }\item[{uint8\+\_\+t}]{cs}{, }\item[{uint32\+\_\+t}]{hz}{, }\item[{bool}]{enable\+\_\+crc}{}\end{DoxyParamCaption})}
+
+
+
+Create SD card block device with SPI. 
+
+Create a block device object for an SPI-\/connected SD or MMC card.
+
+
+\begin{DoxyParams}{Parameters}
+{\em spi\+\_\+inst} & SPI instance, as defined in the pico-\/sdk hardware\+\_\+spi library \\
+\hline
+{\em mosi} & SPI Master Out Slave In(\+TX) pin \\
+\hline
+{\em miso} & SPI Master In Slave Out(\+RX) pin \\
+\hline
+{\em sckl} & SPI clock pin \\
+\hline
+{\em cs} & SPI Chip select pin \\
+\hline
+{\em hz} & SPI clock frequency (Hz) \\
+\hline
+{\em enable\+\_\+crc} & Boolean value to enable CRC on read/write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Block device object. Returnes NULL in case of failure. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em NULL} & Failed to create block device object. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{sd_8c_source_l01038}{1038}} of file \mbox{\hyperlink{sd_8c_source}{sd.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{01045\ \{}
+\DoxyCodeLine{01046\ \ \ \ \ \textcolor{keywordflow}{if}\ (spi\_inst\ ==\ spi0)}
+\DoxyCodeLine{01047\ \ \ \ \ \{}
+\DoxyCodeLine{01048\ \ \ \ \ \ \ \ \ assert(mosi\ ==\ 3\ ||\ mosi\ ==\ 7\ ||\ mosi\ ==\ 19\ ||\ mosi\ ==\ 23\ ||\ mosi\ ==\ 35\ ||\ mosi\ ==\ 39);}
+\DoxyCodeLine{01049\ \ \ \ \ \ \ \ \ assert(miso\ ==\ 0\ ||\ miso\ ==\ 4\ ||\ miso\ ==\ 16\ ||\ miso\ ==\ 20\ ||\ miso\ ==\ 32\ ||\ miso\ ==\ 36);}
+\DoxyCodeLine{01050\ \ \ \ \ \ \ \ \ assert(sclk\ ==\ 2\ ||\ sclk\ ==\ 6\ ||\ sclk\ ==\ 18\ ||\ sclk\ ==\ 22\ ||\ sclk\ ==\ 34\ ||\ sclk\ ==\ 38);}
+\DoxyCodeLine{01051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ assert(cs\ ==\ 1\ ||\ cs\ ==\ 5\ ||\ cs\ ==\ 17\ ||\ cs\ ==\ 21);}}
+\DoxyCodeLine{01052\ \ \ \ \ \}}
+\DoxyCodeLine{01053\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (spi\_inst\ ==\ spi1)}
+\DoxyCodeLine{01054\ \ \ \ \ \{}
+\DoxyCodeLine{01055\ \ \ \ \ \ \ \ \ assert(mosi\ ==\ 11\ ||\ mosi\ ==\ 15\ ||\ mosi\ ==\ 27\ ||\ mosi\ ==\ 31\ ||\ mosi\ ==\ 43\ ||\ mosi\ ==\ 47);}
+\DoxyCodeLine{01056\ \ \ \ \ \ \ \ \ assert(miso\ ==\ 8\ ||\ miso\ ==\ 12\ ||\ miso\ ==\ 24\ ||\ miso\ ==\ 28\ ||\ miso\ ==\ 40\ ||\ miso\ ==\ 44);}
+\DoxyCodeLine{01057\ \ \ \ \ \ \ \ \ assert(sclk\ ==\ 10\ ||\ sclk\ ==\ 14\ ||\ sclk\ ==\ 26\ ||\ sclk\ ==\ 30\ ||\ sclk\ ==\ 42\ ||\ sclk\ ==\ 46);}
+\DoxyCodeLine{01058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ assert(cs\ ==\ 9\ ||\ cs\ ==\ 13\ ||\ cs\ ==\ 25\ ||\ cs\ ==\ 29);}}
+\DoxyCodeLine{01059\ \ \ \ \ \}}
+\DoxyCodeLine{01060\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01061\ \ \ \ \ \ \ \ \ assert(spi\_inst\ ==\ spi0\ ||\ spi\_inst\ ==\ spi1);}
+\DoxyCodeLine{01062\ \ \ \ \ \}}
+\DoxyCodeLine{01063\ }
+\DoxyCodeLine{01064\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}*\ device\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}));}
+\DoxyCodeLine{01065\ \ \ \ \ \textcolor{keywordflow}{if}\ (device\ ==\ NULL)\ \{}
+\DoxyCodeLine{01066\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}blockdevice\_sd\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{01067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{01068\ \ \ \ \ \}}
+\DoxyCodeLine{01069\ \ \ \ \ \mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}*\ config\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structblockdevice__sd__config__t}{blockdevice\_sd\_config\_t}}));}
+\DoxyCodeLine{01070\ \ \ \ \ \textcolor{keywordflow}{if}\ (config\ ==\ NULL)\ \{}
+\DoxyCodeLine{01071\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}blockdevice\_sd\_create:\ Out\ of\ memory\(\backslash\)n"{}});}
+\DoxyCodeLine{01072\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{01073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{01074\ \ \ \ \ \}}
+\DoxyCodeLine{01075\ }
+\DoxyCodeLine{01076\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}\ =\ init;}
+\DoxyCodeLine{01077\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}\ =\ deinit;}
+\DoxyCodeLine{01078\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}}\ =\ sync;}
+\DoxyCodeLine{01079\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}}\ =\ read;}
+\DoxyCodeLine{01080\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}\ =\ erase;}
+\DoxyCodeLine{01081\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}\ =\ program;}
+\DoxyCodeLine{01082\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}\ =\ trim;}
+\DoxyCodeLine{01083\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}\ =\ size;}
+\DoxyCodeLine{01084\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ =\ block\_size;}
+\DoxyCodeLine{01085\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}}\ =\ block\_size;}
+\DoxyCodeLine{01086\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ =\ block\_size;}
+\DoxyCodeLine{01087\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}\ =\ DEVICE\_NAME;}
+\DoxyCodeLine{01088\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01089\ }
+\DoxyCodeLine{01090\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7c06405b4676b1bd54189279f74c4ec}{spi\_inst}}\ =\ spi\_inst;}
+\DoxyCodeLine{01091\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a4b1f87d959d02dd32e88faeb7bf11412}{mosi}}\ =\ mosi;}
+\DoxyCodeLine{01092\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae8df6ecd310556e45f8e9d10b29b8512}{miso}}\ =\ miso;}
+\DoxyCodeLine{01093\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a83bc8190d58c50dc4696e347f6d8b601}{sclk}}\ =\ sclk;}
+\DoxyCodeLine{01094\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af0a9de7d996bcd6711ab7244e2db17d6}{cs}}\ =\ cs;}
+\DoxyCodeLine{01095\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_af7854657ebfe51492086bc83e74d15a8}{hz}}\ =\ hz;}
+\DoxyCodeLine{01096\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_ae7d08bfdf6ccc6ec15fef0f38c155794}{enable\_crc}}\ =\ enable\_crc;}
+\DoxyCodeLine{01097\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a9de2e52cb964416fe7c8565304e60f86}{card\_type}}\ =\ \mbox{\hyperlink{sd_8c_ab3b05bad6c468ddb44aff2f80a988b74a5768fc056208e1ae24594a5995a94290}{SDCARD\_NONE}};}
+\DoxyCodeLine{01098\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a7de1f8b1fe1eac89938593472e1e77c7}{block\_size}}\ =\ 512;}
+\DoxyCodeLine{01099\ \ \ \ \ mutex\_init(\&config-\/>\mbox{\hyperlink{structblockdevice__sd__config__t_a067f7b4829219e283143546a90b876da}{\_mutex}});}
+\DoxyCodeLine{01100\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ config;}
+\DoxyCodeLine{01101\ }
+\DoxyCodeLine{01102\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{01103\ \ \ \ \ \textcolor{keywordflow}{return}\ device;}
+\DoxyCodeLine{01104\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9}\index{blockdevice\_sd@{blockdevice\_sd}!blockdevice\_sd\_free@{blockdevice\_sd\_free}}
+\index{blockdevice\_sd\_free@{blockdevice\_sd\_free}!blockdevice\_sd@{blockdevice\_sd}}
+\doxysubsubsubsection{\texorpdfstring{blockdevice\_sd\_free()}{blockdevice\_sd\_free()}}
+{\footnotesize\ttfamily \label{group__blockdevice__sd_gada9c8624c3e06c29f3780fa5f77fb6d9} 
+void blockdevice\+\_\+sd\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Release the SD card device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Block device object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{sd_8c_source_l01106}{1106}} of file \mbox{\hyperlink{sd_8c_source}{sd.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{01106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01107\ \ \ \ \ free(device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}});}
+\DoxyCodeLine{01108\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ NULL;}
+\DoxyCodeLine{01109\ \ \ \ \ free(device);}
+\DoxyCodeLine{01110\ \ \ \ \ device\ =\ NULL;}
+\DoxyCodeLine{01111\ \}}
+
+\end{DoxyCode}

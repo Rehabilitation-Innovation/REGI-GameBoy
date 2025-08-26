@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('globals_func.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -208,7 +195,7 @@ $(function() {
 
 
 <h3 class="doxsection"><a id="index_m" name="index_m"></a>- m -</h3><ul>
-<li>main()&#160;:&#160;<a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main.cpp</a></li>
+<li>main()&#160;:&#160;<a class="el" href="_c_make_c_compiler_id_8c.html#a0ddf1224851353fc92bfbff6f499fa97">CMakeCCompilerId.c</a>, <a class="el" href="_c_make_c_x_x_compiler_id_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">CMakeCXXCompilerId.cpp</a>, <a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main.cpp</a></li>
 <li>measure_freqs()&#160;:&#160;<a class="el" href="main_8cpp.html#a3f30a40dd935bbd0bbe480669e726f7f">main.cpp</a></li>
 <li>melody()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#ab23c799acb63da00a9d9f0d1d5c5196a">pwm-tone.h</a></li>
 </ul>
@@ -224,12 +211,13 @@ $(function() {
 <li>pattern_random()&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#aa356ca9b38b898c4cf179a56267052d4">DinoGame.cpp</a></li>
 <li>pattern_snakes()&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a936c520c77dd3640169856dda95c0755">DinoGame.cpp</a></li>
 <li>pattern_sparkle()&#160;:&#160;<a class="el" href="_dino_game_8cpp.html#a22d482c11872140be273ca3b3ddda1ec">DinoGame.cpp</a></li>
+<li>pico_board_cmake_set()&#160;:&#160;<a class="el" href="regi__rev1_8h.html#a84cada78bd4360891c500026949abd61">regi_rev1.h</a></li>
 </ul>
 
 
 <h3 class="doxsection"><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>scroll_framebuffer()&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi_8cpp.html#a4bfff3f1d70f74509484b34c8461003b">tinyengine_renderer_dvi.cpp</a></li>
-<li>set_frequency()&#160;:&#160;<a class="el" href="tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.cpp</a>, <a class="el" href="tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.h</a></li>
+<li>set_frequency()&#160;:&#160;<a class="el" href="tinyengine_8h.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.h</a>, <a class="el" href="tinyengine_8cpp.html#a141e0e4cfccde883fde46e6908a6cf9e">tinyengine.cpp</a></li>
 <li>set_rest_duration()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6004e97a98d19f40a6893e47e9d9e4f0">pwm-tone.h</a></li>
 <li>set_tempo()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#ac124ae29e40f75662b6327b3a99185b8">pwm-tone.h</a></li>
 <li>stop_melody()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a3123c1851a4e308ee3b84662745a3d0c">pwm-tone.h</a></li>
@@ -238,7 +226,9 @@ $(function() {
 
 
 <h3 class="doxsection"><a id="index_t" name="index_t"></a>- t -</h3><ul>
-<li>te_audio_init()&#160;:&#160;<a class="el" href="tinyengine__audio_8cpp.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.cpp</a>, <a class="el" href="tinyengine__audio_8h.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.h</a></li>
+<li>te_audio_init()&#160;:&#160;<a class="el" href="tinyengine__audio_8h.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.h</a>, <a class="el" href="tinyengine__audio_8cpp.html#a063f751815bd2faa9b815f16f75c9243">tinyengine_audio.cpp</a></li>
+<li>tinyengine_renderer_dvi_flip_blocking()&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi__c_8h.html#a6b02cd7ab76f3e17dfd9dc647b0e6227">tinyengine_renderer_dvi_c.h</a></li>
+<li>tinyengine_renderer_dvi_init()&#160;:&#160;<a class="el" href="tinyengine__renderer__dvi__c_8h.html#aebf6c33c95a2567557e6cff4509e9555">tinyengine_renderer_dvi_c.h</a></li>
 <li>tone()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6be2aff54804e191b2eec031a3657cd3">pwm-tone.h</a></li>
 <li>tone_init()&#160;:&#160;<a class="el" href="pwm-tone_8h.html#a6007f918a626559d13695f7c8fccce1f">pwm-tone.h</a></li>
 </ul>

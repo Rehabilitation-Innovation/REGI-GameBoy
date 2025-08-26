@@ -1,0 +1,31 @@
+\doxysection{class\+\_\+main.\+cxx}
+\hypertarget{class__main_8cxx_source}{}\label{class__main_8cxx_source}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/class\_main.cxx@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main/test/test\_program/class\_main.cxx}}
+\mbox{\hyperlink{class__main_8cxx}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{distance__sensor_8h}{distance\_sensor.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00005}\mbox{\hyperlink{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}{00005}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}{starting\_countdown}}()\ \{}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00006}00006\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{pico_8h_a4f5fce8c1ef282264f9214809524d836}{uint}}\ i\ =\ 5;\ i\ !=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00007}00007\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Starting\ in\ \%d\(\backslash\)n"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00008}00008\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00009}00009\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00010}00010\ \}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00012}\mbox{\hyperlink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{00012}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00013}00013\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00014}00014\ \ \ \ \ \mbox{\hyperlink{class__main_8cxx_a9664e3fc84c826bdfcb652ad23d1a86b}{starting\_countdown}}();}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}\ sensor\{\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0,\ 0\};}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00018}00018\ \ \ \ \ \ \ \ \ sensor.\mbox{\hyperlink{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}{TriggerRead}}();}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (sensor.\mbox{\hyperlink{class_distance_sensor_a5cad29b69f0ae171cfe3a2be0e346f8f}{is\_sensing}})\ \{}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_us(10);}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00021}00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00022}00022\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Got\ reading:\ \%u\(\backslash\)n"{}},\ sensor.\mbox{\hyperlink{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}{distance}});}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00023}00023\ \ \ \ \ \ \ \ \ sleep\_ms(1000);}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{class__main_8cxx_source_l00025}00025\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,160 @@
+\doxysection{test\+\_\+blockdevice.\+c}
+\hypertarget{host_2test__blockdevice_8c_source}{}\label{host_2test__blockdevice_8c_source}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/host/test\_blockdevice.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/host/test\_blockdevice.c}}
+\mbox{\hyperlink{host_2test__blockdevice_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{heap_8h}{blockdevice/heap.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fat_8h}{filesystem/fat.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00008}\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{00008}}\ \textcolor{preprocessor}{\#define\ COLOR\_GREEN(format)\ \ ("{}\(\backslash\)e[32m"{}\ format\ "{}\(\backslash\)e[0m"{})}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00009}\mbox{\hyperlink{host_2test__blockdevice_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{00009}}\ \textcolor{preprocessor}{\#define\ HEAP\_STORAGE\_SIZE\ \ \ \ (64\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00010}\mbox{\hyperlink{host_2test__blockdevice_8c_ab0b32c3001dc854345376d139b2fc9d4}{00010}}\ \textcolor{preprocessor}{\#define\ LOOPBACK\_STORAGE\_SIZE\ \ 1024}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00011}\mbox{\hyperlink{host_2test__blockdevice_8c_ab8c390e6f53017179ae00255cd27fd11}{00011}}\ \textcolor{preprocessor}{\#define\ LOOPBACK\_BLOCK\_SIZE\ \ \ \ 512}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00014}00014\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print\_hex(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *label,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *buf\ =\ buffer;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00016}00016\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s:\(\backslash\)n"{}},\ label);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ length;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \%\ 16\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}0x\%04zu\%s"{}},\ offset,\ (i\ \%\ 512)\ ==\ 0\ ?\ \textcolor{stringliteral}{"{}>"{}}\ :\ \textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isalnum(buf[i]))\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}'\%c'\ "{}},\ buf[i]);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}0x\%02x"{}},\ buf[i]);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \%\ 16\ ==\ 15)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ offset\ +=\ 16;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00035}00035\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_printf(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *format,\ ...)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00036}00036\ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00037}00037\ \ \ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ vprintf(format,\ args);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00039}00039\ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00041}00041\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 50\ -\/\ (size\_t)n;\ i++)}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}."{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00046}00046\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ setup(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00047}00047\ \ \ \ \ (void)device;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00050}00050\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ cleanup(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ length\ =\ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}(device);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00052}00052\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}(device,\ 0,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00055}00055\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_init(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00056}00056\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}init"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ The\ init\ is\ done\ when\ the\ object\ is\ created.}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}(device);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00060}00060\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Init\ for\ later\ testing}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00063}00063\ \ \ \ \ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00064}00064\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00066}00066\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00069}00069\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_sync(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00070}00070\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}sync"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00072}00072\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}}(device);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00073}00073\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00075}00075\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00078}00078\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_erase\_program\_read(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00079}00079\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}erase,program,read"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ addr\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ length\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}};}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00084}00084\ \ \ \ \ \textcolor{comment}{//\ erase\ test\ block}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}(device,\ addr,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00086}00086\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ program\ by\ random\ data}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00089}00089\ \ \ \ \ uint8\_t\ *program\_buffer\ =\ calloc(1,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00090}00090\ \ \ \ \ srand(length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ length;\ i++)}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ program\_buffer[i]\ =\ rand()\ \&\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00093}00093\ \ \ \ \ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}(device,\ program\_buffer,\ addr,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00094}00094\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00096}00096\ \ \ \ \ \textcolor{comment}{//\ read\ test\ block}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00097}00097\ \ \ \ \ uint8\_t\ *read\_buffer\ =\ calloc(1,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00098}00098\ \ \ \ \ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}}(device,\ read\_buffer,\ addr,\ length);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00099}00099\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00100}00100\ \ \ \ \ assert(memcmp(program\_buffer,\ read\_buffer,\ length)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00102}00102\ \ \ \ \ free(read\_buffer);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00103}00103\ \ \ \ \ free(program\_buffer);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00105}00105\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00108}00108\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_trim(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00109}00109\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}trim"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}(device,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00112}00112\ \ \ \ \ assert(err\ ==\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00114}00114\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00117}00117\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_size(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00118}00118\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}size"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00120}00120\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ length\ =\ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}(device);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00121}00121\ \ \ \ \ assert(length\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00123}00123\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00124}00124\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00126}00126\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_api\_attribute(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device)\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00127}00127\ \ \ \ \ test\_printf(\textcolor{stringliteral}{"{}attribute"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00129}00129\ \ \ \ \ assert(device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00130}00130\ \ \ \ \ assert(device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}}\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00131}00131\ \ \ \ \ assert(device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00132}00132\ \ \ \ \ assert(strlen(device-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}})\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00134}00134\ \ \ \ \ assert(device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00136}00136\ \ \ \ \ printf(\mbox{\hyperlink{host_2test__blockdevice_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00137}00137\ \}}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00139}\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2host_2main_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}{00139}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{host_2test__blockdevice_8c_aaa6a7a1b08b6bd092fbeeebf2476e6a6}{test\_blockdevice}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00140}00140\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Block\ device\ Heap\ memory:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00141}00141\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *heap\ =\ \mbox{\hyperlink{group__blockdevice__heap_ga9500b5327f9bf0e2bf3ca11ec122748f}{blockdevice\_heap\_create}}(\mbox{\hyperlink{fs__init__heap_8c_ac1d21a4fb714b1ecddeb24d45a2f6dae}{HEAP\_STORAGE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00142}00142\ \ \ \ \ assert(heap\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00143}00143\ \ \ \ \ setup(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00145}00145\ \ \ \ \ test\_api\_init(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00146}00146\ \ \ \ \ test\_api\_erase\_program\_read(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00147}00147\ \ \ \ \ test\_api\_trim(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00148}00148\ \ \ \ \ test\_api\_sync(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00149}00149\ \ \ \ \ test\_api\_size(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00150}00150\ \ \ \ \ test\_api\_attribute(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00152}00152\ \ \ \ \ cleanup(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00153}00153\ \ \ \ \ \mbox{\hyperlink{group__blockdevice__heap_ga6d78ccbc7b18231fadf2dd61c42f2a84}{blockdevice\_heap\_free}}(heap);}
+\DoxyCodeLine{\Hypertarget{host_2test__blockdevice_8c_source_l00154}00154\ \}}
+
+\end{DoxyCode}

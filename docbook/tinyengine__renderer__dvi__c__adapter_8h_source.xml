@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source" xml:lang="en-US">
+<title>tinyengine_renderer_dvi_c_adapter.h</title>
+<indexterm><primary>backup/tinyengine_renderer_dvi_c_adapter.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#pragma&#32;once</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine_8h">tinyengine.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__framebuffer_8h">tinyengine_framebuffer.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00004"/>00004 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00005"/>00005 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_tinyengine__renderer__dvi__c_8h">tinyengine_renderer_dvi_c.h</link>&quot;</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00007"/>00007 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00008"/>00008 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00009"/><link linkend="_class_tiny_engine_renderer_d_v_i">00009</link> <emphasis role="keyword">class&#32;</emphasis><link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</link>&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link>&#32;{
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00010"/>00010 <emphasis role="keyword">private</emphasis>:
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;m_frame_buf;
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00012"/>00012 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TinyEngine&amp;&#32;m_engine;</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00013"/>00013 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00014"/>00014 <emphasis role="keyword">public</emphasis>:
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;tinyengine_status_t&#32;tinyengine_renderer_init(TinyEngine&amp;&#32;engine_handle,&#32;TinyEngineFrameBuffer&amp;&#32;framebuffer);</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="comment">//block&#32;until&#32;next&#32;vsync&#32;is&#32;hit&#32;and&#32;the&#32;buffers&#32;are&#32;flipped&#32;then&#32;the&#32;swap&#32;happens.</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;void&#32;tinyengine_renderer_dvi_flip_blocking();</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00018"/><link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">00018</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</link>(<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link>&amp;&#32;fr_buf)&#32;:&#32;m_frame_buf(fr_buf)&#32;{
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00020"/>00020 &#32;&#32;&#32;&#32;};
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00021"/>00021 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00022"/><link linkend="_class_tiny_engine_renderer_d_v_i_1a09c4f163843cf199dc0afcfafd7953b5">00022</link> &#32;&#32;&#32;&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1a09c4f163843cf199dc0afcfafd7953b5">~TinyEngineRendererDVI</link>()&#32;{};
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;void&#32;dma_irq_handler();</emphasis>
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<link linkend="_tinyengine_8h_1a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</link>&#32;<link linkend="_class_tiny_engine_renderer_d_v_i_1ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</link>();
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00028"/>00028 
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00029"/>00029 };
+<anchor xml:id="_tinyengine__renderer__dvi__c__adapter_8h_source_1l00030"/>00030 
+</programlisting></section>

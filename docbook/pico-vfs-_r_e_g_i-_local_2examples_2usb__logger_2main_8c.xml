@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c" xml:lang="en-US">
+<title>lib/pico-vfs-REGI-Local/examples/usb_logger/main.c File Reference</title>
+<indexterm><primary>lib/pico-vfs-REGI-Local/examples/usb_logger/main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;bsp/board.h&gt;<?linebreak?>#include &lt;hardware/adc.h&gt;<?linebreak?>#include &lt;hardware/gpio.h&gt;<?linebreak?>#include &lt;hardware/structs/ioqspi.h&gt;<?linebreak?>#include &lt;hardware/sync.h&gt;<?linebreak?>#include &lt;pico/stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;tusb.h&gt;<?linebreak?>#include &quot;blockdevice/flash.h&quot;<?linebreak?>#include &quot;filesystem/fat.h&quot;<?linebreak?>#include &quot;filesystem/littlefs.h&quot;<?linebreak?>#include &quot;filesystem/vfs.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a8218db278eda6b3652f3ac0338a3b260">TEMPERATURE_UNITS</link>&#160;&#160;&#160;&apos;C&apos;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1abf4fdc27ec7610b3aa5ee951ba9802c3">USBCTRL_REG</link>&#160;&#160;&#160;((uint32_t *)(USBCTRL_REGS_BASE + 0x50))</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe">main</link> (void)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db">filesystem_is_exported</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link> * <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4">flash2</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a8218db278eda6b3652f3ac0338a3b260"/><section>
+    <title>TEMPERATURE_UNITS</title>
+<indexterm><primary>TEMPERATURE_UNITS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>TEMPERATURE_UNITS</secondary></indexterm>
+<para><computeroutput>#define TEMPERATURE_UNITS&#160;&#160;&#160;&apos;C&apos;</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00020">20</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1abf4fdc27ec7610b3aa5ee951ba9802c3"/><section>
+    <title>USBCTRL_REG</title>
+<indexterm><primary>USBCTRL_REG</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>USBCTRL_REG</secondary></indexterm>
+<para><computeroutput>#define USBCTRL_REG&#160;&#160;&#160;((uint32_t *)(USBCTRL_REGS_BASE + 0x50))</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00021">21</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1a840291bc02cba5474a4cb46a9b9566fe"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00185">185</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source">main.c</link>.</para>
+<programlisting linenumbering="unnumbered">00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00186 &#32;&#32;&#32;&#32;adc_init();
+00187 &#32;&#32;&#32;&#32;adc_set_temp_sensor_enabled(<emphasis role="keyword">true</emphasis>);
+00188 &#32;&#32;&#32;&#32;adc_select_input(4);
+00189 &#32;&#32;&#32;&#32;board_init();
+00190 &#32;&#32;&#32;&#32;tud_init(<link linkend="_tusb__config_8h_1a850f6280c7dc9aead785f6bedaaa0fb9">BOARD_TUD_RHPORT</link>);
+00191 &#32;&#32;&#32;&#32;stdio_init_all();
+00192 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!filesystem_init())&#32;{
+00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;-1;
+00194 &#32;&#32;&#32;&#32;}
+00195 
+00196 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Start&#32;USB&#32;MSC&#32;Logger&#32;with&#32;two&#32;file&#32;systems\n&quot;</emphasis>);
+00197 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">true</emphasis>)&#32;{
+00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;filesystem_management_task();
+00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(enable_logging_task)
+00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;logging_task();
+00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tud_task();
+00202 &#32;&#32;&#32;&#32;}
+00203 }
+</programlisting></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1afb4b5379673d98e6bdf98584c040c1db"/><section>
+    <title>filesystem_is_exported</title>
+<indexterm><primary>filesystem_is_exported</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>filesystem_is_exported</secondary></indexterm>
+<para><computeroutput>bool filesystem_is_exported = false</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00023">23</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source">main.c</link>.</para>
+</section>
+<anchor xml:id="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_1ad8ecc24e18a9575a8814a8eafeb8a3b4"/><section>
+    <title>flash2</title>
+<indexterm><primary>flash2</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>flash2</secondary></indexterm>
+<para><computeroutput><link linkend="_group__blockdevice_1ga4bc2c146f975b5250be7f8f5f219f5e4">blockdevice_t</link>* flash2</computeroutput></para><para>
+Definition at line <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source_1l00026">26</link> of file <link linkend="_pico-vfs-_r_e_g_i-_local_2examples_2usb__logger_2main_8c_source">main.c</link>.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,71 @@
+\doxysection{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main Directory Reference}
+\hypertarget{dir_56bc73bd2134923c62427a01040a750a}{}\label{dir_56bc73bd2134923c62427a01040a750a}\index{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main Directory Reference@{lib/pico-\/distance-\/sensor-\/main/pico-\/distance-\/sensor-\/main Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_b133db15c6db2db5e39f54f03d4259b3}{include}}
+\item 
+directory \mbox{\hyperlink{dir_9aa375878d37ad80f1c1074c8fefcebc}{src}}
+\item 
+directory \mbox{\hyperlink{dir_5b8dfded306fbaa43784ea3a78eb9422}{test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md0}{}\doxysubsection{\texorpdfstring{Pico C++ HC-\/\+SR04 Library}{Pico C++ HC-\/\+SR04 Library}}\label{README.md_autotoc_md0}
+C++ library for reading an HC-\/\+SR04 distance sensor using the raspberry pi pico.\hypertarget{README.md_autotoc_md1}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Specify the \doxylink{pio_8h_a05b1974aa3d59de9efe4ff87799ff3da}{PIO} / State machine to use
+\item IRQ driven reads
+\item Non blocking distance sensing
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md2}{}\doxysubsection{\texorpdfstring{How to use}{How to use}}\label{README.md_autotoc_md2}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Include\ the\ library}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{distance__sensor_8h}{distance\_sensor.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class__main_8cxx_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ an\ instance\ of\ the\ sensor}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ specify\ the\ pio,\ state\ machine,\ and\ gpio\ pin\ connected\ to\ trigger}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ echo\ pin\ must\ be\ on\ gpio\ pin\ trigger\ +\ 1.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_distance_sensor}{DistanceSensor}}\ hcsr04\{\mbox{\hyperlink{pio_8h_a916d05e71da7f2173cd22b46bbfa0a11}{pio0}},\ 0,\ 0\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Trigger\ background\ sense}}
+\DoxyCodeLine{\ \ \ \ hcsro4.\mbox{\hyperlink{class_distance_sensor_aa2d0dec65e7626a6958f26df13b29f0a}{TriggerRead}}();}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ wait\ for\ sensor\ to\ get\ a\ result}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (hcsro4.is\_sensing)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ sleep\_us(100);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Read\ result}}
+\DoxyCodeLine{\ \ \ \ printf(\textcolor{stringliteral}{"{}Reading\ \%d\ centimeters\(\backslash\)n"{}},\ hcsr04.\mbox{\hyperlink{class_distance_sensor_a2fda11f424b3634164f1b900ee6a0e3c}{distance}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3}{}\doxysubsection{\texorpdfstring{How to include in your project}{How to include in your project}}\label{README.md_autotoc_md3}
+Including this library in your project is simple.
+
+
+\begin{DoxyEnumerate}
+\item Clone the library into your repository. Using submodules is the simplest way to make sure all your repository users will have the same library you\textquotesingle{}re using. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ submodule\ add\ https://github.com/dangarbri/pico-\/distance-\/sensor}
+
+\end{DoxyCode}
+ if not using git, then just use {\ttfamily git clone} instead of {\ttfamily git submodule add}
+\item Update your `CMake\+Lists.\+txt' to point to the library 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include\_directories(}
+\DoxyCodeLine{\ \ \ \ ...\ \#\ your\ include\ directories}
+\DoxyCodeLine{\ \ \ \ pico-\/distance-\/sensor/include\ \#\ Add\ servo-\/lib's\ include\ directory\ to\ get\ "{}servo.h"{}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{\#\ Add\ the\ subdirectory\ so\ the\ library\ gets\ compiled}
+\DoxyCodeLine{add\_subdirectory(pico-\/distance-\/sensor)}
+\DoxyCodeLine{\#\ include\ it\ in\ your\ link\ libraries}
+\DoxyCodeLine{target\_link\_libraries(your\_program\ pico\_stdlib\ distance-\/sensor)}
+
+\end{DoxyCode}
+ 
+\end{DoxyEnumerate}

@@ -1,0 +1,104 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/tests/large\+\_\+file/main.c File Reference}
+\hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c}{}\label{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/tests/large\_file/main.c@{lib/pico-\/vfs-\/REGI-\/Local/tests/large\_file/main.c}}
+{\ttfamily \#include "{}blockdevice/sd.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/fat.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+{\ttfamily \#include $<$hardware/clocks.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$pico/stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\+\_\+\+GREEN}}(format)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\+\_\+\+SIZE}}~(1024 \texorpdfstring{$\ast$}{*} 64)
+\item 
+\#define \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a60c86b9f8c5c91a868063fa37c36e4cd}{HUGE\+\_\+\+FILE\+\_\+\+SIZE}}~(1U \texorpdfstring{$\ast$}{*} 1024U \texorpdfstring{$\ast$}{*} 1024U \texorpdfstring{$\ast$}{*} 1024U)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Enable predefined file systems. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a6b20d41d6252e9871430c242cb1a56e7}\index{main.c@{main.c}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a6b20d41d6252e9871430c242cb1a56e7} 
+\#define BUFFER\+\_\+\+SIZE~(1024 \texorpdfstring{$\ast$}{*} 64)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_l00015}{15}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}\index{main.c@{main.c}!COLOR\_GREEN@{COLOR\_GREEN}}
+\index{COLOR\_GREEN@{COLOR\_GREEN}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{COLOR\_GREEN}{COLOR\_GREEN}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3} 
+\#define COLOR\+\_\+\+GREEN(\begin{DoxyParamCaption}\item[{}]{format}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{"{}\(\backslash\)e[32m"{}}\ format\ \textcolor{stringliteral}{"{}\(\backslash\)e[0m"{}})}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_l00014}{14}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source}{main.\+c}}.
+
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a60c86b9f8c5c91a868063fa37c36e4cd}\index{main.c@{main.c}!HUGE\_FILE\_SIZE@{HUGE\_FILE\_SIZE}}
+\index{HUGE\_FILE\_SIZE@{HUGE\_FILE\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HUGE\_FILE\_SIZE}{HUGE\_FILE\_SIZE}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a60c86b9f8c5c91a868063fa37c36e4cd} 
+\#define HUGE\+\_\+\+FILE\+\_\+\+SIZE~(1U \texorpdfstring{$\ast$}{*} 1024U \texorpdfstring{$\ast$}{*} 1024U \texorpdfstring{$\ast$}{*} 1024U)}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_l00016}{16}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source}{main.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source_l00155}{155}} of file \mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2tests_2large__file_2main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ stdio\_init\_all();}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gafb19e37469a751aa61de3dcd0c70b4b0}{fs\_init}}();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ printf(\textcolor{stringliteral}{"{}10GB\ write/read\ test:\(\backslash\)n"{}});}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <=\ 10;\ i++)\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ huge\_file\_write(i);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ huge\_file\_read(i);}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ printf(\mbox{\hyperlink{pico-vfs-_r_e_g_i-_local_2examples_2benchmark_2main_8c_a589fea3c63209fa4d21b6b30d8c365c3}{COLOR\_GREEN}}(\textcolor{stringliteral}{"{}All\ tests\ ok\(\backslash\)n"{}}));}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ tight\_loop\_contents();}
+\DoxyCodeLine{00169\ \}}
+
+\end{DoxyCode}

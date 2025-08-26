@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('class_tiny_engine_renderer_d_v_i.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -137,7 +124,9 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a1907e8c778a78214ee236e72eb522ed5a190bb8c4adc621cad9458639bad478e2">MODE_TEXT_RGB111</a> enum value</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ab7f8fc6782cb61207a95e29e526b34d6">palette</a></td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad94c9d8daaaab3efae690638e787e24d">PALETTE_SIZE</a></td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad9985d571f39928ba4cebd35d84cd5f0">swap_blocking</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#aa12a0ece831ea57ad7b912b069493ce7">swap_non_blocking</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa16b59444db5befe282ab100b9e468a44">TEXT_BLACK</a> enum value</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa2dab0064a071643f26dc865b1fe8d4b2">TEXT_BLUE</a> enum value</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
@@ -149,9 +138,13 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850fa2ee86e20ae08e225133e860fdda1be1f">TEXT_YELLOW</a> enum value</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a03955c82103a092f45c54b2e918a850f">TextColour</a> enum name</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</a>(TinyEngineFrameBuffer &amp;fr_buf)</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI</a>(TinyEngineFrameBuffer &amp;fr_buf)</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#aa6f8cc917454c16a374452cc66b03687">v_repeat</a></td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">wait_for_vsync</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a09c4f163843cf199dc0afcfafd7953b5">~TinyEngineRendererDVI</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html#a09c4f163843cf199dc0afcfafd7953b5">~TinyEngineRendererDVI</a>()</td><td class="entry"><a class="el" href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->

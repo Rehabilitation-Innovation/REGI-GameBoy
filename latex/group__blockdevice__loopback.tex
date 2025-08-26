@@ -1,0 +1,128 @@
+\doxysubsection{blockdevice\+\_\+loopback }
+\hypertarget{group__blockdevice__loopback}{}\label{group__blockdevice__loopback}\index{blockdevice\_loopback@{blockdevice\_loopback}}
+
+
+Loopback disk image file block device.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}{blockdevice\+\_\+loopback\+\_\+create}} (const char \texorpdfstring{$\ast$}{*}path, size\+\_\+t capacity, size\+\_\+t block\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Create loopback block device. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}{blockdevice\+\_\+loopback\+\_\+free}} (\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Release the loopback device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Loopback disk image file block device. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__blockdevice__loopback_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d}\index{blockdevice\_loopback@{blockdevice\_loopback}!blockdevice\_loopback\_create@{blockdevice\_loopback\_create}}
+\index{blockdevice\_loopback\_create@{blockdevice\_loopback\_create}!blockdevice\_loopback@{blockdevice\_loopback}}
+\doxysubsubsubsection{\texorpdfstring{blockdevice\_loopback\_create()}{blockdevice\_loopback\_create()}}
+{\footnotesize\ttfamily \label{group__blockdevice__loopback_gaf43766de5178a14bc204b9ec3b2a474d} 
+\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*} blockdevice\+\_\+loopback\+\_\+create (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{size\+\_\+t}]{capacity}{, }\item[{size\+\_\+t}]{block\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Create loopback block device. 
+
+Create a loopback device object that uses a disk image file. Specify the file path allocated to the block device, as well as the maximum size capacity and block size block\+\_\+size.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Disk image file path. \\
+\hline
+{\em capacity} & Maximum device size bytes. \\
+\hline
+{\em block\+\_\+size} & Block size byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Block device object. Returnes NULL in case of failure. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em NULL} & Failed to create block device object. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \mbox{\hyperlink{loopback_8c_source_l00134}{134}} of file \mbox{\hyperlink{loopback_8c_source}{loopback.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}));}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{if}\ (device\ ==\ NULL)\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}\ *config\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structblockdevice__loopback__config__t}{blockdevice\_loopback\_config\_t}}));}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{if}\ (config\ ==\ NULL)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}\ =\ init;}
+\DoxyCodeLine{00146\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}\ =\ deinit;}
+\DoxyCodeLine{00147\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ae4801dd67b1481ac013520098523988e}{read}}\ =\ \_\_read;}
+\DoxyCodeLine{00148\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aca297cb4c31042de2aeda00a9b8f8196}{erase}}\ =\ erase;}
+\DoxyCodeLine{00149\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a07d24eb0a566f88aa45cf1d236006822}{program}}\ =\ program;}
+\DoxyCodeLine{00150\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a0326c4dca54ff9e7966053c3aa96adcf}{trim}}\ =\ trim;}
+\DoxyCodeLine{00151\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_aaff48a348ee1441de6d05ffad85875ee}{sync}}\ =\ \_\_sync;}
+\DoxyCodeLine{00152\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_abba40bbe04d3a88d270634a788249477}{size}}\ =\ size;}
+\DoxyCodeLine{00153\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a44ac5dc03dd62d3c48abbdbd0c9fed4d}{read\_size}}\ =\ block\_size;}
+\DoxyCodeLine{00154\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ab4bddfc59b1c4918514f359c4b509dd3}{erase\_size}}\ =\ block\_size;}
+\DoxyCodeLine{00155\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a79e2a5807006883bcbf1f60a91bdaf98}{program\_size}}\ =\ block\_size;}
+\DoxyCodeLine{00156\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_ac5845731ff9674fc82a752fbd270130d}{name}}\ =\ DEVICE\_NAME;}
+\DoxyCodeLine{00157\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a9a2c51cef39211e0d1c42fc3e395caa0}{is\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a90074ebd562c400e629e17fa2e53e7ef}{path}}\ =\ path;}
+\DoxyCodeLine{00160\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a40206e22fbb46078f37a4e2191aa2114}{capacity}}\ =\ capacity;}
+\DoxyCodeLine{00161\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_aa9e4a4954196dfe2f0b9f5ae42bc9a3d}{block\_size}}\ =\ block\_size;}
+\DoxyCodeLine{00162\ \ \ \ \ config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a5ddcc0d29726ccc7883b82ba3325f808}{fildes}}\ =\ -\/1;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ mutex\_init(\&config-\/>\mbox{\hyperlink{structblockdevice__loopback__config__t_a837cd0853ecfaaae022d0a384835fecb}{\_mutex}});}
+\DoxyCodeLine{00165\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}}\ =\ config;}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (device-\/>\mbox{\hyperlink{structblockdevice_ad37adc41062aa442c1f80852285e0b35}{init}}(device)\ !=\ \mbox{\hyperlink{blockdevice_8h_a6202ecf5974ef985db5f3a2adfd81abba75df174773e6ad20c734b0cee152387c}{BD\_ERROR\_OK}})\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ free(config);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ free(device);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{return}\ device;}
+\DoxyCodeLine{00172\ \}}
+
+\end{DoxyCode}
+\Hypertarget{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15}\index{blockdevice\_loopback@{blockdevice\_loopback}!blockdevice\_loopback\_free@{blockdevice\_loopback\_free}}
+\index{blockdevice\_loopback\_free@{blockdevice\_loopback\_free}!blockdevice\_loopback@{blockdevice\_loopback}}
+\doxysubsubsubsection{\texorpdfstring{blockdevice\_loopback\_free()}{blockdevice\_loopback\_free()}}
+{\footnotesize\ttfamily \label{group__blockdevice__loopback_ga3c4a5393adc24e81505704fba94c1a15} 
+void blockdevice\+\_\+loopback\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Release the loopback device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Block device object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{loopback_8c_source_l00174}{174}} of file \mbox{\hyperlink{loopback_8c_source}{loopback.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ device-\/>\mbox{\hyperlink{structblockdevice_a49aee7ebd3ba09abcc167ba8b026e2a3}{deinit}}(device);}
+\DoxyCodeLine{00176\ \ \ \ \ free(device-\/>\mbox{\hyperlink{structblockdevice_a73a27f59d5175f4a31d4ab3cd2a7e3c0}{config}});}
+\DoxyCodeLine{00177\ \ \ \ \ free(device);}
+\DoxyCodeLine{00178\ \}}
+
+\end{DoxyCode}

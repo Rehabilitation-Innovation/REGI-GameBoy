@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>TinyEngine: src/tinyengine_renderer_dvi.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -18,37 +17,22 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(function() { init_search(); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="side-nav" class="ui-resizable side-nav-resizable"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="Glenrose-Flower-Red_n20iqr.webp"/></td>
+  <td id="projectlogo"><img alt="Logo" src="image (1).png"/></td>
   <td id="projectalign">
-   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1</span>
+   <div id="projectname">TinyEngine<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A tiny engine built for embedded RP2350 based game consoles. Includes support for Scenes, sprites, text, and DVI output.</div>
   </td>
  </tr>
-   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
-          </span>
-        </div>
-</td></tr>
  </tbody>
 </table>
 </div>
@@ -60,7 +44,17 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
     <div id="nav-tree-contents">
       <div id="nav-sync" class="sync"></div>
@@ -73,15 +67,8 @@ $(function() { codefold.init(); });
 <script type="text/javascript">
 $(function(){initNavTree('tinyengine__renderer__dvi_8cpp_source.html','',''); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',false,false,'search.php','Search',true);
-});
-</script>
-<div id="main-nav"></div>
-<div id="container"><div id="doc-content">
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -598,8 +585,7 @@ $(function() {
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno"><a class="line" href="tinyengine__renderer__dvi_8cpp.html#a4bfff3f1d70f74509484b34c8461003b">  487</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="tinyengine__renderer__dvi_8cpp.html#a4bfff3f1d70f74509484b34c8461003b">scroll_framebuffer</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span> </div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span><span class="comment">// void tinyengine_renderer_dvi_init(uint8_t* _display_buffer, uint32_t size, uint32_t width, uint32_t height) {</span></div>
-<div class="foldopen" id="foldopen00490" data-start="{" data-end="}">
-<div class="line"><a id="l00490" name="l00490"></a><span class="lineno"><a class="line" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">  490</a></span><a class="code hl_enumeration" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> <a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a>()</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span><a class="code hl_enumeration" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> <a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a>()</div>
 <div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>{</div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    <span class="comment">//framebuffer-&gt;flip_blocking = te_renderer_dvi_wait_vsync_blocking;// set this in the main initiator in tinyengine.c</span></div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    display = <span class="keyword">this</span>;</div>
@@ -671,7 +657,7 @@ $(function() {
 <div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    <span class="comment">// I just assign the pointers here because this makes the updating simpler.</span></div>
 <div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    <span class="comment">// s_frame_buf = framebuffer;</span></div>
 <div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="comment">// display_buf = _display_buffer;</span></div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    frame_buffer_display = m_frame_buf.pixel_buffer_display;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    frame_buffer_display = m_frame_buf.<a class="code hl_variable" href="class_tiny_engine_frame_buffer.html#a54c83662f0ff4edc1ad54f8064eca159">pixel_buffer_display</a>;</div>
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    <span class="comment">// frame_buffer_back = framebuffer-&gt;pixel_buffer_back;</span></div>
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="comment">// frame_buffer_display = framebuffer-&gt;pixel_buffer_display;</span></div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    <span class="comment">// memset(frame_buffer_display, (uint8_t)(0xF0), frame_width * frame_height * frame_bytes_per_pixel);</span></div>
@@ -786,7 +772,7 @@ $(function() {
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    dma_channel_config c;</div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    c = dma_channel_get_default_config(0);</div>
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    channel_config_set_chain_to(&amp;c, 1);</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>    channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>    channel_config_set_dreq(&amp;c, <a class="code hl_enumvalue" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h.html#a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</a>);</div>
 <div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>    dma_channel_configure(</div>
 <div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        0,</div>
 <div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>        &amp;c,</div>
@@ -797,7 +783,7 @@ $(function() {
 <div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    );</div>
 <div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    c = dma_channel_get_default_config(1);</div>
 <div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    channel_config_set_chain_to(&amp;c, 2);</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    channel_config_set_dreq(&amp;c, <a class="code hl_enumvalue" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h.html#a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</a>);</div>
 <div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    dma_channel_configure(</div>
 <div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>        1,</div>
 <div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>        &amp;c,</div>
@@ -810,7 +796,7 @@ $(function() {
 <div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    {</div>
 <div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>        c = dma_channel_get_default_config(i);</div>
 <div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>        channel_config_set_chain_to(&amp;c, (i + 1) % <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>);</div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>        channel_config_set_dreq(&amp;c, DREQ_HSTX);</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>        channel_config_set_dreq(&amp;c, <a class="code hl_enumvalue" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h.html#a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</a>);</div>
 <div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>        dma_channel_configure(</div>
 <div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>            i,</div>
 <div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>            &amp;c,</div>
@@ -827,8 +813,8 @@ $(function() {
 <div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    dma_hw-&gt;ints2 = (1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1;</div>
 <div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    dma_hw-&gt;inte2 = (1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1;</div>
 <div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    irq_set_exclusive_handler(DMA_IRQ_2, dma_irq_handler);</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    irq_set_enabled(DMA_IRQ_2, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    irq_set_exclusive_handler(<a class="code hl_enumvalue" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955">DMA_IRQ_2</a>, dma_irq_handler);</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    irq_set_enabled(<a class="code hl_enumvalue" href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955">DMA_IRQ_2</a>, <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span> </div>
 <div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    dma_channel_start(0);</div>
 <div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span> </div>
@@ -836,38 +822,36 @@ $(function() {
 <div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span> </div>
 <div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</a>;</div>
 <div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>}</div>
-</div>
 <div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span> </div>
 <div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span> </div>
-<div class="foldopen" id="foldopen00729" data-start="{" data-end="}">
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno"><a class="line" href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">  729</a></span><a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</a>(<a class="code hl_class" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a>&amp; fr_buf) : m_frame_buf(fr_buf)</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span><a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</a>(<a class="code hl_class" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a>&amp; fr_buf) : m_frame_buf(fr_buf)</div>
 <div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>{</div>
 <div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <span class="comment">// Always use the bottom channels</span></div>
 <div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>    dma_claim_mask((1 &lt;&lt; <a class="code hl_define" href="tinyengine__renderer__dvi_8h.html#ae397473251f21f73a1dca055f1c0048e">NUM_CHANS</a>) - 1);</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    <a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">tinyengine_renderer_init</a>();</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    tinyengine_renderer_init();</div>
 <div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>};</div>
-</div>
 <div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span> </div>
-<div class="foldopen" id="foldopen00736" data-start="{" data-end="}">
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno"><a class="line" href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">  736</a></span><a class="code hl_enumeration" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> <a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</a>()</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span><a class="code hl_enumeration" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a> <a class="code hl_function" href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</a>()</div>
 <div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>{</div>
 <div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    <span class="keywordflow">while</span> (v_scanline &gt;= <a class="code hl_define" href="tinyengine__renderer__dvi_8cpp.html#aeed8bd1fd1aca755891e0a08d3cd8fcb">MODE_V_FRONT_PORCH</a>) __wfe();</div>
 <div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span> </div>
 <div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</a>;</div>
 <div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>}</div>
-</div>
 <div class="ttc" id="a_dino_game_8cpp_html_a9c02f93c9698e4486878867c4f265c48"><div class="ttname"><a href="_dino_game_8cpp.html#a9c02f93c9698e4486878867c4f265c48">y</a></div><div class="ttdeci">uint32_t y</div><div class="ttdef"><b>Definition</b> <a href="_dino_game_8cpp_source.html#l00134">DinoGame.cpp:134</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_frame_buffer_html"><div class="ttname"><a href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a></div><div class="ttdef"><b>Definition</b> <a href="tinyengine__framebuffer_8h_source.html#l00013">tinyengine_framebuffer.h:14</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00009">tinyengine_renderer_dvi.h:9</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a0e3df45316caf89ecd7ab4e21888d324"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</a></div><div class="ttdeci">TinyEngineRendererDVI(TinyEngineFrameBuffer &amp;fr_buf)</div><div class="ttdef"><b>Definition</b> <a href="#l00729">tinyengine_renderer_dvi.cpp:729</a></div></div>
+<div class="ttc" id="aclass_tiny_engine_frame_buffer_html_a54c83662f0ff4edc1ad54f8064eca159"><div class="ttname"><a href="class_tiny_engine_frame_buffer.html#a54c83662f0ff4edc1ad54f8064eca159">TinyEngineFrameBuffer::pixel_buffer_display</a></div><div class="ttdeci">uint8_t * pixel_buffer_display</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__framebuffer_8h_source.html#l00026">tinyengine_framebuffer.h:26</a></div></div>
+<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html">TinyEngineRendererDVI</a></div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi__c__adapter_8h_source.html#l00009">tinyengine_renderer_dvi_c_adapter.h:9</a></div></div>
+<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a0e3df45316caf89ecd7ab4e21888d324"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#a0e3df45316caf89ecd7ab4e21888d324">TinyEngineRendererDVI::TinyEngineRendererDVI</a></div><div class="ttdeci">TinyEngineRendererDVI(TinyEngineFrameBuffer &amp;fr_buf)</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi__c__adapter_8h_source.html#l00018">tinyengine_renderer_dvi_c_adapter.h:18</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a3f7752c320d9957f7e88f85ac9d6f8de"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#a3f7752c320d9957f7e88f85ac9d6f8de">TinyEngineRendererDVI::gfx_dma_handler</a></div><div class="ttdeci">void gfx_dma_handler()</div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a5c8198aeb53c231de91bbf790a59f77c"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#a5c8198aeb53c231de91bbf790a59f77c">TinyEngineRendererDVI::frame_width</a></div><div class="ttdeci">uint16_t frame_width</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00089">tinyengine_renderer_dvi.h:89</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_a8a99856f9ce556f04f5032daec14a5f1"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#a8a99856f9ce556f04f5032daec14a5f1">TinyEngineRendererDVI::h_repeat</a></div><div class="ttdeci">uint8_t h_repeat</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00092">tinyengine_renderer_dvi.h:92</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_aa6f8cc917454c16a374452cc66b03687"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#aa6f8cc917454c16a374452cc66b03687">TinyEngineRendererDVI::v_repeat</a></div><div class="ttdeci">uint8_t v_repeat</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00093">tinyengine_renderer_dvi.h:93</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad94c9d8daaaab3efae690638e787e24d"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#ad94c9d8daaaab3efae690638e787e24d">TinyEngineRendererDVI::PALETTE_SIZE</a></div><div class="ttdeci">static constexpr int PALETTE_SIZE</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00036">tinyengine_renderer_dvi.h:36</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad99d6834cfcba17b8c9cbca951029c4a"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a></div><div class="ttdeci">tinyengine_status_t tinyengine_renderer_init()</div><div class="ttdef"><b>Definition</b> <a href="#l00490">tinyengine_renderer_dvi.cpp:490</a></div></div>
+<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_ad99d6834cfcba17b8c9cbca951029c4a"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#ad99d6834cfcba17b8c9cbca951029c4a">TinyEngineRendererDVI::tinyengine_renderer_init</a></div><div class="ttdeci">tinyengine_status_t tinyengine_renderer_init()</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00007">tinyengine_renderer_dvi._c_adapter.cpp:7</a></div></div>
 <div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_add867ce010cc772f7e993a7ac326a05d"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#add867ce010cc772f7e993a7ac326a05d">TinyEngineRendererDVI::frame_bytes_per_pixel</a></div><div class="ttdeci">uint8_t frame_bytes_per_pixel</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8h_source.html#l00091">tinyengine_renderer_dvi.h:91</a></div></div>
-<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_af10bc6442ebdf6db594fdc9c8f249414"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</a></div><div class="ttdeci">tinyengine_status_t wait_for_vsync()</div><div class="ttdef"><b>Definition</b> <a href="#l00736">tinyengine_renderer_dvi.cpp:736</a></div></div>
+<div class="ttc" id="aclass_tiny_engine_renderer_d_v_i_html_af10bc6442ebdf6db594fdc9c8f249414"><div class="ttname"><a href="class_tiny_engine_renderer_d_v_i.html#af10bc6442ebdf6db594fdc9c8f249414">TinyEngineRendererDVI::wait_for_vsync</a></div><div class="ttdeci">tinyengine_status_t wait_for_vsync()</div><div class="ttdef"><b>Definition</b> <a href="tinyengine__renderer__dvi_8__c__adapter_8cpp_source.html#l00004">tinyengine_renderer_dvi._c_adapter.cpp:4</a></div></div>
+<div class="ttc" id="alib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_html_a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03"><div class="ttname"><a href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h.html#a6f0a19defc495cfa6078364122266014a71865f5a1fc034131dfb351d2c830c03">DREQ_HSTX</a></div><div class="ttdeci">@ DREQ_HSTX</div><div class="ttdoc">Select HSTX as DREQ.</div><div class="ttdef"><b>Definition</b> <a href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2dreq_8h_source.html#l00134">dreq.h:134</a></div></div>
+<div class="ttc" id="alib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_html_a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955"><div class="ttname"><a href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h.html#a876b9495995a81dff786f07a1975c3b8aa05c818a7b9a97853fced4be9a9b0955">DMA_IRQ_2</a></div><div class="ttdeci">@ DMA_IRQ_2</div><div class="ttdoc">Select DMA&#39;s IRQ 2 output.</div><div class="ttdef"><b>Definition</b> <a href="lib_2pico-distance-sensor-main_2pico-distance-sensor-main_2pico-sdk_2src_2extra__doxygen_2intctrl_8h_source.html#l00086">intctrl.h:86</a></div></div>
 <div class="ttc" id="amain_8h_html"><div class="ttname"><a href="main_8h.html">main.h</a></div></div>
 <div class="ttc" id="atinyengine_8h_html_a99e26dc5d9e1752ba606841d6b5c3d40"><div class="ttname"><a href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40">tinyengine_status_t</a></div><div class="ttdeci">tinyengine_status_t</div><div class="ttdef"><b>Definition</b> <a href="tinyengine_8h_source.html#l00045">tinyengine.h:45</a></div></div>
 <div class="ttc" id="atinyengine_8h_html_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7"><div class="ttname"><a href="tinyengine_8h.html#a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7">TINYENGINE_OK</a></div><div class="ttdeci">@ TINYENGINE_OK</div><div class="ttdef"><b>Definition</b> <a href="tinyengine_8h_source.html#l00046">tinyengine.h:46</a></div></div>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test__sensor_8cpp" xml:lang="en-US">
+<title>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/tests/test_sensor.cpp File Reference</title>
+<indexterm><primary>lib/pico-distance-sensor-main/pico-distance-sensor-main/test/unit_tests/tests/test_sensor.cpp</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;distance_sensor.h&quot;<?linebreak?>#include &quot;test_harness.h&quot;<?linebreak?>#include &lt;cassert&gt;<?linebreak?>#include &lt;cstdio&gt;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_test__sensor_8cpp_1a9878b5628ef662af86683649f5a7f753">pio_sm_put</link> (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>, uint32_t data)</para>
+</listitem>
+            <listitem><para>void <link linkend="_test__sensor_8cpp_1a04cef081f3e07f3a0ca451ee7942c842">test_IsProgramLoaded_AfterLoading</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_test__sensor_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_test__sensor_8cpp_1a3e9ca87c5950258b37888dd7d2a6ee5d">test_SensorMapEmptyAtStart</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622">test_SensorLocationIsCorrect</link> (<link linkend="_class_distance_sensor">DistanceSensor</link> *address, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> <link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> <link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)</para>
+</listitem>
+            <listitem><para>int <link linkend="_test__sensor_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4">main</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_test__sensor_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (void )</computeroutput></para><para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00080">80</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00081 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1a3e9ca87c5950258b37888dd7d2a6ee5d">test_SensorMapEmptyAtStart</link>();
+00082 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1a077ff69d63e952252eae95bebc60f572">test_IsProgramLoaded_AtFirst</link>();
+00083 
+00084 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Create&#32;instances</emphasis>
+00085 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor">DistanceSensor</link>&#32;pio0_sensor{15,&#32;0,&#32;1};
+00086 &#32;&#32;&#32;&#32;<link linkend="_class_distance_sensor">DistanceSensor</link>&#32;pio1_sensor{15,&#32;1,&#32;2};
+00087 
+00088 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1a04cef081f3e07f3a0ca451ee7942c842">test_IsProgramLoaded_AfterLoading</link>();
+00089 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;the&#32;sensor&#32;address&#32;mapping&#32;is&#32;right&#32;for&#32;the&#32;loaded&#32;pios</emphasis>
+00090 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622">test_SensorLocationIsCorrect</link>(&amp;pio0_sensor,&#32;0,&#32;1);
+00091 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622">test_SensorLocationIsCorrect</link>(&amp;pio1_sensor,&#32;1,&#32;2);
+00092 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Verify&#32;some&#32;other&#32;mappings&#32;are&#32;still&#32;0</emphasis>
+00093 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622">test_SensorLocationIsCorrect</link>(0,&#32;0,&#32;3);
+00094 &#32;&#32;&#32;&#32;<link linkend="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622">test_SensorLocationIsCorrect</link>(0,&#32;1,&#32;3);
+00095 
+00096 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+00097 }
+</programlisting></section>
+<anchor xml:id="_test__sensor_8cpp_1a9878b5628ef662af86683649f5a7f753"/><section>
+    <title>pio_sm_put()</title>
+<indexterm><primary>pio_sm_put</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>pio_sm_put</secondary></indexterm>
+<para><computeroutput>void pio_sm_put (<link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm, uint32_t data)</computeroutput></para>
+<para>MIT License</para>
+
+<para>Copyright (c) 2022 Daniel Garcia-Briseno</para>
+
+<para>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. Simulate triggering the IRQ when the test calls pio_sm_put </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00033">33</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00034 &#32;&#32;&#32;&#32;
+00035 }
+</programlisting></section>
+<anchor xml:id="_test__sensor_8cpp_1a04cef081f3e07f3a0ca451ee7942c842"/><section>
+    <title>test_IsProgramLoaded_AfterLoading()</title>
+<indexterm><primary>test_IsProgramLoaded_AfterLoading</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>test_IsProgramLoaded_AfterLoading</secondary></indexterm>
+<para><computeroutput>void test_IsProgramLoaded_AfterLoading ( )</computeroutput></para>
+<para>Verify the pio program is loaded in memory </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00040">40</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00041 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Load&#32;on&#32;pio0.</emphasis>
+00042 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Testing&#32;that&#32;programs&#32;are&#32;loaded&#32;in&#32;memory.&quot;</emphasis>);
+00043 &#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">TestHarness::IsLoaded</link>(0)&#32;==&#32;<emphasis role="keyword">true</emphasis>);
+00044 &#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">TestHarness::IsLoaded</link>(1)&#32;==&#32;<emphasis role="keyword">true</emphasis>);
+00045 &#32;&#32;&#32;&#32;puts(<emphasis role="stringliteral">&quot;&#32;Success&quot;</emphasis>);
+00046 }
+</programlisting></section>
+<anchor xml:id="_test__sensor_8cpp_1a077ff69d63e952252eae95bebc60f572"/><section>
+    <title>test_IsProgramLoaded_AtFirst()</title>
+<indexterm><primary>test_IsProgramLoaded_AtFirst</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>test_IsProgramLoaded_AtFirst</secondary></indexterm>
+<para><computeroutput>void test_IsProgramLoaded_AtFirst ( )</computeroutput></para>
+<para>Tests that in the beginning, the programs are not loaded into pico memory </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00051">51</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00052 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;that&#32;at&#32;the&#32;start&#32;of&#32;the&#32;program</emphasis>
+00053 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;each&#32;distance&#32;sensor&#32;is&#32;not&#32;loaded</emphasis>
+00054 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Checking&#32;that&#32;programs&#32;are&#32;not&#32;loaded&#32;in&#32;memory:&#32;&quot;</emphasis>);
+00055 &#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">TestHarness::IsLoaded</link>(0)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+00056 &#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1aad8f631b26945bb71e799106705bf072">TestHarness::IsLoaded</link>(1)&#32;==&#32;<emphasis role="keyword">false</emphasis>);
+00057 &#32;&#32;&#32;&#32;puts(<emphasis role="stringliteral">&quot;Success.&quot;</emphasis>);
+00058 }
+</programlisting></section>
+<anchor xml:id="_test__sensor_8cpp_1ac8040954a006b40ec2cb594ce7b35622"/><section>
+    <title>test_SensorLocationIsCorrect()</title>
+<indexterm><primary>test_SensorLocationIsCorrect</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>test_SensorLocationIsCorrect</secondary></indexterm>
+<para><computeroutput>void test_SensorLocationIsCorrect (<link linkend="_class_distance_sensor">DistanceSensor</link> * address, <link linkend="_pio_8h_1a05b1974aa3d59de9efe4ff87799ff3da">PIO</link> pio, <link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link> sm)</computeroutput></para>
+<para>Test that the internal sensor map has the right location </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00076">76</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00077 &#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd">TestHarness::GetMappedSensor</link>(<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)&#32;==&#32;address);
+00078 }
+</programlisting></section>
+<anchor xml:id="_test__sensor_8cpp_1a3e9ca87c5950258b37888dd7d2a6ee5d"/><section>
+    <title>test_SensorMapEmptyAtStart()</title>
+<indexterm><primary>test_SensorMapEmptyAtStart</primary><secondary>test_sensor.cpp</secondary></indexterm>
+<indexterm><primary>test_sensor.cpp</primary><secondary>test_SensorMapEmptyAtStart</secondary></indexterm>
+<para><computeroutput>void test_SensorMapEmptyAtStart ( )</computeroutput></para>
+<para>Verify the sensor map has no sensor pointers when the program loads </para>
+<para>
+Definition at line <link linkend="_test__sensor_8cpp_source_1l00063">63</link> of file <link linkend="_test__sensor_8cpp_source">test_sensor.cpp</link>.</para>
+<programlisting linenumbering="unnumbered">00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+00064 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Testing&#32;that&#32;all&#32;sensors&#32;are&#32;mapped&#32;to&#32;0&#32;at&#32;program&#32;load.&quot;</emphasis>);
+00065 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>&#32;=&#32;0;&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>&#32;&lt;&#32;2;&#32;<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>++)&#32;{
+00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<link linkend="_pico_8h_1a4f5fce8c1ef282264f9214809524d836">uint</link>&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>&#32;=&#32;0;&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>&#32;&lt;&#32;4;&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>++)&#32;{
+00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;assert(<link linkend="_class_test_harness_1af877a434e8fd6b886275e9b6658000fd">TestHarness::GetMappedSensor</link>(<link linkend="__dino_game_8cpp_1ac79a43604cef3e167780e935276174d0">pio</link>,&#32;<link linkend="__dino_game_8cpp_1abeba240b99c2caa6556ccab58b8c8ebb">sm</link>)&#32;==&#32;0);
+00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+00069 &#32;&#32;&#32;&#32;}
+00070 &#32;&#32;&#32;&#32;puts(<emphasis role="stringliteral">&quot;Success.&quot;</emphasis>);
+00071 }
+</programlisting></section>
+</section>
+</section>

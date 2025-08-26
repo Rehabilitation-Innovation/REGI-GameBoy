@@ -2,7 +2,16 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__snake_game_8cpp" xml:lang="en-US">
 <title>src/scenes/SnakeGame.cpp File Reference</title>
 <indexterm><primary>src/scenes/SnakeGame.cpp</primary></indexterm>
-<programlisting linenumbering="unnumbered">#include &lt;cstdlib&gt;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;dino_running.h&quot;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;cactus.h&quot;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;SnakeGame.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?></programlisting><simplesect>
+<programlisting linenumbering="unnumbered">#include &lt;cstdlib&gt;<?linebreak?>#include &quot;tinyengine.h&quot;<?linebreak?>#include &quot;dino_running.h&quot;<?linebreak?>#include &quot;tinyengine_framebuffer.h&quot;<?linebreak?>#include &quot;tinyengine_sprite.h&quot;<?linebreak?>#include &quot;hardware/gpio.h&quot;<?linebreak?>#include &quot;cactus.h&quot;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &quot;pico/rand.h&quot;<?linebreak?>#include &quot;SnakeGame.h&quot;<?linebreak?>#include &lt;malloc.h&gt;<?linebreak?></programlisting>Include dependency graph for SnakeGame.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_snake_game_8cpp__incl.svg"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
     <title>Macros    </title>
         <itemizedlist>
             <listitem><para>#define <link linkend="__snake_game_8cpp_1a874b952818d2197dd45b84e1f65f8b39">HEIGHT_SNAKE</link>&#160;&#160;&#160;240 - 1</para>

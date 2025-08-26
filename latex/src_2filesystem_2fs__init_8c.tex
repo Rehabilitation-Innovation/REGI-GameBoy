@@ -1,0 +1,44 @@
+\doxysection{lib/pico-\/vfs-\/\+REGI-\/\+Local/src/filesystem/fs\+\_\+init.c File Reference}
+\hypertarget{src_2filesystem_2fs__init_8c}{}\label{src_2filesystem_2fs__init_8c}\index{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fs\_init.c@{lib/pico-\/vfs-\/REGI-\/Local/src/filesystem/fs\_init.c}}
+{\ttfamily \#include $<$hardware/flash.\+h$>$}\newline
+{\ttfamily \#include "{}blockdevice/flash.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/littlefs.\+h"{}}\newline
+{\ttfamily \#include "{}filesystem/vfs.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((weak))
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{src_2filesystem_2fs__init_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c}\index{fs\_init.c@{fs\_init.c}!\_\_attribute\_\_@{\_\_attribute\_\_}}
+\index{\_\_attribute\_\_@{\_\_attribute\_\_}!fs\_init.c@{fs\_init.c}}
+\doxysubsubsection{\texorpdfstring{\_\_attribute\_\_()}{\_\_attribute\_\_()}}
+{\footnotesize\ttfamily \label{src_2filesystem_2fs__init_8c_acdc7c707257b149d05bc7b779c55867c} 
+bool \+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(weak)}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{src_2filesystem_2fs__init_8c_source_l00012}{12}} of file \mbox{\hyperlink{src_2filesystem_2fs__init_8c_source}{fs\+\_\+init.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{group__filesystem_gad16024c6aa37d328b78a38f8c006ac83}{filesystem\_t}}\ *fs\ =\ \mbox{\hyperlink{group__filesystem__littlefs_ga6bf5205dec6fdf2ec2d190c44f5f2594}{filesystem\_littlefs\_create}}(500,\ 16);}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{group__blockdevice_ga4bc2c146f975b5250be7f8f5f219f5e4}{blockdevice\_t}}\ *device\ =\ \mbox{\hyperlink{group__blockdevice__flash_gaa4f26759924c70f9a86436aa58f67cfc}{blockdevice\_flash\_create}}(\mbox{\hyperlink{regi__rev1_8h_a7ad5a8273ffcd10db868c3c3e03d5bf0}{PICO\_FLASH\_SIZE\_BYTES}}\ -\/\ \mbox{\hyperlink{vfs_8h_abd5f971d09c17ed19e68d9e201b8884b}{PICO\_FS\_DEFAULT\_SIZE}},\ 0);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ err\ =\ fs-\/>\mbox{\hyperlink{structfilesystem_ad7739bd29a4ee1d7e839c3bfe58d3c53}{format}}(fs,\ device);}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ err\ =\ \mbox{\hyperlink{group__filesystem_ga85336fdeb00149559c5c2008256c3013}{fs\_mount}}(\textcolor{stringliteral}{"{}/"{}},\ fs,\ device);}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ err\ ==\ 0;}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
