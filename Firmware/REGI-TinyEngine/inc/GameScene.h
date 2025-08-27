@@ -22,9 +22,25 @@
  */
 class GameScene : public SceneI {
 protected: // debatable
+    /**
+     * @brief Local refrance for framebuffer. User calls this instance to render.
+     * 
+     */
     TinyEngineFrameBuffer& m_framebuffer;
+    /**
+     *@brief Local interface for renderer. This can be any renderer but only used for vsync.
+     * 
+     */
     TinyEngineRendererI& m_renderer;
+    /**
+     *@brief Local Engine refrence. Used for assigning fps limit, profiling and binding GPIOs.
+     * 
+     */
     TinyEngine& m_engine;
+    /**
+     *@brief Unused. But this is how a global ECS system would store sprites.
+     * 
+     */
     std::vector<Sprite*> sprites;
 
 public:
@@ -64,5 +80,9 @@ public:
      */
     void update(double frameTime) override;
 
+    /**
+     *@brief Destroy scene here. Only call if you do not need to use scene again. Ideally this would be stored in PSRAM instead.
+     * 
+     */
     void destroy() override;
 };
