@@ -31,10 +31,16 @@ Collaboration diagram for SnakeGame:<para>
             <listitem><para><link linkend="_class_snake_game_1acfeac5da2cb6b7e0e850f4e48137e4bf">~SnakeGame</link> () override=default</para>
 </listitem>
             <listitem><para>void <link linkend="_class_snake_game_1a98f4ebbe3303b1627cf738e4684b69b4">create</link> () override</para>
+
+<para>Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_snake_game_1a09eac49a79e09f012c8c5ca6c4d4c7eb">render</link> () override</para>
+
+<para>All framebuffer operations are done here and this is called only once per frame. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_snake_game_1a427ff7fbd06cf21fd64223a3c48d500d">update</link> (double frameTime) override</para>
+
+<para><link linkend="_class_game">Game</link> updates and other time dependednt modifications should be done here, there is no gurentee this is run only. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_snake_game_1ad05db6c6aaa3fad9f248d1e94df2a597">destroy</link> () override</para>
 </listitem>
@@ -42,8 +48,12 @@ Collaboration diagram for SnakeGame:<para>
 </simplesect>
 Public Member Functions inherited from <link linkend="_class_game_scene">GameScene</link>        <itemizedlist>
             <listitem><para><link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp;_framebuffer, <link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link> &amp;_renderer, <link linkend="_class_tiny_engine">TinyEngine</link> &amp;_engine)</para>
+
+<para>Construct a new <link linkend="_class_game">Game</link> Scene object. </para>
 </listitem>
             <listitem><para><link linkend="_class_game_scene_1add5bc48c372aaa7f526c02558a8adf00">~GameScene</link> ()</para>
+
+<para>Destroy the <link linkend="_class_game">Game</link> Scene object. </para>
 </listitem>
         </itemizedlist>
 Public Member Functions inherited from <link linkend="_class_scene_i">SceneI</link>        <itemizedlist>
@@ -59,7 +69,7 @@ Protected Attributes inherited from <link linkend="_class_game_scene">GameScene<
 </listitem>
             <listitem><para><link linkend="_class_tiny_engine">TinyEngine</link> &amp; <link linkend="_class_game_scene_1a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</link></para>
 </listitem>
-            <listitem><para>std::vector&lt; <link linkend="_class_sprite">Sprite</link> * &gt; <link linkend="_class_game_scene_1a73a24f18b5cb2d7cf13efc1e2ce87b48">sprites</link></para>
+            <listitem><para>std::vector&lt; <link linkend="_class_sprite">Sprite</link> * &gt; <link linkend="_class_game_scene_1a894a08b41ccad98c26c0eb588a307d3b">sprites</link></para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -93,6 +103,10 @@ Definition at line <link linkend="__snake_game_8h_source_1l00013">13</link> of f
 <indexterm><primary>create</primary><secondary>SnakeGame</secondary></indexterm>
 <indexterm><primary>SnakeGame</primary><secondary>create</secondary></indexterm>
 <para><computeroutput>void SnakeGame::create ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. </para>
+</para>
+<para>
 Reimplemented from <link linkend="_class_game_scene_1ac4f0485291c1719b76b4ed425661143c">GameScene</link>.</para>
 <para>
 Definition at line <link linkend="__snake_game_8cpp_source_1l00040">40</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
@@ -185,6 +199,10 @@ Definition at line <link linkend="__snake_game_8cpp_source_1l00269">269</link> o
 <indexterm><primary>render</primary><secondary>SnakeGame</secondary></indexterm>
 <indexterm><primary>SnakeGame</primary><secondary>render</secondary></indexterm>
 <para><computeroutput>void SnakeGame::render ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>All framebuffer operations are done here and this is called only once per frame. </para>
+</para>
+<para>
 Reimplemented from <link linkend="_class_game_scene_1af107c5ffdf361b4e0b718f486cbc7d0e">GameScene</link>.</para>
 <para>
 Definition at line <link linkend="__snake_game_8cpp_source_1l00113">113</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>
@@ -277,6 +295,32 @@ Definition at line <link linkend="__snake_game_8cpp_source_1l00113">113</link> o
 <indexterm><primary>update</primary><secondary>SnakeGame</secondary></indexterm>
 <indexterm><primary>SnakeGame</primary><secondary>update</secondary></indexterm>
 <para><computeroutput>void SnakeGame::update (double frameTime)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_game">Game</link> updates and other time dependednt modifications should be done here, there is no gurentee this is run only. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>frameTime</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
 Reimplemented from <link linkend="_class_game_scene_1a9bb2bd694b9c8399ea22aed23a6a809f">GameScene</link>.</para>
 <para>
 Definition at line <link linkend="__snake_game_8cpp_source_1l00198">198</link> of file <link linkend="__snake_game_8cpp_source">SnakeGame.cpp</link>.</para>

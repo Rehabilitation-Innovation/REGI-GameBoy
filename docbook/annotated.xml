@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_annotated" xml:lang="en-US">
 <title>Class List</title>
-Here are the classes, structs, unions and interfaces with brief descriptions:<link linkend="_structc2_a_a_b_b">c2AABB</link><link linkend="_structc2_capsule">c2Capsule</link><link linkend="_structc2_circle">c2Circle</link><link linkend="_structc2_g_j_k_cache">c2GJKCache</link><link linkend="_structc2h">c2h</link><link linkend="_structc2m">c2m</link><link linkend="_structc2_manifold">c2Manifold</link><link linkend="_structc2_poly">c2Poly</link><link linkend="_structc2r">c2r</link><link linkend="_structc2_ray">c2Ray</link><link linkend="_structc2_raycast">c2Raycast</link><link linkend="_structc2_t_o_i_result">c2TOIResult</link><link linkend="_structc2v">c2v</link><link linkend="_structc2x">c2x</link><link linkend="_class_dino_game">DinoGame</link><link linkend="_class_game">Game</link><link linkend="_class_game_scene">GameScene</link><link linkend="_structmelody__t">melody_t</link>
+Here are the classes, structs, unions and interfaces with brief descriptions:<link linkend="_structc2_a_a_b_b">c2AABB</link><link linkend="_structc2_capsule">c2Capsule</link><link linkend="_structc2_circle">c2Circle</link><link linkend="_structc2_g_j_k_cache">c2GJKCache</link><link linkend="_structc2h">c2h</link><link linkend="_structc2m">c2m</link><link linkend="_structc2_manifold">c2Manifold</link><link linkend="_structc2_poly">c2Poly</link><link linkend="_structc2r">c2r</link><link linkend="_structc2_ray">c2Ray</link><link linkend="_structc2_raycast">c2Raycast</link><link linkend="_structc2_t_o_i_result">c2TOIResult</link><link linkend="_structc2v">c2v</link><link linkend="_structc2x">c2x</link><link linkend="_class_dino_game">DinoGame</link><link linkend="_class_game">Game</link>
+<para>Abstract definition file for games. This contains common functions all games need to implement </para>
+<link linkend="_class_game_scene">GameScene</link>
+<para>Contains all of the common fucctions and members needed to render a scene. A down stream <link linkend="_class_game">Game</link> scene will use the frame buffer and engine refrences stored here to render </para>
+<link linkend="_structmelody__t">melody_t</link>
 <para>Represents a musical melody </para>
 <link linkend="_structnote__t">note_t</link>
 <para>Represents a musical note </para>

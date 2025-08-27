@@ -15,7 +15,7 @@ var searchData=
   ['sprite_5fanimation_5fframes_12',['sprite_animation_frames',['../structte__sprite__animation__t.html#ae8b1c132a79499b1a034c8dbaa5f4f07',1,'te_sprite_animation_t']]],
   ['sprite_5fbuffer_13',['sprite_buffer',['../structte__sprite__t.html#a21524697256e082e5b35bbbc2801a537',1,'te_sprite_t']]],
   ['sprite_5fpalette_14',['sprite_palette',['../structte__sprite__t.html#aecee209c14bda6868e25c07c99147798',1,'te_sprite_t']]],
-  ['sprites_15',['sprites',['../class_game_scene.html#a73a24f18b5cb2d7cf13efc1e2ce87b48',1,'GameScene']]],
+  ['sprites_15',['sprites',['../class_game_scene.html#a894a08b41ccad98c26c0eb588a307d3b',1,'GameScene']]],
   ['start_5fframe_16',['start_frame',['../structte__sprite__animation__t.html#ad761f161ae73abb8b94ca8c65b6b5196',1,'te_sprite_animation_t']]],
   ['start_5ftext_17',['start_text',['../_dino_game_8cpp.html#aa87b70da41217e2357375701aca8f910',1,'DinoGame.cpp']]],
   ['string_18',['string',['../_game_scene_8cpp.html#a599ac9672c5ed92e22c3259396cbb7d8',1,'GameScene.cpp']]]

@@ -2,34 +2,36 @@
 \hypertarget{_game_scene_8h_source}{}\label{_game_scene_8h_source}\index{inc/GameScene.h@{inc/GameScene.h}}
 \mbox{\hyperlink{_game_scene_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__scene_8h}{tinyengine\_scene.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__renderer__dvi_8h}{tinyengine\_renderer\_dvi.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00007}00007\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00008}\mbox{\hyperlink{class_game_scene}{00008}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{GameScene}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_scene_i}{SceneI}}\ \{}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00009}00009\ \textcolor{keyword}{protected}:\ \textcolor{comment}{//\ debatable}}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00010}\mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{00010}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\ \&\mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00011}\mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{00011}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\ \&\mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\_renderer}};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00012}\mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{00012}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine}{TinyEngine}}\ \&\mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00013}\mbox{\hyperlink{class_game_scene_a73a24f18b5cb2d7cf13efc1e2ce87b48}{00013}}\ \ \ \ \ std::vector<Sprite\ *>\ \mbox{\hyperlink{class_game_scene_a73a24f18b5cb2d7cf13efc1e2ce87b48}{sprites}};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00015}00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00016}\mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{00016}}\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{GameScene}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\ \&\_framebuffer,\ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\ \&\_renderer,\ \mbox{\hyperlink{class_tiny_engine}{TinyEngine}}\ \&\_engine)}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}(\_framebuffer),\ \mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\_renderer}}(\_renderer),\ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}(\_engine)\ \{}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00018}00018\ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00019}00019\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{class_game_scene_add5bc48c372aaa7f526c02558a8adf00}{\string~GameScene}}();}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{create}}()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00023}00023\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{render}}()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{update}}(\textcolor{keywordtype}{double}\ frameTime)\ \textcolor{keyword}{override};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00027}00027\ }
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{destroy}}()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00029}00029\ \};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00012}00012\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__scene_8h}{tinyengine\_scene.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\_sprite.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\_framebuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tinyengine__renderer__dvi_8h}{tinyengine\_renderer\_dvi.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00023}\mbox{\hyperlink{class_game_scene}{00023}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{GameScene}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_scene_i}{SceneI}}\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00024}00024\ \textcolor{keyword}{protected}:\ \textcolor{comment}{//\ debatable}}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00025}\mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{00025}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00026}\mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{00026}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\&\ \mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\_renderer}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00027}\mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{00027}}\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine}{TinyEngine}}\&\ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00028}\mbox{\hyperlink{class_game_scene_a894a08b41ccad98c26c0eb588a307d3b}{00028}}\ \ \ \ \ std::vector<Sprite*>\ \mbox{\hyperlink{class_game_scene_a894a08b41ccad98c26c0eb588a307d3b}{sprites}};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00030}00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00038}\mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{00038}}\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{GameScene}}(\mbox{\hyperlink{class_tiny_engine_frame_buffer}{TinyEngineFrameBuffer}}\&\ \_framebuffer,\ \mbox{\hyperlink{class_tiny_engine_renderer_i}{TinyEngineRendererI}}\&\ \_renderer,\ \mbox{\hyperlink{class_tiny_engine}{TinyEngine}}\&\ \_engine)}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}(\_framebuffer),\ \mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\_renderer}}(\_renderer),\ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}(\_engine)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00040}00040\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{class_game_scene_add5bc48c372aaa7f526c02558a8adf00}{\string~GameScene}}();}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{create}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{render}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{update}}(\textcolor{keywordtype}{double}\ frameTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{destroy}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_game_scene_8h_source_l00068}00068\ \};}
 
 \end{DoxyCode}

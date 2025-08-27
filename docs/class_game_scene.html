@@ -95,6 +95,9 @@ $(function(){initNavTree('class_game_scene.html','','class_game_scene-members');
 </div><!--header-->
 <div class="contents">
 
+<p>Contains all of the common fucctions and members needed to render a scene. A down stream <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> scene will use the frame buffer and engine refrences stored here to render.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_game_scene_8h_source.html">GameScene.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GameScene:</div>
@@ -110,10 +113,15 @@ Collaboration diagram for GameScene:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f20a87546afdf718a1ef0ff4fb53200" id="r_a9f20a87546afdf718a1ef0ff4fb53200"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f20a87546afdf718a1ef0ff4fb53200">GameScene</a> (<a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;_framebuffer, <a class="el" href="class_tiny_engine_renderer_i.html">TinyEngineRendererI</a> &amp;_renderer, <a class="el" href="class_tiny_engine.html">TinyEngine</a> &amp;_engine)</td></tr>
+<tr class="memdesc:a9f20a87546afdf718a1ef0ff4fb53200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object.  <br /></td></tr>
 <tr class="memitem:add5bc48c372aaa7f526c02558a8adf00" id="r_add5bc48c372aaa7f526c02558a8adf00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add5bc48c372aaa7f526c02558a8adf00">~GameScene</a> ()</td></tr>
+<tr class="memdesc:add5bc48c372aaa7f526c02558a8adf00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object.  <br /></td></tr>
 <tr class="memitem:ac4f0485291c1719b76b4ed425661143c" id="r_ac4f0485291c1719b76b4ed425661143c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4f0485291c1719b76b4ed425661143c">create</a> () override</td></tr>
+<tr class="memdesc:ac4f0485291c1719b76b4ed425661143c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function.  <br /></td></tr>
 <tr class="memitem:af107c5ffdf361b4e0b718f486cbc7d0e" id="r_af107c5ffdf361b4e0b718f486cbc7d0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af107c5ffdf361b4e0b718f486cbc7d0e">render</a> () override</td></tr>
+<tr class="memdesc:af107c5ffdf361b4e0b718f486cbc7d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">All framebuffer operations are done here and this is called only once per frame.  <br /></td></tr>
 <tr class="memitem:a9bb2bd694b9c8399ea22aed23a6a809f" id="r_a9bb2bd694b9c8399ea22aed23a6a809f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bb2bd694b9c8399ea22aed23a6a809f">update</a> (double frameTime) override</td></tr>
+<tr class="memdesc:a9bb2bd694b9c8399ea22aed23a6a809f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> updates and other time dependednt modifications should be done here, there is no gurentee this is run only.  <br /></td></tr>
 <tr class="memitem:a79aa067bf23e490cdfcb4aec1b181b12" id="r_a79aa067bf23e490cdfcb4aec1b181b12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79aa067bf23e490cdfcb4aec1b181b12">destroy</a> () override</td></tr>
 <tr class="inherit_header pub_methods_class_scene_i"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_scene_i')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_scene_i.html">SceneI</a></td></tr>
 <tr class="memitem:a9aca690ad096045ae588810c5dbcbd62 inherit pub_methods_class_scene_i" id="r_a9aca690ad096045ae588810c5dbcbd62"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_i.html#a9aca690ad096045ae588810c5dbcbd62">~SceneI</a> ()=default</td></tr>
@@ -123,11 +131,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a6ce64a6f7dc23c88abe2d43d594ee269" id="r_a6ce64a6f7dc23c88abe2d43d594ee269"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ce64a6f7dc23c88abe2d43d594ee269">m_framebuffer</a></td></tr>
 <tr class="memitem:abbc67a7bac90f11d7ee08c28dc3f0810" id="r_abbc67a7bac90f11d7ee08c28dc3f0810"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine_renderer_i.html">TinyEngineRendererI</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbc67a7bac90f11d7ee08c28dc3f0810">m_renderer</a></td></tr>
 <tr class="memitem:a3ddd4ba5bfabc73eebf7bba28c5ff534" id="r_a3ddd4ba5bfabc73eebf7bba28c5ff534"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine.html">TinyEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</a></td></tr>
-<tr class="memitem:a73a24f18b5cb2d7cf13efc1e2ce87b48" id="r_a73a24f18b5cb2d7cf13efc1e2ce87b48"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sprite.html">Sprite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73a24f18b5cb2d7cf13efc1e2ce87b48">sprites</a></td></tr>
+<tr class="memitem:a894a08b41ccad98c26c0eb588a307d3b" id="r_a894a08b41ccad98c26c0eb588a307d3b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sprite.html">Sprite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a894a08b41ccad98c26c0eb588a307d3b">sprites</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00008">8</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<div class="textblock"><p>Contains all of the common fucctions and members needed to render a scene. A down stream <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> scene will use the frame buffer and engine refrences stored here to render. </p>
+
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00023">23</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9f20a87546afdf718a1ef0ff4fb53200" name="a9f20a87546afdf718a1ef0ff4fb53200"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f20a87546afdf718a1ef0ff4fb53200">&#9670;&#160;</a></span>GameScene()</h2>
@@ -161,12 +170,22 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00016">16</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>        : <a class="code hl_variable" href="#a6ce64a6f7dc23c88abe2d43d594ee269">m_framebuffer</a>(_framebuffer), <a class="code hl_variable" href="#abbc67a7bac90f11d7ee08c28dc3f0810">m_renderer</a>(_renderer), <a class="code hl_variable" href="#a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</a>(_engine) {</div>
-<div class="line"><span class="lineno">   18</span>    };</div>
-<div class="ttc" id="aclass_game_scene_html_a3ddd4ba5bfabc73eebf7bba28c5ff534"><div class="ttname"><a href="#a3ddd4ba5bfabc73eebf7bba28c5ff534">GameScene::m_engine</a></div><div class="ttdeci">TinyEngine &amp; m_engine</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00012">GameScene.h:12</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_a6ce64a6f7dc23c88abe2d43d594ee269"><div class="ttname"><a href="#a6ce64a6f7dc23c88abe2d43d594ee269">GameScene::m_framebuffer</a></div><div class="ttdeci">TinyEngineFrameBuffer &amp; m_framebuffer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00010">GameScene.h:10</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_abbc67a7bac90f11d7ee08c28dc3f0810"><div class="ttname"><a href="#abbc67a7bac90f11d7ee08c28dc3f0810">GameScene::m_renderer</a></div><div class="ttdeci">TinyEngineRendererI &amp; m_renderer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00011">GameScene.h:11</a></div></div>
+<p>Construct a new <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_framebuffer</td><td></td></tr>
+    <tr><td class="paramname">_renderer</td><td></td></tr>
+    <tr><td class="paramname">_engine</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00038">38</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>        : <a class="code hl_variable" href="#a6ce64a6f7dc23c88abe2d43d594ee269">m_framebuffer</a>(_framebuffer), <a class="code hl_variable" href="#abbc67a7bac90f11d7ee08c28dc3f0810">m_renderer</a>(_renderer), <a class="code hl_variable" href="#a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</a>(_engine) {</div>
+<div class="line"><span class="lineno">   40</span>    };</div>
+<div class="ttc" id="aclass_game_scene_html_a3ddd4ba5bfabc73eebf7bba28c5ff534"><div class="ttname"><a href="#a3ddd4ba5bfabc73eebf7bba28c5ff534">GameScene::m_engine</a></div><div class="ttdeci">TinyEngine &amp; m_engine</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00027">GameScene.h:27</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_a6ce64a6f7dc23c88abe2d43d594ee269"><div class="ttname"><a href="#a6ce64a6f7dc23c88abe2d43d594ee269">GameScene::m_framebuffer</a></div><div class="ttdeci">TinyEngineFrameBuffer &amp; m_framebuffer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00025">GameScene.h:25</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_abbc67a7bac90f11d7ee08c28dc3f0810"><div class="ttname"><a href="#abbc67a7bac90f11d7ee08c28dc3f0810">GameScene::m_renderer</a></div><div class="ttdeci">TinyEngineRendererI &amp; m_renderer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00026">GameScene.h:26</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -184,6 +203,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object. </p>
 
 <p class="definition">Definition at line <a class="el" href="_game_scene_8cpp_source.html#l00006">6</a> of file <a class="el" href="_game_scene_8cpp_source.html">GameScene.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    6</span>                      {</div>
@@ -214,6 +235,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. </p>
 
 <p>Implements <a class="el" href="class_scene_i.html#a7f6b05370faed688686525fe2d3706a0">SceneI</a>.</p>
 
@@ -281,6 +304,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>All framebuffer operations are done here and this is called only once per frame. </p>
+
 <p>Implements <a class="el" href="class_scene_i.html#a573a66b660ce2e704f035ea27ac9ccac">SceneI</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_snake_game.html#a09eac49a79e09f012c8c5ca6c4d4c7eb">SnakeGame</a>.</p>
@@ -341,6 +366,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> updates and other time dependednt modifications should be done here, there is no gurentee this is run only. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frameTime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Implements <a class="el" href="class_scene_i.html#a917d7c8e713381b6ff20b1878a997100">SceneI</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_snake_game.html#a427ff7fbd06cf21fd64223a3c48d500d">SnakeGame</a>.</p>
@@ -374,7 +407,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00012">12</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00027">27</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +431,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00010">10</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00025">25</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
 
 </div>
 </div>
@@ -422,12 +455,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00011">11</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00026">26</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
 
 </div>
 </div>
-<a id="a73a24f18b5cb2d7cf13efc1e2ce87b48" name="a73a24f18b5cb2d7cf13efc1e2ce87b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73a24f18b5cb2d7cf13efc1e2ce87b48">&#9670;&#160;</a></span>sprites</h2>
+<a id="a894a08b41ccad98c26c0eb588a307d3b" name="a894a08b41ccad98c26c0eb588a307d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a894a08b41ccad98c26c0eb588a307d3b">&#9670;&#160;</a></span>sprites</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -436,7 +469,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_sprite.html">Sprite</a> *&gt; GameScene::sprites</td>
+          <td class="memname">std::vector&lt;<a class="el" href="class_sprite.html">Sprite</a>*&gt; GameScene::sprites</td>
         </tr>
       </table>
   </td>
@@ -446,7 +479,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00013">13</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_scene_8h_source.html#l00028">28</a> of file <a class="el" href="_game_scene_8h_source.html">GameScene.h</a>.</p>
 
 </div>
 </div>

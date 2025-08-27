@@ -16,8 +16,7 @@ var regi__rev1_8h =
     [ "PICO_FLASH_SPI_CLKDIV", "regi__rev1_8h.html#a090528628a511947179066f60c2aeb8a", null ],
     [ "PICO_RP2350_A2_SUPPORTED", "regi__rev1_8h.html#ae0fd438812696e3d1a23842f755daf74", null ],
     [ "PICO_RP2350A", "regi__rev1_8h.html#a82ed167c189e248cd45960a4ddf976bf", null ],
-    [ "PICO_SMPS_MODE_PIN", "regi__rev1_8h.html#a11ebfeefe195a36f1bc2174c8dd928a1", null ],
-    [ "REGI", "regi__rev1_8h.html#a30f8d2d5c9cffcbe784dd5cb0a0cc1d6", null ],
+    [ "REGI_REV1", "regi__rev1_8h.html#aab404d31e1ddde0e18fa2348701dd9ca", null ],
     [ "WAVESHARE_BAT_ADC_PIN", "regi__rev1_8h.html#a33168c6389f277198979c80041de76a1", null ],
     [ "pico_board_cmake_set", "regi__rev1_8h.html#a84cada78bd4360891c500026949abd61", null ]
 ];

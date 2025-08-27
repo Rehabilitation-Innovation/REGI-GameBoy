@@ -67,7 +67,7 @@ var searchData=
   ['sprite_5fanimation_5fframes_64',['sprite_animation_frames',['../structte__sprite__animation__t.html#ae8b1c132a79499b1a034c8dbaa5f4f07',1,'te_sprite_animation_t']]],
   ['sprite_5fbuffer_65',['sprite_buffer',['../structte__sprite__t.html#a21524697256e082e5b35bbbc2801a537',1,'te_sprite_t']]],
   ['sprite_5fpalette_66',['sprite_palette',['../structte__sprite__t.html#aecee209c14bda6868e25c07c99147798',1,'te_sprite_t']]],
-  ['sprites_67',['sprites',['../class_game_scene.html#a73a24f18b5cb2d7cf13efc1e2ce87b48',1,'GameScene']]],
+  ['sprites_67',['sprites',['../class_game_scene.html#a894a08b41ccad98c26c0eb588a307d3b',1,'GameScene']]],
   ['start_68',['start',['../class_tiny_engine.html#a46a3a85a38bad4a41aaebb97f39b1456',1,'TinyEngine']]],
   ['start_5fframe_69',['start_frame',['../structte__sprite__animation__t.html#ad761f161ae73abb8b94ca8c65b6b5196',1,'te_sprite_animation_t']]],
   ['start_5floop_70',['start_loop',['../class_tiny_engine.html#a30d77a4f317c491bd8ebcf8d5e3852a3',1,'TinyEngine']]],

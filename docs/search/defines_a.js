@@ -20,6 +20,5 @@ var searchData=
   ['pico_5fsdk_5fversion_5fminor_17',['PICO_SDK_VERSION_MINOR',['../version_8h.html#a2dda83706b2cefcf15dfdbc278676c0f',1,'version.h']]],
   ['pico_5fsdk_5fversion_5frevision_18',['PICO_SDK_VERSION_REVISION',['../version_8h.html#a5be32caa1531cc592aeff17e4c5b230d',1,'version.h']]],
   ['pico_5fsdk_5fversion_5fstring_19',['PICO_SDK_VERSION_STRING',['../version_8h.html#a335c1eae5c5da86063f72343c92764db',1,'version.h']]],
-  ['pico_5fsmps_5fmode_5fpin_20',['PICO_SMPS_MODE_PIN',['../regi__rev1_8h.html#a11ebfeefe195a36f1bc2174c8dd928a1',1,'regi_rev1.h']]],
-  ['platform_5fid_21',['PLATFORM_ID',['../_c_make_c_compiler_id_8c.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID:&#160;CMakeCXXCompilerId.cpp']]]
+  ['platform_5fid_20',['PLATFORM_ID',['../_c_make_c_compiler_id_8c.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID:&#160;CMakeCXXCompilerId.cpp']]]
 ];

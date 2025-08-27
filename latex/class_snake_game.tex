@@ -2,24 +2,22 @@
 \hypertarget{class_snake_game}{}\label{class_snake_game}\index{SnakeGame@{SnakeGame}}
 
 
-{\ttfamily \#include $<$Snake\+Game.\+h$>$}
-
-
-
-Inheritance diagram for Snake\+Game\+:\nopagebreak
+Inheritance diagram for Snake\+Game\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=550pt]{class_snake_game__inherit__graph}
+\includegraphics[width=150pt]{class_snake_game__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Snake\+Game\+:\nopagebreak
+Collaboration diagram for Snake\+Game\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=550pt]{class_snake_game__coll__graph}
+\includegraphics[width=350pt]{class_snake_game__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -27,47 +25,36 @@ Collaboration diagram for Snake\+Game\+:\nopagebreak
 \item 
 \mbox{\hyperlink{class_snake_game_afc575759bb084eefa5e95188d041d042}{Snake\+Game}} (\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&\+\_\+framebuffer, \mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \&\+\_\+renderer, \mbox{\hyperlink{class_tiny_engine}{Tiny\+Engine}} \&\+\_\+engine)
 \item 
-\mbox{\hyperlink{class_snake_game_acfeac5da2cb6b7e0e850f4e48137e4bf}{\texorpdfstring{$\sim$}{\string~}\+Snake\+Game}} () override=default
-\item 
 void \mbox{\hyperlink{class_snake_game_a98f4ebbe3303b1627cf738e4684b69b4}{create}} () override
-\item 
+\begin{DoxyCompactList}\small\item\em Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_snake_game_a09eac49a79e09f012c8c5ca6c4d4c7eb}{render}} () override
-\item 
+\begin{DoxyCompactList}\small\item\em All framebuffer operations are done here and this is called only once per frame. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_snake_game_a427ff7fbd06cf21fd64223a3c48d500d}{update}} (double frame\+Time) override
-\item 
+\begin{DoxyCompactList}\small\item\em \doxylink{class_game}{Game} updates and other time dependednt modifications should be done here, there is no gurentee this is run only. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_snake_game_ad05db6c6aaa3fad9f248d1e94df2a597}{destroy}} () override
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Destroy scene here. Only call if you do not need to use scene again. Ideally this would be stored in PSRAM instead. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_game_scene}{Game\+Scene}}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{Game\+Scene}} (\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&\+\_\+framebuffer, \mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \&\+\_\+renderer, \mbox{\hyperlink{class_tiny_engine}{Tiny\+Engine}} \&\+\_\+engine)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_game}{Game} Scene object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_game_scene_add5bc48c372aaa7f526c02558a8adf00}{\texorpdfstring{$\sim$}{\string~}\+Game\+Scene}} ()
-\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_scene_i}{SceneI}}}
-\begin{DoxyCompactItemize}
-\item 
-virtual \mbox{\hyperlink{class_scene_i_a9aca690ad096045ae588810c5dbcbd62}{\texorpdfstring{$\sim$}{\string~}\+SceneI}} ()=default
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{class_game}{Game} Scene object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_game_scene}{Game\+Scene}}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \& \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\+\_\+framebuffer}}
-\item 
+\begin{DoxyCompactList}\small\item\em Local refrance for framebuffer. User calls this instance to render. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \& \mbox{\hyperlink{class_game_scene_abbc67a7bac90f11d7ee08c28dc3f0810}{m\+\_\+renderer}}
-\item 
+\begin{DoxyCompactList}\small\item\em Local interface for renderer. This can be any renderer but only used for vsync. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_tiny_engine}{Tiny\+Engine}} \& \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\+\_\+engine}}
-\item 
-std\+::vector$<$ \mbox{\hyperlink{class_sprite}{Sprite}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_game_scene_a73a24f18b5cb2d7cf13efc1e2ce87b48}{sprites}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Local Engine refrence. Used for assigning fps limit, profiling and binding GPIOs. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_sprite}{Sprite}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_game_scene_a894a08b41ccad98c26c0eb588a307d3b}{sprites}}
+\begin{DoxyCompactList}\small\item\em Unused. But this is how a global ECS system would store sprites. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-
-
-Definition at line \mbox{\hyperlink{_snake_game_8h_source_l00010}{10}} of file \mbox{\hyperlink{_snake_game_8h_source}{Snake\+Game.\+h}}.
-
 
 
 \label{doc-constructors}
@@ -80,22 +67,12 @@ Definition at line \mbox{\hyperlink{_snake_game_8h_source_l00010}{10}} of file \
 Snake\+Game\+::\+Snake\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&}]{\+\_\+framebuffer}{, }\item[{\mbox{\hyperlink{class_tiny_engine_renderer_i}{Tiny\+Engine\+RendererI}} \&}]{\+\_\+renderer}{, }\item[{\mbox{\hyperlink{class_tiny_engine}{Tiny\+Engine}} \&}]{\+\_\+engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{_snake_game_8h_source_l00013}{13}} of file \mbox{\hyperlink{_snake_game_8h_source}{Snake\+Game.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_game_scene_a9f20a87546afdf718a1ef0ff4fb53200}{GameScene}}(\_framebuffer,\ \_renderer,\ \_engine) }
 \DoxyCodeLine{00015\ \ \ \ \ \{}
 \DoxyCodeLine{00016\ \ \ \ \ \}}
 
 \end{DoxyCode}
-\Hypertarget{class_snake_game_acfeac5da2cb6b7e0e850f4e48137e4bf}\index{SnakeGame@{SnakeGame}!````~SnakeGame@{\texorpdfstring{$\sim$}{\string~}SnakeGame}}
-\index{````~SnakeGame@{\texorpdfstring{$\sim$}{\string~}SnakeGame}!SnakeGame@{SnakeGame}}
-\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SnakeGame()}{\string~SnakeGame()}}
-{\footnotesize\ttfamily \label{class_snake_game_acfeac5da2cb6b7e0e850f4e48137e4bf} 
-Snake\+Game\+::\texorpdfstring{$\sim$}{\string~}\+Snake\+Game (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
-
 
 
 \label{doc-func-members}
@@ -109,11 +86,11 @@ void Snake\+Game\+::create (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\
 
 
 
+Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. 
+
+
+
 Reimplemented from \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{Game\+Scene}}.
-
-
-
-Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -121,29 +98,29 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_game_scene_ac4f0485291c1719b76b4ed425661143c}{GameScene::create}}();}
 \DoxyCodeLine{00043\ }
 \DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ signal\ the\ gameover}}
-\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 0;}
+\DoxyCodeLine{00045\ \ \ \ \ gameover\ =\ 0;}
 \DoxyCodeLine{00046\ }
 \DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Initial\ coordinates\ of\ the\ snake}}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}}\ /\ 2;}
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}}\ /\ 2;}
+\DoxyCodeLine{00048\ \ \ \ \ x\_snake\ =\ WIDTH\_SNAKE\ /\ 2;}
+\DoxyCodeLine{00049\ \ \ \ \ y\_snake\ =\ HEIGHT\_SNAKE\ /\ 2;}
 \DoxyCodeLine{00050\ }
 \DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ Initial\ coordinates\ of\ the\ fruit}}
-\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ ==\ 0)}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{00052\ \ \ \ \ fruitx\_snake\ =\ rand()\ \%\ WIDTH\_SNAKE;}
+\DoxyCodeLine{00053\ \ \ \ \ fruity\_snake\ =\ rand()\ \%\ HEIGHT\_SNAKE;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{while}\ (fruitx\_snake\ ==\ 0)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ fruitx\_snake\ =\ rand()\ \%\ WIDTH\_SNAKE;}
 \DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ ==\ 0)}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{while}\ (fruity\_snake\ ==\ 0)}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ fruity\_snake\ =\ rand()\ \%\ HEIGHT\_SNAKE;}
 \DoxyCodeLine{00059\ }
 \DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Score\ initialzed}}
-\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\_snake}}\ =\ 0;}
+\DoxyCodeLine{00061\ \ \ \ \ score\_snake\ =\ 0;}
 \DoxyCodeLine{00062\ }
 \DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a3ddd4ba5bfabc73eebf7bba28c5ff534}{m\_engine}}.bind\_serial\_input\_event(}
 \DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'w'},}
 \DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 3;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ key\_snake\ =\ 3;}
 \DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00069\ \ \ \ \ );}
 \DoxyCodeLine{00070\ }
@@ -151,7 +128,7 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'a'},}
 \DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 1;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ key\_snake\ =\ 1;}
 \DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00077\ \ \ \ \ );}
 \DoxyCodeLine{00078\ }
@@ -159,7 +136,7 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'s'},}
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 4;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ key\_snake\ =\ 4;}
 \DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00085\ \ \ \ \ );}
 \DoxyCodeLine{00086\ }
@@ -167,7 +144,7 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'d'},}
 \DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}}\ =\ 2;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ key\_snake\ =\ 2;}
 \DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00093\ \ \ \ \ );}
 \DoxyCodeLine{00094\ }
@@ -175,7 +152,7 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'x\_snake'},}
 \DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ gameover\ =\ 1;}
 \DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00101\ \ \ \ \ );}
 \DoxyCodeLine{00102\ }
@@ -183,13 +160,25 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00040}{40}} of file
 \DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'f'},}
 \DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ [\&]}
 \DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}};}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ x\_snake\ =\ fruitx\_snake;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ y\_snake\ =\ fruity\_snake;}
 \DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00110\ \ \ \ \ );}
 \DoxyCodeLine{00111\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00003}{Game\+Scene\+::create()}}, and \mbox{\hyperlink{l00039}{Game\+Scene\+::m\+\_\+engine}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_snake_game_a98f4ebbe3303b1627cf738e4684b69b4_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{class_snake_game_ad05db6c6aaa3fad9f248d1e94df2a597}\index{SnakeGame@{SnakeGame}!destroy@{destroy}}
 \index{destroy@{destroy}!SnakeGame@{SnakeGame}}
 \doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
@@ -198,11 +187,11 @@ void Snake\+Game\+::destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})
 
 
 
+Destroy scene here. Only call if you do not need to use scene again. Ideally this would be stored in PSRAM instead. 
+
+
+
 Reimplemented from \mbox{\hyperlink{class_game_scene_a79aa067bf23e490cdfcb4aec1b181b12}{Game\+Scene}}.
-
-
-
-Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00269}{269}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -211,6 +200,18 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00269}{269}} of fil
 \DoxyCodeLine{00272\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00009}{Game\+Scene\+::destroy()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_snake_game_ad05db6c6aaa3fad9f248d1e94df2a597_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{class_snake_game_a09eac49a79e09f012c8c5ca6c4d4c7eb}\index{SnakeGame@{SnakeGame}!render@{render}}
 \index{render@{render}!SnakeGame@{SnakeGame}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
@@ -219,11 +220,11 @@ void Snake\+Game\+::render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\
 
 
 
+All framebuffer operations are done here and this is called only once per frame. 
+
+
+
 Reimplemented from \mbox{\hyperlink{class_game_scene_af107c5ffdf361b4e0b718f486cbc7d0e}{Game\+Scene}}.
-
-
-
-Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00113}{113}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -241,24 +242,24 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00113}{113}} of fil
 \DoxyCodeLine{00125\ }
 \DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_outline\_rectangle(0,\ 0,\ 320\ -\/\ 1,\ 240\ -\/\ 1,\ 45);}
 \DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_pix\_snakeel(x\_snake,\ y\_snake,\ 66);}}
-\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}},\ 10,\ 10,\ 45);}
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(x\_snake,\ y\_snake,\ 10,\ 10,\ 45);}
 \DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_pix\_snakeel(fruitx\_snake,\ fruity\_snake,\ 66);}}
-\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}},\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}},\ 5,\ 5,\ 31);}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(fruitx\_snake,\ fruity\_snake,\ 5,\ 5,\ 31);}
 \DoxyCodeLine{00131\ }
 \DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ k++)}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ snakeTailLen;\ k++)}
 \DoxyCodeLine{00134\ \ \ \ \ \{}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(\mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[k],\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[k],\ 10,\ 10,\ 45);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_scene_a6ce64a6f7dc23c88abe2d43d594ee269}{m\_framebuffer}}.draw\_filled\_rectangle(snakeTailx\_snake[k],\ snakeTaily\_snake[k],\ 10,\ 10,\ 45);}
 \DoxyCodeLine{00136\ \ \ \ \ \}}
 \DoxyCodeLine{00137\ }
 \DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ >\ 320)\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ 0;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_snake\ >\ 320)\ x\_snake\ =\ 0;}
 \DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ <\ 0)\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ =\ 320;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_snake\ <\ 0)\ x\_snake\ =\ 320;}
 \DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ >\ 240)\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ 0;}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (y\_snake\ >\ 240)\ y\_snake\ =\ 0;}
 \DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ <\ 0)\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}\ =\ 0;}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{if}\ (y\_snake\ <\ 0)\ y\_snake\ =\ 0;}
 \DoxyCodeLine{00146\ }
 \DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ Creating\ bottom\ walls\ with\ '-\/'}}
 \DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ i\ =\ 0;\ i\ <\ WIDTH\_SNAKE;\ i++)\ \{}}
@@ -271,7 +272,7 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00113}{113}} of fil
 \DoxyCodeLine{00155\ \ \ \ \ \textcolor{comment}{//\ printf("{}score\ =\ \%d\(\backslash\)r\(\backslash\)n"{},\ score);}}
 \DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\ printf("{}Press\ W,\ A,\ S,\ D\ for\ movement.\(\backslash\)r\(\backslash\)n"{});}}
 \DoxyCodeLine{00157\ \ \ \ \ \textcolor{comment}{//\ printf("{}Press\ x\_snake\ to\ quit\ the\ game.\(\backslash\)r\(\backslash\)n"{});}}
-\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{struct\ }mallinfo\ \mbox{\hyperlink{_game_scene_8cpp_ab5b03fe4e6a8a45e275a46ef2b76a73e}{info}}\ =\ mallinfo();}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{struct\ }mallinfo\ info\ =\ mallinfo();}
 \DoxyCodeLine{00159\ }
 \DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ sprintf(fps\_string,\ "{}Total\ Heap:\ \%d\ by\_snaketes\ |\ \ Free:\ \%d\ \(\backslash\)n"{},\ getTotalHeap(),\ getFreeHeap());}}
 \DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ m\_framebuffer.draw\_string(fps\_string,\ 5,\ 0,\ 100);}}
@@ -312,6 +313,18 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00113}{113}} of fil
 \DoxyCodeLine{00196\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00029}{Game\+Scene\+::m\+\_\+framebuffer}}, \mbox{\hyperlink{l00034}{Game\+Scene\+::m\+\_\+renderer}}, and \mbox{\hyperlink{l00029}{Game\+Scene\+::render()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_snake_game_a09eac49a79e09f012c8c5ca6c4d4c7eb_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{class_snake_game_a427ff7fbd06cf21fd64223a3c48d500d}\index{SnakeGame@{SnakeGame}!update@{update}}
 \index{update@{update}!SnakeGame@{SnakeGame}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
@@ -320,11 +333,16 @@ void Snake\+Game\+::update (\begin{DoxyParamCaption}\item[{double}]{frame\+Time}
 
 
 
+\doxylink{class_game}{Game} updates and other time dependednt modifications should be done here, there is no gurentee this is run only. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
 Reimplemented from \mbox{\hyperlink{class_game_scene_a9bb2bd694b9c8399ea22aed23a6a809f}{Game\+Scene}}.
-
-
-
-Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00198}{198}} of file \mbox{\hyperlink{_snake_game_8cpp_source}{Snake\+Game.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -333,75 +351,87 @@ Definition at line \mbox{\hyperlink{_snake_game_8cpp_source_l00198}{198}} of fil
 \DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//\ sprintf(string,\ "{}FPS:\ \%d\(\backslash\)r\(\backslash\)n"{},\ m\_engine.get\_fps());}}
 \DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ Updating\ the\ coordinates\ for\ continous}}
 \DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//\ movement\ of\ snake}}
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{int}\ prevx\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[0];}
-\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{int}\ prevy\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[0];}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{int}\ prevx\_snake\ =\ snakeTailx\_snake[0];}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{int}\ prevy\_snake\ =\ snakeTaily\_snake[0];}
 \DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{int}\ prev2x\_snake,\ prev2y\_snake;}
-\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[0]\ =\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}};}
-\DoxyCodeLine{00208\ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[0]\ =\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}};}
-\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ i++)}
+\DoxyCodeLine{00207\ \ \ \ \ snakeTailx\_snake[0]\ =\ x\_snake;}
+\DoxyCodeLine{00208\ \ \ \ \ snakeTaily\_snake[0]\ =\ y\_snake;}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ snakeTailLen;\ i++)}
 \DoxyCodeLine{00210\ \ \ \ \ \{}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ prev2x\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i];}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ prev2y\_snake\ =\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i];}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i]\ =\ prevx\_snake;}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i]\ =\ prevy\_snake;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ prev2x\_snake\ =\ snakeTailx\_snake[i];}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ prev2y\_snake\ =\ snakeTaily\_snake[i];}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ snakeTailx\_snake[i]\ =\ prevx\_snake;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ snakeTaily\_snake[i]\ =\ prevy\_snake;}
 \DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ prevx\_snake\ =\ prev2x\_snake;}
 \DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ prevy\_snake\ =\ prev2y\_snake;}
 \DoxyCodeLine{00217\ \ \ \ \ \}}
 \DoxyCodeLine{00218\ }
 \DoxyCodeLine{00219\ \ \ \ \ \textcolor{comment}{//\ Changing\ the\ direction\ of\ movement\ of\ snake}}
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{_snake_game_8cpp_a4d3f43ca8bef050d60a7cc2cb94a184c}{key\_snake}})}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{switch}\ (key\_snake)}
 \DoxyCodeLine{00221\ \ \ \ \ \{}
 \DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}-\/-\/;}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ x\_snake-\/-\/;}
 \DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}++;}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ x\_snake++;}
 \DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}-\/-\/;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ y\_snake-\/-\/;}
 \DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}}++;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ y\_snake++;}
 \DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{default}:}
 \DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00236\ \ \ \ \ \}}
 \DoxyCodeLine{00237\ }
 \DoxyCodeLine{00238\ \ \ \ \ \textcolor{comment}{//\ If\ the\ game\ is\ over}}
-\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake\ <\ 0\ ||\ x\_snake\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}}\ ||\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake\ <\ 0\ ||\ y\_snake\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}})}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_snake\ <\ 0\ ||\ x\_snake\ >=\ WIDTH\_SNAKE\ ||\ y\_snake\ <\ 0\ ||\ y\_snake\ >=\ HEIGHT\_SNAKE)}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ gameover\ =\ 1;}
 \DoxyCodeLine{00241\ }
 \DoxyCodeLine{00242\ \ \ \ \ \textcolor{comment}{//\ Checks\ for\ collision\ with\ the\ tail\ (o)}}
-\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}};\ i++)}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ snakeTailLen;\ i++)}
 \DoxyCodeLine{00244\ \ \ \ \ \{}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_ae170759b728a81554c554cc328bb4911}{snakeTailx\_snake}}[i]\ ==\ \mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}}\ \&\&\ \mbox{\hyperlink{_snake_game_8cpp_af7d39550ddd119a00436dfc0b308561a}{snakeTaily\_snake}}[i]\ ==\ \mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake}})}
-\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a78254252ef207b26bd5cbc668592fcee}{gameover}}\ =\ 1;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (snakeTailx\_snake[i]\ ==\ x\_snake\ \&\&\ snakeTaily\_snake[i]\ ==\ y\_snake)}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ gameover\ =\ 1;}
 \DoxyCodeLine{00247\ \ \ \ \ \}}
 \DoxyCodeLine{00248\ }
 \DoxyCodeLine{00249\ \ \ \ \ \textcolor{comment}{//\ If\ snake\ reaches\ the\ fruit}}
 \DoxyCodeLine{00250\ \ \ \ \ \textcolor{comment}{//\ then\ update\ the\ score}}
 \DoxyCodeLine{00251\ }
-\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake}})}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\_snake)}
 \DoxyCodeLine{00253\ }
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{_snake_game_8cpp_a9bf0425c6db61552a179ae9de2012251}{x\_snake\ <=\ fruitx\_snake\ \&\&\ x\_snake\ +\ 10\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}})\ \&\&\ (\mbox{\hyperlink{_snake_game_8cpp_af6812ead07acd232d20f063781b13e1c}{y\_snake\ <=\ fruity\_snake\ \&\&\ y\_snake\ +\ 10\ >}}=\ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}))}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((x\_snake\ <=\ fruitx\_snake\ \&\&\ x\_snake\ +\ 10\ >=\ fruitx\_snake)\ \&\&\ (y\_snake\ <=\ fruity\_snake\ \&\&\ y\_snake\ +\ 10\ >=\ fruity\_snake))}
 \DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ ==\ 0)}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a3f18df933da679951146eeb824fd715a}{fruitx\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a3860afceb5fa79682a69fb8a4f101af0}{WIDTH\_SNAKE}};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ fruitx\_snake\ =\ rand()\ \%\ WIDTH\_SNAKE;}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ fruity\_snake\ =\ rand()\ \%\ HEIGHT\_SNAKE;}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fruitx\_snake\ ==\ 0)}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fruitx\_snake\ =\ rand()\ \%\ WIDTH\_SNAKE;}
 \DoxyCodeLine{00260\ }
 \DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generation\ of\ new\ fruit}}
-\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ ==\ 0)}
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a71cf12e315d2fecc02e043822bf09edf}{fruity\_snake}}\ =\ rand()\ \%\ \mbox{\hyperlink{_snake_game_8cpp_a874b952818d2197dd45b84e1f65f8b39}{HEIGHT\_SNAKE}};}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a8b980ec9e641de5222f057bb256c05c8}{score\_snake}}\ +=\ 10;}
-\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_snake_game_8cpp_a0c988e922b2bb3514a84d3a32d9769a9}{snakeTailLen}}++;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fruity\_snake\ ==\ 0)}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fruity\_snake\ =\ rand()\ \%\ HEIGHT\_SNAKE;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ score\_snake\ +=\ 10;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ snakeTailLen++;}
 \DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00267\ \}}
 
 \end{DoxyCode}
 
 
+References \mbox{\hyperlink{l00059}{Game\+Scene\+::update()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_snake_game_a427ff7fbd06cf21fd64223a3c48d500d_cgraph}
+\end{center}
+\end{figure}
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/scenes/\mbox{\hyperlink{_snake_game_8h}{Snake\+Game.\+h}}\item 
-src/scenes/\mbox{\hyperlink{_snake_game_8cpp}{Snake\+Game.\+cpp}}\end{DoxyCompactItemize}
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/src/scenes/Snake\+Game.\+h\item 
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/src/scenes/Snake\+Game.\+cpp\end{DoxyCompactItemize}

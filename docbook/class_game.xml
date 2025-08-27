@@ -3,6 +3,11 @@
 <title>Game Class Reference</title>
 <indexterm><primary>Game</primary></indexterm>
 <para>
+
+<para>Abstract definition file for games. This contains common functions all games need to implement. </para>
+ 
+</para>
+<para>
 <computeroutput>#include &lt;Game.h&gt;</computeroutput>
 </para>
 Collaboration diagram for Game:<para>
@@ -18,13 +23,17 @@ Collaboration diagram for Game:<para>
     <title>Public Member Functions    </title>
         <itemizedlist>
             <listitem><para>virtual void <link linkend="_class_game_1a701403e278b6f4849f12dda2bf26fd2f">run</link> ()</para>
+
+<para>Called by the entry point to run the game loop. <link linkend="_class_game">Game</link> must call startgame loop inside this function. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <section>
 <title>Detailed Description</title>
+
+<para>Abstract definition file for games. This contains common functions all games need to implement. </para>
 <para>
-Definition at line <link linkend="__game_8h_source_1l00004">4</link> of file <link linkend="__game_8h_source">Game.h</link>.</para>
+Definition at line <link linkend="__game_8h_source_1l00018">18</link> of file <link linkend="__game_8h_source">Game.h</link>.</para>
 </section>
 <section>
 <title>Member Function Documentation</title>
@@ -33,8 +42,12 @@ Definition at line <link linkend="__game_8h_source_1l00004">4</link> of file <li
 <indexterm><primary>run</primary><secondary>Game</secondary></indexterm>
 <indexterm><primary>Game</primary><secondary>run</secondary></indexterm>
 <para><computeroutput>virtual void Game::run ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
-Definition at line <link linkend="__game_8h_source_1l00006">6</link> of file <link linkend="__game_8h_source">Game.h</link>.</para>
-<programlisting linenumbering="unnumbered">00006 {};
+
+<para>Called by the entry point to run the game loop. <link linkend="_class_game">Game</link> must call startgame loop inside this function. </para>
+</para>
+<para>
+Definition at line <link linkend="__game_8h_source_1l00024">24</link> of file <link linkend="__game_8h_source">Game.h</link>.</para>
+<programlisting linenumbering="unnumbered">00024 {};
 </programlisting></section>
 <para>
 The documentation for this class was generated from the following file:</para>

@@ -112,12 +112,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc575759bb084eefa5e95188d041d042" id="r_afc575759bb084eefa5e95188d041d042"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc575759bb084eefa5e95188d041d042">SnakeGame</a> (<a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;_framebuffer, <a class="el" href="class_tiny_engine_renderer_i.html">TinyEngineRendererI</a> &amp;_renderer, <a class="el" href="class_tiny_engine.html">TinyEngine</a> &amp;_engine)</td></tr>
 <tr class="memitem:acfeac5da2cb6b7e0e850f4e48137e4bf" id="r_acfeac5da2cb6b7e0e850f4e48137e4bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfeac5da2cb6b7e0e850f4e48137e4bf">~SnakeGame</a> () override=default</td></tr>
 <tr class="memitem:a98f4ebbe3303b1627cf738e4684b69b4" id="r_a98f4ebbe3303b1627cf738e4684b69b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98f4ebbe3303b1627cf738e4684b69b4">create</a> () override</td></tr>
+<tr class="memdesc:a98f4ebbe3303b1627cf738e4684b69b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function.  <br /></td></tr>
 <tr class="memitem:a09eac49a79e09f012c8c5ca6c4d4c7eb" id="r_a09eac49a79e09f012c8c5ca6c4d4c7eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09eac49a79e09f012c8c5ca6c4d4c7eb">render</a> () override</td></tr>
+<tr class="memdesc:a09eac49a79e09f012c8c5ca6c4d4c7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">All framebuffer operations are done here and this is called only once per frame.  <br /></td></tr>
 <tr class="memitem:a427ff7fbd06cf21fd64223a3c48d500d" id="r_a427ff7fbd06cf21fd64223a3c48d500d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a427ff7fbd06cf21fd64223a3c48d500d">update</a> (double frameTime) override</td></tr>
+<tr class="memdesc:a427ff7fbd06cf21fd64223a3c48d500d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> updates and other time dependednt modifications should be done here, there is no gurentee this is run only.  <br /></td></tr>
 <tr class="memitem:ad05db6c6aaa3fad9f248d1e94df2a597" id="r_ad05db6c6aaa3fad9f248d1e94df2a597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad05db6c6aaa3fad9f248d1e94df2a597">destroy</a> () override</td></tr>
 <tr class="inherit_header pub_methods_class_game_scene"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_game_scene')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_game_scene.html">GameScene</a></td></tr>
 <tr class="memitem:a9f20a87546afdf718a1ef0ff4fb53200 inherit pub_methods_class_game_scene" id="r_a9f20a87546afdf718a1ef0ff4fb53200"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#a9f20a87546afdf718a1ef0ff4fb53200">GameScene</a> (<a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;_framebuffer, <a class="el" href="class_tiny_engine_renderer_i.html">TinyEngineRendererI</a> &amp;_renderer, <a class="el" href="class_tiny_engine.html">TinyEngine</a> &amp;_engine)</td></tr>
+<tr class="memdesc:a9f20a87546afdf718a1ef0ff4fb53200 inherit pub_methods_class_game_scene"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object.  <br /></td></tr>
 <tr class="memitem:add5bc48c372aaa7f526c02558a8adf00 inherit pub_methods_class_game_scene" id="r_add5bc48c372aaa7f526c02558a8adf00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#add5bc48c372aaa7f526c02558a8adf00">~GameScene</a> ()</td></tr>
+<tr class="memdesc:add5bc48c372aaa7f526c02558a8adf00 inherit pub_methods_class_game_scene"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> Scene object.  <br /></td></tr>
 <tr class="inherit_header pub_methods_class_scene_i"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_scene_i')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_scene_i.html">SceneI</a></td></tr>
 <tr class="memitem:a9aca690ad096045ae588810c5dbcbd62 inherit pub_methods_class_scene_i" id="r_a9aca690ad096045ae588810c5dbcbd62"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_i.html#a9aca690ad096045ae588810c5dbcbd62">~SceneI</a> ()=default</td></tr>
 </table><table class="memberdecls">
@@ -127,7 +132,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a6ce64a6f7dc23c88abe2d43d594ee269 inherit pro_attribs_class_game_scene" id="r_a6ce64a6f7dc23c88abe2d43d594ee269"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine_frame_buffer.html">TinyEngineFrameBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#a6ce64a6f7dc23c88abe2d43d594ee269">m_framebuffer</a></td></tr>
 <tr class="memitem:abbc67a7bac90f11d7ee08c28dc3f0810 inherit pro_attribs_class_game_scene" id="r_abbc67a7bac90f11d7ee08c28dc3f0810"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine_renderer_i.html">TinyEngineRendererI</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#abbc67a7bac90f11d7ee08c28dc3f0810">m_renderer</a></td></tr>
 <tr class="memitem:a3ddd4ba5bfabc73eebf7bba28c5ff534 inherit pro_attribs_class_game_scene" id="r_a3ddd4ba5bfabc73eebf7bba28c5ff534"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tiny_engine.html">TinyEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</a></td></tr>
-<tr class="memitem:a73a24f18b5cb2d7cf13efc1e2ce87b48 inherit pro_attribs_class_game_scene" id="r_a73a24f18b5cb2d7cf13efc1e2ce87b48"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sprite.html">Sprite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#a73a24f18b5cb2d7cf13efc1e2ce87b48">sprites</a></td></tr>
+<tr class="memitem:a894a08b41ccad98c26c0eb588a307d3b inherit pro_attribs_class_game_scene" id="r_a894a08b41ccad98c26c0eb588a307d3b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sprite.html">Sprite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_scene.html#a894a08b41ccad98c26c0eb588a307d3b">sprites</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -169,7 +174,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   14</span>        : <a class="code hl_function" href="class_game_scene.html#a9f20a87546afdf718a1ef0ff4fb53200">GameScene</a>(_framebuffer, _renderer, _engine)</div>
 <div class="line"><span class="lineno">   15</span>    {</div>
 <div class="line"><span class="lineno">   16</span>    }</div>
-<div class="ttc" id="aclass_game_scene_html_a9f20a87546afdf718a1ef0ff4fb53200"><div class="ttname"><a href="class_game_scene.html#a9f20a87546afdf718a1ef0ff4fb53200">GameScene::GameScene</a></div><div class="ttdeci">GameScene(TinyEngineFrameBuffer &amp;_framebuffer, TinyEngineRendererI &amp;_renderer, TinyEngine &amp;_engine)</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00016">GameScene.h:16</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_a9f20a87546afdf718a1ef0ff4fb53200"><div class="ttname"><a href="class_game_scene.html#a9f20a87546afdf718a1ef0ff4fb53200">GameScene::GameScene</a></div><div class="ttdeci">GameScene(TinyEngineFrameBuffer &amp;_framebuffer, TinyEngineRendererI &amp;_renderer, TinyEngine &amp;_engine)</div><div class="ttdoc">Construct a new Game Scene object.</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00038">GameScene.h:38</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -221,6 +226,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. </p>
 
 <p>Reimplemented from <a class="el" href="class_game_scene.html#ac4f0485291c1719b76b4ed425661143c">GameScene</a>.</p>
 
@@ -305,8 +312,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="ttc" id="a_snake_game_8cpp_html_a8b980ec9e641de5222f057bb256c05c8"><div class="ttname"><a href="_snake_game_8cpp.html#a8b980ec9e641de5222f057bb256c05c8">score_snake</a></div><div class="ttdeci">int score_snake</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00034">SnakeGame.cpp:34</a></div></div>
 <div class="ttc" id="a_snake_game_8cpp_html_a9bf0425c6db61552a179ae9de2012251"><div class="ttname"><a href="_snake_game_8cpp.html#a9bf0425c6db61552a179ae9de2012251">x_snake</a></div><div class="ttdeci">int x_snake</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00037">SnakeGame.cpp:37</a></div></div>
 <div class="ttc" id="a_snake_game_8cpp_html_af6812ead07acd232d20f063781b13e1c"><div class="ttname"><a href="_snake_game_8cpp.html#af6812ead07acd232d20f063781b13e1c">y_snake</a></div><div class="ttdeci">int y_snake</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00037">SnakeGame.cpp:37</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_a3ddd4ba5bfabc73eebf7bba28c5ff534"><div class="ttname"><a href="class_game_scene.html#a3ddd4ba5bfabc73eebf7bba28c5ff534">GameScene::m_engine</a></div><div class="ttdeci">TinyEngine &amp; m_engine</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00012">GameScene.h:12</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_ac4f0485291c1719b76b4ed425661143c"><div class="ttname"><a href="class_game_scene.html#ac4f0485291c1719b76b4ed425661143c">GameScene::create</a></div><div class="ttdeci">void create() override</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00003">GameScene.cpp:3</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_a3ddd4ba5bfabc73eebf7bba28c5ff534"><div class="ttname"><a href="class_game_scene.html#a3ddd4ba5bfabc73eebf7bba28c5ff534">GameScene::m_engine</a></div><div class="ttdeci">TinyEngine &amp; m_engine</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00027">GameScene.h:27</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_ac4f0485291c1719b76b4ed425661143c"><div class="ttname"><a href="class_game_scene.html#ac4f0485291c1719b76b4ed425661143c">GameScene::create</a></div><div class="ttdeci">void create() override</div><div class="ttdoc">Create the scene after the object is created. This is for having multiple refrences to the same scene...</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00003">GameScene.cpp:3</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -365,6 +372,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>All framebuffer operations are done here and this is called only once per frame. </p>
 
 <p>Reimplemented from <a class="el" href="class_game_scene.html#af107c5ffdf361b4e0b718f486cbc7d0e">GameScene</a>.</p>
 
@@ -456,9 +465,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="ttc" id="a_snake_game_8cpp_html_a0c988e922b2bb3514a84d3a32d9769a9"><div class="ttname"><a href="_snake_game_8cpp.html#a0c988e922b2bb3514a84d3a32d9769a9">snakeTailLen</a></div><div class="ttdeci">int snakeTailLen</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00031">SnakeGame.cpp:31</a></div></div>
 <div class="ttc" id="a_snake_game_8cpp_html_ae170759b728a81554c554cc328bb4911"><div class="ttname"><a href="_snake_game_8cpp.html#ae170759b728a81554c554cc328bb4911">snakeTailx_snake</a></div><div class="ttdeci">int snakeTailx_snake[100]</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00027">SnakeGame.cpp:27</a></div></div>
 <div class="ttc" id="a_snake_game_8cpp_html_af7d39550ddd119a00436dfc0b308561a"><div class="ttname"><a href="_snake_game_8cpp.html#af7d39550ddd119a00436dfc0b308561a">snakeTaily_snake</a></div><div class="ttdeci">int snakeTaily_snake[100]</div><div class="ttdef"><b>Definition</b> <a href="_snake_game_8cpp_source.html#l00027">SnakeGame.cpp:27</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_a6ce64a6f7dc23c88abe2d43d594ee269"><div class="ttname"><a href="class_game_scene.html#a6ce64a6f7dc23c88abe2d43d594ee269">GameScene::m_framebuffer</a></div><div class="ttdeci">TinyEngineFrameBuffer &amp; m_framebuffer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00010">GameScene.h:10</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_abbc67a7bac90f11d7ee08c28dc3f0810"><div class="ttname"><a href="class_game_scene.html#abbc67a7bac90f11d7ee08c28dc3f0810">GameScene::m_renderer</a></div><div class="ttdeci">TinyEngineRendererI &amp; m_renderer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00011">GameScene.h:11</a></div></div>
-<div class="ttc" id="aclass_game_scene_html_af107c5ffdf361b4e0b718f486cbc7d0e"><div class="ttname"><a href="class_game_scene.html#af107c5ffdf361b4e0b718f486cbc7d0e">GameScene::render</a></div><div class="ttdeci">void render() override</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00029">GameScene.cpp:29</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_a6ce64a6f7dc23c88abe2d43d594ee269"><div class="ttname"><a href="class_game_scene.html#a6ce64a6f7dc23c88abe2d43d594ee269">GameScene::m_framebuffer</a></div><div class="ttdeci">TinyEngineFrameBuffer &amp; m_framebuffer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00025">GameScene.h:25</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_abbc67a7bac90f11d7ee08c28dc3f0810"><div class="ttname"><a href="class_game_scene.html#abbc67a7bac90f11d7ee08c28dc3f0810">GameScene::m_renderer</a></div><div class="ttdeci">TinyEngineRendererI &amp; m_renderer</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8h_source.html#l00026">GameScene.h:26</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_af107c5ffdf361b4e0b718f486cbc7d0e"><div class="ttname"><a href="class_game_scene.html#af107c5ffdf361b4e0b718f486cbc7d0e">GameScene::render</a></div><div class="ttdeci">void render() override</div><div class="ttdoc">All framebuffer operations are done here and this is called only once per frame.</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00029">GameScene.cpp:29</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -484,6 +493,14 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="class_game.html" title="Abstract definition file for games. This contains common functions all games need to implement.">Game</a> updates and other time dependednt modifications should be done here, there is no gurentee this is run only. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frameTime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="class_game_scene.html#a9bb2bd694b9c8399ea22aed23a6a809f">GameScene</a>.</p>
 
@@ -557,7 +574,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  265</span>            <a class="code hl_variable" href="_snake_game_8cpp.html#a0c988e922b2bb3514a84d3a32d9769a9">snakeTailLen</a>++;</div>
 <div class="line"><span class="lineno">  266</span>        }</div>
 <div class="line"><span class="lineno">  267</span>}</div>
-<div class="ttc" id="aclass_game_scene_html_a9bb2bd694b9c8399ea22aed23a6a809f"><div class="ttname"><a href="class_game_scene.html#a9bb2bd694b9c8399ea22aed23a6a809f">GameScene::update</a></div><div class="ttdeci">void update(double frameTime) override</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00059">GameScene.cpp:59</a></div></div>
+<div class="ttc" id="aclass_game_scene_html_a9bb2bd694b9c8399ea22aed23a6a809f"><div class="ttname"><a href="class_game_scene.html#a9bb2bd694b9c8399ea22aed23a6a809f">GameScene::update</a></div><div class="ttdeci">void update(double frameTime) override</div><div class="ttdoc">Game updates and other time dependednt modifications should be done here, there is no gurentee this i...</div><div class="ttdef"><b>Definition</b> <a href="_game_scene_8cpp_source.html#l00059">GameScene.cpp:59</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

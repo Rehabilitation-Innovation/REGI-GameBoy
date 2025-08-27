@@ -2,79 +2,73 @@
 \hypertarget{class_tiny_engine_frame_buffer}{}\label{class_tiny_engine_frame_buffer}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 
 
+Framebuffer class for rendering primitives and sprites. Contains no scaling yet.  
+
+
+
+
 {\ttfamily \#include $<$tinyengine\+\_\+framebuffer.\+h$>$}
 
-
-
-Collaboration diagram for Tiny\+Engine\+Frame\+Buffer\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=212pt]{class_tiny_engine_frame_buffer__coll__graph}
-\end{center}
-\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\+\_\+dual}} ()
 \item 
-void \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{draw\+Circle1}} (int xc, int yc, int \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, int \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, uint8\+\_\+t color)
+void \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{draw\+Circle1}} (int xc, int yc, int x, int y, uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{class_tiny_engine_frame_buffer_a154593a2274a9e154b42730c913470cb}{Tiny\+Engine\+Frame\+Buffer}} (uint32\+\_\+t frame\+\_\+width, uint32\+\_\+t frame\+\_\+height, int \mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\+\_\+dual}})
-\item 
+\mbox{\hyperlink{class_tiny_engine_frame_buffer_a154593a2274a9e154b42730c913470cb}{Tiny\+Engine\+Frame\+Buffer}} (uint32\+\_\+t frame\+\_\+width, uint32\+\_\+t frame\+\_\+height, int is\+\_\+dual)
+\begin{DoxyCompactList}\small\item\em Construct a new Tiny Engine Frame Buffer object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_tiny_engine_frame_buffer_a67e6ae3613bd0ab2933990df90ab6091}{\texorpdfstring{$\sim$}{\string~}\+Tiny\+Engine\+Frame\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Tiny Engine Frame Buffer object. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939}{destroy}} ()
+\begin{DoxyCompactList}\small\item\em Destroys and frees memory. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_ac3bf2f988fc71c133bb8b4627963d77f}{write}} ()
+\begin{DoxyCompactList}\small\item\em Legacy. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_aae5e1ac121730bf70e2faf97b6db7760}{clear}} (const uint8\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Clears back buffer to given color. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897}{clear\+\_\+with}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Clears back buffer to given data. For example a arbitrary frambuffer sized array containing custom background. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\+\_\+pixel}} (const uint32\+\_\+t x, const uint32\+\_\+t y, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939}{destroy}} ()
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5f55e06ce4f4fe1dc7577ef14b851794}{draw\+\_\+grid}} (const uint32\+\_\+t spacing, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_ac3bf2f988fc71c133bb8b4627963d77f}{write}} ()
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a362cb5fdd287fbc4a95f04d593fa10e6}{draw\+\_\+outline\+\_\+rectangle}} (const uint32\+\_\+t x, const uint32\+\_\+t y, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_aae5e1ac121730bf70e2faf97b6db7760}{clear}} (const uint8\+\_\+t color)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a60735e6091fa6c20638fb995b73193d5}{draw\+\_\+filled\+\_\+rectangle}} (const uint32\+\_\+t x, const uint32\+\_\+t y, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897}{clear\+\_\+with}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4beca939063b7270bf66e7872c689128}{draw\+\_\+outline\+\_\+circle}} (const uint32\+\_\+t x, const uint32\+\_\+t y, const uint32\+\_\+t r, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\+\_\+pixel}} (const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint8\+\_\+t color)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330}{draw\+\_\+filled\+\_\+circle}} (const uint32\+\_\+t x, const uint32\+\_\+t y, const uint32\+\_\+t r, const uint8\+\_\+t color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5f55e06ce4f4fe1dc7577ef14b851794}{draw\+\_\+grid}} (const uint32\+\_\+t spacing, const uint8\+\_\+t color)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d}{swap\+\_\+blocking}} ()
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a362cb5fdd287fbc4a95f04d593fa10e6}{draw\+\_\+outline\+\_\+rectangle}} (const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint8\+\_\+t color)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_aef92d2f3ff2cf2a130a86bdc0779d2ac}{draw\+\_\+sprite}} (\mbox{\hyperlink{class_sprite}{Sprite}} \&sprite)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a60735e6091fa6c20638fb995b73193d5}{draw\+\_\+filled\+\_\+rectangle}} (const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint8\+\_\+t color)
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\+\_\+sprite\+\_\+raw}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}sprite, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint32\+\_\+t x, const uint32\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Draw using raw buffer. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf}{draw\+\_\+sprite\+\_\+raw\+\_\+batch}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}sprite, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint16\+\_\+t x\mbox{[}$\,$\mbox{]}, const uint16\+\_\+t y\mbox{[}$\,$\mbox{]}, const uint16\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Draw the same sprite in a single call to multiple locations on the screen. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{draw\+\_\+char}} (const char \+\_\+char, const uint32\+\_\+t x, const uint32\+\_\+t y, const uint8\+\_\+t \+\_\+color)
+\begin{DoxyCompactList}\small\item\em Draw singular char using the global font buffer. \end{DoxyCompactList}\item 
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_affc105087005f183a2c39b2999b691e6}{draw\+\_\+string}} (const char \texorpdfstring{$\ast$}{*}\+\_\+string, const uint32\+\_\+t x, const uint32\+\_\+t y, const uint8\+\_\+t \+\_\+color)
 \item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4beca939063b7270bf66e7872c689128}{draw\+\_\+outline\+\_\+circle}} (const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint32\+\_\+t r, const uint8\+\_\+t color)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330}{draw\+\_\+filled\+\_\+circle}} (const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint32\+\_\+t r, const uint8\+\_\+t color)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d}{swap\+\_\+blocking}} ()
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_aef92d2f3ff2cf2a130a86bdc0779d2ac}{draw\+\_\+sprite}} (\mbox{\hyperlink{class_sprite}{Sprite}} \&sprite)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\+\_\+sprite\+\_\+raw}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}sprite, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf}{draw\+\_\+sprite\+\_\+raw\+\_\+batch}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}sprite, const uint32\+\_\+t w, const uint32\+\_\+t h, const uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\mbox{[}$\,$\mbox{]}, const uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\mbox{[}$\,$\mbox{]}, const uint16\+\_\+t count)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{draw\+\_\+char}} (const char \+\_\+char, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint8\+\_\+t \+\_\+color)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_affc105087005f183a2c39b2999b691e6}{draw\+\_\+string}} (const char \texorpdfstring{$\ast$}{*}\+\_\+string, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, const uint32\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}, const uint8\+\_\+t \+\_\+color)
-\item 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} \mbox{\hyperlink{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152}{copy\+\_\+buffer\+\_\+slow}} (const \mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&\+\_\+buffer\+\_\+to\+\_\+copy, const uint16\+\_\+t \+\_\+dst\+\_\+x, const uint16\+\_\+t \+\_\+dst\+\_\+y)
-\end{DoxyCompactItemize}
+tinyengine\+\_\+status\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152}{copy\+\_\+buffer\+\_\+slow}} (const \mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&\+\_\+buffer\+\_\+to\+\_\+copy, const uint16\+\_\+t \+\_\+dst\+\_\+x, const uint16\+\_\+t \+\_\+dst\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\+\_\+buffer\+\_\+back}}
-\item 
+\begin{DoxyCompactList}\small\item\em All user render calls are thrown to this buffer. It is not rendered to screen. \end{DoxyCompactList}\item 
 uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\+\_\+buffer\+\_\+display}}
-\item 
+\begin{DoxyCompactList}\small\item\em Immutable display buffer, is swaped at vsync or every frame. \end{DoxyCompactList}\item 
 uint32\+\_\+t \mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\+\_\+pixel\+\_\+buffer\+\_\+size}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-No need to edit this struct init will return a filled struct. 
+Framebuffer class for rendering primitives and sprites. Contains no scaling yet. 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00013}{13}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
-
-
+No need to edit this struct init will return a filled struct.  
 
 \label{doc-constructors}
 \Hypertarget{class_tiny_engine_frame_buffer_doc-constructors}
@@ -87,14 +81,35 @@ Tiny\+Engine\+Frame\+Buffer\+::\+Tiny\+Engine\+Frame\+Buffer (\begin{DoxyParamCa
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00033}{33}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
+Construct a new Tiny Engine Frame Buffer object. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em frame\+\_\+width} & \\
+\hline
+{\em frame\+\_\+height} & \\
+\hline
+{\em is\+\_\+dual} & \\
+\hline
+\end{DoxyParams}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_display\_h(frame\_height),}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ m\_display\_w(frame\_width),\ m\_is\_dual(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\_dual}})\ \{\ init();\ \};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_display\_h(frame\_height),}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ m\_display\_w(frame\_width),\ m\_is\_dual(is\_dual)\ \{\ init();\ \};}
 
 \end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{l00460}{copy\+\_\+buffer\+\_\+slow()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tiny_engine_frame_buffer_a154593a2274a9e154b42730c913470cb_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{class_tiny_engine_frame_buffer_a67e6ae3613bd0ab2933990df90ab6091}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!````~TinyEngineFrameBuffer@{\texorpdfstring{$\sim$}{\string~}TinyEngineFrameBuffer}}
 \index{````~TinyEngineFrameBuffer@{\texorpdfstring{$\sim$}{\string~}TinyEngineFrameBuffer}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TinyEngineFrameBuffer()}{\string~TinyEngineFrameBuffer()}}
@@ -103,12 +118,12 @@ Tiny\+Engine\+Frame\+Buffer\+::\texorpdfstring{$\sim$}{\string~}\+Tiny\+Engine\+
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00036}{36}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
+Destroy the Tiny Engine Frame Buffer object. 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00037\ \ \ \ \ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \};}
 
 \end{DoxyCode}
 
@@ -120,16 +135,24 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00036}{36
 \index{clear@{clear}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{clear()}{clear()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_aae5e1ac121730bf70e2faf97b6db7760} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::clear (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::clear (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00070}{70}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Clears back buffer to given color. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em color} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00071\ \{}
-\DoxyCodeLine{00072\ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ color,\ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}});}
+\DoxyCodeLine{00072\ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ color,\ this-\/>m\_pixel\_buffer\_size);}
 \DoxyCodeLine{00073\ }
 \DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ didnt\ really\ work;\ it\ was\ a\ late\ night\ idea.\ needs\ more\ work;}}
 \DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ //\ only\ clear\ stuff\ thats\ changed\ in\ 4\ byte\ blocks.}}
@@ -155,16 +178,32 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00070}{
 \DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//}}
 \DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ \}}}
 \DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00099\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}.
+
 \Hypertarget{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!clear\_with@{clear\_with}}
 \index{clear\_with@{clear\_with}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{clear\_with()}{clear\_with()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a08e38bc9f21443a014f294c8ddd1b897} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::clear\+\_\+with (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::clear\+\_\+with (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
 
+
+
+Clears back buffer to given data. For example a arbitrary frambuffer sized array containing custom background. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t
+\end{DoxyReturn}
 Clears screen with a texture rather than a solid color. 
 \begin{DoxyParams}{Parameters}
 {\em data} & must be exact size as m\+\_\+pixel\+\_\+buffer\+\_\+size \\
@@ -174,13 +213,9 @@ Clears screen with a texture rather than a solid color.
 
 \end{DoxyReturn}
 
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00106}{106}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00107\ \{}
-\DoxyCodeLine{00108\ \ \ \ \ memcpy(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ data,\ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce}{m\_pixel\_buffer\_size}});}
+\DoxyCodeLine{00108\ \ \ \ \ memcpy(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}},\ data,\ this-\/>m\_pixel\_buffer\_size);}
 \DoxyCodeLine{00109\ \ \ \ \ \textcolor{comment}{//\ uint16\_t\ \_x\ =\ 0,\ \_y\ =\ 0;}}
 \DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ for\ (\_x\ =\ 0;\ \_x\ <\ m\_display\_w;\ ++\_x)}}
 \DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{//\ \{}}
@@ -195,20 +230,36 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00106}{
 \DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//}}
 \DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ \}}}
 \DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00124\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}.
+
 \Hypertarget{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!copy\_buffer\_slow@{copy\_buffer\_slow}}
 \index{copy\_buffer\_slow@{copy\_buffer\_slow}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{copy\_buffer\_slow()}{copy\_buffer\_slow()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::copy\+\_\+buffer\+\_\+slow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&}]{\+\_\+buffer\+\_\+to\+\_\+copy}{, }\item[{const uint16\+\_\+t}]{\+\_\+dst\+\_\+x}{, }\item[{const uint16\+\_\+t}]{\+\_\+dst\+\_\+y}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::copy\+\_\+buffer\+\_\+slow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&}]{\+\_\+buffer\+\_\+to\+\_\+copy}{, }\item[{const uint16\+\_\+t}]{\+\_\+dst\+\_\+x}{, }\item[{const uint16\+\_\+t}]{\+\_\+dst\+\_\+y}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00460}{460}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Unused. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+buffer\+\_\+to\+\_\+copy} & \\
+\hline
+{\em \+\_\+dst\+\_\+x} & \\
+\hline
+{\em \+\_\+dst\+\_\+y} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00463\ \{}
@@ -220,43 +271,76 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00460}{
 \DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[i\ *\ \_buffer\_to\_copy.m\_display\_w\ +\ j];}
 \DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00471\ \ \ \ \ \}}
-\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00473\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}, and \mbox{\hyperlink{l00075}{Tiny\+Engine\+Frame\+Buffer()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tiny_engine_frame_buffer_ad46c02986f2666b1a63b851c3e5ab152_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!destroy@{destroy}}
 \index{destroy@{destroy}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a1553a22e5974bf4990184c5b3f9c8939} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00053}{53}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Destroys and frees memory. 
 
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00054\ \{}
 \DoxyCodeLine{00055\ \ \ \ \ free(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}});}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_tiny_engine_frame_buffer_a871da8c140298754c26c13331654f890}{is\_dual}}())}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_dual())}
 \DoxyCodeLine{00057\ \ \ \ \ \{}
 \DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ free(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}});}
 \DoxyCodeLine{00059\ \ \ \ \ \}}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00062\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}, and \mbox{\hyperlink{l00061}{pixel\+\_\+buffer\+\_\+display}}.
+
 \Hypertarget{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!draw\_char@{draw\_char}}
 \index{draw\_char@{draw\_char}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_char()}{draw\_char()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+char (\begin{DoxyParamCaption}\item[{const char}]{\+\_\+char}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{\+\_\+color}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+char (\begin{DoxyParamCaption}\item[{const char}]{\+\_\+char}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{\+\_\+color}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00404}{404}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Draw singular char using the global font buffer. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+char} & Character to draw \\
+\hline
+{\em x} & location x \\
+\hline
+{\em y} & location y \\
+\hline
+{\em \+\_\+color} & color of sprite from pallette \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00406\ \{}
@@ -273,69 +357,69 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00404}{
 \DoxyCodeLine{00417\ \ \ \ \ \}}
 \DoxyCodeLine{00418\ \ \ \ \ \textcolor{comment}{//\ 'font'\ is\ a\ multidimensional\ array\ of\ [96][char\_width]}}
 \DoxyCodeLine{00419\ \ \ \ \ \textcolor{comment}{//\ which\ is\ really\ just\ a\ 1D\ array\ of\ size\ 96*char\_width.}}
-\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ chr\ =\ \mbox{\hyperlink{renew__font_8h_a54965403f79c53e640e1179d0661194e}{renew\_font}}[\_draw\_char\_temp\_index];}
-\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}}\ =\ 0;}
-\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};\ j++)}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ chr\ =\ renew\_font[\_draw\_char\_temp\_index];}
+\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordtype}{char}\ temp\ =\ 0;}
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ CHAR\_WIDTH;\ j++)}
 \DoxyCodeLine{00423\ \ \ \ \ \{}
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_acbe7ef91b8715ffcdfb80354ca7cc448}{temp}}\ |=\ chr[j];}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ temp\ |=\ chr[j];}
 \DoxyCodeLine{00425\ \ \ \ \ \}}
 \DoxyCodeLine{00426\ }
 \DoxyCodeLine{00427\ \ \ \ \ \textcolor{comment}{//\ Draw\ pixels}}
-\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};\ j++)}
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ CHAR\_WIDTH;\ j++)}
 \DoxyCodeLine{00429\ \ \ \ \ \{}
-\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_ae2eecd07a9b6a2256002a15b28e388f2}{CHAR\_HEIGHT}};\ i++)}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ CHAR\_HEIGHT;\ i++)}
 \DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chr[j]\ \&\ (1\ <<\ i))}
 \DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this\ added\ like\ 100FPS\ to\ the\ game\ on\ full\ optimizations}}
 \DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ j))\ *\ 1]\ =\ (uint8\_t)(\_color);}}
-\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ j))\ *\ 1),\ \_color,\ 1);}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ j))\ *\ 1),\ \_color,\ 1);}
 \DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 300FPS\ improvement\ lol.}}
 \DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\_pixel(x\ +\ j,\ y\ +\ i,\ \_color);}}
 \DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00441\ \ \ \ \ \}}
-\DoxyCodeLine{00442\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00442\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00443\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}.
+
 \Hypertarget{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!draw\_filled\_circle@{draw\_filled\_circle}}
 \index{draw\_filled\_circle@{draw\_filled\_circle}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_filled\_circle()}{draw\_filled\_circle()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_af99e05afb9c2710684e3be5d12de5330} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+filled\+\_\+circle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{r}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00241}{241}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+filled\+\_\+circle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{r}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00243\ \{}
-\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ r;}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ 0,\ y\ =\ r;}
 \DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{int}\ d\ =\ 3\ -\/\ 2\ *\ r;}
-\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{drawCircle1}}(xc,\ yc,\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
-\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >=\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})}
+\DoxyCodeLine{00246\ \ \ \ \ drawCircle1(xc,\ yc,\ x,\ y,\ color);}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{while}\ (y\ >=\ x)}
 \DoxyCodeLine{00248\ \ \ \ \ \{}
 \DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ for\ decision\ parameter}}
 \DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ correspondingly}}
 \DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ update\ d,\ y}}
 \DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\ >\ 0)}
 \DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}-\/-\/;}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})\ +\ 10;}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ y-\/-\/;}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ (x\ -\/\ y)\ +\ 10;}
 \DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ 6;}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ d\ +\ 4\ *\ x\ +\ 6;}
 \DoxyCodeLine{00259\ }
 \DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ x\ after\ updating\ decision\ parameter}}
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}++;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ x++;}
 \DoxyCodeLine{00262\ }
 \DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ circle\ using\ the\ new\ coordinates}}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af66ebbabb0bd56a14f77f9ba437b0c41}{drawCircle1}}(xc,\ yc,\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ drawCircle1(xc,\ yc,\ x,\ y,\ color);}
 \DoxyCodeLine{00265\ \ \ \ \ \}}
 \DoxyCodeLine{00266\ }
-\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00268\ \}}
 
 \end{DoxyCode}
@@ -343,11 +427,7 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00241}{
 \index{draw\_filled\_rectangle@{draw\_filled\_rectangle}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_filled\_rectangle()}{draw\_filled\_rectangle()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a60735e6091fa6c20638fb995b73193d5} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+filled\+\_\+rectangle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00193}{193}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+filled\+\_\+rectangle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -368,12 +448,12 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00193}{
 \DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint16\_t\ j\ =\ 0;\ j\ <\ w;\ j++)}}
 \DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{//this-\/>pixel\_buffer[j\ +\ i\ *\ this-\/>display\_w]\ =\ color;}}
 \DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\_pixel(x\ +\ j,\ y\ +\ i,\ color);}}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}),\ color,\ w);}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ memset(this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ (y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x),\ color,\ w);}
 \DoxyCodeLine{00214\ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ j))\ *\ 1]\ =\ (uint8\_t)(color);}}
 \DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{//\ \}}}
 \DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ \{}}
 \DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{//\ \}}}
-\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00219\ \}}
 
 \end{DoxyCode}
@@ -381,25 +461,21 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00193}{
 \index{draw\_grid@{draw\_grid}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_grid()}{draw\_grid()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a5f55e06ce4f4fe1dc7577ef14b851794} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+grid (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{spacing}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00141}{141}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+grid (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{spacing}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00142\ \{}
-\DoxyCodeLine{00143\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ 0;}
-\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ <\ m\_display\_w;\ ++\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})}
+\DoxyCodeLine{00143\ \ \ \ \ uint16\_t\ x\ =\ 0,\ y\ =\ 0;}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ m\_display\_w;\ ++x)}
 \DoxyCodeLine{00145\ \ \ \ \ \{}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ =\ 0;\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ <\ m\_display\_h;\ ++\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ 0;\ y\ <\ m\_display\_h;\ ++y)}
 \DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ \%\ spacing\ ==\ 0\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ \%\ spacing\ ==\ 0)}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ *\ this-\/>m\_display\_w\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})\ *\ 1]\ =\ (uint8\_t)(color);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ \%\ spacing\ ==\ 0\ \&\&\ x\ \%\ spacing\ ==\ 0)}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(y\ *\ this-\/>m\_display\_w\ +\ x)\ *\ 1]\ =\ (uint8\_t)(color);}
 \DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00151\ \ \ \ \ \}}
-\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00153\ \}}
 
 \end{DoxyCode}
@@ -407,16 +483,12 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00141}{
 \index{draw\_outline\_circle@{draw\_outline\_circle}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_outline\_circle()}{draw\_outline\_circle()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a4beca939063b7270bf66e7872c689128} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+outline\+\_\+circle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{r}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00221}{221}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+outline\+\_\+circle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{r}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00223\ \{}
-\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00225\ \}}
 
 \end{DoxyCode}
@@ -424,16 +496,12 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00221}{
 \index{draw\_outline\_rectangle@{draw\_outline\_rectangle}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_outline\_rectangle()}{draw\_outline\_rectangle()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a362cb5fdd287fbc4a95f04d593fa10e6} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+outline\+\_\+rectangle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00155}{155}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+outline\+\_\+rectangle (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00158\ \{}
-\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x\ <=\ this-\/>}}m\_display\_w\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y\ <=\ this-\/>}}m\_display\_h\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >\ 0\ \&\&\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >\ 0))}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(x\ <=\ this-\/>m\_display\_w\ \&\&\ y\ <=\ this-\/>m\_display\_h\ \&\&\ x\ >\ 0\ \&\&\ y\ >\ 0))}
 \DoxyCodeLine{00160\ \ \ \ \ \{}
 \DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}}
 \DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ draw\_pixel(x,\ y\ +\ i,\ color);}}
@@ -450,21 +518,21 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00155}{
 \DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\ sides}}
 \DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}
 \DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x))\ *\ 1]\ =\ (uint8\_t)(color);}}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ 1);}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x))\ *\ 1,\ color,\ 1);}
 \DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ h;\ i++)}
 \DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ w))\ *\ 1]\ =\ (uint8\_t)(color);}}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ w))\ *\ 1,\ color,\ 1);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ w))\ *\ 1,\ color,\ 1);}
 \DoxyCodeLine{00180\ }
 \DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ draw\ top\ and\ bottom;\ Added\ 200\ fps\ lol}}
 \DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})*this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ w);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((y)*this-\/>m\_display\_w\ +\ (x))\ *\ 1,\ color,\ w);}
 \DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ i))\ *\ 1]\ =\ (uint8\_t)(color);}}
 \DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (uint32\_t\ i\ =\ 0;\ i\ <\ w;\ i++)}}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ h)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}))\ *\ 1,\ color,\ w);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ memset(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((y\ +\ h)\ *\ this-\/>m\_display\_w\ +\ (x))\ *\ 1,\ color,\ w);}
 \DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this-\/>pixel\_buffer\_back[((y\ +\ h)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ i))\ *\ 1]\ =\ (uint8\_t)(color);}}
 \DoxyCodeLine{00188\ \ \ \ \ \}}
 \DoxyCodeLine{00189\ }
-\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00191\ \}}
 
 \end{DoxyCode}
@@ -472,11 +540,7 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00155}{
 \index{draw\_pixel@{draw\_pixel}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_pixel()}{draw\_pixel()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+pixel (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00126}{126}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+pixel (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -484,14 +548,14 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00126}{
 \DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//TODO:\ Find\ a\ better\ way\ to\ do\ this,\ rather\ than\ calling\ it\ all\ the\ time.\ this\ will\ work\ for\ now.}}
 \DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ I\ predict\ this\ will\ significantly\ boost\ fps\ if\ it\ was\ implemented\ higher\ up\ in\ the\ draw\ calls.}}
 \DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//\ Rather\ than\ checking\ every\ pixel.}}
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ >=\ this-\/>m\_display\_w)\ ||\ (\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ >=\ this-\/>m\_display\_h))}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40ad36c1abc9c38b5c283a332ac03682f1d}{TINYENGINE\_OUTOFBOUNDS\_ERROR}};}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ ((x\ >=\ this-\/>m\_display\_w)\ ||\ (y\ >=\ this-\/>m\_display\_h))}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OUTOFBOUNDS\_ERROR;}
 \DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Write\ the\ color\ to\ the\ buffer}}
-\DoxyCodeLine{00134\ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ *\ this-\/>m\_display\_w\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}})\ *\ 1]\ =\ (uint8\_t)(color);}
+\DoxyCodeLine{00134\ \ \ \ \ this-\/>\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}[(y\ *\ this-\/>m\_display\_w\ +\ x)\ *\ 1]\ =\ (uint8\_t)(color);}
 \DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ *\ 1\ is\ because\ we\ store\ 1\ byte\ per\ pixel\ if\ it\ was\ RGB888\ then\ it\ would\ be\ 3}}
 \DoxyCodeLine{00136\ }
 \DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00139\ \}}
 
 \end{DoxyCode}
@@ -499,49 +563,45 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00126}{
 \index{draw\_sprite@{draw\_sprite}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_sprite()}{draw\_sprite()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_aef92d2f3ff2cf2a130a86bdc0779d2ac} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite}{Sprite}} \&}]{sprite}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00283}{283}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite}{Sprite}} \&}]{sprite}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00284\ \{}
-\DoxyCodeLine{00285\ \ \ \ \ te\_sprite\_t*\ data\ =\ sprite.\mbox{\hyperlink{class_sprite_aabab23ab32f0cee58b1f2715597458de}{get\_m\_sprite\_data}}();}
+\DoxyCodeLine{00285\ \ \ \ \ te\_sprite\_t*\ data\ =\ sprite.get\_m\_sprite\_data();}
 \DoxyCodeLine{00286\ }
-\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{if}\ (!sprite.\mbox{\hyperlink{class_sprite_aa58f521454f0e700633a1555a1dcd7b3}{is\_m\_animated}}())}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{if}\ (!sprite.is\_m\_animated())}
 \DoxyCodeLine{00288\ \ \ \ \ \{}
 \DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\_sprite\_raw}}(}
 \DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a1c5fb11a08c7da650adbf5e82f8d4d1d}{get\_m\_x}}(),}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_ac6985150992aae6e2a9642b47501faa1}{get\_m\_y}}());}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>width,}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>height,}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.get\_m\_x(),}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ sprite.get\_m\_y());}
 \DoxyCodeLine{00295\ \ \ \ \ \}}
 \DoxyCodeLine{00296\ }
-\DoxyCodeLine{00297\ \ \ \ \ te\_sprite\_animation\_t*\ ani\ =\ sprite.\mbox{\hyperlink{class_sprite_a1b864c55c1447308301665946d3b26de}{get\_m\_animation\_data}}();}
+\DoxyCodeLine{00297\ \ \ \ \ te\_sprite\_animation\_t*\ ani\ =\ sprite.get\_m\_animation\_data();}
 \DoxyCodeLine{00298\ }
-\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite.\mbox{\hyperlink{class_sprite_acae1b5a7536cf89c73c29797e21b780f}{get\_m\_frametime}}()\ >=\ (\textcolor{keywordtype}{float})ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a005d996826fc6306b464609827f3367e}{animation\_delay}})}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite.get\_m\_frametime()\ >=\ (\textcolor{keywordtype}{float})ani-\/>animation\_delay)}
 \DoxyCodeLine{00300\ \ \ \ \ \{}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ +=\ 1;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ ani-\/>current\_frame\ +=\ 1;}
 \DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ani-\/>current\_frame\_time\ =\ 0;}}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a27f095629aeacb38f8dc1a3446ed29d9}{set\_m\_frametime}}(0);}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ sprite.set\_m\_frametime(0);}
 \DoxyCodeLine{00304\ \ \ \ \ \}}
 \DoxyCodeLine{00305\ }
-\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ >\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a738b24e248655af58263162698329aa8}{total\_frames}}\ -\/\ 1}
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ ||\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ >=\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a937203fdf03fe9ded85ab00a0f29a94f}{end\_frame}})}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (ani-\/>current\_frame\ >\ ani-\/>total\_frames\ -\/\ 1}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ ||\ ani-\/>current\_frame\ >=\ ani-\/>end\_frame)}
 \DoxyCodeLine{00308\ \ \ \ \ \{}
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}\ =\ ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_ad761f161ae73abb8b94ca8c65b6b5196}{start\_frame}};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ ani-\/>current\_frame\ =\ ani-\/>start\_frame;}
 \DoxyCodeLine{00310\ \ \ \ \ \}}
 \DoxyCodeLine{00311\ }
 \DoxyCodeLine{00312\ \ \ \ \ \textcolor{comment}{//\ ani-\/>current\_frame\_time\ +=\ sprite.get\_m\_frametime()\ *\ 100;}}
 \DoxyCodeLine{00313\ \ \ \ \ \textcolor{comment}{//\ sprite.set\_m\_frametime(sprite.get\_m\_frametime()\ *\ sprite.get\_m\_animation\_speed());}}
-\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\_sprite\_raw}}(ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_ae8b1c132a79499b1a034c8dbaa5f4f07}{sprite\_animation\_frames}}[ani-\/>\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}}],}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
-\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ data-\/>\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
-\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_a1c5fb11a08c7da650adbf5e82f8d4d1d}{get\_m\_x}}(),}
-\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ sprite.\mbox{\hyperlink{class_sprite_ac6985150992aae6e2a9642b47501faa1}{get\_m\_y}}());}
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c}{draw\_sprite\_raw}}(ani-\/>sprite\_animation\_frames[ani-\/>current\_frame],}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ data-\/>width,}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ data-\/>height,}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ sprite.get\_m\_x(),}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ sprite.get\_m\_y());}
 \DoxyCodeLine{00319\ \}}
 
 \end{DoxyCode}
@@ -549,12 +609,28 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00283}{
 \index{draw\_sprite\_raw@{draw\_sprite\_raw}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_sprite\_raw()}{draw\_sprite\_raw()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_af84da7bf88f0105c71cb05f719c3928c} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite\+\_\+raw (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite\+\_\+raw (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00321}{321}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Draw using raw buffer. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & 1bpp array of sprite data. \\
+\hline
+{\em w} & width of sprite. \\
+\hline
+{\em h} & height of sprite \\
+\hline
+{\em x} & location on buffer must be within buffer bounds. OW it is ignored. \\
+\hline
+{\em y} & location on buffer must be within buffer bounds. OW it is ignored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00323\ \{}
@@ -583,7 +659,7 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00321}{
 \DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ memcpy(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}\ +\ \_y)\ *\ this-\/>m\_display\_w\ +\ (\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}\ +\ start\_of\_sprite)),}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ memcpy(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}}\ +\ ((y\ +\ \_y)\ *\ this-\/>m\_display\_w\ +\ (x\ +\ start\_of\_sprite)),}
 \DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t*)sprite\ +\ (\_y\ *\ w\ +\ start\_of\_sprite)),}
 \DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ end\_of\_sprite\ -\/\ start\_of\_sprite);}
 \DoxyCodeLine{00352\ \ \ \ \ \}}
@@ -613,20 +689,46 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00321}{
 \DoxyCodeLine{00376\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ memcpy(pixel\_buffer\_back\ +\ (y\ +\ i)\ *\ this-\/>m\_display\_w\ +\ (x),\ sprite\ +\ i\ *\ w,\ w);}}
 \DoxyCodeLine{00377\ \ \ \ \ \textcolor{comment}{//\ \}}}
 \DoxyCodeLine{00378\ }
-\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00380\ \}}
 
 \end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{pixel\+\_\+buffer\+\_\+back}}.
+
 \Hypertarget{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!draw\_sprite\_raw\_batch@{draw\_sprite\_raw\_batch}}
 \index{draw\_sprite\_raw\_batch@{draw\_sprite\_raw\_batch}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_sprite\_raw\_batch()}{draw\_sprite\_raw\_batch()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_aa44092c9eb6d9b0ae8c1edac53c34cbf} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite\+\_\+raw\+\_\+batch (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint16\+\_\+t}]{x}{\mbox{[}$\,$\mbox{]}, }\item[{const uint16\+\_\+t}]{y}{\mbox{[}$\,$\mbox{]}, }\item[{const uint16\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+sprite\+\_\+raw\+\_\+batch (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const uint32\+\_\+t}]{w}{, }\item[{const uint32\+\_\+t}]{h}{, }\item[{const uint16\+\_\+t}]{x}{\mbox{[}$\,$\mbox{]}, }\item[{const uint16\+\_\+t}]{y}{\mbox{[}$\,$\mbox{]}, }\item[{const uint16\+\_\+t}]{count}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00382}{382}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Draw the same sprite in a single call to multiple locations on the screen. 
 
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Implement the hardware interpolator to calculate memory addresses. This will be the perfect use for single cycle math.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & 1bpp array of sprite data. \\
+\hline
+{\em w} & width of sprite. \\
+\hline
+{\em h} & height of sprite \\
+\hline
+{\em x} & array of x locations. Please make sure all within bounds of the buffer. Must be indexed the same as ys \\
+\hline
+{\em y} & array of y locations. Please make sure all within bounds of the buffer. \\
+\hline
+{\em count} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00385\ \{}
@@ -638,12 +740,12 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00382}{
 \DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite[i]\ !=\ 0x00)}
 \DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ j\ =\ 0;\ j\ <\ count;\ j++)}
 \DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}[j]\ -\/\ \_y,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}[j]\ +\ \_x,\ sprite[i]);}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ draw\_pixel(x[j]\ -\/\ \_y,\ y[j]\ +\ \_x,\ sprite[i]);}
 \DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00396\ \ \ \ \ \}}
 \DoxyCodeLine{00397\ }
 \DoxyCodeLine{00398\ }
-\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00400\ \}}
 
 \end{DoxyCode}
@@ -651,23 +753,19 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00382}{
 \index{draw\_string@{draw\_string}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{draw\_string()}{draw\_string()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_affc105087005f183a2c39b2999b691e6} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+string (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{\+\_\+string}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{\+\_\+color}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00447}{447}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::draw\+\_\+string (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{\+\_\+string}{, }\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{, }\item[{const uint8\+\_\+t}]{\+\_\+color}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00449\ \{}
-\DoxyCodeLine{00450\ \ \ \ \ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_adcc3b85c751f64cda0dec4912e314a2a}{CHECK\_BOUNDS}}(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}});}
-\DoxyCodeLine{00451\ \ \ \ \ \_draw\_str\_temp\_index\ =\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}};}
+\DoxyCodeLine{00450\ \ \ \ \ CHECK\_BOUNDS(x,\ y);}
+\DoxyCodeLine{00451\ \ \ \ \ \_draw\_str\_temp\_index\ =\ x;}
 \DoxyCodeLine{00452\ \ \ \ \ \textcolor{keywordflow}{while}\ (*\_string)}
 \DoxyCodeLine{00453\ \ \ \ \ \{}
-\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{draw\_char}}(*\_string++,\ \_draw\_str\_temp\_index,\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ \_color);}
-\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \_draw\_str\_temp\_index\ +=\ \mbox{\hyperlink{tinyengine__framebuffer_8cpp_a655981006fca173dd2e056bf81a63dc3}{CHAR\_WIDTH}};}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a5c0048002467262f546585b4f2552c4b}{draw\_char}}(*\_string++,\ \_draw\_str\_temp\_index,\ y,\ \_color);}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \_draw\_str\_temp\_index\ +=\ CHAR\_WIDTH;}
 \DoxyCodeLine{00456\ \ \ \ \ \}}
-\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00458\ \}}
 
 \end{DoxyCode}
@@ -678,20 +776,16 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00447}{
 void Tiny\+Engine\+Frame\+Buffer\+::draw\+Circle1 (\begin{DoxyParamCaption}\item[{int}]{xc}{, }\item[{int}]{yc}{, }\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{uint8\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00229}{229}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00230\ \{}
-\DoxyCodeLine{00231\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
-\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
-\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
-\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ color);}
-\DoxyCodeLine{00235\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
-\DoxyCodeLine{00236\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ +\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
-\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ +\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
-\DoxyCodeLine{00238\ \ \ \ \ \mbox{\hyperlink{class_tiny_engine_frame_buffer_aca0e4a3363f7e018cc4b3bc7c3221f12}{draw\_pixel}}(xc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}},\ yc\ -\/\ \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}},\ color);}
+\DoxyCodeLine{00231\ \ \ \ \ draw\_pixel(xc\ +\ x,\ yc\ +\ y,\ color);}
+\DoxyCodeLine{00232\ \ \ \ \ draw\_pixel(xc\ -\/\ x,\ yc\ +\ y,\ color);}
+\DoxyCodeLine{00233\ \ \ \ \ draw\_pixel(xc\ +\ x,\ yc\ -\/\ y,\ color);}
+\DoxyCodeLine{00234\ \ \ \ \ draw\_pixel(xc\ -\/\ x,\ yc\ -\/\ y,\ color);}
+\DoxyCodeLine{00235\ \ \ \ \ draw\_pixel(xc\ +\ y,\ yc\ +\ x,\ color);}
+\DoxyCodeLine{00236\ \ \ \ \ draw\_pixel(xc\ -\/\ y,\ yc\ +\ x,\ color);}
+\DoxyCodeLine{00237\ \ \ \ \ draw\_pixel(xc\ +\ y,\ yc\ -\/\ x,\ color);}
+\DoxyCodeLine{00238\ \ \ \ \ draw\_pixel(xc\ -\/\ y,\ yc\ -\/\ x,\ color);}
 \DoxyCodeLine{00239\ \}}
 
 \end{DoxyCode}
@@ -702,23 +796,15 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00229}{
 bool Tiny\+Engine\+Frame\+Buffer\+::is\+\_\+dual (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00029}{29}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00029\ \{\ \textcolor{keywordflow}{return}\ m\_is\_dual;\ \};}
+\DoxyCodeLine{00064\ \{\ \textcolor{keywordflow}{return}\ m\_is\_dual;\ \};}
 
 \end{DoxyCode}
 \Hypertarget{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!swap\_blocking@{swap\_blocking}}
 \index{swap\_blocking@{swap\_blocking}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{swap\_blocking()}{swap\_blocking()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_af33ffd30dcce76dc620c8e5bb7c1a28d} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::swap\+\_\+blocking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00270}{270}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::swap\+\_\+blocking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -731,7 +817,7 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00270}{
 \DoxyCodeLine{00277\ }
 \DoxyCodeLine{00278\ \ \ \ \ std::swap(\mbox{\hyperlink{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}{pixel\_buffer\_display}},\ \mbox{\hyperlink{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}{pixel\_buffer\_back}});}
 \DoxyCodeLine{00279\ }
-\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00281\ \}}
 
 \end{DoxyCode}
@@ -739,16 +825,19 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00270}{
 \index{write@{write}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}}
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_ac3bf2f988fc71c133bb8b4627963d77f} 
-\mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40}{tinyengine\+\_\+status\+\_\+t}} Tiny\+Engine\+Frame\+Buffer\+::write (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+tinyengine\+\_\+status\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::write (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00065}{65}} of file \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source}{tinyengine\+\_\+framebuffer.\+cpp}}.
+Legacy. 
 
+\begin{DoxyReturn}{Returns}
+tinyengine\+\_\+status\+\_\+t 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00066\ \{}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{tinyengine_8h_a99e26dc5d9e1752ba606841d6b5c3d40a4682d953acc9bbccd62074cdb89235b7}{TINYENGINE\_OK}};}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ TINYENGINE\_OK;}
 \DoxyCodeLine{00068\ \}}
 
 \end{DoxyCode}
@@ -763,10 +852,6 @@ Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8cpp_source_l00065}{
 {\footnotesize\ttfamily \label{class_tiny_engine_frame_buffer_a0483df712b86f7a10cc0cd3b59981cce} 
 uint32\+\_\+t Tiny\+Engine\+Frame\+Buffer\+::m\+\_\+pixel\+\_\+buffer\+\_\+size}
 
-
-
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00027}{27}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
-
 \Hypertarget{class_tiny_engine_frame_buffer_a4554efab10c073b52faf4d7aa7d4b50e}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!pixel\_buffer\_back@{pixel\_buffer\_back}}
 \index{pixel\_buffer\_back@{pixel\_buffer\_back}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
 \doxysubsubsection{\texorpdfstring{pixel\_buffer\_back}{pixel\_buffer\_back}}
@@ -775,7 +860,11 @@ uint8\+\_\+t\texorpdfstring{$\ast$}{*} Tiny\+Engine\+Frame\+Buffer\+::pixel\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00025}{25}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
+All user render calls are thrown to this buffer. It is not rendered to screen. 
+
+
+
+Referenced by \mbox{\hyperlink{l00070}{clear()}}, \mbox{\hyperlink{l00106}{clear\+\_\+with()}}, \mbox{\hyperlink{l00460}{copy\+\_\+buffer\+\_\+slow()}}, \mbox{\hyperlink{l00053}{destroy()}}, \mbox{\hyperlink{l00404}{draw\+\_\+char()}}, and \mbox{\hyperlink{l00321}{draw\+\_\+sprite\+\_\+raw()}}.
 
 \Hypertarget{class_tiny_engine_frame_buffer_a54c83662f0ff4edc1ad54f8064eca159}\index{TinyEngineFrameBuffer@{TinyEngineFrameBuffer}!pixel\_buffer\_display@{pixel\_buffer\_display}}
 \index{pixel\_buffer\_display@{pixel\_buffer\_display}!TinyEngineFrameBuffer@{TinyEngineFrameBuffer}}
@@ -785,11 +874,15 @@ uint8\+\_\+t\texorpdfstring{$\ast$}{*} Tiny\+Engine\+Frame\+Buffer\+::pixel\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{tinyengine__framebuffer_8h_source_l00026}{26}} of file \mbox{\hyperlink{tinyengine__framebuffer_8h_source}{tinyengine\+\_\+framebuffer.\+h}}.
+Immutable display buffer, is swaped at vsync or every frame. 
+
+
+
+Referenced by \mbox{\hyperlink{l00053}{destroy()}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-inc/\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\+\_\+framebuffer.\+h}}\item 
-src/\mbox{\hyperlink{tinyengine__framebuffer_8cpp}{tinyengine\+\_\+framebuffer.\+cpp}}\end{DoxyCompactItemize}
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/inc/\mbox{\hyperlink{tinyengine__framebuffer_8h}{tinyengine\+\_\+framebuffer.\+h}}\item 
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/src/tinyengine\+\_\+framebuffer.\+cpp\end{DoxyCompactItemize}

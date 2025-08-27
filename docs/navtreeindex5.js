@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"structc2_manifold.html#a5a4907aed423d0495921e65962163ccb":[3,0,6,2],
 "structc2_manifold.html#a95c53afbd81be4a57caad6268412b5c1":[3,0,6,1],
 "structc2_manifold.html#ac5257a2570f5072d083af28cd554fe09":[3,0,6,0],
 "structc2_poly.html":[3,0,7],

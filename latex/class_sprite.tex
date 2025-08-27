@@ -1,24 +1,9 @@
 \doxysection{Sprite Class Reference}
 \hypertarget{class_sprite}{}\label{class_sprite}\index{Sprite@{Sprite}}
-
-
-{\ttfamily \#include $<$tinyengine\+\_\+sprite.\+h$>$}
-
-
-
-Collaboration diagram for Sprite\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=208pt]{class_sprite__coll__graph}
-\end{center}
-\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_sprite_ac8a2c4044d5a8bf1c8923156140355fa}{Sprite}} (bool m\+\_\+externaly\+\_\+created, \mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}m\+\_\+sprite\+\_\+data, bool m\+\_\+animated, \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}m\+\_\+animation\+\_\+data, double m\+\_\+frametime, uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}, uint16\+\_\+t \mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}})
-\item 
-\mbox{\hyperlink{class_sprite_a12cba3ac1868418add3c4d95ce87e615}{Sprite}} ()
+\mbox{\hyperlink{class_sprite_ac8a2c4044d5a8bf1c8923156140355fa}{Sprite}} (bool m\+\_\+externaly\+\_\+created, \mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}m\+\_\+sprite\+\_\+data, bool m\+\_\+animated, \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}m\+\_\+animation\+\_\+data, double m\+\_\+frametime, uint16\+\_\+t x, uint16\+\_\+t y)
 \item 
 \mbox{\hyperlink{class_sprite_aa188f688afaba7bf21ba549429f874a0}{Sprite}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}sprite\+\_\+buffer, uint16\+\_\+t width, uint16\+\_\+t height)
 \item 
@@ -29,8 +14,6 @@ Collaboration diagram for Sprite\+:\nopagebreak
 \mbox{\hyperlink{class_sprite_a7502b3e66c3a8e30821e4b17833c89dc}{Sprite}} (\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}\+\_\+sprite\+\_\+data, \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}\+\_\+sprite\+\_\+animation\+\_\+data)
 \item 
 \mbox{\hyperlink{class_sprite_a34d4bf8a3aba31921a71c2a12b3f2525}{Sprite}} (const \mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \&\+\_\+sprite\+\_\+data, const \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \&\+\_\+sprite\+\_\+animation\+\_\+data)
-\item 
-\mbox{\hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{\texorpdfstring{$\sim$}{\string~}\+Sprite}} ()
 \item 
 void \mbox{\hyperlink{class_sprite_a026f7b28d2047d2b17cfe90ba29598fc}{render}} (\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&\+\_\+fb)
 \item 
@@ -79,10 +62,6 @@ void \mbox{\hyperlink{class_sprite_a6d2a86f21f6dbfbc8e8ad6832301b22d}{set\+\_\+m
 \doxysubsection{Detailed Description}
 
 
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00029}{29}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
-
 \label{doc-constructors}
 \Hypertarget{class_sprite_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -93,18 +72,14 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00029}{29}} of
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{bool}]{m\+\_\+externaly\+\_\+created}{, }\item[{\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{m\+\_\+sprite\+\_\+data}{, }\item[{bool}]{m\+\_\+animated}{, }\item[{\mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{m\+\_\+animation\+\_\+data}{, }\item[{double}]{m\+\_\+frametime}{, }\item[{uint16\+\_\+t}]{x}{, }\item[{uint16\+\_\+t}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00043}{43}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ :\ m\_externaly\_created(m\_externaly\_created),}
 \DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ m\_sprite\_data(m\_sprite\_data),}
 \DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ m\_animated(m\_animated),}
 \DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ m\_animation\_data(m\_animation\_data),}
 \DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ m\_frametime(m\_frametime),}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ m\_x(\mbox{\hyperlink{_dino_game_8cpp_aae8a40a17c0be29c1f06ca6b4f9e2235}{x}}),}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ m\_y(\mbox{\hyperlink{_dino_game_8cpp_a9c02f93c9698e4486878867c4f265c48}{y}}) }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ m\_x(x),}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ m\_y(y) }
 \DoxyCodeLine{00052\ \ \ \ \ \{}
 \DoxyCodeLine{00053\ \ \ \ \ \}}
 
@@ -114,10 +89,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00043}{43}} of
 \doxysubsubsection{\texorpdfstring{Sprite()}{Sprite()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
 {\footnotesize\ttfamily \label{class_sprite_a12cba3ac1868418add3c4d95ce87e615} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00055}{55}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -130,10 +101,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00055}{55}} of
 \doxysubsubsection{\texorpdfstring{Sprite()}{Sprite()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
 {\footnotesize\ttfamily \label{class_sprite_aa188f688afaba7bf21ba549429f874a0} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{sprite\+\_\+buffer}{, }\item[{uint16\+\_\+t}]{width}{, }\item[{uint16\+\_\+t}]{height}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00021}{21}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -155,17 +122,13 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00021}{21}} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}}}]{\+\_\+sprite\+\_\+data}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00009}{9}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00010\ \{}
 \DoxyCodeLine{00011\ \ \ \ \ m\_sprite\_data\ =\ \textcolor{keyword}{new}\ te\_sprite\_t\{}
 \DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_aecee209c14bda6868e25c07c99147798}{sprite\_palette}},}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.width,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.height,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.sprite\_palette,}
 \DoxyCodeLine{00016\ \ \ \ \ \};}
 \DoxyCodeLine{00017\ }
 \DoxyCodeLine{00018\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{false};}
@@ -177,10 +140,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00009}{9}} o
 \doxysubsubsection{\texorpdfstring{Sprite()}{Sprite()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
 {\footnotesize\ttfamily \label{class_sprite_a89a82a1160b2420743502c044b1aca99} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{\+\_\+sprite\+\_\+data}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00004}{4}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -195,10 +154,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00004}{4}} o
 \doxysubsubsection{\texorpdfstring{Sprite()}{Sprite()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
 {\footnotesize\ttfamily \label{class_sprite_a7502b3e66c3a8e30821e4b17833c89dc} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{\+\_\+sprite\+\_\+data}{, }\item[{\mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{\+\_\+sprite\+\_\+animation\+\_\+data}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00032}{32}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -218,25 +173,21 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00032}{32}} 
 Sprite\+::\+Sprite (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \&}]{\+\_\+sprite\+\_\+data}{, }\item[{const \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \&}]{\+\_\+sprite\+\_\+animation\+\_\+data}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00041\ \{}
 \DoxyCodeLine{00042\ \ \ \ \ m\_sprite\_data\ =\ \textcolor{keyword}{new}\ te\_sprite\_t\{}
 \DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ .sprite\_buffer\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a21524697256e082e5b35bbbc2801a537}{sprite\_buffer}},}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a0fe0406c1a75cb8db0fcae2dfbc29bf2}{width}},}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_a6818a63ebf2d3c4908f8c9f4a5c61c9c}{height}},}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.\mbox{\hyperlink{structte__sprite__t_aecee209c14bda6868e25c07c99147798}{sprite\_palette}},}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ .width\ =\ \_sprite\_data.width,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ .height\ =\ \_sprite\_data.height,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ .sprite\_palette\ =\ \_sprite\_data.sprite\_palette,}
 \DoxyCodeLine{00047\ \ \ \ \ \};}
 \DoxyCodeLine{00048\ \ \ \ \ m\_animation\_data\ =\ \textcolor{keyword}{new}\ te\_sprite\_animation\_t\{}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ .sprite\_animation\_frames\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_ae8b1c132a79499b1a034c8dbaa5f4f07}{sprite\_animation\_frames}},}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ .animation\_delay\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a005d996826fc6306b464609827f3367e}{animation\_delay}},}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ .total\_frames\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a738b24e248655af58263162698329aa8}{total\_frames}},}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ .current\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a92c62133cf7757cf33c044b29d9f50e9}{current\_frame}},}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ .start\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_ad761f161ae73abb8b94ca8c65b6b5196}{start\_frame}},}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ .end\_frame\ =\ \_sprite\_animation\_data.\mbox{\hyperlink{structte__sprite__animation__t_a937203fdf03fe9ded85ab00a0f29a94f}{end\_frame}},}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ .sprite\_animation\_frames\ =\ \_sprite\_animation\_data.sprite\_animation\_frames,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ .animation\_delay\ =\ \_sprite\_animation\_data.animation\_delay,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ .total\_frames\ =\ \_sprite\_animation\_data.total\_frames,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ .current\_frame\ =\ \_sprite\_animation\_data.current\_frame,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ .start\_frame\ =\ \_sprite\_animation\_data.start\_frame,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ .end\_frame\ =\ \_sprite\_animation\_data.end\_frame,}
 \DoxyCodeLine{00055\ \ \ \ \ \};}
 \DoxyCodeLine{00056\ \ \ \ \ m\_externaly\_created\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00057\ \}}
@@ -247,10 +198,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00040}{40}} 
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Sprite()}{\string~Sprite()}}
 {\footnotesize\ttfamily \label{class_sprite_a8accab430f9d90ae5117b57d67e32b84} 
 Sprite\+::\texorpdfstring{$\sim$}{\string~}\+Sprite (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00059}{59}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
@@ -272,10 +219,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00059}{59}} 
 \mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*} Sprite\+::get\+\_\+m\+\_\+animation\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00101}{101}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00102\ \ \ \ \ \{}
 \DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_animation\_data;}
@@ -287,10 +230,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00101}{101}} o
 \doxysubsubsection{\texorpdfstring{get\_m\_animation\_speed()}{get\_m\_animation\_speed()}}
 {\footnotesize\ttfamily \label{class_sprite_a34877f284d40cf2e5e7a9ea4966d02f2} 
 uint8\+\_\+t Sprite\+::get\+\_\+m\+\_\+animation\+\_\+speed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00161}{161}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -306,10 +245,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00161}{161}} o
 double Sprite\+::get\+\_\+m\+\_\+frametime (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00111}{111}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00112\ \ \ \ \ \{}
 \DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_frametime;}
@@ -321,10 +256,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00111}{111}} o
 \doxysubsubsection{\texorpdfstring{get\_m\_scale\_x()}{get\_m\_scale\_x()}}
 {\footnotesize\ttfamily \label{class_sprite_a12e57c0de479fec2d23866a7cfe4739f} 
 uint8\+\_\+t Sprite\+::get\+\_\+m\+\_\+scale\+\_\+x (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00141}{141}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -340,10 +271,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00141}{141}} o
 uint8\+\_\+t Sprite\+::get\+\_\+m\+\_\+scale\+\_\+y (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00151}{151}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00152\ \ \ \ \ \{}
 \DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_scale\_y;}
@@ -355,10 +282,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00151}{151}} o
 \doxysubsubsection{\texorpdfstring{get\_m\_sprite\_data()}{get\_m\_sprite\_data()}}
 {\footnotesize\ttfamily \label{class_sprite_aabab23ab32f0cee58b1f2715597458de} 
 \mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*} Sprite\+::get\+\_\+m\+\_\+sprite\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00081}{81}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -374,10 +297,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00081}{81}} of
 uint16\+\_\+t Sprite\+::get\+\_\+m\+\_\+x (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00121}{121}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00122\ \ \ \ \ \{}
 \DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_x;}
@@ -389,10 +308,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00121}{121}} o
 \doxysubsubsection{\texorpdfstring{get\_m\_y()}{get\_m\_y()}}
 {\footnotesize\ttfamily \label{class_sprite_ac6985150992aae6e2a9642b47501faa1} 
 uint16\+\_\+t Sprite\+::get\+\_\+m\+\_\+y (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00131}{131}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -408,10 +323,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00131}{131}} o
 bool Sprite\+::is\+\_\+m\+\_\+animated (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00091}{91}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00092\ \ \ \ \ \{}
 \DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_animated;}
@@ -423,10 +334,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00091}{91}} of
 \doxysubsubsection{\texorpdfstring{is\_m\_externaly\_created()}{is\_m\_externaly\_created()}}
 {\footnotesize\ttfamily \label{class_sprite_a5b5b40f49bab726d65ae5bdddb5095f6} 
 bool Sprite\+::is\+\_\+m\+\_\+externaly\+\_\+created (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00071}{71}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -442,10 +349,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00071}{71}} of
 void Sprite\+::render (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tiny_engine_frame_buffer}{Tiny\+Engine\+Frame\+Buffer}} \&}]{\+\_\+fb}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00065}{65}} of file \mbox{\hyperlink{tinyengine__sprite_8cpp_source}{tinyengine\+\_\+sprite.\+cpp}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00066\ \{}
 \DoxyCodeLine{00067\ }
@@ -457,10 +360,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8cpp_source_l00065}{65}} 
 \doxysubsubsection{\texorpdfstring{set\_m\_animated()}{set\_m\_animated()}}
 {\footnotesize\ttfamily \label{class_sprite_af4281d1664fda219368b190c0b233bcd} 
 void Sprite\+::set\+\_\+m\+\_\+animated (\begin{DoxyParamCaption}\item[{const bool}]{m\+\_\+animated}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00096}{96}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -476,10 +375,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00096}{96}} of
 void Sprite\+::set\+\_\+m\+\_\+animation\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__sprite__animation__t}{te\+\_\+sprite\+\_\+animation\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{m\+\_\+animation\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00106}{106}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00107\ \ \ \ \ \{}
 \DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ this-\/>m\_animation\_data\ =\ m\_animation\_data;}
@@ -491,10 +386,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00106}{106}} o
 \doxysubsubsection{\texorpdfstring{set\_m\_animation\_speed()}{set\_m\_animation\_speed()}}
 {\footnotesize\ttfamily \label{class_sprite_a6d2a86f21f6dbfbc8e8ad6832301b22d} 
 void Sprite\+::set\+\_\+m\+\_\+animation\+\_\+speed (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{m\+\_\+animation\+\_\+speed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00166}{166}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -510,10 +401,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00166}{166}} o
 void Sprite\+::set\+\_\+m\+\_\+externaly\+\_\+created (\begin{DoxyParamCaption}\item[{const bool}]{m\+\_\+externaly\+\_\+created}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00076}{76}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00077\ \ \ \ \ \{}
 \DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ this-\/>m\_externaly\_created\ =\ m\_externaly\_created;}
@@ -525,10 +412,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00076}{76}} of
 \doxysubsubsection{\texorpdfstring{set\_m\_frametime()}{set\_m\_frametime()}}
 {\footnotesize\ttfamily \label{class_sprite_a27f095629aeacb38f8dc1a3446ed29d9} 
 void Sprite\+::set\+\_\+m\+\_\+frametime (\begin{DoxyParamCaption}\item[{const double}]{m\+\_\+frametime}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00116}{116}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -544,10 +427,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00116}{116}} o
 void Sprite\+::set\+\_\+m\+\_\+scale\+\_\+x (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{m\+\_\+scale\+\_\+x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00146}{146}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00147\ \ \ \ \ \{}
 \DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ this-\/>m\_scale\_x\ =\ m\_scale\_x;}
@@ -559,10 +438,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00146}{146}} o
 \doxysubsubsection{\texorpdfstring{set\_m\_scale\_y()}{set\_m\_scale\_y()}}
 {\footnotesize\ttfamily \label{class_sprite_aa8c53d178b2a1470a217cc49e300360a} 
 void Sprite\+::set\+\_\+m\+\_\+scale\+\_\+y (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{m\+\_\+scale\+\_\+y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00156}{156}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -578,10 +453,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00156}{156}} o
 void Sprite\+::set\+\_\+m\+\_\+sprite\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structte__sprite__t}{te\+\_\+sprite\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{m\+\_\+sprite\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00086}{86}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00087\ \ \ \ \ \{}
 \DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ this-\/>m\_sprite\_data\ =\ m\_sprite\_data;}
@@ -593,10 +464,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00086}{86}} of
 \doxysubsubsection{\texorpdfstring{set\_m\_x()}{set\_m\_x()}}
 {\footnotesize\ttfamily \label{class_sprite_a7c1f3afb104aa43c406d59ed0ae01413} 
 void Sprite\+::set\+\_\+m\+\_\+x (\begin{DoxyParamCaption}\item[{const uint16\+\_\+t}]{m\+\_\+x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00126}{126}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
 
 
 \begin{DoxyCode}{0}
@@ -612,10 +479,6 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00126}{126}} o
 void Sprite\+::set\+\_\+m\+\_\+y (\begin{DoxyParamCaption}\item[{const uint16\+\_\+t}]{m\+\_\+y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-
-Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00136}{136}} of file \mbox{\hyperlink{tinyengine__sprite_8h_source}{tinyengine\+\_\+sprite.\+h}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00137\ \ \ \ \ \{}
 \DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ this-\/>m\_y\ =\ m\_y;}
@@ -626,5 +489,5 @@ Definition at line \mbox{\hyperlink{tinyengine__sprite_8h_source_l00136}{136}} o
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-inc/\mbox{\hyperlink{tinyengine__sprite_8h}{tinyengine\+\_\+sprite.\+h}}\item 
-src/\mbox{\hyperlink{tinyengine__sprite_8cpp}{tinyengine\+\_\+sprite.\+cpp}}\end{DoxyCompactItemize}
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/inc/tinyengine\+\_\+sprite.\+h\item 
+C\+:/\+Users/\+GRHRehab\+Tech/\+Desktop/\+Abinash Work Term/\+REGI/\+Firmware/\+REGI-\/\+Tiny\+Engine/src/tinyengine\+\_\+sprite.\+cpp\end{DoxyCompactItemize}

@@ -42,14 +42,24 @@ Collaboration diagram for DinoGame:<para>
 </simplesect>
 Public Member Functions inherited from <link linkend="_class_game_scene">GameScene</link>        <itemizedlist>
             <listitem><para><link linkend="_class_game_scene_1a9f20a87546afdf718a1ef0ff4fb53200">GameScene</link> (<link linkend="_class_tiny_engine_frame_buffer">TinyEngineFrameBuffer</link> &amp;_framebuffer, <link linkend="_class_tiny_engine_renderer_i">TinyEngineRendererI</link> &amp;_renderer, <link linkend="_class_tiny_engine">TinyEngine</link> &amp;_engine)</para>
+
+<para>Construct a new <link linkend="_class_game">Game</link> Scene object. </para>
 </listitem>
             <listitem><para><link linkend="_class_game_scene_1add5bc48c372aaa7f526c02558a8adf00">~GameScene</link> ()</para>
+
+<para>Destroy the <link linkend="_class_game">Game</link> Scene object. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_game_scene_1ac4f0485291c1719b76b4ed425661143c">create</link> () override</para>
+
+<para>Create the scene after the object is created. This is for having multiple refrences to the same scene. Memory and configuration should only happen in this function. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_game_scene_1af107c5ffdf361b4e0b718f486cbc7d0e">render</link> () override</para>
+
+<para>All framebuffer operations are done here and this is called only once per frame. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_game_scene_1a9bb2bd694b9c8399ea22aed23a6a809f">update</link> (double frameTime) override</para>
+
+<para><link linkend="_class_game">Game</link> updates and other time dependednt modifications should be done here, there is no gurentee this is run only. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_game_scene_1a79aa067bf23e490cdfcb4aec1b181b12">destroy</link> () override</para>
 </listitem>
@@ -67,7 +77,7 @@ Protected Attributes inherited from <link linkend="_class_game_scene">GameScene<
 </listitem>
             <listitem><para><link linkend="_class_tiny_engine">TinyEngine</link> &amp; <link linkend="_class_game_scene_1a3ddd4ba5bfabc73eebf7bba28c5ff534">m_engine</link></para>
 </listitem>
-            <listitem><para>std::vector&lt; <link linkend="_class_sprite">Sprite</link> * &gt; <link linkend="_class_game_scene_1a73a24f18b5cb2d7cf13efc1e2ce87b48">sprites</link></para>
+            <listitem><para>std::vector&lt; <link linkend="_class_sprite">Sprite</link> * &gt; <link linkend="_class_game_scene_1a894a08b41ccad98c26c0eb588a307d3b">sprites</link></para>
 </listitem>
         </itemizedlist>
 </simplesect>
