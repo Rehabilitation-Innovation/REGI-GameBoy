@@ -1,8 +1,18 @@
+/**
+ *@file tinyengine_sprite.h
+ * @author A. Singh (--)
+ * @brief Generic sprite class implementing static and animated sprite rendering.
+ * @version 1.0
+ * @date 2025-08-27
+ *
+ * Glenrose Rehabilitation Research and Innovation (C) 2025
+ *
+ */
 #pragma once
 #include "tinyengine_framebuffer.h"
-/**
- * A 8bit color space sprite object. must be a 1-D array of 1 byte pixels.
- */
+ /**
+  * A 8bit color space sprite object. must be a 1-D array of 1 byte pixels.
+  */
 typedef struct
 {
     /**
@@ -26,6 +36,10 @@ typedef struct
     uint8_t start_frame, end_frame;
 } te_sprite_animation_t;
 
+/**
+ *@brief Generic sprite class implementing static and animated sprite rendering.
+ *
+ */
 class Sprite
 {
 private:
@@ -41,14 +55,14 @@ private:
 
 public:
     Sprite(bool m_externaly_created, te_sprite_t* m_sprite_data, bool m_animated,
-           te_sprite_animation_t* m_animation_data, double m_frametime, uint16_t x, uint16_t y)
+        te_sprite_animation_t* m_animation_data, double m_frametime, uint16_t x, uint16_t y)
         : m_externaly_created(m_externaly_created),
-          m_sprite_data(m_sprite_data),
-          m_animated(m_animated),
-          m_animation_data(m_animation_data),
-          m_frametime(m_frametime),
-          m_x(x),
-          m_y(y)
+        m_sprite_data(m_sprite_data),
+        m_animated(m_animated),
+        m_animation_data(m_animation_data),
+        m_frametime(m_frametime),
+        m_x(x),
+        m_y(y)
     {
     }
 
