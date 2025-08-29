@@ -15,13 +15,16 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
+
 set(sdkVersion 2.2.0)
 set(toolchainVersion 14_2_Rel1)
 set(picotoolVersion 2.2.0)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-if (EXISTS ${picoVscode})
+
+if(EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
+
 # ====================================================================================
 # set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
 set(PICO_BOARD_HEADER_DIRS ../REGI-TinyEngine/boards/)
@@ -81,5 +84,5 @@ target_include_directories(REGI-Bootloader PUBLIC
     "inc/"
     ${CMAKE_CURRENT_BINARY_DIR}/lib/REGI-TinyEngine/inc
 )
-
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
 pico_add_extra_outputs(REGI-Bootloader)

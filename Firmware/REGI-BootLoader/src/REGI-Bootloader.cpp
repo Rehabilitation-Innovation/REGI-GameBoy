@@ -6,6 +6,10 @@
 #include "BootLoaderScreen.h"
 #include "hardware/exception.h"
 
+#include "hardware/irq.h"  // interrupts
+#include "hardware/pwm.h"  // pwm 
+#include "hardware/sync.h" // wait for interrupt 
+
 void Bootloader::run() {
     TinyEngineFrameBuffer frame_buf(320, 240, true);
     TinyEngineRendererDVI dvi(frame_buf);
@@ -37,7 +41,6 @@ void Bootloader::run() {
     engine.start();
     engine.start_loop();
 }
-
 
 
 int main()

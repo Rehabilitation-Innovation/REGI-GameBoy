@@ -36,6 +36,121 @@
 // #include "pico_tone.hpp"
 #include "hardware/watchdog.h"
 
+#include "hardware/irq.h"  // interrupts
+#include "hardware/pwm.h"  // pwm 
+#include "hardware/sync.h" // wait for interrupt 
+
+
+/*
+ * This include brings in static arrays which contain audio samples.
+ * if you want to know how to make these please see the python code
+ * for converting audio samples into static arrays.
+ */
+#include "sounds/jump1.h"
+#include "sounds/hitdamage.h"
+
+int current_wav_position = 0;
+uint8_t* current_playback = nullptr;
+bool current_playback_done = true;
+int32_t current_wav_data_length = 0;
+// Audio PIN is to match some of the design guide shields. 
+#define AUDIO_PIN 10  // you can change this to whatever you like
+#define PLAY_JUMP 0 // Define more for different sounds
+#define PLAY_HIT 1
+/*
+ * PWM Interrupt Handler which outputs PWM level and advances the
+ * current sample.
+ *
+ * We repeat the same value for 8 cycles this means sample rate etc
+ * adjust by factor of 8   (this is what bitshifting <<3 is doing)
+ *
+ */
+void pwm_interrupt_handler() {
+    pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_PIN));
+    if (nullptr != current_playback) {
+        if (current_wav_position < (current_wav_data_length << 3) - 1) {
+            current_playback_done = false;
+            // set pwm level 
+            // allow the pwm value to repeat for 8 cycles this is >>3 
+            pwm_set_gpio_level(AUDIO_PIN, current_playback[current_wav_position >> 3]);
+            current_wav_position++;
+        }
+        else {
+            current_playback_done = true;
+            // reset to start
+            // wav_position = 0;
+            // We do nothing, we wait for core to reset sound
+        }
+    }
+}
+
+void core1_entry() {
+
+    gpio_set_function(AUDIO_PIN, GPIO_FUNC_PWM);
+
+    int audio_pin_slice = pwm_gpio_to_slice_num(AUDIO_PIN);
+
+    // Setup PWM interrupt to fire when PWM cycle is complete
+    pwm_clear_irq(audio_pin_slice);
+    pwm_set_irq_enabled(audio_pin_slice, true);
+
+    // set the handle function above
+    irq_set_exclusive_handler(PWM_IRQ_WRAP, pwm_interrupt_handler);
+    irq_set_enabled(PWM_IRQ_WRAP, true);
+    // Setup PWM for audio output
+    pwm_config config = pwm_get_default_config();
+    /* Base clock 176,000,000 Hz divide by wrap 250 then the clock divider further divides
+     * to set the interrupt rate.
+     *
+     * 11 KHz is fine for speech. Phone lines generally sample at 8 KHz
+     *
+     *
+     * So clkdiv should be as follows for given sample rate
+     *  8.0f for 11 KHz
+     *  4.0f for 22 KHz
+     *  2.0f for 44 KHz etc
+     */
+    pwm_config_set_clkdiv(&config, 8.0f);
+    // pwm_config_set_wrap(&config, 250);
+    pwm_config_set_wrap(&config, 450); //  Because our clock is set to 315MHZ so 315MHz / 704000 = 447 ~= 450
+    pwm_init(audio_pin_slice, &config, true);
+
+    pwm_set_gpio_level(AUDIO_PIN, 0);
+
+
+    while (1) {
+
+        uint32_t g = multicore_fifo_pop_blocking();
+
+        switch (g)
+        {
+        case PLAY_JUMP:
+
+
+            current_wav_position = 0;
+            current_wav_data_length = Jump_1_wav_DATA_LENGTH;
+            current_playback = Jump_1_wav_DATA;
+            break;
+        case PLAY_HIT:
+
+            current_wav_position = 0;
+            current_wav_data_length = HIT_DAMAGE_1_WAV_DATA_LENGTH;
+            current_playback = HIT_DAMAGE_1_WAV_DATA;
+            break;
+
+        default:
+            break;
+        }
+        while (!current_playback_done) {
+            busy_wait_us(1);
+        }
+        // busy_wait_us(1);
+        // __wfi();
+    }
+
+}
+
+
 #define IS_RGBW true
 #define NUM_PIXELS 4
 
@@ -168,7 +283,7 @@ void DinoScene::create() {
     // int res = myPlayer.init(TONE_NON_BLOCKING, true);
     // printf("Result of initializing tone = 0x%X\n", res);
     adc_init();
-
+    multicore_launch_core1(core1_entry);
     // Make sure GPIO is high-impedance, no pullups etc
     adc_gpio_init(44);
     // Select ADC input 0 (GPIO26)
@@ -261,6 +376,7 @@ void DinoScene::create() {
                 jump_counter++;
                 vely = -10;
                 onGround = false;
+                multicore_fifo_push_blocking(PLAY_JUMP);
             }
             // play_tone = 1;
             // myPlayer.tone(15000,0.25);
@@ -306,6 +422,7 @@ void DinoScene::create() {
         {
             jump_counter++;
             vely = -10;
+            multicore_fifo_push_blocking(PLAY_JUMP);
             onGround = false;
         }
         // play_tone = 1;
@@ -378,7 +495,7 @@ bool alreadyHit = false;
 
 void DinoScene::update(double frameTime) {
     GameScene::update(frameTime);
-    dinoSprite.set_m_frametime(frameTime);
+    dinoSprite.set_m_frametime(frameTime * 5);
     vely += gravity;
 
     // put_pixel(pio, sm, urgb_u32(0xff - vely, 0, 0));
@@ -410,6 +527,7 @@ void DinoScene::update(double frameTime) {
     if (c2AABBtoAABB(dinoBox, cactusBox) && !alreadyHit)
     {
         alreadyHit = true;
+        multicore_fifo_push_blocking(PLAY_HIT);
         miss++;
     }
 

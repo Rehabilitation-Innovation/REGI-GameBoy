@@ -16,6 +16,9 @@
 #include "hardware/sync.h"
 #include "hardware/watchdog.h"
 #include "pico/stdlib.h"
+#include "hardware/irq.h"  // interrupts
+#include "hardware/pwm.h"  // pwm 
+#include "hardware/sync.h" // wait for interrupt 
 
 
 #include "cat_frame_0.h"
@@ -345,8 +348,13 @@ uint8_t sd_error = 0;
 
 Sprite cat;
 
+
+
 void BootLoaderScreen::create() {
     GameScene::create();
+
+    
+
     // int* p = NULL;
     // *p = 1;
     cat = Sprite(te_sprite_t{

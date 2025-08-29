@@ -45,6 +45,7 @@ set(PICO_CXX_ENABLE_RTTI 1)
 # add_subdirectory(lib/pico-distance-sensor-main/pico-distance-sensor-main)
 
 # add_subdirectory(lib/pi-pico-tone)
+# add_subdirectory(lib/pico-pwm-audio)
 
 # This function sets the custom linker script for SD card applications
 # The memmap_sdcard_app.ld script configures the application to start at

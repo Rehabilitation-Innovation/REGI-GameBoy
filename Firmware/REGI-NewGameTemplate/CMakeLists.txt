@@ -15,13 +15,16 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
+
 set(sdkVersion 2.1.1)
 set(toolchainVersion 14_2_Rel1)
 set(picotoolVersion 2.1.1)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-if (EXISTS ${picoVscode})
+
+if(EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
+
 # ====================================================================================
 # set(PICO_BOARD waveshare_rp2350_plus_16mb CACHE STRING "Board type")
 # set(PICO_BOARD_HEADER_DIRS ${CMAKE_SOURCE_DIR})
@@ -81,5 +84,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 pico_add_extra_outputs(${PROJECT_NAME})
-
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
 pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350

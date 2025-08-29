@@ -55,40 +55,40 @@ static void hardfault() {
 
     while (1) {
         gpio_put(0, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(1, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(6, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(7, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(9, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(45, 1);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(0, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(1, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(6, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(7, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(9, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
 
         gpio_put(45, 0);
-        sleep_ms(100);
+        busy_wait_us(10000);
     }
 
 }

@@ -36,7 +36,7 @@ set(GAME_NAME REGI-DinoGame)
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(${GAME_NAME} C CXX ASM)
+project(REGI-DinoGame C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
@@ -62,17 +62,17 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../REGI-TinyEngine ${CMAKE_CURRENT_
 # add_subdirectory(lib/pico-distance-sensor)
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(${GAME_NAME} ${SOURCES} ${INCLUDES})
+add_executable(REGI-DinoGame ${SOURCES} ${INCLUDES})
 
-pico_set_program_name(${GAME_NAME} ${GAME_NAME})
-pico_set_program_version(${GAME_NAME} "0.1")
+pico_set_program_name(REGI-DinoGame "REGI-DinoGame")
+pico_set_program_version(REGI-DinoGame "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(${GAME_NAME} 1)
-pico_enable_stdio_usb(${GAME_NAME} 0)
+pico_enable_stdio_uart(REGI-DinoGame 1)
+pico_enable_stdio_usb(REGI-DinoGame 1)
 
 # Add the standard library to the build
-target_link_libraries(${GAME_NAME} PUBLIC
+target_link_libraries(REGI-DinoGame PUBLIC
     pico_stdlib
 
     # distance-sensor
@@ -80,12 +80,13 @@ target_link_libraries(${GAME_NAME} PUBLIC
 )
 
 # Add the standard include files to the build
-target_include_directories(${GAME_NAME} PUBLIC
+target_include_directories(REGI-DinoGame PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
     "inc/"
     ${CMAKE_CURRENT_BINARY_DIR}/lib/REGI-TinyEngine/inc
 )
 
-pico_add_extra_outputs(${GAME_NAME})
+pico_add_extra_outputs(REGI-DinoGame)
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
 
 pico_set_linker_script(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../REGI-TinyEngine/memmap_default_rp2350.ld) # only making for r2350
