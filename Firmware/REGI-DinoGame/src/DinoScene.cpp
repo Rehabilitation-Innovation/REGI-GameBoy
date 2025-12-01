@@ -255,7 +255,7 @@ std::string start_text = "PRESS JUMP TO START";
 TinyEngineUIBlinkingTextBox banner(160 - (20 + start_text.length() * 7) / 2, 200, 20 + start_text.length() * 7, 20, 0,
     15, start_text, 5);
 
-uint16_t jump_counter = 0, miss = 0;
+uint16_t jump_counter = 0, miss = 0, score_counter = 0;
 /**
  * ------------------------------------------
  * Score:               Jumps:
@@ -303,7 +303,6 @@ void DinoScene::create() {
 
     ws2812_program_init(pio, sm, offsetpio, WS2812_PIN, 1000000, IS_RGBW);
 
-    int t = 0;
     // while (1) {
     //     int pat = rand() % count_of(pattern_table);
     //     int dir = (rand() >> 30) & 1 ? 1 : -1;
@@ -410,6 +409,8 @@ void DinoScene::create() {
             // gameStarted = false;
         }
     );
+
+    m_engine.bind_gpio_input_event(3, [&] {watchdog_reboot(0, 0, 10);});
 
     m_engine.bind_gpio_input_event(2, [&] {
         if (!gameStarted)
@@ -521,6 +522,7 @@ void DinoScene::update(double frameTime) {
 
     if (cactusSprite.get_m_x() < 10)
     {
+        if (!alreadyHit) { score_counter++; };
         alreadyHit = false;
         cactusSprite.set_m_x(310);
     }
@@ -539,11 +541,11 @@ void DinoScene::update(double frameTime) {
     }
 
     t += frameTime;
-    sprintf(temp, "Score:%.2f", frameTime);
+    sprintf(temp, "Score:%d", score_counter);
     score.set_text(temp);
     sprintf(temp, "Jumps:%d", jump_counter);
     jumps.set_text(temp);
-    sprintf(temp, "Time:%1.0fs", t);
+    sprintf(temp, "Time:%1.0f", t);
     time_.set_text(temp);
     sprintf(temp, "Missed Jumps:%d", miss);
     missed_jumps.set_text(temp);
