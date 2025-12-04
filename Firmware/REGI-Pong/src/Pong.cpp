@@ -102,8 +102,8 @@ void core1_entry() {
  */
 TinyEngineUIText score(5, 5, "Score: ", 15);
 TinyEngineUIText time_(5, 30, "Time: ", 15);
-TinyEngineUIText pongs(90, 5, "Pongs: ", 15);
-TinyEngineUIText missed_pongs(90, 30, "Missed Pongs: ", 15);
+TinyEngineUIText highscore(90, 5, "Highscore: ", 15);
+TinyEngineUIText missed_pongs(90, 30, "Rounds: ", 15);
 
 TinyEngineUITextBox scoreboard(70, 180, 210, 50, 45);
 
@@ -119,7 +119,7 @@ void PongScene::create() {
     gpio_set_dir(0, GPIO_OUT);
 
     scoreboard.add_text("s", score);
-    scoreboard.add_text("j", pongs);
+    scoreboard.add_text("j", highscore);
     scoreboard.add_text("t", time_);
     scoreboard.add_text("mj", missed_pongs);
 
@@ -151,6 +151,11 @@ void PongScene::create() {
         watchdog_reboot(0, 0, 10);
         // move_up = 1;
         });
+
+    m_engine.bind_gpio_input_event(3, [&] {
+        watchdog_reboot(0, 0, 10);
+        });
+
     multicore_launch_core1(core1_entry);
     ba.dx = 1;
     ba.dy = 1;
@@ -191,11 +196,11 @@ void PongScene::update(double frameTime) {
     t += frameTime;
     sprintf(temp, "Score:%d", hscore);
     score.set_text(temp);
-    sprintf(temp, "Pongs:%d", pong_counter);
-    pongs.set_text(temp);
-    sprintf(temp, "Time:%1.0fs", t);
+    sprintf(temp, "Highscore:%d", pong_counter);
+    highscore.set_text(temp);
+    sprintf(temp, "Time:%1.0f", t);
     time_.set_text(temp);
-    sprintf(temp, "Missed Pongs:%d", miss);
+    sprintf(temp, "Rounds:%d", miss);
     missed_pongs.set_text(temp);
 
     // telog("Reading %d", d.distance);
