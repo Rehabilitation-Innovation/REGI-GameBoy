@@ -182,7 +182,7 @@ void PongScene::render() {
 }
 
 c2AABB ballbox, pada, padb;
-uint16_t pong_counter = 0, miss = 0, hscore = 0;
+uint16_t score_counter = 0, miss = 0, hscore = 0;
 char temp[255] = { 0 };
 double t = 0;
 
@@ -194,9 +194,9 @@ void PongScene::update(double frameTime) {
     //     sleep_us(10);
 // }
     t += frameTime;
-    sprintf(temp, "Score:%d", hscore);
+    sprintf(temp, "Score:%d", score_counter);
     score.set_text(temp);
-    sprintf(temp, "Highscore:%d", pong_counter);
+    sprintf(temp, "Highscore:%d", hscore);
     highscore.set_text(temp);
     sprintf(temp, "Time:%1.0f", t);
     time_.set_text(temp);
@@ -233,7 +233,7 @@ void PongScene::update(double frameTime) {
 
     if (c2AABBtoAABB(pada, ballbox) || c2AABBtoAABB(padb, ballbox)) {
         ba.dx *= -1;
-        pong_counter += 1;
+        score_counter += 1;
     }
 
     ba.x += ba.dx * ba.move_speed * frameTime;
@@ -242,14 +242,22 @@ void PongScene::update(double frameTime) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
-        hscore += 1;
+        miss += 1;
+        if (score_counter >= hscore) {
+            hscore = score_counter;
+        }
+        score_counter = 0;
     }
+
     if (ba.x <= 0) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
-        hscore = 0;
         miss += 1;
+        if (score_counter >= hscore) {
+            hscore = score_counter;
+        }
+        score_counter = 0;
     }
 
     ba.y += ba.dy * ba.move_speed * frameTime;
