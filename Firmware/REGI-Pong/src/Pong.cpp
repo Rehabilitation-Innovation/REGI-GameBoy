@@ -231,8 +231,13 @@ void PongScene::update(double frameTime) {
     padb.min.x = b.x;
     padb.min.y = b.y;
 
-    if (c2AABBtoAABB(pada, ballbox) || c2AABBtoAABB(padb, ballbox)) {
-        ba.dx *= -1;
+    if (c2AABBtoAABB(pada, ballbox)) {
+        ba.dx = 1;
+        score_counter += 1;
+    }
+
+    if (c2AABBtoAABB(padb, ballbox)) {
+        ba.dx = -1;
         score_counter += 1;
     }
 
