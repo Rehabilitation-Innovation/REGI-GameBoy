@@ -101,9 +101,11 @@ void core1_entry() {
  * ------------------------------------------
  */
 TinyEngineUIText score(5, 5, "Score: ", 15);
+TinyEngineUIText p1score(5, 5, "P1 Score: ", 15);
 TinyEngineUIText time_(5, 30, "Time: ", 15);
-TinyEngineUIText pongs(90, 5, "Pongs: ", 15);
-TinyEngineUIText missed_pongs(90, 30, "Missed Pongs: ", 15);
+TinyEngineUIText highscore(90, 5, "Highscore: ", 15);
+TinyEngineUIText p2score(90, 5, "P2 Score: ", 15);
+TinyEngineUIText missed_pongs(90, 30, "Rounds: ", 15);
 
 TinyEngineUITextBox scoreboard(70, 180, 210, 50, 45);
 
@@ -118,8 +120,10 @@ void PongScene::create() {
     gpio_init(0);
     gpio_set_dir(0, GPIO_OUT);
 
-    scoreboard.add_text("s", score);
-    scoreboard.add_text("j", pongs);
+    scoreboard.add_text("s", score);                            //P1
+    scoreboard.add_text("j", highscore);                        //P1
+    // scoreboard.add_text("s", p1score);                          //P2
+    // scoreboard.add_text("j", p2score);                          //P2
     scoreboard.add_text("t", time_);
     scoreboard.add_text("mj", missed_pongs);
 
@@ -151,6 +155,11 @@ void PongScene::create() {
         watchdog_reboot(0, 0, 10);
         // move_up = 1;
         });
+
+    m_engine.bind_gpio_input_event(3, [&] {
+        watchdog_reboot(0, 0, 10);
+        });
+
     multicore_launch_core1(core1_entry);
     ba.dx = 1;
     ba.dy = 1;
@@ -177,7 +186,7 @@ void PongScene::render() {
 }
 
 c2AABB ballbox, pada, padb;
-uint16_t pong_counter = 0, miss = 0, hscore = 0;
+uint16_t score_counter = 0, miss = 0, hscore = 0, p1_score = 0, p2_score = 0;
 char temp[255] = { 0 };
 double t = 0;
 
@@ -189,13 +198,17 @@ void PongScene::update(double frameTime) {
     //     sleep_us(10);
 // }
     t += frameTime;
-    sprintf(temp, "Score:%d", hscore);
-    score.set_text(temp);
-    sprintf(temp, "Pongs:%d", pong_counter);
-    pongs.set_text(temp);
-    sprintf(temp, "Time:%1.0fs", t);
+    sprintf(temp, "Score:%d", score_counter);                     //P1
+    score.set_text(temp);                                         //P1
+    sprintf(temp, "Highscore:%d", hscore);                        //P1
+    highscore.set_text(temp);                                     //P1
+    // sprintf(temp, "P1 Score:%d", p1_score);                       //P2
+    // p1score.set_text(temp);                                       //P2
+    // sprintf(temp, "P2 Score:%d", p2_score);                       //P2
+    // p2score.set_text(temp);                                       //P2
+    sprintf(temp, "Time:%1.0f", t);
     time_.set_text(temp);
-    sprintf(temp, "Missed Pongs:%d", miss);
+    sprintf(temp, "Rounds:%d", miss);
     missed_pongs.set_text(temp);
 
     // telog("Reading %d", d.distance);
@@ -226,9 +239,14 @@ void PongScene::update(double frameTime) {
     padb.min.x = b.x;
     padb.min.y = b.y;
 
-    if (c2AABBtoAABB(pada, ballbox) || c2AABBtoAABB(padb, ballbox)) {
-        ba.dx *= -1;
-        pong_counter += 1;
+    if (c2AABBtoAABB(pada, ballbox)) {
+        ba.dx = 1;
+        score_counter += 1;
+    }
+
+    if (c2AABBtoAABB(padb, ballbox)) {
+        ba.dx = -1;
+        score_counter += 1;
     }
 
     ba.x += ba.dx * ba.move_speed * frameTime;
@@ -237,14 +255,24 @@ void PongScene::update(double frameTime) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
-        hscore += 1;
+        miss += 1;
+        p1_score += 1;
+        if (score_counter >= hscore) {
+            hscore = score_counter;
+        }
+        score_counter = 0;
     }
+
     if (ba.x <= 0) {
         // ba.dx *= -1;
         ba.x = 320 / 2;
         ba.y = 240 / 2;
-        hscore = 0;
         miss += 1;
+        p2_score += 1;
+        if (score_counter >= hscore) {
+            hscore = score_counter;
+        }
+        score_counter = 0;
     }
 
     ba.y += ba.dy * ba.move_speed * frameTime;
@@ -260,12 +288,6 @@ void PongScene::update(double frameTime) {
         // ba.y = 240 / 2;
     }
 
-    if (move_up) {
-        a.y += a.move_speed * frameTime;
-        move_up = 0;
-
-    }
-
     if (toggle_move_up) {
         move_up = 1;
         move_down = 0;
@@ -275,6 +297,11 @@ void PongScene::update(double frameTime) {
         move_down = 1;
     }
 
+    if (move_up) {
+        a.y += a.move_speed * frameTime;
+        move_up = 0;
+
+    }
 
     if (move_down) {
         a.y -= a.move_speed * frameTime;
@@ -288,7 +315,7 @@ void PongScene::update(double frameTime) {
         b.y -= b.move_speed * frameTime;
     }
 
-    b.y = a.y;
+    b.y = a.y;                                          //1P
 
     if (a.x > 320 - 10) a.x = 320 - 10;
 
